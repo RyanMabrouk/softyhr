@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getValidSubdomain } from "./api/getValidSubdomain";
 
 export const config = {
-  matcher: ["/", "/test", "/test/:test1*", "/NOT-FOUND"], //routes that pass through middleware.ts before handle them
+  matcher: ["/", "/home", "/NOT-FOUND"], //routes that pass through middleware.ts before handle them
 };
 
 interface CustomRequest extends NextRequest {
@@ -17,14 +17,17 @@ const hostnamedb = [
 
 export default async function middleware(req: CustomRequest) {
   const url = req.nextUrl;
+  console.log(url);
   const hostname = req.headers.get("host") || "";
   const current_org = getValidSubdomain(hostname);
-  console.log("object");
+  //console.log("object");
   const org = hostnamedb.find((org) => org?.name === current_org);
-  console.log(current_org);
+  //console.log(current_org);
   if (!org) {
-    const redirectUrl = new URL("/", `${req.nextUrl.origin}`);
-    return NextResponse.redirect(redirectUrl);
+    //console.log(req.headers);
+    //req.headers.set("host", "localhost:3001");
+    //console.log(req.headers);
+    return NextResponse.rewrite(new URL("/", req.url));
   }
 
   return NextResponse.rewrite(url);
