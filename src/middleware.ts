@@ -19,7 +19,7 @@ export default async function middleware(req: CustomRequest) {
   const url = req.nextUrl;
   const hostname = req.headers.get("host") || "";
   const current_org = getValidSubdomain(hostname);
-  console.log("object");
+  //console.log("object");
   const org = hostnamedb.find((org) => org?.name === current_org);
   console.log(current_org);
   if (!org) {
