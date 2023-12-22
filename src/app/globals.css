@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.MuiMenu-list{
+    border: 3px solid green;
+}
