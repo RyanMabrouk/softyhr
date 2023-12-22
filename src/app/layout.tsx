@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import getCurrentorg from "@/api/getCurrentOrg";
 import Layout from "./layout/layout";
 
+import getSession from "@/actions/getSession";
 const lato = Lato({
   weight: ["100", "300", "400", "700", "900"],
   subsets: ["latin"],
@@ -18,16 +19,21 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({
   children,
+  auth,
+  dashboard,
 }: {
   children: React.ReactNode;
+  auth: React.ReactNode;
+  dashboard: React.ReactNode;
 }) {
   const current_org = await getCurrentorg();
   if (!current_org) redirect("/");
+  const session = await getSession();
   return (
     <html lang="en">
       <body className={lato.className + " min-h-screen"}>
         <Layout />
-        {children}
+        {session ? children : auth}
       </body>
     </html>
   );

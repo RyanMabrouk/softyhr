@@ -17,7 +17,7 @@ const hostnamedb = [
 
 export default async function middleware(req: CustomRequest) {
   const url = req.nextUrl;
-  console.log(url);
+  //console.log(url);
   const hostname = req.headers.get("host") || "";
   const current_org = getValidSubdomain(hostname);
   //console.log("object");

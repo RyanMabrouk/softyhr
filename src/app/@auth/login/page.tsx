@@ -2,9 +2,8 @@ import getCurrentorg from "@/api/getCurrentOrg";
 import { redirect } from "next/navigation";
 import React from "react";
 
-async function Page() {
+export default async function Page() {
   const current_org = await getCurrentorg();
-  return <div className="text-black">{current_org?.name} is subscribed</div>;
+  if (current_org) redirect("/home");
+  return <div>log in page</div>;
 }
-
-export default Page;

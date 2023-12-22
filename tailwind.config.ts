@@ -14,6 +14,12 @@ const config: Config = {
       width: {
         screen: "100dvw",
       },
+      minHeight: {
+        screen: "100dvh",
+      },
+      minWidth: {
+        screen: "100dvw",
+      },
       colors: {
         "fabric-100": "#c0e94f80",
         "fabric-200": "#c0e94f59",
