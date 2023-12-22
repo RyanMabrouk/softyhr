@@ -2,7 +2,6 @@
 
 import { headers } from "next/headers";
 import { getValidSubdomain } from "./getValidSubdomain";
-import { NextApiRequest } from "next";
 
 const hostnamedb = [
   { name: "softyeducation", org_id: "1f5f-4fv8-78rv-r8fv" },
