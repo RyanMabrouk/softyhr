@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { Lato } from "next/font/google";
 import "./globals.css";
+import { redirect } from "next/navigation";
+import getCurrentorg from "@/api/getCurrentOrg";
+import Layout from "./layout/layout";
+
 import getSession from "@/actions/getSession";
 const lato = Lato({
   weight: ["100", "300", "400", "700", "900"],
@@ -22,10 +26,15 @@ export default async function RootLayout({
   auth: React.ReactNode;
   dashboard: React.ReactNode;
 }) {
+  const current_org = await getCurrentorg();
+  if (!current_org) redirect("/");
   const session = await getSession();
   return (
     <html lang="en">
-      <body className={lato.className}>{session?.user ? children : auth}</body>
+      <body className={lato.className + " min-h-screen"}>
+        <Layout />
+        {session ? children : auth}
+      </body>
     </html>
   );
 }

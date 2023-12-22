@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getValidSubdomain } from "./api/getValidSubdomain";
 
 export const config = {
-  matcher: ["/", "/home", "/NOT-FOUND"], //routes that pass through middleware.ts before handle them
+  matcher: ["/", "/home", "/NOT-FOUND", '/employees','/employees/:employeeId'], //routes that pass through middleware.ts before handle them
 };
 
 interface CustomRequest extends NextRequest {
