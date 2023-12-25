@@ -3,11 +3,12 @@ import React, { useState } from "react";
 import type { RadioChangeEvent } from "antd";
 import { ConfigProvider, Radio, Space } from "antd";
 
-function RadioBox({ RowField }: any) {
+function RadioBox({ RowField, setTouched }: any) {
   const [value, setValue] = useState(1);
 
   const onChange = (e: RadioChangeEvent) => {
     console.log("radio checked", e.target.value);
+    setTouched(true);
     setValue(e.target.value);
   };
   console.log(RowField);
@@ -22,11 +23,11 @@ function RadioBox({ RowField }: any) {
             borderRadius: 2,
             colorBgContainer: "#f6ffed",
             fontSize: 14,
-            controlOutline:'',
+            controlOutline: "",
           },
         }}
       >
-        <Radio.Group onChange={onChange} value={value}>
+        <Radio.Group onChange={onChange} value={value} name={RowField?.name}>
           <Space direction="vertical">
             {RowField?.options?.map((value: string) => (
               <Radio value={value}>{value}</Radio>

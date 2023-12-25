@@ -7,7 +7,7 @@ import { EmployeRoutesType, EmployeeRoute } from "@/constants/employeeRoute";
 import { usePathname } from "next/navigation";
 import UserInfo from "../components/UserInfo/UserInfo";
 import DropDown from "../components/DropDown/DropDown";
-import { Settings, changementRequest } from "@/constants/userInfoLabel";
+import { Settings, changementRequest } from "@/constants/userInfo";
 import useScrollPosition from "@/hooks/useScrollPosition";
 
 interface EmployePropsType {
@@ -19,12 +19,11 @@ function Layout({ params: { employeeId }, children }: EmployePropsType) {
   const ActiveRoute =
     usePathname().split("/").slice(-1).join("") || EmployeeRoute[0]?.label;
   const [ScrollPosition] = useScrollPosition();
-  console.log(ScrollPosition);
   return (
     <div className="h-full w-full">
       <div
         className={
-          "border-10 to-color-green-9 duration-400 z-50 flex h-[13rem] justify-center  bg-gradient-to-r from-color-green-7 transition-all " +
+          "border-10 duration-400 z-50 flex h-[13rem] justify-center bg-gradient-to-r  from-color-green-7 to-color-green-9 transition-all " +
           (ScrollPosition > 330 ? "fixed top-0 h-[4rem] w-full !flex-row" : "")
         }
       >
@@ -73,9 +72,9 @@ function Layout({ params: { employeeId }, children }: EmployePropsType) {
                         key={rang}
                         href={path(employeeId)}
                         className={
-                          "flex overflow-hidden rounded-t-lg p-4 px-10 text-white transition ease-in-out " +
+                          "flex items-center justify-center overflow-hidden rounded-t-lg p-3 px-6 text-white transition ease-in-out " +
                           (ActiveRoute == label
-                            ? `!text-color-green-9 bg-white font-bold `
+                            ? `bg-white font-bold !text-color-green-9 `
                             : `font-normal hover:bg-fabric-100 hover:opacity-25`) +
                           (ScrollPosition > 330
                             ? " !rounded-lg !p-2 !px-4"

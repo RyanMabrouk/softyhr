@@ -1,30 +1,46 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, memo, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import Input from "./Input/Input";
-import { Field } from "@/constants/userInfoLabel";
+import { Field } from "@/constants/userInfo";
+import { RowFieldType } from "@/app/types/userInfoTypes.type";
 
-function Fileds({ FieldsArray, index }: any) {
+interface FiledsChampsPropsType {
+  FieldsArray:RowFieldType[];
+  setTouched:(arg: boolean)=>void;
+}
+
+function FiledsChamps({
+  FieldsArray,
+  setTouched,
+}: FiledsChampsPropsType): ReactNode {
+  //const [touched, setTouched] = useState<boolean>(false);
   return (
     <>
       {FieldsArray?.sort((a: any, b: any) => a.rang - b.rang)?.map(
         ({ Row }: any) => {
-          console.log(Row);
           return (
             <div
-              className="hustify-center flex items-center gap-[1rem]"
+              className="flex items-end justify-center gap-[1rem]"
               key={uuidv4()}
             >
               {Row?.map((RowField: any) => {
-                console.log(RowField);
-                const Component = Field[RowField?.fieldType.toUpperCase()];
-                return <Component RowField={RowField} />;
+                const Component = Field[RowField?.type.toUpperCase()];
+                return (
+                  <Component
+                    setTouched={setTouched}
+                    key={uuidv4()}
+                    // setTouched={setTouched}
+                    RowField={RowField}
+                  />
+                );
               })}
             </div>
           );
         },
       )}
+      {}
     </>
   );
 }
 
-export default Fileds;
+export default FiledsChamps;

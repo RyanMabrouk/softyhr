@@ -25,6 +25,12 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      keyframes: {
+        show: {
+          "0%": { bottom: "0" },
+          "100%": { transform: "5rem" },
+        },
+      },
       height: {
         screen: "100dvh",
       },

@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Lato } from "next/font/google";
 import "./globals.css";
+import Hydration from "@/provider/hydration";
+import Store from "@/provider/store";
+
 const lato = Lato({
   weight: ["100", "300", "400", "700", "900"],
   subsets: ["latin"],
@@ -21,7 +24,13 @@ export default async function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={lato.className + " min-h-screen"}>{children}</body>
+      <body className={lato.className + " min-h-screen"}>
+        <Store>
+          <Hydration>
+            {children}
+          </Hydration>
+        </Store>
+      </body>
     </html>
   );
 }

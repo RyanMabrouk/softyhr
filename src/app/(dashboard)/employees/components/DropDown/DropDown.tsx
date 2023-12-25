@@ -17,7 +17,13 @@ interface DropdownpropsType {
 function DropDown({ text, ListArray }: DropdownpropsType) {
   return (
     <Select
-      sx={{ border: "1px solid white", color: "white" }}
+      sx={{
+        border: "1px solid white",
+        color: "white",
+        ".MuiSvgIcon-root ": {
+          fill: "white !important",
+        },
+      }}
       value={text}
       displayEmpty
       inputProps={{ "aria-label": "Without label" }}
