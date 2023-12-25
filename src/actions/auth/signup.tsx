@@ -5,7 +5,6 @@ import { redirect } from "next/navigation";
 import postData from "@/api/postData";
 
 export default async function signup(formData: FormData) {
-  console.log("🚀 ~ file: signup.tsx:3 ~ signup ~ formData:", formData);
   const headersList = headers();
   const header_url = headersList.get("host") || "";
   //Company Info
@@ -15,11 +14,6 @@ export default async function signup(formData: FormData) {
   const tel = formData.get("tel") as string;
   const password = formData.get("password") as string;
   const job = formData.get("job") as string;
-  const emailRedirectTo = `http://${company}.${header_url}/auth/callback`;
-  console.log(
-    "🚀 ~ file: signup.tsx:20 ~ signup ~ emailRedirectTo:",
-    emailRedirectTo,
-  );
   const options = {
     data: {
       first_name: formData.get("first_name"),
@@ -27,24 +21,22 @@ export default async function signup(formData: FormData) {
       tel: tel,
       job: job,
     },
-    emailRedirectTo: emailRedirectTo,
+    emailRedirectTo: `http://${header_url}/auth/callback`,
   };
-  const cookieStore = cookies();
-  const supabase = createServerActionClient({ cookies: () => cookieStore });
+  const supabase = createServerActionClient({ cookies });
   const { data, error: signup_error } = await supabase.auth.signUp({
     email: email,
     password: password,
     options: options,
   });
-  console.log("🚀 ~ file: signup.tsx:35 ~ signup ~ data:", data);
   if (signup_error) {
-    console.log("signup_error", signup_error);
+    console.log("🚀signup_error", signup_error);
     return;
   }
   if (data?.user?.identities?.length === 0) {
-    console.log("already signed up");
+    console.log("🚀already signed up");
   } else {
-    console.log("verify your email");
+    console.log("🚀verify your email");
     const { error: organizations_error } = await postData("organizations", [
       {
         name: company,
@@ -53,7 +45,7 @@ export default async function signup(formData: FormData) {
       },
     ]);
     if (organizations_error) {
-      console.log("organizations_error", organizations_error);
+      console.log("🚀organizations_error", organizations_error);
       return;
     } else {
       const { error: profiles_error } = await postData("profiles", [
@@ -69,9 +61,10 @@ export default async function signup(formData: FormData) {
         },
       ]);
       if (profiles_error) {
-        console.log("profiles_error", profiles_error);
+        console.log("🚀profiles_error", profiles_error);
         return;
       } else {
+        console.log("🚀redirecting to /");
         redirect("/");
       }
     }

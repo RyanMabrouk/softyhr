@@ -1,5 +1,6 @@
 "use server";
 import signout from "@/actions/auth/signout";
+import getSession from "@/actions/getSession";
 import getCurrentorg from "@/api/getCurrentOrg";
 import Link from "next/link";
 import { redirect } from "next/navigation";
