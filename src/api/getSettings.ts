@@ -4,13 +4,12 @@ import getCurrentorg from "./getCurrentOrg";
 export async function GetSettings(section: string) {
   try {
     const org = await getCurrentorg();
-    const { data: settings, error } = await getData("settings");
+    const { data: org_settings, error } = await getData("settings", {
+      match: { org_name: org?.name },
+    }); 
     if (error) throw new Error(error.message);
     else {
-      const org_settings = settings?.filter(
-        (setting) => setting.org_name === org?.name,
-      )[0];
-      if (settings && org_settings) return org_settings[section];
+      if (org_settings) return org_settings[0][section];
       else return null;
     }
   } catch (error) {

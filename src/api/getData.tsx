@@ -15,12 +15,12 @@ export default async function getData(
   const user_id = session?.user?.id;
   const { data, error } = match
     ? user
-      ? await supabase.from(table).select("*").match(match)
-      : await supabase
+      ? await supabase
           .from(table)
           .select("*")
           .match(match)
           .eq("user_id", user_id)
+      : await supabase.from(table).select("*").match(match)
     : await supabase.from(table).select("*");
   return { data: data, error: error };
 }
