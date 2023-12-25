@@ -22,11 +22,5 @@ export default async function getData(
           .match(match)
           .eq("user_id", user_id)
     : await supabase.from(table).select("*");
-  if (error) {
-    console.log("supabase error");
-    console.error(error.message);
-    return null;
-  } else if (data) {
-    return data;
-  }
+  return { data: data, error: error };
 }

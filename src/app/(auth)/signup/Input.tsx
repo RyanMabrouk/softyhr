@@ -1,3 +1,4 @@
+"use client";
 import React, { useEffect, useState } from "react";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
@@ -17,14 +18,16 @@ export function Input({
   options,
   error,
   toggleDisplay,
+  placeholder = "",
   setValueInParent,
 }: {
-  label: string;
+  label?: string;
   type: string;
   name: string;
-  className?: string;
-  options?: Option[];
   error: string[] | undefined;
+  className?: string;
+  placeholder?: string;
+  options?: Option[];
   toggleDisplay?: boolean;
   setValueInParent?: (company: string) => void;
 }) {
@@ -50,6 +53,7 @@ export function Input({
             <InputLabel>{label}</InputLabel>
             <Select
               variant="outlined"
+              data-placeholder-trigger="keydown"
               label={label}
               error={inputError ? true : false}
               labelId="demo-simple-select-error-label"
@@ -77,10 +81,12 @@ export function Input({
         </div>
       ) : (
         <TextField
+          data-placeholder-trigger="keydown"
           variant="outlined"
           error={inputError ? true : false}
           helperText={inputError && HelperText}
           fullWidth
+          placeholder={placeholder}
           className={`group w-full [&_*]:!outline-color-green-4 [&_*]:focus:!outline-color-green-4 [&_label]:!border-color-green-4 [&_label]:focus:!text-color-green-4`}
           label={label}
           type={type}

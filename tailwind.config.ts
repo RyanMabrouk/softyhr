@@ -1,6 +1,23 @@
 import type { Config } from "tailwindcss";
-
+const plugin = require("tailwindcss/plugin");
+const Myclass = plugin(function ({ addUtilities }) {
+  addUtilities({
+    ".my-rotate-y-180": {
+      transform: "rotateY(180deg)",
+    },
+    ".preserve-3d": {
+      transformStyle: "preserve-3d",
+    },
+    ".perspective": {
+      perspective: "1000px",
+    },
+    ".backface-hidden": {
+      backfaceVisibility: "hidden",
+    },
+  });
+});
 const config: Config = {
+  mode: "jit",
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -92,7 +109,7 @@ const config: Config = {
         "color8-500": "#34b9ac",
         "color8-600": "#1b7b7e",
         "color8-700": "#003a4c",
-        "color-white": "#fff",
+
         "gray-0": "#FAFAF8",
         "gray-1": "#F5F4F1",
         "gray-2": "#E4E3E0",
@@ -113,7 +130,9 @@ const config: Config = {
         "gray-17": "#EBEBEB",
         "gray-18": "#CCCCCC",
         "gray-19": "#D9D9D9",
-        "color-black": "#000",
+        "gray-20": "#444",
+        "gray-21": "#686868",
+        "gray-22": "#F3F3F3",
 
         "color-green": "#599D15",
         "color-teal-2": "#284D59",
@@ -127,6 +146,7 @@ const config: Config = {
         "color-green-7": "#719D0C",
         "color-green-8": "#527A01",
         "color-green-9": "#527B00",
+        "color-green-10": "#84bf41",
         "color-green-focus": "#AAE868",
 
         "color-rose-1": "#FFAAB0",
@@ -136,7 +156,7 @@ const config: Config = {
       },
     },
   },
-  plugins: [require("@tailwindcss/typography")],
+  plugins: [Myclass, require("@tailwindcss/typography")],
 };
 
 export default config;
