@@ -1,10 +1,14 @@
 "use server";
-import getSession from "@/actions/getSession";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
+import getSession from "@/actions/getSession";
+type getDataParams = {
+  user?: boolean;
+  match?: Object;
+};
 export default async function getData(
   table: string,
-  { user, match }: { user: boolean; match: Object },
+  { user, match }: getDataParams = { user: undefined, match: undefined },
 ) {
   const supabase = createServerComponentClient({ cookies });
   const session = await getSession();
