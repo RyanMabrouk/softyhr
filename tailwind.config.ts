@@ -8,6 +8,12 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      keyframes: {
+        show: {
+          "0%": { bottom: "0" },
+          "100%": { transform: "5rem" },
+        },
+      },
       height: {
         screen: "100dvh",
       },
@@ -113,6 +119,9 @@ const config: Config = {
         "gray-17": "#EBEBEB",
         "gray-18": "#CCCCCC",
         "gray-19": "#D9D9D9",
+        "gray-20": "#F3F3F3",
+        "gray-21": "#444",
+        "gray-22": "#686868",
         "color-black": "#000",
 
         "color-green": "#599D15",

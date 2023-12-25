@@ -1,5 +1,4 @@
 import getCurrentorg from "@/api/getCurrentOrg";
-import { redirect } from "next/navigation";
 import React from "react";
 
 async function Page() {

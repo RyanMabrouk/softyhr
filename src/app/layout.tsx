@@ -4,6 +4,8 @@ import "./globals.css";
 import { redirect } from "next/navigation";
 import getCurrentorg from "@/api/getCurrentOrg";
 import Layout from "./layout/layout";
+import Hydration from "@/provider/hydration";
+import Store from "@/provider/store";
 
 import getSession from "@/actions/getSession";
 const lato = Lato({
@@ -27,13 +29,18 @@ export default async function RootLayout({
   dashboard: React.ReactNode;
 }) {
   const current_org = await getCurrentorg();
-  if (!current_org) redirect("/");
+  //if (!current_org) redirect("/");
   const session = await getSession();
   return (
     <html lang="en">
       <body className={lato.className + " min-h-screen"}>
-        <Layout />
-        {session ? children : auth}
+        <Store>
+          <Hydration>
+            <Layout />
+            {children}
+          </Hydration>
+        </Store>
+        {/*session ? children : auth*/}
       </body>
     </html>
   );

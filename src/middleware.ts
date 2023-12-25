@@ -27,7 +27,7 @@ export default async function middleware(req: CustomRequest) {
     //console.log(req.headers);
     //req.headers.set("host", "localhost:3001");
     //console.log(req.headers);
-    return NextResponse.rewrite(new URL("/", req.url));
+   // return NextResponse.rewrite(new URL("/", req.url));
   }
 
   return NextResponse.rewrite(url);
