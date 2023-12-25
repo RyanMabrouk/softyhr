@@ -4,8 +4,11 @@ import React from "react";
 import logo from "/public/logo.svg";
 import background_img from "/public/signup/signup_bg_img.png";
 import { Form } from "./Form";
-
-export default function Page() {
+import getSession from "@/actions/getSession";
+import { redirect } from "next/navigation";
+export default async function Page() {
+  const session = await getSession();
+  if (session) redirect("/");
   return (
     <div className=" relative flex h-screen w-screen flex-col overflow-x-hidden scroll-smooth">
       <nav className="sticky top-0 z-20 flex h-[5rem] w-full flex-row items-center justify-between bg-white px-8 py-4">
