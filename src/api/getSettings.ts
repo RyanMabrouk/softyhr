@@ -1,17 +1,18 @@
 "use server";
-
-import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
-import { cookies } from "next/headers";
-
+import getData from "./getData";
+import getCurrentorg from "./getCurrentOrg";
 export async function GetSettings(section: string) {
-  const cookieStore = cookies();
-  const supabase = createServerActionClient({ cookies: () => cookieStore });
-
   try {
-    let { data: settings, error } = await supabase
-      .from("settings")
-      .select('"personnal "');
-    return settings[0]["personnal "];
+    const org = await getCurrentorg();
+    const { data: settings, error } = await getData("settings");
+    if (error) throw new Error(error.message);
+    else {
+      const org_settings = settings?.filter(
+        (setting) => setting.org_name === org?.name,
+      )[0];
+      if (settings && org_settings) return org_settings[section];
+      else return null;
+    }
   } catch (error) {
     console.log(error);
   }
