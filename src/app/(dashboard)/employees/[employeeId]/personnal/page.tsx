@@ -7,15 +7,20 @@ import ChangesSection from "../../components/ChangesSection/ChangesSection";
 import { GetSettings } from "@/api/getSettings";
 import Loader from "../../components/Loader/Loader";
 import submitForm from "@/api/test";
-import  {sectionIcon}  from "@/constants/userInfo";
-import { ChampsType, RowFieldType, RowType } from "@/app/types/userInfoTypes.type";
+import { sectionIcon } from "@/constants/userInfo";
+import { ChampsType, RowFieldType, RowType } from "@/types/userInfoTypes.type";
+import { usePathname, useRouter } from "next/navigation";
+import path from "path";
 
-function page() {
+function Personnal() {
   const { data, isPending } = useQuery({
     queryKey: ["settings"],
-    queryFn: async () => await GetSettings("personnal"),
+    queryFn: () => GetSettings("personnal"),
   });
   const [touched, setTouched] = useState<boolean>(false);
+  const pathname = usePathname();
+  const Router = useRouter();
+  console.log(pathname);
   return (
     <>
       {isPending ? (
@@ -29,7 +34,10 @@ function page() {
               <FaAddressCard fill="green" />
               Personnal
             </h1>
-            <h1 className="cursor-pointer text-gray-10 hover:underline">
+            <h1
+              className="cursor-pointer text-gray-10 hover:underline"
+              onClick={() => Router.push(pathname + "?popup=Edit_Field")}
+            >
               Edit Fields
             </h1>
           </div>
@@ -70,4 +78,4 @@ function page() {
   );
 }
 
-export default page;
+export default Personnal;

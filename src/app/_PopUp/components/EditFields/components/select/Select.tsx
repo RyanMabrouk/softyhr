@@ -1,5 +1,5 @@
 "use client";
-import { MenuItem, Select } from "@mui/material";
+import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import React, { useRef, useState } from "react";
 import DropDown from "../../DropDown/DropDown";
 import { RowFieldType } from "@/types/userInfoTypes.type";
@@ -9,42 +9,25 @@ interface SelectInputPropsType {
   setTouched: (arg: boolean) => void | undefined;
 }
 
-function SelectInput({ RowField, setTouched }: SelectInputPropsType) {
-  const [value, setValue] = useState("");
-
-  const HandleChange = (e: any) => {
-    setTouched(true);
-    setValue(e.target.value);
-  };
-
+function SelectInput({ RowField }: SelectInputPropsType) {
   return (
     <div className="flex flex-col items-start justify-center">
-      <h1
-        className={
-          "text-gray text-sm font-light " +
-          (RowField?.required ? " after:text-red after:content-['*']" : "")
-        }
-      >
-        {RowField?.name}
-      </h1>
       <Select
+        renderValue={() => <h1>Add Fields</h1>}
         labelId="demo-simple-select-autowidth-label"
         id="demo-simple-select-autowidth"
         sx={{
           border: "1px solid #D9D9D9",
           color: "black",
           ".MuiSvgIcon-root ": {
-            fill: "#D9D9D9 !important",
+            fill: "green !important",
           },
           height: "2rem",
           minWidth: "9rem",
           fontWeight: "300",
           fontSize: "1rem",
         }}
-        name={RowField?.name}
-        label={"-Sélectionner-"}
         displayEmpty
-        onChange={HandleChange}
         className="[&_.MuiOutlinedInput-notchedOutline]:border-none"
       >
         {RowField?.options?.map((element: any, index: number) => {

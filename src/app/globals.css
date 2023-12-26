@@ -2,9 +2,3 @@
 @tailwind components;
 @tailwind utilities;
 
-.MuiMenu-list {
-  border-radius: 0.5rem;
-}
-.MuiOutlinedInput-notchedOutline {
-  border: none !important ;
-}

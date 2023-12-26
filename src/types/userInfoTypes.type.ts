@@ -28,3 +28,7 @@ export interface RowType {
   Row: RowFieldType[];
   rang: number;
 }
+
+export interface PopupType {
+  EDIT_FIELD: () => ReactNode;
+};

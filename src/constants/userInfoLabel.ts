@@ -139,7 +139,7 @@ import { ImProfile } from "react-icons/im";
 import { MdOutlineCastForEducation, MdOutlineSmartphone } from "react-icons/md";
 import Input from "@/app/(dashboard)/employees/components/Fileds/Input/Input";
 import SelectInput from "@/app/(dashboard)/employees/components/Fileds/select/Select";
-import Date from "@/app/(dashboard)/employees/components/Fileds/Date/Date";
+import Date from "@/app/(dashboard)/employees/components/Fileds/DateInput/DateInput";
 import RadioBox from "@/app/(dashboard)/employees/components/Fileds/RadioBox/RadioBox";
 
 export const PersonnalChamps = [

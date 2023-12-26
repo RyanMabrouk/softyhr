@@ -1,5 +1,5 @@
 "use client";
-import { RowFieldType } from "@/app/types/userInfoTypes.type";
+import { RowFieldType } from "@/types/userInfoTypes.type";
 import React, { memo, useEffect, useRef, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 

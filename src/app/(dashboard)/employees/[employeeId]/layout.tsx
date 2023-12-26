@@ -23,36 +23,31 @@ function Layout({ params: { employeeId }, children }: EmployePropsType) {
     <div className="h-full w-full">
       <div
         className={
-          "border-10 duration-400 z-50 flex h-[13rem] justify-center bg-gradient-to-r  from-color-green-7 to-color-green-9 transition-all " +
-          (ScrollPosition > 330 ? "fixed top-0 h-[4rem] w-full !flex-row" : "")
+          "border-10 duration-400 z-50 flex h-[13rem] justify-center bg-gradient-to-r  from-color-green-7 to-color-green-9 transition-all "
         }
       >
         <div
           className={
-            "flex w-9/12 items-end justify-start gap-[4.7rem] " +
-            (ScrollPosition > 330 ? "!items-center" : "")
+            "flex w-9/12 items-end justify-start gap-[4.7rem] " 
           }
         >
           <Image
             src={AvatarUser}
             alt="user-name"
             className={
-              "border-10 z-10 -mb-9 h-[13rem] w-[13rem] cursor-pointer rounded-full border-2 border-white bg-gray-6 object-cover " +
-              (ScrollPosition > 330 ? "!mb-0 h-[4rem] w-[4rem]" : "")
+              "border-10 z-10 -mb-9 h-[13rem] w-[13rem] cursor-pointer rounded-full border-2 border-white bg-gray-6 object-cover "
             }
           />
           <div
             className={
-              "flex-column flex w-full flex-col gap-[4rem] " +
-              (ScrollPosition > 300 ? "!flex-row" : "")
+              "flex-column flex w-full flex-col gap-[4rem] " 
             }
           >
             <div className="flex items-start justify-between">
               <h1 className="text-3xl font-bold text-white">Ali Ben Romdhan</h1>
               <div
                 className={
-                  "flex h-10 gap-[3rem] " +
-                  (ScrollPosition > 330 ? "hidden" : "")
+                  "flex h-10 gap-[3rem] "
                 }
               >
                 <DropDown
@@ -75,10 +70,7 @@ function Layout({ params: { employeeId }, children }: EmployePropsType) {
                           "flex items-center justify-center overflow-hidden rounded-t-lg p-3 px-6 text-white transition ease-in-out " +
                           (ActiveRoute == label
                             ? `bg-white font-bold !text-color-green-9 `
-                            : `font-normal hover:bg-fabric-100 hover:opacity-25`) +
-                          (ScrollPosition > 330
-                            ? " !rounded-lg !p-2 !px-4"
-                            : "")
+                            : `font-normal hover:bg-fabric-100 hover:opacity-25`) 
                         }
                       >
                         {label}
