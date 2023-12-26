@@ -2,7 +2,7 @@ import { GetSettings } from "@/api/getSettings";
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import Loader from "../Loader/Loader";
-import { ChampsType } from "@/types/userInfoTypes.type";
+import { ChampsType, RowFieldType } from "@/types/userInfoTypes.type";
 import RowFields from "./components/RowFields";
 
 import { usePathname } from "next/navigation";
@@ -17,10 +17,11 @@ function EditFields() {
   const pathname = usePathname();
   const { data, isPending } = useQuery({
     queryKey: ["settings"],
-    queryFn:  () => GetSettings(pathname.split("/")[pathname.split("/").length - 1]),
+    queryFn: () =>
+      GetSettings(pathname.split("/")[pathname.split("/").length - 1]),
   });
 
-  const AddFields = {
+  const AddFields: RowFieldType = {
     name: pathname.split("/")[pathname.split("/").length - 1],
     type: "select",
     options: [
@@ -33,6 +34,7 @@ function EditFields() {
         value: "test2",
       },
     ],
+    required: false,
   };
 
   return (
@@ -61,7 +63,14 @@ function EditFields() {
               </h1>
               {data?.Champs?.sort((a: any, b: any) => a.rang - b.rang)?.map(
                 ({ rang, champ, Icon, Fields }: ChampsType, index: number) => {
-                  return <RowFiedlsList data={data} champ={champ} Fields={Fields} />;
+                  return (
+                    <RowFiedlsList
+                      key={champ + index}
+                      data={data}
+                      champ={champ}
+                      Fields={Fields}
+                    />
+                  );
                 },
               )}
             </div>

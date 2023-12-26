@@ -1,14 +1,11 @@
-import React, { ReactNode, memo, useState } from "react";
+import React, { ReactNode } from "react";
 import { v4 as uuidv4 } from "uuid";
-import Input from "./Input/Input";
 import { Field } from "@/constants/userInfo";
-import { RowFieldType, RowType } from "@/types/userInfoTypes.type";
-
+import { RowFieldType } from "@/types/userInfoTypes.type";
 interface FiledsChampsPropsType {
   FieldsArray:RowFieldType[];
   setTouched:(arg: boolean)=>void;
 }
-
 function FiledsChamps({
   FieldsArray,
   setTouched,

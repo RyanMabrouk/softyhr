@@ -1,7 +1,6 @@
 "use client";
 import { RowFieldType } from "@/types/userInfoTypes.type";
-import React, { memo, useEffect, useRef, useState } from "react";
-import { v4 as uuidv4 } from "uuid";
+import React, { memo} from "react";
 
 interface InputPropsType {
   RowField: RowFieldType;

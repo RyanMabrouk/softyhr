@@ -1,12 +1,10 @@
 "use client";
-import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
-import React, { useRef, useState } from "react";
-import DropDown from "../../DropDown/DropDown";
+import {  MenuItem, Select } from "@mui/material";
+import React from "react";
 import { RowFieldType } from "@/types/userInfoTypes.type";
 
 interface SelectInputPropsType {
   RowField: RowFieldType;
-  setTouched: (arg: boolean) => void | undefined;
 }
 
 function SelectInput({ RowField }: SelectInputPropsType) {

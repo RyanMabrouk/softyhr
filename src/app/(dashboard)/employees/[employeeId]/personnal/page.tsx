@@ -1,16 +1,15 @@
 "use client";
-import React, { memo, useState } from "react";
+import React, {  useState } from "react";
 import FiledsChamps from "../../components/Fileds/Fileds";
 import { FaAddressCard } from "react-icons/fa";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import ChangesSection from "../../components/ChangesSection/ChangesSection";
 import { GetSettings } from "@/api/getSettings";
 import Loader from "../../components/Loader/Loader";
 import submitForm from "@/api/test";
 import { sectionIcon } from "@/constants/userInfo";
-import { ChampsType, RowFieldType, RowType } from "@/types/userInfoTypes.type";
+import { ChampsType} from "@/types/userInfoTypes.type";
 import { usePathname, useRouter } from "next/navigation";
-import path from "path";
 
 function Personnal() {
   const { data, isPending } = useQuery({
@@ -36,7 +35,7 @@ function Personnal() {
             </h1>
             <h1
               className="cursor-pointer text-gray-10 hover:underline"
-              onClick={() => Router.push(pathname + "?popup=Edit_Field")}
+              onClick={() => Router.push(pathname + "?popup=edit_field")}
             >
               Edit Fields
             </h1>

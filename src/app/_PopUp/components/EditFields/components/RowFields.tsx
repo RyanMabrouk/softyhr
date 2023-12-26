@@ -52,7 +52,7 @@ function RowFields({ RowFields, rang, champ, data }: any) {
       >
         {RowFields?.map(({ name }: any, index: number) => {
           return (
-            <h1 className="text-gray-23">
+            <h1 className="text-gray-23" key={name + index}>
               {name + (index + 1 < RowFields.length ? " & " : "")}
             </h1>
           );

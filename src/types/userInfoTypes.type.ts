@@ -12,7 +12,7 @@ export interface Settings {
 
 export interface RowFieldType {
   name: string;
-  options: string[] | undefined;
+  options: Object[] | undefined;
   required: boolean;
   type: "select" | "text" | "radio";
 }
@@ -31,4 +31,4 @@ export interface RowType {
 
 export interface PopupType {
   EDIT_FIELD: () => ReactNode;
-};
+}
