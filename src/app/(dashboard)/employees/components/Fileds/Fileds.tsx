@@ -2,7 +2,7 @@ import React, { ReactNode, memo, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import Input from "./Input/Input";
 import { Field } from "@/constants/userInfo";
-import { RowFieldType } from "@/app/types/userInfoTypes.type";
+import { RowFieldType, RowType } from "@/types/userInfoTypes.type";
 
 interface FiledsChampsPropsType {
   FieldsArray:RowFieldType[];

@@ -11,7 +11,6 @@ function RadioBox({ RowField, setTouched }: any) {
     setTouched(true);
     setValue(e.target.value);
   };
-  console.log(RowField);
 
   return (
     <div className="flex flex-col items-start justify-center gap-[0.5rem]">
@@ -29,8 +28,8 @@ function RadioBox({ RowField, setTouched }: any) {
       >
         <Radio.Group onChange={onChange} value={value} name={RowField?.name}>
           <Space direction="vertical">
-            {RowField?.options?.map((value: string) => (
-              <Radio value={value}>{value}</Radio>
+            {RowField?.options?.map((value: string, index:number) => (
+              <Radio key={index} value={value}>{value}</Radio>
             ))}
           </Space>
         </Radio.Group>
