@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import countries from "./countries.json";
-import { SubmitBtn } from "./SubmitBtn";
+import { SubmitBtn } from "./ui/SubmitBtn";
 import signup from "@/actions/auth/signup";
 import { Input } from "./Input";
 import { z } from "zod";
@@ -100,9 +100,9 @@ export function Form() {
         </h1>
       ) : (
         <h1
-          className={`font-serif text-2xl font-bold leading-[1.2] text-color-green-4`}
+          className={`text-3xl font-bold leading-[1.2] text-color-green-4`}
         >
-          Sign up for SoftyHr
+          Sign up for SoftyHR
         </h1>
       )}
       <div

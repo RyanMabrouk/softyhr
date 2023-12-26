@@ -7,7 +7,7 @@ export function ShowPasswordToggleProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState<boolean>(false);
   return (
     <showPasswordToggle.Provider value={{ showPassword, setShowPassword }}>
       {children}

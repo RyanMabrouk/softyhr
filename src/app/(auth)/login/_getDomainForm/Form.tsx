@@ -1,5 +1,5 @@
 import React from "react";
-import { SubmitBtn } from "../signup/SubmitBtn";
+import { SubmitBtn } from "../../signup/ui/SubmitBtn";
 import { DomainInput } from "./DomainInput";
 import verifyCompanyDomain from "@/actions/auth/verifyCompanyDomain";
 
@@ -11,7 +11,7 @@ export function Form({ children }: { children: React.ReactNode }) {
     >
       <div className="flex h-full w-full flex-row items-center gap-2">
         <DomainInput />
-        <span className=" text-gray-21 space-x-8 font-light leading-[22px]">
+        <span className=" space-x-8 font-light leading-[22px] text-gray-21">
           .softyhr.com
         </span>
       </div>

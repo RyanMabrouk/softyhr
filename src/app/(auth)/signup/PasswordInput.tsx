@@ -19,9 +19,15 @@ export function PasswordInput({ error }: { error: string[] | undefined }) {
   }, [error]);
   return (
     <FormControl sx={{ width: "100%" }} variant="outlined">
-      <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+      <InputLabel
+        error={inputError ? true : false}
+        htmlFor="outlined-adornment-password"
+      >
+        Password
+      </InputLabel>
       <OutlinedInput
         fullWidth
+        label="Password"
         id="outlined-adornment-password"
         name="password"
         error={inputError ? true : false}

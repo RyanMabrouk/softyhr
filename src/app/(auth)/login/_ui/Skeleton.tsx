@@ -1,6 +1,5 @@
 import Link from "next/link";
 import React from "react";
-
 export default function Skeleton({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex max-w-[40rem] flex-col">
@@ -12,12 +11,12 @@ export default function Skeleton({ children }: { children: React.ReactNode }) {
         className="h-[3px] w-full"
       />
       <footer className=" flex w-full flex-row justify-between  px-1 py-3">
-        <div className="text-gray-21 flex flex-row gap-2 text-sm font-light no-underline">
+        <div className="flex flex-row gap-2 text-sm font-light text-gray-21 no-underline">
           <Link
             href="#"
             className="cursor-pointer hover:text-color-green hover:underline"
           >
-            Terms of Service
+            Privacy Policy
           </Link>
           <strong className="-mt-2 text-center text-lg">.</strong>
           <Link

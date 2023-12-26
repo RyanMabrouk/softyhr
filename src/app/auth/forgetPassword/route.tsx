@@ -4,7 +4,7 @@ import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 export async function GET(request: NextRequest) {
-  console.log("🚀 ~ interceptd in callback");
+  console.log("🚀 ~ interceptd in forget password callback");
   const requestUrl = new URL(request.url);
   const code = requestUrl.searchParams.get("code");
   try {
@@ -18,12 +18,9 @@ export async function GET(request: NextRequest) {
         (profile) => profile.user_id === session?.user.id,
       )[0].org_name;
       if (error) throw new Error(error.message);
-      //sign out from the landing page url
-      const { error: signout_error } = await supabase.auth.signOut();
-      if (signout_error) throw new Error(signout_error.message);
-      // URL to redirect to after sign in process completes
+      // URL to redirect after sign in process completed
       return NextResponse.redirect(
-        `${requestUrl.protocol}//${company}.${requestUrl.host}/home`,
+        `${requestUrl.protocol}//${company}.${requestUrl.host}/change_password`,
       );
     }
   } catch (error) {

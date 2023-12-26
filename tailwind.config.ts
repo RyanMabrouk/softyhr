@@ -1,6 +1,6 @@
 import type { Config } from "tailwindcss";
 const plugin = require("tailwindcss/plugin");
-const Myclass = plugin(function ({ addUtilities }) {
+const Myclass = plugin(function ({ addUtilities }: any) {
   addUtilities({
     ".my-rotate-y-180": {
       transform: "rotateY(180deg)",
@@ -17,7 +17,6 @@ const Myclass = plugin(function ({ addUtilities }) {
   });
 });
 const config: Config = {
-  mode: "jit",
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",

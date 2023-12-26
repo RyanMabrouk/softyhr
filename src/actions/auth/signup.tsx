@@ -3,10 +3,10 @@ import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
 import { cookies, headers } from "next/headers";
 import { redirect } from "next/navigation";
 import postData from "@/api/postData";
-
 export default async function signup(formData: FormData) {
   const headersList = headers();
   const header_url = headersList.get("host") || "";
+  const proto = headers().get("x-forwarded-proto") || "http";
   //Company Info
   const company = formData.get("company") as string;
   //Admin Info
@@ -20,8 +20,9 @@ export default async function signup(formData: FormData) {
       last_name: formData.get("last_name"),
       tel: tel,
       job: job,
+      org_name: company,
     },
-    emailRedirectTo: `http://${header_url}/auth/callback`,
+    emailRedirectTo: `${proto}://${header_url}/auth/callback`,
   };
   const supabase = createServerActionClient({ cookies });
   const { data, error: signup_error } = await supabase.auth.signUp({
@@ -37,6 +38,7 @@ export default async function signup(formData: FormData) {
     console.log("🚀already signed up");
   } else {
     console.log("🚀verify your email");
+    //Create organization
     const { error: organizations_error } = await postData("organizations", [
       {
         name: company,
@@ -48,6 +50,7 @@ export default async function signup(formData: FormData) {
       console.log("🚀organizations_error", organizations_error);
       return;
     } else {
+      //Create profile
       const { error: profiles_error } = await postData("profiles", [
         {
           user_id: data?.user?.id,
@@ -64,8 +67,19 @@ export default async function signup(formData: FormData) {
         console.log("🚀profiles_error", profiles_error);
         return;
       } else {
-        console.log("🚀redirecting to /");
-        redirect("/");
+        //Create settings
+        const { error: settings_error } = await postData("settings", [
+          {
+            org_name: company,
+          },
+        ]);
+        if (settings_error) {
+          console.log("🚀settings_error", settings_error);
+          return;
+        } else {
+          console.log("🚀redirecting to /");
+          redirect("/");
+        }
       }
     }
   }

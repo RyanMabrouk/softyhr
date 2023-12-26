@@ -31,7 +31,6 @@ export function Input({
   toggleDisplay?: boolean;
   setValueInParent?: (company: string) => void;
 }) {
-  const [value, setValue] = useState("");
   const [inputError, setInputError] = useState(error ? error[0] : "");
   useEffect(() => {
     setInputError(error ? error[0] : "");
@@ -49,22 +48,21 @@ export function Input({
     >
       {type === "select" ? (
         <div className="relative flex h-fit w-full flex-col items-center justify-center">
-          <FormControl className="w-full">
+          <FormControl className="group w-full [&_*]:transition-all [&_*]:ease-linear [&_label]:focus-within:!text-color-green-4 [&_label]:!text-opacity-[0.6]">
             <InputLabel>{label}</InputLabel>
             <Select
               variant="outlined"
               data-placeholder-trigger="keydown"
+              autoComplete="off"
               label={label}
               error={inputError ? true : false}
               labelId="demo-simple-select-error-label"
               id="demo-simple-select-error"
               name={name}
-              value={value}
-              onChange={(e) => {
-                setValue(e.target.value);
+              onChange={() => {
                 setInputError("");
               }}
-              className={`group w-full`}
+              className={`group w-full [&_*]:transition-all [&_*]:ease-linear [&_.MuiOutlinedInput-notchedOutline]:!border-color-green-4   [&_.MuiOutlinedInput-notchedOutline]:focus-within:!border-color-green-4  [&_label]:focus-within:!text-color-green-4 `}
             >
               {options?.map((option, i) => (
                 <MenuItem
@@ -87,7 +85,7 @@ export function Input({
           helperText={inputError && HelperText}
           fullWidth
           placeholder={placeholder}
-          className={`group w-full [&_*]:!outline-color-green-4 [&_*]:focus:!outline-color-green-4 [&_label]:!border-color-green-4 [&_label]:focus:!text-color-green-4`}
+          className={`group w-full border [&_*]:transition-all [&_*]:ease-linear [&_.MuiOutlinedInput-notchedOutline]:focus-within:!border-color-green-4   [&_label]:focus-within:!text-color-green-4 `}
           label={label}
           type={type}
           name={name}
@@ -96,7 +94,6 @@ export function Input({
             if (setValueInParent) {
               setValueInParent(e.target.value);
             }
-            setValue(e.target.value);
             setInputError("");
           }}
         />
