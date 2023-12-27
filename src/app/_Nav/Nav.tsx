@@ -19,10 +19,9 @@ export default function Nav() {
             const isActive =
               currentPath === pathFn(firstPath, employeId) ||
               currentPath.startsWith(label.slice(0, label.indexOf("/")));
-            console.log(
-              pathFn(firstPath, employeId),
-              pathFn(firstPath, employeId).startsWith("/employees/"),
-            );
+              console.log(pathFn(firstPath, employeId));
+            console.log (pathFn(firstPath, employeId))
+            console.log(pathFn(firstPath, employeId).startsWith("/people"));
             return (
               <Link
                 key={index}

@@ -17,8 +17,7 @@ interface EmployePropsType {
 
 function Layout({ params: { employeeId }, children }: EmployePropsType) {
   const ActiveRoute =
-    usePathname().split("/").slice(-1).join("") || EmployeeRoute[0]?.label;
-  const [ScrollPosition] = useScrollPosition();
+    usePathname().split("/").slice(-1).join("") || EmployeeRoute[0]?.label; 
   return (
     <div className="h-full w-full">
       <div

@@ -6,10 +6,10 @@ import { useDrag, useDrop } from "react-dnd";
 
 function RowFields({ RowFields, rang, champ, data }: any) {
   const queryClient = useQueryClient();
-  const { mutateAsync } = useMutation({
+
+  /*const { mutateAsync } = useMutation({
     mutationFn: async ({ RowStart, RowEnd, champ }: any) => {
       console.log(RowStart, RowEnd);
-      const NewSettings = ReorderFields(RowStart, RowEnd, data, champ);
       return await UpdateSettings(NewSettings).then(() => {
         console.log("updated successfuly !!!");
       });
@@ -18,7 +18,7 @@ function RowFields({ RowFields, rang, champ, data }: any) {
       console.log(data);
       queryClient.invalidateQueries({ queryKey: ["settings"] });
     },
-  });
+  });*/
 
   const [{ isDragging }, drag] = useDrag(() => ({
     type: champ,
@@ -32,11 +32,18 @@ function RowFields({ RowFields, rang, champ, data }: any) {
     accept: champ,
     drop: (item: any, monitor: any) => {
       const dropResult = monitor.internalMonitor.registry.dropTargets;
-      mutateAsync({
+    /*  mutateAsync({
         RowStart: item.Row,
         champ: item.champ,
         RowEnd: dropResult.get(monitor.targetId).spec.Row,
-      });
+      });*/
+      data = ReorderFields(
+        item.Row,
+        dropResult.get(monitor.targetId).spec.Row,
+        data,
+        item.champ,
+      );
+
     },
     Row: rang,
     collect: (monitor) => ({
