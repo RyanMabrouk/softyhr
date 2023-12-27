@@ -19,15 +19,12 @@ export default function Nav() {
             const isActive =
               currentPath === pathFn(firstPath, employeId) ||
               currentPath.startsWith(label.slice(0, label.indexOf("/")));
-              console.log(pathFn(firstPath, employeId));
-            console.log (pathFn(firstPath, employeId))
-            console.log(pathFn(firstPath, employeId).startsWith("/people"));
             return (
               <Link
                 key={index}
                 className={
                   "flex h-full items-center justify-center px-6 text-gray-9 transition delay-75 ease-in-out hover:bg-gray-14 " +
-                  (isActive ? "text-green bg-gray-14 font-bold" : "")
+                  (isActive ? "bg-gray-14 font-bold !text-color-green-4" : "")
                 }
                 href={pathFn(firstPath, employeId) || ""}
               >

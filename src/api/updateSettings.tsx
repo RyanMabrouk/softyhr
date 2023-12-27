@@ -3,8 +3,7 @@ import getData from "./getData";
 import getCurrentorg from "./getCurrentOrg";
 import { cookies } from "next/headers";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-export async function UpdateSettings( column :any) {
-  console.log(column);
+export async function UpdateSettings(column: any) {
   try {
     const org = await getCurrentorg();
     const supabase = createServerComponentClient({ cookies });
@@ -13,11 +12,9 @@ export async function UpdateSettings( column :any) {
       .update({ personnal: column })
       .eq("org_name", org?.name)
       .select();
-              
-    return data
+
+    return column;
   } catch (error) {
     console.log(error);
   }
 }
-
-          

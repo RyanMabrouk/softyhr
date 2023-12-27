@@ -1,5 +1,5 @@
 import React from "react";
-import Nav from "../_Nav/Nav";
+import Nav from "../_Layout/Layout";
 import { redirect } from "next/navigation";
 import getSession from "@/actions/getSession";
 export async function Layout({ children }: { children: React.ReactNode }) {

@@ -14,6 +14,7 @@ export interface RowFieldType {
   name: string;
   options: string[] | undefined;
   required: boolean;
+  placeHolder: string | undefined;
   type: "select" | "text" | "radio";
 }
 
@@ -31,4 +32,4 @@ export interface RowType {
 
 export interface PopupType {
   EDIT_FIELD: () => ReactNode;
-};
+}

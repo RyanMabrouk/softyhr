@@ -34,7 +34,7 @@ export function ReorderFields(
       }
     });
   }
-  data?.Champs?.map((element: any) => {
+  let Finalarray = data?.Champs?.map((element: any) => {
     if (element?.champ == champ) {
       return {
         ...element,
