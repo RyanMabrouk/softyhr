@@ -7,6 +7,7 @@ import { GetDomainName } from "./_getDomainForm/GetDomainName";
 import { WhereIsMyDomain } from "./_getDomainForm/WhereIsMyDomain";
 import { ResetPasswordPage } from "./ResetPasswordPage";
 import { LoginPage } from "./LoginPage";
+
 export default async function Page() {
   const session = await getSession();
   const org = await getCurrentorg();

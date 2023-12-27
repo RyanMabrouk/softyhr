@@ -2,7 +2,7 @@ import Link from "next/link";
 import React from "react";
 export default function Skeleton({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex max-w-[40rem] flex-col">
+    <div className="flex flex-col">
       {children}
       <hr
         style={{
@@ -26,7 +26,7 @@ export default function Skeleton({ children }: { children: React.ReactNode }) {
             Terms of Service
           </Link>
         </div>
-        <Link className="relative font-bold" href={"/"}>
+        <Link className="relative font-bold" href={"/"} target="_blank">
           <span className="mr-2">SoftyHR</span>
           <span className="absolute right-0 top-0 text-[0.5rem]">®</span>
         </Link>

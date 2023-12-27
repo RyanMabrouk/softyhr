@@ -12,5 +12,11 @@ export default async function verifyCompanyDomain(formData: FormData) {
   });
   if (hostnamedb?.length === 1)
     redirect(`${proto}://${copanyDomain}.${header_url}/login`);
-  else console.log("🚀 ~ please verify your domain name");
+  else
+    return {
+      error: {
+        message: "Please verify your domain name",
+        type: "Domain doesnt exist",
+      },
+    };
 }

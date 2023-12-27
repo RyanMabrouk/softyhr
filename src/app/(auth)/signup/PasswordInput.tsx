@@ -18,7 +18,13 @@ export function PasswordInput({ error }: { error: string[] | undefined }) {
     setInputError(error ? error[0] : "");
   }, [error]);
   return (
-    <FormControl sx={{ width: "100%" }} variant="outlined">
+    <FormControl
+      sx={{ width: "100%" }}
+      variant="outlined"
+      className={`[&_label]:focus-within:!text-color-green-3  ${
+        inputError ? "" : "[&_label]:!text-black [&_label]:!text-opacity-[0.6]"
+      }`}
+    >
       <InputLabel
         error={inputError ? true : false}
         htmlFor="outlined-adornment-password"
@@ -33,6 +39,11 @@ export function PasswordInput({ error }: { error: string[] | undefined }) {
         error={inputError ? true : false}
         type={showPassword ? "text" : "password"}
         onChange={() => setInputError("")}
+        className={` [&_.MuiOutlinedInput-notchedOutline]:focus-within:!border-color-green-4   ${
+          inputError
+            ? ""
+            : "[&_.MuiOutlinedInput-notchedOutline]:!border-color-green-4"
+        }`}
         endAdornment={
           <InputAdornment position="end">
             <IconButton

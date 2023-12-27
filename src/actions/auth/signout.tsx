@@ -16,6 +16,6 @@ export default async function signout() {
       header_url.indexOf(".") + 1,
       header_url.length,
     )}`;
-    redirect(domain_url);
+    redirect("/logout");
   }
 }

@@ -1,9 +1,9 @@
 "use server";
 import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
 import { cookies, headers } from "next/headers";
-import { redirect } from "next/navigation";
 import postData from "@/api/postData";
 export default async function signup(formData: FormData) {
+  console.log("🚀 ~ signup");
   const headersList = headers();
   const header_url = headersList.get("host") || "";
   const proto = headers().get("x-forwarded-proto") || "http";
@@ -31,13 +31,15 @@ export default async function signup(formData: FormData) {
     options: options,
   });
   if (signup_error) {
-    console.log("🚀signup_error", signup_error);
-    return;
+    return {
+      error: { message: signup_error.message, type: "Signup Error" },
+    };
   }
   if (data?.user?.identities?.length === 0) {
-    console.log("🚀already signed up");
+    return {
+      error: { message: "You already have an account", type: "Signup Error" },
+    };
   } else {
-    console.log("🚀verify your email");
     //Create organization
     const { error: organizations_error } = await postData("organizations", [
       {
@@ -47,8 +49,12 @@ export default async function signup(formData: FormData) {
       },
     ]);
     if (organizations_error) {
-      console.log("🚀organizations_error", organizations_error);
-      return;
+      return {
+        error: {
+          message: organizations_error.message,
+          type: "creating an organization failed",
+        },
+      };
     } else {
       //Create profile
       const { error: profiles_error } = await postData("profiles", [
@@ -64,8 +70,12 @@ export default async function signup(formData: FormData) {
         },
       ]);
       if (profiles_error) {
-        console.log("🚀profiles_error", profiles_error);
-        return;
+        return {
+          error: {
+            message: profiles_error.message,
+            type: "creating a profile failed",
+          },
+        };
       } else {
         //Create settings
         const { error: settings_error } = await postData("settings", [
@@ -74,11 +84,16 @@ export default async function signup(formData: FormData) {
           },
         ]);
         if (settings_error) {
-          console.log("🚀settings_error", settings_error);
-          return;
+          return {
+            error: {
+              message: settings_error.message,
+              type: "creating settings failed",
+            },
+          };
         } else {
-          console.log("🚀redirecting to /");
-          redirect("/");
+          return {
+            error: null,
+          };
         }
       }
     }

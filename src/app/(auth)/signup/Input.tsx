@@ -5,7 +5,6 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import FormHelperText from "@mui/material/FormHelperText";
 import { FormControl, InputLabel } from "@mui/material";
-
 type Option = {
   value: string;
   name: string;
@@ -48,8 +47,14 @@ export function Input({
     >
       {type === "select" ? (
         <div className="relative flex h-fit w-full flex-col items-center justify-center">
-          <FormControl className="group w-full [&_*]:transition-all [&_*]:ease-linear [&_label]:focus-within:!text-color-green-4 [&_label]:!text-opacity-[0.6]">
-            <InputLabel>{label}</InputLabel>
+          <FormControl
+            className={`group w-full [&_*]:transition-all [&_*]:ease-linear  [&_label]:focus-within:!text-color-green-3  ${
+              inputError
+                ? ""
+                : "[&_label]:!text-black [&_label]:!text-opacity-[0.6]"
+            }`}
+          >
+            <InputLabel error={inputError ? true : false}>{label}</InputLabel>
             <Select
               variant="outlined"
               data-placeholder-trigger="keydown"
@@ -62,7 +67,11 @@ export function Input({
               onChange={() => {
                 setInputError("");
               }}
-              className={`group w-full [&_*]:transition-all [&_*]:ease-linear [&_.MuiOutlinedInput-notchedOutline]:!border-color-green-4   [&_.MuiOutlinedInput-notchedOutline]:focus-within:!border-color-green-4  [&_label]:focus-within:!text-color-green-4 `}
+              className={`group w-full [&_*]:transition-all [&_*]:ease-linear   [&_.MuiOutlinedInput-notchedOutline]:focus-within:!border-color-green-4   ${
+                inputError
+                  ? ""
+                  : "[&_.MuiOutlinedInput-notchedOutline]:!border-color-green-4"
+              }`}
             >
               {options?.map((option, i) => (
                 <MenuItem

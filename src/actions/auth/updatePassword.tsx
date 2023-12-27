@@ -9,9 +9,14 @@ export default async function updatePassword(formData: FormData) {
   const { error } = await supabase.auth.updateUser({
     password: password,
   });
-  if (error) console.log("🚀 updatePassword ~ error", error);
+  if (error)
+    return {
+      error: {
+        message: error.message,
+        type: "Server Error",
+      },
+    };
   else {
-    console.log("🚀 updatePassword ~ password updated");
     redirect("/home");
   }
 }

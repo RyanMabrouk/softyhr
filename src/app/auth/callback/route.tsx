@@ -25,6 +25,11 @@ export async function GET(request: NextRequest) {
       return NextResponse.redirect(
         `${requestUrl.protocol}//${company}.${requestUrl.host}/home`,
       );
+    } else {
+      const error = requestUrl.searchParams.get("error");
+      const error_description =
+        requestUrl.searchParams.get("error_description");
+      throw new Error("code is not defined");
     }
   } catch (error) {
     console.log("🚀 ~ file: route.tsx:15 ~ GET ~ error:", error);
