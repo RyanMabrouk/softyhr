@@ -14,6 +14,7 @@ export interface RowFieldType {
   name: string;
   options: Object[] | undefined;
   required: boolean;
+  placeHolder: string | undefined;
   type: "select" | "text" | "radio";
 }
 

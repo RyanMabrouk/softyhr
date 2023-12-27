@@ -1,14 +1,14 @@
 export const LayoutRoute = [
-  { label: "acceuil", pathFn: () => "/acceuil" },
+  { label: "Home", pathFn: () => "/Home" },
   {
-    label: "mes infos",
+    label: "my info",
     pathFn: (firstPath: string, employeId: number) =>
-      `/employees/${employeId}/${firstPath}`,
+      `/people/${employeId}/${firstPath}`,
   },
-  { label: "individus", pathFn: () => "/employees" },
-  { label: "recrutement", pathFn: () => "/recrutement" },
-  { label: "rapports", pathFn: () => "/rapports" },
-  { label: "fichers", pathFn: () => "/fichers" },
+  { label: "people", pathFn: () => "/people" },
+  { label: "Hiring", pathFn: () => "/Hiring" },
+  { label: "Reports", pathFn: () => "/Reports" },
+  { label: "Files", pathFn: () => "/Files" },
 ];
 
 export interface LayoutRouteType {

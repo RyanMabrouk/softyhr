@@ -69,7 +69,7 @@ const PersonnalFields = [
         name: "Date de naissance",
         fieldType: "Date",
         required: true,
-        ExtraTxt:"Age"
+        ExtraTxt: "Age",
       },
     ],
   },
@@ -137,10 +137,10 @@ import { FaHome } from "react-icons/fa";
 import { IoIosChatbubbles } from "react-icons/io";
 import { ImProfile } from "react-icons/im";
 import { MdOutlineCastForEducation, MdOutlineSmartphone } from "react-icons/md";
-import Input from "@/app/(dashboard)/employees/components/Fileds/Input/Input";
-import SelectInput from "@/app/(dashboard)/employees/components/Fileds/select/Select";
-import Date from "@/app/(dashboard)/employees/components/Fileds/DateInput/DateInput";
-import RadioBox from "@/app/(dashboard)/employees/components/Fileds/RadioBox/RadioBox";
+import Input from "@/app/(dashboard)/people/components/Fileds/Input/Input";
+import SelectInput from "@/app/(dashboard)/people/components/Fileds/select/Select";
+import Date from "@/app/(dashboard)/people/components/Fileds/DateInput/DateInput";
+import RadioBox from "@/app/(dashboard)/people/components/Fileds/RadioBox/RadioBox";
 
 export const PersonnalChamps = [
   { rang: 1, champ: "personnal", Icon: ImProfile, Fields: PersonnalFields },

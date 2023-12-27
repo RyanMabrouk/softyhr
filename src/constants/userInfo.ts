@@ -20,10 +20,10 @@ import { FaHome } from "react-icons/fa";
 import { IoIosChatbubbles } from "react-icons/io";
 import { ImProfile } from "react-icons/im";
 import { MdOutlineCastForEducation, MdOutlineSmartphone } from "react-icons/md";
-import Input from "@/app/(dashboard)/employees/components/Fileds/Input/Input";
-import SelectInput from "@/app/(dashboard)/employees/components/Fileds/select/Select";
-import RadioBox from "@/app/(dashboard)/employees/components/Fileds/RadioBox/RadioBox";
-import DateInput from "@/app/(dashboard)/employees/components/Fileds/DateInput/DateInput";
+import Input from "@/app/(dashboard)/people/components/Fileds/Input/Input";
+import SelectInput from "@/app/(dashboard)/people/components/Fileds/select/Select";
+import RadioBox from "@/app/(dashboard)/people/components/Fileds/RadioBox/RadioBox";
+import DateInput from "@/app/(dashboard)/people/components/Fileds/DateInput/DateInput";
 
 export const Field: any = {
   TEXT: Input,
@@ -33,10 +33,10 @@ export const Field: any = {
   RADIO: RadioBox,
 };
 
-export const sectionIcon :any = {
-  "ImProfile":ImProfile,
-  'FAHOME': FaHome,
-  'MDOUTLINESMARTPHONE': MdOutlineSmartphone,
-  'MDOUTLINECASTFOREDUCATION': MdOutlineCastForEducation,
-  'IOIOSCHATBUBBLES': IoIosChatbubbles,
+export const sectionIcon: any = {
+  ImProfile: ImProfile,
+  FAHOME: FaHome,
+  MDOUTLINESMARTPHONE: MdOutlineSmartphone,
+  MDOUTLINECASTFOREDUCATION: MdOutlineCastForEducation,
+  IOIOSCHATBUBBLES: IoIosChatbubbles,
 };

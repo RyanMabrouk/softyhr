@@ -18,7 +18,6 @@ interface EmployePropsType {
 function Layout({ params: { employeeId }, children }: EmployePropsType) {
   const ActiveRoute =
     usePathname().split("/").slice(-1).join("") || EmployeeRoute[0]?.label;
-  const [ScrollPosition] = useScrollPosition();
   return (
     <div className="h-full w-full">
       <div
@@ -26,11 +25,7 @@ function Layout({ params: { employeeId }, children }: EmployePropsType) {
           "border-10 duration-400 z-50 flex h-[13rem] justify-center bg-gradient-to-r  from-color-green-7 to-color-green-9 transition-all "
         }
       >
-        <div
-          className={
-            "flex w-9/12 items-end justify-start gap-[4.7rem] " 
-          }
-        >
+        <div className={"flex w-9/12 items-end justify-start gap-[4.7rem] "}>
           <Image
             src={AvatarUser}
             alt="user-name"
@@ -38,20 +33,12 @@ function Layout({ params: { employeeId }, children }: EmployePropsType) {
               "border-10 z-10 -mb-9 h-[13rem] w-[13rem] cursor-pointer rounded-full border-2 border-white bg-gray-6 object-cover "
             }
           />
-          <div
-            className={
-              "flex-column flex w-full flex-col gap-[4rem] " 
-            }
-          >
+          <div className={"flex-column flex w-full flex-col gap-[4rem] "}>
             <div className="flex items-start justify-between">
               <h1 className="text-3xl font-bold text-white">Ali Ben Romdhan</h1>
-              <div
-                className={
-                  "flex h-10 gap-[3rem] "
-                }
-              >
+              <div className={"flex h-10 gap-[1rem] "}>
                 <DropDown
-                  text="Demander un Changement"
+                  text="Request a Change"
                   ListArray={changementRequest}
                 />
                 <DropDown text="Settings" ListArray={Settings} />
@@ -70,7 +57,7 @@ function Layout({ params: { employeeId }, children }: EmployePropsType) {
                           "flex items-center justify-center overflow-hidden rounded-t-lg p-3 px-6 text-white transition ease-in-out " +
                           (ActiveRoute == label
                             ? `bg-white font-bold !text-color-green-9 `
-                            : `font-normal hover:bg-fabric-100 hover:opacity-25`) 
+                            : `hover:bg-gray-24 font-normal`)
                         }
                       >
                         {label}

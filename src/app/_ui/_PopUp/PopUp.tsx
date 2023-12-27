@@ -15,7 +15,7 @@ function PopUp() {
     PopUp != "" && (
       <div className="fixed top-0 z-30 flex h-screen w-screen items-center justify-center">
         <div
-          className="absolute z-40 h-full w-full backdrop-blur-sm"
+          className="absolute z-40 h-full w-full bg-gray-14"
           onClick={() => Router.push(pathname)}
         />
         <DndProvider backend={HTML5Backend}>

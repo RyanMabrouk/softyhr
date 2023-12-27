@@ -3,7 +3,7 @@ import { DatePicker, DatePickerProps } from "antd";
 import React from "react";
 import "dayjs/locale/zh-cn";
 import dayjs from "dayjs";
-import { getYearDiff } from "@/app/(dashboard)/employees/components/utils/getYearDff";
+import { getYearDiff } from "@/app/(dashboard)/people/components/utils/getYearDff";
 
 function DateInput({ RowField, setTouched }: any) {
   const onChange: DatePickerProps["onChange"] = (date, dateString) => {

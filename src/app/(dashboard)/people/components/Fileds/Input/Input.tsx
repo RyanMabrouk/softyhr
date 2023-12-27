@@ -8,9 +8,6 @@ interface InputPropsType {
 }
 
 const Input = ({ RowField, setTouched }:InputPropsType) => {
-  //const [value, setvalue] = useState<string>("");
-
-  //console.log(values, RowField);
   
   return (
     <div className="flex flex-col items-start justify-center">
@@ -23,15 +20,15 @@ const Input = ({ RowField, setTouched }:InputPropsType) => {
         {RowField?.name}
       </h1>
       <input
-        className="h-[2rem] rounded border border-gray-19 pl-2 font-normal outline-none"
+        className="h-[2rem] rounded border border-gray-19 pl-2 font-light outline-none"
         type={RowField?.type || "text"}
         name={RowField?.name}
         onFocus={() => setTouched(true)}
+        placeholder={RowField?.placeHolder || ""}
         //value={value}
         // onChange={handleChange}
         //  setvalue(e.target.value);
         //  setFieldValue(RowField?.name, value);
-
         //  }}
       />
     </div>

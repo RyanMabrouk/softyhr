@@ -1,11 +1,11 @@
+"use client";
 import { GetSettings } from "@/api/getSettings";
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useState } from "react";
 import Loader from "../Loader/Loader";
 import { ChampsType, RowFieldType } from "@/types/userInfoTypes.type";
-import RowFields from "./components/RowFields";
 
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { CgClose } from "react-icons/cg";
 import SelectInput from "./components/select/Select";
 import { GiRapidshareArrow } from "react-icons/gi";
@@ -15,6 +15,8 @@ import RowFiedlsList from "./components/RowFiedlsList";
 
 function EditFields() {
   const pathname = usePathname();
+  const Router = useRouter();
+
   const { data, isPending } = useQuery({
     queryKey: ["settings"],
     queryFn: () =>
@@ -44,12 +46,19 @@ function EditFields() {
       ) : (
         <div className="max-h-5/6 z-50 flex flex-col items-start justify-center rounded-lg ">
           <div className="flex w-full items-center justify-between">
-            <h1 className="v text-gray-23 pb-2 text-xl font-normal">
+            <h1 className=" pb-2 text-xl font-normal text-color-green-4">
               Edit Fields for All Employees
             </h1>
-            <CgClose color={"#999999"} fontSize={"2rem"} cursor="pointer" />
+            <div onClick={() => Router.push(pathname)}>
+              <CgClose
+                color={"#999999"}
+                fontSize={"2rem"}
+                cursor="pointer"
+                onclick={() => console.log("object")}
+              />
+            </div>
           </div>
-          <div className=" rounded bg-white p-8 py-10">
+          <div className=" rounded bg-white p-8 py-10 shadow-md">
             <div className="mb-2 flex w-full items-center  justify-between border-b border-gray-16 pb-2">
               <h1 className="text-lg font-bold capitalize">
                 {pathname.split("/")[pathname.split("/").length - 1]}
@@ -65,7 +74,8 @@ function EditFields() {
                 ({ rang, champ, Icon, Fields }: ChampsType, index: number) => {
                   return (
                     <RowFiedlsList
-                      key={champ + index}
+                      key={champ}
+                      rang={rang}
                       data={data}
                       champ={champ}
                       Fields={Fields}
