@@ -10,6 +10,7 @@ export default async function verifyCompanyDomain(formData: FormData) {
   const { data: hostnamedb } = await getData("organizations", {
     match: { name: copanyDomain },
   });
+  console.log("🚀 ~ file: verifyCompanyDomain.tsx:13 ~ verifyCompanyDomain ~ hostnamedb:", hostnamedb)
   if (hostnamedb?.length === 1)
     redirect(`${proto}://${copanyDomain}.${header_url}/login`);
   else
