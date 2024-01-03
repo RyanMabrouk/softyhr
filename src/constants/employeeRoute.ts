@@ -9,7 +9,7 @@ export const EmployeeRoute = [
     icon: FaAddressCard,
   },
   {
-    rang: 4,
+    rang: 2,
     label: "job",
     path: (employeId: string) => `/people/${employeId}/job`,
     defaultPath: true,
@@ -21,7 +21,7 @@ export const EmployeeRoute = [
     defaultPath: true,
   },
   {
-    rang: 2,
+    rang: 4,
     label: "Avantages",
     path: (employeId: string) => `/people/${employeId}/Avantages`,
     defaultPath: true,

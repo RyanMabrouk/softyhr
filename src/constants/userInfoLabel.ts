@@ -141,6 +141,9 @@ import Input from "@/app/(dashboard)/people/components/Fileds/Input/Input";
 import SelectInput from "@/app/(dashboard)/people/components/Fileds/select/Select";
 import Date from "@/app/(dashboard)/people/components/Fileds/DateInput/DateInput";
 import RadioBox from "@/app/(dashboard)/people/components/Fileds/RadioBox/RadioBox";
+import FiledsChamps from "@/app/(dashboard)/people/components/Fileds/Fileds";
+import Education from "@/app/(dashboard)/people/components/Fileds/Education";
+import TableChamps from "@/app/(dashboard)/people/components/Fileds/TableChamps";
 
 export const PersonnalChamps = [
   { rang: 1, champ: "personnal", Icon: ImProfile, Fields: PersonnalFields },
@@ -183,4 +186,10 @@ export const Field: any = {
   SELECT: SelectInput,
   DATE: Date,
   RADIO: RadioBox,
+};
+
+export const Section: any = {
+  "Visa Information": TableChamps,
+  "Driver License": TableChamps,
+  Education: Education,
 };

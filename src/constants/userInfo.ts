@@ -34,7 +34,7 @@ export const Field: any = {
 };
 
 export const sectionIcon: any = {
-  ImProfile: ImProfile,
+  IMPROFILE: ImProfile,
   FAHOME: FaHome,
   MDOUTLINESMARTPHONE: MdOutlineSmartphone,
   MDOUTLINECASTFOREDUCATION: MdOutlineCastForEducation,

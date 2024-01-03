@@ -7,10 +7,12 @@ export default async function updateData(
   match: Object,
 ) {
   const supabase = createServerActionClient({ cookies });
+  console.log(payload);
   const { data, error } = await supabase
     .from(table)
     .update(payload)
     .match(match)
     .select();
+  console.log(error);
   return { data: data, error: error };
 }

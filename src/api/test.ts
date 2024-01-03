@@ -1,4 +1,4 @@
 "use server";
-export default async function submitForm(formdata:FormData) {
-  console.log(formdata);
+export default async function submitForm(NewData: any) {
+  console.log(NewData);
 }

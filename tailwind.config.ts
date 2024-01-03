@@ -146,8 +146,11 @@ const config: Config = {
         "gray-22": "#F3F3F3",
         "gray-23": "#232323",
         "gray-24": "#0003",
+        "gray-25": "#555",
+        "gray-26": "#999",
+        "gray-27": "#222222",
 
-       "color-teal-2": "#284D59",
+        "color-teal-2": "#284D59",
 
         "color-primary": "#599D15",
         "color-primary-0": "#F6FFE3",
@@ -168,7 +171,7 @@ const config: Config = {
         "color9-300": "#CE4755",
         "color9-400": "#A73440",
 
-         /*"color-green": "#599D15",
+        /*"color-green": "#599D15",
         "color-teal-2": "#284D59",
         "color-green-0": "#F6FFE3",
         "color-green-1": "#ECFFC7",

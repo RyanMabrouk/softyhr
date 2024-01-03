@@ -50,11 +50,11 @@ function RowFields({ RowFields, rang, champ, data }: any) {
         className="flex h-[2rem] w-full cursor-move items-center  justify-start border border-dashed border-gray-18 bg-gray-14 px-4 py-4 pr-12 duration-150 ease-in-out hover:bg-gray-16"
         ref={drag}
       >
-        {RowFields?.map(({ name, Default }: any, index: number) => {
+        { RowFields?.map(({ name, Default }: any, index: number) => {
           console.log(Default);
           return (
             <h1 className="text-gray-23" key={name}>
-              {name + (index + 1 < RowFields.length ? " , " : "")}
+              {name + (index + 1 < RowFields.length ? " , " : "") || "---"}
             </h1>
           );
         })}

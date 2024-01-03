@@ -6,22 +6,55 @@ import ChangesSection from "../../components/ChangesSection/ChangesSection";
 import { useSettings } from "@/hooks/useSettings";
 import Loader from "../../components/Loader/Loader";
 import submitForm from "@/api/test";
+import { v4 as uuidv4 } from "uuid";
 import { sectionIcon } from "@/constants/userInfo";
 import { ChampsType } from "@/types/userInfoTypes.type";
 import { usePathname, useRouter } from "next/navigation";
 import getData from "@/api/getData";
 import getSession from "@/actions/getSession";
 import getUser from "@/api/getUser";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { Section } from "@/constants/userInfoLabel";
+import formulateData from "../../components/utils/formulateData";
+import updateData from "@/api/updateData";
+import useToast from "@/hooks/useToast";
 
 function Personnal() {
   const { data, isPending } = useSettings("personnal");
+  const { toast, toastContainer } = useToast();
   const [touched, setTouched] = useState<boolean>(false);
+  const queryClient = useQueryClient();
+
+  const { mutateAsync, isPaused } = useMutation({
+    mutationFn: async (NewData: any) => {
+      return await updateData("profiles", NewData, {
+        user_id: NewData.user_id,
+      });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["user"] });
+      toast.success("your changes updated successfully", "update");
+    },
+    onError: () => {
+      toast.error("something went wrong");
+    },
+  });
+
+  const { data: user, isPending: isLoading } = useQuery({
+    queryKey: ["user"],
+    queryFn: () => getData("profiles", { user: true, org: true }),
+  });
   const pathname = usePathname();
   const Router = useRouter();
-  console.log(pathname);
+  const SubmitForm = (formdata: FormData) => {
+    const NewData = formulateData(formdata, user);
+    mutateAsync(NewData);
+    setTouched(false);
+  };
   return (
     <>
-      {(isPending ) ? (
+      {toastContainer}
+      {isPending || isLoading ? (
         <div className="flex h-[20rem] w-full items-center justify-center ">
           <Loader />
         </div>
@@ -39,28 +72,29 @@ function Personnal() {
               Edit Fields
             </h1>
           </div>
-          <form className="Form-Profile" action={submitForm}>
+          <form className="Form-Profile" action={SubmitForm}>
             {data?.Champs?.sort((a: any, b: any) => a.rang - b.rang)?.map(
               ({ rang, champ, Icon, Fields }: ChampsType, index: number) => {
                 const Component = sectionIcon[Icon.toUpperCase()];
-                console.log(Component);
+                const ComponentChamps = Section[champ] || FiledsChamps;
+                console.log(Icon.toUpperCase());
                 return (
                   <div
                     className="mt-4 flex w-full flex-col place-items-start justify-center gap-[2rem] border-b border-gray-18 pb-8"
                     key={index}
                   >
                     <h1 className="font-lg flex items-center justify-center gap-[0.5rem] text-xl  text-black">
-                      {/*   <Component fill="green" />*/}
+                      <Component fill="green" />
                       {champ}
                     </h1>
                     <div className="flex flex-col items-start justify-center gap-[1rem]">
-                      <FiledsChamps
+                      <ComponentChamps
                         champ={champ}
-                        user={user}
+                        user={user?.data[0]}
                         setTouched={setTouched}
-                        key={rang}
+                        key={rang || uuidv4()}
                         FieldsArray={Fields?.sort(
-                          (a: any, b: any) => a.rang - b.rang,
+                          (a: any, b: any) => a?.rang - b?.rang,
                         )}
                       />
                     </div>
