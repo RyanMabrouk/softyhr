@@ -6,7 +6,7 @@ export default function ForgotPasswordBtn() {
   return (
     <button
       type="button"
-      className="cursor-pointer hover:text-color-green hover:underline"
+      className="cursor-pointer hover:text-color-primary hover:underline"
       onClick={() => setToggleDisplay((old: boolean) => !old)}
     >
       Forgot Password?

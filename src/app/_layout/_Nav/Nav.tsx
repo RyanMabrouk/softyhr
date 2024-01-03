@@ -24,7 +24,7 @@ export default function Nav() {
                 key={index}
                 className={
                   "flex h-full items-center justify-center px-6 text-gray-9 transition delay-75 ease-in-out hover:bg-gray-14 " +
-                  (isActive ? "bg-gray-14 font-bold !text-color-green-4" : "")
+                  (isActive ? "bg-gray-14 font-bold !text-color-primary-4" : "")
                 }
                 href={pathFn(firstPath, employeId) || ""}
               >

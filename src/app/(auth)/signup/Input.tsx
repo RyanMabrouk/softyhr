@@ -48,7 +48,7 @@ export function Input({
       {type === "select" ? (
         <div className="relative flex h-fit w-full flex-col items-center justify-center">
           <FormControl
-            className={`group w-full [&_*]:transition-all [&_*]:ease-linear  [&_label]:focus-within:!text-color-green-3  ${
+            className={`group w-full [&_*]:transition-all [&_*]:ease-linear  [&_label]:focus-within:!text-color-primary-3  ${
               inputError
                 ? ""
                 : "[&_label]:!text-black [&_label]:!text-opacity-[0.6]"
@@ -67,10 +67,10 @@ export function Input({
               onChange={() => {
                 setInputError("");
               }}
-              className={`group w-full [&_*]:transition-all [&_*]:ease-linear   [&_.MuiOutlinedInput-notchedOutline]:focus-within:!border-color-green-4   ${
+              className={`group w-full [&_*]:transition-all [&_*]:ease-linear   [&_.MuiOutlinedInput-notchedOutline]:focus-within:!border-color-primary-4   ${
                 inputError
                   ? ""
-                  : "[&_.MuiOutlinedInput-notchedOutline]:!border-color-green-4"
+                  : "[&_.MuiOutlinedInput-notchedOutline]:!border-color-primary-4"
               }`}
             >
               {options?.map((option, i) => (
@@ -94,7 +94,7 @@ export function Input({
           helperText={inputError && HelperText}
           fullWidth
           placeholder={placeholder}
-          className={`group w-full border [&_*]:transition-all [&_*]:ease-linear [&_.MuiOutlinedInput-notchedOutline]:focus-within:!border-color-green-4   [&_label]:focus-within:!text-color-green-4 `}
+          className={`group w-full border [&_*]:transition-all [&_*]:ease-linear [&_.MuiOutlinedInput-notchedOutline]:focus-within:!border-color-primary-4   [&_label]:focus-within:!text-color-primary-4 `}
           label={label}
           type={type}
           name={name}

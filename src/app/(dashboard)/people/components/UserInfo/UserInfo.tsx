@@ -42,7 +42,7 @@ function UserInfo() {
         </div>
         <div className="h-px w-full  self-center bg-gray-16" />
         <div className=" flex flex-col gap-[0.3rem]">
-          <h1 className="text-sm text-color-green-7">Date d'embauche</h1>
+          <h1 className="text-sm text-color-primary-7">Date d'embauche</h1>
           <h1 className="text-500 text-sm font-bold text-gray-15">
             2 déc. 2020
           </h1>
@@ -77,7 +77,7 @@ function UserInfo() {
         </div>
         <div className="h-px w-full  self-center bg-gray-16" />
         <div className="flex flex-col items-start justify-center gap-[0.5rem]">
-          <h1 className="text-sm text-color-green-7">Rapports directs</h1>
+          <h1 className="text-sm text-color-primary-7">Rapports directs</h1>
           <div className="flex items-center justify-start gap-[1rem]">
             <CgProfile fill="gray" />
             <h1 className="cursor-pointer text-sm font-normal text-gray-15 underline-offset-1 hover:underline">

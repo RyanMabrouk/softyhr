@@ -56,7 +56,7 @@ export function Form() {
               >
                 {req.valid ? (
                   <IoIosCheckmarkCircleOutline
-                    className={`h-5 w-5 text-color-green-5`}
+                    className={`h-5 w-5 text-color-primary-5`}
                   />
                 ) : (
                   <FaRegCircle className={`ml-0.5 h-4 w-4`} />
@@ -72,11 +72,11 @@ export function Form() {
               type="password"
               placeholder="Password"
             >
-              <IoKey className="h-7 w-7 font-bold text-gray-400 group-focus-within:text-color-green-5" />
+              <IoKey className="h-7 w-7 font-bold text-gray-400 group-focus-within:text-color-primary-5" />
             </Input>
             <IoShieldCheckmarkOutline
               className={`h-8 w-8 ${
-                isValidPassword ? "text-color-green-5" : "text-gray-400"
+                isValidPassword ? "text-color-primary-5" : "text-gray-400"
               }`}
             />
           </div>
@@ -87,12 +87,12 @@ export function Form() {
               type="password"
               placeholder="Confirm Password"
             >
-              <IoKey className="h-7 w-7 font-bold text-gray-400 group-focus-within:text-color-green-5" />
+              <IoKey className="h-7 w-7 font-bold text-gray-400 group-focus-within:text-color-primary-5" />
             </Input>
             <IoShieldCheckmarkOutline
               className={`h-8 w-8 ${
                 confirmPassword === password && confirmPassword.length > 0
-                  ? "text-color-green-5"
+                  ? "text-color-primary-5"
                   : "text-gray-400"
               }`}
             />
@@ -103,7 +103,7 @@ export function Form() {
             <button
               type="button"
               disabled={true}
-              className={`col-span-2 h-11 w-full max-w-[9rem] rounded-md !bg-fabric-700 px-[auto] font-bold capitalize text-white transition-all duration-300 ease-linear hover:!bg-fabric-600  disabled:bg-color-green-5  disabled:opacity-50 `}
+              className={`col-span-2 h-11 w-full max-w-[9rem] rounded-md !bg-fabric-700 px-[auto] font-bold capitalize text-white transition-all duration-300 ease-linear hover:!bg-fabric-600  disabled:bg-color-primary-5  disabled:opacity-50 `}
             >
               Reset Password
             </button>

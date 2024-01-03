@@ -18,10 +18,10 @@ export function LoginPage() {
         <LoginPageForm>
           <ShowPasswordToggleProvider>
             <Input name="email" placeholder="Email" type="email">
-              <IoIosMail className="h-7 w-7 font-bold text-gray-400 group-focus-within:text-color-green-5" />
+              <IoIosMail className="h-7 w-7 font-bold text-gray-400 group-focus-within:text-color-primary-5" />
             </Input>
             <Input name="password" type="password" placeholder="Password">
-              <IoKey className="h-7 w-7 font-bold text-gray-400 group-focus-within:text-color-green-5" />
+              <IoKey className="h-7 w-7 font-bold text-gray-400 group-focus-within:text-color-primary-5" />
             </Input>
             <div className="-mt-2 mb-2 flex w-full flex-row justify-between gap-2 font-normal text-gray-21 no-underline">
               <ForgotPasswordBtn />

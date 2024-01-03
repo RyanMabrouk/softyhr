@@ -19,7 +19,7 @@ export function ResetPasswordPage() {
           </h1>
           <hr className="h-[2px] w-full" />
           <Input name="email" placeholder="Email Address" type="email">
-            <IoIosMail className="h-7 w-7 font-bold text-gray-400 group-focus-within:text-color-green-5" />
+            <IoIosMail className="h-7 w-7 font-bold text-gray-400 group-focus-within:text-color-primary-5" />
           </Input>
           <div className="-mt-2 mb-2 flex w-full flex-row items-center gap-3 font-normal text-gray-21 no-underline">
             <SubmitBtn className="!max-w-[8rem]">send email</SubmitBtn>

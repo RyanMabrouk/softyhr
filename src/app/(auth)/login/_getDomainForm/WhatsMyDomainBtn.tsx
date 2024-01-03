@@ -8,7 +8,7 @@ export function WhatsMyDomainBtn() {
     <button
       onClick={() => setToggleDisplay((old: boolean) => !old)}
       type="button"
-      className="font-normal text-gray-21 hover:text-color-green hover:underline"
+      className="font-normal text-gray-21 hover:text-color-primary hover:underline"
     >
       What's my domain?
     </button>

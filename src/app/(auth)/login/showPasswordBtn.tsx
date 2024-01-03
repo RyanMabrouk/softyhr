@@ -6,7 +6,7 @@ export default function ShowPasswordBtn() {
   return (
     <button
       type="button"
-      className="cursor-pointer hover:text-color-green hover:underline"
+      className="cursor-pointer hover:text-color-primary hover:underline"
       onClick={() => setShowPassword((old: boolean) => !old)}
     >
       Show Password

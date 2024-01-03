@@ -20,7 +20,7 @@ export function Button({
     <button
       disabled={disabled}
       type={type}
-      className={`col-span-2 h-14 w-full cursor-pointer rounded-xl bg-color-green-4 font-bold capitalize text-white transition-all duration-300 ease-linear hover:bg-color-green-5 disabled:cursor-wait disabled:bg-color-green-5  disabled:opacity-50 ${className} `}
+      className={`col-span-2 h-14 w-full cursor-pointer rounded-xl bg-color-primary-4 font-bold capitalize text-white transition-all duration-300 ease-linear hover:bg-color-primary-5 disabled:cursor-wait disabled:bg-color-primary-5  disabled:opacity-50 ${className} `}
       onClick={onClick}
       formAction={formAction}
     >

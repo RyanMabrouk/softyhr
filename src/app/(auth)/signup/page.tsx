@@ -24,7 +24,7 @@ export default async function Page() {
         </Link>
         <Link
           href="login"
-          className="h-fit w-fit space-x-2 rounded-2xl border-2 border-solid border-color1-400 px-6 py-2 text-center  font-bold leading-[15px] tracking-[1px] text-color-green-4 transition-all duration-150 ease-linear  hover:border-color-green-4 hover:bg-color-green-4 hover:text-white"
+          className="h-fit w-fit space-x-2 rounded-2xl border-2 border-solid border-color1-400 px-6 py-2 text-center  font-bold leading-[15px] tracking-[1px] text-color-primary-4 transition-all duration-150 ease-linear  hover:border-color-primary-4 hover:bg-color-primary-4 hover:text-white"
         >
           Log In
         </Link>

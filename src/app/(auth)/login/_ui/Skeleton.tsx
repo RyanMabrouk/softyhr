@@ -4,19 +4,19 @@ export default function Skeleton({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex flex-col">
       {children}
-      <hr className="bg-green-gradient h-[3px] w-full" />
+      <hr className="bg-primary-gradient h-[3px] w-full" />
       <footer className=" flex w-full flex-row justify-between  px-1 py-3">
         <div className="flex flex-row gap-2 text-sm font-light text-gray-21 no-underline">
           <Link
             href="#"
-            className="cursor-pointer hover:text-color-green hover:underline"
+            className="cursor-pointer hover:text-color-primary hover:underline"
           >
             Privacy Policy
           </Link>
           <strong className="-mt-2 text-center text-lg">.</strong>
           <Link
             href="#"
-            className="cursor-pointer hover:text-color-green hover:underline"
+            className="cursor-pointer hover:text-color-primary hover:underline"
           >
             Terms of Service
           </Link>

@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import {RowFields} from "./RowFields";
+import RowFields from "./RowFields";
 import { useDrag, useDrop } from "react-dnd";
 import { ReorderChamps } from "../../../helper/ReorderChamps";
 import {

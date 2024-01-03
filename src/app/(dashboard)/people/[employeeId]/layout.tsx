@@ -22,7 +22,7 @@ function Layout({ params: { employeeId }, children }: EmployePropsType) {
     <div className="h-full w-full">
       <div
         className={
-          "border-10 duration-400 z-50 flex h-[13rem] justify-center bg-gradient-to-r  from-color-green-7 to-color-green-9 transition-all "
+          "border-10 duration-400 z-50 flex h-[13rem] justify-center bg-gradient-to-r  from-color-primary-7 to-color-primary-9 transition-all "
         }
       >
         <div className={"flex w-9/12 items-end justify-start gap-[4.7rem] "}>
@@ -56,7 +56,7 @@ function Layout({ params: { employeeId }, children }: EmployePropsType) {
                         className={
                           "flex items-center justify-center overflow-hidden rounded-t-lg p-3 px-6 text-white transition ease-in-out " +
                           (ActiveRoute == label
-                            ? `bg-white font-bold !text-color-green-9 `
+                            ? `bg-white font-bold !text-color-primary-9 `
                             : `hover:bg-gray-24 font-normal`)
                         }
                       >

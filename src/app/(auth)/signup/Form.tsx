@@ -102,7 +102,7 @@ export function Form() {
         className="flex h-fit w-full max-w-[32.5rem] flex-col items-center gap-4 rounded-xl bg-white px-4 py-8 transition-all duration-300 ease-linear"
       >
         {toggleDisplay ? (
-          <h1 className="flex flex-col items-center justify-center  gap-2 text-center text-2xl font-bold leading-[1.2] text-color-green-4">
+          <h1 className="flex flex-col items-center justify-center  gap-2 text-center text-2xl font-bold leading-[1.2] text-color-primary-4">
             <span>{`${company}.softyhr.com`}</span>
             <span className="text-[1rem] font-normal text-gray-12 ">
               Here is your domain. Everyone on your account will need to use
@@ -110,7 +110,7 @@ export function Form() {
             </span>
           </h1>
         ) : (
-          <h1 className={`text-3xl font-bold leading-[1.2] text-color-green-4`}>
+          <h1 className={`text-3xl font-bold leading-[1.2] text-color-primary-4`}>
             Sign up for SoftyHR
           </h1>
         )}
@@ -213,7 +213,7 @@ export function Form() {
         {/* Step1 */}
         <div className={`-mt-3 w-full px-8 ${toggleDisplay ? "hidden" : ""}`}>
           <button
-            className="col-span-2 h-14 w-full  cursor-pointer rounded-xl bg-color-green-4 font-bold text-white transition-all duration-300 ease-linear hover:bg-color-green-5 disabled:cursor-wait disabled:bg-color-green-5  disabled:opacity-50  "
+            className="col-span-2 h-14 w-full  cursor-pointer rounded-xl bg-color-primary-4 font-bold text-white transition-all duration-300 ease-linear hover:bg-color-primary-5 disabled:cursor-wait disabled:bg-color-primary-5  disabled:opacity-50  "
             formAction={(formData: FormData) => {
               const valid = validateForm(formData);
               if (valid) {

@@ -21,7 +21,7 @@ export default function PrivacyPolicy({
         I authorize BambooHR to keep me informed about its products, services
         and events through emails and phone calls. My data will be handled
         according to the{" "}
-        <span className="cursor-pointer text-color-green-5 underline">
+        <span className="cursor-pointer text-color-primary-5 underline">
           <strong>{"Privacy Policy"}</strong>
         </span>
         .

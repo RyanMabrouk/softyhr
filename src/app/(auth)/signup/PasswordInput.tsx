@@ -21,7 +21,7 @@ export function PasswordInput({ error }: { error: string[] | undefined }) {
     <FormControl
       sx={{ width: "100%" }}
       variant="outlined"
-      className={`[&_label]:focus-within:!text-color-green-3  ${
+      className={`[&_label]:focus-within:!text-color-primary-3  ${
         inputError ? "" : "[&_label]:!text-black [&_label]:!text-opacity-[0.6]"
       }`}
     >
@@ -39,10 +39,10 @@ export function PasswordInput({ error }: { error: string[] | undefined }) {
         error={inputError ? true : false}
         type={showPassword ? "text" : "password"}
         onChange={() => setInputError("")}
-        className={` [&_.MuiOutlinedInput-notchedOutline]:focus-within:!border-color-green-4   ${
+        className={` [&_.MuiOutlinedInput-notchedOutline]:focus-within:!border-color-primary-4   ${
           inputError
             ? ""
-            : "[&_.MuiOutlinedInput-notchedOutline]:!border-color-green-4"
+            : "[&_.MuiOutlinedInput-notchedOutline]:!border-color-primary-4"
         }`}
         endAdornment={
           <InputAdornment position="end">
