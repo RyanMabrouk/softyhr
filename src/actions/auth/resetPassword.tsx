@@ -11,17 +11,20 @@ export default async function resetPassword(formData: FormData) {
   //Form data
   const email = formData.get("email") as string;
   const supabase = createServerActionClient({ cookies });
-  const { data: profile, error: profile_error } = await getData("profiles", {
-    match: { email: email },
+  const { data: profiles, error: profiles_error } = await getData("profiles", {
+    match: { org_name: org },
   });
-  if (profile_error) {
+  if (profiles_error) {
     return {
       error: {
-        message: profile_error.message,
+        message: profiles_error.message,
         type: "Server Error",
       },
     };
   } else {
+    const profile = profiles?.filter(
+      (profile) => profile?.Contact["Work Email"] === email,
+    );
     //user not found
     if (profile?.length === 0) {
       return {
