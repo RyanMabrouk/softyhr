@@ -3,12 +3,16 @@ import { v4 as uuidv4 } from "uuid";
 import { Field } from "@/constants/userInfo";
 import { RowFieldType } from "@/types/userInfoTypes.type";
 interface FiledsChampsPropsType {
-  FieldsArray:RowFieldType[];
-  setTouched:(arg: boolean)=>void;
+  FieldsArray: RowFieldType[];
+  setTouched: (arg: boolean) => void;
+  user: any;
+  champ:string;
 }
 function FiledsChamps({
   FieldsArray,
   setTouched,
+  user,
+  champ
 }: FiledsChampsPropsType): ReactNode {
   //const [touched, setTouched] = useState<boolean>(false);
   return (
@@ -24,6 +28,8 @@ function FiledsChamps({
                 const Component = Field[RowField?.type.toUpperCase()];
                 return (
                   <Component
+                    champ={champ}
+                    user={user?.data[0]}
                     setTouched={setTouched}
                     key={uuidv4()}
                     // setTouched={setTouched}

@@ -1,5 +1,5 @@
 "use client";
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import FiledsChamps from "../../components/Fileds/Fileds";
 import { FaAddressCard } from "react-icons/fa";
 import { useQuery } from "@tanstack/react-query";
@@ -8,21 +8,30 @@ import { GetSettings } from "@/api/getSettings";
 import Loader from "../../components/Loader/Loader";
 import submitForm from "@/api/test";
 import { sectionIcon } from "@/constants/userInfo";
-import { ChampsType} from "@/types/userInfoTypes.type";
+import { ChampsType } from "@/types/userInfoTypes.type";
 import { usePathname, useRouter } from "next/navigation";
+import getData from "@/api/getData";
+import getSession from "@/actions/getSession";
+import getUser from "@/api/getUser";
 
 function Personnal() {
   const { data, isPending } = useQuery({
     queryKey: ["settings"],
     queryFn: () => GetSettings("personnal"),
   });
+
+  const { data: user, isPending: isLoading } = useQuery({
+    queryKey: ["user"],
+    queryFn: () => getUser(),
+  });
+  console.log(user);
   const [touched, setTouched] = useState<boolean>(false);
   const pathname = usePathname();
   const Router = useRouter();
   console.log(pathname);
   return (
     <>
-      {isPending ? (
+      {(isPending || isLoading) ? (
         <div className="flex h-[20rem] w-full items-center justify-center ">
           <Loader />
         </div>
@@ -56,6 +65,8 @@ function Personnal() {
                     </h1>
                     <div className="flex flex-col items-start justify-center gap-[1rem]">
                       <FiledsChamps
+                        champ={champ}
+                        user={user}
                         setTouched={setTouched}
                         key={rang}
                         FieldsArray={Fields?.sort(

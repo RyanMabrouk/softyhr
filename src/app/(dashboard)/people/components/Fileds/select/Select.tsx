@@ -6,11 +6,18 @@ import { RowFieldType } from "@/types/userInfoTypes.type";
 interface SelectInputPropsType {
   RowField: RowFieldType;
   setTouched: (arg: boolean) => void | undefined;
+  user: any;
+  champ: string;
 }
 
-function SelectInput({ RowField, setTouched }: SelectInputPropsType) {
-  const [value, setValue] = useState("");
-
+function SelectInput({
+  RowField,
+  setTouched,
+  user,
+  champ,
+}: SelectInputPropsType) {
+  const [value, setValue] = useState(String(user[champ][RowField?.name || ""]));
+  console.log(RowField?.name,value);
   const HandleChange = (e: any) => {
     setTouched(true);
     setValue(e.target.value);
@@ -41,8 +48,9 @@ function SelectInput({ RowField, setTouched }: SelectInputPropsType) {
           fontSize: "1rem",
         }}
         name={RowField?.name}
-        label={"-Sélectionner-"}
+        defaultValue={value}
         displayEmpty
+        inputProps={{ "aria-label": "Without label" }}
         onChange={HandleChange}
         className="[&_.MuiOutlinedInput-notchedOutline]:border-none"
       >

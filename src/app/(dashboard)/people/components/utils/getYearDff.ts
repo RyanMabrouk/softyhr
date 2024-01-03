@@ -3,5 +3,5 @@ export function getYearDiff(startDate: Date, endDate: Date) {
 
   const date = new Date(ms);
 
-  return Math.abs(date.getUTCFullYear() - 1971);
+  return Math.abs(date.getUTCFullYear() - 1970);
 }
