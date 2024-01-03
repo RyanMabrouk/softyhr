@@ -1,21 +1,17 @@
 "use client";
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import FiledsChamps from "../../components/Fileds/Fileds";
 import { FaAddressCard } from "react-icons/fa";
-import { useQuery } from "@tanstack/react-query";
 import ChangesSection from "../../components/ChangesSection/ChangesSection";
-import { GetSettings } from "@/api/getSettings";
+import { useSettings } from "@/hooks/useSettings";
 import Loader from "../../components/Loader/Loader";
 import submitForm from "@/api/test";
 import { sectionIcon } from "@/constants/userInfo";
-import { ChampsType} from "@/types/userInfoTypes.type";
+import { ChampsType } from "@/types/userInfoTypes.type";
 import { usePathname, useRouter } from "next/navigation";
 
 function Personnal() {
-  const { data, isPending } = useQuery({
-    queryKey: ["settings"],
-    queryFn: () => GetSettings("personnal"),
-  });
+  const { data, isPending } = useSettings("personnal");
   const [touched, setTouched] = useState<boolean>(false);
   const pathname = usePathname();
   const Router = useRouter();

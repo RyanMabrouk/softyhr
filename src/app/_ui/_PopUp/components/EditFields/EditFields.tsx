@@ -1,6 +1,5 @@
 "use client";
-import { GetSettings } from "@/api/getSettings";
-import { useQuery } from "@tanstack/react-query";
+import { useSettings } from "@/hooks/useSettings";
 import React, { useState } from "react";
 import { ChampsType, RowFieldType } from "@/types/userInfoTypes.type";
 
@@ -9,23 +8,17 @@ import { CgClose } from "react-icons/cg";
 import SelectInput from "./components/select/Select";
 import { GiRapidshareArrow } from "react-icons/gi";
 
-import { useDrop } from "react-dnd";
 import RowFiedlsList from "./components/RowFiedlsList";
 import Loader from "@/app/(dashboard)/people/components/Loader/Loader";
 
 function EditFields() {
   const pathname = usePathname();
   const Router = useRouter();
-
-  const { data, isPending } = useQuery({
-    queryKey: ["settings"],
-    queryFn: () =>
-      GetSettings(pathname.split("/")[pathname.split("/").length - 1]),
-  });
-
+  const settings_type = pathname.split("/")[pathname.split("/").length - 1];
+  const { data, isPending } = useSettings(settings_type);
   const AddFields: RowFieldType = {
     placeHolder: "",
-    name: pathname.split("/")[pathname.split("/").length - 1],
+    name: settings_type,
     type: "select",
     options: [
       {
@@ -47,7 +40,7 @@ function EditFields() {
       ) : (
         <div className="max-h-5/6 z-50 flex flex-col items-start justify-center rounded-lg ">
           <div className="flex w-full items-center justify-between">
-            <h1 className=" text-color-primary-4 pb-2 text-xl font-normal">
+            <h1 className=" pb-2 text-xl font-normal text-color-primary-4">
               Edit Fields for All Employees
             </h1>
             <div onClick={() => Router.push(pathname)}>
