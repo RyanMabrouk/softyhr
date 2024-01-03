@@ -21,6 +21,7 @@
     "@tanstack/react-query-devtools": "^5.14.2",
     "antd": "^5.12.4",
     "next": "14.0.4",
+    "nextjs-current-url": "^1.0.3",
     "react": "^18",
     "react-dnd": "^16.0.1",
     "react-dnd-html5-backend": "^16.0.1",
