@@ -57,7 +57,7 @@ function Layout({ params: { employeeId }, children }: EmployePropsType) {
                           "flex items-center justify-center overflow-hidden rounded-t-lg p-3 px-6 text-white transition ease-in-out " +
                           (ActiveRoute == label
                             ? `bg-white font-bold !text-color-primary-9 `
-                            : `hover:bg-gray-24 font-normal`)
+                            : `font-normal hover:bg-gray-24`)
                         }
                       >
                         {label}
@@ -69,7 +69,7 @@ function Layout({ params: { employeeId }, children }: EmployePropsType) {
         </div>
       </div>
       <div className="flex w-full items-center justify-center ">
-        <div className="gap flex h-full w-9/12 items-start justify-start gap-[2rem]">
+        <div className="ml-[11.65%] mr-[15%] flex h-full w-full items-start justify-start">
           <UserInfo />
           {children}
         </div>
