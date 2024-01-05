@@ -15,11 +15,14 @@ interface EmployePropsType {
   children: ReactNode;
 }
 
-function Layout({ params: { employeeId }, children }: EmployePropsType) {
+export default function Layout({
+  params: { employeeId },
+  children,
+}: EmployePropsType) {
   const ActiveRoute =
     usePathname().split("/").slice(-1).join("") || EmployeeRoute[0]?.label;
   return (
-    <div className="h-full w-full">
+    <div className="flex h-full w-full flex-col ">
       <div
         className={
           "border-10 duration-400 z-50 flex h-[13rem] justify-center bg-gradient-to-r  from-color-primary-7 to-color-primary-9 transition-all "
@@ -29,6 +32,7 @@ function Layout({ params: { employeeId }, children }: EmployePropsType) {
           <Image
             src={AvatarUser}
             alt="user-name"
+            priority
             className={
               "border-10 z-10 -mb-9 h-[13rem] w-[13rem] cursor-pointer rounded-full border-2 border-white bg-gray-6 object-cover "
             }
@@ -68,14 +72,40 @@ function Layout({ params: { employeeId }, children }: EmployePropsType) {
           </div>
         </div>
       </div>
-      <div className="flex w-full items-center justify-center ">
-        <div className="ml-[11.65%] mr-[15%] flex h-full w-full items-start justify-start">
-          <UserInfo />
-          {children}
-        </div>
+      <div className="items-stretc flex h-full w-full grow pl-[12%] pr-[15%]">
+        <UserInfo />
+        {children}
       </div>
+      <Footer />
     </div>
   );
 }
-
-export default Layout;
+function Footer() {
+  return (
+    <footer className=" flex w-full flex-row items-center justify-evenly  border-t-[2px] border-t-gray-14 px-48 py-7">
+      <div className="flex flex-row gap-2 text-sm font-light text-gray-21 no-underline">
+        <Link
+          href="#"
+          className="cursor-pointer hover:text-color-primary hover:underline"
+        >
+          Privacy Policy
+        </Link>
+        <strong className="-mt-2 text-center text-lg">.</strong>
+        <Link
+          href="#"
+          className="cursor-pointer hover:text-color-primary hover:underline"
+        >
+          Terms of Service
+        </Link>
+      </div>
+      <Link
+        className="relative font-bold text-gray-21 "
+        href={"/"}
+        target="_blank"
+      >
+        <span className="mr-2">SoftyHR</span>
+        <span className="absolute right-0 top-0 text-[0.5rem]">®</span>
+      </Link>
+    </footer>
+  );
+}

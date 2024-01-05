@@ -17,7 +17,7 @@ import { CgProfile } from "react-icons/cg";
 
 function UserInfo() {
   return (
-    <div className="flex flex-col  items-start justify-center gap-[0.5rem] bg-gray-14 pb-[100%]">
+    <div className="mb-0 flex max-w-[14rem] pt-4 grow flex-col items-start justify-center gap-[0.5rem] bg-gray-14 ">
       <div className="mt-10 flex flex-col gap-[1rem] px-6">
         <div className=" flex flex-col items-start  justify-center gap-[0.5rem]">
           <div className="flex items-center justify-start gap-[1rem] whitespace-nowrap text-sm text-gray-15">

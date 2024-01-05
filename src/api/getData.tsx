@@ -35,7 +35,13 @@ export default async function getData(
             .eq("org_name", org_name)
       : await supabase.from(table).select("*").match(match)
     : org
-      ? await supabase.from(table).select("*").eq("org_name", org_name)
+      ? user
+        ? await supabase
+            .from(table)
+            .select("*")
+            .eq("org_name", org_name)
+            .eq("user_id", user_id)
+        : await supabase.from(table).select("*").eq("org_name", org_name)
       : await supabase.from(table).select("*");
   return { data: data, error: error };
 }
