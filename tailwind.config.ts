@@ -52,6 +52,7 @@ const config: Config = {
         "fabric-100": "#c0e94f80",
         "fabric-200": "#c0e94f59",
         "fabric-300": "#c0e94f1a",
+
         "fabric-400": "#c0e94f",
         "fabric-500": "#82af13",
         "fabric-600": "#6a950a",
