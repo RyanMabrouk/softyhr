@@ -57,7 +57,7 @@ function Education({
       {Data?.map((data: any) => {
         {
           return (
-            <div className="flex justify-center gap-[1rem] py-2">
+            <div className="flex justify-center gap-[1rem] py-2" key={uuidv4()}>
               <div className="flex flex-col items-start gap-[0.5rem] border-b border-gray-5 py-6">
                 {FieldsArray?.map(({ Row }: any) => {
                   return (
@@ -89,22 +89,15 @@ function Education({
                       (education: any) => education.id == data?.id,
                     ),
                   );
-                  if (
-                    user[champ]?.filter(
-                      (education: any) => education.id == data?.id,
-                    ).length > 0
-                  ) {
                     mutateAsync({
                       id: data?.id,
-                      data: user[champ],
+                      data: Data,
                       user_id: user?.user_id,
                     });
-                  } else
-                    setData(
-                      Data?.filter(
-                        (education: any) => education.id != data?.id,
-                      ),
-                    );
+                    console.log("here");
+                  setData(
+                    Data?.filter((education: any) => education.id != data?.id),
+                  );
                 }}
                 className="hover:border-gray-27 hover:bg-gray flex h-[2rem] w-[2rem] cursor-pointer items-center justify-center duration-150 ease-in-out hover:border"
               >
