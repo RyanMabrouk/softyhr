@@ -14,10 +14,11 @@ import getData from "@/api/getData";
 import getSession from "@/actions/getSession";
 import getUser from "@/api/getUser";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { Section } from "@/constants/userInfoLabel";
+import { Section } from "@/constants/userInfoSections";
 import formulateData from "../../components/utils/formulateData";
 import updateData from "@/api/updateData";
 import useToast from "@/hooks/useToast";
+import useData from "@/hooks/useData";
 
 function Personnal() {
   const { data, isPending } = useSettings("personnal");
@@ -32,7 +33,7 @@ function Personnal() {
       });
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["user"] });
+      queryClient.invalidateQueries({ queryKey: ["user_profile"] });
       toast.success("your changes updated successfully", "update");
     },
     onError: () => {
@@ -40,10 +41,8 @@ function Personnal() {
     },
   });
 
-  const { data: user, isPending: isLoading } :any= useQuery({
-    queryKey: ["user"],
-    queryFn: () => getData("profiles", { user: true, org: true }),
-  });
+  
+  const { user_profile: user} = useData();
   const pathname = usePathname();
   const Router = useRouter();
   const SubmitForm = (formdata: FormData) => {
@@ -54,7 +53,7 @@ function Personnal() {
   return (
     <>
       {toastContainer}
-      {isPending || isLoading ? (
+      {isPending || user?.isPending ? (
         <div className="flex h-[20rem] w-full items-center justify-center ">
           <h1>Loading...</h1>
         </div>

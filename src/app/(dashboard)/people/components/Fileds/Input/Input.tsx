@@ -38,7 +38,7 @@ const Input = ({ RowField, setTouched, defaultValue }: InputPropsType) => {
         )}
         <input
           className={
-            "h-[2rem] rounded-sm border border-gray-19 px-2 font-light outline-none focus:!border-color-primary-3  focus:shadow focus:shadow-color-primary " +
+            "focus:focus-within:shadow-green h-[2rem] rounded-sm border border-gray-19 px-2 font-light outline-none  focus:!border-color-primary-3 " +
             (RowField?.Icon ? "pl-8 " : "")
           }
           type={RowField?.type || "text"}

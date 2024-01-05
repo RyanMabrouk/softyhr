@@ -38,7 +38,7 @@ function ChangesSection({ touched, setTouched }: ChangesSectionPropsType) {
             className="cursor-pointer text-cyan-600 hover:underline"
             onClick={() => {
               setTouched(false);
-              queryClient.invalidateQueries({ queryKey: ["user"] });
+              queryClient.invalidateQueries({ queryKey: ["user_profile"] });
             }}
           >
             Cancel

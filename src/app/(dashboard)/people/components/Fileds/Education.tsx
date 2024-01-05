@@ -43,7 +43,7 @@ function Education({
       });
     },
     onSuccess: (data: any) => {
-      queryClient.invalidateQueries({ queryKey: ["user"] });
+      queryClient.invalidateQueries({ queryKey: ["user_profile"] });
       toast.success("Education deleted successfully", "Deleted");
     },
     onError: () => {
