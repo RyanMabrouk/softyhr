@@ -1,11 +1,11 @@
 export const LayoutRoute = [
-  { label: "Home", pathFn: () => "/Home" },
+  { label: "Home", pathFn: () => "/home" },
   {
-    label: "my info",
+    label: "My info",
     pathFn: (firstPath: string, employeId: number) =>
       `/people/${employeId}/${firstPath}`,
   },
-  { label: "people", pathFn: () => "/people" },
+  { label: "People", pathFn: () => "/people" },
   { label: "Hiring", pathFn: () => "/Hiring" },
   { label: "Reports", pathFn: () => "/Reports" },
   { label: "Files", pathFn: () => "/Files" },

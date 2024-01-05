@@ -54,10 +54,10 @@ function Layout({ params: { employeeId }, children }: EmployePropsType) {
                         key={rang}
                         href={path(employeeId)}
                         className={
-                          "flex items-center justify-center overflow-hidden rounded-t-lg p-3 px-6 text-white transition ease-in-out " +
+                          "flex items-center justify-center overflow-hidden rounded-t-lg p-3 px-6 capitalize text-white transition ease-in-out " +
                           (ActiveRoute == label
                             ? `bg-white font-bold !text-color-primary-9 `
-                            : `hover:bg-gray-24 font-normal`)
+                            : `font-normal hover:bg-gray-24`)
                         }
                       >
                         {label}

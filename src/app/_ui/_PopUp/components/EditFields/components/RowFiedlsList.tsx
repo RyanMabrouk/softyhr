@@ -66,7 +66,6 @@ function RowFiedlsList({ champ, Fields, data, rang }: any) {
         {Fields?.sort((a: any, b: any) => a.rang - b.rang)?.map(
           ({ Row, rang }: any) => {
             return (
-              !isDragging && (
                 <RowFields
                   champ={champ}
                   data={data}
@@ -74,7 +73,7 @@ function RowFiedlsList({ champ, Fields, data, rang }: any) {
                   rang={rang}
                   key={uuidv4()}
                 />
-              )
+              
             );
           },
         )}

@@ -5,7 +5,7 @@ export default async function Page() {
   const current_org = await getCurrentorg();
   return (
     <div className="gao-2 flex flex-col p-4 text-black">
-      {current_org?.name} is subscribed <SignOutBtn />
+     Reports
     </div>
   );
 }
