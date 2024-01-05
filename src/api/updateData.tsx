@@ -13,6 +13,6 @@ export default async function updateData(
     .update(payload)
     .match(match)
     .select();
-  console.log(error);
+  console.log(data);
   return { data: data, error: error };
 }

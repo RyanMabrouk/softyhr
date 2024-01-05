@@ -6,7 +6,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { TableFooter, TablePagination } from "@mui/material";
+import { v4 as uuidv4 } from "uuid";
 
 interface BasicTablePropsType {
   TableRows: string[];
@@ -21,7 +21,11 @@ export default function BasicTable({ TableRows, data }: BasicTablePropsType) {
         <TableHead sx={{ backgroundColor: "#EBEBEB" }}>
           <TableRow>
             {TableRows?.map((title: string) => {
-              return <TableCell align="left">{title}</TableCell>;
+              return (
+                <TableCell key={uuidv4()} align="left">
+                  {title}
+                </TableCell>
+              );
             })}
           </TableRow>
         </TableHead>
@@ -29,12 +33,16 @@ export default function BasicTable({ TableRows, data }: BasicTablePropsType) {
           {data?.map((row: any) => {
             return (
               <TableRow
+                key={uuidv4()}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
-                {Object?.values(row).map((attribute: string) => {
-                  console.log(attribute);
+                {Object?.values(row).map((attribute: any) => {
                   return (
-                    <TableCell sx={{ whiteSpace: "noWrap" }} align="left">
+                    <TableCell
+                      key={uuidv4()}
+                      sx={{ whiteSpace: "noWrap" }}
+                      align="left"
+                    >
                       {attribute || "---"}
                     </TableCell>
                   );

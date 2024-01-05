@@ -16,6 +16,7 @@ export interface RowFieldType {
   required: boolean;
   placeHolder: string | undefined;
   type: "select" | "text" | "radio";
+  Icon?:string | undefined ;
 }
 
 export interface ChampsType {

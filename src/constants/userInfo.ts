@@ -16,14 +16,15 @@ export const Settings = [
 
 //profile personnal champs
 
-import { FaHome } from "react-icons/fa";
+import { FaFacebookSquare, FaHome, FaInstagram, FaLinkedin, FaPinterest, FaTwitter } from "react-icons/fa";
 import { IoIosChatbubbles } from "react-icons/io";
 import { ImProfile } from "react-icons/im";
-import { MdOutlineCastForEducation, MdOutlineSmartphone } from "react-icons/md";
+import { MdOutlineCastForEducation, MdOutlineHomeWork, MdOutlineSmartphone, MdPhoneAndroid } from "react-icons/md";
 import Input from "@/app/(dashboard)/people/components/Fileds/Input/Input";
 import SelectInput from "@/app/(dashboard)/people/components/Fileds/select/Select";
 import RadioBox from "@/app/(dashboard)/people/components/Fileds/RadioBox/RadioBox";
 import DateInput from "@/app/(dashboard)/people/components/Fileds/DateInput/DateInput";
+import { CiMail } from "react-icons/ci";
 
 export const Field: any = {
   TEXT: Input,
@@ -39,4 +40,15 @@ export const sectionIcon: any = {
   MDOUTLINESMARTPHONE: MdOutlineSmartphone,
   MDOUTLINECASTFOREDUCATION: MdOutlineCastForEducation,
   IOIOSCHATBUBBLES: IoIosChatbubbles,
+};
+
+export const InputIcons: any = {
+  LINKEDIN: FaLinkedin,
+  TWITTER: FaTwitter,
+  SQUARE: FaFacebookSquare,
+  PINTEREST: FaPinterest,
+  MDOUTLINEHOMEWORK: MdOutlineHomeWork,
+  MDPHONEANDROID: MdPhoneAndroid,
+  CIMAIL:CiMail,
+  FAINSTAGRAM:FaInstagram
 };

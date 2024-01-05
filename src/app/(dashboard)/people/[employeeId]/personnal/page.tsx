@@ -40,7 +40,7 @@ function Personnal() {
     },
   });
 
-  const { data: user, isPending: isLoading } = useQuery({
+  const { data: user, isPending: isLoading } :any= useQuery({
     queryKey: ["user"],
     queryFn: () => getData("profiles", { user: true, org: true }),
   });
@@ -56,7 +56,7 @@ function Personnal() {
       {toastContainer}
       {isPending || isLoading ? (
         <div className="flex h-[20rem] w-full items-center justify-center ">
-          <Loader />
+          <h1>Loading...</h1>
         </div>
       ) : (
         <div className="flex h-full w-full flex-col items-start justify-start pl-8">

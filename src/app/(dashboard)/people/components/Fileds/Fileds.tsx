@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, memo } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { Field } from "@/constants/userInfo";
 import { RowFieldType } from "@/types/userInfoTypes.type";
@@ -44,4 +44,4 @@ function FiledsChamps({
   );
 }
 
-export default FiledsChamps;
+export default memo(FiledsChamps);
