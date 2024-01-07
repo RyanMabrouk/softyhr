@@ -173,6 +173,7 @@ const config: Config = {
         "color9-200": "#E45160",
         "color9-300": "#CE4755",
         "color9-400": "#A73440",
+        "color9-500":"#C20B0B"
 
         /*"color-green": "#599D15",
         "color-teal-2": "#284D59",

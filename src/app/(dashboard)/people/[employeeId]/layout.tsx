@@ -25,7 +25,7 @@ export default function Layout({
     <div className="flex h-full w-full flex-col ">
       <div
         className={
-          "border-10 duration-400 z-50 flex h-[13rem] justify-center bg-gradient-to-r  from-color-primary-7 to-color-primary-9 transition-all "
+          "z-20 flex h-[13rem] justify-center bg-gradient-to-r  from-color-primary-7 to-color-primary-9 transition-all "
         }
       >
         <div className={"flex w-9/12 items-end justify-start gap-[4.7rem] "}>

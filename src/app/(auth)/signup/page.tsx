@@ -11,7 +11,7 @@ export default async function Page() {
   if (session) redirect("/");
   return (
     <div className=" relative flex h-screen w-screen flex-col overflow-x-hidden scroll-smooth">
-      <nav className="sticky top-0 z-20 flex h-[5rem] w-full flex-row items-center justify-between bg-white px-8 py-4">
+      <nav className="sticky top-0 z-50 flex h-[5rem] w-full flex-row items-center justify-between bg-white px-8 py-4">
         <Link href="/">
           <Image
             src={logo}

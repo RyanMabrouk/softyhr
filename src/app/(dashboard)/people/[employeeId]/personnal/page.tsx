@@ -4,16 +4,11 @@ import FiledsChamps from "../../components/Fileds/Fileds";
 import { FaAddressCard } from "react-icons/fa";
 import ChangesSection from "../../components/ChangesSection/ChangesSection";
 import { useSettings } from "@/hooks/useSettings";
-import Loader from "../../components/Loader/Loader";
-import submitForm from "@/api/test";
 import { v4 as uuidv4 } from "uuid";
 import { sectionIcon } from "@/constants/userInfo";
 import { ChampsType } from "@/types/userInfoTypes.type";
 import { usePathname, useRouter } from "next/navigation";
-import getData from "@/api/getData";
-import getSession from "@/actions/getSession";
-import getUser from "@/api/getUser";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Section } from "@/constants/userInfoSections";
 import formulateData from "../../components/utils/formulateData";
 import updateData from "@/api/updateData";
@@ -21,12 +16,13 @@ import useToast from "@/hooks/useToast";
 import useData from "@/hooks/useData";
 
 function Personnal() {
+
   const { data, isPending } = useSettings("personnal");
   const { toast, toastContainer } = useToast();
   const [touched, setTouched] = useState<boolean>(false);
   const queryClient = useQueryClient();
 
-  const { mutateAsync, isPaused } = useMutation({
+  const { mutateAsync } = useMutation({
     mutationFn: async (NewData: any) => {
       return await updateData("profiles", NewData, {
         user_id: NewData.user_id,

@@ -20,7 +20,7 @@ function ChangesSection({ touched, setTouched }: ChangesSectionPropsType) {
           <button
             disabled={pending}
             className={
-              "text-bold   rounded bg-color-primary-8  p-2 px-5 text-white duration-300 ease-in-out hover:!bg-color-primary-3 " +
+              "text-bold rounded bg-color-primary-8 p-2 px-5 text-white duration-300 ease-in-out hover:!bg-color-primary-3 " +
               (pending ? "  animate-pulse " : "")
             }
             type="submit"
