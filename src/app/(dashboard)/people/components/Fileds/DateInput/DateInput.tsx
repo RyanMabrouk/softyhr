@@ -19,7 +19,7 @@ function DateInput({ RowField, setTouched, defaultValue }: any) {
         <DatePicker
           style={{ width: "11.3rem", borderRadius: "0.2rem" }}
           //@ts-ignore
-          defaultValue={""}
+          defaultValue={value? dayjs(value, "YYYY-MM-DD") : ""}
           onChange={onChange}
           name={RowField?.name}
         />

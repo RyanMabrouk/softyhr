@@ -4,9 +4,9 @@ import { Field } from "@/constants/userInfo";
 import { RowFieldType } from "@/types/userInfoTypes.type";
 interface FiledsChampsPropsType {
   FieldsArray: RowFieldType[];
-  setTouched: (arg: boolean) => void;
-  user: any;
-  champ:string;
+  setTouched?: ((arg: boolean) => void) | undefined;
+  user?: any | undefined;
+  champ: string;
 }
 function FiledsChamps({
   FieldsArray,
@@ -14,7 +14,7 @@ function FiledsChamps({
   user,
   champ,
 }: FiledsChampsPropsType): ReactNode {
-  console.log(user);
+  console.log(FieldsArray);
   return (
     <>
       {FieldsArray?.sort((a: any, b: any) => a.rang - b.rang)?.map(
@@ -29,7 +29,7 @@ function FiledsChamps({
                 return (
                   <Component
                     champ={champ}
-                    defaultValue={user[champ][RowField?.name] || ""}
+                    defaultValue={user?.[champ]?.[RowField?.name] || ""}
                     user={user}
                     setTouched={setTouched}
                     key={uuidv4()}

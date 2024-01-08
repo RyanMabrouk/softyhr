@@ -36,4 +36,10 @@
     box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
       var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
   }
+  .shadow-popup {
+    --tw-shadow: 0 8px 14px 3px #0000000d;
+    --tw-shadow-colored: 0 8px 14px 3px var(--tw-shadow-color);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
+      var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  }
 }

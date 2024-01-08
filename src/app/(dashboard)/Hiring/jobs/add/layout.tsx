@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import React, { ReactNode, useEffect, useState } from "react";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { TiClipboard } from "react-icons/ti";
+import StepsProvider from "./provider/StepsProvider";
 
 interface LayoutJobsProps {
   children: ReactNode;
@@ -84,7 +85,9 @@ function Layout({ children }: LayoutJobsProps) {
                 : "Save Draft"}
             </Link>
           </div>
-          {children}
+          <StepsProvider>
+            {children}
+          </StepsProvider>
         </div>
       </div>
     </div>

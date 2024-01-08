@@ -5,11 +5,13 @@ import Link from "next/link";
 import React from "react";
 import companyLogo from "/public/cropped (2).jpg";
 import { usePathname } from "next/navigation";
+import useData from "@/hooks/useData";
 
 export default function Nav() {
   const currentPath = usePathname();
   const firstPath = "personnal";
-  const employeId = 1202;
+  const { user_profile: data } = useData();
+  const employeId = data?.data[0]?.user_id;
   return (
     <>
       <nav className="flex h-20 items-center justify-start gap-[2rem] bg-gray-17 px-20">

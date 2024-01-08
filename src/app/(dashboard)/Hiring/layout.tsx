@@ -78,7 +78,7 @@ export default function HiringLayout({ children }: LayoutHiringProps) {
             </div>
           </div>
         </div>
-        {children}
+     {children}
       </div>
     );
 }

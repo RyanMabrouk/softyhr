@@ -1,9 +1,11 @@
-import React from 'react'
+"use client";
+import React, { useContext } from "react";
+import { StepsContext } from "../provider/StepsProvider";
 
 function page() {
-  return (
-    <div>page</div>
-  )
+  const { ApplicationDetails } = useContext(StepsContext);
+  console.log(ApplicationDetails);
+  return <div>page</div>;
 }
 
-export default page
+export default page;

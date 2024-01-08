@@ -1,5 +1,5 @@
 import React from "react";
-import Nav from "../_layout/_Nav/Nav";
+import Nav from "../_Layout/_Nav/Nav";
 import { redirect } from "next/navigation";
 import getSession from "@/actions/getSession";
 import Initialize from "@/provider/Initilize";
@@ -9,8 +9,8 @@ async function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex h-full w-full min-h-screen flex-col">
       <Initialize>
-      <Nav />
-      <main className="h-full min-h-screen w-full ">{children}</main>
+        <Nav />
+        <main className="h-full min-h-screen w-full ">{children}</main>
       </Initialize>
     </div>
   );

@@ -1,9 +1,20 @@
-import React from 'react'
+"use client";
+import React, { useContext } from "react";
+import { StepsContext } from "../provider/StepsProvider";
 
 function page() {
+  const { ApplicationDetails, Update_ApplicationDetails } = useContext(StepsContext);
+
+
   return (
-    <div>page</div>
-  )
+    <div
+      onClick={() => {
+        Update_ApplicationDetails({ done: true });
+      }}
+    >
+      click me!!!
+    </div>
+  );
 }
 
-export default page
+export default page;
