@@ -70,8 +70,8 @@ function DeleteEducation() {
       <button onClick={()=>{
         mutateAsync({
           id: id,
-          data: data?.data[0]["Education"],
-          user_id: data?.data[0]?.user_id,
+          data: data?.data["Education"],
+          user_id: data?.data?.user_id,
         });
       }}  className='text-white hover:bg-color-primary-10 duration-150 ease-in-out p-2 capitalize rounded-sm bg-color-primary-9'>{isPending? <div className="flex items-center justify-center gap-[0.3rem]">
       <span className="box-border inline-block h-5 w-5 animate-[spin_1s_linear_infinite] rounded-[50%] border-[3px] border-solid border-white border-b-transparent"></span>

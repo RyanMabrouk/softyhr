@@ -10,7 +10,7 @@ function page() {
   return (
     <div className="flex h-full w-full flex-col items-start justify-start">
       <FiledsChamps
-        FieldsArray={data?.data[0]["Hiring"]["Fields"]}
+        FieldsArray={data?.data["Hiring"]["Fields"]}
         champ={"hiring"}
       ></FiledsChamps>
     </div>

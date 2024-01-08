@@ -85,7 +85,7 @@ function Personnal() {
                     <div className="flex flex-col items-start justify-center gap-[1rem]">
                       <ComponentChamps
                         champ={champ}
-                        user={user?.data[0]}
+                        user={user?.data}
                         setTouched={setTouched}
                         key={rang || uuidv4()}
                         FieldsArray={Fields?.sort(

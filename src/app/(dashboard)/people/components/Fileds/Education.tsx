@@ -27,21 +27,22 @@ function Education({
   setTouched,
   champ,
 }: EducationPropsType): ReactNode {
-
   const { toast, toastContainer } = useToast();
   const [data, setData] = useState<any>([]);
-  const {user_profile:Data} = useData();
-  const router = useRouter()
+  const { user_profile: Data } = useData();
+  const router = useRouter();
   const pathname = usePathname();
-  console.log(data)
-  const Show_DeleteEducation=(id:string)=>{
-    router.push(pathname+`?popup=delete_education&id=${id}`);
-  }
+  console.log(Data?.data?.[champ]);
+  console.log(Data?.data);
+  console.log(champ);
+  const Show_DeleteEducation = (id: string) => {
+    router.push(pathname + `?popup=delete_education&id=${id}`);
+  };
 
   return (
     <div className="flex flex-col items-start ">
       {toastContainer}
-      {[...Data?.data[0]?.[champ], ...data]?.map((data: any) => {
+      {[...Data?.data?.[champ], ...data]?.map((data: any) => {
         {
           return (
             <div className="flex justify-center gap-[1rem] py-2" key={uuidv4()}>
@@ -71,10 +72,20 @@ function Education({
               <div
                 key={data?.id}
                 onClick={() => {
-                  if(Data?.data[0]?.[champ]?.filter((education: any) => education.id == data?.id).length === 0) setData((old:any)=> old?.filter((education: any) => education.id != data?.id));
-                  else{
-                      Show_DeleteEducation(data?.id);
-                    }
+                  if (
+                    Data?.data?.[champ]?.filter(
+                      (education: any) => education.id == data?.id,
+                    ).length === 0
+                  )
+                    setData(
+                      (old: any) =>
+                        old?.filter(
+                          (education: any) => education.id != data?.id,
+                        ),
+                    );
+                  else {
+                    Show_DeleteEducation(data?.id);
+                  }
                 }}
                 className="hover:border-gray-27 hover:bg-gray flex h-[2rem] w-[2rem] cursor-pointer items-center justify-center duration-150 ease-in-out hover:border"
               >

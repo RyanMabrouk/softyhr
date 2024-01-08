@@ -28,7 +28,7 @@ export default function formulateData(formdata: FormData, user: any) {
     formdata.set(key, "");
   });
   console.log(formDataObj);
-  const data = user?.data[0];
+  const data = user?.data;
   Object.keys(data)?.map((object) => {
     console.log(typeof data[object]);
     if (typeof data[object] == "object") {
@@ -42,5 +42,5 @@ export default function formulateData(formdata: FormData, user: any) {
     }
     data["Education"] = NewEducation;
   });
-  return { ...user?.data[0], ...data };
+  return { ...user?.data, ...data };
 }
