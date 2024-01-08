@@ -1,5 +1,6 @@
 "use server";
 import getData from "@/api/getData";
+import { database_profile_type } from "@/types/database.tables.types";
 import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
 import { cookies, headers } from "next/headers";
 export default async function resetPassword(formData: FormData) {

@@ -2,6 +2,7 @@
 import { popups } from "@/constants/popupComponents";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React from "react";
+// @ts-ignore  
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 

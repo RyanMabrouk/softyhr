@@ -22,7 +22,11 @@ export default function BasicTable({ TableRows, data }: BasicTablePropsType) {
           <TableRow>
             {TableRows?.map((title: string) => {
               return (
-                <TableCell key={uuidv4()} align="left">
+                <TableCell
+                  key={uuidv4()}
+                  className="text-gray-25 font-bold"
+                  align="left"
+                >
                   {title}
                 </TableCell>
               );

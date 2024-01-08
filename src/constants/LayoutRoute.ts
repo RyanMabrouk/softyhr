@@ -15,3 +15,4 @@ export interface LayoutRouteType {
   label: string;
   pathFn: (arg0: string, arg1: number) => string;
 }
+

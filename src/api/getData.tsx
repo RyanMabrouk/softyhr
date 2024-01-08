@@ -9,6 +9,7 @@ type getDataParams = {
   match?: object;
   column?: string;
 };
+
 export default async function getData(
   table: string,
   {
