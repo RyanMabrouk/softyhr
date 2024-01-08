@@ -33,7 +33,7 @@ function Education({
   const {user_profile:Data} = useData();
   const router = useRouter()
   const pathname = usePathname();
-
+  console.log(data)
   const Show_DeleteEducation=(id:string)=>{
     router.push(pathname+`?popup=delete_education&id=${id}`);
   }
