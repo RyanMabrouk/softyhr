@@ -230,7 +230,7 @@ function CategoriesSelect({
 }: {
   label: string;
   name: string;
-  defaultValue: databese_leave_categories_type;
+  defaultValue: any;
   options: Option[];
 }) {
   const [value, setValue] = useState(defaultValue?.id.toString());
@@ -262,7 +262,7 @@ function Amount({
   default_satrt_at,
   default_end_at,
 }: {
-  default_duration: default_duration_type[] | Json[];
+  default_duration: any;
   track_time_unit: "hours" | "days" | string;
   default_satrt_at: string;
   default_end_at: string;
@@ -278,7 +278,7 @@ function Amount({
       : [];
   const active_duration = removeDuplicateObjectsFromArray(
     [
-      ...default_duration.map((d) => ({
+      ...default_duration.map((d: default_duration_type) => ({
         date: formatYYYYMMDD(new Date(d.date)),
         duration: d.duration,
       })),

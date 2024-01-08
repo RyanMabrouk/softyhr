@@ -4,7 +4,7 @@ import FiledsChamps from "@/app/(dashboard)/people/components/Fileds/Fileds";
 import { StepsContext } from "../provider/StepsProvider";
 import useData from "@/hooks/useData";
 
-function page() {
+function Page() {
   const { ApplicationDetails } = useContext(StepsContext);
   const { settings: data } = useData();
   return (
@@ -17,4 +17,4 @@ function page() {
   );
 }
 
-export default page;
+export default Page;

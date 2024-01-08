@@ -2,9 +2,9 @@
 import React, { useContext } from "react";
 import { StepsContext } from "../provider/StepsProvider";
 
-function page() {
-  const { ApplicationDetails, Update_ApplicationDetails } = useContext(StepsContext);
-
+function Page() {
+  const { ApplicationDetails, Update_ApplicationDetails } =
+    useContext(StepsContext);
 
   return (
     <div
@@ -17,4 +17,4 @@ function page() {
   );
 }
 
-export default page;
+export default Page;

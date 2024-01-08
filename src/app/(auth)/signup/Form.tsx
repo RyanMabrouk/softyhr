@@ -58,7 +58,7 @@ export function Form() {
   const [toggleDisplay, setToggleDisplay] = useState(false);
   const [company, setCompany] = useState<string>("");
   const { toast, toastContainer } = useToast();
-  const formRef = useRef(null);
+  const formRef = useRef<HTMLFormElement>(null);
   //-----------------form validation-----------------
   function validateForm(formData: FormData) {
     const data = Object.fromEntries(formData);
