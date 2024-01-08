@@ -1,20 +1,9 @@
-"use client";
-import React, { useContext } from "react";
-import FiledsChamps from "@/app/(dashboard)/people/components/Fileds/Fileds";
-import { StepsContext } from "../provider/StepsProvider";
-import useData from "@/hooks/useData";
+import React from 'react'
 
-function Page() {
-  const { ApplicationDetails } = useContext(StepsContext);
-  const { settings: data } = useData();
+function page() {
   return (
-    <div className="flex h-full w-full flex-col items-start justify-start">
-      <FiledsChamps
-        FieldsArray={data?.data["Hiring"]["Fields"]}
-        champ={"hiring"}
-      ></FiledsChamps>
-    </div>
-  );
+    <div>page</div>
+  )
 }
 
-export default Page;
+export default page

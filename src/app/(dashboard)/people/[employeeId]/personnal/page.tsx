@@ -24,6 +24,7 @@ function Personnal() {
 
   const { mutateAsync } = useMutation({
     mutationFn: async (NewData: any) => {
+      console.log(NewData);
       return await updateData("profiles", NewData, {
         user_id: NewData.user_id,
       });

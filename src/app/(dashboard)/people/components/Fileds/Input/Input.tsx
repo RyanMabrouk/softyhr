@@ -6,12 +6,13 @@ import { FaLinkedin } from "react-icons/fa";
 
 interface InputPropsType {
   RowField: RowFieldType;
-  setTouched: (arg: boolean) => void;
+  setTouched?: (arg: boolean) => void ;
   defaultValue: string;
 }
 const Input = ({ RowField, setTouched, defaultValue }: InputPropsType) => {
   const [value, setValue] = useState<string>(String(defaultValue || ""));
   const Component = InputIcons[RowField?.Icon?.toUpperCase() || ""];
+  console.log(RowField?.name);
   return (
     <div className="flex flex-col items-start justify-center">
       <h1
@@ -45,7 +46,7 @@ const Input = ({ RowField, setTouched, defaultValue }: InputPropsType) => {
           value={value}
           name={RowField?.name}
           onChange={(e) => setValue(e.target.value)}
-          onFocus={() => setTouched(true)}
+          onFocus={() => {if(setTouched)setTouched(true)}}
           placeholder={RowField?.placeHolder || ""}
         />
       </div>

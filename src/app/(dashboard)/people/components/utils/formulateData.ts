@@ -42,5 +42,6 @@ export default function formulateData(formdata: FormData, user: any) {
     }
     data["Education"] = NewEducation;
   });
+  console.log(data);
   return { ...user?.data, ...data };
 }

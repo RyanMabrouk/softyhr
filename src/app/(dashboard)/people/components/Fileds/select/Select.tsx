@@ -5,7 +5,7 @@ import { RowFieldType } from "@/types/userInfoTypes.type";
 
 interface SelectInputPropsType {
   RowField: RowFieldType;
-  setTouched: (arg: boolean) => void | undefined;
+  setTouched?: (arg: boolean) => void | undefined;
   defaultValue: string;
 }
 
@@ -17,7 +17,7 @@ function SelectInput({
   const [value, setValue] = useState(String(defaultValue));
   console.log(RowField?.name, value);
   const HandleChange = (e: any) => {
-    setTouched(true);
+    if (setTouched) setTouched(true);
     setValue(e.target.value);
   };
 
