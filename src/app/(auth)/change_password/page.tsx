@@ -1,4 +1,4 @@
-import getSession from "@/actions/getSession";
+import getSession from "@/api/getSession";
 import getCurrentorg from "@/api/getCurrentOrg";
 import { redirect } from "next/navigation";
 import React from "react";

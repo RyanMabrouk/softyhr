@@ -11,12 +11,14 @@ export function Policy({
   hours_available,
   name,
   title,
+  color,
 }: {
   icon: React.ReactNode;
   hours_scheduled: number;
   hours_available: number;
   name: string;
   title?: string;
+  color?: string;
 }) {
   return (
     <div className="group relative flex h-fit w-fit max-w-[20rem] flex-col items-center justify-between gap-1 pt-6 ">

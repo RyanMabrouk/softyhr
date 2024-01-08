@@ -19,7 +19,7 @@ export function Button({
     <button
       disabled={disabled}
       type={type}
-      className={`col-span-2 h-11 w-full min-w-[8rem] cursor-pointer rounded-md bg-fabric-700 px-[auto] font-bold capitalize  text-white transition-all duration-300 ease-linear hover:bg-fabric-600 disabled:cursor-wait disabled:bg-color-primary-5  disabled:opacity-50 ${className} `}
+      className={`col-span-2 h-11 w-full min-w-[8rem] cursor-pointer space-x-8 rounded-md bg-fabric-700 px-[auto] font-bold capitalize  text-white transition-all duration-300 ease-linear hover:bg-fabric-600 disabled:cursor-wait disabled:bg-color-primary-5  disabled:opacity-50 ${className} `}
       onClick={onClick}
       formAction={formAction}
     >

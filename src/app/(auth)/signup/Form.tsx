@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import countries from "./countries.json";
 import { SubmitBtn } from "./ui/SubmitBtn";
 import signup from "@/actions/auth/signup";
@@ -58,6 +58,7 @@ export function Form() {
   const [toggleDisplay, setToggleDisplay] = useState(false);
   const [company, setCompany] = useState<string>("");
   const { toast, toastContainer } = useToast();
+  const formRef = useRef(null);
   //-----------------form validation-----------------
   function validateForm(formData: FormData) {
     const data = Object.fromEntries(formData);
@@ -89,6 +90,7 @@ export function Form() {
     <>
       {toastContainer}
       <form
+        ref={formRef}
         action={async (formData) => {
           const valid =
             validateForm(formData) &&
@@ -96,7 +98,11 @@ export function Form() {
           if (valid) {
             const { error } = await signup(formData);
             if (error) toast.error(error.message, error.type);
-            else toast.success("Please verify your email", "sign up success");
+            else {
+              toast.success("Please verify your email", "sign up success");
+              formRef.current?.reset();
+              setToggleDisplay((old) => !old);
+            }
           }
         }}
         className="flex h-fit w-full max-w-[32.5rem] flex-col items-center gap-4 rounded-xl bg-white px-4 py-8 transition-all duration-300 ease-linear"
@@ -110,7 +116,9 @@ export function Form() {
             </span>
           </h1>
         ) : (
-          <h1 className={`text-3xl font-bold leading-[1.2] text-color-primary-4`}>
+          <h1
+            className={`text-3xl font-bold leading-[1.2] text-color-primary-4`}
+          >
             Sign up for SoftyHR
           </h1>
         )}

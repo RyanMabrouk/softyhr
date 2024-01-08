@@ -5,7 +5,7 @@ export function HistoryTable({
   data,
   layout,
 }: {
-  data: { [key: string]: any }[];
+  data: { [key: string]: any }[] | undefined;
   Headers: string[];
   layout: string;
 }) {

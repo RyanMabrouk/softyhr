@@ -10,11 +10,11 @@ interface CustomRequest extends NextRequest {
 }
 export default async function middleware(req: CustomRequest) {
   const { data: orgs } = await getData("organizations");
-  const hostnamedb = orgs?.map((org) => ({ name: org.name }));
+  const hostnamedb = orgs?.map((org: any) => ({ name: org.name }));
   const url = req.nextUrl;
   const hostname = req.headers.get("host") || "";
   const current_org = getValidSubdomain(hostname);
-  const org = hostnamedb?.find((org) => {
+  const org = hostnamedb?.find((org: any) => {
     return org?.name === current_org;
   });
   if (!org) {

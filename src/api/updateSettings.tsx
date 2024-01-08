@@ -1,5 +1,4 @@
 "use server";
-import getData from "./getData";
 import getCurrentorg from "./getCurrentOrg";
 import { cookies } from "next/headers";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";

@@ -1,4 +1,4 @@
-import getSession from "@/actions/getSession";
+import getSession from "@/api/getSession";
 import getData from "@/api/getData";
 import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
@@ -15,7 +15,7 @@ export async function GET(request: NextRequest) {
       const session = await getSession();
       const { data: profiles, error } = await getData("profiles");
       const company = profiles?.filter(
-        (profile) => profile.user_id === session?.user.id,
+        (profile: any) => profile.user_id === session?.user.id,
       )[0].org_name;
       if (error) throw new Error(error.message);
       // URL to redirect after sign in process completed

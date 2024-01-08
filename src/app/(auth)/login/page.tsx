@@ -1,4 +1,4 @@
-import getSession from "@/actions/getSession";
+import getSession from "@/api/getSession";
 import { redirect } from "next/navigation";
 import React from "react";
 import { FlipEffectContainer } from "./_ui/FlipEffectContainer";

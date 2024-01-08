@@ -4,7 +4,7 @@ import React from "react";
 import logo from "/public/logo.svg";
 import background_img from "/public/signup/signup_bg_img.png";
 import { Form } from "./Form";
-import getSession from "@/actions/getSession";
+import getSession from "@/api/getSession";
 import { redirect } from "next/navigation";
 export default async function Page() {
   const session = await getSession();

@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 // you can use this hook to get the current url
 import { useUrl } from "nextjs-current-url";
 //--------------------------------------------
+
 export default function useData() {
   //--------------------Settings--------------------
   const { data: settings, isPending } = useQuery({
@@ -18,7 +19,6 @@ export default function useData() {
     queryKey: ["leave_requests"],
     queryFn: () =>
       getData("leave_requests", {
-        user: true,
         org: true,
       }),
   });
@@ -35,10 +35,34 @@ export default function useData() {
     queryKey: ["leave_accrued"],
     queryFn: () =>
       getData("leave_accrued", {
-        user: true,
         org: true,
       }),
   });
+  //-------------------- Leave Categories--------------------
+  const { data: leave_categories, isPending: isPending5 } = useQuery({
+    queryKey: ["leave_categories"],
+    queryFn: () =>
+      getData("leave_categories", {
+        org: true,
+      }),
+  });
+  //------------------- User Profile--------------------
+  const { data: user_profile, isPending: isPending6 } = useQuery({
+    queryKey: ["user_profile"],
+    queryFn: () =>
+      getData("profiles", {
+        user: true,
+      }),
+  });
+  //------------------- Users Basic Information--------------------
+  const { data: all_profiles, isPending: isPending7 } = useQuery({
+    queryKey: ["all_profiles"],
+    queryFn: () =>
+      getData("profiles", {
+        org: true,
+      }),
+  });
+  //------------------------------------------------------------
   return {
     leave_requests: {
       data: leave_requests?.data,
@@ -55,10 +79,25 @@ export default function useData() {
       error: leave_accrued?.error,
       isPending: isPending4,
     },
+    leave_categories: {
+      data: leave_categories?.data,
+      error: leave_categories?.error,
+      isPending: isPending5,
+    },
     settings: {
       data: settings?.data,
       error: settings?.error,
       isPending: isPending,
+    },
+    user_profile: {
+      data: user_profile?.data[0],
+      error: user_profile?.error,
+      isPending: isPending6,
+    },
+    all_profiles: {
+      data: all_profiles?.data,
+      error: all_profiles?.error,
+      isPending: isPending7,
     },
   };
 }

@@ -32,7 +32,7 @@ export function FilterSelect({
         onChange={(value) =>
           setValueInParent ? setValueInParent(value.toString()) : null
         }
-        className={`group h-9 w-[12.5rem] rounded-md border border-gray-400 text-gray-400 hover:border-gray-600  focus:border-transparent  focus:outline-none focus:ring-2 focus:ring-color-primary-5 group-focus-within:text-color-primary-5 [&_.ant-select-selection]:bg-color-primary-focus [&_.ant-select-selector]:!border-transparent`}
+        className={`group h-9 w-[12.5rem] rounded-md border border-gray-400 capitalize text-gray-400 hover:border-gray-600  focus:border-transparent  focus:outline-none focus:ring-2 focus:ring-color-primary-5 group-focus-within:text-color-primary-5 [&_.ant-select-selection]:bg-color-primary-focus [&_.ant-select-selector]:!border-transparent`}
         options={options}
       />
     </Space>

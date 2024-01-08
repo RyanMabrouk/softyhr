@@ -11,7 +11,7 @@ import { sectionIcon } from "@/constants/userInfo";
 import { ChampsType } from "@/types/userInfoTypes.type";
 import { usePathname, useRouter } from "next/navigation";
 import getData from "@/api/getData";
-import getSession from "@/actions/getSession";
+import getSession from "@/api/getSession";
 import getUser from "@/api/getUser";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Section } from "@/constants/userInfoLabel";
@@ -40,7 +40,7 @@ function Personnal() {
     },
   });
 
-  const { data: user, isPending: isLoading } :any= useQuery({
+  const { data: user, isPending: isLoading }: any = useQuery({
     queryKey: ["user"],
     queryFn: () => getData("profiles", { user: true, org: true }),
   });

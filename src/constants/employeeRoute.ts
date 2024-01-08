@@ -16,20 +16,20 @@ export const EmployeeRoute = [
   },
   {
     rang: 3,
-    label: "emploi",
-    path: (employeId: string) => `/people/${employeId}/emploi`,
+    label: "TimeOff",
+    path: (employeId: string) => `/people/${employeId}/TimeOff`,
     defaultPath: true,
   },
   {
     rang: 4,
-    label: "Avantages",
-    path: (employeId: string) => `/people/${employeId}/Avantages`,
+    label: "Performance",
+    path: (employeId: string) => `/people/${employeId}/Performance`,
     defaultPath: true,
   },
   {
     rang: 5,
-    label: "leave",
-    path: (employeId: string) => `/people/${employeId}/leave`,
+    label: "Benefits",
+    path: (employeId: string) => `/people/${employeId}/Benefits`,
     defaultPath: true,
   },
   {
@@ -40,8 +40,8 @@ export const EmployeeRoute = [
   },
   {
     rang: 7,
-    label: "Actifs",
-    path: (employeId: string) => `/people/${employeId}/Actifs`,
+    label: "Assets",
+    path: (employeId: string) => `/people/${employeId}/Assets`,
     defaultPath: true,
   },
   {

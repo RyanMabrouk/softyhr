@@ -1,7 +1,7 @@
 import React from "react";
 import Nav from "@/app/_layout/_Nav/Nav";
 import { redirect } from "next/navigation";
-import getSession from "@/actions/getSession";
+import getSession from "@/api/getSession";
 async function Layout({ children }: { children: React.ReactNode }) {
   const session = await getSession();
   if (!session) redirect("/login");

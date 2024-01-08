@@ -4,7 +4,7 @@ import React from "react";
 import Skeleton from "../login/_ui/Skeleton";
 import Link from "next/link";
 import { Button } from "../login/_ui/Button";
-import getSession from "@/actions/getSession";
+import getSession from "@/api/getSession";
 import bg_img from "/public/winter.png";
 import Image from "next/image";
 export default async function Page() {

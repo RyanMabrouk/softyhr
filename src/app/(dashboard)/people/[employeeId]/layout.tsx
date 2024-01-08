@@ -8,13 +8,10 @@ import { usePathname } from "next/navigation";
 import UserInfo from "../components/UserInfo/UserInfo";
 import DropDown from "../components/DropDown/DropDown";
 import { Settings, changementRequest } from "@/constants/userInfo";
-import useScrollPosition from "@/hooks/useScrollPosition";
-
 interface EmployePropsType {
   params: { employeeId: string };
   children: ReactNode;
 }
-
 export default function Layout({
   params: { employeeId },
   children,
@@ -24,20 +21,19 @@ export default function Layout({
   return (
     <div className="flex h-full w-full flex-col ">
       <div
-        className={
-          "border-10 duration-400 z-50 flex h-[13rem] justify-center bg-gradient-to-r  from-color-primary-7 to-color-primary-9 transition-all "
-        }
-      >
-        <div className={"flex w-9/12 items-end justify-start gap-[4.7rem] "}>
+        className="z-20 flex h-[13rem] justify-center bg-gradient-to-r from-color-primary-7  to-color-primary-9 transition-all duration-300 ">
+        <div className={"flex w-9/12 items-end justify-start gap-[4rem] "}>
           <Image
             src={AvatarUser}
             alt="user-name"
             priority
+            width={208}
+            height={208}
             className={
-              "border-10 z-10 -mb-9 h-[13rem] w-[13rem] cursor-pointer rounded-full border-2 border-white bg-gray-6 object-cover "
+              " z-10 ml-4 -mb-9 h-[13rem] w-[13rem] cursor-pointer rounded-full border-2 border-white bg-gray-6 object-cover "
             }
           />
-          <div className={"flex-column flex w-full flex-col gap-[4rem] "}>
+          <div className={"flex-column flex w-full flex-col gap-[3rem] "}>
             <div className="flex items-start justify-between">
               <h1 className="text-3xl font-bold text-white">Ali Ben Romdhan</h1>
               <div className={"flex h-10 gap-[1rem] "}>
@@ -58,7 +54,7 @@ export default function Layout({
                         key={rang}
                         href={path(employeeId)}
                         className={
-                          "flex items-center justify-center overflow-hidden rounded-t-lg p-3 px-6 capitalize text-white transition ease-in-out " +
+                          "flex items-center justify-center overflow-hidden rounded-t-md p-3 px-6 capitalize text-white transition ease-in-out " +
                           (ActiveRoute == label
                             ? `bg-white font-bold !text-color-primary-9 `
                             : `font-normal hover:bg-gray-24`)

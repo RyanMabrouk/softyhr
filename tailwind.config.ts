@@ -14,6 +14,9 @@ const Myclass = plugin(function ({ addUtilities }: any) {
     ".backface-hidden": {
       backfaceVisibility: "hidden",
     },
+    ".bg-primary-gradient": {
+      backgroundImage: "linear-gradient(90deg, #c0e94f 0%, #82af13 100%)",
+    },
   });
 });
 const config: Config = {
@@ -150,6 +153,7 @@ const config: Config = {
         "gray-25": "#555",
         "gray-26": "#999",
         "gray-27": "#222222",
+        "gray-28": "#FAFAFA",
 
         "color-teal-2": "#284D59",
 
@@ -165,6 +169,7 @@ const config: Config = {
         "color-primary-8": "#527A01",
         "color-primary-9": "#527B00",
         "color-primary-10": "#84bf41",
+        "color-primary-11": "#8EBB23",
         "color-primary-focus": "#AAE868",
 
         "color9-100": "#FFAAB0",
