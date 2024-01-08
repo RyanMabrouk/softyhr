@@ -11,7 +11,7 @@ export default function Nav() {
   const currentPath = usePathname();
   const firstPath = "personnal";
   const { user_profile: data } = useData();
-  const employeId = data?.data[0]?.user_id;
+  const employeId = data?.data?.user_id;
   return (
     <>
       <nav className="flex h-20 items-center justify-start gap-[2rem] bg-gray-17 px-20">
