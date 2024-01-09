@@ -14,7 +14,7 @@ function FiledsChamps({
   user,
   champ,
 }: FiledsChampsPropsType): ReactNode {
-  console.log(FieldsArray);
+  console.log(user);
   return (
     <>
       {FieldsArray?.sort((a: any, b: any) => a.rang - b.rang)?.map(
@@ -29,7 +29,7 @@ function FiledsChamps({
                   return (
                     <Component
                       champ={champ}
-                      defaultValue={user?.[champ]?.[RowField?.name] || ""}
+                      defaultValue={user?.[champ]?.[RowField?.name]}
                       user={user}
                       setTouched={setTouched}
                       key={uuidv4()}

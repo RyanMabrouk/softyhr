@@ -1,4 +1,4 @@
-"use client";
+// Add "use" to "useReducer" import
 import React, { ReactNode, createContext, useReducer } from "react";
 
 interface StepsProviderTypeProps {
@@ -11,21 +11,36 @@ export enum Actions {
   JOB_BOARDS = "JOB_BOARDS",
 }
 
+interface StepType {
+  done: boolean;
+  values: Object;
+}
 interface StepsState {
-  ApplicationDetails: Object;
-  InformationJob: Object;
-  JobBoards: Object;
+  ApplicationDetails: StepType;
+  InformationJob: StepType;
+  JobBoards: StepType;
 }
 
 interface StepsAction {
   type: Actions;
-  payload: StepsState;
+  payload: StepType;
 }
 
-export const initialState = {
-  ApplicationDetails: {},
-  InformationJob: {},
-  JobBoards: {},
+export const initialState: StepsState = {
+  ApplicationDetails: { done: false, values: {} },
+  InformationJob: {
+    done: false,
+      values: {
+        "Posting Title": "ssdfgsdfg",
+        "Job Status": "Draft",
+        "Hiring Lead": "iheb sebai",
+        Departement: "Human Resources",
+        "Minimum Experience": "Senior Manager/Supervisor",
+        "Job Description": "mlqksjdflmqskdjfqlksmdfq",
+        "Internal Job Code": "k",
+      },
+  },
+  JobBoards: { done: true, values: {} },
 };
 
 export const StepsContext = createContext({
@@ -37,24 +52,24 @@ export const StepsContext = createContext({
 
 export const reducer = (state: StepsState, action: StepsAction): StepsState => {
   const { type, payload } = action;
-  console.log(payload);
+
   switch (type) {
     case Actions.APPLICATION_DETAILS: {
       return {
         ...state,
-        ApplicationDetails: payload,
+        ApplicationDetails: { ...state.ApplicationDetails, ...payload },
       };
     }
     case Actions.INFORMATION_JOB: {
       return {
         ...state,
-        InformationJob: payload,
+        InformationJob: { ...state.InformationJob, ...payload },
       };
     }
     case Actions.JOB_BOARDS: {
       return {
         ...state,
-        JobBoards: payload,
+        JobBoards: { ...state.JobBoards, ...payload },
       };
     }
     default:
@@ -65,23 +80,21 @@ export const reducer = (state: StepsState, action: StepsAction): StepsState => {
 function StepsProvider({ children }: StepsProviderTypeProps) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const Update_ApplicationDetails = (payload: any) => {
-    console.log(payload);
-    console.log("-------------------");
+  const Update_ApplicationDetails = (payload: StepType) => {
     dispatch({
       type: Actions.APPLICATION_DETAILS,
       payload,
     });
   };
 
-  const Update_InformationJob = (payload: any) => {
+  const Update_InformationJob = (payload: StepType) => {
     dispatch({
       type: Actions.INFORMATION_JOB,
       payload,
     });
   };
 
-  const Update_JobBoards = (payload: any) => {
+  const Update_JobBoards = (payload: StepType) => {
     dispatch({
       type: Actions.JOB_BOARDS,
       payload,

@@ -1,11 +1,19 @@
 "use client";
 import { UpdateSettings } from "@/api/updateSettings";
 import { ReorderFields } from "@/app/_ui/_PopUp/helper/ReorderFields";
+import { RowFieldType } from "@/types/userInfoTypes.type";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import React, { useState } from "react";
 import { useDrag, useDrop } from "react-dnd";
 
-function RowFields({ RowFields, rang, champ, data }: any) {
+interface RowFieldsPropsType {
+  RowFields: RowFieldType[];
+  rang: number;
+  champ: string;
+  data: any;
+}
+
+function RowFields({ RowFields, rang, champ, data }: RowFieldsPropsType) {
   const queryClient = useQueryClient();
 
   const { mutateAsync, isPending, isPaused } = useMutation({
@@ -44,17 +52,18 @@ function RowFields({ RowFields, rang, champ, data }: any) {
       isOver: !!monitor.isOver(),
     }),
   }));
+  console.log(RowFields, champ);
   return (
     <div ref={drop} className="w-full">
       <div
         className="flex h-[2rem] w-full cursor-move items-center  justify-start border border-dashed border-gray-18 bg-gray-14 px-4 py-4 pr-12 duration-150 ease-in-out hover:bg-gray-16"
         ref={drag}
       >
-        { RowFields?.map(({ name, Default }: any, index: number) => {
-          console.log(Default);
+        {RowFields?.map((Fields:any, index: number) => {
+          console.log(Fields?.Default);
           return (
-            <h1 className="text-gray-23" key={name}>
-              {name + (index + 1 < RowFields.length ? " , " : "") || "---"}
+            <h1 className="text-gray-23" key={Fields?.name}>
+              {Fields?.name + (index + 1 < RowFields.length ? " , " : "")|| Fields || "---"}
             </h1>
           );
         })}

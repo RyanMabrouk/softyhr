@@ -1,6 +1,6 @@
 import React from 'react'
 
-function DependeciesForm({minor, major, }) {
+function DependeciesForm() {
   return (
     <div>DependeciesForm</div>
   )

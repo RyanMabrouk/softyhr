@@ -1,7 +1,9 @@
+import submitForm from "@/api/test";
 import { v4 as uuidv4 } from "uuid";
 
 export default function formulateData(formdata: FormData, user: any) {
   let NewEducation: Object[] = [];
+  submitForm(formdata);
   formdata.getAll("GPA").map((element, index) => {
     if (
       formdata.getAll("GPA")[index] != "" ||
@@ -21,21 +23,13 @@ export default function formulateData(formdata: FormData, user: any) {
         "Major/Specialization": formdata.getAll("Major/Specialization")[index],
       });
   });
-  console.log(NewEducation);
-  let formDataObj: any = {};
-  formdata.forEach((value, key) => {
-    formDataObj[key] = value;
-    formdata.set(key, "");
-  });
-  console.log(formDataObj);
+
   const data = user?.data;
   Object.keys(data)?.map((object) => {
-    console.log(typeof data[object]);
     if (typeof data[object] == "object") {
       Object.keys(data[object])?.map((key) => {
-        console.log(formdata.get("Birth Date"));
-        if (formdata.get(key)) {
-          console.log(key);
+        if (formdata.get(key) || formdata.get(key) == "") {
+          console.log(key, formdata.get(key));
           data[object][key] = String(formdata.get(key));
         }
       });

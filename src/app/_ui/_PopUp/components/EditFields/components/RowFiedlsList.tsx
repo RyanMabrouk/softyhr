@@ -55,6 +55,19 @@ function RowFiedlsList({ champ, Fields, data, rang }: any) {
     }),
   }));
   console.log(data);
+  if (typeof Fields[0] == "string") {
+    return (
+      <div ref={drag}>
+        <div
+          className="mt-2 flex cursor-move flex-col items-start justify-center gap-[0.5rem] border border-dashed border-gray-15  bg-gray-14  px-4 duration-150 ease-in-out   hover:!border-gray-16"
+          key={uuidv4()}
+          ref={drop}
+        >
+          <h1 className="pb-2 pt-2 text-lg font-bold text-gray-21">{champ}</h1>
+        </div>
+      </div>
+    );
+  }
   return (
     <div ref={drag}>
       <div
@@ -66,14 +79,13 @@ function RowFiedlsList({ champ, Fields, data, rang }: any) {
         {Fields?.sort((a: any, b: any) => a.rang - b.rang)?.map(
           ({ Row, rang }: any) => {
             return (
-                <RowFields
-                  champ={champ}
-                  data={data}
-                  RowFields={Row}
-                  rang={rang}
-                  key={uuidv4()}
-                />
-              
+              <RowFields
+                champ={champ}
+                data={data}
+                RowFields={Row}
+                rang={rang}
+                key={uuidv4()}
+              />
             );
           },
         )}

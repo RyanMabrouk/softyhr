@@ -34,7 +34,8 @@ function ChangesSection({ touched, setTouched }: ChangesSectionPropsType) {
               "save changes"
             )}
           </button>
-          <h1
+          <button
+          type="reset"
             className="cursor-pointer text-cyan-600 hover:underline"
             onClick={() => {
               setTouched(false);
@@ -42,7 +43,7 @@ function ChangesSection({ touched, setTouched }: ChangesSectionPropsType) {
             }}
           >
             Cancel
-          </h1>
+          </button>
         </div>
         <Image
           height={250}

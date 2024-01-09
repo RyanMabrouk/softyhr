@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import React, { ReactNode } from "react";
-import AvatarUser from "./download (7).png";
+import AvatarUser from "./download (7).jpeg";
 import Link from "next/link";
 import { EmployeRoutesType, EmployeeRoute } from "@/constants/employeeRoute";
 import { usePathname } from "next/navigation";

@@ -32,13 +32,10 @@ function Education({
   const { user_profile: Data } = useData();
   const router = useRouter();
   const pathname = usePathname();
-  console.log(Data?.data?.[champ]);
-  console.log(Data?.data);
-  console.log(champ);
   const Show_DeleteEducation = (id: string) => {
     router.push(pathname + `?popup=delete_education&id=${id}`);
   };
-
+  console.log(Data);
   return (
     <div className="flex flex-col items-start ">
       {toastContainer}

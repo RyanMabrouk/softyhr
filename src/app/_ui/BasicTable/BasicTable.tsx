@@ -11,51 +11,57 @@ import { v4 as uuidv4 } from "uuid";
 interface BasicTablePropsType {
   TableRows: string[];
   data: {}[];
+  champ: string;
 }
 
-export default function BasicTable({ TableRows, data }: BasicTablePropsType) {
-  console.log(data);
+export default function BasicTable({
+  TableRows,
+  data,
+  champ,
+}: BasicTablePropsType) {
   return (
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 1000 }} aria-label="simple table">
-        <TableHead sx={{ backgroundColor: "#EBEBEB" }}>
-          <TableRow>
-            {TableRows?.map((title: string) => {
+    <div className="border-gray h-full w-full border-b">
+      <TableContainer component={Paper} sx={{ boxShadow: "none" }}>
+        <Table sx={{ minWidth: 1000 }} aria-label="simple table">
+          <TableHead sx={{ backgroundColor: "#EBEBEB" }}>
+            <TableRow>
+              {TableRows?.map((title: string) => {
+                return (
+                  <TableCell
+                    key={uuidv4()}
+                    className="font-bold text-gray-25"
+                    align="left"
+                  >
+                    {title}
+                  </TableCell>
+                );
+              })}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {data?.map((row: any) => {
               return (
-                <TableCell
+                <TableRow
                   key={uuidv4()}
-                  className="text-gray-25 font-bold"
-                  align="left"
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
-                  {title}
-                </TableCell>
+                  {Object?.values(TableRows).map((key: string) => {
+                    return (
+                      <TableCell
+                        key={uuidv4()}
+                        sx={{ whiteSpace: "noWrap" }}
+                        align="left"
+                      >
+                        {row[key] || "---"}
+                      </TableCell>
+                    );
+                  })}
+                </TableRow>
               );
             })}
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {data?.map((row: any) => {
-            return (
-              <TableRow
-                key={uuidv4()}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-              >
-                {Object?.values(row).map((attribute: any) => {
-                  return (
-                    <TableCell
-                      key={uuidv4()}
-                      sx={{ whiteSpace: "noWrap" }}
-                      align="left"
-                    >
-                      {attribute || "---"}
-                    </TableCell>
-                  );
-                })}
-              </TableRow>
-            );
-          })}
-        </TableBody>
-      </Table>
-    </TableContainer>
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </div>
   );
 }
