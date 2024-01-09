@@ -8,10 +8,14 @@ import useData from "@/hooks/useData";
 import {
   database_leave_policies_type,
   database_leave_requests_type,
+  database_profile_type,
   databese_leave_categories_type,
 } from "@/types/database.tables.types";
 import { generateLeaveCategorieIcon } from "@/helpers/leave.helpers";
+import useToast from "@/hooks/useToast";
+import { useParams } from "next/navigation";
 interface formatted_policy_type {
+  id: number;
   name: string;
   title: string;
   icon: JSX.Element;
@@ -20,15 +24,21 @@ interface formatted_policy_type {
 }
 export function PolyciesSwiper() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const { toastContainer } = useToast();
+  const params = useParams();
+  const { employeeId } = params;
   const {
     leave_policies: { data: leave_policies, isPending: isPending1 },
     leave_categories: { data: leave_categories, isPending: isPending2 },
     leave_requests: { data: leave_requests, isPending: isPending3 },
-    user_profile: { data: user_profile, isPending: isPending4 },
+    all_profiles: { data: all_profiles, isPending: isPending4 },
   } = useData();
   const isPending = isPending1 || isPending2 || isPending3 || isPending4;
-  const user_policies_ids = user_profile?.leave_balance?.map(
-    (e: any) => Number(e.policy_id),
+  const user_profile = all_profiles?.find(
+    (profile: database_profile_type) => profile.user_id === employeeId,
+  );
+  const user_policies_ids = user_profile?.leave_balance?.map((e: any) =>
+    Number(e.policy_id),
   );
   const policies: formatted_policy_type[] = leave_policies
     ?.filter(
@@ -44,7 +54,8 @@ export function PolyciesSwiper() {
         ?.filter(
           (leave: database_leave_requests_type) =>
             new Date(leave.start_at) > new Date() &&
-            leave.policy_id === policy.id,
+            leave.policy_id === policy.id &&
+            leave.status === "approved",
         )
         .reduce(
           (acc: [], leave: database_leave_requests_type) => [
@@ -55,6 +66,7 @@ export function PolyciesSwiper() {
         )
         .reduce((acc: number, e: any) => acc + Number(e.duration), 0);
       return {
+        id: policy.id,
         name: policy.name,
         title: categorie?.name,
         icon: generateLeaveCategorieIcon({
@@ -72,30 +84,33 @@ export function PolyciesSwiper() {
     return <div>Loading...</div>;
   }
   return (
-    <section className="relative mx-auto block w-full max-w-[57.5vw] px-12 ">
-      <div className="btn_swiper_arrow_left absolute -left-5 top-[40%] cursor-pointer ">
-        <FaArrowLeft
-          className="h-10 w-10 border border-gray-26 p-2 text-gray-25"
-          hidden={activeIndex === 0}
+    <>
+      {toastContainer}
+      <section className="relative mx-auto block w-full max-w-[57.5vw] px-12 ">
+        <div className="btn_swiper_arrow_left absolute -left-5 top-[40%] cursor-pointer ">
+          <FaArrowLeft
+            className="h-10 w-10 border border-gray-26 p-2 text-gray-25"
+            hidden={activeIndex === 0}
+          />
+        </div>
+        <div
+          className="btn_swiper_arrow_right absolute -right-5 top-[40%] cursor-pointer"
+          hidden={activeIndex === policies?.length - 3}
+        >
+          <FaArrowRight className="h-10 w-10 border border-gray-26 p-2 text-gray-25" />
+        </div>
+        <CustomSwiper
+          setActiveIndex={setActiveIndex}
+          navigation={{
+            prevEl: ".btn_swiper_arrow_left",
+            nextEl: ".btn_swiper_arrow_right",
+          }}
+          slidesPerView={3}
+          slides={policies?.map((policy, i: number) => (
+            <Policy key={policy.name + i} {...policy} />
+          ))}
         />
-      </div>
-      <div
-        className="btn_swiper_arrow_right absolute -right-5 top-[40%] cursor-pointer"
-        hidden={activeIndex === policies?.length - 3}
-      >
-        <FaArrowRight className="h-10 w-10 border border-gray-26 p-2 text-gray-25" />
-      </div>
-      <CustomSwiper
-        setActiveIndex={setActiveIndex}
-        navigation={{
-          prevEl: ".btn_swiper_arrow_left",
-          nextEl: ".btn_swiper_arrow_right",
-        }}
-        slidesPerView={3}
-        slides={policies?.map((policy, i: number) => (
-          <Policy key={policy.name + i} {...policy} />
-        ))}
-      />
-    </section>
+      </section>
+    </>
   );
 }

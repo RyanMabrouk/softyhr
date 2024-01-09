@@ -1,24 +1,23 @@
 "use client";
 import React from "react";
 import { IoMdSettings } from "react-icons/io";
-import { FaCalculator } from "react-icons/fa";
-import { TbPlusMinus } from "react-icons/tb";
-import { TbClockEdit } from "react-icons/tb";
-
+import { AddLeaveRequestBtn } from "./_ui/AddLeaveRequestBtn";
+import { AdjustLeavePolicyBalanceBtn } from "./_ui/AdjustLeavePolicyBalanceBtn";
+import { FaCalculator } from "react-icons/fa6";
 export function Policy({
+  id,
   icon,
   hours_scheduled,
   hours_available,
   name,
   title,
-  color,
 }: {
+  id: number;
   icon: React.ReactNode;
   hours_scheduled: number;
   hours_available: number;
   name: string;
   title?: string;
-  color?: string;
 }) {
   return (
     <div className="group relative flex h-fit w-fit max-w-[20rem] flex-col items-center justify-between gap-1 pt-6 ">
@@ -49,9 +48,9 @@ export function Policy({
         <IoMdSettings className="order-0 h-4 w-4 peer-hover:text-fabric-700" />
       </div>
       <div className="absolute -top-2 box-border flex  w-full -translate-x-5 translate-y-10 flex-row items-center justify-center gap-2 rounded-[0px_0px_8px_8px] border-solid  border-[10px_2px_2px] py-3 text-center text-gray-25 opacity-0 transition-all delay-[0s] duration-[0.1s] ease-[ease-in-out] group-hover:translate-x-0 group-hover:translate-y-0  group-hover:opacity-100">
-        <TbClockEdit className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-md border border-black bg-white px-2 text-center  " />
+        <AddLeaveRequestBtn id={id} />
         <FaCalculator className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-md border border-black bg-white px-2 text-center " />
-        <TbPlusMinus className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-md border border-black bg-white px-2 text-center " />
+        <AdjustLeavePolicyBalanceBtn id={id} />
       </div>
     </div>
   );

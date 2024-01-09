@@ -21,13 +21,6 @@ export default function formulateData(formdata: FormData, user: any) {
         "Major/Specialization": formdata.getAll("Major/Specialization")[index],
       });
   });
-  console.log(NewEducation);
-  let formDataObj: any = {};
-  formdata.forEach((value, key) => {
-    formDataObj[key] = value;
-    formdata.set(key, "");
-  });
-  console.log(formDataObj);
   const data = user?.data;
   Object.keys(data)?.map((object) => {
     console.log(typeof data[object]);

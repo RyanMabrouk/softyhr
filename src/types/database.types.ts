@@ -9,6 +9,41 @@ export type Json =
 export interface Database {
   public: {
     Tables: {
+      Hiring: {
+        Row: {
+          Application_Details: Json | null
+          candidates: number | null
+          created_at: string
+          id: number
+          job_information: Json | null
+          org_name: string | null
+        }
+        Insert: {
+          Application_Details?: Json | null
+          candidates?: number | null
+          created_at?: string
+          id?: number
+          job_information?: Json | null
+          org_name?: string | null
+        }
+        Update: {
+          Application_Details?: Json | null
+          candidates?: number | null
+          created_at?: string
+          id?: number
+          job_information?: Json | null
+          org_name?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "Hiring_org_name_fkey"
+            columns: ["org_name"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["name"]
+          }
+        ]
+      }
       leave_accrued: {
         Row: {
           balance: number
@@ -159,6 +194,7 @@ export interface Database {
           policy_id: number
           reviewed_at: string | null
           reviewed_by: string | null
+          reviewed_comment: string | null
           start_at: string
           status: string
           user_id: string
@@ -174,6 +210,7 @@ export interface Database {
           policy_id: number
           reviewed_at?: string | null
           reviewed_by?: string | null
+          reviewed_comment?: string | null
           start_at: string
           status?: string
           user_id: string
@@ -189,6 +226,7 @@ export interface Database {
           policy_id?: number
           reviewed_at?: string | null
           reviewed_by?: string | null
+          reviewed_comment?: string | null
           start_at?: string
           status?: string
           user_id?: string

@@ -2,7 +2,6 @@
 import React, { useContext } from "react";
 import { FaHistory } from "react-icons/fa";
 import { HistoryTable } from "./HistoryTable";
-import { DeleteEditBtns } from "./_ui/DeleteEditBtns";
 import historyTableFilters from "./_context/historyTableFilters";
 import { historyTableFiltersContextType } from "./_context/historyTableFilters"; // Import the type of the context
 import { UnderlinedLink } from "./_ui/UnderlinedLink";
@@ -12,15 +11,22 @@ import { Filters } from "./Filters";
 import {
   database_leave_accrued_type,
   database_leave_policies_type,
+  database_leave_request_status_type,
   database_leave_requests_type,
   database_profile_type,
+  databese_leave_categories_track_time_unit_type,
   databese_leave_categories_type,
 } from "@/types/database.tables.types";
 import { formatTotalHoursToTimeUnit } from "@/helpers/leave.helpers";
+import { useParams } from "next/navigation";
+import { EditLeaveRequestBtn } from "./_ui/EditLeaveRequestBtn";
+import { DeleteLeaveRequestBtn } from "./_ui/DeleteLeaveRequestBtn";
+import Link from "next/link";
 interface leave_data {
+  user_id: string;
   reviewed_by: string | "";
   reviewed_at: string | "";
-  status: "pending" | "approved" | "rejected" | "canceled" | "";
+  status: database_leave_request_status_type | "";
   created_at: Date;
   name: string;
   id: number;
@@ -30,25 +36,35 @@ interface leave_data {
   duration_used: number | "";
   duration_accrued: number | "";
   Balance: number | "";
-  track_time_unit: "hours" | "days";
+  reviewed_comment: string | "";
+  track_time_unit: databese_leave_categories_track_time_unit_type;
 }
 export type leave_data_types = leave_data[] | undefined;
+
 export function History() {
   const { year, type, toggleView } =
     useContext<historyTableFiltersContextType>(historyTableFilters);
+  const { employeeId } = useParams();
   const {
     leave_requests: { data: leave_requests, isPending: isPending2 },
     leave_policies: { data: leave_policies, isPending: isPending3 },
     leave_accrued: { data: leave_accrued, isPending: isPending4 },
     leave_categories: { data: leave_categories, isPending: isPending5 },
     all_profiles: { data: all_profiles, isPending: isPending6 },
+    user_profile: { data: user_profile, isPending: isPending7 },
   } = useData();
   const isPending =
-    isPending2 || isPending3 || isPending4 || isPending5 || isPending6;
+    isPending2 ||
+    isPending3 ||
+    isPending4 ||
+    isPending5 ||
+    isPending6 ||
+    isPending7;
   //--------------------------------------------------
-  //NOT CORRECT TYPE ANY HERE PLEASE FIX
-  const leave_requests_data: leave_data_types = leave_requests?.map(
-    (e: database_leave_requests_type) => {
+  // format leave requests data
+  const leave_requests_data: leave_data_types = leave_requests
+    ?.filter((e: database_leave_requests_type) => e.user_id === employeeId)
+    .map((e: database_leave_requests_type) => {
       const categorie: databese_leave_categories_type = leave_categories?.find(
         (categorie: databese_leave_categories_type) =>
           categorie.id ==
@@ -60,6 +76,8 @@ export function History() {
         (profile: database_profile_type) => profile.user_id === e.reviewed_by,
       )?.["Basic Information"];
       return {
+        reviewed_comment: e.reviewed_comment,
+        user_id: e.user_id,
         reviewed_by: reviewed_by_info
           ? reviewed_by_info?.["First name"] +
             " " +
@@ -81,11 +99,11 @@ export function History() {
         Balance: e.balance,
         track_time_unit: categorie?.track_time_unit,
       };
-    },
-  );
-  //NOT CORRECT TYP HERE PLEASE FIX
-  const leave_accrued_data: leave_data_types = leave_accrued?.map(
-    (e: database_leave_accrued_type) => {
+    });
+  // format leave accrued data
+  const leave_accrued_data: leave_data_types = leave_accrued
+    ?.filter((e: database_leave_accrued_type) => e.user_id === employeeId)
+    .map((e: database_leave_accrued_type) => {
       const categorie: databese_leave_categories_type = leave_categories?.find(
         (categorie: databese_leave_categories_type) =>
           categorie.id ==
@@ -94,8 +112,6 @@ export function History() {
           )?.categories_id,
       );
       return {
-        reviewed_by: "",
-        reviewed_at: "",
         status: "",
         created_at: new Date(e.created_at),
         name: categorie?.name,
@@ -108,8 +124,7 @@ export function History() {
         Balance: e.balance,
         track_time_unit: categorie?.track_time_unit,
       };
-    },
-  );
+    });
   return (
     <section className="mt-8 flex flex-col justify-center gap-1">
       <div className="mb-2 flex flex-row items-center gap-2">
@@ -140,7 +155,19 @@ export function History() {
                   Description: (
                     <div className="flex flex-col capitalize">
                       <span>{e.name}</span>
-                      <UnderlinedLink>See Comments (1)</UnderlinedLink>
+                      <Link
+                        href={{
+                          pathname: `/people/${employeeId}/TimeOff`,
+                          query: {
+                            popup: "VIEW_LEAVE_REQUEST_COMMENT",
+                            leave_request_id: e.id,
+                          },
+                        }}
+                      >
+                        <UnderlinedLink>
+                          See Comments ({e.reviewed_comment ? 1 : 0})
+                        </UnderlinedLink>
+                      </Link>
                     </div>
                   ),
                   Submitted: formatDDMMYYYY(new Date(e.created_at)),
@@ -211,12 +238,17 @@ export function History() {
                         )
                       : "",
                     Balance: e.Balance,
-                    " ": new Date(e.start_at) > new Date() && (
-                      <DeleteEditBtns
-                        key={e.id + "edit/del"}
-                        leave_request_id={e.id}
-                      />
-                    ),
+                    " ": !e.duration_accrued &&
+                      e.status !== "canceled" &&
+                      user_profile?.user_id === e.user_id && (
+                        <div className=" flex h-[4.25rem] w-full  flex-row  items-start justify-center gap-1 px-4 pt-3 text-center align-top text-gray-27  ">
+                          <DeleteLeaveRequestBtn className="hidden h-7 w-7 cursor-pointer  rounded-md border border-transparent px-0.5 text-gray-25 transition-all ease-linear hover:border hover:border-black hover:bg-white group-hover:block" />
+                          <EditLeaveRequestBtn
+                            className=" hidden h-7 w-7 cursor-pointer  rounded-md border border-transparent px-0.5 text-gray-25 transition-all ease-linear hover:border hover:border-black hover:bg-white group-hover:block"
+                            leave_request_id={e.id}
+                          />
+                        </div>
+                      ),
                   }))}
               />
             )

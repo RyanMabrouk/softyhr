@@ -13,11 +13,10 @@ export function EditLeaveRequestBtn({
   return (
     <Link
       href={{
-        pathname: "/people/1202/TimeOff",
+        pathname: `/people/${useParams().employeeId}/TimeOff`,
         query: {
           popup: "EDIT_LEAVE_REQUEST",
           leave_request_id: leave_request_id,
-          employeeId: useParams().employeeId,
         },
       }}
       className="flex flex-row items-center justify-center"

@@ -1,6 +1,10 @@
 import icons from "@/app/(dashboard)/people/[employeeId]/TimeOff/_ui/icons";
-import { databese_leave_categories_type } from "@/types/database.tables.types";
-import { formatYYYYMMDD } from "./date";
+import {
+  databese_leave_categories_track_time_unit_type,
+  databese_leave_categories_type,
+} from "@/types/database.tables.types";
+import { addOneDay, formatYYYYMMDD, sameDay, timeDiffInHours } from "./date";
+// generate Leave Categorie Icon
 export function generateLeaveCategorieIcon({
   categorie,
   className,
@@ -15,18 +19,20 @@ export function generateLeaveCategorieIcon({
       : icons.default(icons_classname);
   return icon;
 }
+// format Total Hours To Time Unit
 export function formatTotalHoursToTimeUnit(
   total_hours: number,
-  time_unit: "hours" | "days" | string,
+  time_unit: databese_leave_categories_track_time_unit_type | string,
 ) {
   return time_unit === "days"
     ? (total_hours / 24).toFixed(2) + " days"
     : total_hours + " hours";
 }
+// array Of Working Days
 export function arrayOfWorkingDays(startDate: Date, endDate: Date) {
   const dates = [];
   const currentDate = new Date(startDate);
-  while (currentDate <= endDate) {
+  while (currentDate <= endDate || sameDay(currentDate, endDate)) {
     const day = currentDate.getDay();
     if (day !== 0 && day !== 6) {
       dates.push({

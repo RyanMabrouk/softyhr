@@ -25,14 +25,14 @@ export function HistoryTable({
           ))}
         </div>
         {data && data?.length > 0 ? (
-          data?.map((row: { [key: string]: any }, index2) => (
-            <div className="flex w-full flex-col" key={"row" + index2}>
+          data?.map((row: { [key: string]: any }, index) => (
+            <div className="flex w-full flex-col" key={"row" + index}>
               <div
                 className={`group grid w-full  flex-row px-2 transition-all ease-linear hover:bg-gray-14 ${layout} `}
               >
-                {Object.keys(row).map((key, index) =>
+                {Object.keys(row).map((key, index2) =>
                   key === " " ? (
-                    row[key]
+                    <div key={"row_el" + key + index2}>{row[key]}</div>
                   ) : (
                     <div
                       key={"row_el" + key + index2}
