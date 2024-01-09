@@ -1,5 +1,24 @@
 import type { Config } from "tailwindcss";
-
+import plugin from "tailwindcss/plugin";
+const Myclass = plugin(function ({ addUtilities }: any) {
+  addUtilities({
+    ".my-rotate-y-180": {
+      transform: "rotateY(180deg)",
+    },
+    ".preserve-3d": {
+      transformStyle: "preserve-3d",
+    },
+    ".perspective": {
+      perspective: "1000px",
+    },
+    ".backface-hidden": {
+      backfaceVisibility: "hidden",
+    },
+    ".bg-primary-gradient": {
+      backgroundImage: "linear-gradient(90deg, #c0e94f 0%, #82af13 100%)",
+    },
+  });
+});
 const config: Config = {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -8,16 +27,35 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      keyframes: {
+        show: {
+          "0%": { bottom: "0" },
+          "100%": { transform: "5rem" },
+        },
+      },
       height: {
         screen: "100dvh",
       },
       width: {
         screen: "100dvw",
       },
+      minHeight: {
+        screen: "100dvh",
+      },
+      minWidth: {
+        screen: "100dvw",
+      },
+      maxHeight: {
+        screen: "100dvh",
+      },
+      maxWidth: {
+        screen: "100dvw",
+      },
       colors: {
         "fabric-100": "#c0e94f80",
         "fabric-200": "#c0e94f59",
         "fabric-300": "#c0e94f1a",
+
         "fabric-400": "#c0e94f",
         "fabric-500": "#82af13",
         "fabric-600": "#6a950a",
@@ -80,10 +118,92 @@ const config: Config = {
         "color7-700": "#4c003e",
 
         "color8-100": "#e5ffe6",
+        "color8-200": "#b1f8df",
+        "color8-300": "#82f2d9",
+        "color8-400": "#48ead1",
+        "color8-500": "#34b9ac",
+        "color8-600": "#1b7b7e",
+        "color8-700": "#003a4c",
+
+        "gray-0": "#FAFAF8",
+        "gray-1": "#F5F4F1",
+        "gray-2": "#E4E3E0",
+        "gray-3": "#D4D2D0",
+        "gray-4": "#C6C2BF",
+        "gray-5": "#B5B2AF",
+        "gray-6": "#A5A29F",
+        "gray-7": "#95918F",
+        "gray-8": "#868180",
+        "gray-9": "#777270",
+        "gray-10": "#676260",
+        "gray-11": "#58524F",
+        "gray-12": "#48413F",
+        "gray-13": "#38312F",
+
+        "gray-14": "#F4F4F4",
+        "gray-15": "#999999",
+        "gray-16": "#E0E0E0",
+        "gray-17": "#EBEBEB",
+        "gray-18": "#CCCCCC",
+        "gray-19": "#D9D9D9",
+        "gray-20": "#444",
+        "gray-21": "#686868",
+        "gray-22": "#F3F3F3",
+        "gray-23": "#232323",
+        "gray-24": "#0003",
+        "gray-25": "#555",
+        "gray-26": "#999",
+        "gray-27": "#222222",
+        "gray-28": "#FAFAFA",
+        "gray-29": "#636363",
+        "gray-30": "#777",
+
+        "color-teal-2": "#284D59",
+
+        "color-primary": "#599D15",
+        "color-primary-0": "#F6FFE3",
+        "color-primary-1": "#ECFFC7",
+        "color-primary-2": "#D4FD80",
+        "color-primary-3": "#599D15",
+        "color-primary-4": "#2E7918",
+        "color-primary-5": "#03551C",
+        "color-primary-6": "#517A00",
+        "color-primary-7": "#719D0C",
+        "color-primary-8": "#527A01",
+        "color-primary-9": "#527B00",
+        "color-primary-10": "#84bf41",
+        "color-primary-11": "#8EBB23",
+        "color-primary-focus": "#AAE868",
+
+        "color9-100": "#FFAAB0",
+        "color9-200": "#E45160",
+        "color9-300": "#CE4755",
+        "color9-400": "#A73440",
+        "color9-500": "#C20B0B",
+
+        /*"color-green": "#599D15",
+        "color-teal-2": "#284D59",
+        "color-green-0": "#F6FFE3",
+        "color-green-1": "#ECFFC7",
+        "color-green-2": "#D4FD80",
+        "color-green-3": "#599D15",
+        "color-green-4": "#2E7918",
+        "color-green-5": "#03551C",
+        "color-green-6": "#517A00",
+        "color-green-7": "#719D0C",
+        "color-green-8": "#527A01",
+        "color-green-9": "#527B00",
+        "color-green-10": "#84bf41",
+        "color-green-focus": "#AAE868",
+
+        "color-rose-1": "#FFAAB0",
+        "color-rose-2": "#E45160",
+        "color-rose-3": "#CE4755",
+        "color-rose-4": "#A73440",*/
       },
     },
   },
-  plugins: [require("@tailwindcss/typography")],
+  plugins: [Myclass, require("@tailwindcss/typography")],
 };
 
 export default config;
