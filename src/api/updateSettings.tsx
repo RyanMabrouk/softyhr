@@ -8,7 +8,7 @@ export async function UpdateSettings(column: any) {
     const supabase = createServerComponentClient({ cookies });
     const { data, error } = await supabase
       .from("settings")
-      .update({ personnal: column })
+      .update(column)
       .eq("org_name", org?.name)
       .select();
 

@@ -69,6 +69,7 @@ function EditFields() {
                   return (
                     <RowFiedlsList
                       key={champ}
+                      section={settings_type}
                       rang={rang}
                       data={data}
                       champ={champ}

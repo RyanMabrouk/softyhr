@@ -11,12 +11,14 @@ import {
 } from "@tanstack/react-query";
 import { UpdateSettings } from "@/api/updateSettings";
 
-function RowFiedlsList({ champ, Fields, data, rang }: any) {
+function RowFiedlsList({ champ, Fields, section, data, rang }: any) {
   const queryClient = useQueryClient();
   const [Data, setData] = useState(Fields);
+
+  //--------update_section_rang------
   const { mutateAsync, isPending, isPaused } = useMutation({
     mutationFn: async (NewSettings: any) => {
-      return await UpdateSettings(NewSettings).then(() => {
+      return await UpdateSettings({ [section]: NewSettings }).then(() => {
         console.log("updated successfuly !!!");
       });
     },
@@ -25,6 +27,7 @@ function RowFiedlsList({ champ, Fields, data, rang }: any) {
     },
   });
 
+  //-------drag_section-----------
   const [{ isDragging }, drag] = useDrag(() => ({
     type: "champ",
     item: { rang: rang, champ: champ },
@@ -32,6 +35,8 @@ function RowFiedlsList({ champ, Fields, data, rang }: any) {
       isDragging: !!monitor.isDragging(),
     }),
   }));
+
+  //-------drop_section-----------
   const [{ isOver }, drop] = useDrop(() => ({
     accept: "champ",
     drop: (item: any, monitor: any) => {
@@ -46,6 +51,7 @@ function RowFiedlsList({ champ, Fields, data, rang }: any) {
         dropResult.get(monitor.targetId).spec.data.rang,
         data?.Champs,
       );
+      console.log(NewSettings);
       mutateAsync({ Champs: NewSettings });
       queryClient.invalidateQueries({ queryKey: ["settings"] });
     },
@@ -54,12 +60,13 @@ function RowFiedlsList({ champ, Fields, data, rang }: any) {
       isOver: !!monitor.isOver(),
     }),
   }));
-  console.log(data);
+
+    
   if (typeof Fields[0] == "string") {
     return (
       <div ref={drag}>
         <div
-          className="mt-2 flex cursor-move flex-col items-start justify-center gap-[0.5rem] border border-dashed border-gray-15  bg-gray-14  px-4 duration-150 ease-in-out   hover:!border-gray-16"
+          className="mt-2 flex cursor-move flex-col items-start justify-center gap-[0.5rem] border border-dashed border-gray-15  bg-gray-14  px-4 duration-150 ease-in-out   hover:!border-gray-14"
           key={uuidv4()}
           ref={drop}
         >
@@ -68,6 +75,7 @@ function RowFiedlsList({ champ, Fields, data, rang }: any) {
       </div>
     );
   }
+
   return (
     <div ref={drag}>
       <div
