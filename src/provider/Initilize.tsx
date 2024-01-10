@@ -10,11 +10,7 @@ interface InitializeProps {
 function Initialize({ children }: InitializeProps) {
     const { user_profile: data } = useData();
 
-    return (false) ? (
-        <Loader/>
-    ) : (
-        <>{children}</>
-    );
+    return !data?.data ? <Loader /> : <>{children}</>;
 }
 
 export default Initialize;

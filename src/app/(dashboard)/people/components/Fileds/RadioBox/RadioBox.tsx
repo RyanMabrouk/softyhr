@@ -7,7 +7,6 @@ function RadioBox({ RowField, setTouched, user, champ }: any) {
   const [value, setValue] = useState(String(user[champ][RowField?.name || ""]));
   
   const onChange = (e: RadioChangeEvent) => {
-    console.log("radio checked", e.target.value);
     setTouched(true);
     setValue(e.target.value);
   };

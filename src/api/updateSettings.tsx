@@ -14,6 +14,5 @@ export async function UpdateSettings(column: any) {
 
     return column;
   } catch (error) {
-    console.log(error);
   }
 }

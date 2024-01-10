@@ -7,7 +7,6 @@ import { getYearDiff } from "@/app/(dashboard)/people/components/utils/getYearDf
 
 function DateInput({ RowField, setTouched, defaultValue }: any) {
   const [value, setValue] = useState<string>(String(defaultValue));
-  console.log(value);
   const onChange: DatePickerProps["onChange"] = (date, dateString) => {
     setTouched(true);
     setValue(dateString);
@@ -19,7 +18,7 @@ function DateInput({ RowField, setTouched, defaultValue }: any) {
         <DatePicker
           style={{ width: "11.3rem", borderRadius: "0.2rem" }}
           //@ts-ignore
-          defaultValue={value? dayjs(value, "YYYY-MM-DD") : ""}
+          defaultValue={value ? dayjs(value, "YYYY-MM-DD") : ""}
           onChange={onChange}
           name={RowField?.name}
         />

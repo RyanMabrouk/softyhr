@@ -11,14 +11,11 @@ import { usePathname } from "next/navigation";
 import { CreateHiringJob } from "@/constants/Hiring";
 import { v4 as uuidv4 } from "uuid";
 
-
 interface LayoutHiringProps {
   children: ReactNode;
 }
 export default function HiringLayout({ children }: LayoutHiringProps) {
   const ActiveRoute = usePathname();
-  console.log(ActiveRoute);
-  console.log(ActiveRoute.slice(ActiveRoute.lastIndexOf("/") + 1));
   if (
     CreateHiringJob.includes(
       ActiveRoute.slice(ActiveRoute.lastIndexOf("/") + 1),
@@ -31,7 +28,9 @@ export default function HiringLayout({ children }: LayoutHiringProps) {
         <div className="mt-12 flex w-3/4 flex-col items-start justify-center gap-[2rem] text-black">
           <div className="flex items-center justify-center gap-[0.5rem] self-start">
             <TiClipboard fontSize="3rem" fill="#527A01" />
-            <h1 className="text-2xl text-color-primary-8">Hiring</h1>
+            <h1 className="text-2xl font-semibold text-color-primary-8">
+              Hiring
+            </h1>
           </div>
           <div className="flex w-full items-center justify-between">
             <div className="flex items-center justify-center">
@@ -43,7 +42,7 @@ export default function HiringLayout({ children }: LayoutHiringProps) {
                       key={uuidv4()}
                       href={path}
                       className={
-                        "hover:!bg-gray-28 flex items-center justify-center gap-[0.5rem] whitespace-nowrap rounded-t p-4 duration-150 ease-in-out " +
+                        "flex items-center justify-center gap-[0.5rem] whitespace-nowrap rounded-t p-4 duration-150 ease-in-out hover:!bg-gray-28 " +
                         (ActiveRoute.includes(path) ? "bg-white" : "gray")
                       }
                     >
@@ -78,7 +77,7 @@ export default function HiringLayout({ children }: LayoutHiringProps) {
             </div>
           </div>
         </div>
-     {children}
+        {children}
       </div>
     );
 }

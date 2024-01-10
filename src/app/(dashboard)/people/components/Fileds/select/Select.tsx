@@ -15,7 +15,6 @@ function SelectInput({
   defaultValue,
 }: SelectInputPropsType) {
   const [value, setValue] = useState(String(defaultValue));
-  console.log(RowField?.name, value);
   const HandleChange = (e: any) => {
     if (setTouched) setTouched(true);
     setValue(e.target.value);

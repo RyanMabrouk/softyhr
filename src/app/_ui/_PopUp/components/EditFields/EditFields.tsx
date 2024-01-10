@@ -48,7 +48,6 @@ function EditFields() {
                 color={"#999999"}
                 fontSize={"2rem"}
                 cursor="pointer"
-                onclick={() => console.log("object")}
               />
             </div>
           </div>

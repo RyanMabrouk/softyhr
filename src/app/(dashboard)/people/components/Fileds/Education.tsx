@@ -14,35 +14,38 @@ interface DeleteEducationFnType {
   id: string;
   data: any;
   user_id: string;
+ 
 }
 interface EducationPropsType {
   FieldsArray: RowFieldType[];
   setTouched: (arg: boolean) => void;
   user: any;
   champ: string;
+  setData: (arg: any) => any;
+  DATA: Object[];
 }
 
 function Education({
   FieldsArray,
   setTouched,
   champ,
+  setData,
+  DATA,
 }: EducationPropsType): ReactNode {
   const { toast, toastContainer } = useToast();
-  const [data, setData] = useState<any>([]);
   const { user_profile: Data } = useData();
   const router = useRouter();
   const pathname = usePathname();
   const Show_DeleteEducation = (id: string) => {
     router.push(pathname + `?popup=delete_education&id=${id}`);
   };
-  console.log(Data);
   return (
     <div className="flex flex-col items-start ">
       {toastContainer}
-      {[...Data?.data?.[champ], ...data]?.map((data: any) => {
+      {[...Data?.data?.[champ], ...DATA]?.map((data: any) => {
         {
           return (
-            <div className="flex justify-center gap-[1rem] py-2" key={uuidv4()}>
+            <div className="flex justify-center gap-[1rem] py-2" key={data?.id}>
               <div className="flex flex-col items-start gap-[0.5rem] border-b border-gray-5 py-6">
                 {FieldsArray?.map(({ Row }: any) => {
                   return (
@@ -84,7 +87,7 @@ function Education({
                     Show_DeleteEducation(data?.id);
                   }
                 }}
-                className="hover:border-gray-27 hover:bg-gray flex h-[2rem] w-[2rem] cursor-pointer items-center justify-center duration-150 ease-in-out hover:border"
+                className="hover:bg-gray flex h-[2rem] w-[2rem] cursor-pointer items-center justify-center duration-150 ease-in-out hover:border hover:border-gray-27"
               >
                 <FaTrash cursor={"pointer"} fill={"gray"} />
               </div>
@@ -96,7 +99,7 @@ function Education({
         className="flex cursor-pointer items-center justify-center gap-[0.5rem] pt-4 text-color5-600"
         onClick={() =>
           setData([
-            ...data,
+            ...DATA,
             {
               id: uuidv4(),
               GPA: "",

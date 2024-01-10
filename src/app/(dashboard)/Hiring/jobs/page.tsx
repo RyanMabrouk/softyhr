@@ -2,10 +2,12 @@
 import { CreateHiringJob, HirinSections } from "@/constants/Hiring";
 import Link from "next/link";
 import React from "react";
+import { v4 as uuidv4 } from "uuid";
 import { FaPlusCircle } from "react-icons/fa";
 import HiringTable from "../_ui/HiringTable/HiringTable";
 import useData from "@/hooks/useData";
 import Loader from "@/app/_ui/Loader/Loader";
+import { NewCandidates } from "@/helpers/CountNewCandidates";
 
 function Page() {
   const {
@@ -13,7 +15,9 @@ function Page() {
   } = useData();
   const HiringDataTable = data?.map((Hiring: any) => {
     return {
+      id:uuidv4(),
       Candiates: Hiring?.candidates?.length || 0,
+      NewCandidates: NewCandidates(Hiring?.candidates || []),
       job_opening: Hiring?.job_information?.["Posting Title"],
       hiring_lead: Hiring?.job_information?.["Hiring Lead"],
       CreatedOn: new Date(Hiring?.created_at).toDateString(),
@@ -25,7 +29,7 @@ function Page() {
 
   return (
     <div className="flex h-full w-full flex-col items-center justify-center bg-white">
-      <div className="flex w-9/12 flex-col gap-[3rem]">
+      <div className="flex w-5/6 flex-col gap-[1rem]">
         <div className="mt-4 w-full">
           <Link
             href={HirinSections[0]?.path + "/add/" + CreateHiringJob[0]}

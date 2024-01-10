@@ -9,9 +9,8 @@ interface TableChampsPropsType {
 }
 
 function TableChamps({ FieldsArray, user, champ }: TableChampsPropsType) {
-  console.log(user);
   return (
-    <div className=" flex flex-col items-start justify-between gap-[1rem]">
+    <div className=" -mt-10 flex flex-col items-start justify-between gap-[1rem]">
       <div className="flex cursor-pointer items-center justify-center gap-[0.3rem] self-end text-gray-15 hover:underline">
         <IoMdAdd />
         <h1 className="">Add Entry</h1>

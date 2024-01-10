@@ -4,7 +4,6 @@ import { StepsContext } from "../provider/StepsProvider";
 
 function Page() {
   const { ApplicationDetails } = useContext(StepsContext);
-  console.log(ApplicationDetails);
   return <div>page</div>;
 }
 

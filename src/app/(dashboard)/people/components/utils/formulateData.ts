@@ -29,13 +29,11 @@ export default function formulateData(formdata: FormData, user: any) {
     if (typeof data[object] == "object") {
       Object.keys(data[object])?.map((key) => {
         if (formdata.get(key) || formdata.get(key) == "") {
-          console.log(key, formdata.get(key));
           data[object][key] = String(formdata.get(key));
         }
       });
     }
     data["Education"] = NewEducation;
   });
-  console.log(data);
   return { ...user?.data, ...data };
 }

@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import RowFields from "./RowFields";
 import { useDrag, useDrop } from "react-dnd";
-import { ReorderChamps } from "../../../helper/ReorderChamps";
+import { ReorderChamps } from "../../../helper/ReorderChamps.helper";
 import {
   QueryClient,
   useMutation,
@@ -46,12 +46,12 @@ function RowFiedlsList({ champ, Fields, section, data, rang }: any) {
         " dropped on ",
         dropResult.get(monitor.targetId).spec.data,
       );
-      const NewSettings = ReorderChamps(
-        item.rang,
-        dropResult.get(monitor.targetId).spec.data.rang,
-        data?.Champs,
-      );
-      console.log(NewSettings);
+      if (item?.rang == dropResult.get(monitor.targetId).spec.data?.rang) return;
+        const NewSettings = ReorderChamps(
+          item.rang,
+          dropResult.get(monitor.targetId).spec.data.rang,
+          data?.Champs,
+        );
       mutateAsync({ Champs: NewSettings });
       queryClient.invalidateQueries({ queryKey: ["settings"] });
     },

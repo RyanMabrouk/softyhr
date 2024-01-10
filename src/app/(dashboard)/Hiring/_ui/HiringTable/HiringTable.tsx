@@ -1,6 +1,7 @@
 "use client";
 import { v4 as uuidv4 } from "uuid";
-import React from "react";
+import React, { useState } from "react";
+import { HiOutlineDuplicate } from "react-icons/hi";
 import {
   Table,
   TableHeader,
@@ -8,29 +9,31 @@ import {
   TableBody,
   TableRow,
   TableCell,
-  Input,
   Button,
   DropdownTrigger,
   Dropdown,
   DropdownMenu,
   DropdownItem,
-  Chip,
   User,
   Pagination,
   Selection,
-  ChipProps,
   SortDescriptor,
 } from "@nextui-org/react";
-import { RxAvatar } from "react-icons/rx";
 import { CgProfile } from "react-icons/cg";
 import { monthsAgo } from "@/helpers/MonthAgo";
 import { formatCustomDate } from "@/helpers/Formatdate";
+import Empty from "./components/Empty";
+import { FaSortDown, FaTrash } from "react-icons/fa6";
+import { MdModeEditOutline } from "react-icons/md";
+import { FaFileDownload } from "react-icons/fa";
 
 const columns = [
+  { name:"id", uid:"id"},
   { name: "Candiates", uid: "Candiates", sortable: true },
   { name: "Job Opening", uid: "job_opening", sortable: true },
   { name: "Hiring Lead", uid: "hiring_lead", sortable: true },
   { name: "Created On", uid: "CreatedOn", sortable: true },
+  { name: "NewCandidates", uid: "NewCandidates" },
   { name: "Status", uid: "status", sortable: true },
   { name: "", uid: "actions" },
 ];
@@ -67,13 +70,12 @@ const INITIAL_VISIBLE_COLUMNS = [
 type User = any;
 
 export default function HiringTable({ users }: any) {
-  console.log(users);
   const [filterValue, setFilterValue] = React.useState("");
   const [visibleColumns, setVisibleColumns] = React.useState<Selection>(
     new Set(INITIAL_VISIBLE_COLUMNS),
   );
   const [statusFilter, setStatusFilter] = React.useState<Selection>("all");
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rowsPerPage, setRowsPerPage] = React.useState(users.length);
   const [sortDescriptor, setSortDescriptor] = React.useState<SortDescriptor>({
     column: "age",
     direction: "ascending",
@@ -94,7 +96,6 @@ export default function HiringTable({ users }: any) {
 
   const filteredItems = React.useMemo(() => {
     let filteredUsers = [...users];
-    console.log(statusFilter);
     if (
       !(
         (statusFilter instanceof Set && statusFilter.has("all")) ||
@@ -127,7 +128,6 @@ export default function HiringTable({ users }: any) {
 
   const renderCell = React.useCallback((user: User, columnKey: React.Key) => {
     const cellValue = user[columnKey as keyof User];
-    console.log(columnKey);
     switch (columnKey) {
       case "Candiates":
         return (
@@ -136,7 +136,9 @@ export default function HiringTable({ users }: any) {
             classNames={{
               description: "",
             }}
-            description={user.Candiates > 0 && user.Candiates + " NEW"}
+            description={
+              user?.NewCandidates > 0 && user?.NewCandidates + " NEW"
+            }
             name={cellValue}
           >
             <div className="flex items-center justify-center gap-[0rem]">
@@ -151,7 +153,7 @@ export default function HiringTable({ users }: any) {
       case "job_opening":
         return (
           <div className="flex flex-col items-start justify-center gap-[0.2rem]">
-            <p className="cursor-pointer text-color5-500 hover:underline">
+            <p className="cursor-pointer text-color5-500 hover:text-color-primary-8 hover:underline">
               {user.job_opening}
             </p>
             <div className="flex items-center justify-center text-sm font-normal text-gray-11">
@@ -189,19 +191,20 @@ export default function HiringTable({ users }: any) {
         );
       case "actions":
         return (
-          <div className="relative flex items-center justify-end gap-2">
-            <Dropdown className="bg-background border-1 border-default-200">
-              <DropdownTrigger>
-                <Button isIconOnly radius="full" size="sm" variant="light">
-                  <h1>actions</h1>
-                </Button>
-              </DropdownTrigger>
-              <DropdownMenu>
-                <DropdownItem>View</DropdownItem>
-                <DropdownItem>Edit</DropdownItem>
-                <DropdownItem>Delete</DropdownItem>
-              </DropdownMenu>
-            </Dropdown>
+          <div className="flex items-center justify-end gap-2">
+            <div className="duration-250 flex h-[2rem] w-[2rem] cursor-pointer items-center justify-center ease-in-out hover:border hover:border-gray-27 hover:bg-gray-22">
+              <MdModeEditOutline
+                className="text-lg"
+                cursor={"pointer"}
+                fill={"gray"}
+              />
+            </div>
+            <div className="duration-250 flex h-[2rem] w-[2rem] cursor-pointer items-center justify-center ease-in-out hover:border hover:border-gray-27 hover:bg-gray-22">
+              <FaTrash cursor={"pointer"} fill={"gray"} />
+            </div>
+            <div className="duration-250 flex h-[2rem] w-[2rem] cursor-pointer items-center justify-center ease-in-out hover:border hover:border-gray-27 hover:bg-gray-22">
+              <HiOutlineDuplicate cursor={"pointer"} />
+            </div>
           </div>
         );
       default:
@@ -221,34 +224,49 @@ export default function HiringTable({ users }: any) {
     return (
       <div className="flex items-center justify-between  gap-4">
         <div className="flex items-center justify-between">
-          <span className="text-default-400 text-small">
+          <span className="text-normal  text-gray-11">
             Total {users.length} Job opening
           </span>
         </div>
         <div className="flex items-center justify-between gap-3">
+          <h1 className="text-normal font-medium ">
+            {users?.filter((job: any) => job?.status == "Open")?.length || 0} of{" "}
+            {users?.length || 0} open · Show
+          </h1>
           <div className="flex  min-w-16 ">
             <Dropdown className="w-full">
-              <DropdownTrigger className="hidden w-full border border-gray-18 !bg-white px-12 py-1 sm:flex">
-                <Button endContent={<h1 className="text-small" />} size="sm">
-                  {statusFilter}
+              <DropdownTrigger className="hidden w-full min-w-40 items-center justify-between border border-gray-15 !bg-white text-gray-11   sm:flex">
+                <Button size="sm">
+                  <h1 className="pl-4">{statusFilter}</h1>
+                  <div className="flex h-[2rem] w-[2rem] cursor-pointer items-center justify-center bg-gray-14 duration-150 ease-in-out">
+                    <FaSortDown fill="gray" />
+                  </div>
                 </Button>
               </DropdownTrigger>
               <DropdownMenu
-                className="w-full gap-[1rem] border border-color1-500 !bg-white "
+                className="w-full min-w-40  gap-[1.5rem] border border-gray-15 !bg-white "
                 disallowEmptySelection
                 aria-label="Table Columns"
-                closeOnSelect={false}
+                closeOnSelect={true}
                 selectedKeys={statusFilter}
                 selectionMode="single"
                 onSelectionChange={setStatusFilter}
               >
-                {statusOptions.map((status: any) => (
-                  <DropdownItem key={status.uid} className="capitalize">
-                    {status.name}
-                  </DropdownItem>
-                ))}
+                {statusOptions.map((status: any) => {
+                  return (
+                    <DropdownItem
+                      className="py-1 capitalize text-gray-11"
+                      key={status.uid}
+                    >
+                      {status.name}
+                    </DropdownItem>
+                  );
+                })}
               </DropdownMenu>
             </Dropdown>
+          </div>
+          <div className="flex h-[2rem] w-[2rem] cursor-pointer items-center justify-center border border-gray-15 duration-150 ease-in-out hover:bg-gray-14">
+            <FaFileDownload fill="gray" />
           </div>
         </div>
       </div>
@@ -263,6 +281,7 @@ export default function HiringTable({ users }: any) {
   ]);
 
   const bottomContent = React.useMemo(() => {
+    return;
     return (
       <div className="flex items-center justify-between px-2 py-2">
         <Pagination
@@ -284,10 +303,20 @@ export default function HiringTable({ users }: any) {
   const classNames = React.useMemo(
     () => ({
       wrapper: ["max-h-[382px]", "max-w-3xl"],
-      th: ["!bg-gray-17", "text-gray-15", "border-b", "border-divider"],
+      tr: ["border-b border-gray-14"],
+      th: [
+        "cursor-pointer",
+        "py-2",
+        "!bg-gray-17",
+        "hover:!bg-gray-14",
+        "text-gray-11",
+        "border-b",
+        "border-divider",
+      ],
       td: [
         // changing the rows border radius
         // first
+
         "group-data-[first=true]:first:before:rounded-none",
         "group-data-[first=true]:last:before:rounded-none",
         // middle
@@ -322,17 +351,24 @@ export default function HiringTable({ users }: any) {
       <TableHeader columns={headerColumns}>
         {(column: any) => (
           <TableColumn
+            {...(column.uid !== "actions" ? { allowsSorting: true } : {})}
             key={column.uid}
             align={column.uid === "actions" ? "center" : "start"}
-            allowsSorting={column.sortable}
           >
             {column.name}
           </TableColumn>
         )}
       </TableHeader>
-      <TableBody emptyContent={"No users found"} items={sortedItems}>
+      <TableBody emptyContent={<Empty />} items={sortedItems}>
         {(item) => (
-          <TableRow key={uuidv4()}>
+          <TableRow
+            className={
+              item?.status == "Draft"
+                ? "!opacity-50"
+                : "" 
+            }
+            key={uuidv4()}
+          >
             {(columnKey) => (
               <TableCell>{renderCell(item, columnKey)}</TableCell>
             )}

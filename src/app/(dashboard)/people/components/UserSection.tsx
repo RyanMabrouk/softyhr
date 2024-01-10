@@ -20,11 +20,13 @@ interface UserSection {
 }
 
 function UserSection({ section }: UserSection) {
+  const router = useRouter();
   const { data, isPending } = useSettings(section);
   const { toast, toastContainer } = useToast();
   const [touched, setTouched] = useState<boolean>(false);
+  const [Data, setData] = useState<any>([]);
   const queryClient = useQueryClient();
-  
+
   const { mutateAsync } = useMutation({
     mutationFn: async (NewData: any) => {
       return await updateData("profiles", NewData, {
@@ -33,7 +35,8 @@ function UserSection({ section }: UserSection) {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["user_profile"] });
-      toast.success("your changes updated successfully", "update");
+      setData([]);
+      router.refresh();
     },
     onError: () => {
       toast.error("something went wrong");
@@ -87,6 +90,8 @@ function UserSection({ section }: UserSection) {
                       <ComponentChamps
                         champ={champ}
                         user={user?.data}
+                        setData={setData}
+                        DATA={Data}
                         setTouched={setTouched}
                         key={rang || uuidv4()}
                         FieldsArray={Fields?.sort(

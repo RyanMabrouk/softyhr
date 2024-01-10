@@ -38,4 +38,5 @@ export const Section: any = {
   Compensation: TableChamps,
   "Job Information": TableChamps,
   Bonus:TableChamps
+  
 };

@@ -1,6 +1,6 @@
 "use client";
 import { UpdateSettings } from "@/api/updateSettings";
-import { ReorderFields } from "@/app/_ui/_PopUp/helper/ReorderFields";
+import { ReorderFields } from "@/app/_ui/_PopUp/helper/ReorderFields.helper";
 import { RowFieldType } from "@/types/userInfoTypes.type";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import React, { useState } from "react";
@@ -20,7 +20,6 @@ function RowFields({ RowFields, rang, champ, data }: RowFieldsPropsType) {
     mutationFn: async ({ RowStart, RowEnd, champ }: any) => {
       let NewSettings = ReorderFields(RowStart, RowEnd, data, champ);
       return await UpdateSettings(NewSettings).then(() => {
-        console.log("updated successfuly !!!");
       });
     },
     onSuccess: (data: any) => {
@@ -52,7 +51,6 @@ function RowFields({ RowFields, rang, champ, data }: RowFieldsPropsType) {
       isOver: !!monitor.isOver(),
     }),
   }));
-  console.log(RowFields, champ);
   return (
     <div ref={drop} className="w-full">
       <div
@@ -60,7 +58,6 @@ function RowFields({ RowFields, rang, champ, data }: RowFieldsPropsType) {
         ref={drag}
       >
         {RowFields?.map((Fields:any, index: number) => {
-          console.log(Fields?.Default);
           return (
             <h1 className="text-gray-23" key={Fields?.name}>
               {Fields?.name + (index + 1 < RowFields.length ? " , " : "")|| Fields || "---"}

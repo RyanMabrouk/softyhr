@@ -12,7 +12,6 @@ interface InputPropsType {
 const Input = ({ RowField, setTouched, defaultValue }: InputPropsType) => {
   const [value, setValue] = useState<string>(String(defaultValue || ""));
   const Component = InputIcons[RowField?.Icon?.toUpperCase() || ""];
-  console.log(RowField?.name);
   return (
     <div className="flex flex-col items-start justify-center">
       <h1
