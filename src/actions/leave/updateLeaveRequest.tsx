@@ -1,14 +1,22 @@
 "use server";
 import getData from "@/api/getData";
 import updateData from "@/api/updateData";
-import { getDaysInBetween } from "@/helpers/date";
-import { database_leave_requests_insert_type } from "@/types/database.tables.types";
-export default async function updateLeaveRequest(
-  formData: FormData,
-  user_id: string | string[],
-  old_request: database_leave_requests_insert_type,
-  old_user_leave_balance: { [key: string]: any }[],
-) {
+import { getDaysInBetween } from "@/helpers/date.helpers";
+import {
+  database_leave_request_status_type,
+  database_leave_requests_insert_type,
+  database_profile_leave_balance_type,
+} from "@/types/database.tables.types";
+import updateLeaveBalance from "./updateLeaveBalance";
+export default async function updateLeaveRequest({
+  formData,
+  user_id,
+  old_request,
+}: {
+  formData: FormData;
+  user_id: string | string[];
+  old_request: database_leave_requests_insert_type;
+}) {
   console.log("updateLeaveRequest");
   const start_at = formData.get("start_at") as string;
   const end_at = formData.get("end_at") as string;
@@ -56,50 +64,26 @@ export default async function updateLeaveRequest(
       },
     };
   }
-  // Check if the leave request is approved
-  if (old_request?.status == "approved") {
-    // Update the leave balance
+  const status: database_leave_request_status_type | undefined | string =
+    old_request?.status;
+  // Check if the leave request was approved
+  if (status == "approved") {
     // Get the total duration of the old leave request
     const old_leave_request_total_duration = old_request?.duration_used.reduce(
       (acc: number, duration: any) => acc + Number(duration.duration),
       0,
     );
-    // Check if the user has a balance for the policy
-    const unchanged_balance = old_user_leave_balance?.filter(
-      (e) => e.policy_id != policy_id,
-    );
-    const changed_balance = old_user_leave_balance?.find(
-      (e) => e.policy_id == policy_id,
-    );
-    // Calculate the new balance
-    const new_balance =
-      Number(changed_balance?.balance) +
-      (Number(old_leave_request_total_duration) - total_duration);
     // Update the leave balance
-    const balance = [
-      ...unchanged_balance,
-      {
-        policy_id: policy_id,
-        categories_id: categories_id[0].categories_id,
-        balance: new_balance,
-      },
-    ];
-    const { error: error2 } = await updateData(
-      "profiles",
-      { leave_balance: balance },
-      {
-        user_id: user_id,
-      },
-    );
-    if (error2) {
+    const { error: error1 } = await updateLeaveBalance({
+      user_id: user_id,
+      policy_id: policy_id,
+      categories_id: categories_id[0].categories_id,
+      total_added_duration: old_leave_request_total_duration - total_duration,
+    });
+    if (error1) {
       return {
-        error: {
-          message: error2.message,
-          type: "Server Error : Adjusting Leave Balance",
-        },
+        error: error1,
       };
-    } else {
-      return { error: null };
     }
   }
   return { error: null };

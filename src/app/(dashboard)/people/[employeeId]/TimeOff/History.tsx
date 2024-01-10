@@ -5,7 +5,7 @@ import { HistoryTable } from "./HistoryTable";
 import historyTableFilters from "./_context/historyTableFilters";
 import { historyTableFiltersContextType } from "./_context/historyTableFilters"; // Import the type of the context
 import { UnderlinedLink } from "./_ui/UnderlinedLink";
-import { formatDDMMYYYY } from "@/helpers/date";
+import { formatDDMMYYYY } from "@/helpers/date.helpers";
 import useData from "@/hooks/useData";
 import { Filters } from "./Filters";
 import {
@@ -19,8 +19,8 @@ import {
 } from "@/types/database.tables.types";
 import { formatTotalHoursToTimeUnit } from "@/helpers/leave.helpers";
 import { useParams } from "next/navigation";
-import { EditLeaveRequestBtn } from "./_ui/EditLeaveRequestBtn";
-import { DeleteLeaveRequestBtn } from "./_ui/DeleteLeaveRequestBtn";
+import { EditLeaveRequestBtn } from "./_ui/Buttons/EditLeaveRequestBtn";
+import { DeleteLeaveRequestBtn } from "./_ui/Buttons/DeleteLeaveRequestBtn";
 import Link from "next/link";
 interface leave_data {
   user_id: string;
@@ -42,7 +42,7 @@ interface leave_data {
 export type leave_data_types = leave_data[] | undefined;
 
 export function History() {
-  const { year, type, toggleView } =
+  const { year, type, status, toggleView } =
     useContext<historyTableFiltersContextType>(historyTableFilters);
   const { employeeId } = useParams();
   const {
@@ -61,9 +61,15 @@ export function History() {
     isPending6 ||
     isPending7;
   //--------------------------------------------------
+  const current_user_profile = all_profiles?.find(
+    (profile: database_profile_type) => employeeId == profile.user_id,
+  );
   // format leave requests data
   const leave_requests_data: leave_data_types = leave_requests
-    ?.filter((e: database_leave_requests_type) => e.user_id === employeeId)
+    ?.filter(
+      (e: database_leave_requests_type) =>
+        e.user_id === employeeId && e.status !== "pending",
+    )
     .map((e: database_leave_requests_type) => {
       const categorie: databese_leave_categories_type = leave_categories?.find(
         (categorie: databese_leave_categories_type) =>
@@ -138,15 +144,17 @@ export function History() {
           )}
           {toggleView ? (
             <HistoryTable
-              layout="grid-cols-[20%_20%_20%_auto_8%]"
+              layout="grid-cols-[20%_17.5%_15%_35%_auto]"
               Headers={["Date", "Description", "Submitted", "Status", "(-)"]}
               data={leave_requests_data
-                ?.filter((e) =>
-                  year
-                    ? year === new Date(e.start_at).getFullYear().toString()
-                    : true,
+                ?.filter(
+                  (e) =>
+                    (year
+                      ? year === new Date(e.start_at).getFullYear().toString()
+                      : true) &&
+                    (type ? type === e.name : true) &&
+                    (status ? status === e.status : true),
                 )
-                .filter((e) => (type ? type === e.name : true))
                 .map((e) => ({
                   Date:
                     formatDDMMYYYY(new Date(e.start_at)) +
@@ -172,12 +180,13 @@ export function History() {
                   ),
                   Submitted: formatDDMMYYYY(new Date(e.created_at)),
                   Status: (
-                    <div className="flex flex-row gap-1 capitalize">
+                    <div className="flex w-fit flex-row gap-2 capitalize">
                       <UnderlinedLink>{e.status}</UnderlinedLink>
                       {e.reviewed_at && (
-                        <span className="capitalize">
-                          ({e.reviewed_by}{" "}
-                          {formatDDMMYYYY(new Date(e.reviewed_at))})
+                        <span className="w-fit capitalize">
+                          {`( was reviewed by ${
+                            e.reviewed_by
+                          } on ${formatDDMMYYYY(new Date(e.reviewed_at))} )`}
                         </span>
                       )}
                     </div>
@@ -204,12 +213,14 @@ export function History() {
                   " ",
                 ]}
                 data={[...leave_requests_data, ...leave_accrued_data]
-                  ?.filter((e) =>
-                    year
-                      ? year === new Date(e.start_at).getFullYear().toString()
-                      : true,
+                  ?.filter(
+                    (e) =>
+                      (year
+                        ? year === new Date(e.start_at).getFullYear().toString()
+                        : true) &&
+                      (type ? type === e.name : true) &&
+                      (e.status === "approved" || e.status === ""),
                   )
-                  .filter((e) => (type ? type === e.name : true))
                   .map((e) => ({
                     Date: formatDDMMYYYY(new Date(e.start_at)),
                     Description: (
@@ -218,7 +229,7 @@ export function History() {
                         {e.description && (
                           <>
                             <span> - </span>
-                            <span className="text-sm leading-6 text-gray-21">
+                            <span className="caption-top text-sm leading-6 text-gray-21">
                               {e.description}
                             </span>
                           </>
@@ -239,10 +250,12 @@ export function History() {
                       : "",
                     Balance: e.Balance,
                     " ": !e.duration_accrued &&
-                      e.status !== "canceled" &&
-                      user_profile?.user_id === e.user_id && (
+                      current_user_profile?.role === "admin" && (
                         <div className=" flex h-[4.25rem] w-full  flex-row  items-start justify-center gap-1 px-4 pt-3 text-center align-top text-gray-27  ">
-                          <DeleteLeaveRequestBtn className="hidden h-7 w-7 cursor-pointer  rounded-md border border-transparent px-0.5 text-gray-25 transition-all ease-linear hover:border hover:border-black hover:bg-white group-hover:block" />
+                          <DeleteLeaveRequestBtn
+                            className="hidden h-7 w-7 cursor-pointer rounded-md border border-transparent px-0.5 text-gray-25 transition-all ease-linear hover:border hover:border-black hover:bg-white group-hover:block"
+                            leave_request_id={e.id}
+                          />
                           <EditLeaveRequestBtn
                             className=" hidden h-7 w-7 cursor-pointer  rounded-md border border-transparent px-0.5 text-gray-25 transition-all ease-linear hover:border hover:border-black hover:bg-white group-hover:block"
                             leave_request_id={e.id}

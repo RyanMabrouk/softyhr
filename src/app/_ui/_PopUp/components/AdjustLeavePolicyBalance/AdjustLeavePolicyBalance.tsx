@@ -31,7 +31,7 @@ export default function AdjustLeavePolicyBalance() {
     (profile: database_profile_type) => profile.user_id === employeeId,
   );
   // current policy balance
-  const leave_balance: database_profile_leave_balance_type =
+  const leave_balance: database_profile_leave_balance_type[] =
     current_user_profile?.leave_balance;
   const policy_balance = leave_balance?.find(
     (e) => e.policy_id == Number(leave_policy_id),
@@ -47,7 +47,6 @@ export default function AdjustLeavePolicyBalance() {
         formData: formData,
         policy_id: Number(leave_policy_id),
         user_id: employeeId,
-        old_user_leave_balance: current_user_profile?.leave_balance,
         additionType: additionType,
       });
       if (error) {
@@ -76,7 +75,7 @@ export default function AdjustLeavePolicyBalance() {
             </div>
           </div>
         </div>
-        <div className="shadow-popup flex w-full min-w-[35rem] flex-col items-center bg-white px-8 py-6">
+        <div className="shadow-popup flex w-full min-w-[35rem] flex-col items-center rounded-sm bg-white px-8 py-6">
           <header className="flex w-full flex-row items-center gap-2 bg-gray-14 px-4 py-3">
             <Image
               src={default_avatar}

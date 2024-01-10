@@ -10,6 +10,7 @@ export default async function rejectLeaveRequest({
   reviewed_by: string;
   reviewed_comment: string;
 }) {
+  console.log("🚀 ~ reviewed_comment:", reviewed_comment)
   console.log("acceptLeaveRequest");
   const status: database_leave_request_status_type = "rejected";
   const { error } = await updateData(

@@ -14,7 +14,7 @@ import { CgClose } from "react-icons/cg";
 import default_avatar from "/public/default_avatar.jpeg";
 import default_user_avatar from "/public/default_avatar.png";
 import { formatTotalHoursToTimeUnit } from "@/helpers/leave.helpers";
-import { formatDateToMonDDYYYY } from "@/helpers/date";
+import { formatDateToMonDDYYYY } from "@/helpers/date.helpers";
 
 function ViewLeaveRequestComment() {
   const Router = useRouter();
@@ -65,7 +65,7 @@ function ViewLeaveRequestComment() {
             </div>
           </div>
         </div>
-        <div className="shadow-popup flex min-w-[35rem]  flex-col items-center bg-white px-8 py-4">
+        <div className="shadow-popup flex min-w-[35rem] flex-col  items-center rounded-sm bg-white px-8 py-4">
           <div className="mb-6 text-2xl font-semibold capitalize text-gray-27 opacity-95">
             {full_name + " is requesting:"}
           </div>
@@ -110,7 +110,7 @@ function ViewLeaveRequestComment() {
                   height={80}
                 />
                 <div className="flex flex-col gap-2">
-                  <div className=" text-gray-30 -mb-2 text-sm font-normal capitalize leading-[1.733rem]">
+                  <div className=" -mb-2 text-sm font-normal capitalize leading-[1.733rem] text-gray-30">
                     {`${admin_full_name} ${new Date(
                       leave_request_data?.created_at,
                     ).toLocaleDateString()}`}

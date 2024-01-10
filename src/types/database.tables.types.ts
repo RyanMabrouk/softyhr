@@ -15,10 +15,10 @@ export type database_leave_request_status_type =
   | "rejected"
   | "canceled";
 export type database_profile_leave_balance_type = {
-  categories_id: number | string;
-  policy_id: number | string;
+  categories_id: number;
+  policy_id: number;
   balance: number;
-}[];
+};
 export type database_leave_request_duration_used_type = {
   date: string;
   duration: number | string;

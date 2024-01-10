@@ -6,10 +6,8 @@ import React from "react";
 import companyLogo from "/public/cropped (2).jpg";
 import { usePathname } from "next/navigation";
 import useData from "@/hooks/useData";
-
 export default function Nav() {
   const currentPath = usePathname();
-  const firstPath = "personnal";
   const { user_profile: data } = useData();
   const employeId = data?.data?.user_id;
   return (
@@ -22,10 +20,11 @@ export default function Nav() {
         />
         <div className="flex h-full items-center justify-center">
           {LayoutRoute?.map(
-            ({ label, pathFn }: LayoutRouteType, index: number) => {
-              const isActive =
-                currentPath === pathFn(firstPath, employeId) ||
-                currentPath.startsWith(label.slice(0, label.indexOf("/")));
+            (
+              { label, pathFn, defaultPath }: LayoutRouteType,
+              index: number,
+            ) => {
+              const isActive = pathFn(currentPath, String(employeId));
               return (
                 <Link
                   key={index}
@@ -35,7 +34,7 @@ export default function Nav() {
                       ? "bg-gray-14 font-bold !text-color-primary-4"
                       : "")
                   }
-                  href={pathFn(firstPath, employeId) || ""}
+                  href={defaultPath ? defaultPath(employeId) : ""}
                 >
                   {label}
                 </Link>
@@ -44,7 +43,7 @@ export default function Nav() {
           )}
         </div>
       </nav>
-      <div className="bg-color-primary-11 h-[0.2rem] w-full" />
+      <div className="h-[0.2rem] w-full bg-color-primary-11" />
     </>
   );
 }

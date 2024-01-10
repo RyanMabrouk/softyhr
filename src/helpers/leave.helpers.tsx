@@ -3,7 +3,7 @@ import {
   databese_leave_categories_track_time_unit_type,
   databese_leave_categories_type,
 } from "@/types/database.tables.types";
-import { addOneDay, formatYYYYMMDD, sameDay, timeDiffInHours } from "./date";
+import { formatYYYYMMDD, sameDay } from "./date.helpers";
 // generate Leave Categorie Icon
 export function generateLeaveCategorieIcon({
   categorie,
@@ -23,10 +23,16 @@ export function generateLeaveCategorieIcon({
 export function formatTotalHoursToTimeUnit(
   total_hours: number,
   time_unit: databese_leave_categories_track_time_unit_type | string,
+  { remove_time_unit }: { remove_time_unit?: boolean } = {
+    remove_time_unit: false,
+  },
 ) {
-  return time_unit === "days"
-    ? (total_hours / 24).toFixed(2) + " days"
-    : total_hours + " hours";
+  if (total_hours === 0) {
+    return total_hours + " " + time_unit;
+  }
+  const total_time =
+    time_unit === "days" ? (total_hours / 24).toFixed(2) : total_hours;
+  return remove_time_unit ? `${total_time}` : `${total_time} ${time_unit}`;
 }
 // array Of Working Days
 export function arrayOfWorkingDays(startDate: Date, endDate: Date) {

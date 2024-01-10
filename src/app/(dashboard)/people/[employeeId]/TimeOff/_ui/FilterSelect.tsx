@@ -10,7 +10,7 @@ export function FilterSelect({
   initialValue,
 }: {
   options: Option[];
-  setValueInParent?: React.Dispatch<React.SetStateAction<string>> | undefined;
+  setValueInParent?: React.Dispatch<React.SetStateAction<any>> | undefined;
   initialValue?: number;
 }) {
   const defaultValue = initialValue

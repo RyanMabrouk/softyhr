@@ -22,7 +22,7 @@ export default function RejectLeaveRequest() {
       const { error } = await rejectLeaveRequest({
         request_id: Number(leave_request_id),
         reviewed_by: user_profile?.user_id,
-        reviewed_comment: formData.get("reviewed_comment") as string,
+        reviewed_comment: (formData.get("note") as string) ?? "",
       });
       if (error) {
         toast.error(error.message, error.type);
@@ -48,7 +48,7 @@ export default function RejectLeaveRequest() {
             </div>
           </div>
         </div>
-        <div className="shadow-popup flex w-full min-w-[35rem] flex-col items-center bg-white px-8 py-6">
+        <div className="shadow-popup flex w-full min-w-[35rem] flex-col items-center rounded-sm bg-white px-8 py-6">
           <form
             action={reject}
             className="flex w-full flex-col items-center justify-center gap-6"

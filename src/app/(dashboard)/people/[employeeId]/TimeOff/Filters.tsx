@@ -4,11 +4,12 @@ import { FilterSelect } from "./_ui/FilterSelect";
 import historyTableFilters from "./_context/historyTableFilters";
 import { historyTableFiltersContextType } from "./_context/historyTableFilters";
 import { leave_data_types } from "./History";
+import { capitalizeFirstLetter } from "@/helpers/string.helpers";
 interface FiltersProps {
   data: leave_data_types;
 }
 export function Filters({ data }: FiltersProps) {
-  const { setType, setYear, setToggleView } =
+  const { setType, setYear, setStatus, setToggleView, toggleView } =
     useContext<historyTableFiltersContextType>(historyTableFilters);
   return (
     <div className="flex flex-row items-center justify-between">
@@ -22,7 +23,7 @@ export function Filters({ data }: FiltersProps) {
               ?.map((e: any) => e.name)
               .filter((value, index, array) => array.indexOf(value) === index)
               .map((name) => ({
-                label: name,
+                label: capitalizeFirstLetter(name),
                 value: name,
               })) || []),
           ]}
@@ -35,11 +36,29 @@ export function Filters({ data }: FiltersProps) {
               ?.map((e: any) => new Date(e.start_at).getFullYear().toString())
               .filter((value, index, array) => array.indexOf(value) === index)
               .map((date) => ({
-                label: date,
+                label: capitalizeFirstLetter(date),
                 value: date,
               })) || []),
           ]}
         />
+        {toggleView && (
+          <FilterSelect
+            setValueInParent={setStatus}
+            options={[
+              { label: "All", value: "" },
+              ...(data
+                ?.map((e: any) => e.status)
+                .filter(
+                  (value, index, array) =>
+                    array.indexOf(value) === index && value !== "",
+                )
+                .map((status) => ({
+                  label: capitalizeFirstLetter(status),
+                  value: status,
+                })) || []),
+            ]}
+          />
+        )}
       </div>
       <FilterSelect
         setValueInParent={(newVal) =>

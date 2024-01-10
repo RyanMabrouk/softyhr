@@ -82,3 +82,20 @@ export function formatDateToMonDDYYYY(date: Date) {
   });
   return formatter.format(date);
 }
+// Check if a date range is in an array of date ranges
+export function DateRangeIsInAnArrayOfDateRanges(
+  date_range: { start_at: Date; end_at: Date },
+  array_of_date_ranges: { start_at: Date; end_at: Date }[],
+): boolean {
+  array_of_date_ranges.map((date_range_in_array) => {
+    if (
+      (+date_range.start_at >= +date_range_in_array.start_at &&
+        +date_range.end_at <= +date_range_in_array.end_at) ||
+      (+date_range.start_at <= +date_range_in_array.start_at &&
+        +date_range.end_at >= +date_range_in_array.end_at)
+    ) {
+      return true;
+    }
+  });
+  return false;
+}
