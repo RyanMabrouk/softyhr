@@ -28,7 +28,7 @@ import { MdModeEditOutline } from "react-icons/md";
 import { FaFileDownload } from "react-icons/fa";
 
 const columns = [
-  { name:"id", uid:"id"},
+  { name: "id", uid: "id" },
   { name: "Candiates", uid: "Candiates", sortable: true },
   { name: "Job Opening", uid: "job_opening", sortable: true },
   { name: "Hiring Lead", uid: "hiring_lead", sortable: true },
@@ -191,7 +191,7 @@ export default function HiringTable({ users }: any) {
         );
       case "actions":
         return (
-          <div className="flex items-center justify-end gap-2">
+          <div className="ease flex items-center justify-end gap-2 opacity-0 duration-150 group-hover:!opacity-100">
             <div className="duration-250 flex h-[2rem] w-[2rem] cursor-pointer items-center justify-center ease-in-out hover:border hover:border-gray-27 hover:bg-gray-22">
               <MdModeEditOutline
                 className="text-lg"
@@ -362,11 +362,7 @@ export default function HiringTable({ users }: any) {
       <TableBody emptyContent={<Empty />} items={sortedItems}>
         {(item) => (
           <TableRow
-            className={
-              item?.status == "Draft"
-                ? "!opacity-50"
-                : "" 
-            }
+            className={item?.status == "Draft" ? "group !opacity-50" : " group"}
             key={uuidv4()}
           >
             {(columnKey) => (
