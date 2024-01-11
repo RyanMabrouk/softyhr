@@ -23,6 +23,8 @@
     "antd": "^5.12.4",
     "next": "14.0.4",
     "nextjs-current-url": "^1.0.3",
+    "pino": "^8.17.2",
+    "pino-logflare": "^0.4.2",
     "react": "^18",
     "react-dnd": "^16.0.1",
     "react-dnd-html5-backend": "^16.0.1",
