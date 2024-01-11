@@ -1,14 +1,14 @@
-"use client";
 import React from "react";
 import { TbClockEdit } from "react-icons/tb";
 import Link from "next/link";
-import { useParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 export function AddLeaveRequestBtn({ id }: { id: number }) {
+  const pathname = usePathname();
   return (
     <Link
       href={{
-        pathname: `/people/${useParams().employeeId}/TimeOff`,
+        pathname: pathname,
         query: { popup: "EDIT_LEAVE_REQUEST", leave_policy_id: id },
       }}
     >

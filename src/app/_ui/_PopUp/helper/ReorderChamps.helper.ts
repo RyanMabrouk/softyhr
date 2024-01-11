@@ -1,5 +1,4 @@
 export function ReorderChamps(RowStart: any, RowEnd: any, data: any) {
-  console.log(RowStart, RowEnd);
   const startIndex = RowStart - 1;
   const endIndex = RowEnd + 1;
 
@@ -24,12 +23,9 @@ export function ReorderChamps(RowStart: any, RowEnd: any, data: any) {
           row?.rang <= startIndex &&
           startIndex > RowEnd
         ) {
-          console.log(row?.rang, RowEnd, startIndex);
           row.rang = row.rang + 1;
-          console.log(row?.rang, RowEnd, startIndex);
         } else if (row?.rang == RowStart) {
           row.rang = RowEnd;
-          console.log("hereee !!!");
         }
       });
   }

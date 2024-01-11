@@ -1,15 +1,14 @@
-"use client";
 import React from "react";
-import { useParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { TbPlusMinus } from "react-icons/tb";
 
 export function AdjustLeavePolicyBalanceBtn({ id }: { id: number }) {
-  const { employeeId } = useParams();
+  const pathname = usePathname();
   return (
     <Link
       href={{
-        pathname: `/people/${employeeId}/TimeOff`,
+        pathname: pathname,
         query: { leave_policy_id: id, popup: "ADJUST_LEAVE_POLICY_BALANCE" },
       }}
     >

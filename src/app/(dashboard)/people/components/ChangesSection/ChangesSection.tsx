@@ -4,6 +4,7 @@ import Image from "next/image";
 import React from "react";
 import { useFormStatus } from "react-dom";
 import BrandLogo from "./images/BrandLogo.png";
+import { useRouter } from "next/navigation";
 
 interface ChangesSectionPropsType {
   touched: boolean;
@@ -13,6 +14,7 @@ interface ChangesSectionPropsType {
 function ChangesSection({ touched, setTouched }: ChangesSectionPropsType) {
   const { pending } = useFormStatus();
   const queryClient = useQueryClient();
+  const router = useRouter();
   return (
     <div className="fixed bottom-0 left-0 flex h-[5rem] w-full items-center justify-end  gap-[2rem] border-t border-gray-19 bg-gray-14 px-10 delay-200 ease-in-out  ">
       <div className="flex w-4/5 items-center justify-between">
@@ -34,15 +36,17 @@ function ChangesSection({ touched, setTouched }: ChangesSectionPropsType) {
               "save changes"
             )}
           </button>
-          <h1
+          <button
+            type="reset"
             className="cursor-pointer text-cyan-600 hover:underline"
             onClick={() => {
-              setTouched(false);
               queryClient.invalidateQueries({ queryKey: ["user_profile"] });
+              setTouched(false);
+              router.refresh();
             }}
           >
             Cancel
-          </h1>
+          </button>
         </div>
         <Image
           height={250}

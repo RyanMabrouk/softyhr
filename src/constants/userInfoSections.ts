@@ -14,9 +14,6 @@ export const Settings = [
   { label: "Réinitialiser le mot de passe de l'utilisateur", action: () => "" },
 ];
 
-
-
-
 import Input from "@/app/(dashboard)/people/components/Fileds/Input/Input";
 import SelectInput from "@/app/(dashboard)/people/components/Fileds/select/Select";
 import Date from "@/app/(dashboard)/people/components/Fileds/DateInput/DateInput";
@@ -24,8 +21,6 @@ import RadioBox from "@/app/(dashboard)/people/components/Fileds/RadioBox/RadioB
 import FiledsChamps from "@/app/(dashboard)/people/components/Fileds/Fileds";
 import Education from "@/app/(dashboard)/people/components/Fileds/Education";
 import TableChamps from "@/app/(dashboard)/people/components/Fileds/TableChamps";
-
-
 
 export const Field: any = {
   TEXT: Input,
@@ -39,4 +34,9 @@ export const Section: any = {
   "Visa Information": TableChamps,
   "Driver License": TableChamps,
   Education: Education,
+  "Employment Status": TableChamps,
+  Compensation: TableChamps,
+  "Job Information": TableChamps,
+  Bonus:TableChamps
+  
 };

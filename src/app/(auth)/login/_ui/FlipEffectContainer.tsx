@@ -1,6 +1,8 @@
 "use client";
 import React, { useContext } from "react";
-import toggleFormDisplay from "../_context/toggleFormDisplay";
+import toggleFormDisplay, {
+  toggleFormDisplayType,
+} from "../_context/toggleFormDisplay";
 import { ToggleFormDisplayProvider } from "../_context/toggleFormDisplay";
 
 export function FlipEffectContainer({
@@ -24,7 +26,8 @@ function ToggleDisplay({
   page1: React.ReactNode;
   page2: React.ReactNode;
 }) {
-  const { toggleDisplay }: any = useContext(toggleFormDisplay);
+  const { toggleDisplay } =
+    useContext<toggleFormDisplayType>(toggleFormDisplay);
   return (
     <div className="group relative flex h-full w-full items-center justify-center perspective">
       <div

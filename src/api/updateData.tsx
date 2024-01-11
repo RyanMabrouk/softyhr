@@ -1,13 +1,14 @@
 "use server";
 import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
-type object_type = {
-  [key: string]: any;
-};
 export default async function updateData(
   table: string,
-  payload: object_type,
-  match: object_type,
+  payload: {
+    [key: string]: any;
+  },
+  match: {
+    [key: string]: string | number | boolean | null | string[];
+  },
 ) {
   const supabase = createServerActionClient({ cookies });
   const { data, error } = await supabase

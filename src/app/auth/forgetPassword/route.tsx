@@ -12,11 +12,11 @@ export async function GET(request: NextRequest) {
       const supabase = createRouteHandlerClient({ cookies });
       await supabase.auth.exchangeCodeForSession(code);
       //get user company name
-      const session = await getSession();
-      const { data: profiles, error } = await getData("profiles");
-      const company = profiles?.filter(
-        (profile: any) => profile.user_id === session?.user.id,
-      )[0].org_name;
+      const { data: profile, error } = await getData("profiles", {
+        user: true,
+        column: "org_name",
+      });
+      const company = profile?.[0].org_name;
       if (error) throw new Error(error.message);
       // URL to redirect after sign in process completed
       return NextResponse.redirect(

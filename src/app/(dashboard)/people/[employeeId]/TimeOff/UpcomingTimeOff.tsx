@@ -1,10 +1,11 @@
 "use client";
 import React from "react";
 import { Hr } from "./_ui/Hr";
-import { formatDateMMDD } from "@/helpers/date";
+import { formatDateMMDD } from "@/helpers/date.helpers";
 import useData from "@/hooks/useData";
 import { FaCheckCircle } from "react-icons/fa";
 import {
+  database_leave_policies_type,
   database_leave_request_status_type,
   database_leave_requests_type,
   database_profile_leave_balance_type,
@@ -14,12 +15,12 @@ import {
   formatTotalHoursToTimeUnit,
   generateLeaveCategorieIcon,
 } from "@/helpers/leave.helpers";
-import { EditLeaveRequestBtn } from "./_ui/EditLeaveRequestBtn";
+import { EditLeaveRequestBtn } from "./_ui/Buttons/EditLeaveRequestBtn";
 import { useParams } from "next/navigation";
 import useToast from "@/hooks/useToast";
 import { MdCancel } from "react-icons/md";
-import { AcceptRequestBtn } from "./_ui/AcceptRequestBtn";
-import { RejectRequestBtn } from "./_ui/RejectRequestBtn";
+import { AcceptRequestBtn } from "./_ui/Buttons/AcceptRequestBtn";
+import { RejectRequestBtn } from "./_ui/Buttons/RejectRequestBtn";
 type upcoming_leave_requests_data_type = {
   id: number;
   start_at: Date;
@@ -31,7 +32,7 @@ type upcoming_leave_requests_data_type = {
   note: string;
   policy_id: number;
   user_id: string;
-  duration_used: database_profile_leave_balance_type;
+  duration_used: database_profile_leave_balance_type[];
 };
 export function UpcomingTimeOff() {
   const { employeeId } = useParams();
@@ -61,7 +62,9 @@ export function UpcomingTimeOff() {
         +new Date(a.start_at) - +new Date(b.start_at),
     )
     .map((e: database_leave_requests_type) => {
-      const policy = leave_policies?.find((p: any) => p.id === e.policy_id);
+      const policy = leave_policies?.find(
+        (p: database_leave_policies_type) => p.id === e.policy_id,
+      );
       const categorie: databese_leave_categories_type = leave_categories?.find(
         (categorie: databese_leave_categories_type) =>
           categorie.id === policy?.categories_id,
@@ -108,7 +111,7 @@ export function UpcomingTimeOff() {
                   <div className="m-0 font-bold leading-[1.467rem] text-gray-27">
                     {formatDateMMDD(leave.start_at, leave.end_at)}
                   </div>
-                  <div className="-mt-0.5 flex flex-row items-center gap-1 overflow-hidden text-ellipsis whitespace-nowrap  text-sm leading-[1.467rem] ">
+                  <div className="-mt-0.5 flex h-full min-w-[12.5rem] flex-row items-center gap-1 text-sm leading-[1.467rem] ">
                     {(leave.status === "approved" ||
                       leave.status === "pending") && (
                       <FaCheckCircle
@@ -123,13 +126,11 @@ export function UpcomingTimeOff() {
                       leave.status === "canceled") && (
                       <MdCancel className="h-3.5 w-3.5 text-color9-500" />
                     )}
-                    <span>{leave.duration}</span>
-                    <span> of </span>
-                    <span>{leave.policy_title}</span>
+                    <span className="line-clamp-1">{`${leave.duration} of ${leave.policy_title}`}</span>
                   </div>
                 </div>
               </div>
-              <span className=" mr-auto line-clamp-2 w-fit max-w-[60%] flex-1 pl-10 pr-2 text-left text-sm font-normal text-gray-26">
+              <span className=" mr-auto line-clamp-2 w-fit max-w-[60%] flex-1 pl-20 pr-2 text-left text-sm font-normal text-gray-26">
                 {user_profile?.role === "admin" ? leave.note : ""}
               </span>
               <div className="flex flex-row gap-1">
@@ -159,7 +160,11 @@ export function UpcomingTimeOff() {
             </div>
             <Hr />
           </div>
-        ))}
+        )) ?? (
+          <div className=" relative box-border line-clamp-2  h-[3.25rem] w-max  max-w-[25rem]  overflow-hidden text-ellipsis px-4 pt-3 text-left align-top text-gray-27  ">
+            There is no Upcoming Time offs..
+          </div>
+        )}
       </div>
     </>
   );

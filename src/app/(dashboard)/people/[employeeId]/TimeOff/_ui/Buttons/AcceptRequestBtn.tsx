@@ -13,7 +13,7 @@ export type request_type = {
   id: number;
   policy_id: number;
   user_id: string;
-  duration_used: database_profile_leave_balance_type;
+  duration_used: database_profile_leave_balance_type[];
 };
 export function AcceptRequestBtn({ request }: { request: request_type }) {
   const { toast } = useToast();
@@ -26,7 +26,6 @@ export function AcceptRequestBtn({ request }: { request: request_type }) {
       const { error } = await acceptLeaveRequest({
         request: request,
         reviewed_by: user_profile?.user_id,
-        old_user_leave_balance: user_profile?.leave_balance,
       });
       if (error) {
         toast.error(error.message, error.type);

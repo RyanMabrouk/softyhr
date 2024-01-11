@@ -8,5 +8,5 @@ export default async function getCurrentorg() {
   const { data: org } = await getData("organizations", {
     match: { name: current_org },
   });
-  return org[0];
+  return org?.[0];
 }

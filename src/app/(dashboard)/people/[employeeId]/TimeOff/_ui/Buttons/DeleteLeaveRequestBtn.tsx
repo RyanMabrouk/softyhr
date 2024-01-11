@@ -1,27 +1,28 @@
-"use client";
 import Link from "next/link";
-import { useParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 import React from "react";
-import { MdModeEdit } from "react-icons/md";
-export function EditLeaveRequestBtn({
+import { MdDelete } from "react-icons/md";
+
+export function DeleteLeaveRequestBtn({
   className,
   leave_request_id,
 }: {
   className: string;
   leave_request_id: number;
 }) {
+  const pathname = usePathname();
   return (
     <Link
       href={{
-        pathname: `/people/${useParams().employeeId}/TimeOff`,
+        pathname: pathname,
         query: {
-          popup: "EDIT_LEAVE_REQUEST",
           leave_request_id: leave_request_id,
+          popup: "DELETE_LEAVE_REQUEST",
         },
       }}
       className="flex flex-row items-center justify-center"
     >
-      <MdModeEdit aria-label="Edit" className={className} />
+      <MdDelete aria-label="Delete" className={className} />
     </Link>
   );
 }

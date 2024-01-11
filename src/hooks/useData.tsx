@@ -62,6 +62,15 @@ export default function useData() {
         org: true,
       }),
   });
+  //------------------Hiring--------------------------------------
+
+  const { data: Hiring, isPending: isPending8 } = useQuery({
+    queryKey: ["Hiring"],
+    queryFn: () =>
+      getData("Hiring", {
+        org: true,
+      }),
+  });
   //------------------------------------------------------------
   return {
     leave_requests: {
@@ -90,7 +99,7 @@ export default function useData() {
       isPending: isPending,
     },
     user_profile: {
-      data: user_profile?.data[0],
+      data: user_profile?.data?.[0],
       error: user_profile?.error,
       isPending: isPending6,
     },
@@ -98,6 +107,11 @@ export default function useData() {
       data: all_profiles?.data,
       error: all_profiles?.error,
       isPending: isPending7,
+    },
+    Hiring: {
+      data: Hiring?.data,
+      error: Hiring?.error,
+      isPending: isPending8,
     },
   };
 }

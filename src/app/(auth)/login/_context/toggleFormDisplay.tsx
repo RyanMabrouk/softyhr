@@ -1,5 +1,9 @@
 "use client";
 import React, { createContext, useState } from "react";
+export type toggleFormDisplayType = Partial<{
+  toggleDisplay: boolean;
+  setToggleDisplay: React.Dispatch<React.SetStateAction<boolean>>;
+}>;
 const toggleFormDisplay = createContext({});
 export default toggleFormDisplay;
 export function ToggleFormDisplayProvider({

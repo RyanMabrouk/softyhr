@@ -6,7 +6,7 @@ import { Database } from "@/types/database.types";
 type getDataParams = {
   user?: boolean;
   org?: boolean;
-  match?: object;
+  match?: { [key: string]: string | number | boolean | null | string[] };
   column?: string;
 };
 

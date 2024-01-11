@@ -10,6 +10,7 @@ import { GiRapidshareArrow } from "react-icons/gi";
 
 import RowFiedlsList from "./components/RowFiedlsList";
 import Loader from "@/app/(dashboard)/people/components/Loader/Loader";
+import { champ_type } from "@/types/database.tables.types";
 
 function EditFields() {
   const pathname = usePathname();
@@ -44,15 +45,10 @@ function EditFields() {
               Edit Fields for All Employees
             </h1>
             <div onClick={() => Router.push(pathname)}>
-              <CgClose
-                color={"#999999"}
-                fontSize={"2rem"}
-                cursor="pointer"
-                onclick={() => console.log("object")}
-              />
+              <CgClose color={"#999999"} fontSize={"2rem"} cursor="pointer" />
             </div>
           </div>
-          <div className=" rounded bg-white p-8 py-10 shadow-md">
+          <div className="shadow-popup rounded-sm bg-white p-8 py-10">
             <div className="mb-2 flex w-full items-center  justify-between border-b border-gray-16 pb-2">
               <h1 className="text-lg font-bold capitalize">
                 {pathname.split("/")[pathname.split("/").length - 1]}
@@ -64,11 +60,14 @@ function EditFields() {
                 <GiRapidshareArrow color={"green"} />
                 Drag to reorder information on the Personal Tab
               </h1>
-              {data?.Champs?.sort((a: any, b: any) => a.rang - b.rang)?.map(
-                ({ rang, champ, Icon, Fields }: ChampsType, index: number) => {
+              {data?.Champs?.sort(
+                (a: champ_type, b: champ_type) => a.rang - b.rang,
+              )?.map(
+                ({ rang, champ, Icon, Fields }: champ_type) => {
                   return (
                     <RowFiedlsList
                       key={champ}
+                      section={settings_type}
                       rang={rang}
                       data={data}
                       champ={champ}

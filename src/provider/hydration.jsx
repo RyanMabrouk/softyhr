@@ -7,7 +7,7 @@ import getData from "@/api/getData";
 
 export default async function Hydration({ children }) {
   const queryClient = new QueryClient();
-  await queryClient.prefetchQuery({
+ /* await queryClient.prefetchQuery({
     queryKey: ["leave_requests"],
     queryFn: () =>
       getData("leave_requests", {
@@ -29,7 +29,7 @@ export default async function Hydration({ children }) {
         user: true,
         org: true,
       }),
-  });
+  });*/
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       {children}

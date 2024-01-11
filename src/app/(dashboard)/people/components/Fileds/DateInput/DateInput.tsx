@@ -3,11 +3,10 @@ import { DatePicker, DatePickerProps } from "antd";
 import React, { useState } from "react";
 import "dayjs/locale/zh-cn";
 import dayjs from "dayjs";
-import { getYearDiff } from "@/app/(dashboard)/people/components/utils/getYearDff";
+import { getYearDiff } from "@/helpers/date.helpers";
 
 function DateInput({ RowField, setTouched, defaultValue }: any) {
   const [value, setValue] = useState<string>(String(defaultValue));
-  console.log(value);
   const onChange: DatePickerProps["onChange"] = (date, dateString) => {
     setTouched(true);
     setValue(dateString);
@@ -19,7 +18,7 @@ function DateInput({ RowField, setTouched, defaultValue }: any) {
         <DatePicker
           style={{ width: "11.3rem", borderRadius: "0.2rem" }}
           //@ts-ignore
-          defaultValue={value? dayjs(value, "YYYY-MM-DD") : ""}
+          defaultValue={value ? dayjs(value, "YYYY-MM-DD") : ""}
           onChange={onChange}
           name={RowField?.name}
         />

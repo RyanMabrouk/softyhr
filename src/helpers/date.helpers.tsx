@@ -82,3 +82,42 @@ export function formatDateToMonDDYYYY(date: Date) {
   });
   return formatter.format(date);
 }
+// Check if a date range is in an array of date ranges
+export function DateRangeIsInAnArrayOfDateRanges(
+  date_range: { start_at: Date; end_at: Date },
+  array_of_date_ranges: { start_at: Date; end_at: Date }[],
+): boolean {
+  array_of_date_ranges.map((date_range_in_array) => {
+    if (
+      (+date_range.start_at >= +date_range_in_array.start_at &&
+        +date_range.end_at <= +date_range_in_array.end_at) ||
+      (+date_range.start_at <= +date_range_in_array.start_at &&
+        +date_range.end_at >= +date_range_in_array.end_at)
+    ) {
+      return true;
+    }
+  });
+  return false;
+}
+// get the diff of years between two dates
+export function getYearDiff(startDate: Date, endDate: Date) {
+  const ms = endDate.getTime() - startDate.getTime();
+
+  const date = new Date(ms);
+
+  return Math.abs(date.getUTCFullYear() - 1970);
+}
+
+export function updateTime() {
+  const now = new Date();
+  const hours = now.getHours();
+  const minutes = now.getMinutes();
+  const seconds = now.getSeconds();
+
+  // Format the string with leading zeroes
+  const clockStr = `${hours.toString().padStart(2, "0")} : ${minutes
+    .toString()
+    .padStart(2, "0")}`;
+
+  return String(clockStr);
+}

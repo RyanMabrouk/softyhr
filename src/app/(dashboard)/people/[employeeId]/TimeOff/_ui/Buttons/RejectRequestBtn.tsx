@@ -1,19 +1,18 @@
-"use client";
 import React from "react";
 import { CgClose } from "react-icons/cg";
-import { useParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 export function RejectRequestBtn({
   leave_request_id,
 }: {
   leave_request_id: number;
 }) {
-  const { employeeId } = useParams();
+  const pathname = usePathname();
   return (
     <>
       <Link
         href={{
-          pathname: `/people/${employeeId}/TimeOff`,
+          pathname: pathname,
           query: {
             popup: "RJECT_LEAVE_REQUEST",
             leave_request_id: leave_request_id,
