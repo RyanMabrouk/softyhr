@@ -99,3 +99,25 @@ export function DateRangeIsInAnArrayOfDateRanges(
   });
   return false;
 }
+// get the diff of years between two dates
+export function getYearDiff(startDate: Date, endDate: Date) {
+  const ms = endDate.getTime() - startDate.getTime();
+
+  const date = new Date(ms);
+
+  return Math.abs(date.getUTCFullYear() - 1970);
+}
+
+export function updateTime() {
+  const now = new Date();
+  const hours = now.getHours();
+  const minutes = now.getMinutes();
+  const seconds = now.getSeconds();
+
+  // Format the string with leading zeroes
+  const clockStr = `${hours.toString().padStart(2, "0")} : ${minutes
+    .toString()
+    .padStart(2, "0")}`;
+
+  return String(clockStr);
+}

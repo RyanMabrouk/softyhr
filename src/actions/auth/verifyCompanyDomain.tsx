@@ -6,7 +6,7 @@ export default async function verifyCompanyDomain(formData: FormData) {
   const headersList = headers();
   const header_url = headersList.get("host") || "";
   const proto = headers().get("x-forwarded-proto") || "http";
-  const copanyDomain = formData.get("companydomain");
+  const copanyDomain = formData.get("companydomain") as string;
   const { data: hostnamedb } = await getData("organizations", {
     match: { name: copanyDomain },
   });

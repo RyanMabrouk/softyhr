@@ -7,7 +7,7 @@ export default async function updateData(
     [key: string]: any;
   },
   match: {
-    [key: string]: string | number | boolean | null;
+    [key: string]: string | number | boolean | null | string[];
   },
 ) {
   const supabase = createServerActionClient({ cookies });

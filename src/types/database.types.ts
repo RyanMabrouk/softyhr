@@ -12,7 +12,7 @@ export interface Database {
       Hiring: {
         Row: {
           Application_Details: Json | null
-          candidates: Json | null
+          candidates: Json[] | null
           created_at: string
           id: number
           job_information: Json | null
@@ -20,7 +20,7 @@ export interface Database {
         }
         Insert: {
           Application_Details?: Json | null
-          candidates?: Json | null
+          candidates?: Json[] | null
           created_at?: string
           id?: number
           job_information?: Json | null
@@ -28,7 +28,7 @@ export interface Database {
         }
         Update: {
           Application_Details?: Json | null
-          candidates?: Json | null
+          candidates?: Json[] | null
           created_at?: string
           id?: number
           job_information?: Json | null

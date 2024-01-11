@@ -74,7 +74,7 @@ const INITIAL_VISIBLE_COLUMNS = [
 export interface HiringTableType {
   id: string;
   Candiates: number;
-  NewCandidates: number ;
+  NewCandidates: number;
   job_opening: string;
   hiring_lead: string;
   CreatedOn: string;
@@ -125,7 +125,7 @@ export default function HiringTable({ Hiring }: HiringPropsType) {
       );
     }
     return filteredUsers;
-  }, [Hiring, hasSearchFilter, filterValue, statusFilter]);
+  }, [Hiring, statusFilter]);
 
   const items = React.useMemo(() => {
     const start = (page - 1) * rowsPerPage;
@@ -295,14 +295,7 @@ export default function HiringTable({ Hiring }: HiringPropsType) {
         </div>
       </div>
     );
-  }, [
-    filterValue,
-    statusFilter,
-    visibleColumns,
-    onRowsPerPageChange,
-    Hiring.length,
-    hasSearchFilter,
-  ]);
+  }, [Hiring, statusFilter]);
 
   const bottomContent = React.useMemo(() => {
     return;
@@ -322,7 +315,7 @@ export default function HiringTable({ Hiring }: HiringPropsType) {
         />
       </div>
     );
-  }, [items.length, page, pages, hasSearchFilter]);
+  }, [page, pages, hasSearchFilter]);
 
   const classNames = React.useMemo(
     () => ({

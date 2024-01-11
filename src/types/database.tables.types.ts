@@ -1,4 +1,3 @@
-import { profile } from "console";
 import { Database } from "./database.types";
 
 // Leave Categories
@@ -46,8 +45,20 @@ export type organizations_type =
 
 //------------Hiring_types---------------
 
-export type Hiring_type = Database["public"]["Tables"]["Hiring"]["Row"];
-
+export type Hiring_type = {
+  Application_Details: {
+    Job_Category: string;
+    Additional_Questions: string;
+    Application_Questions: [];
+  } | null;
+  candidates: [] | null;
+  created_at: string;
+  id: number;
+  job_information: {
+    [key: string]: string | null;
+  } | null;
+  org_name: string | null;
+};
 export type Application_Details_type = {
   Job_Category?: string;
   Additional_Questions?: string;
