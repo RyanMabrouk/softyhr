@@ -1,24 +1,26 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import { Hr } from "./_ui/Hr";
+
 export function HistoryTable({
   Headers,
   data,
   layout,
 }: {
   data: { [key: string]: any }[] | undefined;
-  Headers: string[];
+  Headers: ReactNode[];
   layout: string;
 }) {
+  // Headers Must Match the Keys in the data
   return (
     <section className="flex flex-row">
       <div className="flex w-full flex-col">
         <div
-          className={`group grid w-full flex-row bg-gray-17 px-2 transition-all ease-linear ${layout}`}
+          className={`group grid w-full flex-row transition-all ease-linear ${layout}`}
         >
           {Headers.map((key, index) => (
             <header
               key={"header" + key + index}
-              className="relative box-border h-12 w-full border-transparent bg-gray-17 px-4 pb-[11px] pt-3 text-left align-top font-semibold text-gray-25 transition-[background-color] duration-[0.15s] ease-[ease-in-out]"
+              className="relative box-border h-12 w-full cursor-pointer border-transparent bg-gray-17 px-6 pb-[11px] pt-3 text-left align-top font-semibold text-gray-25 transition-[background-color] duration-[0.15s] ease-[ease-in-out] hover:bg-gray-19"
             >
               {key}
             </header>

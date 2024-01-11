@@ -12,6 +12,7 @@ import useToast from "@/hooks/useToast";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import insertLeaveRequest from "@/actions/leave/insertLeaveRequest";
 import { errorContext, errorContextType } from "../context/errorContext";
+import { checkIfOjectValuesAreEmpty } from "@/helpers/array.helpers";
 
 export function From() {
   const Router = useRouter();
@@ -95,7 +96,7 @@ export function From() {
         ref={formRef}
         className="flex w-full flex-col gap-4 px-2 pt-3"
         action={async (formData: FormData) => {
-          if (formError) return;
+          if (formError && !checkIfOjectValuesAreEmpty(formError)) return;
           leave_request_id ? update(formData) : insert(formData);
         }}
       >

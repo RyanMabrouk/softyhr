@@ -28,8 +28,10 @@ export function Amount({
 }) {
   const { setFormError, formError } =
     useContext<errorContextType>(errorContext);
+  console.log("🚀 ~ formError:", formError);
   const { startDate, endDate } =
     useContext<dateRangeContextType>(dateRangeContext);
+  //keep old range
   const oldRange = default_duration?.map(
     (d: default_duration_type) =>
       ({
@@ -37,6 +39,7 @@ export function Amount({
         duration: d.duration,
       }) ?? [],
   );
+  // Get the active range
   const activeDateStart = startDate
     ? startDate
     : default_satrt_at
@@ -47,13 +50,16 @@ export function Amount({
     : default_satrt_at
       ? new Date(default_end_at)
       : "";
+  // Get the new range
   const user_new_range =
     activeDateStart && activeDateEnd
       ? arrayOfWorkingDays(activeDateStart, activeDateEnd)
       : [];
+  // Get the new range days
   const user_new_days = user_new_range?.map((e) =>
     formatYYYYMMDD(new Date(e.date)),
   );
+  // calculate the active duration
   const active_duration = removeDuplicateObjectsFromArray(
     [
       ...(oldRange?.filter((e: any) =>
@@ -65,6 +71,7 @@ export function Amount({
     ],
     "date",
   );
+  // calculate the total duration
   const total_duration = active_duration?.reduce(
     (acc, duration) => acc + Number(duration.duration),
     0,
@@ -99,7 +106,7 @@ export function Amount({
                           if (
                             Number(e.target.value) > 24 ||
                             Number(e.target.value) < 0
-                          )
+                          ) {
                             setFormError &&
                               setFormError((old) =>
                                 old
@@ -113,6 +120,16 @@ export function Amount({
                                         "Duration must be between 0 and 24 hours",
                                     },
                               );
+                          } else {
+                            setFormError &&
+                              setFormError((old) =>
+                                old
+                                  ? { ...old, ["duration_date" + i]: "" }
+                                  : {
+                                      ["duration_date" + i]: "",
+                                    },
+                              );
+                          }
                         }}
                         className={`flex h-8 w-12 items-center justify-center border p-2 px-3 text-gray-27 focus:outline-none ${
                           formError?.["duration_date" + i]

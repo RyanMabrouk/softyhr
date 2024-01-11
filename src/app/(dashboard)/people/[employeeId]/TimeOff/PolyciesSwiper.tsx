@@ -7,6 +7,7 @@ import { Policy } from "./Policy";
 import useData from "@/hooks/useData";
 import {
   database_leave_policies_type,
+  database_leave_request_duration_used_type,
   database_leave_requests_type,
   database_profile_leave_balance_type,
   database_profile_type,
@@ -67,7 +68,11 @@ export function PolyciesSwiper() {
           ],
           [],
         )
-        .reduce((acc: number, e: any) => acc + Number(e.duration), 0);
+        .reduce(
+          (acc: number, e: database_leave_request_duration_used_type) =>
+            acc + Number(e.duration),
+          0,
+        );
       return {
         id: policy.id,
         name: policy.name,
@@ -80,7 +85,8 @@ export function PolyciesSwiper() {
         hours_scheduled: hours_scheduled,
         hours_available:
           current_user_profile?.leave_balance?.find(
-            (e: any) => e.policy_id == policy.id,
+            (e: database_profile_leave_balance_type) =>
+              e.policy_id == policy.id,
           )?.balance || 0,
       };
     });

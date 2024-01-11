@@ -5,6 +5,7 @@ import historyTableFilters from "./_context/historyTableFilters";
 import { historyTableFiltersContextType } from "./_context/historyTableFilters";
 import { leave_data_types } from "./History";
 import { capitalizeFirstLetter } from "@/helpers/string.helpers";
+import { SelectGeneric } from "@/app/_ui/SelectGeneric";
 interface FiltersProps {
   data: leave_data_types;
 }
@@ -12,10 +13,10 @@ export function Filters({ data }: FiltersProps) {
   const { setType, setYear, setStatus, setToggleView, toggleView } =
     useContext<historyTableFiltersContextType>(historyTableFilters);
   return (
-    <div className="flex flex-row items-center justify-between">
+    <div className="flex w-full flex-row items-center justify-between">
       <div className="flex flex-row items-center gap-4 py-2">
-        <FilterSelect
-          //initialValue={1}
+        <SelectGeneric
+          inputLabel="Category"
           setValueInParent={setType}
           options={[
             { label: "All", value: "" },
@@ -28,7 +29,8 @@ export function Filters({ data }: FiltersProps) {
               })) || []),
           ]}
         />
-        <FilterSelect
+        <SelectGeneric
+          inputLabel="Year"
           setValueInParent={setYear}
           options={[
             { label: "All", value: "" },
@@ -42,7 +44,8 @@ export function Filters({ data }: FiltersProps) {
           ]}
         />
         {toggleView && (
-          <FilterSelect
+          <SelectGeneric
+            inputLabel="Status"
             setValueInParent={setStatus}
             options={[
               { label: "All", value: "" },
@@ -60,8 +63,9 @@ export function Filters({ data }: FiltersProps) {
           />
         )}
       </div>
-      <FilterSelect
-        setValueInParent={(newVal) =>
+      <SelectGeneric
+        inputLabel="View"
+        setValueInParent={() =>
           setToggleView ? setToggleView((old) => !old) : null
         }
         options={[

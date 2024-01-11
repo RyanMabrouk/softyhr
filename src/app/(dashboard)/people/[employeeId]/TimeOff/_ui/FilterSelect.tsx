@@ -13,6 +13,7 @@ export function FilterSelect({
   setValueInParent?: React.Dispatch<React.SetStateAction<any>> | undefined;
   initialValue?: number;
 }) {
+  // set default value
   const defaultValue = initialValue
     ? initialValue < options.length
       ? options[initialValue].value
@@ -20,6 +21,7 @@ export function FilterSelect({
         ? options[1].value
         : options[0].value
     : options[0].value;
+  // make sure parent and child are in sync
   useEffect(() => {
     initialValue && setValueInParent ? setValueInParent(defaultValue) : null;
   }, [defaultValue, setValueInParent, initialValue]);

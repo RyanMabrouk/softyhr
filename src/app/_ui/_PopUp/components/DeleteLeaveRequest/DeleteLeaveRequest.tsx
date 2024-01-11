@@ -35,7 +35,10 @@ export default function DeleteLeaveRequest() {
     current_user_profile?.["Basic Information"]?.["Last name"];
   // Current Leave Request Data
   const current_leave_request: database_leave_requests_type =
-    leave_requests?.find((request: any) => request.id == leave_request_id);
+    leave_requests?.find(
+      (request: database_leave_requests_type) =>
+        request.id == Number(leave_request_id),
+    );
   // Current Leave Request Policy Data
   const current_leave_policy = leave_policies?.find(
     (policy: database_leave_policies_type) =>

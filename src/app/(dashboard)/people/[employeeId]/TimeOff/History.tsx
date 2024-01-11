@@ -1,5 +1,5 @@
 "use client";
-import React, { useContext } from "react";
+import React, { Fragment, useContext, useState } from "react";
 import { FaHistory } from "react-icons/fa";
 import { HistoryTable } from "./HistoryTable";
 import historyTableFilters from "./_context/historyTableFilters";
@@ -22,6 +22,7 @@ import { useParams } from "next/navigation";
 import { EditLeaveRequestBtn } from "./_ui/Buttons/EditLeaveRequestBtn";
 import { DeleteLeaveRequestBtn } from "./_ui/Buttons/DeleteLeaveRequestBtn";
 import Link from "next/link";
+import { Span } from "next/dist/trace";
 interface leave_data {
   user_id: string;
   reviewed_by: string | "";
@@ -45,6 +46,7 @@ export function History() {
   const { year, type, status, toggleView } =
     useContext<historyTableFiltersContextType>(historyTableFilters);
   const { employeeId } = useParams();
+  const [toggleSort, setToggleSort] = useState(false);
   const {
     leave_requests: { data: leave_requests, isPending: isPending2 },
     leave_policies: { data: leave_policies, isPending: isPending3 },
@@ -131,6 +133,14 @@ export function History() {
         track_time_unit: categorie?.track_time_unit,
       };
     });
+  const DateHeader = () => (
+    <span
+      className="cursor-pointer"
+      onClick={() => setToggleSort((old) => !old)}
+    >
+      Date
+    </span>
+  );
   return (
     <section className="mt-8 flex flex-col justify-center gap-1">
       <div className="mb-2 flex flex-row items-center gap-2">
@@ -145,7 +155,13 @@ export function History() {
           {toggleView ? (
             <HistoryTable
               layout="grid-cols-[20%_17.5%_15%_35%_auto]"
-              Headers={["Date", "Description", "Submitted", "Status", "(-)"]}
+              Headers={[
+                <DateHeader key={"header"} />,
+                "Description",
+                "Submitted",
+                "Status",
+                "(-)",
+              ]}
               data={leave_requests_data
                 ?.filter(
                   (e) =>
@@ -154,6 +170,11 @@ export function History() {
                       : true) &&
                     (type ? type === e.name : true) &&
                     (status ? status === e.status : true),
+                )
+                .sort((a, b) =>
+                  toggleSort
+                    ? +new Date(a.start_at) - +new Date(b.start_at)
+                    : +new Date(b.start_at) - +new Date(a.start_at),
                 )
                 .map((e) => ({
                   Date:
@@ -203,9 +224,9 @@ export function History() {
             leave_accrued_data &&
             leave_requests_data && (
               <HistoryTable
-                layout="grid-cols-[12%_auto_12%_12%_12%_8%]"
+                layout="grid-cols-[12%_auto_15%_12%_15%_8%]"
                 Headers={[
-                  "Date",
+                  <DateHeader key={"header"} />,
                   "Description",
                   "Used (-)",
                   "Accrued (+)",
@@ -220,6 +241,11 @@ export function History() {
                         : true) &&
                       (type ? type === e.name : true) &&
                       (e.status === "approved" || e.status === ""),
+                  )
+                  .sort((a, b) =>
+                    toggleSort
+                      ? +new Date(a.start_at) - +new Date(b.start_at)
+                      : +new Date(b.start_at) - +new Date(a.start_at),
                   )
                   .map((e) => ({
                     Date: formatDDMMYYYY(new Date(e.start_at)),

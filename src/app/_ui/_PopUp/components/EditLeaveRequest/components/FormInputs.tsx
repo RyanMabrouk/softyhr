@@ -15,9 +15,8 @@ import {
 } from "../context/dateRangeContext";
 import { DateInput } from "./DateInput";
 import { Amount } from "./Amount";
-import { CategoriesSelect } from "./CategoriesSelect";
+import { SelectGeneric } from "../../../../SelectGeneric";
 import { WarningIfDatesAlreadyBooked } from "./WarningIfDatesAlreadyBooked";
-import { errorContext, errorContextType } from "../context/errorContext";
 export function FormInputs() {
   const searchParams = useSearchParams();
   const { setStartDate, setEndDate } =
@@ -38,8 +37,8 @@ export function FormInputs() {
   // User Leave Balance
   const current_user_leave_balance: database_profile_leave_balance_type[] =
     current_user_profile?.[0]?.leave_balance;
-  const current_user_categories_ids = current_user_leave_balance?.map(
-    (e: any) => Number(e.categories_id),
+  const current_user_categories_ids = current_user_leave_balance?.map((e) =>
+    Number(e.categories_id),
   );
   // Leave Request Data
   const request_data: database_leave_requests_type | undefined =
@@ -74,10 +73,11 @@ export function FormInputs() {
         />
         <WarningIfDatesAlreadyBooked />
       </div>
-      <CategoriesSelect
+      <SelectGeneric
         label="Time Off Category"
+        required={true}
         name="policy_id"
-        defaultValue={{ label: categorie?.name, value: policy?.id }}
+        defaultValue={{ label: categorie?.name, value: String(policy?.id) }}
         options={leave_categories
           ?.filter(
             (category: databese_leave_categories_type) =>

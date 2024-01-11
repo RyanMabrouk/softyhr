@@ -5,6 +5,7 @@ import { formatDateMMDD } from "@/helpers/date.helpers";
 import useData from "@/hooks/useData";
 import { FaCheckCircle } from "react-icons/fa";
 import {
+  database_leave_policies_type,
   database_leave_request_status_type,
   database_leave_requests_type,
   database_profile_leave_balance_type,
@@ -61,7 +62,9 @@ export function UpcomingTimeOff() {
         +new Date(a.start_at) - +new Date(b.start_at),
     )
     .map((e: database_leave_requests_type) => {
-      const policy = leave_policies?.find((p: any) => p.id === e.policy_id);
+      const policy = leave_policies?.find(
+        (p: database_leave_policies_type) => p.id === e.policy_id,
+      );
       const categorie: databese_leave_categories_type = leave_categories?.find(
         (categorie: databese_leave_categories_type) =>
           categorie.id === policy?.categories_id,

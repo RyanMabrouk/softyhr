@@ -21,7 +21,7 @@ export type database_profile_leave_balance_type = {
 };
 export type database_leave_request_duration_used_type = {
   date: string;
-  duration: number | string;
+  duration: number;
 };
 // Leave Accrued
 export type database_leave_accrued_type =
