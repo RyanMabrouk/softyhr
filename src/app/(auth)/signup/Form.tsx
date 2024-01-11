@@ -65,7 +65,6 @@ export function Form() {
     const result = schema.safeParse(data);
     if (result.success) return true;
     else {
-      console.log(result.error.flatten().fieldErrors);
       setError((old) =>
         old
           ? { ...old, ...result.error.flatten().fieldErrors }
@@ -78,7 +77,6 @@ export function Form() {
     const result = password_schema.safeParse({ password });
     if (result.success) return true;
     else {
-      console.log(result.error.flatten().fieldErrors);
       setError((old) =>
         old
           ? { ...old, ...result.error.flatten().fieldErrors }

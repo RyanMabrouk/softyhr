@@ -1,12 +1,12 @@
 "use client";
-import updateData from "@/api/updateData";
-import useData from "@/hooks/useData";
-import useToast from "@/hooks/useToast";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import React from "react";
-import { CgClose } from "react-icons/cg";
-import { FaRegTrashAlt } from "react-icons/fa";
+import { deleteEducation } from '@/actions/education/deleteEducation';
+import useData from '@/hooks/useData';
+import useToast from '@/hooks/useToast';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import React from 'react'
+import { CgClose } from 'react-icons/cg'
+import { FaRegTrashAlt } from 'react-icons/fa';
 
 interface DeleteEducationFnType {
   id: string | null;
@@ -28,9 +28,7 @@ function DeleteEducation() {
       const NewEducation = data?.filter(
         (education: any) => education?.id != id,
       );
-      return await updateData("profiles", [{ Education: NewEducation }], {
-        user_id,
-      });
+      return await deleteEducation( NewEducation, user_id);
     },
     onSuccess: (data: any) => {
       queryClient.invalidateQueries({ queryKey: ["user_profile"] });

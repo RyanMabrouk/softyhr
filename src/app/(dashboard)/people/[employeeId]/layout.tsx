@@ -1,13 +1,14 @@
 "use client";
 import Image from "next/image";
 import React, { ReactNode } from "react";
-import AvatarUser from "./download (7).jpeg";
+import AvatarUser from "./profileImage.png";
 import Link from "next/link";
 import { EmployeRoutesType, EmployeeRoute } from "@/constants/employeeRoute";
 import { usePathname } from "next/navigation";
 import UserInfo from "../components/UserInfo/UserInfo";
 import DropDown from "../components/DropDown/DropDown";
 import { Settings, changementRequest } from "@/constants/userInfo";
+import useData from "@/hooks/useData";
 interface EmployePropsType {
   params: { employeeId: string };
   children: ReactNode;
@@ -16,12 +17,12 @@ export default function Layout({
   params: { employeeId },
   children,
 }: EmployePropsType) {
+  const { user_profile: data } = useData();
   const ActiveRoute =
     usePathname().split("/").slice(-1).join("") || EmployeeRoute[0]?.label;
   return (
     <div className="flex h-full w-full flex-col ">
-      <div
-        className="z-20 flex h-[13rem] justify-center bg-gradient-to-r from-color-primary-7  to-color-primary-9 transition-all duration-300 ">
+      <div className="z-20 flex h-[13rem] justify-center bg-gradient-to-r from-color-primary-7  to-color-primary-9 transition-all duration-300 ">
         <div className={"flex w-9/12 items-end justify-start gap-[4rem] "}>
           <Image
             src={AvatarUser}
@@ -30,12 +31,17 @@ export default function Layout({
             width={208}
             height={208}
             className={
-              " z-10 ml-4 -mb-9 h-[13rem] w-[13rem] cursor-pointer rounded-full border-2 border-white bg-gray-6 object-cover "
+              " z-10 -mb-9 ml-4 h-[13rem] w-[13rem] cursor-pointer rounded-full border-2 border-white bg-gray-6 object-cover "
             }
           />
           <div className={"flex-column flex w-full flex-col gap-[3rem] "}>
             <div className="flex items-start justify-between">
-              <h1 className="text-3xl font-bold text-white">Ali Ben Romdhan</h1>
+              <h1 className="text-3xl font-bold text-white">
+                {data?.data?.["Basic Information"]?.["First name"] +
+                  " " +
+                  data?.data?.["Basic Information"]?.["Last name"] ||
+                  "your name"}
+              </h1>
               <div className={"flex h-10 gap-[1rem] "}>
                 <DropDown
                   text="Request a Change"

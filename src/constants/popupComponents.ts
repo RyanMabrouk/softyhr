@@ -5,6 +5,7 @@ import EditFields from "@/app/_ui/_PopUp/components/EditFields/EditFields";
 import EditLeaveRequest from "@/app/_ui/_PopUp/components/EditLeaveRequest/EditLeaveRequest";
 import RejectLeaveRequest from "@/app/_ui/_PopUp/components/RejectLeaveRequest/RejectLeaveRequest";
 import ViewLeaveRequestComment from "@/app/_ui/_PopUp/components/ViewLeaveRequestComment.tsx/ViewLeaveRequestComment";
+import EditTablechamps from "@/app/_ui/_PopUp/components/EditTablechamps/EditTablechamps";
 import { PopupType } from "@/types/userInfoTypes.type";
 
 export const popups: any = {

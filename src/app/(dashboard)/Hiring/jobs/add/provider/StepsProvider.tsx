@@ -1,4 +1,5 @@
-"use client";
+// Add "use" to "useReducer" import
+import {  ObjectOfStrings } from "@/types/database.tables.types";
 import React, { ReactNode, createContext, useReducer } from "react";
 
 interface StepsProviderTypeProps {
@@ -11,50 +12,67 @@ export enum Actions {
   JOB_BOARDS = "JOB_BOARDS",
 }
 
-interface StepsState {
-  ApplicationDetails: Object;
-  InformationJob: Object;
-  JobBoards: Object;
+interface StepType<T>{
+  done: boolean;
+  values: T;
 }
+interface StepsState {
+  ApplicationDetails: StepType<ObjectOfStrings>;
+  InformationJob: StepType<ObjectOfStrings>;
+  JobBoards: StepType<ObjectOfStrings>;
+}
+
+
 
 interface StepsAction {
   type: Actions;
-  payload: StepsState;
+  payload?: any;
 }
 
-export const initialState = {
-  ApplicationDetails: {},
-  InformationJob: {},
-  JobBoards: {},
+export const initialState: StepsState = {
+  ApplicationDetails: { done: false, values: {} },
+  InformationJob: {
+    done: false,
+      values: {
+        "Posting Title": "ssdfgsdfg",
+        "Job Status": "Draft",
+        "Hiring Lead": "iheb sebai",
+        Departement: "Human Resources",
+        "Minimum Experience": "Senior Manager/Supervisor",
+        "Job Description": "mlqksjdflmqskdjfqlksmdfq",
+        "Internal Job Code": "k",
+      },
+  },
+  JobBoards: { done: true, values: {} },
 };
 
 export const StepsContext = createContext({
   ...initialState,
-  Update_ApplicationDetails: (payload: any) => {},
-  Update_InformationJob: (payload: any) => {},
-  Update_JobBoards: (payload: any) => {},
+  Update_ApplicationDetails: (payload: ObjectOfStrings) => {},
+  Update_InformationJob: (payload: ObjectOfStrings) => {},
+  Update_JobBoards: (payload: ObjectOfStrings) => {},
 });
 
 export const reducer = (state: StepsState, action: StepsAction): StepsState => {
   const { type, payload } = action;
-  console.log(payload);
+
   switch (type) {
     case Actions.APPLICATION_DETAILS: {
       return {
         ...state,
-        ApplicationDetails: payload,
+        ApplicationDetails: { ...state.ApplicationDetails, ...payload },
       };
     }
     case Actions.INFORMATION_JOB: {
       return {
         ...state,
-        InformationJob: payload,
+        InformationJob: { ...state.InformationJob, ...payload },
       };
     }
     case Actions.JOB_BOARDS: {
       return {
         ...state,
-        JobBoards: payload,
+        JobBoards: { ...state.JobBoards, ...payload },
       };
     }
     default:
@@ -65,23 +83,21 @@ export const reducer = (state: StepsState, action: StepsAction): StepsState => {
 function StepsProvider({ children }: StepsProviderTypeProps) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const Update_ApplicationDetails = (payload: any) => {
-    console.log(payload);
-    console.log("-------------------");
+  const Update_ApplicationDetails = (payload: ObjectOfStrings) => {
     dispatch({
       type: Actions.APPLICATION_DETAILS,
       payload,
     });
   };
 
-  const Update_InformationJob = (payload: any) => {
+  const Update_InformationJob = (payload: ObjectOfStrings) => {
     dispatch({
       type: Actions.INFORMATION_JOB,
       payload,
     });
   };
 
-  const Update_JobBoards = (payload: any) => {
+  const Update_JobBoards = (payload: ObjectOfStrings) => {
     dispatch({
       type: Actions.JOB_BOARDS,
       payload,

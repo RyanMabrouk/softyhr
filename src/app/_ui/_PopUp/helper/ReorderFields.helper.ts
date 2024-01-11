@@ -4,7 +4,6 @@ export function ReorderFields(
   data: any,
   champ: string,
 ) {
-  console.log(RowStart, RowEnd);
   const ChampFields = data?.Champs?.filter(
     (element: any) => element?.champ == champ,
   );
@@ -25,12 +24,9 @@ export function ReorderFields(
         row?.rang <= startIndex &&
         startIndex > RowEnd
       ) {
-        console.log(row?.rang, RowEnd, startIndex);
         row.rang = row.rang + 1;
-        console.log(row?.rang, RowEnd, startIndex);
       } else if (row?.rang == RowStart) {
         row.rang = RowEnd;
-        console.log("hereee !!!");
       }
     });
   }
