@@ -26,7 +26,27 @@ export type organizations_type =
 
 //------------Hiring_types---------------
 
-export type Hiring_type = Database["public"]["Tables"]["Hiring"]["Row"];
+export type Hiring_type ={ 
+  Application_Details: {
+            Job_Category: string;
+            Additional_Questions: string;
+            Application_Questions: [];
+          } | null;
+          candidates: [] | null;
+          created_at: string;
+          id: number;
+          job_information: {
+            "Job Status": string;
+            Departement: string;
+            "Hiring Lead": string;
+            "Job Location": string;
+            "Posting Title": string;
+            "Job Description": string;
+            "Internal Job Code": string;
+            "Minimum Experience": string;
+          } | null;
+          org_name: string | null
+        };
 
 export type Application_Details_type = {
   Job_Category?: string;
