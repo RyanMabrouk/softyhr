@@ -26,7 +26,7 @@ function UserInfo() {
   setInterval(() => SetCurrentTime(updateTime()), 1000);
   return (
     <div className="mb-0 flex max-w-[14rem] grow flex-col items-start justify-center gap-[0.5rem] bg-gray-14 pt-4 ">
-      <div className="mt-10 flex flex-col gap-[1rem] px-6">
+      <div className="mt-10 flex flex-col gap-[1rem] px-4">
         <div className=" flex flex-col items-start  justify-center gap-[0.5rem]">
           <div className="flex items-center justify-start gap-[1rem] whitespace-nowrap text-sm text-gray-15">
             <MdOutlineHomeWork fill="gray" />

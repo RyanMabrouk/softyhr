@@ -296,12 +296,10 @@ export default function HiringTable({ Hiring }: HiringPropsType) {
       </div>
     );
   }, [
-    filterValue,
     statusFilter,
     visibleColumns,
     onRowsPerPageChange,
     Hiring.length,
-    hasSearchFilter,
   ]);
 
   const bottomContent = React.useMemo(() => {
