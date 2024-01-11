@@ -3,7 +3,9 @@ import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 export default async function updateData(
   table: string,
-  payload: Object[],
+  payload: {
+    [key: string]: any;
+  },
   match: Object,
 ) {
   const supabase = createServerActionClient({ cookies });

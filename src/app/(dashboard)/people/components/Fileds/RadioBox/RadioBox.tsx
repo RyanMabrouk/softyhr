@@ -4,7 +4,7 @@ import type { RadioChangeEvent } from "antd";
 import { ConfigProvider, Radio, Space } from "antd";
 
 function RadioBox({ RowField, setTouched, user, champ }: any) {
-  const [value, setValue] = useState(String(user[champ][RowField?.name || ""]));
+  const [value, setValue] = useState(String(user?.[champ]?.[RowField?.name || ""]));
   
   const onChange = (e: RadioChangeEvent) => {
     setTouched(true);

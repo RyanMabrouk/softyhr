@@ -4,28 +4,30 @@ import Link from "next/link";
 import React from "react";
 import { v4 as uuidv4 } from "uuid";
 import { FaPlusCircle } from "react-icons/fa";
-import HiringTable from "../_ui/HiringTable/HiringTable";
+import HiringTable, { HiringTableType } from "../_ui/HiringTable/HiringTable";
 import useData from "@/hooks/useData";
-import Loader from "@/app/_ui/Loader/Loader";
 import { NewCandidates } from "@/helpers/CountNewCandidates";
+import { Hiring_type } from "@/types/database.tables.types";
+
+
 
 function Page() {
-  const {
-    Hiring: { data, isPending },
-  } = useData();
-  const HiringDataTable = data?.map((Hiring: any) => {
-    return {
-      id:uuidv4(),
-      Candiates: Hiring?.candidates?.length || 0,
-      NewCandidates: NewCandidates(Hiring?.candidates || []),
-      job_opening: Hiring?.job_information?.["Posting Title"],
-      hiring_lead: Hiring?.job_information?.["Hiring Lead"],
-      CreatedOn: new Date(Hiring?.created_at).toDateString(),
-      department: Hiring?.job_information?.["Departement"],
-      Location: Hiring?.job_information?.["Job Location"],
-      status: Hiring?.job_information?.["Job Status"],
-    };
-  });
+  const { Hiring: { data, isPending } } = useData();
+  const HiringDataTable: HiringTableType[] = data?.map(
+    (Hiring: Hiring_type) => {
+      return {
+        id: uuidv4(),
+        Candiates: Hiring?.candidates?.length || 0,
+        NewCandidates: NewCandidates(Hiring?.candidates || []),
+        job_opening: Hiring?.job_information?.["Posting Title"],
+        hiring_lead: Hiring?.job_information?.["Hiring Lead"],
+        CreatedOn: new Date(Hiring?.created_at).toDateString(),
+        department: Hiring?.job_information?.["Departement"],
+        Location: Hiring?.job_information?.["Job Location"],
+        status: Hiring?.job_information?.["Job Status"],
+      };
+    },
+  );
 
   return (
     <div className="flex h-full w-full flex-col items-center justify-center bg-white">
@@ -43,7 +45,7 @@ function Page() {
           {isPending ? (
             <h1>Loading...</h1>
           ) : (
-            <HiringTable users={HiringDataTable} />
+            <HiringTable Hiring={HiringDataTable} />
           )}
         </div>
       </div>

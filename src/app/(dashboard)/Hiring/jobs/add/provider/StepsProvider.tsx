@@ -1,4 +1,5 @@
 // Add "use" to "useReducer" import
+import {  ObjectOfStrings } from "@/types/database.tables.types";
 import React, { ReactNode, createContext, useReducer } from "react";
 
 interface StepsProviderTypeProps {
@@ -11,19 +12,21 @@ export enum Actions {
   JOB_BOARDS = "JOB_BOARDS",
 }
 
-interface StepType {
+interface StepType<T>{
   done: boolean;
-  values: Object;
+  values: T;
 }
 interface StepsState {
-  ApplicationDetails: StepType;
-  InformationJob: StepType;
-  JobBoards: StepType;
+  ApplicationDetails: StepType<ObjectOfStrings>;
+  InformationJob: StepType<ObjectOfStrings>;
+  JobBoards: StepType<ObjectOfStrings>;
 }
+
+
 
 interface StepsAction {
   type: Actions;
-  payload: StepType;
+  payload?: any;
 }
 
 export const initialState: StepsState = {
@@ -45,9 +48,9 @@ export const initialState: StepsState = {
 
 export const StepsContext = createContext({
   ...initialState,
-  Update_ApplicationDetails: (payload: any) => {},
-  Update_InformationJob: (payload: any) => {},
-  Update_JobBoards: (payload: any) => {},
+  Update_ApplicationDetails: (payload: ObjectOfStrings) => {},
+  Update_InformationJob: (payload: ObjectOfStrings) => {},
+  Update_JobBoards: (payload: ObjectOfStrings) => {},
 });
 
 export const reducer = (state: StepsState, action: StepsAction): StepsState => {
@@ -80,21 +83,21 @@ export const reducer = (state: StepsState, action: StepsAction): StepsState => {
 function StepsProvider({ children }: StepsProviderTypeProps) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const Update_ApplicationDetails = (payload: StepType) => {
+  const Update_ApplicationDetails = (payload: ObjectOfStrings) => {
     dispatch({
       type: Actions.APPLICATION_DETAILS,
       payload,
     });
   };
 
-  const Update_InformationJob = (payload: StepType) => {
+  const Update_InformationJob = (payload: ObjectOfStrings) => {
     dispatch({
       type: Actions.INFORMATION_JOB,
       payload,
     });
   };
 
-  const Update_JobBoards = (payload: StepType) => {
+  const Update_JobBoards = (payload: ObjectOfStrings) => {
     dispatch({
       type: Actions.JOB_BOARDS,
       payload,

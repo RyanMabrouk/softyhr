@@ -25,6 +25,12 @@ import SelectInput from "@/app/(dashboard)/people/components/Fileds/select/Selec
 import RadioBox from "@/app/(dashboard)/people/components/Fileds/RadioBox/RadioBox";
 import DateInput from "@/app/(dashboard)/people/components/Fileds/DateInput/DateInput";
 import { CiMail } from "react-icons/ci";
+import { IconType } from "react-icons";
+import { ReactNode } from "react";
+
+interface FieldsObjectType {
+  [key: string]:ReactNode;
+}
 
 export const Field: any = {
   TEXT: Input,
@@ -34,7 +40,7 @@ export const Field: any = {
   RADIO: RadioBox,
 };
 
-export const sectionIcon: any = {
+export const sectionIcon: ObjectIconsType = {
   IMPROFILE: ImProfile,
   FAHOME: FaHome,
   MDOUTLINESMARTPHONE: MdOutlineSmartphone,
@@ -42,13 +48,18 @@ export const sectionIcon: any = {
   IOIOSCHATBUBBLES: IoIosChatbubbles,
 };
 
-export const InputIcons: any = {
+
+interface ObjectIconsType {
+  [key: string]: IconType;
+}
+
+export const InputIcons: ObjectIconsType = {
   LINKEDIN: FaLinkedin,
   TWITTER: FaTwitter,
   SQUARE: FaFacebookSquare,
   PINTEREST: FaPinterest,
   MDOUTLINEHOMEWORK: MdOutlineHomeWork,
   MDPHONEANDROID: MdPhoneAndroid,
-  CIMAIL:CiMail,
-  FAINSTAGRAM:FaInstagram
+  CIMAIL: CiMail,
+  FAINSTAGRAM: FaInstagram,
 };

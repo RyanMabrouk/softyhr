@@ -2,7 +2,8 @@
 import getCurrentorg from "./getCurrentOrg";
 import { cookies } from "next/headers";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-export async function UpdateSettings(column: any) {
+import { Settings_type } from "@/types/database.tables.types";
+export async function UpdateSettings(column: Settings_type) {
   try {
     const org = await getCurrentorg();
     const supabase = createServerComponentClient({ cookies });
@@ -13,6 +14,5 @@ export async function UpdateSettings(column: any) {
       .select();
 
     return column;
-  } catch (error) {
-  }
+  } catch (error) {}
 }

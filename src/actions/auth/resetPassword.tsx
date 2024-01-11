@@ -24,7 +24,8 @@ export default async function resetPassword(formData: FormData) {
     };
   } else {
     const profile = profiles?.filter(
-      (profile: any) => profile?.Contact["Work Email"] === email,
+      (profile: any) =>
+        profile?.Contact["Work Email"] === email,
     );
     //user not found
     if (profile?.length === 0) {

@@ -1,10 +1,15 @@
 import submitForm from "@/api/test";
+import { database_profile_type } from "@/types/database.tables.types";
 import { v4 as uuidv4 } from "uuid";
 
-export default function formulateData(formdata: FormData, user: any) {
+interface userType {
+  data: database_profile_type | any  ;
+}
+
+export default function formulateData(formdata: FormData, user: userType) {
   let NewEducation: Object[] = [];
   submitForm(formdata);
-  formdata.getAll("GPA").map((element, index) => {
+  formdata.getAll("GPA").map((element, index: number) => {
     if (
       formdata.getAll("GPA")[index] != "" ||
       formdata.getAll("Degree")[index] != "" ||
@@ -25,9 +30,9 @@ export default function formulateData(formdata: FormData, user: any) {
   });
 
   const data = user?.data;
-  Object.keys(data)?.map((object) => {
-    if (typeof data[object] == "object") {
-      Object.keys(data[object])?.map((key) => {
+  Object.keys(data)?.map((object :string) => {
+    if (typeof data?.[object] == "object") {
+      Object.keys(data?.[object])?.map((key) => {
         if (formdata.get(key) || formdata.get(key) == "") {
           data[object][key] = String(formdata.get(key));
         }

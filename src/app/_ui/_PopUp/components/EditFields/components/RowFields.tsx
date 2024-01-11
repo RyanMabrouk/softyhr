@@ -1,6 +1,7 @@
 "use client";
 import { UpdateSettings } from "@/api/updateSettings";
 import { ReorderFields } from "@/app/_ui/_PopUp/helper/ReorderFields.helper";
+import { sectionType } from "@/types/database.tables.types";
 import { RowFieldType } from "@/types/userInfoTypes.type";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import React, { useState } from "react";
@@ -10,7 +11,7 @@ interface RowFieldsPropsType {
   RowFields: RowFieldType[];
   rang: number;
   champ: string;
-  data: any;
+  data: sectionType;
 }
 
 function RowFields({ RowFields, rang, champ, data }: RowFieldsPropsType) {

@@ -1,7 +1,6 @@
 "use client";
 import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import RowFields from "./RowFields";
 import { useDrag, useDrop } from "react-dnd";
 import { ReorderChamps } from "../../../helper/ReorderChamps.helper";
 import {
@@ -10,14 +9,29 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 import { UpdateSettings } from "@/api/updateSettings";
+import {  RowFieldType, RowType, Settings_type, champ_type, sectionType } from "@/types/database.tables.types";
+import RowFields from "./RowFields";
 
-function RowFiedlsList({ champ, Fields, section, data, rang }: any) {
+interface RowFieldsListPropstype {
+  champ: string;
+  Fields: RowType[] | string[] | null;
+  section: string;
+  data: sectionType;
+  rang: number;
+}
+
+interface DropItemType {
+  rang: number;
+  champ: string;
+}
+
+function RowFiedlsList({ champ, Fields, section, data, rang }: RowFieldsListPropstype) {
   const queryClient = useQueryClient();
   const [Data, setData] = useState(Fields);
 
   //--------update_section_rang------
   const { mutateAsync, isPending, isPaused } = useMutation({
-    mutationFn: async (NewSettings: any) => {
+    mutationFn: async (NewSettings: sectionType) => {
       return await UpdateSettings({ [section]: NewSettings }).then(() => {
         console.log("updated successfuly !!!");
       });
@@ -39,7 +53,7 @@ function RowFiedlsList({ champ, Fields, section, data, rang }: any) {
   //-------drop_section-----------
   const [{ isOver }, drop] = useDrop(() => ({
     accept: "champ",
-    drop: (item: any, monitor: any) => {
+    drop: (item: DropItemType, monitor: any) => {
       const dropResult = monitor.internalMonitor.registry.dropTargets;
       console.log(
         item.champ,
@@ -62,7 +76,7 @@ function RowFiedlsList({ champ, Fields, section, data, rang }: any) {
   }));
 
     
-  if (typeof Fields[0] == "string") {
+  if (typeof Fields?.[0] == "string") {
     return (
       <div ref={drag}>
         <div
@@ -84,7 +98,7 @@ function RowFiedlsList({ champ, Fields, section, data, rang }: any) {
         ref={drop}
       >
         <h1 className="pb-2 pt-2 text-lg font-bold text-gray-21">{champ}</h1>
-        {Fields?.sort((a: any, b: any) => a.rang - b.rang)?.map(
+        {Fields?.sort((a: any, b: any) => a?.rang - b?.rang)?.map(
           ({ Row, rang }: any) => {
             return (
               <RowFields

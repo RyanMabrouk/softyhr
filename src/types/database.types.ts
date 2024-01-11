@@ -1,368 +1,427 @@
 export type Json =
+  | Object
   | string
   | number
   | boolean
   | null
   | { [key: string]: Json | undefined }
-  | Json[]
+  | Json[];
 
 export interface Database {
   public: {
     Tables: {
+      Hiring: {
+        Row: {
+          Application_Details: {
+            Job_Category: string;
+            Additional_Questions: string;
+            Application_Questions: [];
+          } | null;
+          candidates: [] | null;
+          created_at: string;
+          id: number;
+          job_information: {
+            "Job Status": string;
+            Departement: string;
+            "Hiring Lead": string;
+            "Job Location": string;
+            "Posting Title": string;
+            "Job Description": string;
+            "Internal Job Code": string;
+            "Minimum Experience": string;
+          } | null;
+          org_name: string | null;
+        };
+        Insert: {
+          Application_Details?: Json | null;
+          candidates?: Json | null;
+          created_at?: string;
+          id?: number;
+          job_information?: Json | null;
+          org_name?: string | null;
+        };
+        Update: {
+          Application_Details?: Json | null;
+          candidates?: Json | null;
+          created_at?: string;
+          id?: number;
+          job_information?: Json | null;
+          org_name?: string | null;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "Hiring_org_name_fkey";
+            columns: ["org_name"];
+            isOneToOne: false;
+            referencedRelation: "organizations";
+            referencedColumns: ["name"];
+          },
+        ];
+      };
       leave_accrued: {
         Row: {
-          balance: number
-          created_at: string
-          duration: number
-          id: number
-          note: string | null
-          org_name: string | null
-          policy_id: number
-          start_at: string
-          user_id: string
-        }
+          balance: number;
+          created_at: string;
+          duration: number;
+          id: number;
+          note: string | null;
+          org_name: string | null;
+          policy_id: number;
+          start_at: string;
+          user_id: string;
+        };
         Insert: {
-          balance: number
-          created_at?: string
-          duration?: number
-          id?: number
-          note?: string | null
-          org_name?: string | null
-          policy_id: number
-          start_at: string
-          user_id: string
-        }
+          balance: number;
+          created_at?: string;
+          duration?: number;
+          id?: number;
+          note?: string | null;
+          org_name?: string | null;
+          policy_id: number;
+          start_at: string;
+          user_id: string;
+        };
         Update: {
-          balance?: number
-          created_at?: string
-          duration?: number
-          id?: number
-          note?: string | null
-          org_name?: string | null
-          policy_id?: number
-          start_at?: string
-          user_id?: string
-        }
+          balance?: number;
+          created_at?: string;
+          duration?: number;
+          id?: number;
+          note?: string | null;
+          org_name?: string | null;
+          policy_id?: number;
+          start_at?: string;
+          user_id?: string;
+        };
         Relationships: [
           {
-            foreignKeyName: "leave_accrued_org_name_fkey"
-            columns: ["org_name"]
-            isOneToOne: false
-            referencedRelation: "organizations"
-            referencedColumns: ["name"]
+            foreignKeyName: "leave_accrued_org_name_fkey";
+            columns: ["org_name"];
+            isOneToOne: false;
+            referencedRelation: "organizations";
+            referencedColumns: ["name"];
           },
           {
-            foreignKeyName: "leave_accrued_policy_id_fkey"
-            columns: ["policy_id"]
-            isOneToOne: false
-            referencedRelation: "leave_policies"
-            referencedColumns: ["id"]
+            foreignKeyName: "leave_accrued_policy_id_fkey";
+            columns: ["policy_id"];
+            isOneToOne: false;
+            referencedRelation: "leave_policies";
+            referencedColumns: ["id"];
           },
           {
-            foreignKeyName: "leave_accrued_user_id_fkey"
-            columns: ["user_id"]
-            isOneToOne: false
-            referencedRelation: "users"
-            referencedColumns: ["id"]
-          }
-        ]
-      }
+            foreignKeyName: "leave_accrued_user_id_fkey";
+            columns: ["user_id"];
+            isOneToOne: false;
+            referencedRelation: "users";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
       leave_categories: {
         Row: {
-          color: string
-          created_at: string
-          icon: string
-          id: number
-          name: string
-          org_name: string | null
-          track_time_unit: string
-        }
+          color: string;
+          created_at: string;
+          icon: string;
+          id: number;
+          name: string;
+          org_name: string | null;
+          track_time_unit: string;
+        };
         Insert: {
-          color: string
-          created_at?: string
-          icon: string
-          id?: number
-          name: string
-          org_name?: string | null
-          track_time_unit?: string
-        }
+          color: string;
+          created_at?: string;
+          icon: string;
+          id?: number;
+          name: string;
+          org_name?: string | null;
+          track_time_unit?: string;
+        };
         Update: {
-          color?: string
-          created_at?: string
-          icon?: string
-          id?: number
-          name?: string
-          org_name?: string | null
-          track_time_unit?: string
-        }
+          color?: string;
+          created_at?: string;
+          icon?: string;
+          id?: number;
+          name?: string;
+          org_name?: string | null;
+          track_time_unit?: string;
+        };
         Relationships: [
           {
-            foreignKeyName: "leave_categories_org_name_fkey"
-            columns: ["org_name"]
-            isOneToOne: false
-            referencedRelation: "organizations"
-            referencedColumns: ["name"]
-          }
-        ]
-      }
+            foreignKeyName: "leave_categories_org_name_fkey";
+            columns: ["org_name"];
+            isOneToOne: false;
+            referencedRelation: "organizations";
+            referencedColumns: ["name"];
+          },
+        ];
+      };
       leave_policies: {
         Row: {
-          categories_id: number | null
-          created_at: string
-          description: string | null
-          id: number
-          name: string
-          org_name: string
-        }
+          categories_id: number | null;
+          created_at: string;
+          description: string | null;
+          id: number;
+          name: string;
+          org_name: string;
+        };
         Insert: {
-          categories_id?: number | null
-          created_at?: string
-          description?: string | null
-          id?: number
-          name: string
-          org_name: string
-        }
+          categories_id?: number | null;
+          created_at?: string;
+          description?: string | null;
+          id?: number;
+          name: string;
+          org_name: string;
+        };
         Update: {
-          categories_id?: number | null
-          created_at?: string
-          description?: string | null
-          id?: number
-          name?: string
-          org_name?: string
-        }
+          categories_id?: number | null;
+          created_at?: string;
+          description?: string | null;
+          id?: number;
+          name?: string;
+          org_name?: string;
+        };
         Relationships: [
           {
-            foreignKeyName: "leave_policies_categories_id_fkey"
-            columns: ["categories_id"]
-            isOneToOne: false
-            referencedRelation: "leave_categories"
-            referencedColumns: ["id"]
+            foreignKeyName: "leave_policies_categories_id_fkey";
+            columns: ["categories_id"];
+            isOneToOne: false;
+            referencedRelation: "leave_categories";
+            referencedColumns: ["id"];
           },
           {
-            foreignKeyName: "leave_policies_org_name_fkey"
-            columns: ["org_name"]
-            isOneToOne: false
-            referencedRelation: "organizations"
-            referencedColumns: ["name"]
-          }
-        ]
-      }
+            foreignKeyName: "leave_policies_org_name_fkey";
+            columns: ["org_name"];
+            isOneToOne: false;
+            referencedRelation: "organizations";
+            referencedColumns: ["name"];
+          },
+        ];
+      };
       leave_requests: {
         Row: {
-          balance: number
-          created_at: string
-          duration_used: Json[]
-          end_at: string
-          id: number
-          note: string | null
-          org_name: string | null
-          policy_id: number
-          reviewed_at: string | null
-          reviewed_by: string | null
-          start_at: string
-          status: string
-          user_id: string
-        }
+          balance: number;
+          created_at: string;
+          duration_used: Json[];
+          end_at: string;
+          id: number;
+          note: string | null;
+          org_name: string | null;
+          policy_id: number;
+          reviewed_at: string | null;
+          reviewed_by: string | null;
+          reviewed_comment: string | null;
+          start_at: string;
+          status: string;
+          user_id: string;
+        };
         Insert: {
-          balance: number
-          created_at?: string
-          duration_used: Json[]
-          end_at: string
-          id?: number
-          note?: string | null
-          org_name?: string | null
-          policy_id: number
-          reviewed_at?: string | null
-          reviewed_by?: string | null
-          start_at: string
-          status?: string
-          user_id: string
-        }
+          //this are two files of types typescript i want to merge them so that if type is Json or Jsonb replace it with the type from the other file if in the two files is json or jsonb so nothing
+          balance: number;
+          created_at?: string;
+          duration_used: Json[];
+          end_at: string;
+          id?: number;
+          note?: string | null;
+          org_name?: string | null;
+          policy_id: number;
+          reviewed_at?: string | null;
+          reviewed_by?: string | null;
+          reviewed_comment?: string | null;
+          start_at: string;
+          status?: string;
+          user_id: string;
+        };
         Update: {
-          balance?: number
-          created_at?: string
-          duration_used?: Json[]
-          end_at?: string
-          id?: number
-          note?: string | null
-          org_name?: string | null
-          policy_id?: number
-          reviewed_at?: string | null
-          reviewed_by?: string | null
-          start_at?: string
-          status?: string
-          user_id?: string
-        }
+          balance?: number;
+          created_at?: string;
+          duration_used?: Json[];
+          end_at?: string;
+          id?: number;
+          note?: string | null;
+          org_name?: string | null;
+          policy_id?: number;
+          reviewed_at?: string | null;
+          reviewed_by?: string | null;
+          reviewed_comment?: string | null;
+          start_at?: string;
+          status?: string;
+          user_id?: string;
+        };
         Relationships: [
           {
-            foreignKeyName: "leave_requests_org_name_fkey"
-            columns: ["org_name"]
-            isOneToOne: false
-            referencedRelation: "organizations"
-            referencedColumns: ["name"]
+            foreignKeyName: "leave_requests_org_name_fkey";
+            columns: ["org_name"];
+            isOneToOne: false;
+            referencedRelation: "organizations";
+            referencedColumns: ["name"];
           },
           {
-            foreignKeyName: "leave_requests_policy_id_fkey"
-            columns: ["policy_id"]
-            isOneToOne: false
-            referencedRelation: "leave_policies"
-            referencedColumns: ["id"]
+            foreignKeyName: "leave_requests_policy_id_fkey";
+            columns: ["policy_id"];
+            isOneToOne: false;
+            referencedRelation: "leave_policies";
+            referencedColumns: ["id"];
           },
           {
-            foreignKeyName: "leave_requests_reviewed_by_fkey"
-            columns: ["reviewed_by"]
-            isOneToOne: false
-            referencedRelation: "users"
-            referencedColumns: ["id"]
+            foreignKeyName: "leave_requests_reviewed_by_fkey";
+            columns: ["reviewed_by"];
+            isOneToOne: false;
+            referencedRelation: "users";
+            referencedColumns: ["id"];
           },
           {
-            foreignKeyName: "leave_requests_user_id_fkey"
-            columns: ["user_id"]
-            isOneToOne: false
-            referencedRelation: "users"
-            referencedColumns: ["id"]
-          }
-        ]
-      }
+            foreignKeyName: "leave_requests_user_id_fkey";
+            columns: ["user_id"];
+            isOneToOne: false;
+            referencedRelation: "users";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
       organizations: {
         Row: {
-          country: string
-          created_at: string
-          employee_count: string
-          name: string
-        }
+          country: string;
+          created_at: string;
+          employee_count: string;
+          name: string;
+        };
         Insert: {
-          country: string
-          created_at?: string
-          employee_count: string
-          name: string
-        }
+          country: string;
+          created_at?: string;
+          employee_count: string;
+          name: string;
+        };
         Update: {
-          country?: string
-          created_at?: string
-          employee_count?: string
-          name?: string
-        }
-        Relationships: []
-      }
+          country?: string;
+          created_at?: string;
+          employee_count?: string;
+          name?: string;
+        };
+        Relationships: [];
+      };
       profiles: {
         Row: {
-          Address: Json | null
-          "Basic Information": Json | null
-          Bonus: Json[] | null
-          Commission: Json[] | null
-          Compensation: Json[] | null
-          Contact: Json | null
-          "Driver License": Json[] | null
-          Education: Json[] | null
-          "Employment Status": Json[] | null
-          Job: Json | null
-          "Job Information": Json[] | null
-          leave_balance: Json[] | null
-          org_name: string
-          role: string
-          "Social Links": Json | null
-          "Stock Options": Json[] | null
-          user_id: string
-          "Visa Information": Json[] | null
-        }
+          Address: Json | null;
+          "Basic Information": Json | null;
+          Bonus: Json[] | null;
+          Commission: Json[] | null;
+          Compensation: Json[] | null;
+          Contact: Json | null;
+          "Driver License": Json[] | null;
+          Education: Json[] | null;
+          "Employment Status": Json[] | null;
+          Hiring: Json | null;
+          Job: Json | null;
+          "Job Information": Json[] | null;
+          leave_balance: Json[] | null;
+          org_name: string;
+          role: string;
+          "Social Links": Json | null;
+          "Stock Options": Json[] | null;
+          user_id: string;
+          "Visa Information": Json[] | null;
+        };
         Insert: {
-          Address?: Json | null
-          "Basic Information"?: Json | null
-          Bonus?: Json[] | null
-          Commission?: Json[] | null
-          Compensation?: Json[] | null
-          Contact?: Json | null
-          "Driver License"?: Json[] | null
-          Education?: Json[] | null
-          "Employment Status"?: Json[] | null
-          Job?: Json | null
-          "Job Information"?: Json[] | null
-          leave_balance?: Json[] | null
-          org_name: string
-          role: string
-          "Social Links"?: Json | null
-          "Stock Options"?: Json[] | null
-          user_id: string
-          "Visa Information"?: Json[] | null
-        }
+          Address?: Json | null;
+          "Basic Information"?: Json | null;
+          Bonus?: Json[] | null;
+          Commission?: Json[] | null;
+          Compensation?: Json[] | null;
+          Contact?: Json | null;
+          "Driver License"?: Json[] | null;
+          Education?: Json[] | null;
+          "Employment Status"?: Json[] | null;
+          Hiring?: Json | null;
+          Job?: Json | null;
+          "Job Information"?: Json[] | null;
+          leave_balance?: Json[] | null;
+          org_name: string;
+          role: string;
+          "Social Links"?: Json | null;
+          "Stock Options"?: Json[] | null;
+          user_id: string;
+          "Visa Information"?: Json[] | null;
+        };
         Update: {
-          Address?: Json | null
-          "Basic Information"?: Json | null
-          Bonus?: Json[] | null
-          Commission?: Json[] | null
-          Compensation?: Json[] | null
-          Contact?: Json | null
-          "Driver License"?: Json[] | null
-          Education?: Json[] | null
-          "Employment Status"?: Json[] | null
-          Job?: Json | null
-          "Job Information"?: Json[] | null
-          leave_balance?: Json[] | null
-          org_name?: string
-          role?: string
-          "Social Links"?: Json | null
-          "Stock Options"?: Json[] | null
-          user_id?: string
-          "Visa Information"?: Json[] | null
-        }
+          Address?: Json | null;
+          "Basic Information"?: Json | null;
+          Bonus?: Json[] | null;
+          Commission?: Json[] | null;
+          Compensation?: Json[] | null;
+          Contact?: Json | null;
+          "Driver License"?: Json[] | null;
+          Education?: Json[] | null;
+          "Employment Status"?: Json[] | null;
+          Hiring?: Json | null;
+          Job?: Json | null;
+          "Job Information"?: Json[] | null;
+          leave_balance?: Json[] | null;
+          org_name?: string;
+          role?: string;
+          "Social Links"?: Json | null;
+          "Stock Options"?: Json[] | null;
+          user_id?: string;
+          "Visa Information"?: Json[] | null;
+        };
         Relationships: [
           {
-            foreignKeyName: "profiles_org_name_fkey"
-            columns: ["org_name"]
-            isOneToOne: false
-            referencedRelation: "organizations"
-            referencedColumns: ["name"]
+            foreignKeyName: "profiles_org_name_fkey";
+            columns: ["org_name"];
+            isOneToOne: false;
+            referencedRelation: "organizations";
+            referencedColumns: ["name"];
           },
           {
-            foreignKeyName: "profiles_user_id_fkey"
-            columns: ["user_id"]
-            isOneToOne: true
-            referencedRelation: "users"
-            referencedColumns: ["id"]
-          }
-        ]
-      }
+            foreignKeyName: "profiles_user_id_fkey";
+            columns: ["user_id"];
+            isOneToOne: true;
+            referencedRelation: "users";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
       settings: {
         Row: {
-          Hiring: Json | null
-          org_name: string
-          personnal: Json | null
-        }
+          Hiring: Json | null;
+          job: Json | null;
+          org_name: string | null;
+          personnal: Json | null;
+        };
         Insert: {
-          Hiring?: Json | null
-          org_name: string
-          personnal?: Json | null
-        }
+          Hiring?: Json | null;
+          job?: Json | null;
+          org_name: string;
+          personnal?: Json | null;
+        };
         Update: {
-          Hiring?: Json | null
-          org_name?: string
-          personnal?: Json | null
-        }
+          Hiring?: Json | null;
+          job?: Json | null;
+          org_name?: string;
+          personnal?: Json | null;
+        };
         Relationships: [
           {
-            foreignKeyName: "settings_org_name_fkey"
-            columns: ["org_name"]
-            isOneToOne: true
-            referencedRelation: "organizations"
-            referencedColumns: ["name"]
-          }
-        ]
-      }
-    }
+            foreignKeyName: "settings_org_name_fkey";
+            columns: ["org_name"];
+            isOneToOne: true;
+            referencedRelation: "organizations";
+            referencedColumns: ["name"];
+          },
+        ];
+      };
+    };
     Views: {
-      [_ in never]: never
-    }
+      [_ in never]: never;
+    };
     Functions: {
-      [_ in never]: never
-    }
+      [_ in never]: never;
+    };
     Enums: {
-      [_ in never]: never
-    }
+      [_ in never]: never;
+    };
     CompositeTypes: {
-      [_ in never]: never
-    }
-  }
+      [_ in never]: never;
+    };
+  };
 }
 
 export type Tables<
@@ -372,23 +431,23 @@ export type Tables<
   TableName extends PublicTableNameOrOptions extends { schema: keyof Database }
     ? keyof (Database[PublicTableNameOrOptions["schema"]]["Tables"] &
         Database[PublicTableNameOrOptions["schema"]]["Views"])
-    : never = never
+    : never = never,
 > = PublicTableNameOrOptions extends { schema: keyof Database }
   ? (Database[PublicTableNameOrOptions["schema"]]["Tables"] &
       Database[PublicTableNameOrOptions["schema"]]["Views"])[TableName] extends {
-      Row: infer R
+      Row: infer R;
     }
     ? R
     : never
   : PublicTableNameOrOptions extends keyof (Database["public"]["Tables"] &
-      Database["public"]["Views"])
-  ? (Database["public"]["Tables"] &
-      Database["public"]["Views"])[PublicTableNameOrOptions] extends {
-      Row: infer R
-    }
-    ? R
-    : never
-  : never
+        Database["public"]["Views"])
+    ? (Database["public"]["Tables"] &
+        Database["public"]["Views"])[PublicTableNameOrOptions] extends {
+        Row: infer R;
+      }
+      ? R
+      : never
+    : never;
 
 export type TablesInsert<
   PublicTableNameOrOptions extends
@@ -396,20 +455,20 @@ export type TablesInsert<
     | { schema: keyof Database },
   TableName extends PublicTableNameOrOptions extends { schema: keyof Database }
     ? keyof Database[PublicTableNameOrOptions["schema"]]["Tables"]
-    : never = never
+    : never = never,
 > = PublicTableNameOrOptions extends { schema: keyof Database }
   ? Database[PublicTableNameOrOptions["schema"]]["Tables"][TableName] extends {
-      Insert: infer I
+      Insert: infer I;
     }
     ? I
     : never
   : PublicTableNameOrOptions extends keyof Database["public"]["Tables"]
-  ? Database["public"]["Tables"][PublicTableNameOrOptions] extends {
-      Insert: infer I
-    }
-    ? I
-    : never
-  : never
+    ? Database["public"]["Tables"][PublicTableNameOrOptions] extends {
+        Insert: infer I;
+      }
+      ? I
+      : never
+    : never;
 
 export type TablesUpdate<
   PublicTableNameOrOptions extends
@@ -417,20 +476,20 @@ export type TablesUpdate<
     | { schema: keyof Database },
   TableName extends PublicTableNameOrOptions extends { schema: keyof Database }
     ? keyof Database[PublicTableNameOrOptions["schema"]]["Tables"]
-    : never = never
+    : never = never,
 > = PublicTableNameOrOptions extends { schema: keyof Database }
   ? Database[PublicTableNameOrOptions["schema"]]["Tables"][TableName] extends {
-      Update: infer U
+      Update: infer U;
     }
     ? U
     : never
   : PublicTableNameOrOptions extends keyof Database["public"]["Tables"]
-  ? Database["public"]["Tables"][PublicTableNameOrOptions] extends {
-      Update: infer U
-    }
-    ? U
-    : never
-  : never
+    ? Database["public"]["Tables"][PublicTableNameOrOptions] extends {
+        Update: infer U;
+      }
+      ? U
+      : never
+    : never;
 
 export type Enums<
   PublicEnumNameOrOptions extends
@@ -438,9 +497,9 @@ export type Enums<
     | { schema: keyof Database },
   EnumName extends PublicEnumNameOrOptions extends { schema: keyof Database }
     ? keyof Database[PublicEnumNameOrOptions["schema"]]["Enums"]
-    : never = never
+    : never = never,
 > = PublicEnumNameOrOptions extends { schema: keyof Database }
   ? Database[PublicEnumNameOrOptions["schema"]]["Enums"][EnumName]
   : PublicEnumNameOrOptions extends keyof Database["public"]["Enums"]
-  ? Database["public"]["Enums"][PublicEnumNameOrOptions]
-  : never
+    ? Database["public"]["Enums"][PublicEnumNameOrOptions]
+    : never;

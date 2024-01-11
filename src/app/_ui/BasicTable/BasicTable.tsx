@@ -9,15 +9,17 @@ import Paper from "@mui/material/Paper";
 import { v4 as uuidv4 } from "uuid";
 import { SortByDate } from "@/helpers/sort.helper";
 import { MdModeEditOutline } from "react-icons/md";
-import { HiOutlineDuplicate } from "react-icons/hi";
 import { FaTrash } from "react-icons/fa6";
 
 interface BasicTablePropsType {
   TableRows: string[];
-  data: any;
+  data: DataTableType[];
   champ: string;
 }
 
+interface DataTableType {
+  [key: string]: any;
+}
 export default function BasicTable({
   TableRows,
   data,
@@ -48,7 +50,7 @@ export default function BasicTable({
           <TableBody>
             {data
               ?.sort(
-                (a: any, b: any) =>
+                (a: DataTableType, b: DataTableType) =>
                   new Date(b?.Date || b?.["Effective Date"]).getTime() -
                   new Date(a?.Date || a?.["Effective Date"]).getTime(),
               )
@@ -103,12 +105,6 @@ export default function BasicTable({
                               className="rounded-sm"
                               cursor={"pointer"}
                               fill={"gray"}
-                            />
-                          </div>
-                          <div className="duration-250 flex h-[2rem] w-[2rem] cursor-pointer items-center justify-center ease-in-out hover:border hover:border-gray-27 hover:bg-gray-22">
-                            <HiOutlineDuplicate
-                              className="rounded-sm"
-                              cursor={"pointer"}
                             />
                           </div>
                         </div>

@@ -3,7 +3,7 @@ import { DatePicker, DatePickerProps } from "antd";
 import React, { useState } from "react";
 import "dayjs/locale/zh-cn";
 import dayjs from "dayjs";
-import { getYearDiff } from "@/app/(dashboard)/people/components/utils/getYearDff";
+import { getYearDiff } from "@/helpers/date";
 
 function DateInput({ RowField, setTouched, defaultValue }: any) {
   const [value, setValue] = useState<string>(String(defaultValue));

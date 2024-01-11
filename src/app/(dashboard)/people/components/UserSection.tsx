@@ -14,6 +14,7 @@ import formulateData from "../components/utils/formulateData";
 import updateData from "@/api/updateData";
 import useToast from "@/hooks/useToast";
 import useData from "@/hooks/useData";
+import { Profile_Type, Settings_type_insert, database_profile_type_insert } from "@/types/database.tables.types";
 
 interface UserSection {
   section: string;
@@ -28,7 +29,7 @@ function UserSection({ section }: UserSection) {
   const queryClient = useQueryClient();
 
   const { mutateAsync } = useMutation({
-    mutationFn: async (NewData: any) => {
+    mutationFn: async (NewData: Profile_Type) => {
       return await updateData("profiles", NewData, {
         user_id: NewData.user_id,
       });
