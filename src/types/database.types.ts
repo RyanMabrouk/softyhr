@@ -9,6 +9,41 @@ export type Json =
 export interface Database {
   public: {
     Tables: {
+      Hiring: {
+        Row: {
+          Application_Details: Json | null
+          candidates: Json | null
+          created_at: string
+          id: number
+          job_information: Json | null
+          org_name: string | null
+        }
+        Insert: {
+          Application_Details?: Json | null
+          candidates?: Json | null
+          created_at?: string
+          id?: number
+          job_information?: Json | null
+          org_name?: string | null
+        }
+        Update: {
+          Application_Details?: Json | null
+          candidates?: Json | null
+          created_at?: string
+          id?: number
+          job_information?: Json | null
+          org_name?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "Hiring_org_name_fkey"
+            columns: ["org_name"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["name"]
+          }
+        ]
+      }
       leave_accrued: {
         Row: {
           balance: number
@@ -159,6 +194,7 @@ export interface Database {
           policy_id: number
           reviewed_at: string | null
           reviewed_by: string | null
+          reviewed_comment: string | null
           start_at: string
           status: string
           user_id: string
@@ -174,6 +210,7 @@ export interface Database {
           policy_id: number
           reviewed_at?: string | null
           reviewed_by?: string | null
+          reviewed_comment?: string | null
           start_at: string
           status?: string
           user_id: string
@@ -189,6 +226,7 @@ export interface Database {
           policy_id?: number
           reviewed_at?: string | null
           reviewed_by?: string | null
+          reviewed_comment?: string | null
           start_at?: string
           status?: string
           user_id?: string
@@ -256,6 +294,7 @@ export interface Database {
           "Driver License": Json[] | null
           Education: Json[] | null
           "Employment Status": Json[] | null
+          Hiring: Json | null
           Job: Json | null
           "Job Information": Json[] | null
           leave_balance: Json[] | null
@@ -276,6 +315,7 @@ export interface Database {
           "Driver License"?: Json[] | null
           Education?: Json[] | null
           "Employment Status"?: Json[] | null
+          Hiring?: Json | null
           Job?: Json | null
           "Job Information"?: Json[] | null
           leave_balance?: Json[] | null
@@ -296,6 +336,7 @@ export interface Database {
           "Driver License"?: Json[] | null
           Education?: Json[] | null
           "Employment Status"?: Json[] | null
+          Hiring?: Json | null
           Job?: Json | null
           "Job Information"?: Json[] | null
           leave_balance?: Json[] | null
@@ -326,16 +367,19 @@ export interface Database {
       settings: {
         Row: {
           Hiring: Json | null
+          job: Json | null
           org_name: string
           personnal: Json | null
         }
         Insert: {
           Hiring?: Json | null
+          job?: Json | null
           org_name: string
           personnal?: Json | null
         }
         Update: {
           Hiring?: Json | null
+          job?: Json | null
           org_name?: string
           personnal?: Json | null
         }
@@ -354,13 +398,71 @@ export interface Database {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      json_matches_schema: {
+        Args: {
+          schema: Json
+          instance: Json
+        }
+        Returns: boolean
+      }
+      jsonb_matches_schema: {
+        Args: {
+          schema: Json
+          instance: Json
+        }
+        Returns: boolean
+      }
+      jsonschema_is_valid: {
+        Args: {
+          schema: Json
+        }
+        Returns: boolean
+      }
+      jsonschema_validation_errors: {
+        Args: {
+          schema: Json
+          instance: Json
+        }
+        Returns: unknown
+      }
     }
     Enums: {
-      [_ in never]: never
+      leave_request_status_type:
+        | "pending"
+        | "approved"
+        | "rejected"
+        | "canceled"
     }
     CompositeTypes: {
-      [_ in never]: never
+      job_details: {
+        job_status: string
+        department: string
+        hiring_lead: string
+        job_location: string
+        posting_title: string
+        job_description: string
+        internal_job_code: string
+        minimum_experience: string
+      }
+      job_information_type: {
+        job_status: string
+        department: string
+        hiring_lead: string
+        job_location: string
+        posting_title: string
+        job_description: string
+        internal_job_code: string
+        minimum_experience: string
+      }
+      leave_balance_type: {
+        balance: number
+        policy_id: number
+        categories_id: number
+      }
+      leave_request_duration_used_type: {
+        date: string
+        duration: number
+      }
     }
   }
 }
