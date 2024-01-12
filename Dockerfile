@@ -2,9 +2,9 @@
 
 # Comments are provided throughout this file to help you get started.
 # If you need more help, visit the Dockerfile reference guide at
-# https://docs.docker.com/go/dockerfile-reference/
+# https://docs.docker.com/engine/reference/builder/
 
-ARG NODE_VERSION=20.7.0
+ARG NODE_VERSION=20.7
 
 ################################################################################
 # Use node image for base image for all stages.
@@ -60,7 +60,7 @@ COPY package.json .
 # Copy the production dependencies from the deps stage and also
 # the built application from the build stage into the image.
 COPY --from=deps /usr/src/app/node_modules ./node_modules
-COPY --from=build /usr/src/app/. ./.
+COPY --from=build /usr/src/app/./.next ././.next
 
 
 # Expose the port that the application listens on.

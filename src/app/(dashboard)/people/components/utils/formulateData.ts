@@ -1,4 +1,3 @@
-import submitForm from "@/api/test";
 import { database_profile_type } from "@/types/database.tables.types";
 import { v4 as uuidv4 } from "uuid";
 
@@ -8,7 +7,6 @@ interface userType {
 
 export default function formulateData(formdata: FormData, user: userType) {
   let NewEducation: Object[] = [];
-  submitForm(formdata);
   formdata.getAll("GPA").map((element, index: number) => {
     if (
       formdata.getAll("GPA")[index] != "" ||
