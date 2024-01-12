@@ -56,7 +56,7 @@ export default function useData() {
   });
   //------------------- Users Basic Information--------------------
   const { data: all_profiles, isPending: isPending7 } = useQuery({
-    queryKey: ["all_profiles"],
+    queryKey: ["profiles", "all"],
     queryFn: () =>
       getData("profiles", {
         org: true,

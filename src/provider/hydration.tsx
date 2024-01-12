@@ -4,14 +4,17 @@ import {
   HydrationBoundary,
 } from "@tanstack/react-query";
 import getData from "@/api/getData";
-
-export default async function Hydration({ children }) {
+import React from "react";
+export default async function Hydration({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const queryClient = new QueryClient();
- /* await queryClient.prefetchQuery({
-    queryKey: ["leave_requests"],
+  await queryClient.prefetchQuery({
+    queryKey: ["settings"],
     queryFn: () =>
-      getData("leave_requests", {
-        user: true,
+      getData("settings", {
         org: true,
       }),
   });
@@ -23,13 +26,19 @@ export default async function Hydration({ children }) {
       }),
   });
   await queryClient.prefetchQuery({
-    queryKey: ["leave_accrued"],
+    queryKey: ["leave_categories"],
     queryFn: () =>
-      getData("leave_accrued", {
-        user: true,
+      getData("leave_categories", {
         org: true,
       }),
-  });*/
+  });
+  await queryClient.prefetchQuery({
+    queryKey: ["user_profile"],
+    queryFn: () =>
+      getData("user_profile", {
+        user: true,
+      }),
+  });
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       {children}
