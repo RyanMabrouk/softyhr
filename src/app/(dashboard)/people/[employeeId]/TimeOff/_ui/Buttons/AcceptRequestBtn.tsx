@@ -9,6 +9,7 @@ import {
   database_profile_leave_balance_type,
   database_profile_type,
 } from "@/types/database.tables.types";
+import { useParams } from "next/navigation";
 export type request_type = {
   id: number;
   policy_id: number;
@@ -18,6 +19,7 @@ export type request_type = {
 export function AcceptRequestBtn({ request }: { request: request_type }) {
   const { toast } = useToast();
   const queryClient = useQueryClient();
+  const { employeeId } = useParams();
   const {
     user_profile: { data: user_profile },
   }: { [key: string]: { data: database_profile_type } } = useData();
@@ -34,8 +36,10 @@ export function AcceptRequestBtn({ request }: { request: request_type }) {
       }
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["leave_requests"] });
-      queryClient.invalidateQueries({ queryKey: ["all_profiles"] });
+      queryClient.invalidateQueries({
+        queryKey: ["leave_requests", employeeId],
+      });
+      queryClient.invalidateQueries({ queryKey: ["all_profiles_basic_info"] });
     },
   });
   return (

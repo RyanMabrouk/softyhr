@@ -4,7 +4,6 @@ import { useQuery } from "@tanstack/react-query";
 // you can use this hook to get the current url
 import { useUrl } from "nextjs-current-url";
 //--------------------------------------------
-
 export default function useData() {
   //--------------------Settings--------------------
   const { data: settings, isPending } = useQuery({
@@ -38,16 +37,7 @@ export default function useData() {
         user: true,
       }),
   });
-  //------------------- Users Basic Information--------------------
-  const { data: all_profiles, isPending: isPending7 } = useQuery({
-    queryKey: ["profiles", "all"],
-    queryFn: () =>
-      getData("profiles", {
-        org: true,
-      }),
-  });
   //------------------Hiring--------------------------------------
-
   const { data: Hiring, isPending: isPending8 } = useQuery({
     queryKey: ["Hiring"],
     queryFn: () =>
@@ -55,17 +45,18 @@ export default function useData() {
         org: true,
       }),
   });
+  // ------------------All Profiles Basic Information--------------------
   const { data: all_profiles_basic_info, isPending: isPending9 } = useQuery({
     queryKey: [
       "profiles",
       {
-        column: 'user_id,role,picture,"Basic Information"',
+        column: 'user_id,role,picture,"Basic Information",leave_balance',
       },
     ],
     queryFn: () =>
       getData("profiles", {
         org: true,
-        column: 'user_id,role,picture,"Basic Information"',
+        column: 'user_id,role,picture,"Basic Information",leave_balance',
       }),
   });
   //------------------------------------------------------------
@@ -89,11 +80,6 @@ export default function useData() {
       data: user_profile?.data?.[0],
       error: user_profile?.error,
       isPending: isPending6,
-    },
-    all_profiles: {
-      data: all_profiles?.data,
-      error: all_profiles?.error,
-      isPending: isPending7,
     },
     Hiring: {
       data: Hiring?.data,

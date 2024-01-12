@@ -28,7 +28,6 @@ export function Amount({
 }) {
   const { setFormError, formError } =
     useContext<errorContextType>(errorContext);
-  console.log("🚀 ~ formError:", formError);
   const { startDate, endDate } =
     useContext<dateRangeContextType>(dateRangeContext);
   //keep old range
@@ -105,7 +104,7 @@ export function Amount({
                         onChange={(e) => {
                           if (
                             Number(e.target.value) > 24 ||
-                            Number(e.target.value) < 0
+                            Number(e.target.value) < 1
                           ) {
                             setFormError &&
                               setFormError((old) =>
@@ -113,11 +112,11 @@ export function Amount({
                                   ? {
                                       ...old,
                                       ["duration_date" + i]:
-                                        "Duration must be between 0 and 24 hours",
+                                        "Duration must be between 1 and 24 hours",
                                     }
                                   : {
                                       ["duration_date" + i]:
-                                        "Duration must be between 0 and 24 hours",
+                                        "Duration must be between 1 and 24 hours",
                                     },
                               );
                           } else {
