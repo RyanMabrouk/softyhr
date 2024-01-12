@@ -3,7 +3,6 @@ import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
 import { cookies, headers } from "next/headers";
 import postData from "@/api/postData";
 export default async function signup(formData: FormData) {
-  console.log("🚀 ~ signup");
   const headersList = headers();
   const header_url = headersList.get("host") || "";
   const proto = headers().get("x-forwarded-proto") || "http";

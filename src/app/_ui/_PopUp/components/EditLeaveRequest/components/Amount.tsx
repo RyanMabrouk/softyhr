@@ -28,7 +28,6 @@ export function Amount({
 }) {
   const { setFormError, formError } =
     useContext<errorContextType>(errorContext);
-  console.log("🚀 ~ formError:", formError);
   const { startDate, endDate } =
     useContext<dateRangeContextType>(dateRangeContext);
   //keep old range

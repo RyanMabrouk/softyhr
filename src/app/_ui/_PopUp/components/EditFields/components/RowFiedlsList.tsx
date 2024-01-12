@@ -33,7 +33,6 @@ function RowFiedlsList({ champ, Fields, section, data, rang }: RowFieldsListProp
   const { mutateAsync, isPending, isPaused } = useMutation({
     mutationFn: async (NewSettings: sectionType) => {
       return await UpdateSettings({ [section]: NewSettings }).then(() => {
-        console.log("updated successfuly !!!");
       });
     },
     onSuccess: (data: any) => {
@@ -55,11 +54,6 @@ function RowFiedlsList({ champ, Fields, section, data, rang }: RowFieldsListProp
     accept: "champ",
     drop: (item: DropItemType, monitor: any) => {
       const dropResult = monitor.internalMonitor.registry.dropTargets;
-      console.log(
-        item.champ,
-        " dropped on ",
-        dropResult.get(monitor.targetId).spec.data,
-      );
       if (item?.rang == dropResult.get(monitor.targetId).spec.data?.rang) return;
         const NewSettings = ReorderChamps(
           item.rang,

@@ -11,7 +11,6 @@ function Page() {
     <div className="flex h-full w-full flex-col items-start justify-start gap-[1.5rem]">
       <form
         className="flex flex-col items-start justify-start gap-[1rem]"
-        action={(formdata: FormData) =>  console.log(formdata)}
       >
         <FiledsChamps
           FieldsArray={data?.data[0]["Hiring"]["Fields"]}

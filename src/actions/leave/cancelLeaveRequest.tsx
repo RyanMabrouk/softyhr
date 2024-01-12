@@ -15,7 +15,6 @@ export default async function cancelLeaveRequest({
   leave_request: database_leave_requests_type;
   user_id: string | string[];
 }) {
-  console.log("cancelLeaveRequest");
   // if the leave request is approved then remove it from the leave balance
   if (leave_request.status === "approved") {
     const request_duration: number = leave_request.duration_used.reduce(

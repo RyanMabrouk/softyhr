@@ -56,8 +56,6 @@ export default function BasicTable({
               )
               ?.map((row: any) => {
                 const last_changes = SortByDate(data);
-                console.log(data);
-
                 return (
                   <>
                     {last_changes == row?.id && (

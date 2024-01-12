@@ -17,7 +17,6 @@ export default async function updateLeaveRequest({
   user_id: string | string[];
   old_request: database_leave_requests_insert_type;
 }) {
-  console.log("updateLeaveRequest");
   const start_at = formData.get("start_at") as string;
   const end_at = formData.get("end_at") as string;
   const durations = formData.getAll("duration_date");
