@@ -4,7 +4,6 @@ import {
   database_leave_policies_type,
   database_leave_requests_type,
   database_profile_leave_balance_type,
-  database_profile_type,
   databese_leave_categories_type,
 } from "@/types/database.tables.types";
 import { useParams, useSearchParams } from "next/navigation";
@@ -17,6 +16,7 @@ import { DateInput } from "./DateInput";
 import { Amount } from "./Amount";
 import { SelectGeneric } from "../../../../SelectGeneric";
 import { WarningIfDatesAlreadyBooked } from "./WarningIfDatesAlreadyBooked";
+import useEmployeeData from "@/hooks/useEmloyeeData";
 export function FormInputs() {
   const searchParams = useSearchParams();
   const { setStartDate, setEndDate } =
@@ -27,16 +27,14 @@ export function FormInputs() {
   const {
     leave_categories: { data: leave_categories, isPending: isPending1 },
     leave_policies: { data: leave_policies, isPending: isPending2 },
-    leave_requests: { data: leave_requests, isPending: isPending3 },
-    all_profiles: { data: all_profiles, isPending: isPending4 },
   } = useData();
-  // User Profile Data
-  const current_user_profile = all_profiles?.filter(
-    (profile: database_profile_type) => profile.user_id === employeeId,
-  );
+  const {
+    leave_requests: { data: leave_requests, isPending: isPending3 },
+    employee_profile: { data: employee_profile, isPending: isPending4 },
+  } = useEmployeeData({ employeeId: employeeId });
   // User Leave Balance
   const current_user_leave_balance: database_profile_leave_balance_type[] =
-    current_user_profile?.[0]?.leave_balance;
+    employee_profile?.leave_balance;
   const current_user_categories_ids = current_user_leave_balance?.map((e) =>
     Number(e.categories_id),
   );

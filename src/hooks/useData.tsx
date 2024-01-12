@@ -14,27 +14,11 @@ export default function useData() {
         org: true,
       }),
   });
-  //--------------------Leave Requests--------------------
-  const { data: leave_requests, isPending: isPending2 } = useQuery({
-    queryKey: ["leave_requests"],
-    queryFn: () =>
-      getData("leave_requests", {
-        org: true,
-      }),
-  });
   //----------------- Leave Policies--------------------
   const { data: leave_policies, isPending: isPending3 } = useQuery({
     queryKey: ["leave_policies"],
     queryFn: () =>
       getData("leave_policies", {
-        org: true,
-      }),
-  });
-  //----------------- Leave Accrued--------------------
-  const { data: leave_accrued, isPending: isPending4 } = useQuery({
-    queryKey: ["leave_accrued"],
-    queryFn: () =>
-      getData("leave_accrued", {
         org: true,
       }),
   });
@@ -71,22 +55,25 @@ export default function useData() {
         org: true,
       }),
   });
+  const { data: all_profiles_basic_info, isPending: isPending9 } = useQuery({
+    queryKey: [
+      "profiles",
+      {
+        column: 'user_id,role,picture,"Basic Information"',
+      },
+    ],
+    queryFn: () =>
+      getData("profiles", {
+        org: true,
+        column: 'user_id,role,picture,"Basic Information"',
+      }),
+  });
   //------------------------------------------------------------
   return {
-    leave_requests: {
-      data: leave_requests?.data,
-      error: leave_requests?.error,
-      isPending: isPending2,
-    },
     leave_policies: {
       data: leave_policies?.data,
       error: leave_policies?.error,
       isPending: isPending3,
-    },
-    leave_accrued: {
-      data: leave_accrued?.data,
-      error: leave_accrued?.error,
-      isPending: isPending4,
     },
     leave_categories: {
       data: leave_categories?.data,
@@ -112,6 +99,11 @@ export default function useData() {
       data: Hiring?.data,
       error: Hiring?.error,
       isPending: isPending8,
+    },
+    all_profiles_basic_info: {
+      data: all_profiles_basic_info?.data,
+      error: all_profiles_basic_info?.error,
+      isPending: isPending9,
     },
   };
 }

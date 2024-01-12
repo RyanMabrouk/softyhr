@@ -36,15 +36,6 @@ export default function useEmployeeData({
         match: { user_id: employeeId },
       }),
   });
-  const { data: all_profiles_uid_info, isPending: isPending8 } = useQuery({
-    queryKey: ["all_profiles_uid_info"],
-    queryFn: () =>
-      getData("profiles", {
-        org: true,
-        column: "user_id,Job Information",
-      }),
-  });
-  console.log("🚀 ~ all_profiles_uid_info:", all_profiles_uid_info)
   //------------------------------------------------------------
   return {
     leave_requests: {
@@ -53,7 +44,7 @@ export default function useEmployeeData({
       isPending: isPending2,
     },
     employee_profile: {
-      data: employee_profile?.data,
+      data: employee_profile?.data?.[0],
       error: employee_profile?.error,
       isPending: isPending7,
     },

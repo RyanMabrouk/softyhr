@@ -1,5 +1,4 @@
 "use client";
-import useData from "@/hooks/useData";
 import { database_leave_requests_type } from "@/types/database.tables.types";
 import { useContext, useMemo } from "react";
 import {
@@ -7,16 +6,14 @@ import {
   dateRangeContextType,
 } from "../context/dateRangeContext";
 import { formatDDMMYYYY, getDaysInBetween } from "@/helpers/date.helpers";
+import useEmployeeData from "@/hooks/useEmloyeeData";
 
 export function useAlreadyBooked(employeeId: string | string[]) {
   const {
-    leave_requests: { data: leave_requests },
-  } = useData();
-  // User Leave Requests
-  const user_leave_requests: database_leave_requests_type[] =
-    leave_requests?.filter(
-      (e: database_leave_requests_type) => e.user_id === employeeId,
-    );
+    leave_requests: { data: user_leave_requests },
+  }: {
+    leave_requests: { data: database_leave_requests_type[] };
+  } = useEmployeeData({ employeeId: employeeId });
   // already booked days
   const already_booked_days = useMemo(
     () =>

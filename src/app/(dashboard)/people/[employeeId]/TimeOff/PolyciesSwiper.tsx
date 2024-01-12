@@ -10,7 +10,6 @@ import {
   database_leave_request_duration_used_type,
   database_leave_requests_type,
   database_profile_leave_balance_type,
-  database_profile_type,
   databese_leave_categories_track_time_unit_type,
   databese_leave_categories_type,
 } from "@/types/database.tables.types";
