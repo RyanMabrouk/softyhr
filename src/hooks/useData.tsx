@@ -99,7 +99,7 @@ export default function useData() {
       isPending: isPending,
     },
     user_profile: {
-      data: user_profile?.data[0],
+      data: user_profile?.data?.[0],
       error: user_profile?.error,
       isPending: isPending6,
     },

@@ -2,17 +2,21 @@
 export function InvalidDate(date: Date) {
   return date instanceof Date && !isNaN(date.getTime()) ? "" : "Invalid Date";
 }
-// format date to DD/MM/YYYY
+// format date to 31/12/2024
 export function formatDDMMYYYY(date: Date) {
   if (InvalidDate(date)) return InvalidDate(date);
   return new Date(date).toLocaleDateString("en-GB");
 }
-// format date to YYYY-MM-DD
+// format date to 2024-12-31
 export function formatYYYYMMDD(date: Date) {
   if (InvalidDate(date)) return InvalidDate(date);
-  return new Date(date).toISOString().split("T")[0];
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
 }
-// format date to MMDD - MMDD
+
+// format date to Jan 31 - Jul 02
 export function formatDateMMDD(start_at: Date, end_at: Date) {
   if (InvalidDate(start_at)) return InvalidDate(start_at);
   if (InvalidDate(end_at)) return InvalidDate(end_at);
@@ -41,7 +45,7 @@ export function timeDiffInHours(start: Date, end: Date) {
   if (InvalidDate(end)) return InvalidDate(end);
   return Math.abs(end.getTime() - start.getTime()) / 36e5;
 }
-// format date to 'day of the week,month day' short format
+// format date to 'Mon, 31' short format
 export function formatDateToDayMonDD(date: Date) {
   if (InvalidDate(date)) return InvalidDate(date);
   const formatter = new Intl.DateTimeFormat("en-US", {
@@ -51,7 +55,50 @@ export function formatDateToDayMonDD(date: Date) {
   });
   return formatter.format(date);
 }
-
+// get the days in between two dates
+export function getDaysInBetween(startDate: Date, endDate: Date) {
+  if (InvalidDate(startDate)) return [];
+  if (InvalidDate(endDate)) return [];
+  let dates: Date[] = [];
+  //to avoid modifying the original date
+  const theDate = new Date(startDate);
+  while (theDate <= endDate) {
+    dates = [...dates, new Date(theDate)];
+    theDate.setDate(theDate.getDate() + 1);
+  }
+  return dates;
+}
+// add one day to a date
+export function addOneDay(date: Date) {
+  return new Date(date.setDate(date.getDate() + 1));
+}
+// format date to 'Feb 17, 2021' format
+export function formatDateToMonDDYYYY(date: Date) {
+  if (InvalidDate(date)) return InvalidDate(date);
+  const formatter = new Intl.DateTimeFormat("en-US", {
+    month: "short",
+    day: "2-digit",
+    year: "numeric",
+  });
+  return formatter.format(date);
+}
+// Check if a date range is in an array of date ranges
+export function DateRangeIsInAnArrayOfDateRanges(
+  date_range: { start_at: Date; end_at: Date },
+  array_of_date_ranges: { start_at: Date; end_at: Date }[],
+): boolean {
+  array_of_date_ranges.map((date_range_in_array) => {
+    if (
+      (+date_range.start_at >= +date_range_in_array.start_at &&
+        +date_range.end_at <= +date_range_in_array.end_at) ||
+      (+date_range.start_at <= +date_range_in_array.start_at &&
+        +date_range.end_at >= +date_range_in_array.end_at)
+    ) {
+      return true;
+    }
+  });
+  return false;
+}
 // get the diff of years between two dates
 export function getYearDiff(startDate: Date, endDate: Date) {
   const ms = endDate.getTime() - startDate.getTime();

@@ -48,7 +48,7 @@ function EditFields() {
               <CgClose color={"#999999"} fontSize={"2rem"} cursor="pointer" />
             </div>
           </div>
-          <div className=" rounded bg-white p-8 py-10 shadow-md">
+          <div className="shadow-popup rounded-sm bg-white p-8 py-10">
             <div className="mb-2 flex w-full items-center  justify-between border-b border-gray-16 pb-2">
               <h1 className="text-lg font-bold capitalize">
                 {pathname.split("/")[pathname.split("/").length - 1]}

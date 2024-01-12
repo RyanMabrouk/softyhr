@@ -6,15 +6,15 @@ export default async function updateData(
   payload: {
     [key: string]: any;
   },
-  match: Object,
+  match: {
+    [key: string]: string | number | boolean | null | string[];
+  },
 ) {
   const supabase = createServerActionClient({ cookies });
-  console.log(payload, "------------------");
   const { data, error } = await supabase
     .from(table)
     .update(payload)
     .match(match)
     .select();
-  console.log(data);
   return { data: data, error: error };
 }

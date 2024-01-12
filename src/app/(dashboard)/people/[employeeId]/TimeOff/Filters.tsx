@@ -4,17 +4,19 @@ import { FilterSelect } from "./_ui/FilterSelect";
 import historyTableFilters from "./_context/historyTableFilters";
 import { historyTableFiltersContextType } from "./_context/historyTableFilters";
 import { leave_data_types } from "./History";
+import { capitalizeFirstLetter } from "@/helpers/string.helpers";
+import { SelectGeneric } from "@/app/_ui/SelectGeneric";
 interface FiltersProps {
   data: leave_data_types;
 }
 export function Filters({ data }: FiltersProps) {
-  const { setType, setYear, setToggleView } =
+  const { setType, setYear, setStatus, setToggleView, toggleView } =
     useContext<historyTableFiltersContextType>(historyTableFilters);
   return (
-    <div className="flex flex-row items-center justify-between">
+    <div className="flex w-full flex-row items-center justify-between">
       <div className="flex flex-row items-center gap-4 py-2">
-        <FilterSelect
-          //initialValue={1}
+        <SelectGeneric
+          inputLabel="Category"
           setValueInParent={setType}
           options={[
             { label: "All", value: "" },
@@ -22,12 +24,13 @@ export function Filters({ data }: FiltersProps) {
               ?.map((e: any) => e.name)
               .filter((value, index, array) => array.indexOf(value) === index)
               .map((name) => ({
-                label: name,
+                label: capitalizeFirstLetter(name),
                 value: name,
               })) || []),
           ]}
         />
-        <FilterSelect
+        <SelectGeneric
+          inputLabel="Year"
           setValueInParent={setYear}
           options={[
             { label: "All", value: "" },
@@ -35,14 +38,34 @@ export function Filters({ data }: FiltersProps) {
               ?.map((e: any) => new Date(e.start_at).getFullYear().toString())
               .filter((value, index, array) => array.indexOf(value) === index)
               .map((date) => ({
-                label: date,
+                label: capitalizeFirstLetter(date),
                 value: date,
               })) || []),
           ]}
         />
+        {toggleView && (
+          <SelectGeneric
+            inputLabel="Status"
+            setValueInParent={setStatus}
+            options={[
+              { label: "All", value: "" },
+              ...(data
+                ?.map((e: any) => e.status)
+                .filter(
+                  (value, index, array) =>
+                    array.indexOf(value) === index && value !== "",
+                )
+                .map((status) => ({
+                  label: capitalizeFirstLetter(status),
+                  value: status,
+                })) || []),
+            ]}
+          />
+        )}
       </div>
-      <FilterSelect
-        setValueInParent={(newVal) =>
+      <SelectGeneric
+        inputLabel="View"
+        setValueInParent={() =>
           setToggleView ? setToggleView((old) => !old) : null
         }
         options={[

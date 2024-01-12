@@ -45,4 +45,26 @@
   .ant-select-open .ant-select-selector {
     @apply !border-[white] !shadow-none;
   }
+  /* Remove default number input arrows style */
+  /* Chrome, Safari, Edge, Opera */
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  /* Firefox */
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
+}
+/* Reset Mui Select Componant selected bg color */
+.Mui-selected {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(82 122 0 / var(--tw-bg-opacity)) !important;
+  --tw-text-opacity: 1 !important;
+  color: rgb(255 255 255 / var(--tw-text-opacity)) !important;
+}
+.MuiMenu-list {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
 }

@@ -1,6 +1,8 @@
 "use client";
 import React, { useContext } from "react";
-import showPasswordToggle from "../_context/showPasswordToggle";
+import showPasswordToggle, {
+  ShowPasswordToggleType,
+} from "../_context/showPasswordToggle";
 export function Input({
   className,
   type,
@@ -16,9 +18,10 @@ export function Input({
   children?: React.ReactNode;
   setValueInParent?: React.Dispatch<React.SetStateAction<string>>;
 }) {
-  const { showPassword }: any = useContext(showPasswordToggle);
+  const { showPassword } =
+    useContext<ShowPasswordToggleType>(showPasswordToggle);
   return (
-    <div className="group relative flex h-12 w-full flex-row items-center justify-between rounded-sm border  border-gray-300 bg-[#f4f4f4] transition-all duration-200 ease-in-out focus-within:shadow-[0px_0px_4px_1px_#84bf41] focus:border-transparent focus:outline-none focus:ring-2 focus:ring-primary-500">
+    <div className="focus:ring-primary-500 group relative flex h-12 w-full flex-row items-center justify-between rounded-sm  border border-gray-300 bg-[#f4f4f4] transition-all duration-200 ease-in-out focus-within:shadow-[0px_0px_4px_1px_#84bf41] focus:border-transparent focus:outline-none focus:ring-2">
       <span className="flex h-full w-12 items-center justify-center px-1">
         {children}
       </span>

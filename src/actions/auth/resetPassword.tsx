@@ -14,6 +14,7 @@ export default async function resetPassword(formData: FormData) {
   const supabase = createServerActionClient({ cookies });
   const { data: profiles, error: profiles_error } = await getData("profiles", {
     match: { org_name: org },
+    column: "Contact,org_name",
   });
   if (profiles_error) {
     return {
@@ -23,12 +24,11 @@ export default async function resetPassword(formData: FormData) {
       },
     };
   } else {
-    const profile = profiles?.filter(
-      (profile: any) =>
-        profile?.Contact["Work Email"] === email,
+    const profile = profiles?.find(
+      (profile: any) => profile?.Contact?.["Work Email"] === email,
     );
     //user not found
-    if (profile?.length === 0) {
+    if (!profile) {
       return {
         error: {
           message: "User profile not found",
@@ -36,8 +36,8 @@ export default async function resetPassword(formData: FormData) {
         },
       };
     }
-    //user found
-    if (profile && org === profile[0].org_name) {
+    //user found check org
+    if (org === profile.org_name) {
       const { error } = await supabase.auth.resetPasswordForEmail(email, {
         redirectTo: `${proto}://${header_url}/auth/forgetPassword`,
       });

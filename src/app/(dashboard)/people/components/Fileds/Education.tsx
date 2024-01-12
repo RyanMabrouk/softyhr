@@ -9,13 +9,6 @@ import updateData from "@/api/updateData";
 import useToast from "@/hooks/useToast";
 import { usePathname, useRouter } from "next/navigation";
 import useData from "@/hooks/useData";
-
-interface DeleteEducationFnType {
-  id: string;
-  data: any;
-  user_id: string;
- 
-}
 interface EducationPropsType {
   FieldsArray: RowFieldType[];
   setTouched: (arg: boolean) => void;

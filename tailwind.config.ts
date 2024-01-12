@@ -139,6 +139,7 @@ const config: Config = {
         "gray-11": "#58524F",
         "gray-12": "#48413F",
         "gray-13": "#38312F",
+
         "gray-14": "#F4F4F4",
         "gray-15": "#999999",
         "gray-16": "#E0E0E0",
@@ -155,6 +156,7 @@ const config: Config = {
         "gray-27": "#222222",
         "gray-28": "#FAFAFA",
         "gray-29": "#636363",
+        "gray-30": "#777",
 
         "color-teal-2": "#284D59",
 

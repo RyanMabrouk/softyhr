@@ -1,6 +1,10 @@
 import icons from "@/app/(dashboard)/people/[employeeId]/TimeOff/_ui/icons";
-import { databese_leave_categories_type } from "@/types/database.tables.types";
-import { formatYYYYMMDD } from "./date";
+import {
+  databese_leave_categories_track_time_unit_type,
+  databese_leave_categories_type,
+} from "@/types/database.tables.types";
+import { formatYYYYMMDD, sameDay } from "./date.helpers";
+// generate Leave Categorie Icon
 export function generateLeaveCategorieIcon({
   categorie,
   className,
@@ -15,18 +19,26 @@ export function generateLeaveCategorieIcon({
       : icons.default(icons_classname);
   return icon;
 }
+// format Total Hours To Time Unit
 export function formatTotalHoursToTimeUnit(
   total_hours: number,
-  time_unit: "hours" | "days" | string,
+  time_unit: databese_leave_categories_track_time_unit_type | string,
+  { remove_time_unit }: { remove_time_unit?: boolean } = {
+    remove_time_unit: false,
+  },
 ) {
-  return time_unit === "days"
-    ? (total_hours / 24).toFixed(2) + " days"
-    : total_hours + " hours";
+  if (total_hours === 0) {
+    return total_hours + " " + time_unit;
+  }
+  const total_time =
+    time_unit === "days" ? (total_hours / 24).toFixed(2) : total_hours;
+  return remove_time_unit ? `${total_time}` : `${total_time} ${time_unit}`;
 }
+// array Of Working Days
 export function arrayOfWorkingDays(startDate: Date, endDate: Date) {
   const dates = [];
   const currentDate = new Date(startDate);
-  while (currentDate <= endDate) {
+  while (currentDate <= endDate || sameDay(currentDate, endDate)) {
     const day = currentDate.getDay();
     if (day !== 0 && day !== 6) {
       dates.push({

@@ -17,7 +17,7 @@ import { FaMapLocation } from "react-icons/fa6";
 import { CgProfile } from "react-icons/cg";
 import useData from "@/hooks/useData";
 import { formatCustomDate } from "@/helpers/Formatdate";
-import { updateTime } from "@/helpers/date";
+import { updateTime } from "@/helpers/date.helpers";
 
 function UserInfo() {
   const { user_profile: data } = useData();
