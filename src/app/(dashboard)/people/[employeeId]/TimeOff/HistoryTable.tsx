@@ -20,7 +20,7 @@ export function HistoryTable({
           {Headers.map((key, index) => (
             <header
               key={"header" + key + index}
-              className="relative box-border h-12 w-full cursor-pointer border-transparent bg-gray-17 px-6 pb-[11px] pt-3 text-left align-top font-semibold text-gray-25 transition-[background-color] duration-[0.15s] ease-[ease-in-out] hover:bg-gray-19"
+              className="relative box-border h-12 w-full cursor-pointer border-transparent bg-gray-17 pb-[11px] pl-4 pr-7 pt-3 text-left align-top font-semibold text-gray-25 transition-[background-color] duration-[0.15s] ease-[ease-in-out] hover:bg-gray-19"
             >
               {key}
             </header>
@@ -28,17 +28,22 @@ export function HistoryTable({
         </div>
         {data && data?.length > 0 ? (
           data?.map((row: { [key: string]: any }, index) => (
-            <div className="flex w-full flex-col" key={"row" + index}>
+            <div className="flex w-full flex-col " key={"row" + index}>
               <div
-                className={`group grid w-full  flex-row px-2 transition-all ease-linear hover:bg-gray-14 ${layout} `}
+                className={`group grid w-full  flex-row transition-all ease-linear hover:bg-gray-14 ${layout} `}
               >
                 {Object.keys(row).map((key, index2) =>
                   key === " " ? (
-                    <div key={"row_el" + key + index2}>{row[key]}</div>
+                    <div
+                      className="w-full text-center"
+                      key={"row_el" + key + index2}
+                    >
+                      {row[key]}
+                    </div>
                   ) : (
                     <div
                       key={"row_el" + key + index2}
-                      className=" relative box-border line-clamp-2  h-[4.25rem] w-max  max-w-[25rem]  overflow-hidden text-ellipsis px-4 pt-3 text-left align-top text-gray-27  "
+                      className="relative box-border line-clamp-2 h-[4.25rem] w-full  max-w-[25rem]  overflow-hidden  text-ellipsis px-4 pt-3 text-left align-top text-gray-27  "
                     >
                       {row[key]}
                     </div>

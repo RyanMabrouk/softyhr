@@ -84,12 +84,10 @@ export function UpcomingTimeOff() {
           categorie: categorie,
           className: "h-11 w-11",
         }),
-        duration: duration_used
-          ? formatTotalHoursToTimeUnit(
-              duration_used,
-              categorie?.track_time_unit,
-            )
-          : "",
+        duration: formatTotalHoursToTimeUnit(
+          duration_used,
+          categorie?.track_time_unit,
+        ),
         policy_id: e.policy_id,
         id: e.id,
         user_id: e.user_id,
