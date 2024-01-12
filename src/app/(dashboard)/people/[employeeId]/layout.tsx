@@ -9,6 +9,7 @@ import UserInfo from "../components/UserInfo/UserInfo";
 import DropDown from "../components/DropDown/DropDown";
 import { Settings, changementRequest } from "@/constants/userInfo";
 import useData from "@/hooks/useData";
+import useEmployeeData from "@/hooks/useEmloyeeData";
 interface EmployePropsType {
   params: { employeeId: string };
   children: ReactNode;
@@ -17,7 +18,7 @@ export default function Layout({
   params: { employeeId },
   children,
 }: EmployePropsType) {
-  const { user_profile: data } = useData();
+  const { employee_profile: data } = useEmployeeData({ employeeId });
   const ActiveRoute =
     usePathname().split("/").slice(-1).join("") || EmployeeRoute[0]?.label;
   return (
@@ -75,7 +76,7 @@ export default function Layout({
         </div>
       </div>
       <div className="items-stretc flex h-full w-full grow pl-[12%] pr-[15%]">
-        <UserInfo />
+        <UserInfo employeeId={employeeId} />
         {children}
       </div>
       <Footer />

@@ -1,12 +1,13 @@
 "use client";
-import { deleteEducation } from '@/actions/education/deleteEducation';
-import useData from '@/hooks/useData';
-import useToast from '@/hooks/useToast';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import React from 'react'
-import { CgClose } from 'react-icons/cg'
-import { FaRegTrashAlt } from 'react-icons/fa';
+import { deleteEducation } from "@/actions/education/deleteEducation";
+import useEmployeeData from "@/hooks/useEmloyeeData";
+import useToast from "@/hooks/useToast";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import React from "react";
+import { CgClose } from "react-icons/cg";
+import { useParams } from "next/navigation";
+import { FaRegTrashAlt } from "react-icons/fa";
 
 interface DeleteEducationFnType {
   id: string | null;
@@ -19,7 +20,8 @@ function DeleteEducation() {
   const pathname = usePathname();
   const queryClient = useQueryClient();
   const { toast, toastContainer } = useToast();
-  const { user_profile: data } = useData();
+  const { employeeId } = useParams();
+  const { employee_profile: data } = useEmployeeData({ employeeId });
   const params = useSearchParams();
   const id = params?.get("id");
 
@@ -28,10 +30,10 @@ function DeleteEducation() {
       const NewEducation = data?.filter(
         (education: any) => education?.id != id,
       );
-      return await deleteEducation( NewEducation, user_id);
+      return await deleteEducation(NewEducation, user_id);
     },
     onSuccess: (data: any) => {
-      queryClient.invalidateQueries({ queryKey: ["user_profile"] });
+      queryClient.invalidateQueries({ queryKey: ["profiles", employeeId] });
       toast.success("Education deleted successfully", "Deleted");
       Router.push(pathname);
     },

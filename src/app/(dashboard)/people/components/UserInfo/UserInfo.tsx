@@ -18,12 +18,15 @@ import { CgProfile } from "react-icons/cg";
 import useData from "@/hooks/useData";
 import { formatCustomDate } from "@/helpers/Formatdate";
 import { updateTime } from "@/helpers/date.helpers";
+import useEmployeeData from "@/hooks/useEmloyeeData";
 
-function UserInfo() {
-  const { user_profile: data } = useData();
+interface UserInfoPropsType {
+  employeeId: string;
+}
+function UserInfo({ employeeId }: UserInfoPropsType) {
+  const { employee_profile: data } = useEmployeeData({ employeeId });
   const user = data?.data;
-  const [CurrentTime, SetCurrentTime] = useState<string>(updateTime());
-  setInterval(() => SetCurrentTime(updateTime()), 1000);
+  if(!data?.data) return;
   return (
     <div className="mb-0 flex max-w-[14rem] grow flex-col items-start justify-center gap-[0.5rem] bg-gray-14 pt-4 ">
       <div className="mt-10 flex flex-col gap-[1rem] px-6">
@@ -52,7 +55,7 @@ function UserInfo() {
         <div className=" flex flex-col gap-[0.3rem]">
           <h1 className="text-sm text-color-primary-7">Hiring Date</h1>
           <h1 className="text-500 text-sm font-bold text-gray-15">
-            {formatCustomDate(user?.Hiring?.["Hire Date"])}
+            {formatCustomDate(user?.Hiring?.["Hire Date"]) || ""}
           </h1>
           <h1 className="text-sm font-medium text-gray-13">3y - 19d</h1>
         </div>
@@ -90,7 +93,7 @@ function UserInfo() {
           </div>
           <div className="flex items-center justify-start gap-[1REM] text-sm  font-normal text-gray-15">
             <CiClock2 fill="gray" />
-            <span>{CurrentTime} Local Time</span>
+            <span>{updateTime()} Local Time</span>
           </div>
         </div>
         <div className="h-px w-full  self-center bg-gray-16" />

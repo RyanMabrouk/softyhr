@@ -9,13 +9,16 @@ import updateData from "@/api/updateData";
 import useToast from "@/hooks/useToast";
 import { usePathname, useRouter } from "next/navigation";
 import useData from "@/hooks/useData";
+import useEmployeeData from "@/hooks/useEmloyeeData";
 interface EducationPropsType {
   FieldsArray: RowFieldType[];
   setTouched: (arg: boolean) => void;
   user: any;
   champ: string;
+  params: { employeeId: string };
   setData: (arg: any) => any;
   DATA: Object[];
+  employeeId: string;
 }
 
 function Education({
@@ -24,9 +27,10 @@ function Education({
   champ,
   setData,
   DATA,
+  employeeId,
 }: EducationPropsType): ReactNode {
   const { toast, toastContainer } = useToast();
-  const { user_profile: Data } = useData();
+  const { employee_profile: Data } = useEmployeeData({ employeeId });
   const router = useRouter();
   const pathname = usePathname();
   const Show_DeleteEducation = (id: string) => {

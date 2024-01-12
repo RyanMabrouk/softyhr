@@ -6,9 +6,13 @@ import React from "react";
 import companyLogo from "/public/cropped (2).jpg";
 import { usePathname } from "next/navigation";
 import useData from "@/hooks/useData";
+import useEmployeeData from "@/hooks/useEmloyeeData";
+
 export default function Nav() {
   const currentPath = usePathname();
-  const { user_profile: data } = useData();
+  const { employee_profile: data } = useEmployeeData({
+    employeeId: "69fc8647-c92d-4834-8238-efa5e82062f3",
+  });
   const employeId = data?.data?.user_id;
   return (
     <>

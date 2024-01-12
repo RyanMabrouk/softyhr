@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { memo, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { useDrag, useDrop } from "react-dnd";
 import { ReorderChamps } from "../../../helper/ReorderChamps.helper";
@@ -9,7 +9,13 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 import { UpdateSettings } from "@/api/updateSettings";
-import {  RowFieldType, RowType, Settings_type, champ_type, sectionType } from "@/types/database.tables.types";
+import {
+  RowFieldType,
+  RowType,
+  Settings_type,
+  champ_type,
+  sectionType,
+} from "@/types/database.tables.types";
 import RowFields from "./RowFields";
 
 interface RowFieldsListPropstype {
@@ -18,6 +24,8 @@ interface RowFieldsListPropstype {
   section: string;
   data: sectionType;
   rang: number;
+  setSettings: any;
+  Settings: any;
 }
 
 interface DropItemType {
@@ -25,22 +33,15 @@ interface DropItemType {
   champ: string;
 }
 
-function RowFiedlsList({ champ, Fields, section, data, rang }: RowFieldsListPropstype) {
-  const queryClient = useQueryClient();
-  const [Data, setData] = useState(Fields);
-
-  //--------update_section_rang------
-  const { mutateAsync, isPending, isPaused } = useMutation({
-    mutationFn: async (NewSettings: sectionType) => {
-      return await UpdateSettings({ [section]: NewSettings }).then(() => {
-        console.log("updated successfuly !!!");
-      });
-    },
-    onSuccess: (data: any) => {
-      queryClient.invalidateQueries({ queryKey: ["settings"] });
-    },
-  });
-
+function RowFiedlsList({
+  champ,
+  Settings,
+  setSettings,
+  section,
+  data,
+  Fields,
+  rang,
+}: RowFieldsListPropstype) {
   //-------drag_section-----------
   const [{ isDragging }, drag] = useDrag(() => ({
     type: "champ",
@@ -60,14 +61,14 @@ function RowFiedlsList({ champ, Fields, section, data, rang }: RowFieldsListProp
         " dropped on ",
         dropResult.get(monitor.targetId).spec.data,
       );
-      if (item?.rang == dropResult.get(monitor.targetId).spec.data?.rang) return;
-        const NewSettings = ReorderChamps(
-          item.rang,
-          dropResult.get(monitor.targetId).spec.data.rang,
-          data?.Champs,
-        );
-      mutateAsync({ Champs: NewSettings });
-      queryClient.invalidateQueries({ queryKey: ["settings"] });
+      if (item?.rang == dropResult.get(monitor.targetId).spec.data?.rang)
+        return;
+      const NewSettings = ReorderChamps(
+        item.rang,
+        dropResult.get(monitor.targetId).spec.data.rang,
+        data?.Champs,
+      );
+      setSettings({ Champs: NewSettings });
     },
     data: { rang, champ },
     collect: (monitor) => ({
@@ -75,7 +76,6 @@ function RowFiedlsList({ champ, Fields, section, data, rang }: RowFieldsListProp
     }),
   }));
 
-    
   if (typeof Fields?.[0] == "string") {
     return (
       <div ref={drag}>
@@ -89,7 +89,6 @@ function RowFiedlsList({ champ, Fields, section, data, rang }: RowFieldsListProp
       </div>
     );
   }
-
   return (
     <div ref={drag}>
       <div
@@ -107,6 +106,7 @@ function RowFiedlsList({ champ, Fields, section, data, rang }: RowFieldsListProp
                 RowFields={Row}
                 rang={rang}
                 key={uuidv4()}
+                setSettings={setSettings}
               />
             );
           },
@@ -116,4 +116,4 @@ function RowFiedlsList({ champ, Fields, section, data, rang }: RowFieldsListProp
   );
 }
 
-export default RowFiedlsList;
+export default memo(RowFiedlsList);

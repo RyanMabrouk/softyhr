@@ -15,12 +15,14 @@ import updateData from "@/api/updateData";
 import useToast from "@/hooks/useToast";
 import useData from "@/hooks/useData";
 import { Profile_Type, Settings_type_insert, database_profile_type_insert } from "@/types/database.tables.types";
+import useEmployeeData from "@/hooks/useEmloyeeData";
 
 interface UserSection {
   section: string;
+  employeeId:string;
 }
 
-function UserSection({ section }: UserSection) {
+function UserSection({ section, employeeId }: UserSection) {
   const router = useRouter();
   const { data, isPending } = useSettings(section);
   const { toast, toastContainer } = useToast();
@@ -35,7 +37,7 @@ function UserSection({ section }: UserSection) {
       });
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["user_profile"] });
+      queryClient.invalidateQueries({ queryKey: ["profiles"] });
       setData([]);
       router.refresh();
     },
@@ -44,7 +46,8 @@ function UserSection({ section }: UserSection) {
     },
   });
 
-  const { user_profile: user } = useData();
+  const { employee_profile: user } = useEmployeeData({ employeeId });
+
   const pathname = usePathname();
   const Router = useRouter();
   const SubmitForm = (formdata: FormData) => {
@@ -89,6 +92,7 @@ function UserSection({ section }: UserSection) {
                     </h1>
                     <div className="flex flex-col items-start justify-center gap-[1rem]">
                       <ComponentChamps
+                        employeeId={employeeId}
                         champ={champ}
                         user={user?.data}
                         setData={setData}

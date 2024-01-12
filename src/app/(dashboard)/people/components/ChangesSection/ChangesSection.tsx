@@ -40,7 +40,7 @@ function ChangesSection({ touched, setTouched }: ChangesSectionPropsType) {
             type="reset"
             className="cursor-pointer text-cyan-600 hover:underline"
             onClick={() => {
-              queryClient.invalidateQueries({ queryKey: ["user_profile"] });
+              queryClient.invalidateQueries({ queryKey: ["profiles"] });
               setTouched(false);
               router.refresh();
             }}
