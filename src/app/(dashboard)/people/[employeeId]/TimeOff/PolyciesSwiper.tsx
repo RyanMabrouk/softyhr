@@ -10,13 +10,13 @@ import {
   database_leave_request_duration_used_type,
   database_leave_requests_type,
   database_profile_leave_balance_type,
-  database_profile_type,
   databese_leave_categories_track_time_unit_type,
   databese_leave_categories_type,
 } from "@/types/database.tables.types";
 import { generateLeaveCategorieIcon } from "@/helpers/leave.helpers";
 import useToast from "@/hooks/useToast";
 import { useParams } from "next/navigation";
+import useEmployeeData from "@/hooks/useEmloyeeData";
 interface formatted_policy_type {
   id: number;
   name: string;
@@ -34,14 +34,13 @@ export function PolyciesSwiper() {
   const {
     leave_policies: { data: leave_policies, isPending: isPending1 },
     leave_categories: { data: leave_categories, isPending: isPending2 },
-    leave_requests: { data: leave_requests, isPending: isPending3 },
-    all_profiles: { data: all_profiles, isPending: isPending4 },
   } = useData();
-  const isPending = isPending1 || isPending2 || isPending3 || isPending4;
-  const current_user_profile = all_profiles?.find(
-    (profile: database_profile_type) => profile.user_id === employeeId,
-  );
-  const user_policies_ids = current_user_profile?.leave_balance?.map(
+  const {
+    leave_requests: { data: leave_requests, isPending: isPending4 },
+    employee_profile: { data: employee_profile, isPending: isPending5 },
+  } = useEmployeeData({ employeeId: employeeId });
+  const isPending = isPending1 || isPending2 || isPending4 || isPending5;
+  const user_policies_ids = employee_profile?.leave_balance?.map(
     (e: database_profile_leave_balance_type) => e.policy_id,
   );
   const policies: formatted_policy_type[] = leave_policies
@@ -84,7 +83,7 @@ export function PolyciesSwiper() {
         }),
         hours_scheduled: hours_scheduled,
         hours_available:
-          current_user_profile?.leave_balance?.find(
+          employee_profile?.leave_balance?.find(
             (e: database_profile_leave_balance_type) =>
               e.policy_id == policy.id,
           )?.balance || 0,

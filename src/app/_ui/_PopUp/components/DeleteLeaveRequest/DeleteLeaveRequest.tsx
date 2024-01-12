@@ -3,11 +3,11 @@ import deleteLeaveRequest from "@/actions/leave/deleteLeaveRequest";
 import { SubmitBtn } from "@/app/(auth)/login/_ui/SubmitBtn";
 import { formatDateToMonDDYYYY } from "@/helpers/date.helpers";
 import useData from "@/hooks/useData";
+import useEmployeeData from "@/hooks/useEmloyeeData";
 import useToast from "@/hooks/useToast";
 import {
   database_leave_policies_type,
   database_leave_requests_type,
-  database_profile_type,
 } from "@/types/database.tables.types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
@@ -20,19 +20,17 @@ export default function DeleteLeaveRequest() {
   const leave_request_id = useSearchParams().get("leave_request_id");
   const { employeeId } = useParams();
   const {
-    all_profiles: { data: all_profiles },
-    leave_requests: { data: leave_requests },
     leave_policies: { data: leave_policies },
   } = useData();
-  // User Profile Data
-  const current_user_profile = all_profiles?.find(
-    (profile: database_profile_type) => profile.user_id == employeeId,
-  );
+  const {
+    leave_requests: { data: leave_requests },
+    employee_profile: { data: employee_profile },
+  } = useEmployeeData({ employeeId: employeeId });
   // Current User Data
   const full_name: string =
-    current_user_profile?.["Basic Information"]?.["First name"] +
+    employee_profile?.["Basic Information"]?.["First name"] +
     " " +
-    current_user_profile?.["Basic Information"]?.["Last name"];
+    employee_profile?.["Basic Information"]?.["Last name"];
   // Current Leave Request Data
   const current_leave_request: database_leave_requests_type =
     leave_requests?.find(

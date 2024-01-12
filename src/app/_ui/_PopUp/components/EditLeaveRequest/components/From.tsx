@@ -13,6 +13,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import insertLeaveRequest from "@/actions/leave/insertLeaveRequest";
 import { errorContext, errorContextType } from "../context/errorContext";
 import { checkIfOjectValuesAreEmpty } from "@/helpers/array.helpers";
+import useEmployeeData from "@/hooks/useEmloyeeData";
 
 export function From() {
   const Router = useRouter();
@@ -23,9 +24,11 @@ export function From() {
   const formRef = useRef<HTMLFormElement>(null);
   const { formError } = useContext<errorContextType>(errorContext);
   const {
-    leave_requests: { data: leave_requests, isPending: isPending2 },
     user_profile: { data: user_profile, isPending: isPending3 },
   } = useData();
+  const {
+    leave_requests: { data: leave_requests, isPending: isPending2 },
+  } = useEmployeeData({ employeeId: employeeId });
   // Leave Requests Data
   const request_data: database_leave_requests_type = leave_requests?.find(
     (request: database_leave_requests_type) => request.id == leave_request_id,

@@ -15,6 +15,7 @@ import default_avatar from "/public/default_avatar.jpeg";
 import default_user_avatar from "/public/default_avatar.png";
 import { formatTotalHoursToTimeUnit } from "@/helpers/leave.helpers";
 import { formatDateToMonDDYYYY } from "@/helpers/date.helpers";
+import useEmployeeData from "@/hooks/useEmloyeeData";
 
 function ViewLeaveRequestComment() {
   const Router = useRouter();
@@ -22,13 +23,13 @@ function ViewLeaveRequestComment() {
   const leave_request_id = useSearchParams().get("leave_request_id");
   const {
     all_profiles: { data: all_profiles },
-    leave_requests: { data: leave_requests },
     leave_categories: { data: leave_categories },
     leave_policies: { data: leave_policies },
   } = useData();
-  const current_user_profile = all_profiles?.find(
-    (profile: database_profile_type) => profile.user_id === employeeId,
-  );
+  const {
+    leave_requests: { data: leave_requests },
+    employee_profile: { data: employee_profile },
+  } = useEmployeeData({ employeeId: employeeId });
   const leave_request_data = leave_requests?.find(
     (request: database_leave_requests_type) =>
       request.id === Number(leave_request_id),
@@ -49,9 +50,9 @@ function ViewLeaveRequestComment() {
     " " +
     admin_profile?.["Basic Information"]?.["Last name"];
   const full_name: string =
-    current_user_profile?.["Basic Information"]?.["First name"] +
+    employee_profile?.["Basic Information"]?.["First name"] +
     " " +
-    current_user_profile?.["Basic Information"]?.["Last name"];
+    employee_profile?.["Basic Information"]?.["Last name"];
   return (
     <>
       <div className="z-50 flex flex-col gap-2">
@@ -71,7 +72,7 @@ function ViewLeaveRequestComment() {
           </div>
           <header className="mb-3 flex w-full flex-row items-center gap-2 bg-gray-14 px-4 py-3">
             <Image
-              src={current_user_profile?.picture || default_avatar}
+              src={employee_profile?.picture || default_avatar}
               className="h-12 w-12 rounded-full"
               alt=""
               width={80}

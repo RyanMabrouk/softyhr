@@ -21,6 +21,7 @@ import useToast from "@/hooks/useToast";
 import { MdCancel } from "react-icons/md";
 import { AcceptRequestBtn } from "./_ui/Buttons/AcceptRequestBtn";
 import { RejectRequestBtn } from "./_ui/Buttons/RejectRequestBtn";
+import useEmployeeData from "@/hooks/useEmloyeeData";
 type upcoming_leave_requests_data_type = {
   id: number;
   start_at: Date;
@@ -38,11 +39,13 @@ export function UpcomingTimeOff() {
   const { employeeId } = useParams();
   const { toastContainer } = useToast();
   const {
-    leave_requests: { data: leave_requests, isPending: isPending2 },
     leave_categories: { data: leave_categories, isPending: isPending3 },
     leave_policies: { data: leave_policies, isPending: isPending4 },
     user_profile: { data: user_profile, isPending: isPending5 },
   } = useData();
+  const {
+    leave_requests: { data: leave_requests, isPending: isPending2 },
+  } = useEmployeeData({ employeeId: employeeId });
   const isPending = isPending2 || isPending3 || isPending4 || isPending5;
   // format leave requests data to upcoming leave requests only
   const upcoming_leave_requests_data:
