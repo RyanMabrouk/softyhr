@@ -49,8 +49,10 @@ export function From() {
       }
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["leave_requests"] });
-      queryClient.invalidateQueries({ queryKey: ["all_profiles"] });
+      queryClient.invalidateQueries({
+        queryKey: ["leave_requests", employeeId],
+      });
+      queryClient.invalidateQueries({ queryKey: ["profiles", employeeId] });
       //Router.back();
     },
   });
@@ -68,7 +70,10 @@ export function From() {
       }
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["leave_requests"] });
+      queryClient.invalidateQueries({
+        queryKey: ["leave_requests", employeeId],
+      });
+      queryClient.invalidateQueries({ queryKey: ["profiles", employeeId] });
       //Router.back();
     },
   });
@@ -86,8 +91,10 @@ export function From() {
       }
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["leave_requests"] });
-      queryClient.invalidateQueries({ queryKey: ["all_profiles"] });
+      queryClient.invalidateQueries({
+        queryKey: ["leave_requests", employeeId],
+      });
+      queryClient.invalidateQueries({ queryKey: ["profiles", employeeId] });
       formRef.current?.reset();
       //Router.back();
     },

@@ -7,6 +7,8 @@ import RejectLeaveRequest from "@/app/_ui/_PopUp/components/RejectLeaveRequest/R
 import ViewLeaveRequestComment from "@/app/_ui/_PopUp/components/ViewLeaveRequestComment.tsx/ViewLeaveRequestComment";
 import EditTablechamps from "@/app/_ui/_PopUp/components/EditTablechamps/EditTablechamps";
 import { PopupType } from "@/types/userInfoTypes.type";
+import ChangeLeavePolicy from "@/app/_ui/_PopUp/components/ChangeLeavePolicy/ChangeLeavePolicy";
+import DeleteLeavePolicy from "@/app/_ui/_PopUp/components/DeleteLeavePolicy/DeleteLeavePolicy";
 
 export const popups: any = {
   EDIT_FIELD: EditFields,
@@ -16,4 +18,6 @@ export const popups: any = {
   VIEW_LEAVE_REQUEST_COMMENT: ViewLeaveRequestComment,
   ADJUST_LEAVE_POLICY_BALANCE: AdjustLeavePolicyBalance,
   DELETE_LEAVE_REQUEST: DeleteLeaveRequest,
+  CHANGE_LEAVE_POLICY: ChangeLeavePolicy,
+  DELETE_LEAVE_POLICY: DeleteLeavePolicy,
 };

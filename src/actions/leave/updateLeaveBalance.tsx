@@ -7,11 +7,13 @@ export default async function updateLeaveBalance({
   policy_id,
   categories_id,
   total_added_duration,
+  new_policy_id,
 }: {
   user_id: string | string[];
   policy_id: number;
   categories_id?: number;
   total_added_duration: number;
+  new_policy_id?: number;
 }) {
   const { data: data, error } = await getData("profiles", {
     column: "leave_balance",
@@ -52,7 +54,9 @@ export default async function updateLeaveBalance({
     const newBalance = [
       ...unchanged_leave_balance,
       {
-        policy_id: policy_id ?? changed_leave_balance?.policy_id,
+        policy_id: new_policy_id
+          ? new_policy_id
+          : policy_id ?? changed_leave_balance?.policy_id,
         categories_id: categories_id ?? changed_leave_balance?.categories_id,
         balance: new_policy_balance,
       },

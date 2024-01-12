@@ -49,7 +49,10 @@ export function History() {
   const {
     leave_policies: { data: leave_policies, isPending: isPending3 },
     leave_categories: { data: leave_categories, isPending: isPending5 },
-    all_profiles: { data: all_profiles, isPending: isPending6 },
+    all_profiles_basic_info: {
+      data: all_profiles_basic_info,
+      isPending: isPending6,
+    },
   } = useData();
   const {
     leave_accrued: { data: leave_accrued, isPending: isPending4 },
@@ -74,7 +77,7 @@ export function History() {
         (categorie: databese_leave_categories_type) =>
           categorie.id == policy?.categories_id,
       );
-      const reviewed_by_info = all_profiles?.find(
+      const reviewed_by_info = all_profiles_basic_info?.find(
         (profile: database_profile_type) => profile.user_id === e.reviewed_by,
       )?.["Basic Information"];
       return {
@@ -218,7 +221,7 @@ export function History() {
             leave_accrued_data &&
             leave_requests_data && (
               <HistoryTable
-                layout="grid-cols-[12%_auto_15%_12%_15%_8%]"
+                layout="grid-cols-[12%_auto_12%_12%_12%_8%]"
                 Headers={[
                   <DateHeader key={"header"} />,
                   "Description",
@@ -262,13 +265,17 @@ export function History() {
                           e.track_time_unit,
                         )
                       : "",
-                    "Accrued (+)": e.duration_accrued
-                      ? formatTotalHoursToTimeUnit(
+                    "Accrued (+)": e.duration_accrued ? (
+                      <span className="pl-3">
+                        {formatTotalHoursToTimeUnit(
                           e.duration_accrued,
                           e.track_time_unit,
-                        )
-                      : "",
-                    Balance: e.Balance,
+                        )}
+                      </span>
+                    ) : (
+                      ""
+                    ),
+                    Balance: <span className="pl-4">{e.Balance}</span>,
                     " ": !e.duration_accrued &&
                       employee_profile?.role === "admin" && (
                         <div className=" flex h-[4.25rem] w-full  flex-row  items-start justify-center gap-1 px-4 pt-3 text-center align-top text-gray-27  ">

@@ -1,5 +1,5 @@
 import React from "react";
-import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import { FormControl, MenuItem, Select } from "@mui/material";
 import { Option } from "./_PopUp/components/EditLeaveRequest/EditLeaveRequest";
 export function SelectGeneric({
   label,
@@ -42,14 +42,16 @@ export function SelectGeneric({
           setValueInParent ? setValueInParent(e.target.value) : null
         }
       >
-        <MenuItem
-          value="none"
-          className="peer font-sans capitalize text-gray-27"
-          disabled
-          hidden={true}
-        >
-          {inputLabel}
-        </MenuItem>
+        {inputLabel && (
+          <MenuItem
+            value="none"
+            className="peer font-sans capitalize text-gray-27"
+            disabled
+            hidden={true}
+          >
+            {inputLabel}
+          </MenuItem>
+        )}
         {options?.map((e: any, i: number) => {
           return (
             <MenuItem
