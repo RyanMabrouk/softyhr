@@ -17,7 +17,7 @@ function EditFields() {
   const pathname = usePathname();
   const settings_type = pathname.split("/")[pathname.split("/").length - 1];
   const { data, isPending } = useSettings(settings_type);
-  const Router = useRouter()
+  const Router = useRouter();
   const AddFields: RowFieldType = {
     placeHolder: "",
     name: settings_type,
@@ -67,13 +67,7 @@ function EditFields() {
           className="p-8 py-10"
           title="Edit Fields for All Employees"
         >
-          <div className="mb-2 flex w-full items-center  justify-between border-b border-gray-16 pb-2">
-            <h1 className="text-lg font-bold capitalize">
-              {pathname.split("/")[pathname.split("/").length - 1]}
-            </h1>
-            <SelectInput RowField={AddFields} />
-          </div>
-          <div className="shadow-popup rounded-sm bg-white p-8 py-8">
+          <div className="rounded-sm bg-white">
             <div className="mb-2 flex w-full items-center  justify-between border-b border-gray-16 pb-2">
               <h1 className="text-lg font-bold capitalize">
                 {pathname.split("/")[pathname.split("/").length - 1]}
@@ -117,4 +111,4 @@ function EditFields() {
   );
 }
 
-export default memo(EditFields);
+export default EditFields;

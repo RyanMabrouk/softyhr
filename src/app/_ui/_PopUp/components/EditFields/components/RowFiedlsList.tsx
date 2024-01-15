@@ -10,10 +10,7 @@ import {
 } from "@tanstack/react-query";
 import { UpdateSettings } from "@/api/updateSettings";
 import {
-  RowFieldType,
   RowType,
-  Settings_type,
-  champ_type,
   sectionType,
 } from "@/types/database.tables.types";
 import RowFields from "./RowFields";

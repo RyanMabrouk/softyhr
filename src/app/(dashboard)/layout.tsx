@@ -1,14 +1,16 @@
+import { headers } from "next/headers";
 import React from "react";
-import { redirect } from "next/navigation";
+import { redirect, usePathname } from "next/navigation";
 import getSession from "@/api/getSession";
 import Initialize from "@/provider/Initilize";
 import Nav from "../_layout/_Nav/Nav";
+import { getLogLevel, getLogger } from "@/logging/log-util";
 async function Layout({
   children,
   params: { employeeId },
 }: {
   children: React.ReactNode;
-  params: { employeeId :string};
+  params: { employeeId: string };
 }) {
   const session = await getSession();
   if (!session) redirect("/login");

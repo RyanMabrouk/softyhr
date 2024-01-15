@@ -34,6 +34,7 @@ export const LayoutRoute: LayoutRouteType[] = [
   },
 ];
 
+export const CAREER_PATH = "/careers";
 export interface LayoutRouteType {
   label: string;
   pathFn: (currentPath: string, arg0: string) => boolean;
