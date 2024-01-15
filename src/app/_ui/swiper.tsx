@@ -48,6 +48,7 @@ export default function CustomSwiper(props: {
       allowTouchMove={props.allowTouchMove}
       //centeredSlidesBounds={true}
       observer={true}
+      className="w-full"
     >
       {props.slides.map((slide: any, index: number) => (
         <SwiperSlide

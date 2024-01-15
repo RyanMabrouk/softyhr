@@ -5,10 +5,9 @@ import EditFields from "@/app/_ui/_PopUp/components/EditFields/EditFields";
 import EditLeaveRequest from "@/app/_ui/_PopUp/components/EditLeaveRequest/EditLeaveRequest";
 import RejectLeaveRequest from "@/app/_ui/_PopUp/components/RejectLeaveRequest/RejectLeaveRequest";
 import ViewLeaveRequestComment from "@/app/_ui/_PopUp/components/ViewLeaveRequestComment.tsx/ViewLeaveRequestComment";
-import EditTablechamps from "@/app/_ui/_PopUp/components/EditTablechamps/EditTablechamps";
-import { PopupType } from "@/types/userInfoTypes.type";
 import ChangeLeavePolicy from "@/app/_ui/_PopUp/components/ChangeLeavePolicy/ChangeLeavePolicy";
 import DeleteLeavePolicy from "@/app/_ui/_PopUp/components/DeleteLeavePolicy/DeleteLeavePolicy";
+import AddEntry from "@/app/_ui/_PopUp/components/AddEntry/AddEntry";
 
 export const popups: any = {
   EDIT_FIELD: EditFields,
@@ -20,4 +19,5 @@ export const popups: any = {
   DELETE_LEAVE_REQUEST: DeleteLeaveRequest,
   CHANGE_LEAVE_POLICY: ChangeLeavePolicy,
   DELETE_LEAVE_POLICY: DeleteLeavePolicy,
+  ADD_ENTRY: AddEntry
 };

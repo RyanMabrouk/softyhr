@@ -8,12 +8,12 @@ import { usePathname } from "next/navigation";
 import useData from "@/hooks/useData";
 import useEmployeeData from "@/hooks/useEmloyeeData";
 
-export default function Nav() {
+interface NavPropsType {
+  employeeId:string;
+}
+
+export default function Nav({employeeId}:NavPropsType) {
   const currentPath = usePathname();
-  const { employee_profile: data } = useEmployeeData({
-    employeeId: "69fc8647-c92d-4834-8238-efa5e82062f3",
-  });
-  const employeId = data?.data?.user_id;
   return (
     <>
       <nav className="flex h-20 items-center justify-start gap-[2rem] bg-gray-17 px-20">
@@ -28,7 +28,7 @@ export default function Nav() {
               { label, pathFn, defaultPath }: LayoutRouteType,
               index: number,
             ) => {
-              const isActive = pathFn(currentPath, String(employeId));
+              const isActive = pathFn(currentPath, String(employeeId));
               return (
                 <Link
                   key={index}
@@ -38,7 +38,7 @@ export default function Nav() {
                       ? "bg-gray-14 font-bold !text-color-primary-4"
                       : "")
                   }
-                  href={defaultPath ? defaultPath(employeId) : ""}
+                  href={defaultPath ? defaultPath(employeeId) : ""}
                 >
                   {label}
                 </Link>

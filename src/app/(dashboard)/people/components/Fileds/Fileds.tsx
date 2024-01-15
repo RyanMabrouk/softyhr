@@ -6,7 +6,7 @@ interface FiledsChampsPropsType {
   FieldsArray: RowFieldType[];
   setTouched?: ((arg: boolean) => void) | undefined;
   user?: any | undefined;
-  champ: string;
+  champ?: string;
 }
 function FiledsChamps({
   FieldsArray,
@@ -14,6 +14,7 @@ function FiledsChamps({
   user,
   champ,
 }: FiledsChampsPropsType): ReactNode {
+  console.log("i am in");
   return (
     <>
       {FieldsArray?.sort((a: any, b: any) => a.rang - b.rang)?.map(
@@ -25,10 +26,11 @@ function FiledsChamps({
               >
                 {Row?.map((RowField: any) => {
                   const Component = Field[RowField?.type.toUpperCase()];
+                  console.log(RowField);
                   return (
                     <Component
-                      champ={champ}
-                      defaultValue={user?.[champ]?.[RowField?.name]}
+                      champ={champ || ""}
+                      defaultValue={user?.[champ || ""]?.[RowField?.name]}
                       user={user}
                       setTouched={setTouched}
                       key={uuidv4()}
