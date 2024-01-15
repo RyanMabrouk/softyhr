@@ -1,6 +1,6 @@
 "use client";
 import deleteLeaveRequest from "@/actions/leave/deleteLeaveRequest";
-import { SubmitBtn } from "@/app/(auth)/login/_ui/SubmitBtn";
+import { SubmitBtn } from "@/app/_ui/SubmitBtn";
 import { formatDateToMonDDYYYY } from "@/helpers/date.helpers";
 import useData from "@/hooks/useData";
 import useEmployeeData from "@/hooks/useEmloyeeData";

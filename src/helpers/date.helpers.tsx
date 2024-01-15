@@ -107,7 +107,7 @@ export function getYearDiff(startDate: Date, endDate: Date) {
 
   return Math.abs(date.getUTCFullYear() - 1970);
 }
-
+// ??
 export function updateTime() {
   const now = new Date();
   const hours = now.getHours();
@@ -120,4 +120,12 @@ export function updateTime() {
     .padStart(2, "0")}`;
 
   return String(clockStr);
+}
+// get the years and days since a date
+export function YearsAndDaysSinceDate(date: Date) {
+  const now = new Date();
+  const diff = now.getTime() - date.getTime();
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const years = Math.floor(days / 365);
+  return `${years}y - ${days - years * 365}d`;
 }

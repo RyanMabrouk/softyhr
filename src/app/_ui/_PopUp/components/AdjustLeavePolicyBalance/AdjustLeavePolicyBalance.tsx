@@ -1,5 +1,5 @@
 import adjustLeavePolicyBalance from "@/actions/leave/adjustLeavePolicyBalance";
-import { SubmitBtn } from "@/app/(auth)/login/_ui/SubmitBtn";
+import { SubmitBtn } from "@/app/_ui/SubmitBtn";
 import useData from "@/hooks/useData";
 import useToast from "@/hooks/useToast";
 import {

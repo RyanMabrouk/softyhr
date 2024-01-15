@@ -1,4 +1,4 @@
-import { SubmitBtn } from "@/app/(auth)/login/_ui/SubmitBtn";
+import { SubmitBtn } from "@/app/_ui/SubmitBtn";
 import React from "react";
 import PopUpSkeleton from "../../PopUpSkeleton";
 import { IoWarning } from "react-icons/io5";

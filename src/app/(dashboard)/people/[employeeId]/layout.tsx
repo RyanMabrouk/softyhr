@@ -8,7 +8,6 @@ import { usePathname } from "next/navigation";
 import UserInfo from "../components/UserInfo/UserInfo";
 import DropDown from "../components/DropDown/DropDown";
 import { Settings, changementRequest } from "@/constants/userInfo";
-import useData from "@/hooks/useData";
 import useEmployeeData from "@/hooks/useEmloyeeData";
 interface EmployePropsType {
   params: { employeeId: string };

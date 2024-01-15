@@ -7,7 +7,7 @@ import { IoShieldCheckmarkOutline } from "react-icons/io5";
 import updatePassword from "@/actions/auth/updatePassword";
 import { FaRegCircle } from "react-icons/fa6";
 import useToast from "@/hooks/useToast";
-import { SubmitBtn } from "../login/_ui/SubmitBtn";
+import { SubmitBtn } from "../../_ui/SubmitBtn";
 export function Form() {
   const { toast, toastContainer } = useToast();
   const [password, setPassword] = useState("");

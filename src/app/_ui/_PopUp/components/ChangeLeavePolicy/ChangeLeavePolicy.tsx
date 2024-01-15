@@ -4,7 +4,7 @@ import PopUpSkeleton from "../../PopUpSkeleton";
 import Image from "next/image";
 import default_avatar from "/public/default_avatar.jpeg";
 import { SelectGeneric } from "@/app/_ui/SelectGeneric";
-import { SubmitBtn } from "@/app/(auth)/login/_ui/SubmitBtn";
+import { SubmitBtn } from "@/app/_ui/SubmitBtn";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import changePolicy from "@/actions/leave/changePolicy";

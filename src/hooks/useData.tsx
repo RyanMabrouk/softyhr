@@ -4,7 +4,9 @@ import { useQuery } from "@tanstack/react-query";
 // you can use this hook to get the current url
 import { useUrl } from "nextjs-current-url";
 //--------------------------------------------
-export default function useData(match?:{ [key: string]: string | number | boolean | null | string[] | undefined }) {
+export default function useData(match?: {
+  [key: string]: string | number | boolean | null | string[] | undefined;
+}) {
   //--------------------Settings--------------------
   const { data: settings, isPending } = useQuery({
     queryKey: ["settings"],

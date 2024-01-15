@@ -1,4 +1,4 @@
-import { Button } from "@/app/(auth)/login/_ui/Button";
+import { Button } from "@/app/_ui/Button";
 import useData from "@/hooks/useData";
 import {
   database_leave_policies_type,

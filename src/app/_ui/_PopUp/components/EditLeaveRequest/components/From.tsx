@@ -4,7 +4,7 @@ import { database_leave_requests_type } from "@/types/database.tables.types";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import React, { useContext, useRef } from "react";
 import cancelLeaveRequest from "@/actions/leave/cancelLeaveRequest";
-import { SubmitBtn } from "@/app/(auth)/login/_ui/SubmitBtn";
+import { SubmitBtn } from "@/app/_ui/SubmitBtn";
 import updateLeaveRequest from "@/actions/leave/updateLeaveRequest";
 import DateRangeContextProvider from "../context/dateRangeContext";
 import { FormInputs } from "./FormInputs";

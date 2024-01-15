@@ -17,8 +17,9 @@ import { FaMapLocation } from "react-icons/fa6";
 import { CgProfile } from "react-icons/cg";
 import useData from "@/hooks/useData";
 import { formatCustomDate } from "@/helpers/Formatdate";
-import { updateTime } from "@/helpers/date.helpers";
+import { YearsAndDaysSinceDate, updateTime } from "@/helpers/date.helpers";
 import useEmployeeData from "@/hooks/useEmloyeeData";
+import { UnderlinedLink } from "../../../../_ui/UnderlinedLink";
 
 interface UserInfoPropsType {
   employeeId: string;
@@ -26,7 +27,7 @@ interface UserInfoPropsType {
 function UserInfo({ employeeId }: UserInfoPropsType) {
   const { employee_profile: data } = useEmployeeData({ employeeId });
   const user = data?.data;
-  if(!data?.data) return;
+  if (!data?.data) return;
   return (
     <div className="mb-0 flex max-w-[14rem] grow flex-col items-start justify-center gap-[0.5rem] bg-gray-14 pt-4 ">
       <div className="mt-10 flex flex-col gap-[1rem] px-6">
@@ -57,7 +58,9 @@ function UserInfo({ employeeId }: UserInfoPropsType) {
           <h1 className="text-500 text-sm font-bold text-gray-15">
             {formatCustomDate(user?.Hiring?.["Hire Date"]) || ""}
           </h1>
-          <h1 className="text-sm font-medium text-gray-13">3y - 19d</h1>
+          <h1 className="text-sm font-medium text-gray-13">
+            {YearsAndDaysSinceDate(new Date(user?.Hiring?.["Hire Date"]))}
+          </h1>
         </div>
         <div className="h-px w-full  self-center bg-gray-16" />
         <div className="flex flex-col items-start justify-center gap-[0.5rem]">
@@ -99,41 +102,16 @@ function UserInfo({ employeeId }: UserInfoPropsType) {
         <div className="h-px w-full  self-center bg-gray-16" />
         <div className="flex flex-col items-start justify-center gap-[0.5rem]">
           <h1 className="text-sm text-color-primary-7">Rapports directs</h1>
-          <div className="flex items-center justify-start gap-[1rem]">
-            <CgProfile fill="gray" />
+          <UnderlinedLink>
+            <CgProfile className="text-gray-15" />
             <h1 className="cursor-pointer text-sm font-normal text-gray-15 underline-offset-1 hover:underline">
-              maja andev
+              Employee Name
             </h1>
-          </div>
-          <div className="flex items-center justify-start gap-[1rem]">
-            <CgProfile fill="gray" />
-            <h1 className="cursor-pointer text-sm font-normal text-gray-15 underline-offset-1 hover:underline">
-              maja andev
-            </h1>
-          </div>
-          <div className="flex items-center justify-start gap-[1rem]">
-            <CgProfile fill="gray" />
-            <h1 className="cursor-pointer text-sm font-normal text-gray-15 underline-offset-1 hover:underline">
-              maja andev
-            </h1>
-          </div>
-          <div className="flex items-center justify-start gap-[1rem]">
-            <CgProfile fill="gray" />
-            <h1 className="cursor-pointer text-sm font-normal text-gray-15 underline-offset-1 hover:underline">
-              maja andev
-            </h1>
-          </div>
-          <div className="flex items-center justify-start gap-[1rem]">
-            <CgProfile fill="gray" />
-            <h1 className="cursor-pointer text-sm font-normal text-gray-15 underline-offset-1 hover:underline">
-              maja andev
-            </h1>
-          </div>
+          </UnderlinedLink>
         </div>
       </div>
       <div className="h-full"></div>
     </div>
   );
 }
-
 export default UserInfo;
