@@ -5,7 +5,6 @@ import Link from "next/link";
 import React from "react";
 import companyLogo from "/public/cropped (2).jpg";
 import { usePathname } from "next/navigation";
-import useData from "@/hooks/useData";
 import useEmployeeData from "@/hooks/useEmloyeeData";
 
 export default function Nav() {

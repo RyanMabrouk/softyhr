@@ -8,7 +8,7 @@ import { useParams, useRouter, useSearchParams } from "next/navigation";
 import React from "react";
 import { BiSolidDislike } from "react-icons/bi";
 import { CgClose } from "react-icons/cg";
-import PopUpSkeleton from "../../PopUpSkeleton";
+import PopUpSkeleton from "../../../PopUpSkeleton";
 
 export default function RejectLeaveRequest() {
   const { toast } = useToast();
@@ -51,7 +51,7 @@ export default function RejectLeaveRequest() {
         >
           <BiSolidDislike className="-mb-4 h-24 w-24 text-fabric-700 " />
           <div className="text-[1.2rem] font-semibold  leading-[1.733rem] text-gray-27">
-            Okay, You have successfully denied this request.
+            Okay, You will denie this request.
           </div>
           <div className="-mt-4 text-[15px] leading-[22px] text-gray-20">
             You can leave a comment on it if you would like to.

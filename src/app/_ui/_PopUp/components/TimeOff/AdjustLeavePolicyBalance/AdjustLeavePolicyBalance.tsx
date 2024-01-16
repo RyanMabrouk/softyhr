@@ -5,37 +5,31 @@ import useToast from "@/hooks/useToast";
 import {
   database_leave_policies_type,
   database_profile_leave_balance_type,
-  database_profile_type,
 } from "@/types/database.tables.types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import default_avatar from "/public/default_avatar.jpeg";
 import React, { useState } from "react";
 import Image from "next/image";
-import PopUpSkeleton from "../../PopUpSkeleton";
+import PopUpSkeleton from "../../../PopUpSkeleton";
 import { SelectGeneric } from "@/app/_ui/SelectGeneric";
 import useEmployeeData from "@/hooks/useEmloyeeData";
 export default function AdjustLeavePolicyBalance() {
-  const { toast, toastContainer } = useToast();
+  const { toast } = useToast();
   const Router = useRouter();
   const [addedHours, setAddedHours] = useState(0);
   const [additionType, setAdditionType] = useState<"1" | "-1">("1"); // ["1", "-1"]
   const leave_policy_id = useSearchParams().get("leave_policy_id");
   const { employeeId } = useParams();
   const {
-    all_profiles_basic_info: { data: all_profiles_basic_info },
     leave_policies: { data: leave_policies },
   } = useData();
   const {
     employee_profile: { data: employee_profile },
   } = useEmployeeData({ employeeId: employeeId });
-  // cuurrent user profile
-  const current_user_profile = all_profiles_basic_info?.find(
-    (profile: database_profile_type) => profile.user_id === employeeId,
-  );
   // current policy balance
   const leave_balance: database_profile_leave_balance_type[] =
-    current_user_profile?.leave_balance;
+    employee_profile?.leave_balance;
   const policy_balance = leave_balance?.find(
     (e) => e.policy_id == Number(leave_policy_id),
   )?.balance;
@@ -69,13 +63,14 @@ export default function AdjustLeavePolicyBalance() {
       queryClient.invalidateQueries({
         queryKey: ["leave_accrued", employeeId],
       });
-      queryClient.invalidateQueries({ queryKey: ["all_profiles_basic_info"] });
-      //Router.back();
+      queryClient.invalidateQueries({
+        queryKey: ["profiles", employeeId],
+      });
+      Router.back();
     },
   });
   return (
     <>
-      {toastContainer}
       <PopUpSkeleton
         className="flex w-full min-w-[35rem] flex-col items-center px-8 py-6"
         title={`Adjust ${leave_policy_data?.name} Balance`}

@@ -6,7 +6,10 @@ import React, { useContext, useRef } from "react";
 import cancelLeaveRequest from "@/actions/leave/cancelLeaveRequest";
 import { SubmitBtn } from "@/app/_ui/SubmitBtn";
 import updateLeaveRequest from "@/actions/leave/updateLeaveRequest";
-import DateRangeContextProvider from "../context/dateRangeContext";
+import DateRangeContextProvider, {
+  dateRangeContext,
+  dateRangeContextType,
+} from "../context/dateRangeContext";
 import { FormInputs } from "./FormInputs";
 import useToast from "@/hooks/useToast";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -20,14 +23,14 @@ export function From() {
   const { employeeId } = useParams();
   const searchParams = useSearchParams();
   const leave_request_id = Number(searchParams.get("leave_request_id"));
-  const { toast, toastContainer } = useToast();
+  const { toast } = useToast();
   const formRef = useRef<HTMLFormElement>(null);
   const { formError } = useContext<errorContextType>(errorContext);
   const {
-    user_profile: { data: user_profile, isPending: isPending3 },
+    user_profile: { data: user_profile },
   } = useData();
   const {
-    leave_requests: { data: leave_requests, isPending: isPending2 },
+    leave_requests: { data: leave_requests },
   } = useEmployeeData({ employeeId: employeeId });
   // Leave Requests Data
   const request_data: database_leave_requests_type = leave_requests?.find(
@@ -45,7 +48,7 @@ export function From() {
       if (error) {
         toast.error(error.message, error.type);
       } else {
-        toast.success("Leave Request Updated Successfully");
+        toast.success("Leave Request Updated Successfully", "Success");
       }
     },
     onSuccess: () => {
@@ -53,7 +56,7 @@ export function From() {
         queryKey: ["leave_requests", employeeId],
       });
       queryClient.invalidateQueries({ queryKey: ["profiles", employeeId] });
-      //Router.back();
+      Router.back();
     },
   });
   // Mutation Function for Inserting Leave Request
@@ -66,7 +69,7 @@ export function From() {
       if (error) {
         toast.error(error.message, error.type);
       } else {
-        toast.success("Leave Request Added Successfully");
+        toast.success("Leave Request Added Successfully", "Success");
       }
     },
     onSuccess: () => {
@@ -74,7 +77,7 @@ export function From() {
         queryKey: ["leave_requests", employeeId],
       });
       queryClient.invalidateQueries({ queryKey: ["profiles", employeeId] });
-      //Router.back();
+      Router.back();
     },
   });
   // Mutation Function for Canceling Leave Request
@@ -87,7 +90,7 @@ export function From() {
       if (error) {
         toast.error(error.message, error.type);
       } else {
-        toast.success("Leave Request Canceled Successfully");
+        toast.success("Leave Request Canceled Successfully", "Success");
       }
     },
     onSuccess: () => {
@@ -96,17 +99,23 @@ export function From() {
       });
       queryClient.invalidateQueries({ queryKey: ["profiles", employeeId] });
       formRef.current?.reset();
-      //Router.back();
+      Router.back();
     },
   });
   return (
     <>
-      {toastContainer}
       <form
         ref={formRef}
         className="flex w-full flex-col gap-4 px-2 pt-3"
         action={async (formData: FormData) => {
           if (formError && !checkIfOjectValuesAreEmpty(formError)) return;
+          if (
+            +new Date(formData.get("start_at") as string) >
+            +new Date(formData.get("end_at") as string)
+          ) {
+            toast.error("Start Date must be before End Date", "Error");
+            return;
+          }
           leave_request_id ? update(formData) : insert(formData);
         }}
       >

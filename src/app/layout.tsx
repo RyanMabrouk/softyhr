@@ -4,6 +4,7 @@ import "./globals.css";
 import Hydration from "@/provider/hydration";
 import Store from "@/provider/store";
 import PopUp from "./_ui/_PopUp/PopUp";
+import { ToastContainer, ToastProvider } from "@/hooks/useToast";
 
 const lato = Lato({
   weight: ["100", "300", "400", "700", "900"],
@@ -26,8 +27,11 @@ export default async function RootLayout({
       <body className={lato.className + " min-h-screen"}>
         <Store>
           <Hydration>
-            <PopUp />
-            {children}
+            <ToastProvider>
+              <ToastContainer />
+              <PopUp />
+              {children}
+            </ToastProvider>
           </Hydration>
         </Store>
       </body>

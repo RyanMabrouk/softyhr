@@ -1,6 +1,6 @@
 import { SubmitBtn } from "@/app/_ui/SubmitBtn";
 import React from "react";
-import PopUpSkeleton from "../../PopUpSkeleton";
+import PopUpSkeleton from "../../../PopUpSkeleton";
 import { IoWarning } from "react-icons/io5";
 import useData from "@/hooks/useData";
 import { useParams, useSearchParams } from "next/navigation";
@@ -14,7 +14,7 @@ import {
 } from "@/types/database.tables.types";
 import deleteCategorie from "@/actions/leave/deleteCategorie";
 export default function DeleteLeavePolicy() {
-  const { toast, toastContainer } = useToast();
+  const { toast } = useToast();
   const Router = useRouter();
   const { employeeId } = useParams();
   const policy_id = useSearchParams().get("policy_id");
@@ -59,10 +59,9 @@ export default function DeleteLeavePolicy() {
     employee_profile?.["Basic Information"]?.["Last name"];
   return (
     <>
-      {toastContainer}
       <PopUpSkeleton
         className="flex max-w-[45rem] flex-col items-center gap-4 px-8 py-4"
-        title="Request Comments"
+        title="Just Checking..."
       >
         <IoWarning className="h-16 w-16 text-color9-500 " />
         <div className=" max-w-[30rem] text-center text-[1.25rem] leading-6  text-gray-27">

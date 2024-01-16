@@ -7,12 +7,8 @@ import { Hr } from "@/app/(dashboard)/people/[employeeId]/TimeOff/_ui/Hr";
 import ErrorContextProvider from "./context/errorContext";
 import { From } from "./components/From";
 import useEmployeeData from "@/hooks/useEmloyeeData";
-import PopUpSkeleton from "../../PopUpSkeleton";
+import PopUpSkeleton from "../../../PopUpSkeleton";
 
-export type Option = {
-  value: string | number;
-  label: string;
-};
 export type default_duration_type = {
   date: string;
   duration: string;

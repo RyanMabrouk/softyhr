@@ -6,7 +6,7 @@ import Jobopening from "./components/Jobopening";
 import JobopeningList from "./components/JobopeningList";
 import Image from "next/image";
 
-function page() {
+function Page() {
   const { Hiring: data } = useData();
   return (
     <div className="flex h-screen w-screen items-center justify-center">
@@ -21,4 +21,4 @@ function page() {
   );
 }
 
-export default page;
+export default Page;

@@ -11,7 +11,7 @@ import DescriptionSkeleton from "./components/Description/DescriptionSkeleton";
 import Description from "./components/Description/Description";
 import ApplySection from "./components/ApplySection/ApplySection";
 
-function page({ params: { career_id } }: { params: { career_id: string } }) {
+function Page({ params: { career_id } }: { params: { career_id: string } }) {
   const {
     Hiring: { data, isPending },
   } = useData({ id: career_id });
@@ -48,4 +48,4 @@ function page({ params: { career_id } }: { params: { career_id: string } }) {
   );
 }
 
-export default page;
+export default Page;

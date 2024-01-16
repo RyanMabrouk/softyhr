@@ -53,13 +53,13 @@ export default function useData(match?: {
     queryKey: [
       "profiles",
       {
-        column: 'user_id,role,picture,"Basic Information",leave_balance',
+        column: 'user_id,role,picture,"Basic Information"',
       },
     ],
     queryFn: () =>
       getData("profiles", {
         org: true,
-        column: 'user_id,role,picture,"Basic Information",leave_balance',
+        column: 'user_id,role,picture,"Basic Information"',
       }),
   });
   //------------------------------------------------------------

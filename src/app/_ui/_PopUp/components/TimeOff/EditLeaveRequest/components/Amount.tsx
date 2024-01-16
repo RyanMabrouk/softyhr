@@ -1,5 +1,5 @@
 "use client";
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { formatDateToDayMonDD, formatYYYYMMDD } from "@/helpers/date.helpers";
 import {
   arrayOfWorkingDays,
@@ -31,12 +31,14 @@ export function Amount({
   const { startDate, endDate } =
     useContext<dateRangeContextType>(dateRangeContext);
   //keep old range
-  const oldRange = default_duration?.map(
-    (d: default_duration_type) =>
-      ({
-        date: formatYYYYMMDD(new Date(d.date)),
-        duration: d.duration,
-      }) ?? [],
+  const [oldRange, setOldRange] = useState<default_duration_type[] | []>(
+    default_duration?.map(
+      (d: default_duration_type) =>
+        ({
+          date: formatYYYYMMDD(new Date(d.date)),
+          duration: d.duration,
+        }) ?? [],
+    ),
   );
   // Get the active range
   const activeDateStart = startDate
@@ -71,10 +73,15 @@ export function Amount({
     "date",
   );
   // calculate the total duration
-  const total_duration = active_duration?.reduce(
-    (acc, duration) => acc + Number(duration.duration),
-    0,
-  );
+  const [totalDuration, setTotalDuration] = useState(0);
+  useEffect(() => {
+    setTotalDuration(
+      active_duration?.reduce(
+        (acc, duration) => acc + Number(duration.duration),
+        0,
+      ),
+    );
+  }, [active_duration, formError]);
   return (
     <div className="flex flex-col gap-1">
       <label
@@ -100,8 +107,13 @@ export function Amount({
                       <input
                         type="number"
                         name={"duration_date"}
+                        id={duration.date}
                         defaultValue={duration.duration}
                         onChange={(e) => {
+                          setOldRange((old) => [
+                            { date: e.target.id, duration: e.target.value },
+                            ...old,
+                          ]);
                           if (
                             Number(e.target.value) > 24 ||
                             Number(e.target.value) < 1
@@ -152,7 +164,7 @@ export function Amount({
         <div className="flex w-full flex-row items-center gap-1  bg-gray-14 px-4 py-3 text-lg font-normal">
           Total:{" "}
           <span className=" capitalize">
-            {formatTotalHoursToTimeUnit(total_duration, track_time_unit)}
+            {formatTotalHoursToTimeUnit(totalDuration, track_time_unit)}
           </span>
         </div>
       </div>

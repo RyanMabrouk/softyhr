@@ -5,8 +5,9 @@ import { MdOutlineWatchLater } from "react-icons/md";
 import { Hr } from "./_ui/Hr";
 import { History } from "./History";
 import { HistoryTableFiltersProvider } from "./_context/historyTableFilters";
-import { UnderlinedLink } from "../../../../_ui/UnderlinedLink";
 import { UpcomingTimeOff } from "./UpcomingTimeOff";
+import { ChangeAccrualStartBtn } from "./_ui/Buttons/ChangeAccrualStartBtn";
+import { AddTimeOffPolicyBtn } from "./_ui/Buttons/AddTimeOffPolicyBtn";
 
 export default function Page() {
   return (
@@ -24,10 +25,8 @@ export default function Page() {
             <span className=" max-h-[2rem] whitespace-nowrap">
               Accrual Level Start Date:
             </span>
-            <UnderlinedLink>12/02/2020</UnderlinedLink>
-            <button className="relative m-0 box-border inline-flex h-full w-full min-w-0 cursor-pointer select-none appearance-none items-center justify-center rounded border border-solid border-gray-25 bg-transparent px-[15px] py-[5px] align-middle text-[0.9375rem] font-bold normal-case  leading-[1.75] text-gray-25 no-underline shadow-[rgba(0,0,0,0.05)_0px_1px_0px_0px]">
-              Add Time Off Policy
-            </button>
+            <ChangeAccrualStartBtn />
+            <AddTimeOffPolicyBtn />
           </div>
         </div>
         <div></div>

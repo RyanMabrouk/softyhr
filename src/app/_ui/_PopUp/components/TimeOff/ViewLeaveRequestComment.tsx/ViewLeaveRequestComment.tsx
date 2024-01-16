@@ -15,7 +15,7 @@ import default_user_avatar from "/public/default_avatar.png";
 import { formatTotalHoursToTimeUnit } from "@/helpers/leave.helpers";
 import { formatDateToMonDDYYYY } from "@/helpers/date.helpers";
 import useEmployeeData from "@/hooks/useEmloyeeData";
-import PopUpSkeleton from "../../PopUpSkeleton";
+import PopUpSkeleton from "../../../PopUpSkeleton";
 function ViewLeaveRequestComment() {
   const Router = useRouter();
   const { employeeId } = useParams();

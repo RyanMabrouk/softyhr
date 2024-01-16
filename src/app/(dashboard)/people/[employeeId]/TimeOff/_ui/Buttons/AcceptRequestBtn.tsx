@@ -39,6 +39,9 @@ export function AcceptRequestBtn({ request }: { request: request_type }) {
       queryClient.invalidateQueries({
         queryKey: ["leave_requests", employeeId],
       });
+      queryClient.invalidateQueries({
+        queryKey: ["profiles", employeeId],
+      });
       queryClient.invalidateQueries({ queryKey: ["all_profiles_basic_info"] });
     },
   });

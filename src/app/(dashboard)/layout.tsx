@@ -1,10 +1,8 @@
-import { headers } from "next/headers";
 import React from "react";
-import { redirect, usePathname } from "next/navigation";
+import { redirect } from "next/navigation";
 import getSession from "@/api/getSession";
 import Initialize from "@/provider/Initilize";
 import Nav from "../_layout/_Nav/Nav";
-import { getLogLevel, getLogger } from "@/logging/log-util";
 async function Layout({
   children,
   params: { employeeId },

@@ -1,16 +1,19 @@
-import AdjustLeavePolicyBalance from "@/app/_ui/_PopUp/components/AdjustLeavePolicyBalance/AdjustLeavePolicyBalance";
+import AdjustLeavePolicyBalance from "@/app/_ui/_PopUp/components/TimeOff/AdjustLeavePolicyBalance/AdjustLeavePolicyBalance";
 import DeleteEducation from "@/app/_ui/_PopUp/components/DeleteEducation/DeleteEducation";
-import DeleteLeaveRequest from "@/app/_ui/_PopUp/components/DeleteLeaveRequest/DeleteLeaveRequest";
+import DeleteLeaveRequest from "@/app/_ui/_PopUp/components/TimeOff/DeleteLeaveRequest/DeleteLeaveRequest";
 import EditFields from "@/app/_ui/_PopUp/components/EditFields/EditFields";
-import EditLeaveRequest from "@/app/_ui/_PopUp/components/EditLeaveRequest/EditLeaveRequest";
-import RejectLeaveRequest from "@/app/_ui/_PopUp/components/RejectLeaveRequest/RejectLeaveRequest";
-import ViewLeaveRequestComment from "@/app/_ui/_PopUp/components/ViewLeaveRequestComment.tsx/ViewLeaveRequestComment";
-import EditTablechamps from "@/app/_ui/_PopUp/components/EditTablechamps/EditTablechamps";
-import { PopupType } from "@/types/userInfoTypes.type";
-import ChangeLeavePolicy from "@/app/_ui/_PopUp/components/ChangeLeavePolicy/ChangeLeavePolicy";
-import DeleteLeavePolicy from "@/app/_ui/_PopUp/components/DeleteLeavePolicy/DeleteLeavePolicy";
+import EditLeaveRequest from "@/app/_ui/_PopUp/components/TimeOff/EditLeaveRequest/EditLeaveRequest";
+import RejectLeaveRequest from "@/app/_ui/_PopUp/components/TimeOff/RejectLeaveRequest/RejectLeaveRequest";
+import ViewLeaveRequestComment from "@/app/_ui/_PopUp/components/TimeOff/ViewLeaveRequestComment.tsx/ViewLeaveRequestComment";
+import ChangeLeavePolicy from "@/app/_ui/_PopUp/components/TimeOff/ChangeLeavePolicy/ChangeLeavePolicy";
+import DeleteLeavePolicy from "@/app/_ui/_PopUp/components/TimeOff/DeleteLeavePolicy/DeleteLeavePolicy";
+import AddTimeOffPolicy from "@/app/_ui/_PopUp/components/TimeOff/AddTimeOffPolicy/AddTimeOffPolicy";
+import AccrualStartDate from "@/app/_ui/_PopUp/components/TimeOff/AccrualStartDate/AccrualStartDate";
 
-export const popups: any = {
+type PopupType = {
+  [key: string]: () => React.JSX.Element;
+};
+export const popups: PopupType = {
   EDIT_FIELD: EditFields,
   EDIT_LEAVE_REQUEST: EditLeaveRequest,
   DELETE_EDUCATION: DeleteEducation,
@@ -20,4 +23,6 @@ export const popups: any = {
   DELETE_LEAVE_REQUEST: DeleteLeaveRequest,
   CHANGE_LEAVE_POLICY: ChangeLeavePolicy,
   DELETE_LEAVE_POLICY: DeleteLeavePolicy,
+  ADD_TIME_OFF_POLICY: AddTimeOffPolicy,
+  CHANGE_ACCURAL_START_DATE: AccrualStartDate,
 };

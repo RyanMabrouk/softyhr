@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import React, { ReactNode } from "react";
-import AvatarUser from "./profileImage.png";
+import AvatarUser from "./test.jpeg";
 import Link from "next/link";
 import { EmployeRoutesType, EmployeeRoute } from "@/constants/employeeRoute";
 import { usePathname } from "next/navigation";
@@ -30,9 +30,7 @@ export default function Layout({
             priority
             width={208}
             height={208}
-            className={
-              " z-10 -mb-9 ml-4 h-[13rem] w-[13rem] cursor-pointer rounded-full border-2 border-white bg-gray-6 object-cover "
-            }
+            className=" z-10 -mb-9 ml-4 h-[13rem] w-[13rem] cursor-pointer rounded-full border-2 border-white bg-gray-6 object-cover "
           />
           <div className={"flex-column flex w-full flex-col gap-[3rem] "}>
             <div className="flex items-start justify-between">

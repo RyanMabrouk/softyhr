@@ -13,7 +13,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import React from "react";
 import { CgTrash } from "react-icons/cg";
-import PopUpSkeleton from "../../PopUpSkeleton";
+import PopUpSkeleton from "../../../PopUpSkeleton";
 export default function DeleteLeaveRequest() {
   const { toast } = useToast();
   const Router = useRouter();
@@ -66,7 +66,7 @@ export default function DeleteLeaveRequest() {
     <>
       <PopUpSkeleton
         className="flex min-w-[35rem] flex-col items-center gap-2 px-8 py-4"
-        title="Request Comments"
+        title="Just Checking..."
       >
         <CgTrash className="h-16 w-16 text-color9-500 " />
         <div className=" max-w-[30rem] text-center text-[1.25rem] leading-6  text-gray-27">

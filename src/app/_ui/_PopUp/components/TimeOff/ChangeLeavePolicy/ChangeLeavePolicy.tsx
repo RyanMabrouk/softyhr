@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import PopUpSkeleton from "../../PopUpSkeleton";
+import PopUpSkeleton from "../../../PopUpSkeleton";
 import Image from "next/image";
 import default_avatar from "/public/default_avatar.jpeg";
 import { SelectGeneric } from "@/app/_ui/SelectGeneric";
@@ -17,7 +17,7 @@ import {
 } from "@/types/database.tables.types";
 
 export default function ChangeLeavePolicy() {
-  const { toast, toastContainer } = useToast();
+  const { toast } = useToast();
   const Router = useRouter();
   const { employeeId } = useParams();
   const policy_id = useSearchParams().get("policy_id");
@@ -56,10 +56,11 @@ export default function ChangeLeavePolicy() {
   // change leave policy mutation
   const { mutate: change, isPending } = useMutation({
     mutationFn: async (formData: FormData) => {
+      const new_policy_id = formData.get("policy_id") as string;
       const { error } = await changePolicy({
-        formData: formData,
+        new_policy_id: new_policy_id,
         user_id: employeeId,
-        policy_id: policy?.id,
+        old_policy_id: policy?.id,
       });
       if (error) {
         toast.error(error.message, error.type);
@@ -77,7 +78,6 @@ export default function ChangeLeavePolicy() {
       title={`Change ${category?.name} Leave Policy`}
       className="flex w-full min-w-[50rem] flex-col px-8 py-6"
     >
-      {toastContainer}
       <header className="flex w-full flex-row items-center gap-2 bg-gray-14 px-4 py-3">
         <Image
           src={default_avatar}
@@ -108,7 +108,6 @@ export default function ChangeLeavePolicy() {
             defaultValue={defaultValue}
           />
         </div>
-
         <hr className="h-[3px] w-full bg-primary-gradient" />
         <div className="flex w-full flex-row items-center justify-start gap-4 px-2 pt-3">
           <SubmitBtn disabled={isPending} className="!w-fit">

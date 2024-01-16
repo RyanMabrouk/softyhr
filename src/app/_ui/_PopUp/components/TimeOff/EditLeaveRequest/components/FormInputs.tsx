@@ -14,7 +14,7 @@ import {
 } from "../context/dateRangeContext";
 import { DateInput } from "./DateInput";
 import { Amount } from "./Amount";
-import { SelectGeneric } from "../../../../SelectGeneric";
+import { SelectGeneric } from "../../../../../SelectGeneric";
 import { WarningIfDatesAlreadyBooked } from "./WarningIfDatesAlreadyBooked";
 import useEmployeeData from "@/hooks/useEmloyeeData";
 export function FormInputs() {
@@ -77,9 +77,8 @@ export function FormInputs() {
         name="policy_id"
         defaultValue={{ label: categorie?.name, value: String(policy?.id) }}
         options={leave_categories
-          ?.filter(
-            (category: databese_leave_categories_type) =>
-              current_user_categories_ids?.includes(category.id),
+          ?.filter((category: databese_leave_categories_type) =>
+            current_user_categories_ids?.includes(category.id),
           )
           .map((category: databese_leave_categories_type) => ({
             label:

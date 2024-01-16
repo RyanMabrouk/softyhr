@@ -6,10 +6,9 @@ import useToast from "@/hooks/useToast";
 import { SubmitBtn } from "../../../_ui/SubmitBtn";
 
 export function Form({ children }: { children: React.ReactNode }) {
-  const { toast, toastContainer } = useToast();
+  const { toast } = useToast();
   return (
     <>
-      {toastContainer}
       <form
         action={async (formData: FormData) => {
           const { error } = await verifyCompanyDomain(formData);

@@ -1,17 +1,20 @@
 "use server";
-
 import getData from "@/api/getData";
 import updateData from "@/api/updateData";
 import { database_profile_leave_balance_type } from "@/types/database.tables.types";
-
-export default async function deleteCategorie({
-  user_id,
+export default async function addLeavePolicy({
   categories_id,
+  policy_id,
+  user_id,
 }: {
   categories_id: number;
+  policy_id: string;
   user_id: string | string[];
 }) {
-  console.log("🚀 ~ deleteCategorie");
+  console.log("🚀 ~ policy_id:", policy_id);
+  console.log("🚀 ~ categories_id:", categories_id);
+  console.log("addLeavePolicy");
+  console.log("user_id", user_id);
   const { data: data, error } = await getData("profiles", {
     column: "leave_balance",
     match: { user_id: user_id },
@@ -27,13 +30,17 @@ export default async function deleteCategorie({
       },
     };
   }
-  // get the unchanged leave balance
-  const unchanged_leave_balance = old_leave_balance?.filter(
-    (e) => !(e.categories_id == categories_id),
-  );
+  const new_balance: database_profile_leave_balance_type[] = [
+    ...old_leave_balance,
+    {
+      policy_id: Number(policy_id),
+      balance: 0,
+      categories_id: categories_id,
+    },
+  ];
   const { error: balanceError } = await updateData(
     "profiles",
-    { leave_balance: unchanged_leave_balance },
+    { leave_balance: new_balance },
     { user_id: user_id },
   );
   if (balanceError) {

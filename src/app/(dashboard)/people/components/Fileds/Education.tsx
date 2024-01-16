@@ -29,7 +29,6 @@ function Education({
   DATA,
   employeeId,
 }: EducationPropsType): ReactNode {
-  const { toast, toastContainer } = useToast();
   const { employee_profile: Data } = useEmployeeData({ employeeId });
   const router = useRouter();
   const pathname = usePathname();
@@ -38,7 +37,6 @@ function Education({
   };
   return (
     <div className="flex flex-col items-start ">
-      {toastContainer}
       {[...Data?.data?.[champ], ...DATA]?.map((data: any) => {
         {
           return (
