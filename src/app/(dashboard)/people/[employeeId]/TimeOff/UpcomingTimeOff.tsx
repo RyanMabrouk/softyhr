@@ -17,7 +17,6 @@ import {
 } from "@/helpers/leave.helpers";
 import { EditLeaveRequestBtn } from "./_ui/Buttons/EditLeaveRequestBtn";
 import { useParams } from "next/navigation";
-import useToast from "@/hooks/useToast";
 import { MdCancel } from "react-icons/md";
 import { AcceptRequestBtn } from "./_ui/Buttons/AcceptRequestBtn";
 import { RejectRequestBtn } from "./_ui/Buttons/RejectRequestBtn";
@@ -129,7 +128,7 @@ export function UpcomingTimeOff() {
                   </div>
                 </div>
               </div>
-              <span className=" mr-auto line-clamp-2 w-fit max-w-[60%] flex-1 pl-20 pr-2 text-left text-[0.95rem] font-normal text-gray-26">
+              <span className=" mr-auto line-clamp-2 w-fit max-w-[60%] flex-1 pl-20 pr-2 text-left text-[0.85rem] opacity-80 font-normal text-gray-26">
                 {user_profile?.role === "admin" ? leave.note : ""}
               </span>
               <div className="flex flex-row gap-1">
