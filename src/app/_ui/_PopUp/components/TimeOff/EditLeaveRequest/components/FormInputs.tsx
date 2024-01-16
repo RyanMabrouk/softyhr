@@ -7,7 +7,7 @@ import {
   databese_leave_categories_type,
 } from "@/types/database.tables.types";
 import { useParams, useSearchParams } from "next/navigation";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import {
   dateRangeContext,
   dateRangeContextType,
@@ -56,6 +56,7 @@ export function FormInputs() {
   return (
     <div className="flex flex-col gap-2 pb-3">
       <div className="flex flex-row items-center gap-2">
+        <Calendar name="calender" />
         <DateInput
           label="From"
           name="start_at"
@@ -111,5 +112,42 @@ export function FormInputs() {
         />
       </div>
     </div>
+  );
+}
+
+/*fimport { DateRange, Range } from "react-date-range";
+import "react-date-range/dist/styles.css"; // main style file
+import "react-date-range/dist/theme/default.css"; // theme css file
+unction Calendar({ name }: { name: string }) {
+  const [state, setState] = useState<Range[]>([
+    {
+      startDate: new Date(),
+      endDate: undefined,
+      key: "selection",
+      color: "#527a00",
+    },
+  ]);
+  console.log("🚀 ~ Calendar ~ state:", state);
+  const handleDateChange = (item: Range) => {
+    setState([item]);
+  };
+  return (
+    <DateRange
+      editableDateInputs={true}
+      onChange={handleDateChange}
+      moveRangeOnFirstSelection={false}
+      ranges={state}
+    />
+  );
+}*/
+import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
+import dayjs from "dayjs";
+function Calendar({ name }: { name: string }) {
+  return (
+    <DateRangePicker
+      defaultValue={[dayjs("2022-04-17"), dayjs("2022-04-21")]}
+      onChange={(date) => console.log(date)}
+      name={name}
+    />
   );
 }
