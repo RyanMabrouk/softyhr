@@ -71,6 +71,23 @@ export default function useData() {
         org: true,
       }),
   });
+  //------------------Folders--------------------------------------
+  const { data: folders, isPending: isPending9 } = useQuery({
+    queryKey: ["folders"],
+    queryFn: () =>
+      getData("folders", {
+        org: true,
+      }),
+  });
+
+  //------------------Files--------------------------------------
+  const { data: files, isPending: isPending10 } = useQuery({
+    queryKey: ["files"],
+    queryFn: () =>
+      getData("files", {
+        org: true,
+      }),
+  });
   //------------------------------------------------------------
   return {
     leave_requests: {
@@ -112,6 +129,16 @@ export default function useData() {
       data: Hiring?.data,
       error: Hiring?.error,
       isPending: isPending8,
+    },
+    folders: {
+      data: folders?.data,
+      error: folders?.error,
+      isPending: isPending9,
+    },
+    files: {
+      data: files?.data,
+      error: files?.error,
+      isPending: isPending10,
     },
   };
 }

@@ -38,6 +38,8 @@ const config: Config = {
       },
       width: {
         screen: "100dvw",
+        files_screen: "1355px",
+        percentage78: "78%",
       },
       minHeight: {
         screen: "100dvh",
@@ -173,6 +175,9 @@ const config: Config = {
         "color-primary-9": "#527B00",
         "color-primary-10": "#84bf41",
         "color-primary-11": "#8EBB23",
+        "color-primary-12": "#EEF3E5",
+        "color-primary-13": "#c0e94f1a",
+
         "color-primary-focus": "#AAE868",
 
         "color9-100": "#FFAAB0",
@@ -181,6 +186,7 @@ const config: Config = {
         "color9-400": "#A73440",
         "color9-500": "#C20B0B",
 
+        "color-btn": "#496D00",
         /*"color-green": "#599D15",
         "color-teal-2": "#284D59",
         "color-green-0": "#F6FFE3",

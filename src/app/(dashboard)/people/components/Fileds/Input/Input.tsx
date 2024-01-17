@@ -6,7 +6,7 @@ import { FaLinkedin } from "react-icons/fa";
 
 interface InputPropsType {
   RowField: RowFieldType;
-  setTouched?: (arg: boolean) => void ;
+  setTouched?: (arg: boolean) => void;
   defaultValue: string;
 }
 const Input = ({ RowField, setTouched, defaultValue }: InputPropsType) => {
@@ -45,7 +45,9 @@ const Input = ({ RowField, setTouched, defaultValue }: InputPropsType) => {
           value={value}
           name={RowField?.name}
           onChange={(e) => setValue(e.target.value)}
-          onFocus={() => {if(setTouched)setTouched(true)}}
+          onFocus={() => {
+            if (setTouched) setTouched(true);
+          }}
           placeholder={RowField?.placeHolder || ""}
         />
       </div>
