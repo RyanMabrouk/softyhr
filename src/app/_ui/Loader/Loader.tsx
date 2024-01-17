@@ -1,12 +1,12 @@
-import React from 'react';
-import "./Loader.css"
+import React from "react";
+import "./Loader.css";
 
 function Loader() {
   return (
-    <div className='w-full h-full flex items justify-center m-auto'  >
-    <span className='loader'></span>
+    <div className="m-auto flex h-full w-full items-center justify-center">
+      <span className="loader"></span>
     </div>
-  )
+  );
 }
 
-export default Loader
+export default Loader;

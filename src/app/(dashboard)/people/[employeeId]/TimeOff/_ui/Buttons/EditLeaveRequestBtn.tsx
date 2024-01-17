@@ -12,6 +12,8 @@ export function EditLeaveRequestBtn({
   const pathname = usePathname();
   return (
     <Link
+      className="tooltip z-[9999] flex flex-row items-center justify-center"
+      data-tip="Edit"
       href={{
         pathname: pathname,
         query: {
@@ -19,7 +21,6 @@ export function EditLeaveRequestBtn({
           leave_request_id: leave_request_id,
         },
       }}
-      className="flex flex-row items-center justify-center"
     >
       <MdModeEdit aria-label="Edit" className={className} />
     </Link>

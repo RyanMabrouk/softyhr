@@ -17,10 +17,10 @@ import {
 } from "@/helpers/leave.helpers";
 import { EditLeaveRequestBtn } from "./_ui/Buttons/EditLeaveRequestBtn";
 import { useParams } from "next/navigation";
-import useToast from "@/hooks/useToast";
 import { MdCancel } from "react-icons/md";
 import { AcceptRequestBtn } from "./_ui/Buttons/AcceptRequestBtn";
 import { RejectRequestBtn } from "./_ui/Buttons/RejectRequestBtn";
+import useEmployeeData from "@/hooks/useEmloyeeData";
 type upcoming_leave_requests_data_type = {
   id: number;
   start_at: Date;
@@ -36,13 +36,14 @@ type upcoming_leave_requests_data_type = {
 };
 export function UpcomingTimeOff() {
   const { employeeId } = useParams();
-  const { toastContainer } = useToast();
   const {
-    leave_requests: { data: leave_requests, isPending: isPending2 },
     leave_categories: { data: leave_categories, isPending: isPending3 },
     leave_policies: { data: leave_policies, isPending: isPending4 },
     user_profile: { data: user_profile, isPending: isPending5 },
   } = useData();
+  const {
+    leave_requests: { data: leave_requests, isPending: isPending2 },
+  } = useEmployeeData({ employeeId: employeeId });
   const isPending = isPending2 || isPending3 || isPending4 || isPending5;
   // format leave requests data to upcoming leave requests only
   const upcoming_leave_requests_data:
@@ -81,12 +82,10 @@ export function UpcomingTimeOff() {
           categorie: categorie,
           className: "h-11 w-11",
         }),
-        duration: duration_used
-          ? formatTotalHoursToTimeUnit(
-              duration_used,
-              categorie?.track_time_unit,
-            )
-          : "",
+        duration: formatTotalHoursToTimeUnit(
+          duration_used,
+          categorie?.track_time_unit,
+        ),
         policy_id: e.policy_id,
         id: e.id,
         user_id: e.user_id,
@@ -100,7 +99,6 @@ export function UpcomingTimeOff() {
   }
   return (
     <>
-      {toastContainer}
       <div className="flex flex-col">
         {upcoming_leave_requests_data?.map((leave) => (
           <div className="flex w-full flex-col " key={leave.id}>
@@ -130,7 +128,7 @@ export function UpcomingTimeOff() {
                   </div>
                 </div>
               </div>
-              <span className=" mr-auto line-clamp-2 w-fit max-w-[60%] flex-1 pl-20 pr-2 text-left text-sm font-normal text-gray-26">
+              <span className=" mr-auto line-clamp-2 w-fit max-w-[60%] flex-1 pl-20 pr-2 text-left text-[0.85rem] font-normal text-gray-26 opacity-80">
                 {user_profile?.role === "admin" ? leave.note : ""}
               </span>
               <div className="flex flex-row gap-1">

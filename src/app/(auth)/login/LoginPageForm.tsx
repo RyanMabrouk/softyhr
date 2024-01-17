@@ -3,10 +3,9 @@ import React from "react";
 import login from "@/actions/auth/login";
 import useToast from "@/hooks/useToast";
 export function LoginPageForm({ children }: { children: React.ReactNode }) {
-  const { toast, toastContainer } = useToast();
+  const { toast } = useToast();
   return (
     <>
-      {toastContainer}
       <form
         className="flex h-full w-full flex-col items-start justify-between gap-4 px-28"
         action={async (formData: FormData) => {

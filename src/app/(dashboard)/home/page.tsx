@@ -1,5 +1,5 @@
 import getCurrentorg from "@/api/getCurrentOrg";
-import SignOutBtn from "@/app/_ui/SignOutBtn";
+import SignOutBtn from "@/app/_layout/SignOutBtn";
 import React from "react";
 async function Page() {
   const current_org = await getCurrentorg();

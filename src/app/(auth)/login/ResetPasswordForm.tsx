@@ -4,10 +4,9 @@ import resetPassword from "@/actions/auth/resetPassword";
 import useToast from "@/hooks/useToast";
 
 export function ResetPasswordForm({ children }: { children: React.ReactNode }) {
-  const { toast, toastContainer } = useToast();
+  const { toast } = useToast();
   return (
     <>
-      {toastContainer}
       <form
         className="flex h-full w-full flex-col items-start justify-between gap-6 px-28"
         action={async (formData: FormData) => {

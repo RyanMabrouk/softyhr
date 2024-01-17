@@ -4,8 +4,9 @@ import { useQuery } from "@tanstack/react-query";
 // you can use this hook to get the current url
 import { useUrl } from "nextjs-current-url";
 //--------------------------------------------
-
-export default function useData() {
+export default function useData(match?: {
+  [key: string]: string | number | boolean | null | string[] | undefined;
+}) {
   //--------------------Settings--------------------
   const { data: settings, isPending } = useQuery({
     queryKey: ["settings"],
@@ -14,27 +15,11 @@ export default function useData() {
         org: true,
       }),
   });
-  //--------------------Leave Requests--------------------
-  const { data: leave_requests, isPending: isPending2 } = useQuery({
-    queryKey: ["leave_requests"],
-    queryFn: () =>
-      getData("leave_requests", {
-        org: true,
-      }),
-  });
   //----------------- Leave Policies--------------------
   const { data: leave_policies, isPending: isPending3 } = useQuery({
     queryKey: ["leave_policies"],
     queryFn: () =>
       getData("leave_policies", {
-        org: true,
-      }),
-  });
-  //----------------- Leave Accrued--------------------
-  const { data: leave_accrued, isPending: isPending4 } = useQuery({
-    queryKey: ["leave_accrued"],
-    queryFn: () =>
-      getData("leave_accrued", {
         org: true,
       }),
   });
@@ -54,25 +39,31 @@ export default function useData() {
         user: true,
       }),
   });
-  //------------------- Users Basic Information--------------------
-  const { data: all_profiles, isPending: isPending7 } = useQuery({
-    queryKey: ["all_profiles"],
-    queryFn: () =>
-      getData("profiles", {
-        org: true,
-      }),
-  });
   //------------------Hiring--------------------------------------
-
   const { data: Hiring, isPending: isPending8 } = useQuery({
     queryKey: ["Hiring"],
     queryFn: () =>
       getData("Hiring", {
         org: true,
+        match,
+      }),
+  });
+  // ------------------All Profiles Basic Information--------------------
+  const { data: all_profiles_basic_info, isPending: isPending9 } = useQuery({
+    queryKey: [
+      "profiles",
+      {
+        column: 'user_id,role,picture,"Basic Information"',
+      },
+    ],
+    queryFn: () =>
+      getData("profiles", {
+        org: true,
+        column: 'user_id,role,picture,"Basic Information"',
       }),
   });
   //------------------Folders--------------------------------------
-  const { data: folders, isPending: isPending9 } = useQuery({
+  const { data: folders, isPending: isPending1 } = useQuery({
     queryKey: ["folders"],
     queryFn: () =>
       getData("folders", {
@@ -90,20 +81,10 @@ export default function useData() {
   });
   //------------------------------------------------------------
   return {
-    leave_requests: {
-      data: leave_requests?.data,
-      error: leave_requests?.error,
-      isPending: isPending2,
-    },
     leave_policies: {
       data: leave_policies?.data,
       error: leave_policies?.error,
       isPending: isPending3,
-    },
-    leave_accrued: {
-      data: leave_accrued?.data,
-      error: leave_accrued?.error,
-      isPending: isPending4,
     },
     leave_categories: {
       data: leave_categories?.data,
@@ -120,11 +101,6 @@ export default function useData() {
       error: user_profile?.error,
       isPending: isPending6,
     },
-    all_profiles: {
-      data: all_profiles?.data,
-      error: all_profiles?.error,
-      isPending: isPending7,
-    },
     Hiring: {
       data: Hiring?.data,
       error: Hiring?.error,
@@ -133,12 +109,17 @@ export default function useData() {
     folders: {
       data: folders?.data,
       error: folders?.error,
-      isPending: isPending9,
+      isPending: isPending1,
     },
     files: {
       data: files?.data,
       error: files?.error,
       isPending: isPending10,
+    },
+    all_profiles_basic_info: {
+      data: all_profiles_basic_info?.data,
+      error: all_profiles_basic_info?.error,
+      isPending: isPending9,
     },
   };
 }

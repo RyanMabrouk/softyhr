@@ -1,10 +1,10 @@
 import React from "react";
-import { IoMdSettings } from "react-icons/io";
 import { AddLeaveRequestBtn } from "./_ui/Buttons/AddLeaveRequestBtn";
 import { AdjustLeavePolicyBalanceBtn } from "./_ui/Buttons/AdjustLeavePolicyBalanceBtn";
 import { FaCalculator } from "react-icons/fa6";
 import { databese_leave_categories_track_time_unit_type } from "@/types/database.tables.types";
 import { formatTotalHoursToTimeUnit } from "@/helpers/leave.helpers";
+import { ChangePolicyMenuBtn } from "./ChangePolicyMenuBtn";
 export function Policy({
   id,
   icon,
@@ -49,15 +49,15 @@ export function Policy({
       <span className="m-0 max-w-full overflow-hidden text-ellipsis whitespace-nowrap pb-4 pt-1  text-sm font-normal leading-[1.467rem] text-gray-21">
         {name}
       </span>
-      <div className="absolute bottom-2 box-border flex h-11 w-full -translate-y-5 flex-row-reverse items-center justify-center gap-1  rounded-b-md border-2 border-solid border-gray-17 bg-[white] py-3  text-center capitalize text-gray-21 opacity-0 transition-all delay-[0s] duration-[0.15s] ease-[ease-in-out] group-hover:translate-y-0 group-hover:opacity-100">
-        <span className="peer cursor-pointer text-sm hover:text-fabric-700">
-          chnage policy
-        </span>
-        <IoMdSettings className="order-0 h-4 w-4 peer-hover:text-fabric-700" />
-      </div>
+      <ChangePolicyMenuBtn id={id} />
       <div className="absolute -top-2 box-border flex  w-full -translate-x-5 translate-y-10 flex-row items-center justify-center gap-2 rounded-[0px_0px_8px_8px] border-solid  border-[10px_2px_2px] py-3 text-center text-gray-25 opacity-0 transition-all delay-[0s] duration-[0.1s] ease-[ease-in-out] group-hover:translate-x-0 group-hover:translate-y-0  group-hover:opacity-100">
         <AddLeaveRequestBtn id={id} />
-        <FaCalculator className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-md border border-black bg-white px-2 text-center " />
+        <div
+          className="tooltip tooltip-bottom z-[9999]"
+          data-tip="Under construction 🚧"
+        >
+          <FaCalculator className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-md border border-black bg-white px-2 text-center " />
+        </div>
         <AdjustLeavePolicyBalanceBtn id={id} />
       </div>
     </div>

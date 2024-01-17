@@ -11,6 +11,8 @@ export function RejectRequestBtn({
   return (
     <>
       <Link
+        className="tooltip z-[9999] flex flex-row items-center justify-center"
+        data-tip="Deny"
         href={{
           pathname: pathname,
           query: {

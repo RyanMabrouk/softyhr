@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import React from "react";
 import Skeleton from "../login/_ui/Skeleton";
 import Link from "next/link";
-import { Button } from "../login/_ui/Button";
+import { Button } from "../../_ui/Button";
 import getSession from "@/api/getSession";
 import bg_img from "/public/winter.png";
 import Image from "next/image";

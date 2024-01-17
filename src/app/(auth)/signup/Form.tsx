@@ -57,7 +57,7 @@ export function Form() {
   const [error, setError] = useState<formerror | null>(null);
   const [toggleDisplay, setToggleDisplay] = useState(false);
   const [company, setCompany] = useState<string>("");
-  const { toast, toastContainer } = useToast();
+  const { toast } = useToast();
   const formRef = useRef<HTMLFormElement>(null);
   //-----------------form validation-----------------
   function validateForm(formData: FormData) {
@@ -86,7 +86,6 @@ export function Form() {
   }
   return (
     <>
-      {toastContainer}
       <form
         ref={formRef}
         action={async (formData) => {
