@@ -4,22 +4,31 @@ import React, { useState } from "react";
 import "dayjs/locale/zh-cn";
 import dayjs from "dayjs";
 import { getYearDiff } from "@/helpers/date.helpers";
+import { RowFieldType } from "@/types/database.tables.types";
 
-function DateInput({ RowField, setTouched, defaultValue }: any) {
+interface DateInputPropsType {
+  RowField:RowFieldType;
+  setTouched?: (org: boolean) => void;
+  defaultValue?: string | undefined;
+}
+function DateInput({ RowField, setTouched, defaultValue = "" }: DateInputPropsType) {
   const [value, setValue] = useState<string>(String(defaultValue));
   const onChange: DatePickerProps["onChange"] = (date, dateString) => {
-    setTouched(true);
-    setValue(dateString);
+    setTouched && setTouched(true);
+    console.log(dateString > new Date().toISOString());
+    if(dateString > new Date().toISOString() && RowField?.name != "End Date" && RowField?.name != "Expiration") setValue("");
+    else setValue(dateString);
   };
   return (
     <div className="flex items-end justify-center gap-[1rem]">
       <div className="flex flex-col items-start justify-center">
-        <h1 className="text-gray text-sm font-light ">{RowField?.name}</h1>
+        <h1 className="text-[14px] text-gray-29 ">{RowField?.name}</h1>
         <DatePicker
           style={{ width: "11.3rem", borderRadius: "0.2rem" }}
-          //@ts-ignore
-          defaultValue={value ? dayjs(value, "YYYY-MM-DD") : ""}
+          //defaultValue={""}
           onChange={onChange}
+          //@ts-ignore
+          value={value ? dayjs(value, "YYYY-MM-DD") : ""}
           name={RowField?.name}
         />
       </div>

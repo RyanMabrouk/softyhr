@@ -11,7 +11,8 @@ function PopUp() {
   const PopUp = searchParams.get("popup") || "";
   const pathname = usePathname();
   const Router = useRouter();
-  const Component = popups[PopUp.toUpperCase()];
+  const Component = popups[PopUp.toUpperCase()]
+  
   return (
     PopUp != "" && (
       <div className="fixed top-0 z-30 flex h-screen w-screen items-center justify-center">

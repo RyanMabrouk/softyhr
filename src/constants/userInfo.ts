@@ -27,6 +27,7 @@ import DateInput from "@/app/(dashboard)/people/components/Fileds/DateInput/Date
 import { CiMail } from "react-icons/ci";
 import { IconType } from "react-icons";
 import { ReactNode } from "react";
+import textarea from "@/app/(dashboard)/people/components/Fileds/textarea/textarea";
 
 interface FieldsObjectType {
   [key: string]:ReactNode;
@@ -38,6 +39,7 @@ export const Field: any = {
   SELECT: SelectInput,
   DATE: DateInput,
   RADIO: RadioBox,
+  TEXTAREA: textarea
 };
 
 export const sectionIcon: ObjectIconsType = {

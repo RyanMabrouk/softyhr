@@ -6,7 +6,6 @@ interface userType {
 }
 
 export default function formulateData(formdata: FormData, user: userType) {
-  console.log(user);
   let NewEducation: Object[] = [];
   formdata.getAll("GPA").map((element, index: number) => {
     if (
@@ -29,7 +28,6 @@ export default function formulateData(formdata: FormData, user: userType) {
   });
 
   const data = user?.data;
-  console.log(data);
   Object?.keys(data)?.map((object: string) => {
     if (typeof data?.[object] == "object" && data?.[object]) {
       Object?.keys(data?.[object])?.map((key) => {

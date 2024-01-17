@@ -12,3 +12,21 @@ export function NewCandidates(array: any) {
   });
   return NewCandidates?.length || 0;
 }
+
+
+export function FormulateFormData(formdata: FormData){
+   let metadata : any= {};
+   let data : any= {};
+      data["First Name"] = formdata.get("First Name");
+      data["Last Name"] = formdata.get("Last Name");
+      data["Email"] = formdata.get("Email");
+      data["Phone"] = formdata.get("Phone");
+      formdata.delete("First Name");
+      formdata.delete("Last Name");
+      formdata.delete("Email");
+      formdata.delete("Phone");
+      formdata.forEach(function(value:FormDataEntryValue, key:string){
+            metadata[key] = value;
+    }); 
+    return {...data,metadata};
+}

@@ -12,12 +12,12 @@ import SearchBar from "../_SearchBar/SearchBar";
 import defaultAvatar from "/public/default_avatar.jpeg";
 import { FaInbox } from "react-icons/fa6";
 
-export default function Nav() {
+interface NavPropsType {
+  employeeId:string;
+}
+
+export default function Nav({employeeId}:NavPropsType) {
   const currentPath = usePathname();
-  const { employee_profile: data } = useEmployeeData({
-    employeeId: "69fc8647-c92d-4834-8238-efa5e82062f3",
-  });
-  const employeId = data?.data?.user_id;
   return (
     <>
       <nav className="flex h-20 flex-row items-center justify-between gap-[2rem] bg-gray-17 pl-14 pr-10">
@@ -33,7 +33,7 @@ export default function Nav() {
                 { label, pathFn, defaultPath }: LayoutRouteType,
                 index: number,
               ) => {
-                const isActive = pathFn(currentPath, String(employeId));
+                const isActive = pathFn(currentPath, String(employeeId));
                 return (
                   <Link
                     key={index}
@@ -41,7 +41,7 @@ export default function Nav() {
                       "flex h-full items-center justify-center px-6 capitalize text-gray-9 transition delay-75 ease-in-out hover:bg-gray-14 " +
                       (isActive ? "bg-gray-14 font-bold !text-fabric-700" : "")
                     }
-                    href={defaultPath ? defaultPath(employeId) : ""}
+                    href={defaultPath ? defaultPath(employeeId) : ""}
                   >
                     {label}
                   </Link>

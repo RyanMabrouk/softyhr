@@ -27,7 +27,7 @@ function JobopeningList({ data }: JobopeningListTypeProps) {
           </h1>
         </div>
         {data?.map((job: Hiring_type) => {
-          return <Jobopening key={job.id} job={job} />;
+          return <Jobopening key={job?.id} job={job} />;
         })}
       </div>
       <div className="absolute bottom-0 h-[0.2rem] w-full bg-gradient-to-r from-color-primary-1 to-color-primary-3" />

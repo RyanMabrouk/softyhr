@@ -15,7 +15,7 @@ async function Layout({
   return (
     <div className="flex h-full min-h-screen w-full flex-col">
       <Initialize employeeId={employeeId}>
-        <Nav />
+        <Nav employeeId={employeeId}/>
         <main className="h-full min-h-screen w-full ">{children}</main>
       </Initialize>
     </div>

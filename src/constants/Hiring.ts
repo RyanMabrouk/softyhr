@@ -34,3 +34,34 @@ export const CreateHiringJob = [
   "Application-Details",
   "Job-Boards",
 ];
+
+export const HiringInfos : HiringInfosType[]= [
+  {label:"Location",name:"Job Location" },
+  {label:"Department",name:"Departement" },
+  {label:"Employment Type",name:"Employment Type" },
+  {label:"Minimum Experience",name:"Minimum Experience" }
+]
+export type HiringInfosType = {
+  label:string;
+  name:string;
+}
+
+export const FieldsAplyment = [
+  {
+     name: "Country",
+     type: "text",
+     required: true
+  },
+  {
+     name: "Country",
+     type: "text",
+     required: true
+  }
+]
+
+
+export const InformationJob_inputs = [
+  {RowField:{name:"Job Location", type:'text'}},
+  {RowField:{name:"Job Description", type:'textarea'}},
+  {RowField:{name:"Internal Job Code", type:'text'}},
+]

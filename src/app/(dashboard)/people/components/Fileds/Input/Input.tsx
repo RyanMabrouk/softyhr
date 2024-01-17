@@ -6,8 +6,8 @@ import { FaLinkedin } from "react-icons/fa";
 
 interface InputPropsType {
   RowField: RowFieldType;
-  setTouched?: (arg: boolean) => void;
-  defaultValue: string;
+  setTouched?: (arg: boolean) => void ;
+  defaultValue?: string;
 }
 const Input = ({ RowField, setTouched, defaultValue }: InputPropsType) => {
   const [value, setValue] = useState<string>(String(defaultValue || ""));
@@ -16,7 +16,7 @@ const Input = ({ RowField, setTouched, defaultValue }: InputPropsType) => {
     <div className="flex flex-col items-start justify-center">
       <h1
         className={
-          "text-gray text-sm font-light" +
+          "text-[14px] text-gray-29 " +
           (RowField?.required ? " after:text-red after:content-['*']" : "")
         }
       >
@@ -49,6 +49,7 @@ const Input = ({ RowField, setTouched, defaultValue }: InputPropsType) => {
             if (setTouched) setTouched(true);
           }}
           placeholder={RowField?.placeHolder || ""}
+          {...(RowField?.required && {required : true})}
         />
       </div>
     </div>

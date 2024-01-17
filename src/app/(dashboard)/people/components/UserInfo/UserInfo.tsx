@@ -113,12 +113,12 @@ export default function UserInfo({ employeeId }: UserInfoPropsType) {
         </div>
         <div className="h-px w-full  self-center bg-gray-16" />
         <div className="flex flex-col items-start justify-center gap-[0.5rem]">
-          <div className="flex items-center justify-start gap-4 text-gray-15">
-            <FaHashtag fill="gray" />
+          <div className="flex items-center justify-start gap-[1REM] text-gray-15">
+            <FaHashtag className="cursor-pointer duration-200 ease-in-out hover:!text-color-primary-8" />
             <span>{user?.["Basic Information"]?.Employee}</span>
           </div>
           <div className="flex items-center justify-start gap-[1REM] text-sm font-normal text-gray-15">
-            <BsSignpostFill fill="gray" />
+            <BsSignpostFill className="cursor-pointer duration-200 ease-in-out hover:!text-color-primary-8" />
             <span>
               {
                 user?.["Employment Status"]?.sort(
@@ -130,21 +130,21 @@ export default function UserInfo({ employeeId }: UserInfoPropsType) {
             </span>
           </div>
           <div className="flex items-center justify-start gap-[1REM] text-sm  font-normal text-gray-15">
-            <IoIosPeople fill="gray" />
+            <IoIosPeople className="cursor-pointer duration-200 ease-in-out hover:!text-color-primary-8" />
             <span>Operations</span>
           </div>
           <div className="flex items-center justify-start gap-[1REM] text-sm font-normal text-gray-15">
-            <FaMapLocation fill="gray" />
+            <FaMapLocation className="cursor-pointer duration-200 ease-in-out hover:!text-color-primary-8" />
             <span>{user?.Address?.Country || ""}</span>
           </div>
           <div className="flex items-center justify-start gap-[1REM] text-sm  font-normal text-gray-15">
-            <IoLocationSharp fill="gray" />
+            <IoLocationSharp className="cursor-pointer duration-200 ease-in-out hover:!text-color-primary-8" />
             <span>
               {user?.Address?.State || "" + ", " + user?.Address?.City || ""}
             </span>
           </div>
           <div className="flex items-center justify-start gap-[1REM] text-sm  font-normal text-gray-15">
-            <CiClock2 fill="gray" />
+            <CiClock2 className="cursor-pointer duration-200 ease-in-out hover:!text-color-primary-8" />
             <span>{updateTime()} Local Time</span>
           </div>
         </div>

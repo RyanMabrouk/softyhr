@@ -13,7 +13,7 @@ function RadioBox({ RowField, setTouched, user, champ }: any) {
 
   return (
     <div className="flex flex-col items-start justify-center gap-[0.5rem]">
-      <h1 className="text-gray text-sm font-light ">{RowField?.name}</h1>
+      <h1 className="text-[14px] text-gray-29 ">{RowField?.name}</h1>
       <ConfigProvider
         theme={{
           token: {

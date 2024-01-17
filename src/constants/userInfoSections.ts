@@ -21,6 +21,7 @@ import RadioBox from "@/app/(dashboard)/people/components/Fileds/RadioBox/RadioB
 import FiledsChamps from "@/app/(dashboard)/people/components/Fileds/Fileds";
 import Education from "@/app/(dashboard)/people/components/Fileds/Education";
 import TableChamps from "@/app/(dashboard)/people/components/Fileds/TableChamps";
+import textarea from "@/app/(dashboard)/people/components/Fileds/textarea/textarea";
 
 export const Field: any = {
   TEXT: Input,
@@ -28,6 +29,7 @@ export const Field: any = {
   SELECT: SelectInput,
   DATE: Date,
   RADIO: RadioBox,
+  TEXTAREA: textarea
 };
 
 export const Section: any = {
