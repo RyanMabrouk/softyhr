@@ -9,8 +9,8 @@ interface AdditionnalInputsType {
 function AdditionnalInputs() {
   return (
     <>
-    {InformationJob_inputs?.map(({RowField}: any)=>{
-        return <Input RowField={RowField} />
+    {InformationJob_inputs?.map(({RowField}: any, index:number)=>{
+        return <Input key={index} RowField={RowField} />;
         })
     }
     </>

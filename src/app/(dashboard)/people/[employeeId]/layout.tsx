@@ -22,13 +22,14 @@ export default function Layout({
   children,
 }: EmployePropsType) {
   const { employee_profile: data } = useEmployeeData({ employeeId });
-  const ActiveRoute = usePathname().split("/").slice(-1).join("") || EmployeeRoute[0]?.label;
+  const ActiveRoute =
+    usePathname().split("/").slice(-1).join("") || EmployeeRoute[0]?.label;
   return (
     <div className="flex h-full w-full flex-col ">
       <div className="z-20 flex h-[13rem] justify-center bg-gradient-to-r from-color-primary-7  to-color-primary-9 transition-all duration-300 ">
         <div className={"flex w-9/12 items-end justify-start gap-[4rem] "}>
           <Link href="?popup=EDIT_PROFILE_IMAGE" className="group  relative">
-            <div className="z-10 -mb-9 ml-4 h-[13rem] w-[13rem] rounded-full border-color-primary-2  active:border-2">
+            <div className="z-10 -mb-9 h-[13rem] w-[13rem] rounded-full border-color-primary-2  active:border-2">
               <Image
                 src={data?.data?.picture || avatar}
                 alt="user-name"

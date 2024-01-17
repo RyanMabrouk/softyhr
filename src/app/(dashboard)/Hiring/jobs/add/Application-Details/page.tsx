@@ -18,7 +18,7 @@ const modules = {
     console.log(quillRef.current);
   }, [quillRef]);
   
-  return <div className="bg-black w-full h-[10rem]"><ReactQuill modules={modules} value={value} onChange={setValue} /></div>
+  return <div className="bg-black w-full h-[10rem]">{/*<ReactQuill modules={modules} value={value} onChange={setValue} />*/}</div>
 ;
 }
 

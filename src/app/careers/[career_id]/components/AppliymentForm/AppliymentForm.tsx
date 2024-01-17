@@ -21,7 +21,7 @@ function AppliymentForm({ job}:AppliymentFormPropsType) {
     const {data, isPending} = useSettings('AppliementForm');
      const SubmitForm = async(formdata: FormData) => {
      const response = await CreateCandidate({...FormulateFormData(formdata), job_id:job?.id});
-     toast.success(response?.Msg);
+     if (response?.Msg) toast.success(response?.Msg);
     };
   return (
     <>

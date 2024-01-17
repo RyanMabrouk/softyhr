@@ -11,13 +11,15 @@ import { IoMdSettings } from "react-icons/io";
 import SearchBar from "../_SearchBar/SearchBar";
 import defaultAvatar from "/public/default_avatar.jpeg";
 import { FaInbox } from "react-icons/fa6";
+import useData from "@/hooks/useData";
 
 interface NavPropsType {
-  employeeId:string;
+  employeeId: string;
 }
 
-export default function Nav({employeeId}:NavPropsType) {
+export default function Nav({ employeeId }: NavPropsType) {
   const currentPath = usePathname();
+  const { user_profile:{ data } } = useData(); 
   return (
     <>
       <nav className="flex h-20 flex-row items-center justify-between gap-[2rem] bg-gray-17 pl-14 pr-10">

@@ -1,7 +1,6 @@
 "use client";
 import { deleteEducation } from "@/actions/education/deleteEducation";
 import useEmployeeData from "@/hooks/useEmloyeeData";
-import useToast from "@/";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React from "react";
@@ -9,6 +8,7 @@ import { CgClose } from "react-icons/cg";
 import { useParams } from "next/navigation";
 import { FaRegTrashAlt } from "react-icons/fa";
 import PopUpSkeleton from "../../../PopUpSkeleton";
+import useToast from "@/hooks/useToast";
 
 interface DeleteEducationFnType {
   id: string | null;

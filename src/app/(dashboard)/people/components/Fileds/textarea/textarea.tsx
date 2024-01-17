@@ -9,7 +9,7 @@ interface InputPropsType {
   setTouched?: (arg: boolean) => void ;
   defaultValue?: string;
 }
-const textarea = ({ RowField, setTouched, defaultValue }: InputPropsType) => {
+const Textarea = ({ RowField, setTouched, defaultValue }: InputPropsType) => {
   const [value, setValue] = useState<string>(String(defaultValue || ""));
   const Component = InputIcons[RowField?.Icon?.toUpperCase() || ""];
   return (
@@ -53,4 +53,4 @@ const textarea = ({ RowField, setTouched, defaultValue }: InputPropsType) => {
   );
 };
 
-export default memo(textarea);
+export default memo(Textarea);
