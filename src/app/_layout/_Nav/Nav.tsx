@@ -4,20 +4,23 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import companyLogo from "/public/cropped (2).jpg";
-import { usePathname } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 import useEmployeeData from "@/hooks/useEmloyeeData";
 import { BsFillQuestionCircleFill } from "react-icons/bs";
 import { IoMdSettings } from "react-icons/io";
 import SearchBar from "../_SearchBar/SearchBar";
 import defaultAvatar from "/public/default_avatar.jpeg";
 import { FaInbox } from "react-icons/fa6";
+import useData from "@/hooks/useData";
+import { user } from "@nextui-org/react";
 
-interface NavPropsType {
-  employeeId:string;
-}
-
-export default function Nav({employeeId}:NavPropsType) {
+export default function Nav() {
+  const { employeeId: paramsid } = useParams();
   const currentPath = usePathname();
+  const {
+    user_profile: { data: user },
+  } = useData();
+  const employeeId = paramsid ? paramsid : user?.user_id;
   return (
     <>
       <nav className="flex h-20 flex-row items-center justify-between gap-[2rem] bg-gray-17 pl-14 pr-10">
@@ -41,7 +44,7 @@ export default function Nav({employeeId}:NavPropsType) {
                       "flex h-full items-center justify-center px-6 capitalize text-gray-9 transition delay-75 ease-in-out hover:bg-gray-14 " +
                       (isActive ? "bg-gray-14 font-bold !text-fabric-700" : "")
                     }
-                    href={defaultPath ? defaultPath(employeeId) : ""}
+                    href={defaultPath ? defaultPath(employeeId as string) : ""}
                   >
                     {label}
                   </Link>

@@ -6,10 +6,10 @@ import { FaLinkedin } from "react-icons/fa";
 
 interface InputPropsType {
   RowField: RowFieldType;
-  setTouched?: (arg: boolean) => void ;
+  setTouched?: (arg: boolean) => void;
   defaultValue?: string;
 }
-const textarea = ({ RowField, setTouched, defaultValue }: InputPropsType) => {
+function Textarea({ RowField, setTouched, defaultValue }: InputPropsType) {
   const [value, setValue] = useState<string>(String(defaultValue || ""));
   const Component = InputIcons[RowField?.Icon?.toUpperCase() || ""];
   return (
@@ -44,13 +44,15 @@ const textarea = ({ RowField, setTouched, defaultValue }: InputPropsType) => {
           value={value}
           name={RowField?.name}
           onChange={(e) => setValue(e.target.value)}
-          onFocus={() => {if(setTouched)setTouched(true)}}
+          onFocus={() => {
+            if (setTouched) setTouched(true);
+          }}
           placeholder={RowField?.placeHolder || ""}
-          {...(RowField?.required && {required : true})}
+          {...(RowField?.required && { required: true })}
         />
       </div>
     </div>
   );
-};
+}
 
-export default memo(textarea);
+export default memo(Textarea);

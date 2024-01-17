@@ -10,15 +10,12 @@ interface DescriptionPropsType {
 
 function Description({ job }: DescriptionPropsType) {
   const TextRef = useRef<HTMLDivElement>(null);
-  useEffect(()=>{
-     if(TextRef.current) TextRef.current.innerHTML = job?.job_information?.["Job Description"] || "";
-  },[])
-  return (
-                     
-      <div className="py-4"  ref={TextRef}>
-      </div>
-    
-  );
+  useEffect(() => {
+    if (TextRef.current)
+      TextRef.current.innerHTML =
+        job?.job_information?.["Job Description"] || "";
+  }, [job?.job_information]);
+  return <div className="py-4" ref={TextRef}></div>;
 }
 
 export default Description;
