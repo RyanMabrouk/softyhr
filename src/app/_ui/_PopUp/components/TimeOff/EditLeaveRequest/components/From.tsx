@@ -109,13 +109,6 @@ export function From() {
         className="flex w-full flex-col gap-4 px-2 pt-3"
         action={async (formData: FormData) => {
           if (formError && !checkIfOjectValuesAreEmpty(formError)) return;
-          if (
-            +new Date(formData.get("start_at") as string) >
-            +new Date(formData.get("end_at") as string)
-          ) {
-            toast.error("Start Date must be before End Date", "Error");
-            return;
-          }
           leave_request_id ? update(formData) : insert(formData);
         }}
       >

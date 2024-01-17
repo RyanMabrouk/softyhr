@@ -20,7 +20,7 @@ export const EmployeeRoute = [
     path: (employeId: string) => `/people/${employeId}/TimeOff`,
     defaultPath: true,
   },
-  {
+  /*{
     rang: 4,
     label: "Performance",
     path: (employeId: string) => `/people/${employeId}/Performance`,
@@ -49,7 +49,7 @@ export const EmployeeRoute = [
     label: "COVID-19",
     path: (employeId: string) => `/people/${employeId}/COVID-19`,
     defaultPath: true,
-  },
+  },*/
 ];
 
 export interface EmployeRoutesType {

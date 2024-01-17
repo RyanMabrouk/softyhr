@@ -10,6 +10,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import editAccrualStartDate from "@/actions/leave/editAccrualStartDate";
 import useToast from "@/hooks/useToast";
 import { DateInputGeneric } from "../../../../DateInputGeneric";
+import { CalendarGeneric } from "@/app/_ui/CalenderGeneric";
 export default function AccrualStartDate() {
   const { toast } = useToast();
   const Router = useRouter();
@@ -69,12 +70,14 @@ export default function AccrualStartDate() {
             manipulate the rate this employee is eligible for by adjusting the
             Accrual Start Date below.
           </div>
-          <DateInputGeneric
+          <CalendarGeneric
             name="accrual_start_date"
             label="Accrual Level Start Date"
-            defaultValue={formatYYYYMMDD(
-              new Date(employee_profile?.accrual_start_date) ?? "",
-            )}
+            defaultValue={
+              employee_profile?.accrual_start_date
+                ? new Date(employee_profile?.accrual_start_date)
+                : undefined
+            }
           />
         </main>
         <hr className="h-[3px] w-full bg-primary-gradient" />

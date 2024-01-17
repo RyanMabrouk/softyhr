@@ -11,7 +11,7 @@ export default async function Hydration({
   children: React.ReactNode;
 }) {
   const queryClient = new QueryClient();
-  await queryClient.prefetchQuery({
+  /*await queryClient.prefetchQuery({
     queryKey: ["settings"],
     queryFn: () =>
       getData("settings", {

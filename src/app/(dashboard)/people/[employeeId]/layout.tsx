@@ -9,6 +9,8 @@ import UserInfo from "../components/UserInfo/UserInfo";
 import DropDown from "../components/DropDown/DropDown";
 import { Settings, changementRequest } from "@/constants/userInfo";
 import useEmployeeData from "@/hooks/useEmloyeeData";
+import { SelectGeneric } from "@/app/_ui/SelectGeneric";
+import { IoMdSettings } from "react-icons/io";
 interface EmployePropsType {
   params: { employeeId: string };
   children: ReactNode;
@@ -41,11 +43,18 @@ export default function Layout({
                   "your name"}
               </h1>
               <div className={"flex h-10 gap-[1rem] "}>
-                <DropDown
-                  text="Request a Change"
-                  ListArray={changementRequest}
+                <SelectGeneric
+                  inputLabel="Request a Change"
+                  options={changementRequest}
+                  className=" !border-[1px] !border-white !text-white"
+                  cursor="white"
                 />
-                <DropDown text="Settings" ListArray={Settings} />
+                <SelectGeneric
+                  inputLabel={<IoMdSettings className="h-6 w-6 text-white" />}
+                  options={Settings}
+                  className="!w-[4.5rem] !border-[1px] !border-white !text-white"
+                  cursor="white"
+                />
               </div>
             </div>
             <div className="flex">

@@ -47,9 +47,15 @@ export function AcceptRequestBtn({ request }: { request: request_type }) {
   });
   return (
     <>
-      <div role="button" onClick={() => mutation.mutate()}>
-        <FaCheck className="hidden h-7 w-7 cursor-pointer rounded-md border border-transparent p-0.5 text-gray-21 transition-all ease-linear hover:border hover:border-black hover:bg-white group-hover:block" />
+      <div
+        className="tooltip"
+        data-tip="Accept"
+        role="button"
+        onClick={() => mutation.mutate()}
+      >
+        <FaCheck className="peer hidden h-7 w-7 cursor-pointer rounded-md border border-transparent p-0.5 text-gray-21 transition-all ease-linear hover:border hover:border-black hover:bg-white group-hover:block" />
       </div>
     </>
   );
 }
+//test tooltip <div className=" absolute inset-x-0 left-[-50%] top-[-100%] hidden w-fit rounded-md bg-gray-25 p-1 text-white peer-hover:block">

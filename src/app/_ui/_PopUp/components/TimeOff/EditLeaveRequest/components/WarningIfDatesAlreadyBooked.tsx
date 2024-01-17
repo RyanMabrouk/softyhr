@@ -7,7 +7,7 @@ export function WarningIfDatesAlreadyBooked() {
   const already_booked = useAlreadyBooked(employeeId);
   if (!already_booked) return null;
   return (
-    <div className="-mb-6 ml-2 flex flex-col gap-1 self-end justify-self-center">
+    <div className="-mt-6 ml-2 flex flex-col gap-1 self-end justify-self-center">
       <span className="text-color9-500">
         You've already requested time off for this period.
       </span>

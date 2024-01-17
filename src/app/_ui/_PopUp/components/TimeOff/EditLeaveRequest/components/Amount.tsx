@@ -82,6 +82,7 @@ export function Amount({
       ),
     );
   }, [active_duration, formError]);
+  if (totalDuration === 0) return;
   return (
     <div className="flex flex-col gap-1">
       <label
@@ -161,7 +162,7 @@ export function Amount({
                 </div>
               ))}
         </div>
-        <div className="flex w-full flex-row items-center gap-1  bg-gray-14 px-4 py-3 text-lg font-normal">
+        <div className="flex w-full flex-row items-center gap-1  rounded-b-md bg-gray-14 px-4 py-3 text-lg  font-normal">
           Total:{" "}
           <span className=" capitalize">
             {formatTotalHoursToTimeUnit(totalDuration, track_time_unit)}

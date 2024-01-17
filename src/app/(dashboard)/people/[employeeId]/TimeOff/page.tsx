@@ -20,7 +20,6 @@ export default function Page() {
               Time Off
             </div>
           </div>
-
           <div className="flex flex-row items-center gap-2 leading-8 text-gray-25">
             <span className=" max-h-[2rem] whitespace-nowrap">
               Accrual Level Start Date:
@@ -29,7 +28,6 @@ export default function Page() {
             <AddTimeOffPolicyBtn />
           </div>
         </div>
-        <div></div>
       </header>
       <Hr />
       <PolyciesSwiper />

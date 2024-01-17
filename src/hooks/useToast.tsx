@@ -1,26 +1,32 @@
 "use client";
 import { createContext, useContext } from "react";
 import { notification } from "antd";
-
+import { Button, message, Space } from "antd";
 type NotificationType = "success" | "info" | "warning" | "error";
-
-notification.config({
-  placement: "topRight",
+message.config({
+  top: 100,
   duration: 10,
+  maxCount: 3,
   rtl: true,
+  prefixCls: "my-message",
 });
 
 function createToast() {
-  const [api, contextHolder] = notification.useNotification();
-
+  const [messageApi, contextHolder] = message.useMessage();
   const openNotificationWithIcon = (
     type: NotificationType,
     message: string,
     description: string,
   ) => {
-    api[type]({
-      message: message,
-      description: description,
+    messageApi.open({
+      type: type,
+      content: (
+        <>
+          <span className="my-2 mr-1 text-[1.05rem] font-semibold">{message}</span>
+          <span className="my-2 ml-2 text-[1.05rem]">{description}</span>
+        </>
+      ),
+      //className: "p-0 m-0",
     });
   };
 
@@ -38,7 +44,6 @@ function createToast() {
       openNotificationWithIcon("info", description, message);
     },
   };
-
   return { toast: toast, toastContainer: contextHolder };
 }
 type ToastType = Partial<{
@@ -61,7 +66,6 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
     </toastContext.Provider>
   );
 }
-
 export default function useToast() {
   const { toast, toastContainer } = useContext(toastContext);
   if (!toast || !toastContainer)

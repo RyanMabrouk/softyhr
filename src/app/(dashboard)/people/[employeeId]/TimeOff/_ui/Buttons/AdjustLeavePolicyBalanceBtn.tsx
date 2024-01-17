@@ -7,6 +7,8 @@ export function AdjustLeavePolicyBalanceBtn({ id }: { id: number }) {
   const pathname = usePathname();
   return (
     <Link
+      className="tooltip tooltip-bottom z-[9999]"
+      data-tip="Adjust balance"
       href={{
         pathname: pathname,
         query: { leave_policy_id: id, popup: "ADJUST_LEAVE_POLICY_BALANCE" },

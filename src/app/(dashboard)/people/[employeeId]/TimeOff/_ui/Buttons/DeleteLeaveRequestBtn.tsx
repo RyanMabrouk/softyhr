@@ -13,6 +13,8 @@ export function DeleteLeaveRequestBtn({
   const pathname = usePathname();
   return (
     <Link
+      className="tooltip z-[9999] flex flex-row items-center justify-center"
+      data-tip="Delete"
       href={{
         pathname: pathname,
         query: {
@@ -20,7 +22,6 @@ export function DeleteLeaveRequestBtn({
           popup: "DELETE_LEAVE_REQUEST",
         },
       }}
-      className="flex flex-row items-center justify-center"
     >
       <MdDelete aria-label="Delete" className={className} />
     </Link>

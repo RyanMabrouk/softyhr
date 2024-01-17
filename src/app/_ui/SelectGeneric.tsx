@@ -11,6 +11,7 @@ type GroupOptions = {
   disabled?: boolean;
 };
 export function SelectGeneric({
+  className,
   label,
   name,
   defaultValue,
@@ -19,7 +20,9 @@ export function SelectGeneric({
   required,
   setValueInParent,
   inputLabel,
+  cursor = "black",
 }: {
+  className?: string;
   label?: string;
   name?: string;
   defaultValue?: Option;
@@ -27,7 +30,8 @@ export function SelectGeneric({
   group?: boolean;
   required?: boolean;
   setValueInParent?: React.Dispatch<React.SetStateAction<any>> | undefined;
-  inputLabel?: string;
+  inputLabel?: string | ReactNode;
+  cursor?: "white" | "black";
 }) {
   if (!options) return;
   return (
@@ -45,7 +49,7 @@ export function SelectGeneric({
         data-placeholder-trigger="keydown"
         label={label}
         id={label}
-        className={`peer-focus-within:shadow-green group-hover:shadow-green focus:shadow-green focus-within:shadow-green group peer h-9 w-[12.5rem]  rounded-md  border border-gray-18 py-1 capitalize text-gray-27 shadow-[rgba(0,0,0,0.05)_0px_1px_0px_0px] placeholder:text-gray-14 [&_.MuiOutlinedInput-notchedOutline]:border-none`}
+        className={`peer-focus-within:shadow-green focus:shadow-green focus-within:shadow-green group peer h-9 w-[12.5rem]  rounded-md  border border-gray-18 py-1 capitalize text-gray-27 shadow-[rgba(0,0,0,0.05)_0px_1px_0px_0px] placeholder:text-gray-14 [&_.MuiOutlinedInput-notchedOutline]:border-none ${className}`}
         name={name ?? "select"}
         defaultValue={defaultValue ? defaultValue.value : "none"}
         displayEmpty
@@ -53,6 +57,14 @@ export function SelectGeneric({
         onChange={(e) =>
           setValueInParent ? setValueInParent(e.target.value) : null
         }
+        sx={{
+          "& .MuiOutlinedInput-notchedOutline": {
+            borderColor: cursor,
+          },
+          "& .MuiSvgIcon-root": {
+            color: cursor,
+          },
+        }}
       >
         {group
           ? options?.map((option: any, i: number) => {

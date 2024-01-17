@@ -1,6 +1,5 @@
 import React from "react";
 import { formatYYYYMMDD } from "@/helpers/date.helpers";
-
 export function DateInputGeneric({
   name,
   label,

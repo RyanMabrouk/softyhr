@@ -5,7 +5,6 @@ import { getDaysInBetween } from "@/helpers/date.helpers";
 import {
   database_leave_request_status_type,
   database_leave_requests_insert_type,
-  database_profile_leave_balance_type,
 } from "@/types/database.tables.types";
 import updateLeaveBalance from "./updateLeaveBalance";
 export default async function updateLeaveRequest({
