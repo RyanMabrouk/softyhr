@@ -8,7 +8,7 @@ import React from "react";
 import { CgClose } from "react-icons/cg";
 import { useParams } from "next/navigation";
 import { FaRegTrashAlt } from "react-icons/fa";
-import PopUpSkeleton from "../../PopUpSkeleton";
+import PopUpSkeleton from "../../../PopUpSkeleton";
 
 interface DeleteEducationFnType {
   id: string | null;

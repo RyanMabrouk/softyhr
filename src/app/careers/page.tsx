@@ -8,6 +8,7 @@ import Image from "next/image";
 
 function page() {
   const { Hiring: data } = useData();
+  console.log(data);
   return (
     <div className="flex h-screen w-screen items-center justify-center">
       {data?.data ? (

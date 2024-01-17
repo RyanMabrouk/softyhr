@@ -11,6 +11,7 @@ export default async function updateData(
   },
 ) {
   const supabase = createServerActionClient({ cookies });
+  console.log(table, payload, match);
   const { data, error } = await supabase
     .from(table)
     .update(payload)

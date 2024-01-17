@@ -8,11 +8,11 @@ export const CreateCandidate =async(NewCandaidate:any)=>{
     
     const { data, error } = await supabase
      .from('candidates')
-     .insert([[NewCandaidate]])
+     .insert([NewCandaidate])
      .select()
     if(error){
         return {
-         Msg: "Application submitted successfully",
+         Error: "Application submitted successfully",
      }
     }
     else{

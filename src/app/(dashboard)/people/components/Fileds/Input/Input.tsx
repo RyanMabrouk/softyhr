@@ -16,7 +16,7 @@ const Input = ({ RowField, setTouched, defaultValue }: InputPropsType) => {
     <div className="flex flex-col items-start justify-center">
       <h1
         className={
-          "text-gray text-sm font-light" +
+          "text-[14px] text-gray-29 " +
           (RowField?.required ? " after:text-red after:content-['*']" : "")
         }
       >

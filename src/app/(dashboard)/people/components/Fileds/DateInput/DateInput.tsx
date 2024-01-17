@@ -16,13 +16,13 @@ function DateInput({ RowField, setTouched, defaultValue = "" }: DateInputPropsTy
   const onChange: DatePickerProps["onChange"] = (date, dateString) => {
     setTouched && setTouched(true);
     console.log(dateString > new Date().toISOString());
-    if(dateString > new Date().toISOString() && RowField?.name != "End Date") setValue("");
+    if(dateString > new Date().toISOString() && RowField?.name != "End Date" && RowField?.name != "Expiration") setValue("");
     else setValue(dateString);
   };
   return (
     <div className="flex items-end justify-center gap-[1rem]">
       <div className="flex flex-col items-start justify-center">
-        <h1 className="text-gray text-sm font-light ">{RowField?.name}</h1>
+        <h1 className="text-[14px] text-gray-29 ">{RowField?.name}</h1>
         <DatePicker
           style={{ width: "11.3rem", borderRadius: "0.2rem" }}
           //defaultValue={""}

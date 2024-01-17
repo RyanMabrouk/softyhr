@@ -1,5 +1,5 @@
 import AdjustLeavePolicyBalance from "@/app/_ui/_PopUp/components/AdjustLeavePolicyBalance/AdjustLeavePolicyBalance";
-import DeleteEducation from "@/app/_ui/_PopUp/components/DeleteEducation/DeleteEducation";
+import DeleteEducation from "@/app/_ui/_PopUp/components/Education/DeleteEducation/DeleteEducation";
 import DeleteLeaveRequest from "@/app/_ui/_PopUp/components/DeleteLeaveRequest/DeleteLeaveRequest";
 import EditFields from "@/app/_ui/_PopUp/components/EditFields/EditFields";
 import EditLeaveRequest from "@/app/_ui/_PopUp/components/EditLeaveRequest/EditLeaveRequest";
@@ -7,7 +7,10 @@ import RejectLeaveRequest from "@/app/_ui/_PopUp/components/RejectLeaveRequest/R
 import ViewLeaveRequestComment from "@/app/_ui/_PopUp/components/ViewLeaveRequestComment.tsx/ViewLeaveRequestComment";
 import ChangeLeavePolicy from "@/app/_ui/_PopUp/components/ChangeLeavePolicy/ChangeLeavePolicy";
 import DeleteLeavePolicy from "@/app/_ui/_PopUp/components/DeleteLeavePolicy/DeleteLeavePolicy";
-import AddEntry from "@/app/_ui/_PopUp/components/AddEntry/AddEntry";
+import AddEntry from "@/app/_ui/_PopUp/components/TableEntries/AddEntry/AddEntry";
+import EditEntry from "@/app/_ui/_PopUp/components/TableEntries/EditEntry/EditEntry";
+import DeleteItem from "@/app/_ui/_PopUp/components/TableEntries/DeleteEntry/DeleteItem";
+import EditPhoto from "@/app/_ui/_PopUp/components/EditPhoto/EditPhoto";
 
 export const popups: any = {
   EDIT_FIELD: EditFields,
@@ -19,5 +22,8 @@ export const popups: any = {
   DELETE_LEAVE_REQUEST: DeleteLeaveRequest,
   CHANGE_LEAVE_POLICY: ChangeLeavePolicy,
   DELETE_LEAVE_POLICY: DeleteLeavePolicy,
-  ADD_ENTRY: AddEntry
+  ADD_ENTRY: AddEntry,
+  EDIT_ENTRY: EditEntry,
+  DELETE_ENTRY: DeleteItem,
+  EDIT_PROFILE_IMAGE: EditPhoto
 };

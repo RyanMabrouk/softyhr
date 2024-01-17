@@ -32,24 +32,24 @@ function UserInfo({ employeeId }: UserInfoPropsType) {
       <div className="mt-10 flex flex-col gap-[1rem] px-6">
         <div className=" flex flex-col items-start  justify-center gap-[0.5rem]">
           <div className="flex items-center justify-start gap-[1rem] whitespace-nowrap text-sm text-gray-15">
-            <MdOutlineHomeWork fill="gray" />
+            <MdOutlineHomeWork  className="hover:!text-color-primary-8 ease-in-out duration-200 cursor-pointer" />
             <span className="text-sm">{user?.Contact?.["Work Phone"]}</span>
           </div>
           <div className="flex items-center justify-start gap-[1rem] whitespace-nowrap text-gray-15">
-            <MdPhoneAndroid fill="gray" />
+            <MdPhoneAndroid  className="hover:!text-color-primary-8 ease-in-out duration-200 cursor-pointer" />
             <span className="text-sm">{user?.Contact?.["Mobile Phone"]}</span>
           </div>
           <div className="flex items-center justify-start gap-[1rem] whitespace-nowrap text-gray-15">
-            <CiMail fill="gray" />
+            <CiMail  className="hover:!text-color-primary-8 ease-in-out duration-200 cursor-pointer" />
             <span className="text-sm">{user?.Contact?.["Work Email"]}</span>
           </div>
         </div>
         <div className="flex items-center justify-start gap-[1rem] whitespace-nowrap text-gray-15">
-          <FaLinkedin fill="gray" />
-          <FaTwitter fill="gray" />
-          <FaFacebookSquare fill="gray" />
-          <FaPinterest fill="gray" />
-          <FaTwitter fill="gray" />
+          <FaLinkedin  className="hover:!text-color-primary-8 ease-in-out duration-200 cursor-pointer" />
+          <FaTwitter  className="hover:!text-color-primary-8 ease-in-out duration-200 cursor-pointer" />
+          <FaFacebookSquare  className="hover:!text-color-primary-8 ease-in-out duration-200 cursor-pointer" />
+          <FaPinterest  className="hover:!text-color-primary-8 ease-in-out duration-200 cursor-pointer" />
+          <FaTwitter  className="hover:!text-color-primary-8 ease-in-out duration-200 cursor-pointer" />
         </div>
         <div className="h-px w-full  self-center bg-gray-16" />
         <div className=" flex flex-col gap-[0.3rem]">
@@ -62,11 +62,11 @@ function UserInfo({ employeeId }: UserInfoPropsType) {
         <div className="h-px w-full  self-center bg-gray-16" />
         <div className="flex flex-col items-start justify-center gap-[0.5rem]">
           <div className="flex items-center justify-start gap-[1REM] text-gray-15">
-            <FaHashtag fill="gray" />
+            <FaHashtag  className="hover:!text-color-primary-8 ease-in-out duration-200 cursor-pointer" />
             <span>{user?.["Basic Information"]?.Employee}</span>
           </div>
           <div className="flex items-center justify-start gap-[1REM] text-sm font-normal text-gray-15">
-            <BsSignpostFill fill="gray" />
+            <BsSignpostFill  className="hover:!text-color-primary-8 ease-in-out duration-200 cursor-pointer" />
             <span>
               {
                 user?.["Employment Status"]?.sort(
@@ -78,21 +78,21 @@ function UserInfo({ employeeId }: UserInfoPropsType) {
             </span>
           </div>
           <div className="flex items-center justify-start gap-[1REM] text-sm  font-normal text-gray-15">
-            <IoIosPeople fill="gray" />
+            <IoIosPeople  className="hover:!text-color-primary-8 ease-in-out duration-200 cursor-pointer" />
             <span>Operations</span>
           </div>
           <div className="flex items-center justify-start gap-[1REM] text-sm font-normal text-gray-15">
-            <FaMapLocation fill="gray" />
+            <FaMapLocation  className="hover:!text-color-primary-8 ease-in-out duration-200 cursor-pointer" />
             <span>{user?.Address?.Country || ""}</span>
           </div>
           <div className="flex items-center justify-start gap-[1REM] text-sm  font-normal text-gray-15">
-            <IoLocationSharp fill="gray" />
+            <IoLocationSharp  className="hover:!text-color-primary-8 ease-in-out duration-200 cursor-pointer" />
             <span>
               {user?.Address?.State || "" + ", " + user?.Address?.City || ""}
             </span>
           </div>
           <div className="flex items-center justify-start gap-[1REM] text-sm  font-normal text-gray-15">
-            <CiClock2 fill="gray" />
+            <CiClock2  className="hover:!text-color-primary-8 ease-in-out duration-200 cursor-pointer" />
             <span>{updateTime()} Local Time</span>
           </div>
         </div>
@@ -100,31 +100,31 @@ function UserInfo({ employeeId }: UserInfoPropsType) {
         <div className="flex flex-col items-start justify-center gap-[0.5rem]">
           <h1 className="text-sm text-color-primary-7">Rapports directs</h1>
           <div className="flex items-center justify-start gap-[1rem]">
-            <CgProfile fill="gray" />
+            <CgProfile  className="hover:!text-color-primary-8 ease-in-out duration-200 cursor-pointer" />
             <h1 className="cursor-pointer text-sm font-normal text-gray-15 underline-offset-1 hover:underline">
               maja andev
             </h1>
           </div>
           <div className="flex items-center justify-start gap-[1rem]">
-            <CgProfile fill="gray" />
+            <CgProfile  className="hover:!text-color-primary-8 ease-in-out duration-200 cursor-pointer" />
             <h1 className="cursor-pointer text-sm font-normal text-gray-15 underline-offset-1 hover:underline">
               maja andev
             </h1>
           </div>
           <div className="flex items-center justify-start gap-[1rem]">
-            <CgProfile fill="gray" />
+            <CgProfile  className="hover:!text-color-primary-8 ease-in-out duration-200 cursor-pointer" />
             <h1 className="cursor-pointer text-sm font-normal text-gray-15 underline-offset-1 hover:underline">
               maja andev
             </h1>
           </div>
           <div className="flex items-center justify-start gap-[1rem]">
-            <CgProfile fill="gray" />
+            <CgProfile  className="hover:!text-color-primary-8 ease-in-out duration-200 cursor-pointer" />
             <h1 className="cursor-pointer text-sm font-normal text-gray-15 underline-offset-1 hover:underline">
               maja andev
             </h1>
           </div>
           <div className="flex items-center justify-start gap-[1rem]">
-            <CgProfile fill="gray" />
+            <CgProfile  className="hover:!text-color-primary-8 ease-in-out duration-200 cursor-pointer" />
             <h1 className="cursor-pointer text-sm font-normal text-gray-15 underline-offset-1 hover:underline">
               maja andev
             </h1>
