@@ -2,17 +2,14 @@
 import React, { memo, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { useDrag, useDrop } from "react-dnd";
-import { ReorderChamps } from "../../../helper/ReorderChamps.helper";
+import { ReorderChamps } from "../../../../helper/ReorderChamps.helper";
 import {
   QueryClient,
   useMutation,
   useQueryClient,
 } from "@tanstack/react-query";
 import { UpdateSettings } from "@/api/updateSettings";
-import {
-  RowType,
-  sectionType,
-} from "@/types/database.tables.types";
+import { RowType, sectionType } from "@/types/database.tables.types";
 import RowFields from "./RowFields";
 
 interface RowFieldsListPropstype {
