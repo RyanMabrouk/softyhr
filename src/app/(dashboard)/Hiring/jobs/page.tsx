@@ -4,15 +4,16 @@ import Link from "next/link";
 import React from "react";
 import { v4 as uuidv4 } from "uuid";
 import { FaPlusCircle } from "react-icons/fa";
-import HiringTable, { HiringTableType } from "../_ui/HiringTable/HiringTable";
+import HiringTable from "../_ui/HiringTable/HiringTable";
 import useData from "@/hooks/useData";
 import { NewCandidates } from "@/helpers/CountNewCandidates";
 import { Hiring_type } from "@/types/database.tables.types";
-
-
+import { HiringTableType } from "../_ui/HiringTable/Hiringtable.types";
 
 function Page() {
-  const { Hiring: { data, isPending } } = useData();
+  const {
+    Hiring: { data, isPending },
+  } = useData();
   const HiringDataTable: HiringTableType[] = data?.map(
     (Hiring: Hiring_type) => {
       return {

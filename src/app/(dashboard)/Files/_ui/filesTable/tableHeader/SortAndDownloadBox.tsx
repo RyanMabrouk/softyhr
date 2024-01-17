@@ -1,4 +1,3 @@
-import SortBy from "@/hooks/SortBy";
 import React from "react";
 import FilesDownloadButton from "../../components/FilesDownloadButton";
 import FilesTrashButton from "../../components/FilesTrashButton";

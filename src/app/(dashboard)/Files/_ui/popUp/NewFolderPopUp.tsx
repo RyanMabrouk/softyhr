@@ -1,4 +1,3 @@
-import { SubmitBtn } from "@/app/(auth)/login/_ui/SubmitBtn";
 import { usePathname, useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { CgClose } from "react-icons/cg";
