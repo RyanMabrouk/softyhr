@@ -22,7 +22,7 @@ function Page({ params: { career_id } }: { params: { career_id: string } }) {
   const [CurrentBtn, setCurrentBtn] = useState<string>("Apply for This job");
   return (
     <div className=" flex h-screen w-[99dvw] items-start justify-center gap-[2rem] py-8 pt-8">
-      <div className="flex w-2/4 flex-col py-4 items-center justify-center gap-[2rem]">
+      <div className="flex w-2/4 flex-col items-center justify-center gap-[2rem] py-4">
         <div className="self-start">
           <Image
             className="cursor-pointer self-start"
@@ -63,7 +63,7 @@ function Page({ params: { career_id } }: { params: { career_id: string } }) {
               </Swiper>
           </div>  )}
           </div>
-        <div className="absolute right-0 bottom-0 h-[0.2rem] w-full bg-gradient-to-r from-color-primary-1 to-color-primary-3" />
+          <div className="absolute bottom-0 right-0 h-[0.2rem] w-full bg-gradient-to-r from-color-primary-1 to-color-primary-3" />
         </div>
       </div>
       {isPending ? <ApplySectionSkeleton /> : <ApplySection  job={data[0]} />}

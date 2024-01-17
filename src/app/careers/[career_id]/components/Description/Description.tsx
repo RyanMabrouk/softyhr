@@ -15,12 +15,7 @@ function Description({ job }: DescriptionPropsType) {
       TextRef.current.innerHTML =
         job?.job_information?.["Job Description"] || "";
   }, [job?.job_information]);
-  return (
-                     
-      <div className="py-4"  ref={TextRef}>
-      </div>
-    
-  );
+  return <div className="py-4" ref={TextRef}></div>;
 }
 
 export default Description;

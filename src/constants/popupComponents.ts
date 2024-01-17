@@ -4,7 +4,7 @@ import EditEntry from "@/app/_ui/_PopUp/components/TableEntries/EditEntry/EditEn
 import DeleteItem from "@/app/_ui/_PopUp/components/TableEntries/DeleteEntry/DeleteItem";
 import EditPhoto from "@/app/_ui/_PopUp/components/EditPhoto/EditPhoto";
 import DeleteLeaveRequest from "@/app/_ui/_PopUp/components/TimeOff/DeleteLeaveRequest/DeleteLeaveRequest";
-import EditFields from "@/app/_ui/_PopUp/components/EditFields/EditFields";
+import EditFields from "@/app/_ui/_PopUp/components/Personel-job/EditFields/EditFields";
 import NewFolderPopUp from "@/app/(dashboard)/Files/_ui/popUp/NewFolderPopUp";
 import UploadFilePopUp from "@/app/(dashboard)/Files/_ui/popUp/UploadFilePopUp";
 import DeleteFilePopUp from "@/app/(dashboard)/Files/_ui/popUp/DeleteFilePopUp";

@@ -1,10 +1,10 @@
-import Input from '@/app/(dashboard)/people/components/Fileds/Input/Input'
-import { InformationJob_inputs } from '@/constants/Hiring'
-import { RowFieldType } from '@/types/database.tables.types'
-import React from 'react'
+import Input from "@/app/(dashboard)/people/components/Fileds/Input/Input";
+import { InformationJob_inputs } from "@/constants/Hiring";
+import { RowFieldType } from "@/types/database.tables.types";
+import React from "react";
 
 interface AdditionnalInputsType {
-    RowField: RowFieldType;
+  RowField: RowFieldType;
 }
 function AdditionnalInputs() {
   return (
@@ -14,7 +14,7 @@ function AdditionnalInputs() {
         })
     }
     </>
-  )
+  );
 }
 
-export default AdditionnalInputs
+export default AdditionnalInputs;

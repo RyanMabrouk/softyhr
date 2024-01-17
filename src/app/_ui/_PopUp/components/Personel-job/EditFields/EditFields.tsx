@@ -11,7 +11,7 @@ import Loader from "@/app/(dashboard)/people/components/Loader/Loader";
 import { champ_type, sectionType } from "@/types/database.tables.types";
 import { UpdateSettings } from "@/api/updateSettings";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import PopUpSkeleton from "../../PopUpSkeleton";
+import PopUpSkeleton from "../../../PopUpSkeleton";
 
 function EditFields() {
   const pathname = usePathname();
