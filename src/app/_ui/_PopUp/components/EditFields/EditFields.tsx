@@ -1,7 +1,7 @@
 "use client";
 import { useSettings } from "@/hooks/useSettings";
-import React, { memo, useState } from "react";
-import { ChampsType, RowFieldType } from "@/types/userInfoTypes.type";
+import React, { useState } from "react";
+import { RowFieldType } from "@/types/userInfoTypes.type";
 import { usePathname, useRouter } from "next/navigation";
 import SelectInput from "./components/select/Select";
 import { GiRapidshareArrow } from "react-icons/gi";
@@ -64,7 +64,7 @@ function EditFields() {
         <Loader />
       ) : (
         <PopUpSkeleton
-          className="p-8 py-10"
+          className="px-8 py-5"
           title="Edit Fields for All Employees"
         >
           <div className="rounded-sm bg-white">

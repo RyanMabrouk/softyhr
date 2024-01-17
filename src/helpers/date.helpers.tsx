@@ -15,7 +15,6 @@ export function formatYYYYMMDD(date: Date) {
   const day = String(date.getDate()).padStart(2, "0");
   return `${year}-${month}-${day}`;
 }
-
 // format date to Jan 31 - Jul 02
 export function formatDateMMDD(start_at: Date, end_at: Date) {
   if (InvalidDate(start_at)) return InvalidDate(start_at);
@@ -45,7 +44,7 @@ export function timeDiffInHours(start: Date, end: Date) {
   if (InvalidDate(end)) return InvalidDate(end);
   return Math.abs(end.getTime() - start.getTime()) / 36e5;
 }
-// format date to 'Mon, 31' short format
+// format date to 'Wed, Jul 31' short format
 export function formatDateToDayMonDD(date: Date) {
   if (InvalidDate(date)) return InvalidDate(date);
   const formatter = new Intl.DateTimeFormat("en-US", {
@@ -107,17 +106,30 @@ export function getYearDiff(startDate: Date, endDate: Date) {
 
   return Math.abs(date.getUTCFullYear() - 1970);
 }
-
+// Format the string with leading zeroes
 export function updateTime() {
   const now = new Date();
   const hours = now.getHours();
   const minutes = now.getMinutes();
   const seconds = now.getSeconds();
-
-  // Format the string with leading zeroes
   const clockStr = `${hours.toString().padStart(2, "0")} : ${minutes
     .toString()
     .padStart(2, "0")}`;
-
   return String(clockStr);
+}
+//
+export function formatDateFiles(date: any) {
+  const day = date.slice(8, 10);
+  const month = date.slice(5, 7);
+  const year = date.slice(0, 4);
+
+  return `${day}/${month}/${year}`;
+}
+// get the years and days since a date
+export function YearsAndDaysSinceDate(date: Date) {
+  const now = new Date();
+  const diff = now.getTime() - date.getTime();
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const years = Math.floor(days / 365);
+  return `${years}y - ${days - years * 365}d`;
 }

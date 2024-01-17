@@ -6,7 +6,7 @@ import Jobopening from "./components/Jobopening";
 import JobopeningList from "./components/JobopeningList";
 import Image from "next/image";
 
-function page() {
+function Page() {
   const { Hiring: data } = useData();
   console.log(data);
   return (
@@ -22,4 +22,4 @@ function page() {
   );
 }
 
-export default page;
+export default Page;

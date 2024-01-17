@@ -6,7 +6,7 @@ import { IoIosMail } from "react-icons/io";
 import { Input } from "./_ui/Input";
 import ToggleBackBtn from "./ToggleBackBtn";
 import { ResetPasswordForm } from "./ResetPasswordForm";
-import { SubmitBtn } from "./_ui/SubmitBtn";
+import { SubmitBtn } from "../../_ui/SubmitBtn";
 export function ResetPasswordPage() {
   return (
     <Skeleton>

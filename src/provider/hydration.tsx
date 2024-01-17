@@ -18,7 +18,7 @@ export default async function Hydration({
         org: true,
       }),
   });
-  await queryClient.prefetchQuery({
+  /*await queryClient.prefetchQuery({
     queryKey: ["leave_policies"],
     queryFn: () =>
       getData("leave_policies", {

@@ -5,7 +5,6 @@ export default async function deleteLeaveRequest({
 }: {
   request_id: number;
 }) {
-  console.log("deleteLeaveRequest");
   const { error } = await deleteData("leave_requests", {
     match: { id: request_id },
   });

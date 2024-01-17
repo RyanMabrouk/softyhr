@@ -7,9 +7,9 @@ import { IoShieldCheckmarkOutline } from "react-icons/io5";
 import updatePassword from "@/actions/auth/updatePassword";
 import { FaRegCircle } from "react-icons/fa6";
 import useToast from "@/hooks/useToast";
-import { SubmitBtn } from "../login/_ui/SubmitBtn";
+import { SubmitBtn } from "../../_ui/SubmitBtn";
 export function Form() {
-  const { toast, toastContainer } = useToast();
+  const { toast } = useToast();
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isValidPassword, setIsValidPassword] = useState(false);
@@ -32,7 +32,6 @@ export function Form() {
   }, [password, requirements]);
   return (
     <>
-      {toastContainer}
       <form
         className="flex h-full w-full flex-col items-start justify-between gap-4 px-16"
         action={async (formData: FormData) => {

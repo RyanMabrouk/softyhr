@@ -1,8 +1,8 @@
-import  { ReactNode } from 'react'
+import { ReactNode } from "react";
 interface EmployeesPropsType {
-    children: ReactNode ;
+  children: ReactNode;
 }
-function layout({children}:EmployeesPropsType) {
- return children 
+function layout({ children }: EmployeesPropsType) {
+  return children;
 }
-export default layout
+export default layout;

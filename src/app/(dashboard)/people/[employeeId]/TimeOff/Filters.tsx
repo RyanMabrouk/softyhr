@@ -1,6 +1,5 @@
 "use client";
 import React, { useContext } from "react";
-import { FilterSelect } from "./_ui/FilterSelect";
 import historyTableFilters from "./_context/historyTableFilters";
 import { historyTableFiltersContextType } from "./_context/historyTableFilters";
 import { leave_data_types } from "./History";
@@ -64,10 +63,11 @@ export function Filters({ data }: FiltersProps) {
         )}
       </div>
       <SelectGeneric
-        inputLabel="View"
+        //inputLabel="View"
         setValueInParent={() =>
           setToggleView ? setToggleView((old) => !old) : null
         }
+        defaultValue={{ label: "Earned/Used", value: "Earned/Used" }}
         options={[
           { label: "Earned/Used", value: "Earned/Used" },
           {

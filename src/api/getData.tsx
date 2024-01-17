@@ -6,7 +6,9 @@ import { Database } from "@/types/database.types";
 type getDataParams = {
   user?: boolean;
   org?: boolean;
-  match?: { [key: string]: string | number | boolean | null | string[] | undefined };
+  match?: {
+    [key: string]: string | number | boolean | null | string[] | undefined;
+  };
   column?: string;
 };
 
@@ -24,6 +26,7 @@ export default async function getData(
     column: "*",
   },
 ): Promise<{ data: any; error: any }> {
+  console.log(match);
   const supabase = createServerComponentClient<Database>({ cookies });
   const session = await getSession();
   const org_name = session?.user.user_metadata.org_name;

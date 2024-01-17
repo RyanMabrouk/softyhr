@@ -3,7 +3,6 @@ import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
 import { cookies, headers } from "next/headers";
 import { redirect } from "next/navigation";
 export default async function login(formData: FormData) {
-  console.log("🚀login");
   const header_url = headers().get("host") || "";
   const supabase = createServerActionClient({ cookies });
   const { data: user, error } = await supabase.auth.signInWithPassword({
@@ -23,7 +22,6 @@ export default async function login(formData: FormData) {
     if (user_org === domain) {
       redirect("/home");
     } else {
-      console.log("🚀 ~ You're not registered in this domain");
       const { error: login_not_registered_error } =
         await supabase.auth.signOut();
       if (login_not_registered_error)

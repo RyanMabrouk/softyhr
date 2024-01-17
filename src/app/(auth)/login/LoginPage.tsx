@@ -9,7 +9,7 @@ import { Input } from "./_ui/Input";
 import ShowPasswordBtn from "./showPasswordBtn";
 import ForgotPasswordBtn from "./ForgotPasswordBtn";
 import { LoginPageForm } from "./LoginPageForm";
-import { SubmitBtn } from "./_ui/SubmitBtn";
+import { SubmitBtn } from "../../_ui/SubmitBtn";
 export function LoginPage() {
   return (
     <Skeleton>

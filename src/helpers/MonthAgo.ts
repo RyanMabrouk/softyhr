@@ -1,6 +1,5 @@
 export function monthsAgo(inputDate:string) {
   // Parse the input date
-  console.log(inputDate);
   const date = new Date(inputDate);
 
   // Get the current date

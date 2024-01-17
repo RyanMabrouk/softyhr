@@ -7,6 +7,8 @@ export function AddLeaveRequestBtn({ id }: { id: number }) {
   const pathname = usePathname();
   return (
     <Link
+      className="tooltip tooltip-bottom z-[9999]"
+      data-tip="Record time off"
       href={{
         pathname: pathname,
         query: { popup: "EDIT_LEAVE_REQUEST", leave_policy_id: id },

@@ -38,14 +38,16 @@ const Input = ({ RowField, setTouched, defaultValue }: InputPropsType) => {
         )}
         <input
           className={
-            "focus:focus-within:shadow-green h-[2rem] rounded-sm border border-gray-19 px-2 font-light outline-none  focus:!border-color-primary-3 " +
+            "focus:focus-within:shadow-green h-[2rem] rounded-sm border border-gray-19 px-2 text-[0.95rem] font-normal outline-none  " +
             (RowField?.Icon ? "pl-8 " : "")
           }
           type={RowField?.type || "text"}
           value={value}
           name={RowField?.name}
           onChange={(e) => setValue(e.target.value)}
-          onFocus={() => {if(setTouched)setTouched(true)}}
+          onFocus={() => {
+            if (setTouched) setTouched(true);
+          }}
           placeholder={RowField?.placeHolder || ""}
           {...(RowField?.required && {required : true})}
         />

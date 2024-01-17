@@ -17,7 +17,6 @@ import {
 } from "@/helpers/leave.helpers";
 import { EditLeaveRequestBtn } from "./_ui/Buttons/EditLeaveRequestBtn";
 import { useParams } from "next/navigation";
-import useToast from "@/hooks/useToast";
 import { MdCancel } from "react-icons/md";
 import { AcceptRequestBtn } from "./_ui/Buttons/AcceptRequestBtn";
 import { RejectRequestBtn } from "./_ui/Buttons/RejectRequestBtn";
@@ -37,7 +36,6 @@ type upcoming_leave_requests_data_type = {
 };
 export function UpcomingTimeOff() {
   const { employeeId } = useParams();
-  const { toastContainer } = useToast();
   const {
     leave_categories: { data: leave_categories, isPending: isPending3 },
     leave_policies: { data: leave_policies, isPending: isPending4 },
@@ -101,7 +99,6 @@ export function UpcomingTimeOff() {
   }
   return (
     <>
-      {toastContainer}
       <div className="flex flex-col">
         {upcoming_leave_requests_data?.map((leave) => (
           <div className="flex w-full flex-col " key={leave.id}>
@@ -131,7 +128,7 @@ export function UpcomingTimeOff() {
                   </div>
                 </div>
               </div>
-              <span className=" mr-auto line-clamp-2 w-fit max-w-[60%] flex-1 pl-20 pr-2 text-left text-sm font-normal text-gray-26">
+              <span className=" mr-auto line-clamp-2 w-fit max-w-[60%] flex-1 pl-20 pr-2 text-left text-[0.85rem] font-normal text-gray-26 opacity-80">
                 {user_profile?.role === "admin" ? leave.note : ""}
               </span>
               <div className="flex flex-row gap-1">

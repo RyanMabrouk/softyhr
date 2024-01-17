@@ -9,13 +9,7 @@ import {
   TableBody,
   TableRow,
   TableCell,
-  Button,
-  DropdownTrigger,
-  Dropdown,
-  DropdownMenu,
-  DropdownItem,
   User,
-  Pagination,
   Selection,
   SortDescriptor,
 } from "@nextui-org/react";
@@ -26,6 +20,8 @@ import Empty from "./components/Empty";
 import { FaSortDown, FaTrash } from "react-icons/fa6";
 import { MdModeEditOutline } from "react-icons/md";
 import { FaFileDownload } from "react-icons/fa";
+import  TopContent  from "./components/TopContent";
+import { HiringPropsType, HiringTableType, statusOptionsType } from "./Hiringtable.types";
 
 const columns = [
   { name: "id", uid: "id" },
@@ -47,20 +43,7 @@ const statusOptions = [
   { name: "Canceled", uid: "Canceled" },
 ];
 
-interface statusOptionsType {
-  name: string;
-  uid: string;
-}
 export { columns, statusOptions };
-
-const statusMap: Object = {
-  Open: "Open",
-  Draft: "Draft",
-  "On Hold": "On Hold",
-  Filled: "Filled",
-  all: "all",
-  Canceled: "Canceled",
-};
 
 const INITIAL_VISIBLE_COLUMNS = [
   "Candiates",
@@ -70,22 +53,6 @@ const INITIAL_VISIBLE_COLUMNS = [
   "status",
   "actions",
 ];
-
-export interface HiringTableType {
-  id: string;
-  Candiates: number;
-  NewCandidates: number;
-  job_opening: string;
-  hiring_lead: string;
-  CreatedOn: string;
-  department: string;
-  Location: string;
-  status: string;
-}
-
-interface HiringPropsType {
-  Hiring: HiringTableType[];
-}
 
 export default function HiringTable({ Hiring }: HiringPropsType) {
   const [filterValue, setFilterValue] = React.useState("");
@@ -234,89 +201,6 @@ export default function HiringTable({ Hiring }: HiringPropsType) {
     },
     [],
   );
-
-  const onRowsPerPageChange = React.useCallback(
-    (e: React.ChangeEvent<HTMLSelectElement>) => {
-      setRowsPerPage(Number(e.target.value));
-      setPage(1);
-    },
-    [],
-  );
-
-  const topContent = React.useMemo(() => {
-    return (
-      <div className="flex items-center justify-between  gap-4">
-        <div className="flex items-center justify-between">
-          <span className="text-normal  text-gray-11">
-            Total {Hiring.length} Job opening
-          </span>
-        </div>
-        <div className="flex items-center justify-between gap-3">
-          <h1 className="text-normal font-medium ">
-            {Hiring?.filter((job: HiringTableType) => job?.status == "Open")
-              ?.length || 0}{" "}
-            of {Hiring?.length || 0} open · Show
-          </h1>
-          <div className="flex  min-w-16 ">
-            <Dropdown className="w-full">
-              <DropdownTrigger className="hidden w-full min-w-40 items-center justify-between border border-gray-15 !bg-white text-gray-11   sm:flex">
-                <Button size="sm">
-                  <h1 className="pl-4">{statusFilter}</h1>
-                  <div className="flex h-[2rem] w-[2rem] cursor-pointer items-center justify-center bg-gray-14 duration-150 ease-in-out">
-                    <FaSortDown fill="gray" />
-                  </div>
-                </Button>
-              </DropdownTrigger>
-              <DropdownMenu
-                className="w-full min-w-40  gap-[1.5rem] border border-gray-15 !bg-white "
-                disallowEmptySelection
-                aria-label="Table Columns"
-                closeOnSelect={true}
-                selectedKeys={statusFilter}
-                selectionMode="single"
-                onSelectionChange={setStatusFilter}
-              >
-                {statusOptions.map((status: statusOptionsType) => {
-                  return (
-                    <DropdownItem
-                      className="py-1 capitalize text-gray-11"
-                      key={status.uid}
-                    >
-                      {status.name}
-                    </DropdownItem>
-                  );
-                })}
-              </DropdownMenu>
-            </Dropdown>
-          </div>
-          <div className="flex h-[2rem] w-[2rem] cursor-pointer items-center justify-center border border-gray-15 duration-150 ease-in-out hover:bg-gray-14">
-            <FaFileDownload fill="gray" />
-          </div>
-        </div>
-      </div>
-    );
-  }, [Hiring, statusFilter]);
-
-  const bottomContent = React.useMemo(() => {
-    return;
-    return (
-      <div className="flex items-center justify-between px-2 py-2">
-        <Pagination
-          showControls
-          classNames={{
-            cursor: "bg-foreground text-background",
-          }}
-          color="default"
-          isDisabled={hasSearchFilter}
-          page={page}
-          total={pages}
-          variant="light"
-          onChange={setPage}
-        />
-      </div>
-    );
-  }, [page, pages, hasSearchFilter]);
-
   const classNames = React.useMemo(
     () => ({
       wrapper: ["max-h-[382px]", "max-w-3xl"],
@@ -331,14 +215,9 @@ export default function HiringTable({ Hiring }: HiringPropsType) {
         "border-divider",
       ],
       td: [
-        // changing the rows border radius
-        // first
-
         "group-data-[first=true]:first:before:rounded-none",
         "group-data-[first=true]:last:before:rounded-none",
-        // middle
         "group-data-[middle=true]:before:rounded-none",
-        // last
         "group-data-[last=true]:first:before:rounded-none",
         "group-data-[last=true]:last:before:rounded-none",
       ],
@@ -351,7 +230,6 @@ export default function HiringTable({ Hiring }: HiringPropsType) {
       isCompact
       removeWrapper
       aria-label="Example table with custom cells, pagination and sorting"
-      bottomContent={bottomContent}
       bottomContentPlacement="outside"
       checkboxesProps={{
         classNames: {
@@ -361,7 +239,14 @@ export default function HiringTable({ Hiring }: HiringPropsType) {
       className="border-none !bg-white"
       classNames={classNames}
       sortDescriptor={sortDescriptor}
-      topContent={topContent}
+      topContent={
+        <TopContent
+          statusOptions={statusOptions}
+          setStatusFilter={setStatusFilter}
+          statusFilter={statusFilter}
+          Hiring={Hiring}
+        />
+      }
       topContentPlacement="outside"
       onSortChange={setSortDescriptor}
     >

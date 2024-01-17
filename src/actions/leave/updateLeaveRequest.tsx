@@ -5,7 +5,6 @@ import { getDaysInBetween } from "@/helpers/date.helpers";
 import {
   database_leave_request_status_type,
   database_leave_requests_insert_type,
-  database_profile_leave_balance_type,
 } from "@/types/database.tables.types";
 import updateLeaveBalance from "./updateLeaveBalance";
 export default async function updateLeaveRequest({
@@ -17,7 +16,6 @@ export default async function updateLeaveRequest({
   user_id: string | string[];
   old_request: database_leave_requests_insert_type;
 }) {
-  console.log("updateLeaveRequest");
   const start_at = formData.get("start_at") as string;
   const end_at = formData.get("end_at") as string;
   const durations = formData.getAll("duration_date");

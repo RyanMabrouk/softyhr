@@ -50,13 +50,30 @@ export default function useData() {
     queryKey: [
       "profiles",
       {
-        column: 'user_id,role,picture,"Basic Information",leave_balance',
+        column: 'user_id,role,picture,"Basic Information"',
       },
     ],
     queryFn: () =>
       getData("profiles", {
         org: true,
-        column: 'user_id,role,picture,"Basic Information",leave_balance',
+        column: 'user_id,role,picture,"Basic Information"',
+      }),
+  });
+  //------------------Folders--------------------------------------
+  const { data: folders, isPending: isPending1 } = useQuery({
+    queryKey: ["folders"],
+    queryFn: () =>
+      getData("folders", {
+        org: true,
+      }),
+  });
+
+  //------------------Files--------------------------------------
+  const { data: files, isPending: isPending10 } = useQuery({
+    queryKey: ["files"],
+    queryFn: () =>
+      getData("files", {
+        org: true,
       }),
   });
   //------------------------------------------------------------
@@ -85,6 +102,16 @@ export default function useData() {
       data: Hiring?.data,
       error: Hiring?.error,
       isPending: isPending8,
+    },
+    folders: {
+      data: folders?.data,
+      error: folders?.error,
+      isPending: isPending1,
+    },
+    files: {
+      data: files?.data,
+      error: files?.error,
+      isPending: isPending10,
     },
     all_profiles_basic_info: {
       data: all_profiles_basic_info?.data,

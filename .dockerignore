@@ -2,7 +2,7 @@
 # container here (e.g., local build artifacts, temporary files, etc.).
 #
 # For more help, visit the .dockerignore file reference guide at
-# https://docs.docker.com/go/build-context-dockerignore/
+# https://docs.docker.com/engine/reference/builder/#dockerignore-file
 
 **/.classpath
 **/.dockerignore

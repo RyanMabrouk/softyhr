@@ -52,7 +52,12 @@ export function Policy({
       <ChangePolicyMenuBtn id={id} />
       <div className="absolute -top-2 box-border flex  w-full -translate-x-5 translate-y-10 flex-row items-center justify-center gap-2 rounded-[0px_0px_8px_8px] border-solid  border-[10px_2px_2px] py-3 text-center text-gray-25 opacity-0 transition-all delay-[0s] duration-[0.1s] ease-[ease-in-out] group-hover:translate-x-0 group-hover:translate-y-0  group-hover:opacity-100">
         <AddLeaveRequestBtn id={id} />
-        <FaCalculator className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-md border border-black bg-white px-2 text-center " />
+        <div
+          className="tooltip tooltip-bottom z-[9999]"
+          data-tip="Under construction 🚧"
+        >
+          <FaCalculator className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-md border border-black bg-white px-2 text-center " />
+        </div>
         <AdjustLeavePolicyBalanceBtn id={id} />
       </div>
     </div>

@@ -17,7 +17,7 @@ import 'swiper/css/navigation';
 import CustomSwiper from "@/app/_ui/swiper";
 import AppliymentForm from "./components/AppliymentForm/AppliymentForm";
 
-function page({ params: { career_id } }: { params: { career_id: string } }) {
+function Page({ params: { career_id } }: { params: { career_id: string } }) {
   const { Hiring: { data, isPending } } = useHiring({ id: career_id });
   const [CurrentBtn, setCurrentBtn] = useState<string>("Apply for This job");
   return (
@@ -71,4 +71,4 @@ function page({ params: { career_id } }: { params: { career_id: string } }) {
   );
 }
 
-export default page;
+export default Page;

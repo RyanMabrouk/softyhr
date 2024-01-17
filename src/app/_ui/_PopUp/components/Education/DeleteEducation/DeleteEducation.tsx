@@ -20,7 +20,7 @@ function DeleteEducation() {
   const Router = useRouter();
   const pathname = usePathname();
   const queryClient = useQueryClient();
-  const { toast, toastContainer } = useToast();
+  const { toast } = useToast();
   const { employeeId } = useParams();
   const { employee_profile: data } = useEmployeeData({ employeeId });
   const params = useSearchParams();
@@ -45,7 +45,6 @@ function DeleteEducation() {
   });
   return (
     <>
-      {toastContainer}
       <PopUpSkeleton
         className=" flex flex-col items-center gap-[2rem] px-4 py-6"
         title="Delete Education"

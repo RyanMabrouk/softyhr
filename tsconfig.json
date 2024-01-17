@@ -24,6 +24,12 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/_ui/_PopUp/components/EditPhoto/utils/image.js", "src/app/_ui/_PopUp/components/EditPhoto/cropImage.jsx"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "src/app/(dashboard)/Files/_ui/filesTable/tableSideBar/TableSideBarFolderBox.tsx"
+  ],
   "exclude": ["node_modules"]
 }

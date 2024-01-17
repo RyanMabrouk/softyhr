@@ -28,7 +28,6 @@ interface formatted_policy_type {
 }
 export function PolyciesSwiper() {
   const [activeIndex, setActiveIndex] = useState(0);
-  const { toastContainer } = useToast();
   const params = useParams();
   const { employeeId } = params;
   const {
@@ -94,7 +93,6 @@ export function PolyciesSwiper() {
   }
   return (
     <>
-      {toastContainer}
       <section className="relative mx-auto block w-full max-w-[57.5vw] px-12 ">
         {policies?.length > 0 && (
           <>

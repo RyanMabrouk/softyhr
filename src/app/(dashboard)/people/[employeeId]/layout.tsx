@@ -1,17 +1,18 @@
 "use client";
 import Image from "next/image";
 import React, { ReactNode } from "react";
-import AvatarUser from "./profileImage.png";
+import AvatarUser from "./test.jpeg";
 import Link from "next/link";
 import { EmployeRoutesType, EmployeeRoute } from "@/constants/employeeRoute";
 import { usePathname } from "next/navigation";
 import UserInfo from "../components/UserInfo/UserInfo";
 import DropDown from "../components/DropDown/DropDown";
 import { Settings, changementRequest } from "@/constants/userInfo";
-import useData from "@/hooks/useData";
 import useEmployeeData from "@/hooks/useEmloyeeData";
 import { MdEdit } from "react-icons/md";
 import avatar from "./avatar.png";
+import { SelectGeneric } from "@/app/_ui/SelectGeneric";
+import { IoMdSettings } from "react-icons/io";
 interface EmployePropsType {
   params: { employeeId: string };
   children: ReactNode;
@@ -52,11 +53,18 @@ export default function Layout({
                   "your name"}
               </h1>
               <div className={"flex h-10 gap-[1rem] "}>
-                <DropDown
-                  text="Request a Change"
-                  ListArray={changementRequest}
+                <SelectGeneric
+                  inputLabel="Request a Change"
+                  options={changementRequest}
+                  className=" !border-[1px] !border-white !text-white"
+                  cursor="white"
                 />
-                <DropDown text="Settings" ListArray={Settings} />
+                <SelectGeneric
+                  inputLabel={<IoMdSettings className="h-6 w-6 text-white" />}
+                  options={Settings}
+                  className="!w-[4.5rem] !border-[1px] !border-white !text-white"
+                  cursor="white"
+                />
               </div>
             </div>
             <div className="flex">

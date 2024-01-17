@@ -10,7 +10,6 @@ export default async function acceptLeaveRequest({
   request: request_type;
   reviewed_by: string;
 }) {
-  console.log("acceptLeaveRequest");
   const { error: errorBalance } = await updateLeaveBalance({
     user_id: request.user_id,
     policy_id: request.policy_id,
