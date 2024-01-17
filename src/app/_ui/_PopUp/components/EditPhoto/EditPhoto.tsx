@@ -10,12 +10,8 @@ import useData from "@/hooks/useData";
 import Loader from "@/app/(dashboard)/people/components/Loader/Loader";
 import useEmployeeData from "@/hooks/useEmloyeeData";
 
-interface EditPhotoPropsType {
-  src: string;
-  alt: string;
-}
 
-function EditPhoto({ src = "", alt }: EditPhotoPropsType) {
+function EditPhoto() {
   const router = useRouter();
   const { employeeId } = useParams();
 
@@ -30,7 +26,7 @@ function EditPhoto({ src = "", alt }: EditPhotoPropsType) {
         <PopUpSkeleton title="Modifier la photo">
           <div className="judtify-center flex min-w-[40rem] flex-col items-center gap-[1rem] px-6 py-6">
             <div className="flex flex-col items-center justify-center gap-[2rem]">
-              <CropEasy user_id={data?.user_id} alt={alt} URL={data?.picture} />
+              <CropEasy user_id={data?.user_id} alt={""} URL={data?.picture} />
             </div>
           </div>
         </PopUpSkeleton>
