@@ -4,7 +4,7 @@ import { Field } from "@/constants/userInfo";
 import { RowFieldType } from "@/types/userInfoTypes.type";
 interface FiledsChampsPropsType {
   FieldsArray: RowFieldType[];
-  setTouched?: ((arg: boolean) => void) | undefined;
+  setTouched?: React.Dispatch<React.SetStateAction<boolean>> | undefined;
   user?: any | undefined;
   champ?: string;
 }
@@ -26,7 +26,6 @@ function FiledsChamps({
               >
                 {Row?.map((RowField: any) => {
                   const Component = Field[RowField?.type.toUpperCase()];
-                  console.log(RowField);
                   return (
                     <Component
                       champ={champ || ""}

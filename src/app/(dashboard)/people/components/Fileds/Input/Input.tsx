@@ -6,7 +6,7 @@ import { FaLinkedin } from "react-icons/fa";
 
 interface InputPropsType {
   RowField: RowFieldType;
-  setTouched?: (arg: boolean) => void ;
+  setTouched?: React.Dispatch<React.SetStateAction<boolean>> | undefined;
   defaultValue?: string;
 }
 const Input = ({ RowField, setTouched, defaultValue }: InputPropsType) => {

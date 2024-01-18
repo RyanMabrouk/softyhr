@@ -13,7 +13,7 @@ function Initialize({ children }: InitializeProps) {
   const { employeeId } = useParams();
   const { employee_profile: data } = useEmployeeData({ employeeId });
 
-  return !data?.data ? <Loader /> : <>{children}</>;
+  return false ? <Loader /> : <>{children}</>;
 }
 
 export default Initialize;

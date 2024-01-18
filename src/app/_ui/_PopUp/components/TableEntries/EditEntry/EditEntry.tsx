@@ -26,7 +26,7 @@ function EditEntry() {
   const { employeeId } = useParams();
   const { employee_profile:{ data , isPending}} = useEmployeeData({ employeeId });
   const { settings } = useData()
-  const { toastContainer , toast} = useToast();
+  const { toast} = useToast();
   
 
   //-------Add_Entry---------
@@ -39,8 +39,7 @@ function EditEntry() {
   }
 
   return (
-    <>
-    {toastContainer}
+    <>  
    {settings?.isPending || isPending ?
     <Loader/>
     :<PopUpSkeleton className='' title={`Edit ${section_name} item`}>

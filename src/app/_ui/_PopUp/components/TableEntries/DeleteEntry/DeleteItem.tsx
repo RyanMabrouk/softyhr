@@ -25,7 +25,7 @@ function DeleteItem() {
   const { employeeId } = useParams();
   const { employee_profile:{ data , isPending}} = useEmployeeData({ employeeId });
   const { settings } = useData()
-  const {toastContainer, toast} = useToast();
+  const { toast} = useToast();
 
   //----Deleting-item-----
 
@@ -39,7 +39,6 @@ function DeleteItem() {
   }
   return (
     <>
-    {toastContainer}
    {settings?.isPending || isPending ?
     <Loader/>
     :<PopUpSkeleton className='' title={`Delete ${section_name} item`}>

@@ -1,5 +1,7 @@
-'use server';
+"use server";
 
-export const test=(formdata: FormData)=>{
-    console.log(formdata);
-}
+export const test = (formdata: FormData) => {
+  console.log(formdata);
+  const job = formdata.getAll("Job Description");
+  console.log(job);
+};

@@ -33,6 +33,9 @@
   --tw-text-opacity: 1 !important;
   color: rgb(255 255 255 / var(--tw-text-opacity)) !important;
 }
+.ant-switch-checked{
+   background:#527A01 !important;
+}
 .MuiMenu-list {
   padding-top: 0 !important;
   padding-bottom: 0 !important;

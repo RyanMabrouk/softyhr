@@ -6,10 +6,10 @@ import { FaLinkedin } from "react-icons/fa";
 
 interface InputPropsType {
   RowField: RowFieldType;
-  setTouched?: (arg: boolean) => void;
+  setTouched?: React.Dispatch<React.SetStateAction<boolean>> | undefined;
   defaultValue?: string;
 }
-const textarea = ({ RowField, setTouched, defaultValue }: InputPropsType) => {
+const Textarea = ({ RowField, setTouched, defaultValue }: InputPropsType) => {
   const [value, setValue] = useState<string>(String(defaultValue || ""));
   const Component = InputIcons[RowField?.Icon?.toUpperCase() || ""];
   return (

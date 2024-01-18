@@ -2,11 +2,10 @@
 import { MenuItem, Select } from "@mui/material";
 import React, { useState } from "react";
 import { RowFieldType } from "@/types/userInfoTypes.type";
-
 interface SelectInputPropsType {
   RowField: RowFieldType;
-  setTouched?: (arg: boolean) => void | undefined;
-  defaultValue: string;
+  setTouched?: React.Dispatch<React.SetStateAction<boolean>> | undefined;
+  defaultValue?: string;
 }
 
 function SelectInput({
@@ -19,7 +18,6 @@ function SelectInput({
     if (setTouched) setTouched(true);
     setValue(e.target.value);
   };
-
   return (
     <div className="flex flex-col items-start justify-center">
       <h1
@@ -50,17 +48,17 @@ function SelectInput({
         displayEmpty
         inputProps={{ "aria-label": "Without label" }}
         onChange={HandleChange}
-        className="[&_.MuiOutlinedInput-notchedOutline]:border-none"
+        className="!font-medium !text-gray-29 [&_.MuiOutlinedInput-notchedOutline]:border-none"
       >
         {RowField?.options?.map((element: any, index: number) => {
           return (
             <MenuItem
-              value={element?.label || element?.name}
+              value={element?.label || element?.name || element}
               className="p-1"
               key={index}
-              sx={{ fontWeight: "300", fontSize: "1rem" }}
+              sx={{ color: "300", fontSize: "14px" }}
             >
-              {element?.label || element?.name}
+              {element?.label || element?.name || element}
             </MenuItem>
           );
         })}
@@ -70,31 +68,3 @@ function SelectInput({
 }
 
 export default SelectInput;
-
-/*<div className="flex flex-col items-start justify-center">
-      <h1 className="text-gray text-sm font-light ">{RowField?.name}</h1>
-      <Select
-        defaultValue={"-Sélectionner-"}
-        style={{ minWidth: 280, height: 33 }}
-        onChange={handleChange}
-        options={items}
-        dropdownRender={(menu) => (
-          <>
-            {menu}
-            <Divider style={{ margin: "8px 0" }} />
-            <Space>
-              <Input
-                placeholder="Please enter item"
-                ref={inputRef}
-                value={Name}
-                onChange={onNameChange}
-                onKeyDown={(e) => e.stopPropagation()}
-              />
-              <Button type="text" onClick={addItem}>
-                + Ajoutée un element
-              </Button>
-            </Space>
-          </>
-        )}
-      />
-        </div>*/

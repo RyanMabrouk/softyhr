@@ -15,7 +15,7 @@ export interface RowFieldType {
   options?: Object[] | undefined;
   required?: boolean;
   placeHolder?: string | undefined;
-  type: "select" | "text" | "radio";
+  type?: "select" | "text" | "radio";
   Icon?:string | undefined ;
 }
 
