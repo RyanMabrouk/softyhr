@@ -33,8 +33,8 @@
   --tw-text-opacity: 1 !important;
   color: rgb(255 255 255 / var(--tw-text-opacity)) !important;
 }
-.ant-switch-checked{
-   background:#527A01 !important;
+.ant-switch-checked {
+  background: #527a01 !important;
 }
 .MuiMenu-list {
   padding-top: 0 !important;
@@ -112,3 +112,24 @@
     @apply bg-background text-foreground;
   }
 }
+
+.scrollBar-green {
+  &::-webkit-scrollbar {
+    width: 0.5rem;
+    border-radius: 0.6rem;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #eef3e5;
+    border-radius: 0.5rem;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+  &::-webkit-scrollbar-track-piece {
+    background-color: transparent;
+  }
+  &::-webkit-scrollbar-corner {
+    background-color: transparent;
+  }
+}
+  

@@ -42,6 +42,7 @@ import { ReactNode } from "react";
 import textarea from "@/app/(dashboard)/people/components/Fileds/textarea/textarea";
 
 import dynamic from "next/dynamic";
+import InputFile from "@/app/(dashboard)/people/components/Fileds/File/File";
 const Editor = dynamic(
   () => import("@/app/(dashboard)/people/components/Fileds/Editor/Editor"),
   { ssr: false },
@@ -58,6 +59,7 @@ export const Field: any = {
   RADIO: RadioBox,
   TEXTAREA: textarea,
   EDITOR: Editor,
+  FILE: InputFile,
 };
 
 export const sectionIcon: ObjectIconsType = {

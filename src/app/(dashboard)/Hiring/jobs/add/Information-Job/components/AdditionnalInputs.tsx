@@ -17,7 +17,7 @@ interface AdditionnalInputsType {
 export interface Job_locationElementType {
   label: string;
   Icon: IconType;
-  show: boolean;
+  show?: boolean;
 }
 interface AdditionnalInputsTypeProps {
   LocationValue?: string | undefined;
@@ -36,7 +36,7 @@ function AdditionnalInputs({
 
   const SelectLocation = {
     options: ["London", "USA", "Tunisian", "Canada"],
-    name: "Location",
+    name: "Job Location",
     required: true,
   };
 
@@ -44,7 +44,6 @@ function AdditionnalInputs({
   const [Show, setShow] = useState<boolean>(
     LocationValue && Job_locationValue != "remote" ? true : false,
   );
-  console.log(LocationValue, Job_locationValue);
   return (
     <div className="flex flex-col items-start justify-center gap-[1rem]">
       <div>
@@ -58,7 +57,7 @@ function AdditionnalInputs({
                   setShow={setShow}
                   setLocation={setLocation}
                   label={label}
-                  show={show}
+                  show={show || false}
                   selected={label == Location}
                   Icon={Icon}
                 />
@@ -69,7 +68,7 @@ function AdditionnalInputs({
             readOnly
             autoFocus
             hidden
-            name={"Job_location"}
+            name={"Location"}
             value={Location}
           />
         </div>

@@ -5,7 +5,7 @@ import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
 
 export const CreateCandidate =async(NewCandaidate:any)=>{
   const supabase = createServerActionClient({ cookies });
-    
+  console.log(NewCandaidate);
     const { data, error } = await supabase
      .from('candidates')
      .insert([NewCandaidate])

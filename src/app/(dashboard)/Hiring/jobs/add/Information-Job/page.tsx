@@ -22,8 +22,8 @@ function Page() {
             user={{ hiring: { ...InformationJob?.values } }}
           ></FiledsChamps>
           <AdditionnalInputs
-            LocationValue={InformationJob?.values?.Location}
-            Job_locationValue={InformationJob?.values?.Job_location}
+            LocationValue={InformationJob?.values?.["Job Location"]}
+            Job_locationValue={InformationJob?.values?.Location}
           />
         </div>
       )}

@@ -1,25 +1,34 @@
 "use client";
-import { MenuItem, Select } from "@mui/material";
+import { FormControl, MenuItem, Select } from "@mui/material";
 import React, { useState } from "react";
 import { RowFieldType } from "@/types/userInfoTypes.type";
+import { Row } from "react-day-picker";
 interface SelectInputPropsType {
   RowField: RowFieldType;
   setTouched?: React.Dispatch<React.SetStateAction<boolean>> | undefined;
-  defaultValue?: string;
+  defaultValue?: string | null;
+  label?: string;
+  minWidth?: string;
 }
 
 function SelectInput({
   RowField,
   setTouched,
-  defaultValue,
+  defaultValue = undefined,
+  label,
+  minWidth,
 }: SelectInputPropsType) {
   const [value, setValue] = useState(String(defaultValue));
   const HandleChange = (e: any) => {
     if (setTouched) setTouched(true);
     setValue(e.target.value);
   };
+  console.log(value);
   return (
-    <div className="flex flex-col items-start justify-center">
+    <FormControl
+      required={RowField?.required}
+      className="flex flex-col items-start justify-center"
+    >
       <h1
         className={
           "text-[14px] text-gray-29 " +
@@ -29,8 +38,8 @@ function SelectInput({
         {RowField?.name}
       </h1>
       <Select
-        labelId="demo-simple-select-autowidth-label"
-        id="demo-simple-select-autowidth"
+        labelId="demo-simple-select-required-label"
+        id="demo-simple-select-required"
         sx={{
           border: "1px solid #D9D9D9",
           color: "black",
@@ -38,13 +47,19 @@ function SelectInput({
             fill: "#D9D9D9 !important",
           },
           height: "2rem",
-          minWidth: "9rem",
+          minWidth: minWidth || "9rem",
           borderRadius: "0.1rem !important",
           fontWeight: "300",
           fontSize: "1rem",
         }}
         name={RowField?.name}
         defaultValue={value}
+        renderValue={(selected) => {
+          if (value === "undefined" || value == "") {
+            return <h1 className="text-gray-15">{label}</h1>;
+          }
+          return selected;
+        }}
         displayEmpty
         inputProps={{ "aria-label": "Without label" }}
         onChange={HandleChange}
@@ -63,7 +78,7 @@ function SelectInput({
           );
         })}
       </Select>
-    </div>
+    </FormControl>
   );
 }
 

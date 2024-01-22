@@ -23,6 +23,7 @@ import Education from "@/app/(dashboard)/people/components/Fileds/Education";
 import TableChamps from "@/app/(dashboard)/people/components/Fileds/TableChamps";
 import textarea from "@/app/(dashboard)/people/components/Fileds/textarea/textarea";
 import Editor from "@/app/(dashboard)/people/components/Fileds/Editor/Editor";
+import InputFile from "@/app/(dashboard)/people/components/Fileds/File/File";
 
 export const Field: any = {
   TEXT: Input,
@@ -32,6 +33,7 @@ export const Field: any = {
   RADIO: RadioBox,
   TEXTAREA: textarea,
   EDITOR: Editor,
+  FILE: InputFile,
 };
 
 export const Section: any = {

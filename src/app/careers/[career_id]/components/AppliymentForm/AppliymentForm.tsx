@@ -1,16 +1,16 @@
-import ChangesSection from "@/app/(dashboard)/people/components/ChangesSection/ChangesSection";
-import formulateData from "@/app/(dashboard)/people/components/utils/formulateData";
 import { useSettings } from "@/hooks/useSettings";
 import { Hiring_type } from "@/types/database.tables.types";
 import React from "react";
 import { v4 as uuidv4 } from "uuid";
-import FiledsChamps from "@/app/(dashboard)/people/components/Fileds/Fileds";
+import AppliymentFormSection from "./AplliyementFormSection";
 import Loader from "@/app/(dashboard)/people/components/Loader/Loader";
-import { test } from "@/actions/test";
 import SubmitButton from "./SubmitButton";
 import { CreateCandidate } from "@/actions/hiring/CreateCandidate";
 import { FormulateFormData } from "@/helpers/CountNewCandidates";
 import useToast from "@/hooks/useToast";
+import { test } from "@/actions/test";
+import { UploadImage } from "@/actions/UploadFiles/uploadImage";
+import { FormdataToObject } from "@/helpers/object.helpers";
 
 interface AppliymentFormPropsType {
   job: Hiring_type;
@@ -19,13 +19,38 @@ interface AppliymentFormPropsType {
 function AppliymentForm({ job }: AppliymentFormPropsType) {
   const { toastContainer, toast } = useToast();
   const { data, isPending } = useSettings("AppliementForm");
+
   const SubmitForm = async (formdata: FormData) => {
-    const response = await CreateCandidate({
-      ...FormulateFormData(formdata),
-      job_id: job?.id,
+    const identifient = uuidv4();
+    const Formdata = new FormData();
+    const uploadPromises: any = [];
+
+    //----upload_candidates_attachement-----
+    formdata.forEach(async function (value: FormDataEntryValue, key: string) {
+      if (typeof formdata.get(key) == "object") {
+        const uploadPromise = UploadImage(
+          formdata,
+          key + identifient,
+          "hiring",
+          key,
+        );
+        uploadPromises.push(uploadPromise);
+
+        Formdata.set(key, key + identifient);
+      } else {
+        Formdata.set(key, value);
+      }
     });
-    response?.Msg ? toast.success(response?.Msg) : null;
+     await Promise.all(uploadPromises);
+
+
+      const response = await CreateCandidate({
+      ...FormulateFormData(Formdata),
+      job_id: job?.id,
+      });
+     response?.Msg ? toast.success(response?.Msg) : null;
   };
+
   return (
     <>
       {toastContainer}
@@ -45,7 +70,11 @@ function AppliymentForm({ job }: AppliymentFormPropsType) {
                   key={index}
                 >
                   <div className="flex flex-col items-start justify-center gap-[1rem]">
-                    <FiledsChamps key={uuidv4()} FieldsArray={FieldsArray} />
+                    <AppliymentFormSection
+                      key={uuidv4()}
+                      FieldsCheck={job?.Application_Details}
+                      FieldsArray={FieldsArray}
+                    />
                   </div>
                 </div>
               );

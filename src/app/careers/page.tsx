@@ -1,18 +1,17 @@
 "use client";
-import useData from "@/hooks/useData";
 import React from "react";
 import Loader from "../_ui/Loader/Loader";
-import Jobopening from "./components/Jobopening";
 import JobopeningList from "./components/JobopeningList";
-import Image from "next/image";
+import useHiring from "@/hooks/useHiring";
+import Empty from "./components/Empty";
 
 function Page() {
-  const { Hiring: data } = useData();
+  const { Hiring: data } = useHiring({ "Job Status": "Open" });
   console.log(data);
   return (
     <div className="flex h-screen w-screen items-center justify-center">
       {data?.data ? (
-        <div className="flex h-full w-full flex-col items-center justify-center bg-gray-14">
+        <div className="flex  h-full w-full flex-col items-center justify-start bg-gray-14 pt-6">
           <JobopeningList data={data?.data} />
         </div>
       ) : (

@@ -51,7 +51,7 @@ function ApplySection({job}:ApplySectionPropsType) {
           {HiringInfos?.map(({name, label}:HiringInfosType,index:number)=>
                <div key={index} className='pb-4 w-full gap-[0.3rem] flex flex-col items-start justify-center border-b border-gray-32'>
                   <h1 className='text-sm text-gray-15'>{label}</h1>
-                  <h1 className='text-'>{job?.job_information?.[name]}</h1>
+                  <h1 className=''>{String(job?.job_information?.[name])}</h1>
               </div>
           )}
       </div>

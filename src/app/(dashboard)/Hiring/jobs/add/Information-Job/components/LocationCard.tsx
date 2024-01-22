@@ -8,7 +8,7 @@ interface LocationCardPropsType {
   Icon: IconType;
   show: boolean;
   setLocation: React.Dispatch<React.SetStateAction<string>>;
-  setShow: React.Dispatch<React.SetStateAction<boolean>>;
+  setShow?: React.Dispatch<React.SetStateAction<boolean>>;
   selected: boolean;
 }
 
@@ -24,10 +24,10 @@ function LocationCard({
     <div
       onClick={() => {
         setLocation(label);
-        setShow(show);
+        setShow && setShow(show);
       }}
       className={
-        "items-centerjustify-start group relative flex cursor-pointer  gap-[1rem] overflow-hidden border border-gray-15 p-4 px-8 duration-150 ease-in-out hover:scale-[1.03] " +
+        "items-centerjustify-start group relative flex cursor-pointer  gap-[1rem] overflow-hidden border border-gray-19 p-4 px-8 duration-150 ease-in-out hover:scale-[1.03] " +
         (selected
           ? " shadow-green !border-color-primary-8"
           : "hover:!border-gray-11")

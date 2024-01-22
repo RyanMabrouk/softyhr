@@ -2,7 +2,7 @@ import DeleteEducation from "@/app/_ui/_PopUp/components/Education/DeleteEducati
 import AddEntry from "@/app/_ui/_PopUp/components/TableEntries/AddEntry/AddEntry";
 import EditEntry from "@/app/_ui/_PopUp/components/TableEntries/EditEntry/EditEntry";
 import DeleteItem from "@/app/_ui/_PopUp/components/TableEntries/DeleteEntry/DeleteItem";
-import EditPhoto from "@/app/_ui/_PopUp/components/EditPhoto/EditPhoto";
+import EditPhoto from "@/app/_ui/_PopUp/components/Personel-job/EditPhoto/EditPhoto";
 import DeleteLeaveRequest from "@/app/_ui/_PopUp/components/TimeOff/DeleteLeaveRequest/DeleteLeaveRequest";
 import EditFields from "@/app/_ui/_PopUp/components/Personel-job/EditFields/EditFields";
 import NewFolderPopUp from "@/app/(dashboard)/Files/_ui/popUp/NewFolderPopUp";
@@ -22,6 +22,7 @@ import EditLeaveRequest from "@/app/_ui/_PopUp/components/TimeOff/EditLeaveReque
 import RejectLeaveRequest from "@/app/_ui/_PopUp/components/TimeOff/RejectLeaveRequest/RejectLeaveRequest";
 import ViewLeaveRequestComment from "@/app/_ui/_PopUp/components/TimeOff/ViewLeaveRequestComment.tsx/ViewLeaveRequestComment";
 import AdjustLeavePolicyBalance from "@/app/_ui/_PopUp/components/TimeOff/AdjustLeavePolicyBalance/AdjustLeavePolicyBalance";
+import DeleteJob from "@/app/_ui/_PopUp/components/Hiring/DeleteJob/DeleteJob";
 
 type PopupType = {
   [key: string]: () => React.JSX.Element;
@@ -51,4 +52,5 @@ export const popups: PopupType = {
   EDIT_PROFILE_IMAGE: EditPhoto,
   ADD_TIME_OFF_POLICY: AddTimeOffPolicy,
   CHANGE_ACCURAL_START_DATE: AccrualStartDate,
+  DELETE_JOB: DeleteJob,
 };

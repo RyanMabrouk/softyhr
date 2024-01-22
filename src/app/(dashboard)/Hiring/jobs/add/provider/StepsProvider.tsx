@@ -1,5 +1,5 @@
 import React, { ReactNode, createContext, useReducer } from "react";
-
+import { ApplicationIniTialQuestions } from "@/constants/Hiring";
 interface StepsProviderTypeProps {
   children: ReactNode;
 }
@@ -14,14 +14,14 @@ export enum Actions {
   JOB_BOARDS = "JOB_BOARDS",
 }
 
-interface StepType<T> {
+export interface StepType<T> {
   done: boolean;
   values: T;
 }
-interface StepsState {
+export interface StepsState {
   ApplicationDetails: StepType<ObjectOfStrings>;
   InformationJob: StepType<ObjectOfStrings>;
-  JobBoards: StepType<ObjectOfStrings>;
+  JobBoards: StepType<ObjectOfStrings> | undefined;
 }
 
 interface StepsAction {
@@ -29,8 +29,13 @@ interface StepsAction {
   payload?: any;
 }
 
+
+
 export const initialState: StepsState = {
-  ApplicationDetails: { done: false, values: {} },
+  ApplicationDetails: {
+    done: false,
+    values: { ...ApplicationIniTialQuestions },
+  },
   InformationJob: {
     done: false,
     values: {},

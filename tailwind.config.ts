@@ -232,6 +232,8 @@ const config: Config = {
         "gray-30": "#777",
         "gray-31": "#B6B6B6",
         "gray-32": "#D1D0D1",
+        "gray-33": "#ADADAD",
+        "gray-34": "#757575",
 
         "color-teal-2": "#284D59",
 

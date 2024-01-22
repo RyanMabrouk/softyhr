@@ -41,7 +41,7 @@ const Input = ({ RowField, setTouched, defaultValue }: InputPropsType) => {
             "focus:focus-within:shadow-green h-[2rem] rounded-sm border border-gray-19 px-2 text-[0.95rem] font-normal outline-none  " +
             (RowField?.Icon ? "pl-8 " : "")
           }
-          type={RowField?.type || "text"}
+          type={"text"}
           value={value}
           name={RowField?.name}
           onChange={(e) => setValue(e.target.value)}

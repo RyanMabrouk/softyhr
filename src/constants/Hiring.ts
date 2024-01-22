@@ -29,7 +29,7 @@ export const HirinIcons: HirinIconsType<IconType> = {
   FACIRCLEUSER: FaCircleUser,
   RIUSERSTARFILL: RiUserStarFill,
 };
-export const CreateHiringJob: string[]= [
+export const CreateHiringJob: string[] = [
   "Information-Job",
   "Application-Details",
   "Job-Boards",
@@ -62,4 +62,134 @@ export const FieldsAplyment = [
 export const InformationJob_inputs = [
   { RowField: { name: "Job Location", type: "text" } },
   { RowField: { name: "Internal Job Code", type: "text" } },
+];
+
+export const ApplicationDefaultQuestions: ApplicationDefaultQuestionsType[] = [
+  { required: false, AddToAppliement: false, type: "file", name: "Resume" },
+  { required: false, AddToAppliement: false, type: "text", name: "Adress" },
+  { required: false, AddToAppliement: false, type: "text", name: "Linked URL" },
+  {
+    required: false,
+    AddToAppliement: false,
+    type: "Date",
+    name: "Date available",
+  },
+  {
+    required: false,
+    AddToAppliement: false,
+    type: "text",
+    name: "Desired Salary",
+  },
+  {
+    required: false,
+    AddToAppliement: false,
+    type: "file",
+    name: "Cover Letter",
+  },
+  {
+    required: false,
+    AddToAppliement: false,
+    type: "text",
+    name: "Referred by",
+  },
+  {
+    required: false,
+    AddToAppliement: false,
+    type: "text",
+    name: "Website, Blog or Portfolio",
+  },
+  {
+    required: false,
+    AddToAppliement: false,
+    type: "text",
+    name: "Twitter Username",
+  },
+  {
+    required: false,
+    AddToAppliement: false,
+    type: "text",
+    name: "Highest Education",
+  },
+  {
+    required: false,
+    AddToAppliement: false,
+    type: "text",
+    name: "College/University",
+  },
+  { required: false, AddToAppliement: false, type: "text", name: "References" },
+];
+
+export const ApplicationIniTialQuestions: any = {
+  Resume:{ required: false, AddToAppliement: false, type: "file", name: "Resume" },
+  Adress:{ required: false, AddToAppliement: false, type: "text", name: "Adress" },
+  "Linked URL":{ required: false, AddToAppliement: false, type: "text", name: "Linked URL" },
+  "Date available":{
+    required: false,
+    AddToAppliement: false,
+    type: "Date",
+    name: "Date available",
+  },
+  "Desired Salary":{
+    required: false,
+    AddToAppliement: false,
+    type: "text",
+    name: "Desired Salary",
+  },
+  "Cover Letter":{
+    required: false,
+    AddToAppliement: false,
+    type: "file",
+    name: "Cover Letter",
+  },
+  "Referred by":{
+    required: false,
+    AddToAppliement: false,
+    type: "text",
+    name: "Referred by",
+  },
+  "Website, Blog or Portfolio":{
+    required: false,
+    AddToAppliement: false,
+    type: "text",
+    name: "Website, Blog or Portfolio",
+  },
+  "Twitter Username":{
+    required: false,
+    AddToAppliement: false,
+    type: "text",
+    name: "Twitter Username",
+  },
+  "Highest Education Obtained":{
+    required: false,
+    AddToAppliement: false,
+    type: "text",
+    name: "Highest Education",
+  },
+  "College/University":{
+    required: false,
+    AddToAppliement: false,
+    type: "text",
+    name: "College/University",
+  },
+ References :{ required: false, AddToAppliement: false, type: "text", name: "References" },
+};
+
+export interface ApplicationDefaultQuestionsType {
+  required: boolean;
+  type: string;
+  AddToAppliement: boolean;
+  name: string;
+}
+
+export const GovermentJobCategory = [
+  "Sales Workers",
+  "Services Workers",
+  "Professinals",
+  "Operatives",
+  "Laborers and Helpers",
+  "Craft Workers",
+  "Administrative Support Workers",
+  "Technicians",
+  "First/ Mid Level Officials and Managers",
+  "Executive/ Senior Level Officials and Managers",
 ];

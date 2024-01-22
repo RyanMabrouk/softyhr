@@ -46,23 +46,23 @@ export type organizations_type =
 //------------Hiring_types---------------
 
 export type Hiring_type = {
-  Application_Details: {
-    Job_Category: string;
-    Additional_Questions: string;
-    Application_Questions: [];
-  } | null;
-  candidates: [] | null;
-  created_at: string;
-  id: number;
+  Application_Details: Application_Details_type | null;
+  candidates?: [] | null;
+  created_at?: string;
+  id?: number;
+  "Job Status": string;
   job_information: {
-    [key: string]: string | null;
+    [key: string]: any;
+  } | null;
+  job_Boards: {
+    [key: string]: string | Object[] | Object | null;
   } | null;
   org_name: string | null;
 };
 export type Application_Details_type = {
   Job_Category?: string;
-  Additional_Questions?: string;
-  Application_Questions?: [];
+  Additional_Questions?: object;
+  Application_Questions?: object;
 } | null;
 
 //----------object_of_strings---------------

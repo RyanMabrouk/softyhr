@@ -13,10 +13,20 @@ import React, {
 } from "react";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { TiClipboard } from "react-icons/ti";
-import StepsProvider, { StepsContext } from "./provider/StepsProvider";
+import StepsProvider, {
+  StepType,
+  StepsContext,
+} from "./provider/StepsProvider";
 import { test } from "@/actions/test";
 import { FormdataToObject } from "@/helpers/object.helpers";
 import { RiCheckboxCircleFill, RiCheckboxCircleLine } from "react-icons/ri";
+import { X } from "lucide-react";
+import SubmitFormBtn from "./SubmitFormBtn";
+import useToast from "@/hooks/useToast";
+import { ObjectOfStrings } from "@/types/database.tables.types";
+import { CreateJobOpening } from "@/actions/hiring/CreateJobOpening";
+import useData from "@/hooks/useData";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface LayoutJobsProps {
   children: ReactNode;
@@ -27,6 +37,9 @@ const LayoutComponent = memo(function LayoutComponent({
 }: LayoutJobsProps) {
   const pathname = usePathname();
   const router = useRouter();
+  const { toast } = useToast();
+  const queryClient = useQueryClient();
+
   const {
     Update_ApplicationDetails,
     InformationJob,
@@ -35,31 +48,66 @@ const LayoutComponent = memo(function LayoutComponent({
     Update_InformationJob,
     Update_JobBoards,
   } = useContext(StepsContext);
+
+  const {
+    user_profile: { data: user },
+  } = useData();
+
   const Actions: any = {
     "Information-Job": Update_InformationJob,
     "Application-Details": Update_ApplicationDetails,
     "Job-Boards": Update_JobBoards,
   };
+
   const stepValidation: any = {
     "Information-Job": InformationJob,
     "Application-Details": ApplicationDetails,
     "Job-Boards": JobBoards,
   };
+
+  //------create_new_job------------
+  async function CreateNewJob() {
+    if (ApplicationDetails?.done && InformationJob?.done) {
+      const NewJob = {
+        job_information: { ...InformationJob?.values },
+        Application_Details: { ...ApplicationDetails?.values },
+        job_Boards: { ...JobBoards?.values },
+        org_name: user?.org_name,
+        ["Job Status"]: InformationJob?.values?.["Job Status"],
+      };
+      const response = await CreateJobOpening(NewJob);
+      if (response?.Error) toast.error(response?.Msg);
+      else toast.success(response?.Msg);
+      router.push("/Hiring/jobs");
+      queryClient.invalidateQueries({ queryKey: ["Hiring"] });
+    } else {
+      toast.error("something went wrong !!!");
+      router.push("/Hiring/jobs");
+    }
+  }
+
+  //-----submit_form_each_step---------
   function submitForm(formdata: FormData) {
-    test(formdata);
     const step =
       CreateHiringJob.at(
         CreateHiringJob.indexOf(pathname.slice(pathname.lastIndexOf("/") + 1)),
       ) || "Job-Boards";
+
     const action = Actions?.[step];
-    action({ values: FormdataToObject(formdata), done: true });
+    const stepValue = stepValidation?.[step];
+    action({
+      values: { ...stepValue?.values, ...FormdataToObject(formdata) },
+      done: true,
+    });
     router.push(
       CreateHiringJob.at(
         CreateHiringJob.indexOf(pathname.slice(pathname.lastIndexOf("/") + 1)) +
           1,
       ) || "",
     );
+    if (step == "Job-Boards") CreateNewJob();
   }
+
   return (
     <div className="flex w-full items-center justify-center">
       <div className="flex w-10/12 items-center justify-center">
@@ -126,23 +174,7 @@ const LayoutComponent = memo(function LayoutComponent({
                   );
                 })}
               </div>
-              <button
-                type="submit"
-                className="hover:shadow-green flex w-full items-center justify-center border border-color-primary-8 bg-white p-1 px-2 text-lg  font-semibold text-color-primary-5 duration-200 ease-in-out hover:!border-color-primary-7 hover:!text-color-primary-8 "
-              >
-                {CreateHiringJob.at(
-                  CreateHiringJob.indexOf(
-                    pathname.slice(pathname.lastIndexOf("/") + 1),
-                  ) + 1,
-                )
-                  ? "next: " +
-                    CreateHiringJob.at(
-                      CreateHiringJob.indexOf(
-                        pathname.slice(pathname.lastIndexOf("/") + 1),
-                      ) + 1,
-                    )
-                  : "Save Draft"}
-              </button>
+              <SubmitFormBtn />
             </div>
             {children}
           </form>
@@ -151,6 +183,7 @@ const LayoutComponent = memo(function LayoutComponent({
     </div>
   );
 });
+
 export default function Layout({ children }: LayoutJobsProps) {
   return (
     <StepsProvider>

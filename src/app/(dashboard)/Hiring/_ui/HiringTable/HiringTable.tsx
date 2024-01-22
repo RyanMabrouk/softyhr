@@ -22,6 +22,7 @@ import { MdModeEditOutline } from "react-icons/md";
 import { FaFileDownload } from "react-icons/fa";
 import  TopContent  from "./components/TopContent";
 import { HiringPropsType, HiringTableType, statusOptionsType } from "./Hiringtable.types";
+import Link from "next/link";
 
 const columns = [
   { name: "id", uid: "id" },
@@ -187,9 +188,12 @@ export default function HiringTable({ Hiring }: HiringPropsType) {
                   fill={"gray"}
                 />
               </div>
-              <div className="duration-250 flex h-[2rem] w-[2rem] cursor-pointer items-center justify-center ease-in-out hover:border hover:border-gray-27 hover:bg-gray-22">
+              <Link
+                href={`?popup=DELETE_JOB&id=${ user?.id}`}
+                className="duration-250 flex h-[2rem] w-[2rem] cursor-pointer items-center justify-center ease-in-out hover:border hover:border-gray-27 hover:bg-gray-22"
+              >
                 <FaTrash cursor={"pointer"} fill={"gray"} />
-              </div>
+              </Link>
               <div className="duration-250 flex h-[2rem] w-[2rem] cursor-pointer items-center justify-center ease-in-out hover:border hover:border-gray-27 hover:bg-gray-22">
                 <HiOutlineDuplicate cursor={"pointer"} />
               </div>
