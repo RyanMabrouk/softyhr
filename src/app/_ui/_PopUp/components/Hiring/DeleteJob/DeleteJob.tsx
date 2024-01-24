@@ -9,6 +9,8 @@ import { deleteJobOpening } from "@/actions/hiring/DeleteJobOpening";
 import { useRouter, useSearchParams } from "next/navigation";
 import useToast from "@/hooks/useToast";
 import { useQueryClient } from "@tanstack/react-query";
+import useHiring from "@/hooks/useHiring";
+import { Hiring_type } from "@/types/database.tables.types";
 
 function DeleteJob() {
   const [Value, setValue] = useState<string>();
@@ -16,19 +18,19 @@ function DeleteJob() {
   const { toast } = useToast();
   const router = useRouter();
   const queryClient = useQueryClient();
-  const id = params?.get("id") || "";
+  const id = Number(params?.get("id")) || 0;
+  const {
+    Hiring: { data, isPending },
+  } = useHiring();
 
   async function DeleteJob() {
-   
-      const response = await deleteJobOpening(id);
-      if(response?.Error) toast.error(response?.Msg);
-      else toast.success(response?.Msg);
-      router.push("/Hiring/jobs");
-      queryClient.invalidateQueries({ queryKey: ["Hiring"] });
-    
+    const response = await deleteJobOpening(id);
+    if (response?.Error) toast.error(response?.Msg);
+    else toast.success(response?.Msg);
+    router.push("/Hiring/jobs");
+    queryClient.invalidateQueries({ queryKey: ["Hiring"] });
   }
-
-  console.log(Value != "Delete");
+  console.log(data?.find((job:Hiring_type)=> job?.id == id));
   return (
     <PopUpSkeleton title="Just Checking...">
       <form
@@ -42,9 +44,17 @@ function DeleteJob() {
         </h1>
         <div className="flex flex-col items-center justify-start gap-[0.5rem] bg-gray-14 px-12 py-4">
           <div className="flex flex-col items-center justify-start">
-            <h1>Marketing Manager</h1>
+            <h1>
+              {
+                data?.find((job: Hiring_type) => job?.id == id)
+                  ?.job_information?.["Posting Title"]
+              }
+            </h1>
             <h1 className="text-sm font-light text-gray-29">
-              Vancouver, British Columbia
+              {
+                data?.find((job: Hiring_type) => job?.id == id)
+                  ?.job_information?.["Location"]
+              }
             </h1>
             <div className="flex items-center justify-center gap-[0.5rem] text-sm font-light text-gray-29">
               <RxAvatar className="text-lg !text-color-primary-8" />2 Candidates

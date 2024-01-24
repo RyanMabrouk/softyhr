@@ -11,6 +11,7 @@ export const CreateJobOpening = async (NewJob: Hiring_type) => {
     .from("Hiring")
     .insert([NewJob])
     .select();
+    console.log(error);
   if (error) {
     return {
       Error: error,

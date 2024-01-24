@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 
 export default function useHiring(match?:{ [key: string]: string | number | boolean | null | string[] | undefined }) {
   const { data: Hiring, isPending } = useQuery({
-    queryKey: ["Hiring"+match?.id],
+    queryKey: ["Hiring"],
     queryFn: () =>
       getData("Hiring", {
         org: true,

@@ -16,12 +16,8 @@ interface LayoutHiringProps {
 }
 export default function HiringLayout({ children }: LayoutHiringProps) {
   const ActiveRoute = usePathname();
-  if (
-    CreateHiringJob.includes(
-      ActiveRoute.slice(ActiveRoute.lastIndexOf("/") + 1),
-    )
-  )
-    return children;
+  console.log(ActiveRoute.split("/").length - 1);
+  if (ActiveRoute.split("/").length - 1 > 2) return children;
   else
     return (
       <div className="flex w-full flex-col items-center justify-center bg-gray-14">
@@ -79,7 +75,7 @@ export default function HiringLayout({ children }: LayoutHiringProps) {
             </div>
           </div>
         </div>
-        <div className="w-full h-full ">{children}</div>
+        <div className="h-full w-full ">{children}</div>
       </div>
     );
 }

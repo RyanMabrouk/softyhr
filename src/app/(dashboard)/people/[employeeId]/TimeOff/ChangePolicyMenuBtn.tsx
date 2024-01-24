@@ -29,12 +29,12 @@ export function ChangePolicyMenuBtn({ id }: { id: number }) {
   ];
   return (
     <>
-      <MenuLinksGeneric
+   {  /* <MenuLinksGeneric
         id={"editPolicyMenu" + id}
         options={options}
         anchorEl={anchorEl}
         setAnchorEl={setAnchorEl}
-      />
+  />*/}
       <div
         className={`absolute bottom-2 box-border flex h-11 w-full flex-row-reverse items-center justify-center gap-1 rounded-b-md  border-2 border-solid border-gray-17 bg-[white] py-3 text-center  capitalize text-gray-21  transition-all delay-[0s] duration-[0.15s] ease-[ease-in-out]  ${
           open

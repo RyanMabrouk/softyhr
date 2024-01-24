@@ -37,14 +37,7 @@ export default function useData() {
         user: true,
       }),
   });
-  //------------------Hiring--------------------------------------
-  const { data: Hiring, isPending: isPending8 } = useQuery({
-    queryKey: ["Hiring"],
-    queryFn: () =>
-      getData("Hiring", {
-        org: true,
-      }),
-  });
+
   // ------------------All Profiles Basic Information--------------------
   const { data: all_profiles_basic_info, isPending: isPending9 } = useQuery({
     queryKey: [
@@ -97,11 +90,6 @@ export default function useData() {
       data: user_profile?.data?.[0],
       error: user_profile?.error,
       isPending: isPending6,
-    },
-    Hiring: {
-      data: Hiring?.data,
-      error: Hiring?.error,
-      isPending: isPending8,
     },
     folders: {
       data: folders?.data,

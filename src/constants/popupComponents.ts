@@ -23,6 +23,10 @@ import RejectLeaveRequest from "@/app/_ui/_PopUp/components/TimeOff/RejectLeaveR
 import ViewLeaveRequestComment from "@/app/_ui/_PopUp/components/TimeOff/ViewLeaveRequestComment.tsx/ViewLeaveRequestComment";
 import AdjustLeavePolicyBalance from "@/app/_ui/_PopUp/components/TimeOff/AdjustLeavePolicyBalance/AdjustLeavePolicyBalance";
 import DeleteJob from "@/app/_ui/_PopUp/components/Hiring/DeleteJob/DeleteJob";
+import UnsavedChanges from "@/app/_ui/_PopUp/components/Hiring/UnsavedChanges/UnsavedChanges";
+import EditJobInformation from "@/app/_ui/_PopUp/components/Hiring/EditJobInformation/EditJobInformation";
+import EditApplicationDetails from "@/app/_ui/_PopUp/components/Hiring/EditApplicationDetails/EditApplicationDetails";
+import EditJobBoard from "@/app/_ui/_PopUp/components/Hiring/EditJobBoard/EditJobBoard";
 
 type PopupType = {
   [key: string]: () => React.JSX.Element;
@@ -53,4 +57,7 @@ export const popups: PopupType = {
   ADD_TIME_OFF_POLICY: AddTimeOffPolicy,
   CHANGE_ACCURAL_START_DATE: AccrualStartDate,
   DELETE_JOB: DeleteJob,
+  EDIT_JOB_INFORMATION: EditJobInformation,
+  EDIT_APPLICATION_DETAILS: EditApplicationDetails,
+  EDIT_JOB_BOARDS: EditJobBoard,
 };

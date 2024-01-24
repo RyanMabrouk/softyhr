@@ -31,7 +31,6 @@ export default async function getData(
   const session = await getSession();
   const org_name = session?.user.user_metadata.org_name;
   const user_id = session?.user?.id;
-
   const { data, error } = match
     ? org
       ? user

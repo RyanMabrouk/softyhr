@@ -11,14 +11,20 @@ import useToast from "@/hooks/useToast";
 import { test } from "@/actions/test";
 import { UploadImage } from "@/actions/UploadFiles/uploadImage";
 import { FormdataToObject } from "@/helpers/object.helpers";
+import { useQueryClient } from "@tanstack/react-query";
+import { string } from "zod";
 
 interface AppliymentFormPropsType {
   job: Hiring_type;
+  ButtonText: string;
+  SubmittingButtonText: string;
+  SuccessMessage:string;
 }
 
-function AppliymentForm({ job }: AppliymentFormPropsType) {
+function AppliymentForm({ job, ButtonText, SuccessMessage,  SubmittingButtonText }: AppliymentFormPropsType) {
   const { toastContainer, toast } = useToast();
   const { data, isPending } = useSettings("AppliementForm");
+    const QueryClient = useQueryClient();
 
   const SubmitForm = async (formdata: FormData) => {
     const identifient = uuidv4();
@@ -35,20 +41,19 @@ function AppliymentForm({ job }: AppliymentFormPropsType) {
           key,
         );
         uploadPromises.push(uploadPromise);
-
         Formdata.set(key, key + identifient);
       } else {
         Formdata.set(key, value);
       }
     });
-     await Promise.all(uploadPromises);
+    await Promise.all(uploadPromises);
 
-
-      const response = await CreateCandidate({
+    const response = await CreateCandidate({
       ...FormulateFormData(Formdata),
       job_id: job?.id,
-      });
-     response?.Msg ? toast.success(response?.Msg) : null;
+    });
+    QueryClient.invalidateQueries({ queryKey: ["Candidates", job?.id] });
+    response?.Submitted ? toast.success(SuccessMessage) : null;
   };
 
   return (
@@ -80,7 +85,10 @@ function AppliymentForm({ job }: AppliymentFormPropsType) {
               );
             })}
             <div className="-mt-4 flex items-center justify-center gap-[2rem]">
-              <SubmitButton />
+              <SubmitButton
+                textSubmitting={SubmittingButtonText}
+                text={ButtonText}
+              />
             </div>
           </form>
         </div>

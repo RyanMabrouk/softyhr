@@ -9,11 +9,17 @@ import useData from "@/hooks/useData";
 import { NewCandidates } from "@/helpers/CountNewCandidates";
 import { Hiring_type } from "@/types/database.tables.types";
 import { HiringTableType } from "../_ui/HiringTable/Hiringtable.types";
+import useHiring from "@/hooks/useHiring";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { GetJobOpening } from "@/actions/hiring/GetJobOpening";
 
 function Page() {
+  const [page, setPage] = React.useState(1);
+  const queryClient = useQueryClient();
   const {
     Hiring: { data, isPending },
-  } = useData();
+  } = useHiring();
+
   const HiringDataTable: HiringTableType[] = data?.map(
     (Hiring: Hiring_type) => {
       return {
@@ -45,8 +51,12 @@ function Page() {
         <div className="flex w-full items-center justify-center">
           {isPending ? (
             <h1>Loading...</h1>
-          ) : (
-            <HiringTable Hiring={HiringDataTable} />
+          ):(
+            <HiringTable
+              page={page}
+              setPage={setPage}
+              Hiring={HiringDataTable}
+            />
           )}
         </div>
       </div>

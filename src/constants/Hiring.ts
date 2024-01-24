@@ -120,58 +120,78 @@ export const ApplicationDefaultQuestions: ApplicationDefaultQuestionsType[] = [
 ];
 
 export const ApplicationIniTialQuestions: any = {
-  Resume:{ required: false, AddToAppliement: false, type: "file", name: "Resume" },
-  Adress:{ required: false, AddToAppliement: false, type: "text", name: "Adress" },
-  "Linked URL":{ required: false, AddToAppliement: false, type: "text", name: "Linked URL" },
-  "Date available":{
+  Resume: {
+    required: false,
+    AddToAppliement: false,
+    type: "file",
+    name: "Resume",
+  },
+  Adress: {
+    required: false,
+    AddToAppliement: false,
+    type: "text",
+    name: "Adress",
+  },
+  "Linked URL": {
+    required: false,
+    AddToAppliement: false,
+    type: "text",
+    name: "Linked URL",
+  },
+  "Date available": {
     required: false,
     AddToAppliement: false,
     type: "Date",
     name: "Date available",
   },
-  "Desired Salary":{
+  "Desired Salary": {
     required: false,
     AddToAppliement: false,
     type: "text",
     name: "Desired Salary",
   },
-  "Cover Letter":{
+  "Cover Letter": {
     required: false,
     AddToAppliement: false,
     type: "file",
     name: "Cover Letter",
   },
-  "Referred by":{
+  "Referred by": {
     required: false,
     AddToAppliement: false,
     type: "text",
     name: "Referred by",
   },
-  "Website, Blog or Portfolio":{
+  "Website, Blog or Portfolio": {
     required: false,
     AddToAppliement: false,
     type: "text",
     name: "Website, Blog or Portfolio",
   },
-  "Twitter Username":{
+  "Twitter Username": {
     required: false,
     AddToAppliement: false,
     type: "text",
     name: "Twitter Username",
   },
-  "Highest Education Obtained":{
+  "Highest Education Obtained": {
     required: false,
     AddToAppliement: false,
     type: "text",
     name: "Highest Education",
   },
-  "College/University":{
+  "College/University": {
     required: false,
     AddToAppliement: false,
     type: "text",
     name: "College/University",
   },
- References :{ required: false, AddToAppliement: false, type: "text", name: "References" },
+  References: {
+    required: false,
+    AddToAppliement: false,
+    type: "text",
+    name: "References",
+  },
 };
 
 export interface ApplicationDefaultQuestionsType {
