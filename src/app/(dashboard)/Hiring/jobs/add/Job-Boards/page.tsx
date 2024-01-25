@@ -6,7 +6,7 @@ import React, {
   useContext,
   useState,
 } from "react";
-import { StepsContext } from "../provider/StepsProvider";
+import { StepsContext } from "../context/StepsProvider";
 import { useRouter } from "next/navigation";
 import { Job_locationElementType } from "../Information-Job/components/AdditionnalInputs";
 import { SiIndeed } from "react-icons/si";

@@ -41,8 +41,10 @@ import Avatar from "./Avatar";
 import HiringInfos from "./HiringInfos";
 import { PiDotsThreeOutlineVerticalFill } from "react-icons/pi";
 import updateData from "@/api/updateData";
-import useToast from "@/hooks/useToast";
 import { useQueryClient } from "@tanstack/react-query";
+import { BiCommentAdd } from "react-icons/bi";
+import HireStatus from "./HireStatus";
+import RatingGeneric from "./RatingGeneric";
 
 const statusColorMap: Record<string, ChipProps["color"]> = {
   active: "success",
@@ -55,6 +57,7 @@ const INITIAL_VISIBLE_COLUMNS = [
   "Status",
   "Rating",
   "Applied",
+  "Changes Status",
   "actions",
 ];
 
@@ -74,7 +77,6 @@ export default function CandiatesTable({ candidate, Hiring }: any) {
     column: "age",
     direction: "ascending",
   });
-  const { toast } = useToast();
   const [page, setPage] = React.useState(1);
 
   const pages = Math.ceil(candidate.length / rowsPerPage);
@@ -127,7 +129,7 @@ export default function CandiatesTable({ candidate, Hiring }: any) {
     });
   }, [sortDescriptor, items]);
   console.log(Hiring);
-  const renderCell = React.useCallback((user: User, columnKey: React.Key) => {
+  const renderCell = (user: User, columnKey: React.Key) => {
     const cellValue = user[columnKey as keyof User];
     switch (columnKey) {
       case "Candidate Info":
@@ -146,30 +148,21 @@ export default function CandiatesTable({ candidate, Hiring }: any) {
           </div>
         );
       case "Rating":
+        console.log(user?.Rating);
         return (
-          <Rating
-            name="simple-controlled"
-            value={user?.Rating}
-            onChange={async (event, newValue: any) => {
-              const response = await updateData(
-                "candidates",
-                { Ratings: newValue },
-                {
-                  id: user?.id,
-                },
-              );
-              if (response?.error) toast.error("something went wrong !");
-              queryClient.invalidateQueries({
-                queryKey: ["Candidates", Hiring?.id],
-              });
-              console.log("Candidates", Hiring?.id);
-            }}
-          />
+         <RatingGeneric DefaultValue={user?.Rating} id={user?.id} tableName="candidates" />
         );
       case "Applied":
         return (
           <div className="text-default-600 gap-1 border-none capitalize">
             {formatCustomDate(user.Applied)}
+          </div>
+        );
+      case "Changes Status":
+        console.log("objectobject");
+        return (
+          <div className=" flex items-center justify-start gap-2 z-10">
+           <HireStatus Hiring={user}/>
           </div>
         );
       case "actions":
@@ -187,10 +180,15 @@ export default function CandiatesTable({ candidate, Hiring }: any) {
                   <PiDotsThreeOutlineVerticalFill />
                 </Button>
               </DropdownTrigger>
-              <DropdownMenu>
-                <DropdownItem>View</DropdownItem>
-                <DropdownItem>Edit</DropdownItem>
-                <DropdownItem>Delete</DropdownItem>
+              <DropdownMenu className="shadow-green ">
+                <DropdownItem className="group hover:!bg-color-primary-8">
+                  <div className="flex items-end justify-center gap-[0.5rem] duration-200 ease-linear">
+                    <BiCommentAdd className="text-xl text-color-primary-7 group-hover:!text-white" />
+                    <h1 className="text-black group-hover:!text-white">
+                      Add Comment
+                    </h1>
+                  </div>
+                </DropdownItem>
               </DropdownMenu>
             </Dropdown>
           </div>
@@ -198,7 +196,7 @@ export default function CandiatesTable({ candidate, Hiring }: any) {
       default:
         return cellValue;
     }
-  }, []);
+  }
 
   const onRowsPerPageChange = React.useCallback(
     (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -231,7 +229,9 @@ export default function CandiatesTable({ candidate, Hiring }: any) {
         <div className="flex w-full items-end justify-between gap-3 border-t border-gray-18 pt-2">
           <div className="flex w-full items-center justify-start gap-[0.5rem] text-lg font-semibold text-color-primary-7">
             <FaUserCircle className=" text-3xl font-semibold !text-color-primary-8" />
-            <h1>2 Candidates {"( 1 New )"}</h1>
+            <h1>
+              {candidate?.length} Candidates {"( 1 New )"}
+            </h1>
             <AddCandidate />
           </div>
           <div className="flex w-full items-center justify-end gap-3">

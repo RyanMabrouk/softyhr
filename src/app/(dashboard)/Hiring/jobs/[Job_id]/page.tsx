@@ -19,14 +19,13 @@ function Page({ params: { Job_id } }: { params: { Job_id: string } }) {
       id: candidate?.id,
       "Candidate Info":
         candidate?.["First Name"] + " " + candidate?.["Last Name"],
-      Status: "NEW",
+      Status: candidate?.status,
       Status_update: "Updated Just Now",
       Rating: candidate?.Ratings,
       Applied: candidate?.created_at,
       "Last Email": candidate?.["Last Email"] || "",
     };
   });
-  console.log(Hiring);
   return (
     <div className="flex h-full w-full flex-col items-center justify-center bg-white">
       <div className="flex w-5/6 flex-col gap-[1rem]">
@@ -36,7 +35,7 @@ function Page({ params: { Job_id } }: { params: { Job_id: string } }) {
           ) : (
             <div className="mt-6 flex w-full flex-col items-start justify-center gap-2">
               <Link
-                href="/hiring/jobs"
+                href="/Hiring/jobs"
                 className="flex items-center justify-center gap-[0.5rem] text-sm text-gray-11 duration-200 ease-linear hover:!text-color-primary-8 hover:underline"
               >
                 <FaArrowLeftLong fontSize="1rem" />

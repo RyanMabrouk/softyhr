@@ -6,7 +6,8 @@ const columns = [
   { name: "Rating", uid: "Rating", sortable: true },
   { name: "Applied", uid: "Applied" },
   { name: "Last Email", uid: "Last Email" },
-  { name: "ACTIONS", uid: "actions" },
+  { name: "Changes Status", uid: "Changes Status" },
+  { name: "", uid: "actions" },
 ];
 
 const statusOptions = [

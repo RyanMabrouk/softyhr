@@ -3,7 +3,6 @@ import Loader from "@/app/_ui/Loader/Loader";
 import AppliymentForm from "@/app/careers/[career_id]/components/AppliymentForm/AppliymentForm";
 import useHiring from "@/hooks/useHiring";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
 import React from "react";
 import { BsArrowLeft } from "react-icons/bs";
 import { FaUserCircle } from "react-icons/fa";
@@ -18,7 +17,7 @@ function Page({ params: { job_id } }: { params: { job_id: string } }) {
   return isPending ? (
     <Loader />
   ) : (
-    <div className="flex w-full items-center justify-center bg-white p-4">
+    <div className="flex w-full items-start justify-center bg-white p-4">
       <div className="flex w-3/5 flex-col items-start justify-center">
         <div className="flex w-full flex-col items-start justify-center gap-4">
           <div className="flex items-center justify-center gap-2">

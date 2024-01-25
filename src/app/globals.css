@@ -8,6 +8,12 @@
     box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
       var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow) !important;
   }
+  .shadow-red {
+    --tw-shadow: 0px 0px 3px 1px rgba(217, 52, 52, 0.842) !important;
+    --tw-shadow-colored: 0px 0px 3px 1px var(--tw-shadow-color) !important;
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
+      var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow) !important;
+  }
   .shadow-popup {
     --tw-shadow: 0 8px 14px 3px #0000000d;
     --tw-shadow-colored: 0 8px 14px 3px var(--tw-shadow-color);
@@ -132,4 +138,3 @@
     background-color: transparent;
   }
 }
-  

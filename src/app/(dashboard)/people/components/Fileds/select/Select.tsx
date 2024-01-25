@@ -14,7 +14,7 @@ interface SelectInputPropsType {
 function SelectInput({
   RowField,
   setTouched,
-  defaultValue = undefined,
+  defaultValue = "",
   label,
   minWidth,
 }: SelectInputPropsType) {
@@ -25,10 +25,7 @@ function SelectInput({
   };
   console.log(value);
   return (
-    <FormControl
-      required={RowField?.required}
-      className="flex flex-col items-start justify-center"
-    >
+    <div className="relative flex flex-col items-start justify-center">
       <h1
         className={
           "text-[14px] text-gray-29 " +
@@ -63,7 +60,7 @@ function SelectInput({
         displayEmpty
         inputProps={{ "aria-label": "Without label" }}
         onChange={HandleChange}
-        className="!font-medium !text-gray-29 [&_.MuiOutlinedInput-notchedOutline]:border-none"
+        className="relative z-10 !font-medium !text-gray-29 [&_.MuiOutlinedInput-notchedOutline]:border-none"
       >
         {RowField?.options?.map((element: any, index: number) => {
           return (
@@ -78,7 +75,13 @@ function SelectInput({
           );
         })}
       </Select>
-    </FormControl>
+      <input
+        required={true}
+        type="text"
+        className="absolute bottom-0 left-10 h-[1px] w-[1px] opacity-0"
+        value={value || ""}
+      />
+    </div>
   );
 }
 

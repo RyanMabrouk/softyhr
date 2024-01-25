@@ -25,28 +25,22 @@ function Education({
   FieldsArray,
   setTouched,
   champ,
-  setData,
-  DATA,
-  employeeId,
 }: EducationPropsType): ReactNode {
-  const { employee_profile: Data } = useEmployeeData({ employeeId });
   const router = useRouter();
   const pathname = usePathname();
-  const Show_DeleteEducation = (id: string) => {
-    router.push(pathname + `?popup=delete_education&id=${id}`);
-  };
+  const [data, setdata] = useState<any>([]);
   return (
     <div className="flex flex-col items-start ">
-      {[...Data?.data?.[champ] || [], ...DATA]?.map((data: any) => {
+      {data?.map((data: any) => {
         {
           return (
             <div className="flex justify-center gap-[1rem] py-2" key={data?.id}>
               <div className="flex flex-col items-start gap-[0.5rem] border-b border-gray-5 py-6">
-                {FieldsArray?.map(({ Row }: any) => {
+                {FieldsArray?.map(({ Row }: any, index: number) => {
                   return (
                     <div
                       className="flex items-end justify-center gap-[2rem]"
-                      key={uuidv4()}
+                      key={index}
                     >
                       {Row?.map((RowField: any) => {
                         const Component = Field[RowField?.type.toUpperCase()];
@@ -67,20 +61,9 @@ function Education({
               <div
                 key={data?.id}
                 onClick={() => {
-                  if (
-                    Data?.data?.[champ]?.filter(
-                      (education: any) => education.id == data?.id,
-                    ).length === 0
-                  )
-                    setData(
-                      (old: any) =>
-                        old?.filter(
-                          (education: any) => education.id != data?.id,
-                        ),
-                    );
-                  else {
-                    Show_DeleteEducation(data?.id);
-                  }
+                  setdata((old: any) =>
+                    old?.filter((education: any) => education.id != data?.id),
+                  );
                 }}
                 className="hover:bg-gray flex h-[2rem] w-[2rem] cursor-pointer items-center justify-center duration-150 ease-in-out hover:border hover:border-gray-27"
               >
@@ -92,20 +75,18 @@ function Education({
       })}
       <div
         className="flex cursor-pointer items-center justify-center gap-[0.5rem] pt-4 text-color5-600"
-        onClick={() =>
-          setData([
-            ...DATA,
-            {
-              id: uuidv4(),
-              GPA: "",
-              Degree: "",
-              "End Date": "",
-              "Start Date": "",
-              "College/Institution": "",
-              "Major/Specialization": "",
-            },
-          ])
-        }
+        onClick={()=>setdata((old: any) => [
+          ...old || [],
+          {
+            id: uuidv4(),
+            GPA: "",
+            Degree: "",
+            "End Date": "",
+            "Start Date": "",
+            "College/Institution": "",
+            "Major/Specialization": "",
+          },
+        ])}
       >
         <IoMdAddCircleOutline fill={"#095c8f"} />
         Add Education

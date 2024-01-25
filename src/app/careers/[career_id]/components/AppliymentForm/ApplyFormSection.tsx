@@ -2,7 +2,8 @@ import React, { ReactNode, memo } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { Field } from "@/constants/userInfo";
 import { RowFieldType } from "@/types/userInfoTypes.type";
-import { ApplicationDefaultQuestions } from "@/constants/Hiring";
+import Input from "@/app/(dashboard)/people/components/Fileds/Input/Input";
+
 interface FiledsChampsPropsType {
   FieldsArray: RowFieldType[];
   setTouched?: React.Dispatch<React.SetStateAction<boolean>> | undefined;
@@ -10,7 +11,7 @@ interface FiledsChampsPropsType {
   champ?: string;
   FieldsCheck: any;
 }
-function FiledsChamps({
+function ApplyFormSection({
   FieldsArray,
   setTouched,
   user,
@@ -35,7 +36,7 @@ function FiledsChamps({
                     ...FieldsCheck?.[RowField?.name],
                   };
                 }
-                const Component = Field[RowField?.type.toUpperCase()];
+                const Component = Field[RowField?.type.toUpperCase()] || Input;
                 return (
                   <Component
                     champ={champ || ""}
@@ -54,5 +55,4 @@ function FiledsChamps({
     </>
   );
 }
-
-export default memo(FiledsChamps);
+export default memo(ApplyFormSection)

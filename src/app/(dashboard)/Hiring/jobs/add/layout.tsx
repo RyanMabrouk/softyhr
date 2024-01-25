@@ -5,10 +5,7 @@ import { usePathname, useRouter } from "next/navigation";
 import React, { ReactNode, memo, useContext, useState } from "react";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { TiClipboard } from "react-icons/ti";
-import StepsProvider, {
-  StepType,
-  StepsContext,
-} from "./provider/StepsProvider";
+import StepsProvider, { StepType, StepsContext } from "./context/StepsProvider";
 import { FormdataToObject } from "@/helpers/object.helpers";
 import { RiCheckboxCircleFill, RiCheckboxCircleLine } from "react-icons/ri";
 import SubmitFormBtn from "./SubmitFormBtn";
@@ -102,87 +99,87 @@ const LayoutComponent = memo(function LayoutComponent({
 
   return (
     <>
-        <div className="flex w-full items-center justify-center">
-          <div className="flex w-10/12 items-center justify-center">
-            <div className="mt-12 flex w-11/12 flex-col items-start justify-center gap-[1rem]">
-              <button
-                onClick={() => setShow(true)}
-                className="flex items-center justify-center gap-[0.5rem] text-sm text-gray-11"
-              >
-                <FaArrowLeftLong fontSize="0.7rem" />
-                <h1 className="hover:underline">Job Opening</h1>
-              </button>
-              <div className="flex w-full items-center justify-between border-b border-gray-18 pb-2">
-                <div className="flex items-center justify-center gap-[0.5rem] self-start">
-                  <TiClipboard fontSize="3rem" fill="#527A01" />
-                  <h1 className="text-3xl font-semibold text-color-primary-8">
-                    Create Job Opening
+      <div className="flex w-full items-center justify-center">
+        <div className="flex w-10/12 items-center justify-center">
+          <div className="mt-12 flex w-11/12 flex-col items-start justify-center gap-[1rem]">
+            <button
+              onClick={() => setShow(true)}
+              className="flex items-center justify-center gap-[0.5rem] text-sm text-gray-11"
+            >
+              <FaArrowLeftLong fontSize="0.7rem" />
+              <h1 className="hover:underline">Job Opening</h1>
+            </button>
+            <div className="flex w-full items-center justify-between border-b border-gray-18 pb-2">
+              <div className="flex items-center justify-center gap-[0.5rem] self-start">
+                <TiClipboard fontSize="3rem" fill="#527A01" />
+                <h1 className="text-3xl font-semibold text-color-primary-8">
+                  Create Job Opening
+                </h1>
+                {InformationJob?.values?.["Posting Title"] != "" && (
+                  <h1 className="pt-2 text-lg text-gray-29">
+                    {InformationJob?.values?.["Posting Title"]}
                   </h1>
-                  {InformationJob?.values?.["Posting Title"] != "" && (
-                    <h1 className="pt-2 text-lg text-gray-29">
-                      {InformationJob?.values?.["Posting Title"]}
-                    </h1>
-                  )}
-                </div>
-                <Link
-                  href={HirinSections[0]?.path}
-                  className="text-color5-500 hover:underline"
-                >
-                  cancel
-                </Link>
+                )}
               </div>
-              <form
-                action={submitForm}
-                className="flex w-full items-start justify-start gap-[1rem]"
+              <Link
+                href={HirinSections[0]?.path}
+                className="text-color5-500 hover:underline"
               >
-                <div className="flex w-3/12 flex-col items-center gap-[1rem] rounded-xl bg-gray-14 p-4 px-8 pb-8">
-                  <div className="flex w-full flex-col items-start justify-center  border-b border-gray-15 pb-4">
-                    {CreateHiringJob?.map((path: string, index: number) => {
-                      return (
-                        <Link
-                          href={path}
-                          className={
-                            "flex items-center justify-center gap-[1rem] py-2 "
-                          }
-                          key={index}
-                        >
-                          {(pathname.includes(path) &&
-                            path == CreateHiringJob[0]) ||
-                          stepValidation?.[path]?.done ? (
-                            <RiCheckboxCircleFill className="text-3xl !text-color-primary-8" />
-                          ) : (
-                            <RiCheckboxCircleLine className="text-3xl !text-color-primary-8" />
-                          )}
-                          <h1
-                            className={
-                              "flex gap-[1rem] text-lg font-semibold " +
-                              (pathname.includes(path)
-                                ? "text-color-primary-8"
-                                : "text-gray-15")
-                            }
-                          >
-                            {path}
-                          </h1>
-                        </Link>
-                      );
-                    })}
-                  </div>
-                  <SubmitFormBtn />
-                </div>
-                {children}
-              </form>
+                cancel
+              </Link>
             </div>
+            <form
+              action={submitForm}
+              className="flex w-full items-start justify-start gap-[1rem]"
+            >
+              <div className="flex w-3/12 flex-col items-center gap-[1rem] rounded-xl bg-gray-14 p-4 px-8 pb-8">
+                <div className="flex w-full flex-col items-start justify-center  border-b border-gray-15 pb-4">
+                  {CreateHiringJob?.map((path: string, index: number) => {
+                    return (
+                      <Link
+                        href={path}
+                        className={
+                          "flex items-center justify-center gap-[1rem] py-2 "
+                        }
+                        key={index}
+                      >
+                        {(pathname.includes(path) &&
+                          path == CreateHiringJob[0]) ||
+                        stepValidation?.[path]?.done ? (
+                          <RiCheckboxCircleFill className="text-3xl !text-color-primary-8" />
+                        ) : (
+                          <RiCheckboxCircleLine className="text-3xl !text-color-primary-8" />
+                        )}
+                        <h1
+                          className={
+                            "flex gap-[1rem] text-lg font-semibold " +
+                            (pathname.includes(path)
+                              ? "text-color-primary-8"
+                              : "text-gray-15")
+                          }
+                        >
+                          {path}
+                        </h1>
+                      </Link>
+                    );
+                  })}
+                </div>
+                <SubmitFormBtn />
+              </div>
+              {children}
+            </form>
           </div>
         </div>
-     {Show &&
-       ( <div className="fixed top-0 z-30 flex h-screen w-screen items-center justify-center">
+      </div>
+      {Show && (
+        <div className="fixed top-0 z-30 flex h-screen w-screen items-center justify-center">
           <div
             className="absolute z-40 h-full w-full bg-gray-14"
             onClick={() => setShow(false)}
           />
           <UnsavedChanges setShow={setShow} />
-        </div>)
-      }
+        </div>
+      )}
     </>
   );
 });

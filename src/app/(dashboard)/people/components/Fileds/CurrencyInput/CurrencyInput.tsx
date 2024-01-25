@@ -1,8 +1,9 @@
 "use client";
 import { InputIcons } from "@/constants/userInfo";
 import { RowFieldType } from "@/types/userInfoTypes.type";
+import  Currency  from './Curreny.json';
 import React, { memo, useState } from "react";
-import { FaLinkedin } from "react-icons/fa";
+
 
 interface InputPropsType {
   RowField: RowFieldType;
@@ -22,26 +23,27 @@ const Input = ({ RowField, setTouched, defaultValue }: InputPropsType) => {
       >
         {RowField?.name}
       </h1>
-      <div className="group flex items-center justify-start">
+      <div className="group flex flex-row-reverse items-center justify-start">
         {RowField?.Icon && (
-          <span className="absolute ml-[2px]  h-[1.85rem] w-[1.8rem] bg-gray-14">
-            <Component
-              fill="gray"
+          <div className="absolute ml-[2px]  h-[1.85rem] w-[1.8rem] bg-gray-14">
+            <span
               style={{
                 fontSize: "1rem",
                 position: "absolute",
                 left: "0.4rem",
                 top: "25%",
               }}
-            />
-          </span>
+            >
+              USD
+            </span>
+          </div>
         )}
         <input
           className={
             "focus:focus-within:shadow-green h-[2rem] overflow-hidden rounded-sm border border-gray-19 px-2 text-[0.95rem] font-normal outline-none  " +
             (RowField?.Icon ? "pl-8 " : "")
           }
-          type={RowField?.type}
+          type="Number"
           value={value}
           name={RowField?.name}
           onChange={(e) => setValue(e.target.value)}

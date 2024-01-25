@@ -24,6 +24,7 @@ import TableChamps from "@/app/(dashboard)/people/components/Fileds/TableChamps"
 import textarea from "@/app/(dashboard)/people/components/Fileds/textarea/textarea";
 import Editor from "@/app/(dashboard)/people/components/Fileds/Editor/Editor";
 import InputFile from "@/app/(dashboard)/people/components/Fileds/File/File";
+import SelectUsers from "@/app/(dashboard)/people/components/Fileds/SelectUsers/SelectUsers";
 
 export const Field: any = {
   TEXT: Input,
@@ -34,6 +35,7 @@ export const Field: any = {
   TEXTAREA: textarea,
   EDITOR: Editor,
   FILE: InputFile,
+  SELECT_USERS: SelectUsers,
 };
 
 export const Section: any = {
@@ -44,5 +46,6 @@ export const Section: any = {
   Compensation: TableChamps,
   "Job Information": TableChamps,
   Bonus:TableChamps
-  
 };
+
+

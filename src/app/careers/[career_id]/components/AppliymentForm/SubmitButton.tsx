@@ -5,12 +5,19 @@ import { useFormStatus } from "react-dom";
 interface SubmitButtonPropsType {
   textSubmitting: string;
   text: string;
+  className?:string;
 }
 
-function SubmitButton({ textSubmitting, text }: SubmitButtonPropsType) {
+function SubmitButton({
+  textSubmitting,
+  text,
+  className,
+}: SubmitButtonPropsType) {
   const { pending } = useFormStatus();
   return (
-    <div className="mt-4 flex items-center justify-center gap-[1rem]">
+    <div
+      className={`mt-4 flex items-center justify-center gap-[1rem] ${className}`}
+    >
       <button
         disabled={pending}
         className={
@@ -25,7 +32,7 @@ function SubmitButton({ textSubmitting, text }: SubmitButtonPropsType) {
             {textSubmitting}
           </div>
         ) : (
-           text 
+          text
         )}
       </button>
       <button

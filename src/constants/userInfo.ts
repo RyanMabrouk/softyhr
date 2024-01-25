@@ -43,6 +43,7 @@ import textarea from "@/app/(dashboard)/people/components/Fileds/textarea/textar
 
 import dynamic from "next/dynamic";
 import InputFile from "@/app/(dashboard)/people/components/Fileds/File/File";
+import SelectUsers from "@/app/(dashboard)/people/components/Fileds/SelectUsers/SelectUsers";
 const Editor = dynamic(
   () => import("@/app/(dashboard)/people/components/Fileds/Editor/Editor"),
   { ssr: false },
@@ -60,6 +61,7 @@ export const Field: any = {
   TEXTAREA: textarea,
   EDITOR: Editor,
   FILE: InputFile,
+  SELECT_USERS: SelectUsers,
 };
 
 export const sectionIcon: ObjectIconsType = {
@@ -69,6 +71,16 @@ export const sectionIcon: ObjectIconsType = {
   MDOUTLINECASTFOREDUCATION: MdOutlineCastForEducation,
   IOIOSCHATBUBBLES: IoIosChatbubbles,
 };
+
+export const NewEmployeeSections = [
+  "EDUCAION",
+  "EMPLOYMENT STATUS",
+  "BASIC INFORMATION",
+  "ADDRESS",
+  "SOCIAL LINKS",
+  "CONTACT",
+];
+
 
 interface ObjectIconsType {
   [key: string]: IconType;

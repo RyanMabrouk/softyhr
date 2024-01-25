@@ -27,6 +27,7 @@ import UnsavedChanges from "@/app/_ui/_PopUp/components/Hiring/UnsavedChanges/Un
 import EditJobInformation from "@/app/_ui/_PopUp/components/Hiring/EditJobInformation/EditJobInformation";
 import EditApplicationDetails from "@/app/_ui/_PopUp/components/Hiring/EditApplicationDetails/EditApplicationDetails";
 import EditJobBoard from "@/app/_ui/_PopUp/components/Hiring/EditJobBoard/EditJobBoard";
+import HireCandidate from "@/app/_ui/_PopUp/components/Hiring/HireCandidate/HireCandidate";
 
 type PopupType = {
   [key: string]: () => React.JSX.Element;
@@ -60,4 +61,5 @@ export const popups: PopupType = {
   EDIT_JOB_INFORMATION: EditJobInformation,
   EDIT_APPLICATION_DETAILS: EditApplicationDetails,
   EDIT_JOB_BOARDS: EditJobBoard,
+  HIRE_CANDIDATE: HireCandidate,
 };

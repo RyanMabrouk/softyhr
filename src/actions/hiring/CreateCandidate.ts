@@ -18,7 +18,7 @@ export const CreateCandidate = async (NewCandaidate: any) => {
     return {
       Submitted:false,
       Error: error ,
-      Msg:"Something went Wrong"
+      Msg: error?.message?.includes("candidates_Email_key") ? "email already exist" : "Something went Wrong"
     };
   } else {
     return {

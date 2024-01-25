@@ -3,12 +3,12 @@ import { TbNorthStar } from "react-icons/tb";
 import { Switch } from "antd";
 import Checkbox from "@mui/material/Checkbox";
 import { FormControlLabel } from "@mui/material";
-import { StepsContext } from "../../provider/StepsProvider";
+import { StepsContext } from "../../context/StepsProvider";
 interface AppQuestionPropsType {
   name: string;
   required: boolean;
   show: boolean;
-  type:string
+  type: string;
 }
 
 function AppQuestion({ name, required, show, type }: AppQuestionPropsType) {
@@ -30,7 +30,7 @@ function AppQuestion({ name, required, show, type }: AppQuestionPropsType) {
                     [name]: {
                       ...ApplicationDetails?.values?.[name],
                       AddToAppliement: e.target.checked,
-                      type
+                      type,
                     },
                   },
                 });
@@ -60,7 +60,7 @@ function AppQuestion({ name, required, show, type }: AppQuestionPropsType) {
                 [name]: {
                   ...ApplicationDetails?.values?.[name],
                   required: checked,
-                  type
+                  type,
                 },
               },
             });

@@ -17,6 +17,7 @@ interface AdditionnalInputsType {
 export interface Job_locationElementType {
   label: string;
   Icon: IconType;
+  description?:string;
   show?: boolean;
 }
 interface AdditionnalInputsTypeProps {
