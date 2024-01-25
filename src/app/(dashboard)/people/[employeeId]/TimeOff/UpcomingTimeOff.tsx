@@ -6,9 +6,9 @@ import useData from "@/hooks/useData";
 import { FaCheckCircle } from "react-icons/fa";
 import {
   database_leave_policies_type,
+  database_leave_request_duration_used_type,
   database_leave_request_status_type,
   database_leave_requests_type,
-  database_profile_leave_balance_type,
   databese_leave_categories_type,
 } from "@/types/database.tables.types";
 import {
@@ -21,6 +21,7 @@ import { MdCancel } from "react-icons/md";
 import { AcceptRequestBtn } from "./_ui/Buttons/AcceptRequestBtn";
 import { RejectRequestBtn } from "./_ui/Buttons/RejectRequestBtn";
 import useEmployeeData from "@/hooks/useEmloyeeData";
+import useLeaveData from "@/hooks/useLeaveData";
 type upcoming_leave_requests_data_type = {
   id: number;
   start_at: Date;
@@ -32,13 +33,15 @@ type upcoming_leave_requests_data_type = {
   note: string;
   policy_id: number;
   user_id: string;
-  duration_used: database_profile_leave_balance_type[];
+  duration_used: database_leave_request_duration_used_type[];
 };
 export function UpcomingTimeOff() {
   const { employeeId } = useParams();
   const {
     leave_categories: { data: leave_categories, isPending: isPending3 },
     leave_policies: { data: leave_policies, isPending: isPending4 },
+  } = useLeaveData();
+  const {
     user_profile: { data: user_profile, isPending: isPending5 },
   } = useData();
   const {

@@ -9,36 +9,26 @@ import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import changePolicy from "@/actions/leave/changePolicy";
 import useToast from "@/hooks/useToast";
-import useData from "@/hooks/useData";
 import useEmployeeData from "@/hooks/useEmloyeeData";
-import {
-  database_leave_policies_type,
-  databese_leave_categories_type,
-} from "@/types/database.tables.types";
-
+import { database_leave_policies_type } from "@/types/database.tables.types";
+import usePolicy from "@/hooks/useCategory";
+import useLeaveData from "@/hooks/useLeaveData";
+import CancelBtnGeneric from "@/app/_ui/CancelBtnGeneric";
 export default function ChangeLeavePolicy() {
   const { toast } = useToast();
   const Router = useRouter();
-  const { employeeId } = useParams();
-  const policy_id = useSearchParams().get("policy_id");
+  const searchParams = useSearchParams();
+  const params = useParams();
+  const employeeId = params.employeeId ?? searchParams.get("employeeId");
+  const policy_id = searchParams.get("policy_id") ?? params.policy_id;
   const queryClient = useQueryClient();
   const {
     leave_policies: { data: leave_policies },
-    leave_categories: { data: leave_categories },
-  } = useData();
+  } = useLeaveData();
   const {
     employee_profile: { data: employee_profile },
   } = useEmployeeData({ employeeId: employeeId });
-  const policy: database_leave_policies_type = leave_policies?.find(
-    (p: database_leave_policies_type) => p.id == Number(policy_id),
-  );
-  const category: databese_leave_categories_type = leave_categories?.find(
-    (c: databese_leave_categories_type) => c.id == policy?.categories_id,
-  );
-  const defaultValue = {
-    value: policy?.id,
-    label: policy?.name,
-  };
+  const { policy, category } = usePolicy({ policy_id: Number(policy_id) });
   const options = leave_policies
     ?.filter(
       (policy: database_leave_policies_type) =>
@@ -60,7 +50,7 @@ export default function ChangeLeavePolicy() {
       const { error } = await changePolicy({
         new_policy_id: new_policy_id,
         user_id: employeeId,
-        old_policy_id: policy?.id,
+        old_policy_id: Number(policy_id),
       });
       if (error) {
         toast.error(error.message, error.type);
@@ -69,7 +59,12 @@ export default function ChangeLeavePolicy() {
       }
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["profiles", employeeId] });
+      queryClient.invalidateQueries({
+        queryKey: ["leave_balance", employeeId],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["leave_balance"],
+      });
       Router.back();
     },
   });
@@ -105,7 +100,10 @@ export default function ChangeLeavePolicy() {
             label="New Vacation Policy"
             name="policy_id"
             options={options}
-            defaultValue={defaultValue}
+            defaultValue={{
+              value: Number(policy?.id),
+              label: policy?.name,
+            }}
           />
         </div>
         <hr className="h-[3px] w-full bg-primary-gradient" />
@@ -113,13 +111,7 @@ export default function ChangeLeavePolicy() {
           <SubmitBtn disabled={isPending} className="!w-fit">
             Save
           </SubmitBtn>
-          <button
-            className="cursor-pointer text-color5-500 hover:underline "
-            type="button"
-            onClick={() => Router.back()}
-          >
-            Cancel
-          </button>
+          <CancelBtnGeneric />
         </div>
       </form>
     </PopUpSkeleton>

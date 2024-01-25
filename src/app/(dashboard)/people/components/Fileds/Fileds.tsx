@@ -2,6 +2,7 @@ import React, { ReactNode, memo } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { Field } from "@/constants/userInfo";
 import { RowFieldType } from "@/types/userInfoTypes.type";
+import Input from "./Input/Input";
 interface FiledsChampsPropsType {
   FieldsArray: RowFieldType[];
   setTouched?: ((arg: boolean) => void) | undefined;
@@ -25,7 +26,7 @@ function FiledsChamps({
                 key={uuidv4()}
               >
                 {Row?.map((RowField: any) => {
-                  const Component = Field[RowField?.type.toUpperCase()];
+                  const Component = Field[RowField?.type.toUpperCase()] || Input;
                   console.log(RowField);
                   return (
                     <Component

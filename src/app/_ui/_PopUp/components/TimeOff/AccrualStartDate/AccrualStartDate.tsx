@@ -4,13 +4,12 @@ import default_avatar from "/public/default_avatar.jpeg";
 import { useParams, useRouter } from "next/navigation";
 import useEmployeeData from "@/hooks/useEmloyeeData";
 import Image from "next/image";
-import { formatYYYYMMDD } from "@/helpers/date.helpers";
 import { SubmitBtn } from "@/app/_ui/SubmitBtn";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import editAccrualStartDate from "@/actions/leave/editAccrualStartDate";
 import useToast from "@/hooks/useToast";
-import { DateInputGeneric } from "../../../../DateInputGeneric";
 import { CalendarGeneric } from "@/app/_ui/CalenderGeneric";
+import CancelBtnGeneric from "@/app/_ui/CancelBtnGeneric";
 export default function AccrualStartDate() {
   const { toast } = useToast();
   const Router = useRouter();
@@ -85,13 +84,7 @@ export default function AccrualStartDate() {
           <SubmitBtn disabled={isPending} className="!w-fit">
             Save
           </SubmitBtn>
-          <button
-            className="cursor-pointer text-color5-500 hover:underline "
-            type="button"
-            onClick={() => Router.back()}
-          >
-            Cancel
-          </button>
+          <CancelBtnGeneric />
         </div>
       </form>
     </PopUpSkeleton>

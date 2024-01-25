@@ -1,6 +1,6 @@
 "use client";
-import React, { useContext, useState } from "react";
-import { FaHistory } from "react-icons/fa";
+import React, { useContext } from "react";
+import { FaHistory, FaLongArrowAltDown } from "react-icons/fa";
 import { HistoryTable } from "./HistoryTable";
 import historyTableFilters from "./_context/historyTableFilters";
 import { historyTableFiltersContextType } from "./_context/historyTableFilters"; // Import the type of the context
@@ -23,6 +23,10 @@ import { EditLeaveRequestBtn } from "./_ui/Buttons/EditLeaveRequestBtn";
 import { DeleteLeaveRequestBtn } from "./_ui/Buttons/DeleteLeaveRequestBtn";
 import Link from "next/link";
 import useEmployeeData from "@/hooks/useEmloyeeData";
+import useLeaveData from "@/hooks/useLeaveData";
+import toggleDateSortContext, {
+  toggleDateSortContextType,
+} from "./_context/toggleDateSortContext";
 interface leave_data {
   user_id: string;
   reviewed_by: string | "";
@@ -36,7 +40,7 @@ interface leave_data {
   description: string;
   duration_used: number | "";
   duration_accrued: number | "";
-  Balance: number | "";
+  Balance: number;
   reviewed_comment: string | "";
   track_time_unit: databese_leave_categories_track_time_unit_type;
 }
@@ -44,11 +48,15 @@ export type leave_data_types = leave_data[] | undefined;
 export function History() {
   const { year, type, status, toggleView } =
     useContext<historyTableFiltersContextType>(historyTableFilters);
+  const { toggleSort } = useContext<toggleDateSortContextType>(
+    toggleDateSortContext,
+  );
   const { employeeId } = useParams();
-  const [toggleSort, setToggleSort] = useState(false);
   const {
     leave_policies: { data: leave_policies, isPending: isPending3 },
     leave_categories: { data: leave_categories, isPending: isPending5 },
+  } = useLeaveData();
+  const {
     all_profiles_basic_info: {
       data: all_profiles_basic_info,
       isPending: isPending6,
@@ -130,14 +138,23 @@ export function History() {
       };
     },
   );
-  const DateHeader = () => (
-    <span
-      className="cursor-pointer"
-      onClick={() => setToggleSort((old) => !old)}
-    >
-      Date
-    </span>
-  );
+  const DateHeader = () => {
+    const { setToggleSort, toggleSort } = useContext<toggleDateSortContextType>(
+      toggleDateSortContext,
+    );
+    return (
+      <div
+        className="flex cursor-pointer flex-row items-center gap-0.5"
+        role="button"
+        onClick={() => setToggleSort && setToggleSort((old) => !old)}
+      >
+        <span>Date</span>
+        <FaLongArrowAltDown
+          className={`text-sm transition-all ease-linear ${toggleSort ? "rotate-180" : ""}`}
+        />
+      </div>
+    );
+  };
   return (
     <section className="mt-8 flex flex-col justify-center gap-1">
       <div className="mb-2 flex flex-row items-center gap-2">
@@ -275,7 +292,16 @@ export function History() {
                     ) : (
                       ""
                     ),
-                    Balance: <span className="pl-4">{e.Balance}</span>,
+                    Balance: (
+                      <span className="pl-4">
+                        {e.track_time_unit === "days"
+                          ? formatTotalHoursToTimeUnit(
+                              e.Balance,
+                              e.track_time_unit,
+                            )
+                          : e.Balance}
+                      </span>
+                    ),
                     " ": !e.duration_accrued &&
                       employee_profile?.role === "admin" && (
                         <div className=" flex h-[4.25rem] w-full  flex-row  items-start justify-center gap-1 px-4 pt-3 text-center align-top text-gray-27  ">

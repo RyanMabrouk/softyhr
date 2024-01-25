@@ -30,6 +30,7 @@ import {
 import useData from "@/hooks/useData";
 import { generateLeaveCategorieIcon } from "@/helpers/leave.helpers";
 import { UnderlinedLink } from "@/app/_ui/UnderlinedLink";
+import useLeaveData from "@/hooks/useLeaveData";
 
 interface UserInfoPropsType {
   employeeId: string;
@@ -38,7 +39,7 @@ export default function UserInfo({ employeeId }: UserInfoPropsType) {
   const {
     leave_categories: { data: leave_categories },
     leave_policies: { data: leave_policies },
-  } = useData();
+  } = useLeaveData();
   const {
     employee_profile: { data: user },
     leave_requests: { data: leave_requests },

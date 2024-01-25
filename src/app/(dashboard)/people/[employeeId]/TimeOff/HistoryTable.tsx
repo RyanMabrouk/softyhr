@@ -5,10 +5,14 @@ export function HistoryTable({
   Headers,
   data,
   layout,
+  emptyMessage = "There is no Data History for the selected filters..",
+  setToggleSort,
 }: {
   data: { [key: string]: any }[] | undefined;
   Headers: ReactNode[];
   layout: string;
+  emptyMessage?: string;
+  setToggleSort?: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   // Headers Must Match the Keys in the data
   return (
@@ -20,7 +24,7 @@ export function HistoryTable({
           {Headers.map((key, index) => (
             <header
               key={"header" + key + index}
-              className="relative box-border h-12 w-full cursor-pointer border-transparent bg-gray-17 pb-[11px] pl-4 pr-7 pt-3 text-left align-top font-semibold text-gray-25 transition-[background-color] duration-[0.15s] ease-[ease-in-out] hover:bg-gray-19"
+              className="relative box-border h-12 w-full cursor-pointer border-transparent bg-gray-17 pb-[11px] pl-4 pr-7 pt-3 text-left align-top font-semibold text-gray-25 transition-[background-color] duration-150 ease-linear hover:bg-gray-19"
             >
               {key}
             </header>
@@ -56,7 +60,7 @@ export function HistoryTable({
         ) : (
           <>
             <div className=" relative box-border line-clamp-2  h-[3.25rem] w-max  max-w-[25rem]  overflow-hidden text-ellipsis px-4 pt-3 text-left align-top text-gray-27  ">
-              There is no Data History for the selected filters..
+              {emptyMessage}
             </div>
             <Hr />
           </>

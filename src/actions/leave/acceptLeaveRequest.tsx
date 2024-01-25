@@ -1,8 +1,12 @@
 "use server";
 import updateData from "@/api/updateData";
 import { request_type } from "@/app/(dashboard)/people/[employeeId]/TimeOff/_ui/Buttons/AcceptRequestBtn";
-import { database_leave_request_status_type } from "@/types/database.tables.types";
+import {
+  database_leave_policies_policy_type,
+  database_leave_request_status_type,
+} from "@/types/database.tables.types";
 import updateLeaveBalance from "./updateLeaveBalance";
+import getData from "@/api/getData";
 export default async function acceptLeaveRequest({
   request,
   reviewed_by,
@@ -10,13 +14,29 @@ export default async function acceptLeaveRequest({
   request: request_type;
   reviewed_by: string;
 }) {
+  // get the type of the leave policy
+  const { error: error0, data: typeArr } = await getData("leave_policies", {
+    match: { id: request.policy_id },
+    column: "type",
+  });
+  const type: database_leave_policies_policy_type = typeArr?.[0]?.type;
+  if (error0) {
+    return {
+      error: {
+        message: error0.message,
+        type: "Server Error : Getting Policy Type",
+      },
+    };
+  }
+  const total_duration = request.duration_used.reduce(
+    (acc: number, e: any) => acc + Number(e.duration),
+    0,
+  );
   const { error: errorBalance } = await updateLeaveBalance({
     user_id: request.user_id,
     policy_id: request.policy_id,
-    total_added_duration: -request.duration_used.reduce(
-      (acc: number, e: any) => acc + Number(e.duration),
-      0,
-    ),
+    total_added_duration:
+      type === "unlimited" ? total_duration : 0 - total_duration,
   });
   if (errorBalance) {
     return {

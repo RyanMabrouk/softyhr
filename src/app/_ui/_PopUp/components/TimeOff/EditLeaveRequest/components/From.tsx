@@ -6,10 +6,7 @@ import React, { useContext, useRef } from "react";
 import cancelLeaveRequest from "@/actions/leave/cancelLeaveRequest";
 import { SubmitBtn } from "@/app/_ui/SubmitBtn";
 import updateLeaveRequest from "@/actions/leave/updateLeaveRequest";
-import DateRangeContextProvider, {
-  dateRangeContext,
-  dateRangeContextType,
-} from "../context/dateRangeContext";
+import DateRangeContextProvider from "../context/dateRangeContext";
 import { FormInputs } from "./FormInputs";
 import useToast from "@/hooks/useToast";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -17,6 +14,7 @@ import insertLeaveRequest from "@/actions/leave/insertLeaveRequest";
 import { errorContext, errorContextType } from "../context/errorContext";
 import { checkIfOjectValuesAreEmpty } from "@/helpers/array.helpers";
 import useEmployeeData from "@/hooks/useEmloyeeData";
+import CancelBtnGeneric from "@/app/_ui/CancelBtnGeneric";
 
 export function From() {
   const Router = useRouter();
@@ -55,7 +53,12 @@ export function From() {
       queryClient.invalidateQueries({
         queryKey: ["leave_requests", employeeId],
       });
-      queryClient.invalidateQueries({ queryKey: ["profiles", employeeId] });
+      queryClient.invalidateQueries({
+        queryKey: ["leave_balance", employeeId],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["leave_balance"],
+      });
       Router.back();
     },
   });
@@ -76,7 +79,12 @@ export function From() {
       queryClient.invalidateQueries({
         queryKey: ["leave_requests", employeeId],
       });
-      queryClient.invalidateQueries({ queryKey: ["profiles", employeeId] });
+      queryClient.invalidateQueries({
+        queryKey: ["leave_balance", employeeId],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["leave_balance"],
+      });
       Router.back();
     },
   });
@@ -97,7 +105,12 @@ export function From() {
       queryClient.invalidateQueries({
         queryKey: ["leave_requests", employeeId],
       });
-      queryClient.invalidateQueries({ queryKey: ["profiles", employeeId] });
+      queryClient.invalidateQueries({
+        queryKey: ["leave_balance", employeeId],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["leave_balance"],
+      });
       formRef.current?.reset();
       Router.back();
     },
@@ -130,13 +143,7 @@ export function From() {
               Cancel Request
             </button>
           )}
-          <button
-            className="cursor-pointer text-color5-500 hover:underline "
-            type="button"
-            onClick={() => Router.back()}
-          >
-            Cancel
-          </button>
+          <CancelBtnGeneric />
         </div>
       </form>
     </>

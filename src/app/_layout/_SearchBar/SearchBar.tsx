@@ -50,7 +50,7 @@ export default function SearchBar() {
       </SearchIconWrapper>
       <StyledInputBase
         placeholder="Search..."
-        className="focus-within:shadow-green rounded-3xl bg-white  placeholder-gray-15"
+        className="focus-within:shadow-green h-9 rounded-3xl  bg-white placeholder-gray-15"
         inputProps={{ "aria-label": "search" }}
       />
     </Search>

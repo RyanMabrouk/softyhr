@@ -1,11 +1,7 @@
 import adjustLeavePolicyBalance from "@/actions/leave/adjustLeavePolicyBalance";
 import { SubmitBtn } from "@/app/_ui/SubmitBtn";
-import useData from "@/hooks/useData";
 import useToast from "@/hooks/useToast";
-import {
-  database_leave_policies_type,
-  database_profile_leave_balance_type,
-} from "@/types/database.tables.types";
+import { database_profile_leave_balance_type } from "@/types/database.tables.types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import default_avatar from "/public/default_avatar.jpeg";
@@ -14,6 +10,8 @@ import Image from "next/image";
 import PopUpSkeleton from "../../../PopUpSkeleton";
 import { SelectGeneric } from "@/app/_ui/SelectGeneric";
 import useEmployeeData from "@/hooks/useEmloyeeData";
+import usePolicy from "@/hooks/useCategory";
+import CancelBtnGeneric from "@/app/_ui/CancelBtnGeneric";
 export default function AdjustLeavePolicyBalance() {
   const { toast } = useToast();
   const Router = useRouter();
@@ -22,22 +20,18 @@ export default function AdjustLeavePolicyBalance() {
   const leave_policy_id = useSearchParams().get("leave_policy_id");
   const { employeeId } = useParams();
   const {
-    leave_policies: { data: leave_policies },
-  } = useData();
-  const {
     employee_profile: { data: employee_profile },
+    leave_balance: { data: leave_balance },
   } = useEmployeeData({ employeeId: employeeId });
   // current policy balance
-  const leave_balance: database_profile_leave_balance_type[] =
-    employee_profile?.leave_balance;
   const policy_balance = leave_balance?.find(
-    (e) => e.policy_id == Number(leave_policy_id),
+    (e: database_profile_leave_balance_type) =>
+      e.policy_id == Number(leave_policy_id),
   )?.balance;
   // current policy data
-  const leave_policy_data: database_leave_policies_type = leave_policies?.find(
-    (policy: database_leave_policies_type) =>
-      policy.id == Number(leave_policy_id),
-  );
+  const { policy: leave_policy_data } = usePolicy({
+    policy_id: Number(leave_policy_id),
+  });
   // current employee full name
   const full_name: string =
     employee_profile?.["Basic Information"]?.["First name"] +
@@ -64,7 +58,10 @@ export default function AdjustLeavePolicyBalance() {
         queryKey: ["leave_accrued", employeeId],
       });
       queryClient.invalidateQueries({
-        queryKey: ["profiles", employeeId],
+        queryKey: ["leave_balance"],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["leave_balance", employeeId],
       });
       Router.back();
     },
@@ -160,13 +157,7 @@ export default function AdjustLeavePolicyBalance() {
             <SubmitBtn disabled={isPending} className="!w-fit">
               Save
             </SubmitBtn>
-            <button
-              className="cursor-pointer text-color5-500 hover:underline "
-              type="button"
-              onClick={() => Router.back()}
-            >
-              Cancel
-            </button>
+            <CancelBtnGeneric />
           </div>
         </form>
       </PopUpSkeleton>

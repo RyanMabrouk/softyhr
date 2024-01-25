@@ -26,12 +26,12 @@ export default async function getData(
     column: "*",
   },
 ): Promise<{ data: any; error: any }> {
-  console.log(match);
   const supabase = createServerComponentClient<Database>({ cookies });
-  const session = await getSession();
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
   const org_name = session?.user.user_metadata.org_name;
   const user_id = session?.user?.id;
-
   const { data, error } = match
     ? org
       ? user

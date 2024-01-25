@@ -18,6 +18,8 @@ import { capitalizeFirstLetter } from "@/helpers/string.helpers";
 import { SubmitBtn } from "@/app/_ui/SubmitBtn";
 import addLeavePolicy from "@/actions/leave/addLeavePolicy";
 import changePolicy from "@/actions/leave/changePolicy";
+import useLeaveData from "@/hooks/useLeaveData";
+import CancelBtnGeneric from "@/app/_ui/CancelBtnGeneric";
 export default function AddTimeOffPolicy() {
   const { toast } = useToast();
   const Router = useRouter();
@@ -26,9 +28,10 @@ export default function AddTimeOffPolicy() {
   const {
     leave_policies: { data: leave_policies },
     leave_categories: { data: leave_categories },
-  } = useData();
+  } = useLeaveData();
   const {
     employee_profile: { data: employee_profile },
+    leave_balance: { data: leave_balance },
   } = useEmployeeData({ employeeId: employeeId });
   // current employee full name
   const first_name: string =
@@ -36,30 +39,33 @@ export default function AddTimeOffPolicy() {
   const last_name: string =
     employee_profile?.["Basic Information"]?.["Last name"];
   // Current employee policies
-  const current_policies = employee_profile?.leave_balance.map(
+  const current_policies = leave_balance?.map(
     (e: database_profile_leave_balance_type) => e.policy_id,
   );
-  const current_categories = employee_profile?.leave_balance.map(
+  const current_categories = leave_balance?.map(
     (e: database_profile_leave_balance_type) => e.categories_id,
   );
   // Options
   const options =
-    leave_categories?.reduce(
-      (acc: [], c: databese_leave_categories_type) => [
-        ...acc,
-        { group_name: c.name },
-        ...leave_policies
-          ?.filter(
-            (p: database_leave_policies_type) => p.categories_id === c.id,
-          )
-          .map((p: database_leave_policies_type) => ({
+    leave_categories
+      ?.filter((c: databese_leave_categories_type) => !c.disabled)
+      .reduce((acc: [], c: databese_leave_categories_type) => {
+        const category_policies = leave_policies?.filter(
+          (p: database_leave_policies_type) => p.categories_id === c.id,
+        );
+        if (category_policies?.length === 0) {
+          return acc;
+        }
+        return [
+          ...acc,
+          { group_name: c.name },
+          ...category_policies?.map((p: database_leave_policies_type) => ({
             label: p.name,
             value: p.id,
             disabled: current_policies?.includes(p.id),
           })),
-      ],
-      [],
-    ) || [];
+        ];
+      }, []) ?? [];
   // add leave policy mutation
   const { mutate: add, isPending } = useMutation({
     mutationFn: async (formData: FormData) => {
@@ -76,7 +82,7 @@ export default function AddTimeOffPolicy() {
       )?.id;
       const { error } = current_categories.includes(categories_id)
         ? await changePolicy({
-            old_policy_id: employee_profile?.leave_balance.find(
+            old_policy_id: leave_balance?.find(
               (e: database_profile_leave_balance_type) =>
                 e.categories_id === categories_id,
             )?.policy_id,
@@ -101,7 +107,10 @@ export default function AddTimeOffPolicy() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ["profiles", employeeId],
+        queryKey: ["leave_balance"],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["leave_balance", employeeId],
       });
       Router.back();
     },
@@ -143,13 +152,7 @@ export default function AddTimeOffPolicy() {
           <SubmitBtn disabled={isPending} className="!w-fit">
             Save
           </SubmitBtn>
-          <button
-            className="cursor-pointer text-color5-500 hover:underline "
-            type="button"
-            onClick={() => Router.back()}
-          >
-            Cancel
-          </button>
+          <CancelBtnGeneric />
         </div>
       </form>
     </PopUpSkeleton>

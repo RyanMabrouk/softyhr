@@ -14,15 +14,14 @@ import { useParams, useRouter, useSearchParams } from "next/navigation";
 import React from "react";
 import { CgTrash } from "react-icons/cg";
 import PopUpSkeleton from "../../../PopUpSkeleton";
+import usePolicy from "@/hooks/useCategory";
+import CancelBtnGeneric from "@/app/_ui/CancelBtnGeneric";
 export default function DeleteLeaveRequest() {
   const { toast } = useToast();
   const Router = useRouter();
   const queryClient = useQueryClient();
   const leave_request_id = useSearchParams().get("leave_request_id");
   const { employeeId } = useParams();
-  const {
-    leave_policies: { data: leave_policies },
-  } = useData();
   const {
     leave_requests: { data: leave_requests },
     employee_profile: { data: employee_profile },
@@ -39,10 +38,9 @@ export default function DeleteLeaveRequest() {
         request.id == Number(leave_request_id),
     );
   // Current Leave Request Policy Data
-  const current_leave_policy = leave_policies?.find(
-    (policy: database_leave_policies_type) =>
-      policy.id == current_leave_request?.policy_id,
-  );
+  const { policy: current_leave_policy } = usePolicy({
+    policy_id: current_leave_request?.policy_id,
+  });
   // Delete Leave Request Mutation
   const { mutate: deleteReq, isPending } = useMutation({
     mutationFn: async () => {
@@ -92,13 +90,7 @@ export default function DeleteLeaveRequest() {
             <SubmitBtn disabled={isPending} className="!w-fit">
               Remove
             </SubmitBtn>
-            <button
-              className="cursor-pointer text-color5-500 hover:underline "
-              type="button"
-              onClick={() => Router.back()}
-            >
-              Cancel
-            </button>
+            <CancelBtnGeneric />
           </div>
         </form>
       </PopUpSkeleton>

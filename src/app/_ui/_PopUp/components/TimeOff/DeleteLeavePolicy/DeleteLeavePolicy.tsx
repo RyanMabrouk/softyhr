@@ -8,35 +8,26 @@ import { useRouter } from "next/navigation";
 import useToast from "@/hooks/useToast";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import useEmployeeData from "@/hooks/useEmloyeeData";
-import {
-  database_leave_policies_type,
-  databese_leave_categories_type,
-} from "@/types/database.tables.types";
 import deleteCategorie from "@/actions/leave/deleteCategorie";
+import usePolicy from "@/hooks/useCategory";
+import CancelBtnGeneric from "@/app/_ui/CancelBtnGeneric";
 export default function DeleteLeavePolicy() {
   const { toast } = useToast();
   const Router = useRouter();
-  const { employeeId } = useParams();
-  const policy_id = useSearchParams().get("policy_id");
+  const searchParams = useSearchParams();
+  const params = useParams();
+  const employeeId = params.employeeId ?? searchParams.get("employeeId");
+  const policy_id = searchParams.get("policy_id") ?? params.policy_id;
   const queryClient = useQueryClient();
-  const {
-    leave_policies: { data: leave_policies },
-    leave_categories: { data: leave_categories },
-  } = useData();
   const {
     employee_profile: { data: employee_profile },
   } = useEmployeeData({ employeeId: employeeId });
-  const policy: database_leave_policies_type = leave_policies?.find(
-    (p: database_leave_policies_type) => p.id == Number(policy_id),
-  );
-  const category: databese_leave_categories_type = leave_categories?.find(
-    (c: databese_leave_categories_type) => c.id == policy?.categories_id,
-  );
+  const { policy, category } = usePolicy({ policy_id: Number(policy_id) });
   // Mutation to delete Category
   const { mutate: deleteCat, isPending } = useMutation({
     mutationFn: async () => {
       const { error } = await deleteCategorie({
-        categories_id: category?.id,
+        categories_id: category?.id ?? 0,
         user_id: employeeId,
       });
       if (error) {
@@ -47,7 +38,10 @@ export default function DeleteLeavePolicy() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ["profiles", employeeId],
+        queryKey: ["leave_balance"],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["leave_balance", employeeId],
       });
       Router.back();
     },
@@ -66,9 +60,9 @@ export default function DeleteLeavePolicy() {
         <IoWarning className="h-16 w-16 text-color9-500 " />
         <div className=" max-w-[30rem] text-center text-[1.25rem] leading-6  text-gray-27">
           <span>
-            {`Are you sure you want to remove ${
-              first_name + " " + last_name
-            } from “${policy?.name}” ? `}
+            {"Are you sure you want to remove "}
+            <strong>{first_name + " " + last_name}</strong>
+            {` from “${policy?.name}” ? `}
           </span>
         </div>
         <div className=" max-w-[70%] text-center text-[15px] leading-[22px] text-gray-20">
@@ -80,14 +74,11 @@ export default function DeleteLeavePolicy() {
         >
           <hr className="h-[3px] w-full bg-primary-gradient" />
           <div className="flex flex-row gap-4 px-2 pt-3">
-            <SubmitBtn className="!w-[10rem] !px-2">{`Yes, Remove ${first_name}`}</SubmitBtn>
-            <button
-              className="cursor-pointer text-color5-500 hover:underline "
-              type="button"
-              onClick={() => Router.back()}
-            >
-              Cancel
-            </button>
+            <SubmitBtn
+              className="!w-[10rem] !px-2"
+              disabled={isPending}
+            >{`Yes, Remove ${first_name}`}</SubmitBtn>
+            <CancelBtnGeneric />
           </div>
         </form>
       </PopUpSkeleton>

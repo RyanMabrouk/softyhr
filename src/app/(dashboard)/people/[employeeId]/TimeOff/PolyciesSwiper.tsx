@@ -4,8 +4,8 @@ import CustomSwiper from "@/app/_ui/swiper";
 import { FaArrowLeft } from "react-icons/fa";
 import { FaArrowRight } from "react-icons/fa";
 import { Policy } from "./Policy";
-import useData from "@/hooks/useData";
 import {
+  database_leave_policies_policy_type,
   database_leave_policies_type,
   database_leave_request_duration_used_type,
   database_leave_requests_type,
@@ -14,9 +14,9 @@ import {
   databese_leave_categories_type,
 } from "@/types/database.tables.types";
 import { generateLeaveCategorieIcon } from "@/helpers/leave.helpers";
-import useToast from "@/hooks/useToast";
 import { useParams } from "next/navigation";
 import useEmployeeData from "@/hooks/useEmloyeeData";
+import useLeaveData from "@/hooks/useLeaveData";
 interface formatted_policy_type {
   id: number;
   name: string;
@@ -25,6 +25,7 @@ interface formatted_policy_type {
   icon: JSX.Element;
   hours_scheduled: number;
   hours_available: number;
+  type: database_leave_policies_policy_type;
 }
 export function PolyciesSwiper() {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -33,19 +34,23 @@ export function PolyciesSwiper() {
   const {
     leave_policies: { data: leave_policies, isPending: isPending1 },
     leave_categories: { data: leave_categories, isPending: isPending2 },
-  } = useData();
+  } = useLeaveData();
   const {
     leave_requests: { data: leave_requests, isPending: isPending4 },
-    employee_profile: { data: employee_profile, isPending: isPending5 },
+    leave_balance: { data: leave_balance, isPending: isPending5 },
   } = useEmployeeData({ employeeId: employeeId });
   const isPending = isPending1 || isPending2 || isPending4 || isPending5;
-  const user_policies_ids = employee_profile?.leave_balance?.map(
+  const user_policies_ids = leave_balance?.map(
     (e: database_profile_leave_balance_type) => e.policy_id,
   );
   const policies: formatted_policy_type[] = leave_policies
     ?.filter(
       (policy: database_leave_policies_type) =>
-        user_policies_ids?.includes(policy.id),
+        user_policies_ids?.includes(policy.id) &&
+        !leave_categories?.find(
+          (categorie: databese_leave_categories_type) =>
+            categorie.id === policy?.categories_id,
+        )?.disabled,
     )
     ?.map((policy: database_leave_policies_type) => {
       const categorie: databese_leave_categories_type = leave_categories?.find(
@@ -74,6 +79,7 @@ export function PolyciesSwiper() {
       return {
         id: policy.id,
         name: policy.name,
+        type: policy.type,
         title: categorie?.name,
         category_time_unit: categorie?.track_time_unit,
         icon: generateLeaveCategorieIcon({
@@ -82,10 +88,10 @@ export function PolyciesSwiper() {
         }),
         hours_scheduled: hours_scheduled,
         hours_available:
-          employee_profile?.leave_balance?.find(
+          leave_balance?.find(
             (e: database_profile_leave_balance_type) =>
               e.policy_id == policy.id,
-          )?.balance || 0,
+          )?.balance ?? 0,
       };
     });
   if (isPending) {

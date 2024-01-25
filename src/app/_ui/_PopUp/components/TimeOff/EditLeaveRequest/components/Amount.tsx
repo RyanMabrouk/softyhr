@@ -2,8 +2,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import { formatDateToDayMonDD, formatYYYYMMDD } from "@/helpers/date.helpers";
 import {
-  arrayOfWorkingDays,
   formatTotalHoursToTimeUnit,
+  useArrayOfWorkingDays,
 } from "@/helpers/leave.helpers";
 import {
   dateRangeContext,
@@ -52,10 +52,7 @@ export function Amount({
       ? new Date(default_end_at)
       : "";
   // Get the new range
-  const user_new_range =
-    activeDateStart && activeDateEnd
-      ? arrayOfWorkingDays(activeDateStart, activeDateEnd)
-      : [];
+  const user_new_range = useArrayOfWorkingDays(activeDateStart, activeDateEnd);
   // Get the new range days
   const user_new_days = user_new_range?.map((e) =>
     formatYYYYMMDD(new Date(e.date)),

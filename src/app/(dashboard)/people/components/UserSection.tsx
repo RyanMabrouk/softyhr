@@ -13,11 +13,8 @@ import { Section } from "@/constants/userInfoSections";
 import formulateData from "../components/utils/formulateData";
 import updateData from "@/api/updateData";
 import useToast from "@/hooks/useToast";
-import useData from "@/hooks/useData";
 import {
   Profile_Type,
-  Settings_type_insert,
-  database_profile_type_insert,
 } from "@/types/database.tables.types";
 import useEmployeeData from "@/hooks/useEmloyeeData";
 
@@ -66,7 +63,7 @@ function UserSection({ section, employeeId }: UserSection) {
           <h1>Loading...</h1>
         </div>
       ) : (
-        <div className="flex h-full w-full flex-col items-start justify-start pl-8">
+        <div className="flex h-full w-full flex-col items-start justify-start pb-10 pl-8">
           <div className="mt-8 flex  w-full items-center justify-between gap-[1rem] border-b border-gray-18 pb-4 text-lg font-normal ">
             <h1 className="flex items-center justify-center  gap-[1rem] text-2xl font-medium text-color-primary-7 ">
               <FaAddressCard fill="green" />

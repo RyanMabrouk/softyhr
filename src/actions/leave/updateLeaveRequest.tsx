@@ -3,6 +3,7 @@ import getData from "@/api/getData";
 import updateData from "@/api/updateData";
 import { getDaysInBetween } from "@/helpers/date.helpers";
 import {
+  database_leave_policies_policy_type,
   database_leave_request_status_type,
   database_leave_requests_insert_type,
 } from "@/types/database.tables.types";
@@ -66,6 +67,20 @@ export default async function updateLeaveRequest({
     old_request?.status;
   // Check if the leave request was approved
   if (status == "approved") {
+    // get the type of the leave policy
+    const { error: error0, data: typeArr } = await getData("leave_policies", {
+      match: { id: policy_id },
+      column: "type",
+    });
+    const type: database_leave_policies_policy_type = typeArr?.[0]?.type;
+    if (error0) {
+      return {
+        error: {
+          message: error0.message,
+          type: "Server Error : Getting Policy Type",
+        },
+      };
+    }
     // Get the total duration of the old leave request
     const old_leave_request_total_duration = old_request?.duration_used.reduce(
       (acc: number, duration: any) => acc + Number(duration.duration),
@@ -76,7 +91,10 @@ export default async function updateLeaveRequest({
       user_id: user_id,
       policy_id: policy_id,
       categories_id: categories_id[0].categories_id,
-      total_added_duration: old_leave_request_total_duration - total_duration,
+      total_added_duration:
+        type === "unlimited"
+          ? 0 - (old_leave_request_total_duration - total_duration)
+          : old_leave_request_total_duration - total_duration,
     });
     if (error1) {
       return {
