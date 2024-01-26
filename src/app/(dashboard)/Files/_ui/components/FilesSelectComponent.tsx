@@ -4,7 +4,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React, { useState, useEffect, useRef } from "react";
 import { IoMdArrowDropdown } from "react-icons/io";
 
-const FilesSelectComponent = ({ onSelect, options }: any) => {
+const FilesSelectComponent = ({ isThereFile, onSelect, options }: any) => {
   const [selectedOption, setSelectedOption] = useState("");
   const [selectedLabel, setSelectedLabel] = useState("");
 
@@ -13,8 +13,9 @@ const FilesSelectComponent = ({ onSelect, options }: any) => {
   //
   const searchParams = useSearchParams();
   const pathname = usePathname();
-
   const { replace } = useRouter();
+
+  const notDisabled = searchParams.has("popup") ? isThereFile : true;
 
   function handleChange(term: any) {
     const params = new URLSearchParams(searchParams);
@@ -52,7 +53,7 @@ const FilesSelectComponent = ({ onSelect, options }: any) => {
     setSelectedLabel(option.label);
     setDropdownOpen(false);
     handleChange(option.value);
-    // onSelect(option.value);
+    if (onSelect) onSelect(option.value);
   };
 
   const handleDropdownToggle = () => {
@@ -63,7 +64,7 @@ const FilesSelectComponent = ({ onSelect, options }: any) => {
     <div className="relative inline-block">
       <div
         onClick={handleDropdownToggle}
-        className={`  flex w-44 cursor-pointer items-center justify-between rounded-sm border border-gray-300 pl-2  ${
+        className={` flex w-44 cursor-pointer items-center justify-between rounded-sm border border-gray-300 bg-white pl-2  ${
           isDropdownOpen ? "shadow-green  " : ""
         }`}
       >
@@ -74,8 +75,8 @@ const FilesSelectComponent = ({ onSelect, options }: any) => {
           <IoMdArrowDropdown fill="#444" />
         </div>
       </div>
-      {isDropdownOpen && (
-        <div className="shadow-green absolute mt-[0.1rem]  w-44 origin-top-right rounded-sm bg-white shadow-lg ring-1 ring-black ring-opacity-5">
+      {isDropdownOpen && notDisabled && (
+        <div className="shadow-green absolute z-50 mt-[0.1rem]  w-44 origin-top-right rounded-sm bg-white shadow-lg ring-1 ring-black ring-opacity-5">
           <div
             ref={dropdownRef}
             className="py-1"

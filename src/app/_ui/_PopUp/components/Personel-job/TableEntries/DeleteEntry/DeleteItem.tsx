@@ -15,10 +15,9 @@ import FiledsChamps from "@/app/(dashboard)/people/components/Fileds/Fileds";
 import Input from "@/app/(dashboard)/people/components/Fileds/Input/Input";
 import DateInput from "@/app/(dashboard)/people/components/Fileds/DateInput/DateInput";
 import Loader from "@/app/(dashboard)/people/components/Loader/Loader";
-import { Delete_Entry } from "@/actions/personal-job/Entries/Delete_Entry";
 import { useQueryClient } from "@tanstack/react-query";
 import useToast from "@/hooks/useToast";
-import CancelBtnGeneric from "@/app/_ui/CancelBtnGeneric";
+import { Delete_Entry } from "@/actions/personal-job/Entries/Delete_Entry";
 
 function DeleteItem() {
   const searchParams = useSearchParams();
@@ -32,7 +31,7 @@ function DeleteItem() {
     employee_profile: { data, isPending },
   } = useEmployeeData({ employeeId });
   const { settings } = useData();
-  const { toastContainer, toast } = useToast();
+  const { toast } = useToast();
 
   //----Deleting-item-----
 
@@ -46,7 +45,6 @@ function DeleteItem() {
   };
   return (
     <>
-      {toastContainer}
       {settings?.isPending || isPending ? (
         <Loader />
       ) : (
@@ -79,7 +77,13 @@ function DeleteItem() {
                   >
                     Delete item
                   </button>
-                  <CancelBtnGeneric />
+                  <button
+                    type="reset"
+                    onClick={() => router.push(pathname)}
+                    className="text-bold mt-4 rounded p-2 px-5 text-color5-500 duration-300 ease-in-out "
+                  >
+                    Cancel
+                  </button>
                 </form>
               </div>
             )}

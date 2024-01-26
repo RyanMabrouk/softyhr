@@ -1,6 +1,6 @@
-import AddEntry from "@/app/_ui/_PopUp/components/TableEntries/AddEntry/AddEntry";
-import EditEntry from "@/app/_ui/_PopUp/components/TableEntries/EditEntry/EditEntry";
-import DeleteItem from "@/app/_ui/_PopUp/components/TableEntries/DeleteEntry/DeleteItem";
+import AddEntry from "@/app/_ui/_PopUp/components/Personel-job/TableEntries/AddEntry/AddEntry";
+import EditEntry from "@/app/_ui/_PopUp/components/Personel-job/TableEntries/EditEntry/EditEntry";
+import DeleteItem from "@/app/_ui/_PopUp/components/Personel-job/TableEntries/DeleteEntry/DeleteItem";
 import EditPhoto from "@/app/_ui/_PopUp/components/Personel-job/EditPhoto/EditPhoto";
 import DeleteLeaveRequest from "@/app/_ui/_PopUp/components/TimeOff/DeleteLeaveRequest/DeleteLeaveRequest";
 import EditFields from "@/app/_ui/_PopUp/components/Personel-job/EditFields/EditFields";
@@ -36,6 +36,7 @@ import EditJobInformation from "@/app/_ui/_PopUp/components/Hiring/EditJobInform
 import DeleteJob from "@/app/_ui/_PopUp/components/Hiring/DeleteJob/DeleteJob";
 import EditJobBoard from "@/app/_ui/_PopUp/components/Hiring/EditJobBoard/EditJobBoard";
 import HireCandidate from "@/app/_ui/_PopUp/components/Hiring/HireCandidate/HireCandidate";
+import DeleteFilesPopUp from "@/app/(dashboard)/Files/_ui/popUp/DeleteFilesPopUp";
 
 type PopupType = {
   [key: string]: () => React.JSX.Element;
@@ -51,6 +52,7 @@ export const popups: PopupType = {
   ADD_FOLDER: NewFolderPopUp,
   UPLOAD_FILE: UploadFilePopUp,
   DELETE_FILE: DeleteFilePopUp,
+  DELETE_FILES: DeleteFilesPopUp,
   RENAME_FILE: RenameFilePopUp,
   RENAME_FOLDER: RenameFolderPopUp,
   SHARE_FOLDER: ShareFolderPopUp,

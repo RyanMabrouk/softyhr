@@ -17,15 +17,15 @@ export default function SortAndDownloadBox() {
           options={[
             { value: "name-asc", label: "Name: A - Z" },
             { value: "name-desc", label: "Name: Z - A" },
-            { value: "date-asc", label: "Date : Recent First" },
-            { value: "date-desc", label: "Date : Oldest First" },
-            { value: "size-asc", label: "Size : Largest First" },
-            { value: "size-desc", label: "Size : Smallest First" },
+            { value: "created_at-desc", label: "Date : Recent First" },
+            { value: "created_at-asc", label: "Date : Oldest First" },
+            { value: "size-desc", label: "Size : Largest First" },
+            { value: "size-asc", label: "Size : Smallest First" },
           ]}
         />
       </div>
       <FilesDownloadButton />
-      <FilesTrashButton />
+      <FilesTrashButton check={true} />
     </div>
   );
 }

@@ -7,44 +7,33 @@ import {
   TableBody,
   TableRow,
   TableCell,
-  Input,
   Button,
   DropdownTrigger,
   Dropdown,
   DropdownMenu,
   DropdownItem,
-  Chip,
   User,
   Pagination,
   Selection,
   ChipProps,
   SortDescriptor,
 } from "@nextui-org/react";
-import { PlusIcon } from "./PlusIcon";
-import { SearchIcon } from "./SearchIcon";
-import { columns, users, statusOptions } from "./data";
-import { capitalize } from "./utils";
+import { columns, statusOptions } from "./data";
 import { FaSortDown } from "react-icons/fa6";
 import Mail from "./Mail/Mail";
 import Settings from "./Settings/Settings";
-import { RxAvatar } from "react-icons/rx";
 import { FaUserCircle } from "react-icons/fa";
-import { IoMdAddCircleOutline } from "react-icons/io";
 import AddCandidate from "./AddCandidate";
-import { formatCustomDate } from "@/helpers/Formatdate";
-import { Rating } from "@mui/material";
-import EditJobOpening from "@/app/(dashboard)/Hiring/_ui/HiringTable/EditJobOpening/EditJobOpening";
-import { TbH1 } from "react-icons/tb";
 import AddCollaborate from "./AddCollaborate";
 import CandidateReports from "./CandidateReports";
-import Avatar from "./Avatar";
 import HiringInfos from "./HiringInfos";
 import { PiDotsThreeOutlineVerticalFill } from "react-icons/pi";
-import updateData from "@/api/updateData";
 import { useQueryClient } from "@tanstack/react-query";
 import { BiCommentAdd } from "react-icons/bi";
 import HireStatus from "./HireStatus";
 import RatingGeneric from "./RatingGeneric";
+import { formatCustomDate } from "@/helpers/date.helpers";
+import EditJobOpening from "@/app/(dashboard)/Hiring/_ui/HiringTable/EditJobOpening/EditJobOpening";
 
 const statusColorMap: Record<string, ChipProps["color"]> = {
   active: "success",

@@ -29,7 +29,12 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "src/app/(dashboard)/Files/_ui/filesTable/tableSideBar/TableSideBarFolderBox.tsx"
+    "src/app/(dashboard)/Files/_ui/filesTable/tableSideBar/TableSideBarFolderBox.tsx",
+    "src/components/ui/Pagination.jsx",
+    "src/app/(dashboard)/people/orgchart/_ui/bodyOrgChart/OrgChartBody.tsx",
+    "src/app/(dashboard)/people/orgchart/_ui/bodyOrgChart/prevversion.jsx",
+    "src/app/(dashboard)/Files/context/CheckBoxesContext.js",
+    "src/app/(dashboard)/Files/_ui/components/pdfviewer/PdfViewer.jsx"
   ],
   "exclude": ["node_modules"]
 }

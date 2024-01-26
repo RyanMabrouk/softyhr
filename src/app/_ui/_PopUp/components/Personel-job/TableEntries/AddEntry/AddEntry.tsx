@@ -14,10 +14,9 @@ import useData from "@/hooks/useData";
 import Loader from "@/app/(dashboard)/people/components/Loader/Loader";
 import { Field } from "@/constants/userInfo";
 import { v4 as uuidv4 } from "uuid";
-import { Add_Entry } from "@/actions/personal-job/Entries/Add_Entry";
 import { useQueryClient } from "@tanstack/react-query";
 import useToast from "@/hooks/useToast";
-import CancelBtnGeneric from "@/app/_ui/CancelBtnGeneric";
+import { Add_Entry } from "@/actions/personal-job/Entries/Add_Entry";
 
 function AddEntry() {
   const searchParams = useSearchParams();
@@ -30,20 +29,22 @@ function AddEntry() {
     employee_profile: { data, isPending },
   } = useEmployeeData({ employeeId });
   const { settings } = useData();
-  const { toastContainer, toast } = useToast();
+  const { toast } = useToast();
 
   //-------Add_Entry---------
   const SubmitForm = async (formdata: FormData) => {
     const response = await Add_Entry(formdata, section_name, data);
     queryClient.invalidateQueries({ queryKey: ["profiles", employeeId] });
-    router.push(pathname);
     if (response?.error) toast.error(response?.error?.Message);
-    else toast.success(`${section_name} Deleted Successfully`);
+    else {
+      toast.success(`${section_name} Deleted Successfully`);
+      console.log("response");
+    }
+    router.push(pathname);
   };
 
   return (
     <>
-      {toastContainer}
       {settings?.isPending || isPending ? (
         <Loader />
       ) : (
@@ -87,7 +88,13 @@ function AddEntry() {
                   >
                     Add item
                   </button>
-                  <CancelBtnGeneric />
+                  <button
+                    type="reset"
+                    onClick={() => router.back()}
+                    className="text-bold mt-4 rounded p-2 px-5 text-color5-500 duration-300 ease-in-out "
+                  >
+                    Cancel
+                  </button>
                 </div>
               </form>
             )}

@@ -15,9 +15,9 @@ import { IoLocationSharp } from "react-icons/io5";
 import { CiClock2 } from "react-icons/ci";
 import { FaMapLocation } from "react-icons/fa6";
 import { CgProfile } from "react-icons/cg";
-import { formatCustomDate } from "@/helpers/Formatdate";
 import {
   YearsAndDaysSinceDate,
+  formatCustomDate,
   formatDateToDayMonDD,
   updateTime,
 } from "@/helpers/date.helpers";

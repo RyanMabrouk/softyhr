@@ -1,6 +1,3 @@
-import { useEffect, useState } from "react";
-import { BlockNoteEditor, Block } from "@blocknote/core";
-import { BlockNoteView, useBlockNote } from "@blocknote/react";
 import "@blocknote/react/style.css";
 import { Hiring_type } from "@/types/database.tables.types";
 import dynamic from "next/dynamic";
@@ -13,7 +10,6 @@ interface DesciprtionPropsType {
 }
 
 export default function Description({ job }: DesciprtionPropsType) {
-
   return (
     <Editor
       editable={false}

@@ -21,8 +21,8 @@ export default function Nav() {
   const employeeId = paramsid ? paramsid : user?.user_id;
   return (
     <>
-      <nav className="flex min-h-20 flex-row items-center justify-between gap-[2rem] bg-gray-17 pl-14 pr-10">
-        <div className="flex h-full flex-row items-center gap-2">
+      <nav className="flex h-20 flex-row items-center justify-between gap-[2rem] bg-gray-17 pl-14 pr-10">
+        <div className="flex min-h-full flex-row items-center gap-2">
           <Image
             className="cursor-pointer"
             alt="company logo"
@@ -40,7 +40,7 @@ export default function Nav() {
                   <Link
                     key={index}
                     className={
-                      "flex h-full items-center justify-center px-6 capitalize text-gray-9 transition delay-75 ease-in-out hover:bg-gray-14 " +
+                      "flex h-20 items-center justify-center px-6 capitalize text-gray-9 transition delay-75 ease-in-out hover:bg-gray-14 " +
                       (isActive ? "bg-gray-14 font-bold !text-fabric-700" : "")
                     }
                     href={defaultPath ? defaultPath(employeeId as string) : ""}
@@ -52,8 +52,7 @@ export default function Nav() {
             )}
           </div>
         </div>
-
-        <div className="flex flex-row items-center gap-8">
+        <div className="flex h-full flex-row items-center gap-8">
           <SearchBar />
           <div className="flex flex-row items-center gap-3">
             <div className="relative mr-1">

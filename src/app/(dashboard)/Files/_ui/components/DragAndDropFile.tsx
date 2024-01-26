@@ -6,7 +6,7 @@ import FileUploaded from "./FileUploaded";
 const DragAndDropFileInput = ({
   handleAddFile,
   isThereFile,
-  reset,
+  handleRemoveFile,
   files,
 }: any) => {
   const [selectedFiles, setSelectedFiles] = useState([]);
@@ -50,7 +50,7 @@ const DragAndDropFileInput = ({
             multiple
           />
           {files?.map((file: any, index: number) => (
-            <FileUploaded file={file} key={index} reset={reset} />
+            <FileUploaded file={file} key={index} reset={handleRemoveFile} />
           ))}
         </div>
       ) : (

@@ -117,11 +117,12 @@ export function updateTime() {
     .padStart(2, "0")}`;
   return String(clockStr);
 }
-//
+// get the format DD/MM/YYYY from supabase created at format
+
 export function formatDateFiles(date: any) {
-  const day = date.slice(8, 10);
-  const month = date.slice(5, 7);
-  const year = date.slice(0, 4);
+  const day = date?.slice(8, 10);
+  const month = date?.slice(5, 7);
+  const year = date?.slice(0, 4);
 
   return `${day}/${month}/${year}`;
 }
@@ -132,4 +133,36 @@ export function YearsAndDaysSinceDate(date: Date) {
   const days = Math.floor(diff / (1000 * 60 * 60 * 24));
   const years = Math.floor(days / 365);
   return `${years}y - ${days - years * 365}d`;
+}
+export function formatCustomDate(inputDate: string) {
+  const date = new Date(inputDate);
+  if (InvalidDate(date)) return;
+  return new Intl.DateTimeFormat("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  }).format(date);
+}
+export function monthsAgo(inputDate: string) {
+  // Parse the input date
+  const date = new Date(inputDate);
+
+  // Get the current date
+  const currentDate = new Date();
+
+  // Calculate the difference in months
+  const monthsDifference =
+    (currentDate.getFullYear() - date.getFullYear()) * 12 +
+    currentDate.getMonth() -
+    date.getMonth();
+
+  if (monthsDifference === 0) {
+    return "This month";
+  } else if (monthsDifference === 1) {
+    return "1 month ago";
+  } else if (monthsDifference > 1) {
+    return `${monthsDifference} months ago`;
+  } else {
+    return "Invalid date";
+  }
 }

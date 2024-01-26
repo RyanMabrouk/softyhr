@@ -1,7 +1,6 @@
 "use server";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
-import getSession from "@/api/getSession";
 import { Database } from "@/types/database.types";
 type getDataParams = {
   user?: boolean;

@@ -14,7 +14,7 @@ export default function useCandidate(match?: {
     queryFn: () =>
       getData("candidates", {
         org: true,
-        match,
+        match: match,
       }),
   });
   return {
