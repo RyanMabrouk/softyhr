@@ -7,7 +7,7 @@ export default async function addLeavePolicy({
   user_id,
 }: {
   categories_id: number;
-  policy_id: string;
+  policy_id: string | number;
   user_id: string | string[];
 }) {
   console.log("addLeavePolicy");

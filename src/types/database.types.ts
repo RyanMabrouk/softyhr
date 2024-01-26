@@ -357,7 +357,7 @@ export interface Database {
       }
       leave_policies: {
         Row: {
-          categories_id: number | null
+          categories_id: number
           created_at: string
           id: number
           name: string
@@ -365,7 +365,7 @@ export interface Database {
           type: Database["public"]["Enums"]["database_leave_policies_policy_type"]
         }
         Insert: {
-          categories_id?: number | null
+          categories_id: number
           created_at?: string
           id?: number
           name: string
@@ -373,7 +373,7 @@ export interface Database {
           type?: Database["public"]["Enums"]["database_leave_policies_policy_type"]
         }
         Update: {
-          categories_id?: number | null
+          categories_id?: number
           created_at?: string
           id?: number
           name?: string
@@ -517,7 +517,7 @@ export interface Database {
           org_name: string
           parent_id: string | null
           picture: string | null
-          role: string
+          role: string | null
           "Social Links": Json | null
           "Stock Options": Json[] | null
           user_id: string
@@ -541,7 +541,7 @@ export interface Database {
           org_name: string
           parent_id?: string | null
           picture?: string | null
-          role: string
+          role?: string | null
           "Social Links"?: Json | null
           "Stock Options"?: Json[] | null
           user_id: string
@@ -565,7 +565,7 @@ export interface Database {
           org_name?: string
           parent_id?: string | null
           picture?: string | null
-          role?: string
+          role?: string | null
           "Social Links"?: Json | null
           "Stock Options"?: Json[] | null
           user_id?: string

@@ -3,11 +3,11 @@ import getData from "@/api/getData";
 import updateData from "@/api/updateData";
 import { getDaysInBetween } from "@/helpers/date.helpers";
 import {
-  database_leave_policies_policy_type,
   database_leave_request_status_type,
   database_leave_requests_insert_type,
 } from "@/types/database.tables.types";
 import updateLeaveBalance from "./updateLeaveBalance";
+import { getPolicyType } from "./getPolicyType";
 export default async function updateLeaveRequest({
   formData,
   user_id,
@@ -68,11 +68,9 @@ export default async function updateLeaveRequest({
   // Check if the leave request was approved
   if (status == "approved") {
     // get the type of the leave policy
-    const { error: error0, data: typeArr } = await getData("leave_policies", {
-      match: { id: policy_id },
-      column: "type",
+    const { error: error0, policy_type: type } = await getPolicyType({
+      policy_id,
     });
-    const type: database_leave_policies_policy_type = typeArr?.[0]?.type;
     if (error0) {
       return {
         error: {

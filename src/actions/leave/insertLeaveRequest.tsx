@@ -4,6 +4,7 @@ import getData from "@/api/getData";
 import postData from "@/api/postData";
 import { getDaysInBetween } from "@/helpers/date.helpers";
 import { database_leave_policies_policy_type } from "@/types/database.tables.types";
+import { getPolicyType } from "./getPolicyType";
 export default async function insertLeaveRequest({
   formData,
   user_id,
@@ -20,11 +21,9 @@ export default async function insertLeaveRequest({
   // get the total duration of the leave request
   const total_duration = durations.reduce((acc, e) => acc + Number(e), 0);
   // get the type of the leave policy
-  const { error: error0, data: typeArr } = await getData("leave_policies", {
-    match: { id: policy_id },
-    column: "type",
+  const { error: error0, policy_type: type } = await getPolicyType({
+    policy_id,
   });
-  const type: database_leave_policies_policy_type = typeArr?.[0]?.type;
   if (error0) {
     return {
       error: {

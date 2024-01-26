@@ -1,7 +1,7 @@
 "use server";
 import getData from "@/api/getData";
 import updateData from "@/api/updateData";
-import { database_leave_policies_policy_type } from "@/types/database.tables.types";
+import { getPolicyType } from "./getPolicyType";
 export default async function updateLeaveBalance({
   user_id,
   policy_id,
@@ -11,10 +11,23 @@ export default async function updateLeaveBalance({
 }: {
   user_id: string | string[];
   policy_id: number;
-  categories_id?: number;
   total_added_duration: number;
+  categories_id?: number;
   new_policy_id?: number;
 }) {
+  // get the new policy type
+  const { policy_type: new_policy_type, error: error2 } = new_policy_id
+    ? await getPolicyType({ policy_id: new_policy_id })
+    : { policy_type: null, error: null };
+  if (error2) {
+    return {
+      new_policy_balance: null,
+      error: {
+        message: error2.message,
+        type: "Server Error : Getting New Policy Type",
+      },
+    };
+  }
   // get the current user leave balance
   const { data: data, error: error1 } = await getData("leave_balance", {
     match: { user_id: user_id, policy_id: policy_id },
@@ -37,7 +50,7 @@ export default async function updateLeaveBalance({
         ? new_policy_id
         : policy_id ?? old_leave_balance?.policy_id,
       categories_id: categories_id ?? old_leave_balance?.categories_id,
-      balance: new_policy_balance,
+      balance: new_policy_type === "unlimited" ? 0 : new_policy_balance,
     },
     { user_id: user_id, policy_id: policy_id },
   );

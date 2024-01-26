@@ -54,7 +54,7 @@ export default function DeleteLeavePolicy() {
   return (
     <>
       <PopUpSkeleton
-        className="flex max-w-[45rem] flex-col items-center gap-4 px-8 py-4"
+        className="flex max-w-[35rem] flex-col items-center gap-4 px-8 py-4"
         title="Just Checking..."
       >
         <IoWarning className="h-16 w-16 text-color9-500 " />
@@ -65,7 +65,7 @@ export default function DeleteLeavePolicy() {
             {` from “${policy?.name}” ? `}
           </span>
         </div>
-        <div className=" max-w-[70%] text-center text-[15px] leading-[22px] text-gray-20">
+        <div className=" max-w-[85%] text-center text-[15px] leading-[22px] text-gray-20">
           {`${first_name} will lose access to their history for this policy and will no longer be able to request time off from the ${category?.name} category.`}
         </div>
         <form
@@ -75,7 +75,7 @@ export default function DeleteLeavePolicy() {
           <hr className="h-[3px] w-full bg-primary-gradient" />
           <div className="flex flex-row gap-4 px-2 pt-3">
             <SubmitBtn
-              className="!w-[10rem] !px-2"
+              className="!max-w-[20rem] !w-fit !px-2"
               disabled={isPending}
             >{`Yes, Remove ${first_name}`}</SubmitBtn>
             <CancelBtnGeneric />

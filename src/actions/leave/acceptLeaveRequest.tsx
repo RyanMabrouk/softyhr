@@ -1,12 +1,9 @@
 "use server";
 import updateData from "@/api/updateData";
 import { request_type } from "@/app/(dashboard)/people/[employeeId]/TimeOff/_ui/Buttons/AcceptRequestBtn";
-import {
-  database_leave_policies_policy_type,
-  database_leave_request_status_type,
-} from "@/types/database.tables.types";
+import { database_leave_request_status_type } from "@/types/database.tables.types";
 import updateLeaveBalance from "./updateLeaveBalance";
-import getData from "@/api/getData";
+import { getPolicyType } from "./getPolicyType";
 export default async function acceptLeaveRequest({
   request,
   reviewed_by,
@@ -15,11 +12,9 @@ export default async function acceptLeaveRequest({
   reviewed_by: string;
 }) {
   // get the type of the leave policy
-  const { error: error0, data: typeArr } = await getData("leave_policies", {
-    match: { id: request.policy_id },
-    column: "type",
+  const { error: error0, policy_type: type } = await getPolicyType({
+    policy_id: request.policy_id,
   });
-  const type: database_leave_policies_policy_type = typeArr?.[0]?.type;
   if (error0) {
     return {
       error: {

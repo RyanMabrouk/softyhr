@@ -59,7 +59,10 @@ export default function Page() {
       <section className="flex-rox mb-4 flex items-center justify-between">
         <div className="mb-1 mt-5 flex flex-row gap-4 ">
           <Link
-            href="#"
+            href={{
+              pathname: pathname,
+              query: { popup: "ADD_EMPLOYEES_TO_POLICY" },
+            }}
             className=" flex h-9 max-w-[11rem] flex-row items-center justify-center gap-1 rounded-md border border-fabric-600 px-2 py-1 text-center text-[0.9rem] font-semibold text-fabric-700 shadow-sm transition-all ease-linear hover:border-fabric-600 hover:text-fabric-600 hover:shadow-md"
           >
             <MdOutlineAddCircle />

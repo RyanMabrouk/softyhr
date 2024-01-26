@@ -30,6 +30,7 @@ import EnableLeaveCategory from "@/app/_ui/_PopUp/components/Settings/TimeOff/En
 import RenamePolicy from "@/app/_ui/_PopUp/components/Settings/TimeOff/RenamePolicy/RenamePolicy";
 import DeleteLeavePolicyData from "@/app/_ui/_PopUp/components/Settings/TimeOff/DeleteLeavePolicy/DeleteLeavePolicyData";
 import AddNewPolicy from "@/app/_ui/_PopUp/components/Settings/TimeOff/AddNewPolicy/AddNewPolicy";
+import AddEmployeesToPolicy from "@/app/_ui/_PopUp/components/Settings/TimeOff/AddEmployeesToPolicy/AddEmployeesToPolicy";
 
 type PopupType = {
   [key: string]: () => React.JSX.Element;
@@ -67,4 +68,5 @@ export const popups: PopupType = {
   EDIT_POLICY_NAME: RenamePolicy,
   DELETE_LEAVE_POLICY_DATA: DeleteLeavePolicyData,
   ADD_NEW_POLICY: AddNewPolicy,
+  ADD_EMPLOYEES_TO_POLICY: AddEmployeesToPolicy,
 };
