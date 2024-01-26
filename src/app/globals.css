@@ -125,24 +125,22 @@
   }
 }
 
-.scrollBar-green {
-  &::-webkit-scrollbar {
-    width: 0.5rem;
-    border-radius: 0.6rem;
-  }
-  &::-webkit-scrollbar-thumb {
-    background-color: #eef3e5;
-    border-radius: 0.5rem;
-  }
-  &::-webkit-scrollbar-track {
-    background-color: transparent;
-  }
-  &::-webkit-scrollbar-track-piece {
-    background-color: transparent;
-  }
-  &::-webkit-scrollbar-corner {
-    background-color: transparent;
-  }
+.scrollBar-green::-webkit-scrollbar {
+  width: 0.5rem;
+  border-radius: 0.6rem;
+}
+.scrollBar-green::-webkit-scrollbar-thumb {
+  background-color: #eef3e5;
+  border-radius: 0.5rem;
+}
+.scrollBar-green::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+.scrollBar-green::-webkit-scrollbar-track-piece {
+  background-color: transparent;
+}
+.scrollBar-green::-webkit-scrollbar-corner {
+  background-color: transparent;
 }
 .MuiOutlinedInput-root {
   padding: 0 !important;

@@ -18,9 +18,8 @@ import Loader from "@/app/(dashboard)/people/components/Loader/Loader";
 import FiledsChamps from "@/app/(dashboard)/people/components/Fileds/Fileds";
 import { Field } from "@/constants/userInfo";
 import { useQueryClient } from "@tanstack/react-query";
-import { Edit_Entry } from "@/actions/personal-job/Entries/Edit_Entry";
 import useToast from "@/hooks/useToast";
-import CancelBtnGeneric from "@/app/_ui/CancelBtnGeneric";
+import { Edit_Entry } from "@/actions/personal-job/Entries/Edit_Entry";
 
 function EditEntry() {
   const searchParams = useSearchParams();
@@ -34,7 +33,7 @@ function EditEntry() {
     employee_profile: { data, isPending },
   } = useEmployeeData({ employeeId });
   const { settings } = useData();
-  const { toastContainer, toast } = useToast();
+  const { toast } = useToast();
 
   //-------Add_Entry---------
   const SubmitForm = async (formdata: FormData) => {
@@ -47,7 +46,6 @@ function EditEntry() {
 
   return (
     <>
-      {toastContainer}
       {settings?.isPending || isPending ? (
         <Loader />
       ) : (
@@ -121,7 +119,13 @@ function EditEntry() {
                   >
                     Edit item
                   </button>
-                  <CancelBtnGeneric />
+                  <button
+                    type="reset"
+                    onClick={() => router.back()}
+                    className="text-bold mt-4 rounded p-2 px-5 text-color5-500 duration-300 ease-in-out "
+                  >
+                    Cancel
+                  </button>
                 </div>
               </form>
             )}
