@@ -15,7 +15,6 @@ export default function UploadInput({ isThereFile, handleAddFile }: any) {
     if (selectedFile) {
       handleAddFile(selectedFile);
     }
-    console.log("Selected File:", selectedFile);
   };
 
   return (

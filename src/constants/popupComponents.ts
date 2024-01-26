@@ -22,6 +22,7 @@ import EditLeaveRequest from "@/app/_ui/_PopUp/components/TimeOff/EditLeaveReque
 import RejectLeaveRequest from "@/app/_ui/_PopUp/components/TimeOff/RejectLeaveRequest/RejectLeaveRequest";
 import ViewLeaveRequestComment from "@/app/_ui/_PopUp/components/TimeOff/ViewLeaveRequestComment.tsx/ViewLeaveRequestComment";
 import AdjustLeavePolicyBalance from "@/app/_ui/_PopUp/components/TimeOff/AdjustLeavePolicyBalance/AdjustLeavePolicyBalance";
+import DeleteFilesPopUp from "@/app/(dashboard)/Files/_ui/popUp/DeleteFilesPopUp";
 
 type PopupType = {
   [key: string]: () => React.JSX.Element;
@@ -37,6 +38,7 @@ export const popups: PopupType = {
   ADD_FOLDER: NewFolderPopUp,
   UPLOAD_FILE: UploadFilePopUp,
   DELETE_FILE: DeleteFilePopUp,
+  DELETE_FILES: DeleteFilesPopUp,
   RENAME_FILE: RenameFilePopUp,
   RENAME_FOLDER: RenameFolderPopUp,
   SHARE_FOLDER: ShareFolderPopUp,

@@ -15,7 +15,7 @@ export const LayoutRoute: LayoutRouteType[] = [
     pathFn: (currentPath, employeId) =>
       currentPath.includes("/people") &&
       !currentPath.includes(`/people/${employeId}`),
-    defaultPath: () => "/people",
+    defaultPath: () => "/people/list",
   },
   {
     label: "Hiring",

@@ -1,8 +1,5 @@
-import React from 'react'
-import EmployeList from './components/EmployeList/EmployeList';
+import React from "react";
 
-function page() {
-  return <EmployeList />;
+export default function page() {
+  return <div>people</div>;
 }
-
-export default page
