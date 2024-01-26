@@ -134,3 +134,35 @@ export function YearsAndDaysSinceDate(date: Date) {
   const years = Math.floor(days / 365);
   return `${years}y - ${days - years * 365}d`;
 }
+export function formatCustomDate(inputDate: string) {
+  const date = new Date(inputDate);
+  if (InvalidDate(date)) return;
+  return new Intl.DateTimeFormat("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  }).format(date);
+}
+export function monthsAgo(inputDate: string) {
+  // Parse the input date
+  const date = new Date(inputDate);
+
+  // Get the current date
+  const currentDate = new Date();
+
+  // Calculate the difference in months
+  const monthsDifference =
+    (currentDate.getFullYear() - date.getFullYear()) * 12 +
+    currentDate.getMonth() -
+    date.getMonth();
+
+  if (monthsDifference === 0) {
+    return "This month";
+  } else if (monthsDifference === 1) {
+    return "1 month ago";
+  } else if (monthsDifference > 1) {
+    return `${monthsDifference} months ago`;
+  } else {
+    return "Invalid date";
+  }
+}

@@ -1,12 +1,13 @@
 "use server";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
-import getSession from "@/api/getSession";
 import { Database } from "@/types/database.types";
 type getDataParams = {
   user?: boolean;
   org?: boolean;
-  match?: { [key: string]: string | number | boolean | null | string[] };
+  match?: {
+    [key: string]: string | number | boolean | null | string[] | undefined;
+  };
   column?: string;
 };
 
