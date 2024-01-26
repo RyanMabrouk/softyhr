@@ -9,8 +9,9 @@ export function AddPolicyBtn({ id }: { id: number }) {
   return (
     <Link
       href={{
-        pathname: pathname + "/policy",
+        pathname: pathname,
         query: {
+          popup: "ADD_NEW_POLICY",
           categories_id: id,
         },
       }}

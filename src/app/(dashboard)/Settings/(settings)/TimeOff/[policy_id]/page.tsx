@@ -10,11 +10,16 @@ import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
 import React from "react";
 import { FaPen, FaTrash } from "react-icons/fa6";
-import { MdOutlineAddCircle } from "react-icons/md";
+import {
+  MdOutlineAddCircle,
+  MdOutlineMoreTime,
+  MdTimelapse,
+} from "react-icons/md";
 import { UnderlinedLink } from "@/app/_ui/UnderlinedLink";
 import usePolicy from "@/hooks/useCategory";
 import { EmployyeSettingsBtn } from "./EmployyeSettingsBtn";
 import useLeaveData from "@/hooks/useLeaveData";
+import { BsPlusSlashMinus } from "react-icons/bs";
 export default function Page() {
   const pathname = usePathname();
   const { policy_id } = useParams();
@@ -25,6 +30,23 @@ export default function Page() {
     all_profiles_basic_info: { data: all_profiles_basic_info },
   } = useData();
   const { policy, category } = usePolicy({ policy_id: Number(policy_id) });
+  const policy_type =
+    policy?.type === "traditional" ? (
+      <>
+        <MdTimelapse className="h-5 w-5" />
+        <span>Accruing Policy</span>
+      </>
+    ) : policy?.type === "manual" ? (
+      <>
+        <BsPlusSlashMinus className="h-5 w-5" />
+        <span>Manually Updated Policy</span>
+      </>
+    ) : (
+      <>
+        <MdOutlineMoreTime className="h-5 w-5" />
+        <span>Flexible Policy</span>
+      </>
+    );
   return (
     <div className="flex h-full min-w-full flex-col px-6 py-4">
       <header className="flex flex-row items-center gap-1">
@@ -35,10 +57,10 @@ export default function Page() {
         <span className="text-xl text-black opacity-85">{policy?.name}</span>
       </header>
       <section className="flex-rox mb-4 flex items-center justify-between">
-        <div className="flex flex-row gap-4">
+        <div className="mb-1 mt-5 flex flex-row gap-4 ">
           <Link
             href="#"
-            className=" mb-1 mt-5 flex h-9 max-w-[11rem] flex-row items-center justify-center gap-1 rounded-md border border-fabric-600 px-2 py-1 text-center text-[0.9rem] font-semibold text-fabric-700 shadow-sm transition-all ease-linear hover:border-fabric-600 hover:text-fabric-600 hover:shadow-md"
+            className=" flex h-9 max-w-[11rem] flex-row items-center justify-center gap-1 rounded-md border border-fabric-600 px-2 py-1 text-center text-[0.9rem] font-semibold text-fabric-700 shadow-sm transition-all ease-linear hover:border-fabric-600 hover:text-fabric-600 hover:shadow-md"
           >
             <MdOutlineAddCircle />
             <span>Add Employees</span>
@@ -48,21 +70,26 @@ export default function Page() {
               pathname: pathname,
               query: { popup: "EDIT_POLICY_NAME" },
             }}
-            className=" mb-1 mt-5 flex h-9 max-w-[11rem] flex-row items-center justify-center gap-1 rounded-md border border-gray-21 px-2 py-1 text-center text-[0.9rem] font-semibold text-gray-21 shadow-sm transition-all ease-linear hover:shadow-md"
+            className=" flex h-9 max-w-[11rem] flex-row items-center justify-center gap-1 rounded-md border border-gray-21 px-2 py-1 text-center text-[0.9rem] font-semibold text-gray-21 shadow-sm transition-all ease-linear hover:shadow-md"
           >
             <FaPen />
             <span>Edit Policy</span>
           </Link>
         </div>
-        <Link
-          href={{
-            pathname: pathname,
-            query: { popup: "DELETE_LEAVE_POLICY_DATA" },
-          }}
-          className=" mb-1 mt-5 flex h-9 w-9 max-w-[11rem] flex-row items-center justify-center gap-1 rounded-md border border-gray-21 px-2 py-1 text-center text-[0.9rem] font-semibold text-gray-21 shadow-sm transition-all ease-linear hover:shadow-md"
-        >
-          <FaTrash />
-        </Link>
+        <div className="mb-1 mt-5 flex flex-row items-center gap-2">
+          <div className="flex flex-row items-center gap-0.5 text-gray-21">
+            {policy_type}
+          </div>
+          <Link
+            href={{
+              pathname: pathname,
+              query: { popup: "DELETE_LEAVE_POLICY_DATA" },
+            }}
+            className="flex h-9 w-9 max-w-[11rem] flex-row items-center justify-center gap-1 rounded-md border border-gray-21 px-2 py-1 text-center text-[0.9rem] font-semibold text-gray-21 shadow-sm transition-all ease-linear hover:shadow-md"
+          >
+            <FaTrash />
+          </Link>
+        </div>
       </section>
       {
         <HistoryTable

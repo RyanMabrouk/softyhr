@@ -39,7 +39,6 @@ export function CategoryEdit({
           </>
         )}
       </div>
-
       {disabled ? <EnableCategoryBtn id={id} /> : <AddPolicyBtn id={id} />}
       <div className="absolute right-2 top-2 ">
         <CategoryDropDownMenu id={id} disabled={disabled} />

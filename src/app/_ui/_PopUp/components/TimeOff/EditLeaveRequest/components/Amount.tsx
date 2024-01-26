@@ -70,7 +70,7 @@ export function Amount({
     "date",
   );
   // calculate the total duration
-  const [totalDuration, setTotalDuration] = useState(0);
+  const [totalDuration, setTotalDuration] = useState(null);
   useEffect(() => {
     setTotalDuration(
       active_duration?.reduce(
@@ -79,7 +79,7 @@ export function Amount({
       ),
     );
   }, [active_duration, formError]);
-  if (totalDuration === 0) return;
+  if (totalDuration === null) return;
   return (
     <div className="flex flex-col gap-1">
       <label
@@ -114,7 +114,7 @@ export function Amount({
                           ]);
                           if (
                             Number(e.target.value) > 24 ||
-                            Number(e.target.value) < 1
+                            Number(e.target.value) < 0
                           ) {
                             setFormError &&
                               setFormError((old) =>
@@ -122,11 +122,11 @@ export function Amount({
                                   ? {
                                       ...old,
                                       ["duration_date" + i]:
-                                        "Duration must be between 1 and 24 hours",
+                                        "Duration must be between 0 and 24 hours",
                                     }
                                   : {
                                       ["duration_date" + i]:
-                                        "Duration must be between 1 and 24 hours",
+                                        "Duration must be between 0 and 24 hours",
                                     },
                               );
                           } else {

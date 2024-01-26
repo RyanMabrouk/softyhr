@@ -1,8 +1,9 @@
+"use client";
 import CancelBtnGeneric from "@/app/_ui/CancelBtnGeneric";
 import { SubmitBtn } from "@/app/_ui/SubmitBtn";
 import PopUpSkeleton from "@/app/_ui/_PopUp/PopUpSkeleton";
 import useToast from "@/hooks/useToast";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React from "react";
 import { LiaHourglassEndSolid } from "react-icons/lia";
 import { TypeCheckBox } from "./TypeCheckBox";
@@ -12,6 +13,7 @@ export default function AddNewPolicy() {
   const { toast } = useToast();
   const Router = useRouter();
   const pathname = usePathname();
+  const categories_id = useSearchParams().get("categories_id");
   return (
     <PopUpSkeleton
       title="New Time Off Policy"
@@ -25,7 +27,9 @@ export default function AddNewPolicy() {
             toast.error("Please select a type", "Error");
             return;
           }
-          Router.push(`${pathname}/policy?type=${type}`);
+          Router.push(
+            `${pathname}/policy?type=${type}${categories_id ? `&categories_id=${categories_id}` : ""}`,
+          );
         }}
       >
         <section className="flex w-full flex-col items-center justify-center  gap-2 text-center text-gray-27">
@@ -41,7 +45,10 @@ export default function AddNewPolicy() {
           <Link
             href={{
               pathname: pathname + "/policy",
-              query: { type: "manual" },
+              query: {
+                type: "manual",
+                categories_id: categories_id ? categories_id : "",
+              },
             }}
             className="cursor-pointer text-[0.9rem] font-bold text-fabric-700 opacity-100 transition-all ease-linear hover:underline"
           >

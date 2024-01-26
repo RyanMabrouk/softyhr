@@ -121,6 +121,13 @@ export function From() {
         ref={formRef}
         className="flex w-full flex-col gap-4 px-2 pt-3"
         action={async (formData: FormData) => {
+          const duration = formData
+            .getAll("duration_date")
+            .reduce((acc, e) => acc + Number(e), 0);
+          if (duration === 0) {
+            toast.error("Duration must be greater than 0", "Error");
+            return;
+          }
           if (formError && !checkIfOjectValuesAreEmpty(formError)) return;
           leave_request_id ? update(formData) : insert(formData);
         }}
