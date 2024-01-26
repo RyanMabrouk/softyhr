@@ -13,7 +13,7 @@ import Loader from '@/app/(dashboard)/people/components/Loader/Loader';
 import FiledsChamps from "@/app/(dashboard)/people/components/Fileds/Fileds"
 import { Field } from '@/constants/userInfo';
 import { useQueryClient } from '@tanstack/react-query';
-import { Edit_Entry } from '@/actions/Entries/Edit_Entry';
+import { Edit_Entry } from "@/actions/personal-job/Entries/Edit_Entry";
 import useToast from '@/hooks/useToast';
 
 function EditEntry() {

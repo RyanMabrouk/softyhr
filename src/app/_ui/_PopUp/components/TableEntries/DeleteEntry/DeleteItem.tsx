@@ -10,7 +10,7 @@ import FiledsChamps from "@/app/(dashboard)/people/components/Fileds/Fileds"
 import Input from '@/app/(dashboard)/people/components/Fileds/Input/Input';
 import DateInput from '@/app/(dashboard)/people/components/Fileds/DateInput/DateInput';
 import Loader from '@/app/(dashboard)/people/components/Loader/Loader';
-import { Delete_Entry } from '@/actions/Entries/Delete_Entry';
+import { Delete_Entry } from "@/actions/personal-job/Entries/Delete_Entry";
 import { useQueryClient } from '@tanstack/react-query';
 import useToast from '@/hooks/useToast';
 

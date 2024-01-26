@@ -14,7 +14,7 @@ import useData from "@/hooks/useData";
 import Loader from "@/app/(dashboard)/people/components/Loader/Loader";
 import { Field } from "@/constants/userInfo";
 import { v4 as uuidv4 } from "uuid";
-import { Add_Entry } from "@/actions/Entries/Add_Entry";
+import { Add_Entry } from "@/actions/personal-job/Entries/Add_Entry";
 import { useQueryClient } from "@tanstack/react-query";
 import useToast from "@/hooks/useToast";
 
