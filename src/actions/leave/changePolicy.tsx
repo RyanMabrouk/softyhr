@@ -5,7 +5,7 @@ export default async function changePolicy({
   old_policy_id,
   user_id,
 }: {
-  new_policy_id: string;
+  new_policy_id: string | number;
   user_id: string | string[];
   old_policy_id: number;
 }) {

@@ -31,7 +31,7 @@ function ToggleDisplay({
   return (
     <div className="group relative flex h-full w-full items-center justify-center perspective">
       <div
-        className={`relative flex h-full w-full items-center  justify-center transition-all duration-[650ms] preserve-3d ${
+        className={`duration-650 relative flex h-full w-full  items-center justify-center transition-all preserve-3d ${
           toggleDisplay ? "my-rotate-y-180" : ""
         }`}
       >

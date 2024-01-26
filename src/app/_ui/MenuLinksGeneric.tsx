@@ -61,7 +61,7 @@ export function MenuLinksGeneric({
             onClick={() => {
               setAnchorEl(null);
             }}
-            disabled={e.disabled || false}
+            disabled={e.disabled ?? false}
           >
             <Link href={e.link}>
               <span className="text-sm">{e.name}</span>

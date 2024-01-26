@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import React from "react";
 import { CgClose } from "react-icons/cg";
 export default function PopUpSkeleton({
@@ -10,6 +10,7 @@ export default function PopUpSkeleton({
   className?: string;
   children: React.ReactNode;
 }) {
+  const pathname = usePathname();
   const Router = useRouter();
   return (
     <div className="z-50 flex flex-col gap-2">
@@ -18,7 +19,7 @@ export default function PopUpSkeleton({
           <h1 className=" pb-2 text-2xl font-normal text-fabric-700">
             {title}
           </h1>
-          <div onClick={() => Router.back()}>
+          <div onClick={() => Router.push(pathname)}>
             <CgClose className="cursor-pointer text-3xl text-gray-15" />
           </div>
         </div>

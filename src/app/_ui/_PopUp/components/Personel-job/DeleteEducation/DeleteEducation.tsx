@@ -1,14 +1,14 @@
 "use client";
-import { deleteEducation } from "@/actions/education/deleteEducation";
+import { deleteEducation } from "@/actions/personal-job/education/deleteEducation";
 import useEmployeeData from "@/hooks/useEmloyeeData";
 import useToast from "@/hooks/useToast";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React from "react";
-import { CgClose } from "react-icons/cg";
 import { useParams } from "next/navigation";
 import { FaRegTrashAlt } from "react-icons/fa";
 import PopUpSkeleton from "../../../PopUpSkeleton";
+import CancelBtnGeneric from "@/app/_ui/CancelBtnGeneric";
 
 interface DeleteEducationFnType {
   id: string | null;
@@ -85,12 +85,7 @@ function DeleteEducation() {
               "yes, delete education"
             )}
           </button>
-          <button
-            onClick={() => Router.push(pathname)}
-            className="capitalize text-color5-500 duration-150 ease-in-out hover:text-color1-500 hover:underline"
-          >
-            cancel
-          </button>
+          <CancelBtnGeneric />
         </div>
       </PopUpSkeleton>
     </>

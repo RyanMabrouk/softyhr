@@ -29,6 +29,9 @@ const Myclass = plugin(function ({ addUtilities }: any) {
     ".scroll-snap-y": {
       scrollSnapType: "y",
     },
+    ".duration-650": {
+      transitionDuration: "650ms",
+    },
   });
 });
 const config: Config = {
@@ -226,7 +229,7 @@ const config: Config = {
         "gray-24": "#0003",
         "gray-25": "#555",
         "gray-26": "#999",
-        "gray-27": "#222222",
+        "gray-27": "#222",
         "gray-28": "#FAFAFA",
         "gray-29": "#636363",
         "gray-30": "#777",
@@ -260,6 +263,7 @@ const config: Config = {
         "color9-300": "#CE4755",
         "color9-400": "#A73440",
         "color9-500": "#C20B0B",
+        "color9-600": "#C20C0C",
 
         "color-btn": "#496D00",
         /*"color-green": "#599D15",

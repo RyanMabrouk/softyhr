@@ -9,12 +9,158 @@ export type Json =
 export interface Database {
   public: {
     Tables: {
+      candidates: {
+        Row: {
+          created_at: string
+          Email: string | null
+          "First Name": string | null
+          id: number
+          job_id: number | null
+          "Last Name": string | null
+          metadata: Json | null
+          org_name: string | null
+          Phone: string | null
+          Ratings: number | null
+          status: string | null
+        }
+        Insert: {
+          created_at?: string
+          Email?: string | null
+          "First Name"?: string | null
+          id?: number
+          job_id?: number | null
+          "Last Name"?: string | null
+          metadata?: Json | null
+          org_name?: string | null
+          Phone?: string | null
+          Ratings?: number | null
+          status?: string | null
+        }
+        Update: {
+          created_at?: string
+          Email?: string | null
+          "First Name"?: string | null
+          id?: number
+          job_id?: number | null
+          "Last Name"?: string | null
+          metadata?: Json | null
+          org_name?: string | null
+          Phone?: string | null
+          Ratings?: number | null
+          status?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "candidates_job_id_fkey"
+            columns: ["job_id"]
+            isOneToOne: false
+            referencedRelation: "Hiring"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "candidates_org_name_fkey"
+            columns: ["org_name"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["name"]
+          }
+        ]
+      }
+      files: {
+        Row: {
+          addedBy: string | null
+          created_at: string
+          file_type: string | null
+          file_url: string | null
+          folderId: number | null
+          id: number
+          name: string | null
+          org_name: string | null
+          size: number | null
+        }
+        Insert: {
+          addedBy?: string | null
+          created_at?: string
+          file_type?: string | null
+          file_url?: string | null
+          folderId?: number | null
+          id?: number
+          name?: string | null
+          org_name?: string | null
+          size?: number | null
+        }
+        Update: {
+          addedBy?: string | null
+          created_at?: string
+          file_type?: string | null
+          file_url?: string | null
+          folderId?: number | null
+          id?: number
+          name?: string | null
+          org_name?: string | null
+          size?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "files_addedBy_fkey"
+            columns: ["addedBy"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["user_id"]
+          },
+          {
+            foreignKeyName: "files_folderId_fkey"
+            columns: ["folderId"]
+            isOneToOne: false
+            referencedRelation: "folders"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "files_org_name_fkey"
+            columns: ["org_name"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["name"]
+          }
+        ]
+      }
+      folders: {
+        Row: {
+          created_at: string
+          id: number
+          name: string
+          org_name: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+          name: string
+          org_name?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          name?: string
+          org_name?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "folders_org_name_fkey"
+            columns: ["org_name"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["name"]
+          }
+        ]
+      }
       Hiring: {
         Row: {
           Application_Details: Json | null
           candidates: Json[] | null
           created_at: string
           id: number
+          "Job Status": string | null
+          job_Boards: Json | null
           job_information: Json | null
           org_name: string | null
         }
@@ -23,6 +169,8 @@ export interface Database {
           candidates?: Json[] | null
           created_at?: string
           id?: number
+          "Job Status"?: string | null
+          job_Boards?: Json | null
           job_information?: Json | null
           org_name?: string | null
         }
@@ -31,6 +179,8 @@ export interface Database {
           candidates?: Json[] | null
           created_at?: string
           id?: number
+          "Job Status"?: string | null
+          job_Boards?: Json | null
           job_information?: Json | null
           org_name?: string | null
         }
@@ -102,32 +252,97 @@ export interface Database {
           }
         ]
       }
+      leave_balance: {
+        Row: {
+          balance: number
+          categories_id: number
+          created_at: string
+          org_name: string
+          policy_id: number
+          status: string
+          user_id: string
+        }
+        Insert: {
+          balance?: number
+          categories_id: number
+          created_at?: string
+          org_name: string
+          policy_id: number
+          status?: string
+          user_id: string
+        }
+        Update: {
+          balance?: number
+          categories_id?: number
+          created_at?: string
+          org_name?: string
+          policy_id?: number
+          status?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "leave_balance_categories_id_fkey"
+            columns: ["categories_id"]
+            isOneToOne: false
+            referencedRelation: "leave_categories"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "leave_balance_org_name_fkey"
+            columns: ["org_name"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["name"]
+          },
+          {
+            foreignKeyName: "leave_balance_policy_id_fkey"
+            columns: ["policy_id"]
+            isOneToOne: false
+            referencedRelation: "leave_policies"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "leave_balance_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
       leave_categories: {
         Row: {
           color: string
           created_at: string
+          disabled: boolean
           icon: string
           id: number
           name: string
-          org_name: string | null
+          org_name: string
+          paid: boolean
           track_time_unit: string
         }
         Insert: {
-          color: string
+          color?: string
           created_at?: string
+          disabled?: boolean
           icon: string
           id?: number
           name: string
-          org_name?: string | null
+          org_name: string
+          paid?: boolean
           track_time_unit?: string
         }
         Update: {
           color?: string
           created_at?: string
+          disabled?: boolean
           icon?: string
           id?: number
           name?: string
-          org_name?: string | null
+          org_name?: string
+          paid?: boolean
           track_time_unit?: string
         }
         Relationships: [
@@ -142,28 +357,28 @@ export interface Database {
       }
       leave_policies: {
         Row: {
-          categories_id: number | null
+          categories_id: number
           created_at: string
-          description: string | null
           id: number
           name: string
           org_name: string
+          type: Database["public"]["Enums"]["database_leave_policies_policy_type"]
         }
         Insert: {
-          categories_id?: number | null
+          categories_id: number
           created_at?: string
-          description?: string | null
           id?: number
           name: string
           org_name: string
+          type?: Database["public"]["Enums"]["database_leave_policies_policy_type"]
         }
         Update: {
-          categories_id?: number | null
+          categories_id?: number
           created_at?: string
-          description?: string | null
           id?: number
           name?: string
           org_name?: string
+          type?: Database["public"]["Enums"]["database_leave_policies_policy_type"]
         }
         Relationships: [
           {
@@ -285,6 +500,7 @@ export interface Database {
       }
       profiles: {
         Row: {
+          accrual_start_date: string | null
           Address: Json | null
           "Basic Information": Json | null
           Bonus: Json[] | null
@@ -299,13 +515,16 @@ export interface Database {
           "Job Information": Json[] | null
           leave_balance: Json[] | null
           org_name: string
-          role: string
+          parent_id: string | null
+          picture: string | null
+          role: string | null
           "Social Links": Json | null
           "Stock Options": Json[] | null
           user_id: string
           "Visa Information": Json[] | null
         }
         Insert: {
+          accrual_start_date?: string | null
           Address?: Json | null
           "Basic Information"?: Json | null
           Bonus?: Json[] | null
@@ -320,13 +539,16 @@ export interface Database {
           "Job Information"?: Json[] | null
           leave_balance?: Json[] | null
           org_name: string
-          role: string
+          parent_id?: string | null
+          picture?: string | null
+          role?: string | null
           "Social Links"?: Json | null
           "Stock Options"?: Json[] | null
           user_id: string
           "Visa Information"?: Json[] | null
         }
         Update: {
+          accrual_start_date?: string | null
           Address?: Json | null
           "Basic Information"?: Json | null
           Bonus?: Json[] | null
@@ -341,7 +563,9 @@ export interface Database {
           "Job Information"?: Json[] | null
           leave_balance?: Json[] | null
           org_name?: string
-          role?: string
+          parent_id?: string | null
+          picture?: string | null
+          role?: string | null
           "Social Links"?: Json | null
           "Stock Options"?: Json[] | null
           user_id?: string
@@ -356,6 +580,13 @@ export interface Database {
             referencedColumns: ["name"]
           },
           {
+            foreignKeyName: "profiles_parent_id_fkey"
+            columns: ["parent_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["user_id"]
+          },
+          {
             foreignKeyName: "profiles_user_id_fkey"
             columns: ["user_id"]
             isOneToOne: true
@@ -366,18 +597,24 @@ export interface Database {
       }
       settings: {
         Row: {
+          AppliementForm: Json | null
+          default_hours_per_day: number[]
           Hiring: Json | null
           job: Json | null
           org_name: string
           personnal: Json | null
         }
         Insert: {
+          AppliementForm?: Json | null
+          default_hours_per_day?: number[]
           Hiring?: Json | null
           job?: Json | null
           org_name: string
           personnal?: Json | null
         }
         Update: {
+          AppliementForm?: Json | null
+          default_hours_per_day?: number[]
           Hiring?: Json | null
           job?: Json | null
           org_name?: string
@@ -427,6 +664,10 @@ export interface Database {
       }
     }
     Enums: {
+      database_leave_policies_policy_type:
+        | "manual"
+        | "traditional"
+        | "unlimited"
       leave_request_status_type:
         | "pending"
         | "approved"

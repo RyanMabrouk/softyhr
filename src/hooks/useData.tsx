@@ -13,22 +13,7 @@ export default function useData() {
         org: true,
       }),
   });
-  //----------------- Leave Policies--------------------
-  const { data: leave_policies, isPending: isPending3 } = useQuery({
-    queryKey: ["leave_policies"],
-    queryFn: () =>
-      getData("leave_policies", {
-        org: true,
-      }),
-  });
-  //-------------------- Leave Categories--------------------
-  const { data: leave_categories, isPending: isPending5 } = useQuery({
-    queryKey: ["leave_categories"],
-    queryFn: () =>
-      getData("leave_categories", {
-        org: true,
-      }),
-  });
+
   //------------------- User Profile--------------------
   const { data: user_profile, isPending: isPending6 } = useQuery({
     queryKey: ["user_profile"],
@@ -71,16 +56,6 @@ export default function useData() {
   });
   //------------------------------------------------------------
   return {
-    leave_policies: {
-      data: leave_policies?.data,
-      error: leave_policies?.error,
-      isPending: isPending3,
-    },
-    leave_categories: {
-      data: leave_categories?.data,
-      error: leave_categories?.error,
-      isPending: isPending5,
-    },
     settings: {
       data: settings?.data,
       error: settings?.error,

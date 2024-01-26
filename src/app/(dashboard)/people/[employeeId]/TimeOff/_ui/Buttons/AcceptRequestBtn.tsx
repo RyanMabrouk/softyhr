@@ -6,7 +6,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import useToast from "@/hooks/useToast";
 import acceptLeaveRequest from "@/actions/leave/acceptLeaveRequest";
 import {
-  database_profile_leave_balance_type,
+  database_leave_request_duration_used_type,
   database_profile_type,
 } from "@/types/database.tables.types";
 import { useParams } from "next/navigation";
@@ -14,7 +14,7 @@ export type request_type = {
   id: number;
   policy_id: number;
   user_id: string;
-  duration_used: database_profile_leave_balance_type[];
+  duration_used: database_leave_request_duration_used_type[];
 };
 export function AcceptRequestBtn({ request }: { request: request_type }) {
   const { toast } = useToast();
@@ -40,9 +40,8 @@ export function AcceptRequestBtn({ request }: { request: request_type }) {
         queryKey: ["leave_requests", employeeId],
       });
       queryClient.invalidateQueries({
-        queryKey: ["profiles", employeeId],
+        queryKey: ["leave_balance", employeeId],
       });
-      queryClient.invalidateQueries({ queryKey: ["all_profiles_basic_info"] });
     },
   });
   return (

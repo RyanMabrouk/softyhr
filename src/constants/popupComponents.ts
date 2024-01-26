@@ -1,4 +1,3 @@
-import DeleteEducation from "@/app/_ui/_PopUp/components/Education/DeleteEducation/DeleteEducation";
 import AddEntry from "@/app/_ui/_PopUp/components/TableEntries/AddEntry/AddEntry";
 import EditEntry from "@/app/_ui/_PopUp/components/TableEntries/EditEntry/EditEntry";
 import DeleteItem from "@/app/_ui/_PopUp/components/TableEntries/DeleteEntry/DeleteItem";
@@ -22,10 +21,19 @@ import EditLeaveRequest from "@/app/_ui/_PopUp/components/TimeOff/EditLeaveReque
 import RejectLeaveRequest from "@/app/_ui/_PopUp/components/TimeOff/RejectLeaveRequest/RejectLeaveRequest";
 import ViewLeaveRequestComment from "@/app/_ui/_PopUp/components/TimeOff/ViewLeaveRequestComment.tsx/ViewLeaveRequestComment";
 import AdjustLeavePolicyBalance from "@/app/_ui/_PopUp/components/TimeOff/AdjustLeavePolicyBalance/AdjustLeavePolicyBalance";
-import DeleteJob from "@/app/_ui/_PopUp/components/Hiring/DeleteJob/DeleteJob";
-import UnsavedChanges from "@/app/_ui/_PopUp/components/Hiring/UnsavedChanges/UnsavedChanges";
-import EditJobInformation from "@/app/_ui/_PopUp/components/Hiring/EditJobInformation/EditJobInformation";
+import ChangeDefaultHoursPerDay from "@/app/_ui/_PopUp/components/Settings/TimeOff/ChangeDefaultHoursPerDay/ChangeDefaultHoursPerDay";
+import EditLeaveCategory from "@/app/_ui/_PopUp/components/Settings/TimeOff/EditLeaveCategory/EditLeaveCategory";
+import DisableLeaveCategory from "@/app/_ui/_PopUp/components/Settings/TimeOff/DisableLeaveCategory/DisableLeaveCategory";
+import DeleteLeaveCategory from "@/app/_ui/_PopUp/components/Settings/TimeOff/DeleteLeaveCategory/DeleteLeaveCategory";
+import EnableLeaveCategory from "@/app/_ui/_PopUp/components/Settings/TimeOff/EnableLeaveCategory/EnableLeaveCategory";
+import RenamePolicy from "@/app/_ui/_PopUp/components/Settings/TimeOff/RenamePolicy/RenamePolicy";
+import DeleteLeavePolicyData from "@/app/_ui/_PopUp/components/Settings/TimeOff/DeleteLeavePolicy/DeleteLeavePolicyData";
+import AddNewPolicy from "@/app/_ui/_PopUp/components/Settings/TimeOff/AddNewPolicy/AddNewPolicy";
+import AddEmployeesToPolicy from "@/app/_ui/_PopUp/components/Settings/TimeOff/AddEmployeesToPolicy/AddEmployeesToPolicy";
+import DeleteEducation from "@/app/_ui/_PopUp/components/Personel-job/DeleteEducation/DeleteEducation";
 import EditApplicationDetails from "@/app/_ui/_PopUp/components/Hiring/EditApplicationDetails/EditApplicationDetails";
+import EditJobInformation from "@/app/_ui/_PopUp/components/Hiring/EditJobInformation/EditJobInformation";
+import DeleteJob from "@/app/_ui/_PopUp/components/Hiring/DeleteJob/DeleteJob";
 import EditJobBoard from "@/app/_ui/_PopUp/components/Hiring/EditJobBoard/EditJobBoard";
 import HireCandidate from "@/app/_ui/_PopUp/components/Hiring/HireCandidate/HireCandidate";
 
@@ -62,4 +70,13 @@ export const popups: PopupType = {
   EDIT_APPLICATION_DETAILS: EditApplicationDetails,
   EDIT_JOB_BOARDS: EditJobBoard,
   HIRE_CANDIDATE: HireCandidate,
+  CHANGE_DEFAULT_HOURS_PER_DAY: ChangeDefaultHoursPerDay,
+  EDIT_LEAVE_CATEGORY: EditLeaveCategory,
+  DISABLE_LEAVE_CATEGORY: DisableLeaveCategory,
+  DELETE_LEAVE_CATEGORY: DeleteLeaveCategory,
+  ENABLE_LEAVE_CATEGORY: EnableLeaveCategory,
+  EDIT_POLICY_NAME: RenamePolicy,
+  DELETE_LEAVE_POLICY_DATA: DeleteLeavePolicyData,
+  ADD_NEW_POLICY: AddNewPolicy,
+  ADD_EMPLOYEES_TO_POLICY: AddEmployeesToPolicy,
 };

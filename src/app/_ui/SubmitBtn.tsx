@@ -3,19 +3,23 @@ import React from "react";
 import { useFormStatus } from "react-dom";
 import { Button } from "./Button";
 
-export function SubmitBtn({
-  children,
-  className,
-  disabled,
-}: {
+export function SubmitBtn(props: {
   children: string;
   className?: string;
   disabled?: boolean;
+  blocked?: boolean;
+  onClick?: () => void;
+  formAction?: (formData: FormData) => void;
 }) {
   const { pending } = useFormStatus();
   return (
-    <Button disabled={pending || disabled} type="submit" className={className}>
-      {children}
+    <Button
+      {...props}
+      disabled={pending || props.disabled}
+      formAction={props.formAction}
+      type="submit"
+    >
+      {props.children}
     </Button>
   );
 }

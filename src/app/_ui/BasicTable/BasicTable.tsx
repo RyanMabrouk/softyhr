@@ -41,7 +41,7 @@ export default function BasicTable({
                     key={uuidv4()}
                     align="left"
                   >
-                    <h1 className="relative box-border w-full  border-transparent bg-gray-17 text-left align-top font-semibold text-gray-25 transition-[background-color] duration-[0.15s] ease-[ease-in-out]">
+                    <h1 className="relative box-border w-full  border-transparent bg-gray-17 text-left align-top font-semibold text-gray-25 transition-[background-color] duration-150 ease-linear">
                       {RowField?.name}
                     </h1>
                   </TableCell>

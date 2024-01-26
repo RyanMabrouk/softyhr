@@ -16,14 +16,17 @@ import { formatTotalHoursToTimeUnit } from "@/helpers/leave.helpers";
 import { formatDateToMonDDYYYY } from "@/helpers/date.helpers";
 import useEmployeeData from "@/hooks/useEmloyeeData";
 import PopUpSkeleton from "../../../PopUpSkeleton";
+import useLeaveData from "@/hooks/useLeaveData";
 function ViewLeaveRequestComment() {
   const Router = useRouter();
   const { employeeId } = useParams();
   const leave_request_id = useSearchParams().get("leave_request_id");
   const {
-    all_profiles_basic_info: { data: all_profiles_basic_info },
     leave_categories: { data: leave_categories },
     leave_policies: { data: leave_policies },
+  } = useLeaveData();
+  const {
+    all_profiles_basic_info: { data: all_profiles_basic_info },
   } = useData();
   const {
     leave_requests: { data: leave_requests },

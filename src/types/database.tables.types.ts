@@ -1,5 +1,7 @@
 import { Database } from "./database.types";
-
+// leave balance
+export type database_profile_leave_balance_type =
+  Database["public"]["Tables"]["leave_balance"]["Row"];
 // Leave Categories
 export type databese_leave_categories_type =
   Database["public"]["Tables"]["leave_categories"]["Row"];
@@ -14,11 +16,6 @@ export type database_leave_request_status_type =
   | "approved"
   | "rejected"
   | "canceled";
-export type database_profile_leave_balance_type = {
-  categories_id: number;
-  policy_id: number;
-  balance: number;
-};
 export type database_leave_request_duration_used_type = {
   date: string;
   duration: number;
@@ -29,6 +26,8 @@ export type database_leave_accrued_type =
 export type database_leave_accrued_insert_type =
   Database["public"]["Tables"]["leave_accrued"]["Insert"];
 // Leave Policies
+export type database_leave_policies_policy_type =
+  Database["public"]["Tables"]["leave_policies"]["Row"]["type"];
 export type database_leave_policies_type =
   Database["public"]["Tables"]["leave_policies"]["Row"];
 // Profile Types

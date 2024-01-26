@@ -2,10 +2,10 @@ import React, { ReactNode } from "react";
 import { FormControl, MenuItem, Select } from "@mui/material";
 export type Option = {
   value: string | number;
-  label: string;
+  label: string | ReactNode;
 };
 type GroupOptions = {
-  group_name?: string;
+  group_name?: string; // add only the group name to create a group
   label?: string;
   value?: any;
   disabled?: boolean;
@@ -13,7 +13,7 @@ type GroupOptions = {
 export function SelectGeneric({
   className,
   label,
-  name,
+  name = "select",
   defaultValue,
   options,
   group, // if true, options should be an array of objects with the following structure: {group_name: string, options: Option[]}
@@ -31,7 +31,7 @@ export function SelectGeneric({
   required?: boolean;
   setValueInParent?: React.Dispatch<React.SetStateAction<any>> | undefined;
   inputLabel?: string | ReactNode;
-  cursor?: "white" | "black";
+  cursor?: "white" | "black" | string;
 }) {
   if (!options) return;
   return (
@@ -49,8 +49,8 @@ export function SelectGeneric({
         data-placeholder-trigger="keydown"
         label={label}
         id={label}
-        className={`peer-focus-within:shadow-green focus:shadow-green focus-within:shadow-green group peer h-9 w-[12.5rem]  rounded-md  border border-gray-18 py-1 capitalize text-gray-27 shadow-[rgba(0,0,0,0.05)_0px_1px_0px_0px] placeholder:text-gray-14 [&_.MuiOutlinedInput-notchedOutline]:border-none ${className}`}
-        name={name ?? "select"}
+        className={` group peer h-9 w-[12.5rem] rounded-md  border  border-gray-18 py-1 capitalize text-gray-27 shadow-[rgba(0,0,0,0.05)_0px_1px_0px_0px] transition-all ease-linear placeholder:text-gray-14 hover:shadow-md [&_.MuiOutlinedInput-notchedOutline]:border-none ${className}`}
+        name={name}
         defaultValue={defaultValue ? defaultValue.value : "none"}
         displayEmpty
         required={required}
@@ -95,7 +95,7 @@ export function SelectGeneric({
                 <MenuItem
                   value={option?.value}
                   className="peer capitalize text-gray-27 hover:!bg-fabric-700 hover:text-white"
-                  key={option?.label + i}
+                  key={(name ?? inputLabel ?? label) + i}
                 >
                   {option?.label}
                 </MenuItem>

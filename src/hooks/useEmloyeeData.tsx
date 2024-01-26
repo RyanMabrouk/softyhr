@@ -36,6 +36,14 @@ export default function useEmployeeData({
         match: { user_id: employeeId },
       }),
   });
+  const { data: leave_balance, isPending: isPending5 } = useQuery({
+    queryKey: ["leave_balance", employeeId],
+    queryFn: () =>
+      getData("leave_balance", {
+        org: true,
+        match: { user_id: employeeId },
+      }),
+  });
   //------------------------------------------------------------
   return {
     leave_requests: {
@@ -52,6 +60,11 @@ export default function useEmployeeData({
       data: leave_accrued?.data,
       error: leave_accrued?.error,
       isPending: isPending4,
+    },
+    leave_balance: {
+      data: leave_balance?.data,
+      error: leave_balance?.error,
+      isPending: isPending5,
     },
   };
 }

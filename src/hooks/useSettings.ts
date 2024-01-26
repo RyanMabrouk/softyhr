@@ -8,6 +8,6 @@ export function useSettings(section: string) {
   else
     return {
       data: null,
-      isPending: false,
+      isPending: true,
     };
 }

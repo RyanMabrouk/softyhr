@@ -5,14 +5,12 @@ import Link from "next/link";
 import React from "react";
 import companyLogo from "/public/cropped (2).jpg";
 import { useParams, usePathname } from "next/navigation";
-import useEmployeeData from "@/hooks/useEmloyeeData";
 import { BsFillQuestionCircleFill } from "react-icons/bs";
 import { IoMdSettings } from "react-icons/io";
 import SearchBar from "../_SearchBar/SearchBar";
 import defaultAvatar from "/public/default_avatar.jpeg";
 import { FaInbox } from "react-icons/fa6";
 import useData from "@/hooks/useData";
-import { user } from "@nextui-org/react";
 
 export default function Nav() {
   const { employeeId: paramsid } = useParams();
@@ -29,6 +27,7 @@ export default function Nav() {
             className="cursor-pointer"
             alt="company logo"
             src={companyLogo}
+            priority
           />
           <div className="flex h-full items-center justify-center">
             {LayoutRoute?.map(
@@ -57,7 +56,7 @@ export default function Nav() {
         <div className="flex flex-row items-center gap-8">
           <SearchBar />
           <div className="flex flex-row items-center gap-3">
-            <div className="relative">
+            <div className="relative mr-1">
               <FaInbox className="h-7 w-7 cursor-pointer font-bold text-gray-15 transition-all ease-linear hover:text-fabric-700" />
               <div className="absolute right-[-30%] top-[-25%] flex h-6 w-6 cursor-default items-center justify-center rounded-full border-2 border-gray-17 bg-fabric-700 px-1 text-center text-[0.70rem] text-white">
                 <span>50</span>
@@ -66,11 +65,11 @@ export default function Nav() {
             <BsFillQuestionCircleFill className="h-7 w-7 cursor-pointer font-bold text-gray-15  transition-all ease-linear hover:text-fabric-700" />
             <Link href={"/Settings"}>
               <IoMdSettings
-                className={`h-8 w-8 cursor-pointer font-bold  text-gray-15 transition-all ease-linear hover:text-fabric-700 ${currentPath.includes("/Settings") && "text-fabric-700"}`}
+                className={`h-8 w-8 cursor-pointer font-bold  text-gray-15 transition-all ease-linear hover:text-fabric-700 ${currentPath.includes("/Settings") ? "text-fabric-700" : ""}`}
               />
             </Link>
             <Image
-              className="h-7 w-7 rounded-full"
+              className="h-8 w-8 rounded-full"
               src={defaultAvatar}
               alt=""
             />

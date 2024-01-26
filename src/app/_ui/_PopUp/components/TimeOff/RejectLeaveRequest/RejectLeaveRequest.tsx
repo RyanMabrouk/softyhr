@@ -7,7 +7,6 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import React from "react";
 import { BiSolidDislike } from "react-icons/bi";
-import { CgClose } from "react-icons/cg";
 import PopUpSkeleton from "../../../PopUpSkeleton";
 
 export default function RejectLeaveRequest() {

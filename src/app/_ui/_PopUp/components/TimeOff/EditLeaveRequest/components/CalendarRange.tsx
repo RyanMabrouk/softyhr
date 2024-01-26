@@ -37,6 +37,9 @@ export function CalendarRange({
   required,
 }: CalendarProps) {
   const [date, setDate] = useState<DateRange | undefined>(defaultValue);
+  // Sync the default value with the date
+  if (defaultValue && !date?.from && !date?.to) setDate(defaultValue);
+  // Sync the date with the parent
   useEffect(() => {
     setStartValueInParent && date?.from
       ? setStartValueInParent(new Date(date?.from))
@@ -118,7 +121,7 @@ export function CalendarRange({
               id="date_range"
               initialFocus
               mode="range"
-              defaultMonth={date?.from}
+              defaultMonth={defaultValue?.from}
               selected={date}
               onSelect={setDate}
               numberOfMonths={2}

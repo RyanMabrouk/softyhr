@@ -8,7 +8,7 @@ import { HistoryTableFiltersProvider } from "./_context/historyTableFilters";
 import { UpcomingTimeOff } from "./UpcomingTimeOff";
 import { ChangeAccrualStartBtn } from "./_ui/Buttons/ChangeAccrualStartBtn";
 import { AddTimeOffPolicyBtn } from "./_ui/Buttons/AddTimeOffPolicyBtn";
-
+import { ToggleDateSortContextProvider } from "./_context/toggleDateSortContext";
 export default function Page() {
   return (
     <main className="flex h-full w-full flex-col gap-2 py-4 pb-20 pl-8">
@@ -40,7 +40,9 @@ export default function Page() {
         <UpcomingTimeOff />
       </section>
       <HistoryTableFiltersProvider>
-        <History />
+        <ToggleDateSortContextProvider>
+          <History />
+        </ToggleDateSortContextProvider>
       </HistoryTableFiltersProvider>
     </main>
   );

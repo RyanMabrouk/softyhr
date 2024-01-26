@@ -4,12 +4,7 @@ import { usePathname } from "next/navigation";
 import { MenuLinksGeneric } from "../../../../_ui/MenuLinksGeneric";
 export function ChangePolicyMenuBtn({ id }: { id: number }) {
   const pathname = usePathname();
-  /*------------ Menu ---------------*/
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
+  const [open, setOpen] = React.useState(false);
   /*--------------------------------*/
   const options = [
     {
@@ -28,31 +23,25 @@ export function ChangePolicyMenuBtn({ id }: { id: number }) {
     },
   ];
   return (
-    <>
-   {  /* <MenuLinksGeneric
+    <div
+      className={`absolute inset-x-0 bottom-2 box-border flex  h-11  w-full  flex-row-reverse items-center justify-center gap-1  rounded-b-md  border-2 border-solid border-gray-17 bg-[white] py-3 text-center  capitalize text-gray-21  transition-all delay-0 duration-150 ease-in-out  ${
+        open
+          ? ""
+          : "-translate-y-5 opacity-0 group-hover:translate-y-0 group-hover:opacity-100"
+      }`}
+    >
+      <MenuLinksGeneric
         id={"editPolicyMenu" + id}
         options={options}
-        anchorEl={anchorEl}
-        setAnchorEl={setAnchorEl}
-  />*/}
-      <div
-        className={`absolute bottom-2 box-border flex h-11 w-full flex-row-reverse items-center justify-center gap-1 rounded-b-md  border-2 border-solid border-gray-17 bg-[white] py-3 text-center  capitalize text-gray-21  transition-all delay-[0s] duration-[0.15s] ease-[ease-in-out]  ${
-          open
-            ? ""
-            : "-translate-y-5 opacity-0 group-hover:translate-y-0 group-hover:opacity-100"
-        }`}
+        setOpenValueInParent={setOpen}
       >
-        <span
-          className="peer cursor-pointer text-sm hover:text-fabric-700"
-          aria-controls={open ? "editPolicyMenu" + id : undefined}
-          aria-haspopup="true"
-          aria-expanded={open ? "true" : undefined}
-          onClick={handleClick}
-        >
-          chnage policy
-        </span>
-        <IoMdSettings className="order-0 h-4 w-4 peer-hover:text-fabric-700" />
-      </div>
-    </>
+        <div className="flex h-full w-full flex-row-reverse items-center justify-center gap-1">
+          <span className="peer cursor-pointer text-sm hover:text-fabric-700">
+            chnage policy
+          </span>
+          <IoMdSettings className="order-0 h-4 w-4 peer-hover:text-fabric-700" />
+        </div>
+      </MenuLinksGeneric>
+    </div>
   );
 }

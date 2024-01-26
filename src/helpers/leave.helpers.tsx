@@ -1,22 +1,28 @@
-import icons from "@/app/(dashboard)/people/[employeeId]/TimeOff/_ui/icons";
+import icons from "@/constants/icons";
 import {
   databese_leave_categories_track_time_unit_type,
   databese_leave_categories_type,
 } from "@/types/database.tables.types";
 import { formatYYYYMMDD, sameDay } from "./date.helpers";
+import useData from "@/hooks/useData";
+import { useSettings } from "@/hooks/useSettings";
 // generate Leave Categorie Icon
 export function generateLeaveCategorieIcon({
   categorie,
   className,
+  iconName,
 }: {
-  categorie: databese_leave_categories_type;
+  categorie?: databese_leave_categories_type | undefined;
   className: string;
+  iconName?: string;
 }) {
   const icons_classname = className + " " + "text-fabric-700";
   const icon =
     categorie && icons[categorie.icon]
       ? icons[categorie.icon](icons_classname)
-      : icons.default(icons_classname);
+      : iconName && icons[iconName]
+        ? icons[iconName](icons_classname)
+        : icons.default(icons_classname);
   return icon;
 }
 // format Total Hours To Time Unit
@@ -35,7 +41,12 @@ export function formatTotalHoursToTimeUnit(
   return remove_time_unit ? `${total_time}` : `${total_time} ${time_unit}`;
 }
 // array Of Working Days
-export function arrayOfWorkingDays(startDate: Date, endDate: Date) {
+export function useArrayOfWorkingDays(
+  startDate: Date | "",
+  endDate: Date | "",
+) {
+  const { data: settings } = useSettings("default_hours_per_day");
+  if (!startDate || !endDate) return [];
   const dates = [];
   const currentDate = new Date(startDate);
   while (currentDate <= endDate || sameDay(currentDate, endDate)) {
@@ -43,12 +54,12 @@ export function arrayOfWorkingDays(startDate: Date, endDate: Date) {
     if (day !== 0 && day !== 6) {
       dates.push({
         date: formatYYYYMMDD(currentDate),
-        duration: 8,
+        duration: settings?.[day],
       });
     } else {
       dates.push({
         date: formatYYYYMMDD(currentDate),
-        duration: 0,
+        duration: settings?.[day],
       });
     }
     currentDate.setDate(currentDate.getDate() + 1);
