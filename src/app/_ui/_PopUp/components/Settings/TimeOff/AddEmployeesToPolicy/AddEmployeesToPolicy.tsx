@@ -19,8 +19,8 @@ import {
   MdKeyboardDoubleArrowRight,
 } from "react-icons/md";
 import { SearchContextProvider } from "./context/SearchContext";
-import { AvailableEmployees } from "./AvailableEmployees";
-import { SelectedEmployees } from "./SelectedEmployees";
+import { AvailableEmployees } from "./components/AvailableEmployees";
+import { SelectedEmployees } from "./components/SelectedEmployees";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import addEmployeesToPolicy from "@/actions/settings/leave/addEmployeesToPolicy";
 import useToast from "@/hooks/useToast";

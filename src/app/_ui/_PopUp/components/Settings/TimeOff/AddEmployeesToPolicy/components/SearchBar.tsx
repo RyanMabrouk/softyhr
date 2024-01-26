@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { IoSearchSharp } from "react-icons/io5";
-import { useSearch } from "./context/SearchContext";
+import { useSearch } from "../context/SearchContext";
 
 export function SearchBar() {
   const { setSearch, Search } = useSearch();

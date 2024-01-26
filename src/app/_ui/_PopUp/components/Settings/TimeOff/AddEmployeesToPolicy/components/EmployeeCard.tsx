@@ -22,7 +22,7 @@ export function EmployeeCard({
       <span className="line-clamp-1 overflow-ellipsis text-[1.025rem] group-hover:text-fabric-700">
         {capitalizeFirstLetter(name)}
       </span>
-      <span className="line-clamp-1 overflow-ellipsis text-sm text-gray-21">
+      <span className="line-clamp-1 text-right ml-0.5 capitalize opacity-80 overflow-ellipsis text-sm text-gray-21">
         {current_policy_name}
       </span>
     </div>

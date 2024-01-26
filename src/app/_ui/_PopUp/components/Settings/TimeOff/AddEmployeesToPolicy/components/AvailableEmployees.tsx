@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
-import { useSearch } from "./context/SearchContext";
-import { usersWithoutCurrentPolicy } from "./AddEmployeesToPolicy";
+import { useSearch } from "../context/SearchContext";
+import { usersWithoutCurrentPolicy } from "../AddEmployeesToPolicy";
 import { EmployeeCard } from "./EmployeeCard";
 import { SearchBar } from "./SearchBar";
 import { allowDrop } from "@/helpers/dragAndDrop.helpers";
@@ -14,7 +14,6 @@ export function AvailableEmployees({
   dropSelected: (e: React.DragEvent<HTMLElement>) => void;
 }) {
   const { Search } = useSearch();
-  console.log("🚀 ~ Search:", Search);
   return (
     <section className="flex min-h-full w-fit flex-col gap-1">
       <header className="font-semibold">Available Employees</header>

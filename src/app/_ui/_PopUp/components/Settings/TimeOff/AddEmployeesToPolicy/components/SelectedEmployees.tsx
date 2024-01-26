@@ -2,7 +2,7 @@
 import React from "react";
 import { PiUsersThreeFill } from "react-icons/pi";
 import { EmployeeCard } from "./EmployeeCard";
-import { usersWithoutCurrentPolicy } from "./AddEmployeesToPolicy";
+import { usersWithoutCurrentPolicy } from "../AddEmployeesToPolicy";
 import { allowDrop } from "@/helpers/dragAndDrop.helpers";
 
 export function SelectedEmployees({
