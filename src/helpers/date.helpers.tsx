@@ -117,11 +117,12 @@ export function updateTime() {
     .padStart(2, "0")}`;
   return String(clockStr);
 }
-//
+// get the format DD/MM/YYYY from supabase created at format
+
 export function formatDateFiles(date: any) {
-  const day = date.slice(8, 10);
-  const month = date.slice(5, 7);
-  const year = date.slice(0, 4);
+  const day = date?.slice(8, 10);
+  const month = date?.slice(5, 7);
+  const year = date?.slice(0, 4);
 
   return `${day}/${month}/${year}`;
 }

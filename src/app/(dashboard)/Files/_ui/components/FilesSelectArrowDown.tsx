@@ -61,7 +61,7 @@ const FilesSelectArrowDown = ({ onSelect, options }: any) => {
         </button>
       </div>
       {isDropdownOpen && (
-        <div className="shadow-green absolute z-20 mt-[0.1rem]  w-44 origin-top-right rounded-sm bg-white shadow-lg ring-1 ring-black ring-opacity-5">
+        <div className="shadow-green absolute  z-50 mt-[0.1rem]  w-44 origin-top-right rounded-sm bg-white shadow-lg ring-1 ring-black ring-opacity-5">
           <div
             ref={dropdownRef}
             className="py-1"

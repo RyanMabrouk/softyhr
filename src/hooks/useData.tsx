@@ -43,6 +43,7 @@ export default function useData() {
     queryFn: () =>
       getData("folders", {
         org: true,
+        column: "*,files(*)",
       }),
   });
 

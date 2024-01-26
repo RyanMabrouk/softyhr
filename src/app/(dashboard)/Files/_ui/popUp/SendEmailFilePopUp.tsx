@@ -5,19 +5,16 @@ import ButtonPopUp from "../components/ButtonPopUp";
 import { AiOutlineFileText } from "react-icons/ai";
 import { SubmitHandler, useForm } from "react-hook-form";
 import Error from "../components/Error";
+import PopUpSkeleton from "@/app/_ui/_PopUp/PopUpSkeleton";
+import useFileData from "@/hooks/useFileData";
+import LoaderPopUp from "../components/Loader/LoaderPopUp/LoaderPopUp";
+import { FaRegFileImage, FaRegFilePdf } from "react-icons/fa6";
+import { formatDateFiles } from "@/helpers/date.helpers";
 
 export default function SendEmailFilePopUp() {
   const Router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const fileName = searchParams.get("fileName");
-
-  type FormValues = {
-    email: string;
-    subject: string;
-    message: string;
-  };
-
   const {
     register,
     handleSubmit,
@@ -26,40 +23,46 @@ export default function SendEmailFilePopUp() {
     formState: { errors },
   } = useForm<FormValues>();
 
-  function onError(errors: any) {
-    console.log(errors);
-  }
+  type FormValues = {
+    email: string;
+    subject: string;
+    message: string;
+  };
+
+  const id = searchParams.get("fileId");
+  const { file } = useFileData(id);
+  const isPending = file.isPending;
+
+  function onError(errors: any) {}
 
   const onSubmit: SubmitHandler<FormValues> = (data) => {
-    console.log(data);
     Router.replace(pathname);
   };
 
   return (
     <>
-      <div className="z-50 flex flex-col gap-2 ">
-        <div className="z-50 flex flex-col gap-2">
-          <div className="flex flex-row justify-between">
-            <h1 className=" pb-2 text-2xl font-normal text-fabric-700">
-              Email This File
-            </h1>
-            <div
-              onClick={() => {
-                console.log(pathname);
-                Router.push(pathname);
-              }}
-            >
-              <CgClose className="cursor-pointer text-3xl text-gray-15" />
-            </div>
-          </div>
+      {isPending ? (
+        <div className="z-50">
+          <LoaderPopUp />
         </div>
-        <div className="shadow-popup flex  min-w-[38rem] flex-col gap-2 rounded-sm bg-white p-8">
+      ) : (
+        <PopUpSkeleton
+          title={"Email This File"}
+          className="shadow-popup flex  min-w-[38rem] flex-col gap-2 rounded-sm bg-white p-8"
+        >
           <div className="flex w-[28rem] flex-col p-2">
-            <AiOutlineFileText fontSize="1.8rem" fill="#222222" />
+            {(file.data[0].file_type === "application" && (
+              <FaRegFilePdf fontSize="1.8rem" fill="#cc4373" />
+            )) ||
+              (file.data[0].file_type === "image" && (
+                <FaRegFileImage fontSize="1.8rem" fill="#777270" />
+              ))}
 
-            <p className="text-lg text-gray-11">{fileName}</p>
+            <p className="text-lg text-gray-11">{file.data[0].name}</p>
             <p className=" text-sm text-gray-15">
-              Added 02/17/2024 by tk (512KB)
+              {`Added ${formatDateFiles(file.data[0].created_at)} by ${
+                file.data[0].addedBy
+              } (${file.data[0].size}KB)`}
             </p>
           </div>
           <form
@@ -92,7 +95,7 @@ export default function SendEmailFilePopUp() {
                   {...register("subject", {
                     required: "This field is required",
                   })}
-                  value={fileName ? `Here is the file :  ${fileName}` : ""}
+                  value={`Here is the file :  ${file.data[0].name}`}
                   className=" w-96 border border-stone-400 px-2 py-1 text-sm text-gray-12 outline-1 transition-all duration-300  focus:outline-color1-300 "
                 />
               </div>
@@ -130,8 +133,8 @@ export default function SendEmailFilePopUp() {
               </button>
             </div>
           </form>
-        </div>
-      </div>
+        </PopUpSkeleton>
+      )}
     </>
   );
 }
