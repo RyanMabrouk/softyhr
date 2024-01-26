@@ -5,20 +5,22 @@ import Image from "next/image";
 import Link from "next/link";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { CAREER_PATH } from "@/constants/LayoutRoute";
-import { Navigation } from 'swiper/modules';
+import { Navigation } from "swiper/modules";
 import ApplySectionSkeleton from "./components/ApplySection/ApplySectionSkeleton";
 import DescriptionSkeleton from "./components/Description/DescriptionSkeleton";
 import Description from "./components/Description/Description";
 import ApplySection from "./components/ApplySection/ApplySection";
 import useHiring from "@/hooks/useHiring";
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import 'swiper/css/navigation';
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/navigation";
 import CustomSwiper from "@/app/_ui/swiper";
 import AppliymentForm from "./components/AppliymentForm/AppliymentForm";
 
 function Page({ params: { career_id } }: { params: { career_id: string } }) {
-  const { Hiring: { data, isPending } } = useHiring({ id: career_id });
+  const {
+    Hiring: { data, isPending },
+  } = useHiring({ id: career_id, "Job Status": "Open" });
   const [CurrentBtn, setCurrentBtn] = useState<string>("Apply for This job");
   return (
     <div className=" flex h-screen w-[99dvw] items-start justify-center gap-[2rem] py-8 pt-8">
@@ -42,31 +44,46 @@ function Page({ params: { career_id } }: { params: { career_id: string } }) {
             {isPending ? (
               <DescriptionSkeleton />
             ) : (
-               <div className="w-full py-4">
-      <div className="flex border-b border-gray-32 flex-col pb-8 items-start justify-center gap-[1rem]">
-        <h1 className="text-3xl text-color-primary-8">
-          {data[0]?.job_information?.["Posting Title"]}
-        </h1>
-        <h1 className="text-sm text-gray-15">
-          {data[0]?.job_information?.["Departement"]+" · "+data[0]?.job_information?.["Job Location"]}
-        </h1>
-      </div>
-             <Swiper
-              allowTouchMove={false}
-              style={{width:'100% !important'}}
-              navigation={{
-                prevEl: ".btn_swiper_arrow_left",
-                nextEl: ".btn_swiper_arrow_right",
-              }} modules={[Navigation]}   className="w-full">
-                <SwiperSlide><Description job={data[0]}/></SwiperSlide>
-                <SwiperSlide><AppliymentForm job={data[0]}/></SwiperSlide>
-              </Swiper>
-          </div>  )}
+              <div className="w-full py-4">
+                <div className="flex flex-col items-start justify-center gap-[1rem] border-b border-gray-32 pb-8">
+                  <h1 className="text-3xl text-color-primary-8">
+                    {data[0]?.job_information?.["Posting Title"]}
+                  </h1>
+                  <h1 className="text-sm text-gray-15">
+                    {data[0]?.job_information?.["Departement"] +
+                      " · " +
+                      data[0]?.job_information?.["Job Location"]}
+                  </h1>
+                </div>
+                <Swiper
+                  allowTouchMove={false}
+                  style={{ width: "100% !important" }}
+                  navigation={{
+                    prevEl: ".btn_swiper_arrow_left",
+                    nextEl: ".btn_swiper_arrow_right",
+                  }}
+                  modules={[Navigation]}
+                  className="w-full"
+                >
+                  <SwiperSlide>
+                    <Description job={data[0]} />
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    <AppliymentForm
+                      SuccessMessage="Application submitted successfuly !"
+                      SubmittingButtonText="Submitting Application..."
+                      ButtonText="Submit Application"
+                      job={data[0]}
+                    />
+                  </SwiperSlide>
+                </Swiper>
+              </div>
+            )}
           </div>
           <div className="absolute bottom-0 right-0 h-[0.2rem] w-full bg-gradient-to-r from-color-primary-1 to-color-primary-3" />
         </div>
       </div>
-      {isPending ? <ApplySectionSkeleton /> : <ApplySection  job={data[0]} />}
+      {isPending ? <ApplySectionSkeleton /> : <ApplySection job={data[0]} />}
     </div>
   );
 }

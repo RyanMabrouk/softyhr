@@ -83,24 +83,48 @@ export default function UserInfo({ employeeId }: UserInfoPropsType) {
       <div className="mt-10 flex flex-col gap-[1rem] px-5">
         <div className=" flex flex-col items-start  justify-center gap-2">
           <div className="flex items-center justify-start gap-2 whitespace-nowrap text-sm text-gray-15">
-            <MdOutlineHomeWork fill="gray" />
+            <MdOutlineHomeWork
+              fill="gray"
+              className="cursor-pointer duration-200 ease-in-out hover:!text-color-primary-8"
+            />
             <span className="text-sm">{user?.Contact?.["Work Phone"]}</span>
           </div>
           <div className="flex items-center justify-start gap-2 whitespace-nowrap text-gray-15">
-            <MdPhoneAndroid fill="gray" />
+            <MdPhoneAndroid
+              fill="gray"
+              className="cursor-pointer duration-200 ease-in-out hover:!text-color-primary-8"
+            />
             <span className="text-sm">{user?.Contact?.["Mobile Phone"]}</span>
           </div>
           <div className="flex items-center justify-start gap-2 whitespace-nowrap text-gray-15">
-            <CiMail fill="gray" />
+            <CiMail
+              fill="gray"
+              className="cursor-pointer duration-200 ease-in-out hover:!text-color-primary-8"
+            />
             <span className="text-sm">{user?.Contact?.["Work Email"]}</span>
           </div>
         </div>
         <div className="-ml-4 flex flex-row items-center justify-evenly whitespace-nowrap text-gray-15">
-          <FaLinkedin fill="gray" />
-          <FaTwitter fill="gray" />
-          <FaFacebookSquare fill="gray" />
-          <FaPinterest fill="gray" />
-          <FaTwitter fill="gray" />
+          <FaLinkedin
+            fill="gray"
+            className="cursor-pointer duration-200 ease-in-out hover:!text-color-primary-8"
+          />
+          <FaTwitter
+            fill="gray"
+            className="cursor-pointer duration-200 ease-in-out hover:!text-color-primary-8"
+          />
+          <FaFacebookSquare
+            fill="gray"
+            className="cursor-pointer duration-200 ease-in-out hover:!text-color-primary-8"
+          />
+          <FaPinterest
+            fill="gray"
+            className="cursor-pointer duration-200 ease-in-out hover:!text-color-primary-8"
+          />
+          <FaTwitter
+            fill="gray"
+            className="cursor-pointer duration-200 ease-in-out hover:!text-color-primary-8"
+          />
         </div>
         <div className="h-px w-full  self-center bg-gray-16" />
         <div className=" flex flex-col gap-[0.3rem]">

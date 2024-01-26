@@ -6,7 +6,7 @@ import { FaLinkedin } from "react-icons/fa";
 
 interface InputPropsType {
   RowField: RowFieldType;
-  setTouched?: (arg: boolean) => void ;
+  setTouched?: React.Dispatch<React.SetStateAction<boolean>> | undefined;
   defaultValue?: string;
 }
 const Input = ({ RowField, setTouched, defaultValue }: InputPropsType) => {
@@ -24,7 +24,7 @@ const Input = ({ RowField, setTouched, defaultValue }: InputPropsType) => {
       </h1>
       <div className="group flex items-center justify-start">
         {RowField?.Icon && (
-          <span className="absolute ml-[1px]  h-[1.9rem] w-[1.8rem] bg-gray-14">
+          <span className="absolute ml-[2px]  h-[1.85rem] w-[1.8rem] bg-gray-14">
             <Component
               fill="gray"
               style={{
@@ -38,10 +38,10 @@ const Input = ({ RowField, setTouched, defaultValue }: InputPropsType) => {
         )}
         <input
           className={
-            "focus:focus-within:shadow-green h-[2rem] rounded-sm border border-gray-19 px-2 text-[0.95rem] font-normal outline-none  " +
+            "focus:focus-within:shadow-green h-[2rem] overflow-hidden rounded-sm border border-gray-19 px-2 text-[0.95rem] font-normal outline-none  " +
             (RowField?.Icon ? "pl-8 " : "")
           }
-          type={RowField?.type || "text"}
+          type={RowField?.type}
           value={value}
           name={RowField?.name}
           onChange={(e) => setValue(e.target.value)}
@@ -49,7 +49,7 @@ const Input = ({ RowField, setTouched, defaultValue }: InputPropsType) => {
             if (setTouched) setTouched(true);
           }}
           placeholder={RowField?.placeHolder || ""}
-          {...(RowField?.required && {required : true})}
+          required={RowField?.required}
         />
       </div>
     </div>

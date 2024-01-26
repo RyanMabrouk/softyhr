@@ -37,7 +37,7 @@ function Education({
   };
   return (
     <div className="flex flex-col items-start ">
-      {[...Data?.data?.[champ], ...DATA]?.map((data: any) => {
+      {[...Data?.data?.[champ] || [], ...DATA]?.map((data: any) => {
         {
           return (
             <div className="flex justify-center gap-[1rem] py-2" key={data?.id}>

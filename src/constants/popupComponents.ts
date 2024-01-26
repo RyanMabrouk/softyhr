@@ -1,8 +1,7 @@
-import DeleteEducation from "@/app/_ui/_PopUp/components/Personel-job/Education/DeleteEducation/DeleteEducation";
-import AddEntry from "@/app/_ui/_PopUp/components/Personel-job/TableEntries/AddEntry/AddEntry";
-import EditEntry from "@/app/_ui/_PopUp/components/Personel-job/TableEntries/EditEntry/EditEntry";
-import DeleteItem from "@/app/_ui/_PopUp/components/Personel-job/TableEntries/DeleteEntry/DeleteItem";
-import EditPhoto from "@/app/_ui/_PopUp/components/EditPhoto/EditPhoto";
+import AddEntry from "@/app/_ui/_PopUp/components/TableEntries/AddEntry/AddEntry";
+import EditEntry from "@/app/_ui/_PopUp/components/TableEntries/EditEntry/EditEntry";
+import DeleteItem from "@/app/_ui/_PopUp/components/TableEntries/DeleteEntry/DeleteItem";
+import EditPhoto from "@/app/_ui/_PopUp/components/Personel-job/EditPhoto/EditPhoto";
 import DeleteLeaveRequest from "@/app/_ui/_PopUp/components/TimeOff/DeleteLeaveRequest/DeleteLeaveRequest";
 import EditFields from "@/app/_ui/_PopUp/components/Personel-job/EditFields/EditFields";
 import NewFolderPopUp from "@/app/(dashboard)/Files/_ui/popUp/NewFolderPopUp";
@@ -31,6 +30,12 @@ import RenamePolicy from "@/app/_ui/_PopUp/components/Settings/TimeOff/RenamePol
 import DeleteLeavePolicyData from "@/app/_ui/_PopUp/components/Settings/TimeOff/DeleteLeavePolicy/DeleteLeavePolicyData";
 import AddNewPolicy from "@/app/_ui/_PopUp/components/Settings/TimeOff/AddNewPolicy/AddNewPolicy";
 import AddEmployeesToPolicy from "@/app/_ui/_PopUp/components/Settings/TimeOff/AddEmployeesToPolicy/AddEmployeesToPolicy";
+import DeleteEducation from "@/app/_ui/_PopUp/components/Personel-job/DeleteEducation/DeleteEducation";
+import EditApplicationDetails from "@/app/_ui/_PopUp/components/Hiring/EditApplicationDetails/EditApplicationDetails";
+import EditJobInformation from "@/app/_ui/_PopUp/components/Hiring/EditJobInformation/EditJobInformation";
+import DeleteJob from "@/app/_ui/_PopUp/components/Hiring/DeleteJob/DeleteJob";
+import EditJobBoard from "@/app/_ui/_PopUp/components/Hiring/EditJobBoard/EditJobBoard";
+import HireCandidate from "@/app/_ui/_PopUp/components/Hiring/HireCandidate/HireCandidate";
 
 type PopupType = {
   [key: string]: () => React.JSX.Element;
@@ -60,6 +65,11 @@ export const popups: PopupType = {
   EDIT_PROFILE_IMAGE: EditPhoto,
   ADD_TIME_OFF_POLICY: AddTimeOffPolicy,
   CHANGE_ACCURAL_START_DATE: AccrualStartDate,
+  DELETE_JOB: DeleteJob,
+  EDIT_JOB_INFORMATION: EditJobInformation,
+  EDIT_APPLICATION_DETAILS: EditApplicationDetails,
+  EDIT_JOB_BOARDS: EditJobBoard,
+  HIRE_CANDIDATE: HireCandidate,
   CHANGE_DEFAULT_HOURS_PER_DAY: ChangeDefaultHoursPerDay,
   EDIT_LEAVE_CATEGORY: EditLeaveCategory,
   DISABLE_LEAVE_CATEGORY: DisableLeaveCategory,

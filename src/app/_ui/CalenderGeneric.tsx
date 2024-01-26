@@ -20,6 +20,7 @@ export function CalendarGeneric({
   setValueInParent,
   allowPastDates = false,
   required,
+  setAction,
 }: {
   className?: string;
   name: string;
@@ -29,6 +30,7 @@ export function CalendarGeneric({
   setValueInParent?: React.Dispatch<React.SetStateAction<Date>> | undefined;
   allowPastDates?: boolean;
   required?: boolean;
+  setAction?: () => void | undefined;
 }) {
   const [date, setDate] = useState<Date | undefined>(defaultValue);
   useEffect(() => {
@@ -86,6 +88,7 @@ export function CalendarGeneric({
               defaultMonth={date}
               selected={date}
               onSelect={setDate}
+              onDayClick={setAction}
               disabled={(date) => (allowPastDates ? false : date > new Date())}
               initialFocus
             />

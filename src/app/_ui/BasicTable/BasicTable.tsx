@@ -51,7 +51,7 @@ export default function BasicTable({
             </TableRow>
           </TableHead>
           {data?.length == 0 ? (
-            <div className="text-semibold absolute bg-gray-14 py-2 pl-4 text-lg text-gray-15">
+            <div className="text-semibold bg-gray-14 py-2 pl-4 text-lg text-gray-15">
               No {champ} entries have been added.
             </div>
           ) : (

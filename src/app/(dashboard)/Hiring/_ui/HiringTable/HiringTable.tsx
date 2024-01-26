@@ -1,6 +1,6 @@
 "use client";
 import { v4 as uuidv4 } from "uuid";
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { HiOutlineDuplicate } from "react-icons/hi";
 import {
   Table,
@@ -20,8 +20,19 @@ import Empty from "./components/Empty";
 import { FaSortDown, FaTrash } from "react-icons/fa6";
 import { MdModeEditOutline } from "react-icons/md";
 import { FaFileDownload } from "react-icons/fa";
-import  TopContent  from "./components/TopContent";
-import { HiringPropsType, HiringTableType, statusOptionsType } from "./Hiringtable.types";
+import TopContent from "./components/TopContent";
+import {
+  HiringPropsType,
+  HiringTableType,
+  statusOptionsType,
+} from "./Hiringtable.types";
+import Link from "next/link";
+import Paggination from "./components/Pagination";
+import useHiring from "@/hooks/useHiring";
+import { useQueryClient } from "@tanstack/react-query";
+import { GetJobOpening } from "@/actions/hiring/GetJobOpening";
+import PublishButton from "./components/PublishButton";
+import EditCard from "./components/EditCard";
 
 const columns = [
   { name: "id", uid: "id" },
@@ -53,21 +64,31 @@ const INITIAL_VISIBLE_COLUMNS = [
   "status",
   "actions",
 ];
+interface HiringTablePropsType {
+  Hiring: HiringTableType[];
+  page: number;
+  setPage: React.Dispatch<React.SetStateAction<number>>;
+}
 
-export default function HiringTable({ Hiring }: HiringPropsType) {
+export default function HiringTable({
+  Hiring,
+  page,
+  setPage,
+}: HiringTablePropsType) {
   const [filterValue, setFilterValue] = React.useState("");
   const [visibleColumns, setVisibleColumns] = React.useState<Selection>(
     new Set(INITIAL_VISIBLE_COLUMNS),
   );
+
+  const queryClient = useQueryClient();
+  const [ShowEdit, setShowEdit] = useState<boolean>(false);
   const [statusFilter, setStatusFilter] = React.useState<Selection>("all");
-  const [rowsPerPage, setRowsPerPage] = React.useState(Hiring.length);
   const [sortDescriptor, setSortDescriptor] = React.useState<SortDescriptor>({
     column: "age",
     direction: "ascending",
   });
-  const [page, setPage] = React.useState(1);
 
-  const pages = Math.ceil(Hiring.length / rowsPerPage);
+  const rowsPerPage = 7;
 
   const hasSearchFilter = Boolean(filterValue);
 
@@ -141,9 +162,12 @@ export default function HiringTable({ Hiring }: HiringPropsType) {
         case "job_opening":
           return (
             <div className="flex flex-col items-start justify-center gap-[0.2rem]">
-              <p className="cursor-pointer text-color5-500 hover:text-color-primary-8 hover:underline">
+              <Link
+                href={`/Hiring/jobs/${user?.id}`}
+                className="cursor-pointer text-color5-500 hover:text-color-primary-8 hover:underline"
+              >
                 {user.job_opening}
-              </p>
+              </Link>
               <div className="flex items-center justify-center text-sm font-normal text-gray-11">
                 <p>{user.department}</p>
                 <p>{user.Location}</p>
@@ -180,26 +204,36 @@ export default function HiringTable({ Hiring }: HiringPropsType) {
         case "actions":
           return (
             <div className="ease flex items-center justify-end gap-2 opacity-0 duration-150 group-hover:!opacity-100">
-              <div className="duration-250 flex h-[2rem] w-[2rem] cursor-pointer items-center justify-center ease-in-out hover:border hover:border-gray-27 hover:bg-gray-22">
-                <MdModeEditOutline
-                  className="text-lg"
-                  cursor={"pointer"}
-                  fill={"gray"}
-                />
+              <div className="relative">
+                <div
+                  onClick={() => setShowEdit(true)}
+                  className="duration-250 flex h-[2rem] w-[2rem] cursor-pointer items-center justify-center ease-in-out hover:border hover:border-gray-27 hover:bg-gray-22"
+                >
+                  <MdModeEditOutline
+                    className="text-lg"
+                    cursor={"pointer"}
+                    fill={"gray"}
+                  />
+                </div>
+                {ShowEdit && <EditCard />}
               </div>
-              <div className="duration-250 flex h-[2rem] w-[2rem] cursor-pointer items-center justify-center ease-in-out hover:border hover:border-gray-27 hover:bg-gray-22">
+              <Link
+                href={`?popup=DELETE_JOB&id=${user?.id}`}
+                className="duration-250 flex h-[2rem] w-[2rem] cursor-pointer items-center justify-center ease-in-out hover:border hover:border-gray-27 hover:bg-gray-22"
+              >
                 <FaTrash cursor={"pointer"} fill={"gray"} />
-              </div>
+              </Link>
               <div className="duration-250 flex h-[2rem] w-[2rem] cursor-pointer items-center justify-center ease-in-out hover:border hover:border-gray-27 hover:bg-gray-22">
                 <HiOutlineDuplicate cursor={"pointer"} />
               </div>
+              {user?.status != "Open" && <PublishButton id={user?.id} />}
             </div>
           );
         default:
           return cellValue;
       }
     },
-    [],
+    [ShowEdit],
   );
   const classNames = React.useMemo(
     () => ({
@@ -238,6 +272,13 @@ export default function HiringTable({ Hiring }: HiringPropsType) {
       }}
       className="border-none !bg-white"
       classNames={classNames}
+      bottomContent={
+        <Paggination
+          pages={Math.ceil(Hiring?.length / rowsPerPage)}
+          page={page}
+          setPage={setPage}
+        />
+      }
       sortDescriptor={sortDescriptor}
       topContent={
         <TopContent
@@ -261,10 +302,14 @@ export default function HiringTable({ Hiring }: HiringPropsType) {
           </TableColumn>
         )}
       </TableHeader>
-      <TableBody emptyContent={<Empty />} items={sortedItems}>
+      <TableBody
+        //      loadingContent={isPending}
+        emptyContent={<Empty />}
+        items={sortedItems}
+      >
         {(item) => (
           <TableRow
-            className={item?.status == "Draft" ? "group !opacity-50" : " group"}
+            className={item?.status != "Open" ? "group !opacity-50" : " group"}
             key={uuidv4()}
           >
             {(columnKey) => (

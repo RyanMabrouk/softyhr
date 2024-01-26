@@ -1,37 +1,34 @@
 "use client";
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { memo, useContext, useEffect, useRef, useState } from "react";
 import FiledsChamps from "@/app/(dashboard)/people/components/Fileds/Fileds";
-import { StepsContext } from "../provider/StepsProvider";
+import { StepsContext } from "../context/StepsProvider";
 import useData from "@/hooks/useData";
-import Input from "@/app/(dashboard)/people/components/Fileds/Input/Input";
-import AdditionnalInputs from "./AdditionnalInputs";
-import ReactQuill  from 'react-quill';
+import AdditionnalInputs from "./components/AdditionnalInputs";
 
 function Page() {
-  const { InformationJob } = useContext(StepsContext);
-  const { settings: { data, isPending} } = useData();
-  const [value, setValue] = useState("");
-  const quillRef = useRef();
-
-  useEffect(() => {
-    console.log(quillRef.current);
-  }, [quillRef]);
-
-  return (  
-    <div className="flex h-full w-full flex-col items-start justify-start gap-[1.5rem]">
-    { isPending?
-        <h1>Loading...</h1>    
-    :<form className="flex flex-col items-start justify-start gap-[1rem]">
-        <FiledsChamps
-          FieldsArray={data[0]["Hiring"]["Fields"]}
-          champ={"hiring"}
-          user={{ hiring: { ...InformationJob?.values } }}
-        ></FiledsChamps>
-        <AdditionnalInputs/>
-        <button type="submit">submit</button>
-      </form>}
+  const { InformationJob, Update_InformationJob } = useContext(StepsContext);
+  const {
+    settings: { data, isPending },
+  } = useData();
+  return (
+    <div className="flex h-full w-full flex-col items-start justify-start gap-[1.5rem] pb-12">
+      {isPending ? (
+        <h1>Loading...</h1>
+      ) : (
+        <div className="flex flex-col items-start justify-start gap-[1rem]">
+          <FiledsChamps
+            FieldsArray={data[0]["Hiring"]["Fields"]}
+            champ={"hiring"}
+            user={{ hiring: { ...InformationJob?.values } }}
+          ></FiledsChamps>
+          <AdditionnalInputs
+            LocationValue={InformationJob?.values?.["Job Location"]}
+            Job_locationValue={InformationJob?.values?.Location}
+          />
+        </div>
+      )}
     </div>
   );
 }
 
-export default Page;
+export default memo(Page);

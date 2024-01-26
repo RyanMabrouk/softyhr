@@ -3,9 +3,10 @@ import { v4 as uuidv4 } from "uuid";
 import { Field } from "@/constants/userInfo";
 import { RowFieldType } from "@/types/userInfoTypes.type";
 import Input from "./Input/Input";
+import { RowType } from "@/types/database.tables.types";
 interface FiledsChampsPropsType {
-  FieldsArray: RowFieldType[];
-  setTouched?: ((arg: boolean) => void) | undefined;
+  FieldsArray: RowType[];
+  setTouched?: React.Dispatch<React.SetStateAction<boolean>> | undefined;
   user?: any | undefined;
   champ?: string;
 }
@@ -27,7 +28,6 @@ function FiledsChamps({
               >
                 {Row?.map((RowField: any) => {
                   const Component = Field[RowField?.type.toUpperCase()] || Input;
-                  console.log(RowField);
                   return (
                     <Component
                       champ={champ || ""}

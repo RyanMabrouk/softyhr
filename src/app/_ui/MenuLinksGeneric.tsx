@@ -10,6 +10,7 @@ export function MenuLinksGeneric({
   id: string;
   options: {
     name: string | React.ReactNode;
+    disabled?: boolean;
     link: {
       pathname: string;
       query?: { [key: string]: string | number };
@@ -60,6 +61,7 @@ export function MenuLinksGeneric({
             onClick={() => {
               setAnchorEl(null);
             }}
+            disabled={e.disabled ?? false}
           >
             <Link href={e.link}>
               <span className="text-sm">{e.name}</span>

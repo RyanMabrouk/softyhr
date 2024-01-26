@@ -1,22 +1,30 @@
-'use server';
+"use server";
 import { cookies, headers } from "next/headers";
 
 import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
+import getCurrentorg from "@/api/getCurrentOrg";
 
-export const CreateCandidate =async(NewCandaidate:any)=>{
+export const CreateCandidate = async (NewCandaidate: any) => {
   const supabase = createServerActionClient({ cookies });
-    
-    const { data, error } = await supabase
-     .from('candidates')
-     .insert([NewCandaidate])
-     .select()
-    if(error){
-        return {
-         Error: "Application submitted successfully",
-     }
-    }
-    else{
-      return {
-         Msg: "Application submitted successfully",
-     } }
-}
+  const org = await getCurrentorg();
+
+  const { data, error } = await supabase
+    .from("candidates")
+    .insert([{...NewCandaidate, org_name: org?.name}])
+    .select();
+  console.log("data", data);
+  console.log(error);
+  if (error) {
+    return {
+      Submitted:false,
+      Error: error ,
+      Msg: error?.message?.includes("candidates_Email_key") ? "email already exist" : "Something went Wrong"
+    };
+  } else {
+    return {
+      Submitted: true,
+      Error: null,
+      Msg: "candidate added successfully",
+    };
+  }
+};

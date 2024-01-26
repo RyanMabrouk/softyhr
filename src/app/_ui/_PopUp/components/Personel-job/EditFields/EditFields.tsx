@@ -53,7 +53,6 @@ function EditFields() {
     },
     onError: () => {
       Router.push(pathname);
-      // toast message
     },
   });
   const [Settings, setSettings] = useState<any>(data);

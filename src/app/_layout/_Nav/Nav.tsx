@@ -21,7 +21,7 @@ export default function Nav() {
   const employeeId = paramsid ? paramsid : user?.user_id;
   return (
     <>
-      <nav className="flex h-20 flex-row items-center justify-between gap-[2rem] bg-gray-17 pl-14 pr-10">
+      <nav className="flex min-h-20 flex-row items-center justify-between gap-[2rem] bg-gray-17 pl-14 pr-10">
         <div className="flex h-full flex-row items-center gap-2">
           <Image
             className="cursor-pointer"

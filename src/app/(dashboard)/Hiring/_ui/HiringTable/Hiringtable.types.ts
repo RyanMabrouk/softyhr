@@ -8,7 +8,8 @@ export interface HiringTableType {
   department: string;
   Location: string;
   status: string;
-}
+} 
+
 
 export interface HiringPropsType {
   Hiring: HiringTableType[];

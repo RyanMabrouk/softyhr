@@ -14,25 +14,21 @@ import { v4 as uuidv4 } from "uuid";
 interface LayoutHiringProps {
   children: ReactNode;
 }
+
 export default function HiringLayout({ children }: LayoutHiringProps) {
   const ActiveRoute = usePathname();
-  if (
-    CreateHiringJob.includes(
-      ActiveRoute.slice(ActiveRoute.lastIndexOf("/") + 1),
-    )
-  )
-    return children;
-  else
+  console.log(ActiveRoute.split("/").length - 1);
+  if (ActiveRoute.split("/").length - 1 > 2) return children;
     return (
       <div className="flex w-full flex-col items-center justify-center bg-gray-14">
-        <div className="mt-12 flex w-3/4 flex-col items-start justify-center gap-[2rem] text-black">
+        <div className="mt-8 flex w-3/4 flex-col items-start justify-center gap-[0.5rem] text-black">
           <div className="flex items-center justify-center gap-[0.5rem] self-start">
             <TiClipboard fontSize="3rem" fill="#527A01" />
             <h1 className="text-2xl font-semibold text-color-primary-8">
               Hiring
             </h1>
           </div>
-          <div className="flex w-full items-center justify-between">
+          <div className="flex w-full items-center justify-between ">
             <div className="flex items-center justify-center">
               {HirinSections?.map(
                 ({ label, path, Icon }: HirinSectionsType) => {
@@ -43,7 +39,9 @@ export default function HiringLayout({ children }: LayoutHiringProps) {
                       href={path}
                       className={
                         "flex items-center justify-center gap-[0.5rem] whitespace-nowrap rounded-t p-4 duration-150 ease-in-out hover:!bg-gray-28 " +
-                        (ActiveRoute.includes(path) ? "bg-white" : "gray")
+                        (ActiveRoute.includes(path)
+                          ? "bg-white shadow-2xl"
+                          : "gray")
                       }
                     >
                       <IconComponent
@@ -77,7 +75,7 @@ export default function HiringLayout({ children }: LayoutHiringProps) {
             </div>
           </div>
         </div>
-        {children}
+        <div className="h-full w-full ">{children}</div>
       </div>
     );
 }

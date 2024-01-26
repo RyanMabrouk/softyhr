@@ -1,21 +1,23 @@
-"use client";
+import { useEffect, useState } from "react";
+import { BlockNoteEditor, Block } from "@blocknote/core";
+import { BlockNoteView, useBlockNote } from "@blocknote/react";
+import "@blocknote/react/style.css";
 import { Hiring_type } from "@/types/database.tables.types";
-import React, { useEffect, useRef, useState } from "react";
-import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
-
-interface DescriptionPropsType {
+import dynamic from "next/dynamic";
+const Editor = dynamic(
+  () => import("@/app/(dashboard)/people/components/Fileds/Editor/Editor"),
+  { ssr: false },
+);
+interface DesciprtionPropsType {
   job: Hiring_type;
 }
 
-function Description({ job }: DescriptionPropsType) {
-  const TextRef = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    if (TextRef.current)
-      TextRef.current.innerHTML =
-        job?.job_information?.["Job Description"] || "";
-  }, [job?.job_information]);
-  return <div className="py-4" ref={TextRef}></div>;
-}
+export default function Description({ job }: DesciprtionPropsType) {
 
-export default Description;
+  return (
+    <Editor
+      editable={false}
+      defaultValue={job?.job_information?.["Job Description"]}
+    />
+  );
+}

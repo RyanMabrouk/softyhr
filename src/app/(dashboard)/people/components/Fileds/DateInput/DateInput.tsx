@@ -5,10 +5,11 @@ import "dayjs/locale/zh-cn";
 import dayjs from "dayjs";
 import { getYearDiff } from "@/helpers/date.helpers";
 import { RowFieldType } from "@/types/database.tables.types";
+import { CalendarGeneric } from "@/app/_ui/CalenderGeneric";
 
 interface DateInputPropsType {
-  RowField:RowFieldType;
-  setTouched?: (org: boolean) => void;
+  RowField: RowFieldType;
+  setTouched?: React.Dispatch<React.SetStateAction<boolean>> | undefined;
   defaultValue?: string | undefined;
 }
 function DateInput({ RowField, setTouched, defaultValue = "" }: DateInputPropsType) {
@@ -19,7 +20,7 @@ function DateInput({ RowField, setTouched, defaultValue = "" }: DateInputPropsTy
     if(dateString > new Date().toISOString() && RowField?.name != "End Date" && RowField?.name != "Expiration") setValue("");
     else setValue(dateString);
   };
-  return (
+  /*{return (
     <div className="flex items-end justify-center gap-[1rem]">
       <div className="flex flex-col items-start justify-center">
         <h1 className="text-[14px] text-gray-29 ">{RowField?.name}</h1>
@@ -39,6 +40,14 @@ function DateInput({ RowField, setTouched, defaultValue = "" }: DateInputPropsTy
         )}`}</h1>
       )}
     </div>
+  );*/
+  return (
+    <CalendarGeneric
+      name={RowField?.name}
+      label={RowField?.name}
+      setAction={() => setTouched && setTouched(true)}
+      defaultValue={defaultValue != "" ? new Date(defaultValue): undefined}
+    />
   );
 }
 

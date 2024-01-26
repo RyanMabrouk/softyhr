@@ -1,7 +1,7 @@
 import BasicTable from "@/app/_ui/BasicTable/BasicTable";
 import { RowFieldType } from "@/types/database.tables.types";
 import Link from "next/link";
-import React from "react";
+import React, { memo } from "react";
 import { IoMdAdd } from "react-icons/io";
 
 interface TableChampsPropsType {
@@ -22,4 +22,4 @@ function TableChamps({ FieldsArray, user, champ }: TableChampsPropsType) {
   );
 }
 
-export default TableChamps;
+export default memo(TableChamps);
