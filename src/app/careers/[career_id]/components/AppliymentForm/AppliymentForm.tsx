@@ -58,6 +58,7 @@ function AppliymentForm({
     const response = await CreateCandidate({
       ...FormulateFormData(Formdata),
       job_id: job?.id,
+      "Hiring Lead": job?.job_information?.["Hiring Lead"],
     });
     if (response?.Submitted) {
       console.log("Candidates", job?.id);

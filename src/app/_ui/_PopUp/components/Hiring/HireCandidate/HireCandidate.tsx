@@ -1,17 +1,19 @@
 import React, { ChangeEvent, useState } from "react";
 import PopUpSkeleton from "../../../PopUpSkeleton";
 import Confetti from "react-confetti";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { AiFillSafetyCertificate } from "react-icons/ai";
 import Checkbox from "@mui/material/Checkbox";
-import SubmitFormBtn from "@/app/(dashboard)/Hiring/jobs/add/SubmitFormBtn";
-import SubmitButton from "@/app/careers/[career_id]/components/AppliymentForm/SubmitButton";
 import Link from "next/link";
 
 function HireCandidate() {
   const Router = useRouter();
+  const params = useSearchParams();
+  const  ApplicationId = params.get("ApplicationId");
+  const  Candidate  = params.get("Candidate");
   const pathname = usePathname();
   const [checked, setCheked] = useState();
+  console.log(ApplicationId, Candidate);
   return (
     <PopUpSkeleton title="Hire">
       <div className="relative flex flex-col items-center justify-start gap-4 overflow-hidden px-10 py-4">
@@ -32,7 +34,7 @@ function HireCandidate() {
         </div>
         <hr className="mt-4 h-[3px] w-full bg-primary-gradient" />
         <Link
-          href={`/people/NewEmployee?DJO=${checked}`}
+          href={`/people/NewEmployee?DJO=${checked}&ApplicationId=${ApplicationId}&Candidate=${Candidate}`}
           className="text-bold !justify-start self-start rounded bg-color-primary-8 p-2 px-5 text-white duration-300 ease-in-out hover:!bg-color-primary-7 "
         >
           Add New Employee

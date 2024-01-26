@@ -8,7 +8,7 @@ import EmployementStatus from "./components/EmployementStatus";
 
 function Page() {
   const [checked, setChecked] = useState<boolean>(false);
-  console.log(checked);
+  
   return (
     <div className="flex h-full w-full items-start justify-center">
       <div className="w-9/12">
@@ -24,7 +24,6 @@ function Page() {
           </div>
           <div>
             <Form />
-            <AccessSection />
           </div>
         </div>
       </div>

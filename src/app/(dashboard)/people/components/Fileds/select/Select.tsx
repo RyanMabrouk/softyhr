@@ -76,7 +76,7 @@ function SelectInput({
         })}
       </Select>
       <input
-        required={true}
+        required={RowField?.required}
         type="text"
         className="absolute bottom-0 left-10 h-[1px] w-[1px] opacity-0"
         value={value || ""}

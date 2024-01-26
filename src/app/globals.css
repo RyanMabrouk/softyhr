@@ -138,3 +138,10 @@
     background-color: transparent;
   }
 }
+.MuiOutlinedInput-root {
+  padding: 0 !important;
+}
+.MuiAutocomplete-input {
+  padding-top: 0.3rem !important;
+  padding-left: 0.5rem !important;
+}

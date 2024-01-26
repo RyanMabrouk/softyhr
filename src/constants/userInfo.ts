@@ -73,7 +73,7 @@ export const sectionIcon: ObjectIconsType = {
 };
 
 export const NewEmployeeSections = [
-  "EDUCAION",
+  "EDUCATION",
   "EMPLOYMENT STATUS",
   "BASIC INFORMATION",
   "ADDRESS",

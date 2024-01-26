@@ -1,28 +1,27 @@
 "use client";
-import React, { memo, useState } from "react";
-import { FaAddressCard } from "react-icons/fa";
+import React, { useState } from "react";
 import { useSettings } from "@/hooks/useSettings";
 import { v4 as uuidv4 } from "uuid";
 import { NewEmployeeSections, sectionIcon } from "@/constants/userInfo";
 import { ChampsType } from "@/types/userInfoTypes.type";
-import { usePathname, useRouter } from "next/navigation";
+import {
+  useParams,
+  usePathname,
+  useRouter,
+  useSearchParams,
+} from "next/navigation";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import updateData from "@/api/updateData";
 import useToast from "@/hooks/useToast";
-import useData from "@/hooks/useData";
 import FiledsChamps from "@/app/(dashboard)/people/components/Fileds/Fileds";
-import {
-  Profile_Type,
-  Settings_type_insert,
-  database_profile_type_insert,
-} from "@/types/database.tables.types";
-import useEmployeeData from "@/hooks/useEmloyeeData";
-import formulateData from "../../../components/utils/formulateData";
+import { Profile_Type } from "@/types/database.tables.types";
 import ChangesSection from "../../../components/ChangesSection/ChangesSection";
-import useCandidate from "@/hooks/useCandidate";
 import Education from "./Education";
-import { test } from "@/actions/test";
 import EmployementStatus from "../EmployementStatus";
+import AccessSection from "../AccessSection";
+import formulateData from "../../../components/utils/formulateData";
+import { CreateNewEmployee } from "@/actions/hiring/CreateNewEmployee";
+import useCandidate from "@/hooks/useCandidate";
 
 export const CreateEmployeeSection: any = {
   Education: Education,
@@ -31,39 +30,59 @@ export const CreateEmployeeSection: any = {
 function Form() {
   const router = useRouter();
   const { data, isPending } = useSettings("personnal");
-  const { data: job, isPending: isLoading } = useSettings("job");
   const { toast } = useToast();
   const [touched, setTouched] = useState<boolean>(true);
   const queryClient = useQueryClient();
+  const params = useSearchParams();
+  const ApplicationId = params.get("ApplicationId");
+  const Candidate = params.get("Candidate");
 
-  const { mutateAsync } = useMutation({
-    mutationFn: async (NewData: Profile_Type) => {
-      return await updateData("profiles", NewData, {
-        user_id: NewData.user_id,
-      });
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["profiles"] });
-      router.refresh();
-    },
-    onError: () => {
-      toast.error("something went wrong");
-    },
-  });
+  const {
+    candidates: { data: candidate_data, isPending: candidate_isPending },
+  }: any = useCandidate({ id: Candidate });
 
-  //const { employee_profile: user } = useCandidate({ employeeId });
 
   const pathname = usePathname();
   const Router = useRouter();
-  const SubmitForm = (formdata: FormData) => {
-    //const NewData = formulateData(formdata, user);
-    //  mutateAsync(NewData);
-    test(formdata);
+  const SubmitForm = async (formdata: FormData) => {
+
+
+    //-----formulate_data-------
+    let result: any = {};
+    data?.Champs.forEach((champ: any) => {
+      let Champ: any = {};
+      if (!NewEmployeeSections.includes(champ.champ.toUpperCase())) return;
+      champ.Fields.flatMap((fieldGroup: any) => {
+        return fieldGroup.Row?.map(
+          (fieldRow: any) => (Champ = { ...Champ, [fieldRow.name]: "" }),
+        );
+      });
+      result = { ...result, [champ?.champ]: { ...Champ } };
+    });
+    
+    const NewData = formulateData(formdata, {
+      data: {
+        ...result,
+        Hiring: { "Hire Date": new Date() },
+        parent_id: candidate_data[0]?.["Hiring Lead"],
+      },
+    });
+    
+    //----create_new_user--and--submit_profile_data
+    const response = await CreateNewEmployee(
+      NewData,
+      NewData?.Contact?.["Work Email"] || "",
+    );
+    if (response?.Submitted) toast.success(response?.Message);
+    else toast.error(response?.Message);
+
     setTouched(false);
   };
+
+
   return (
     <>
-      {isPending || isLoading ? (
+      {isPending || candidate_isPending ? (
         <div className="flex h-[20rem] w-full items-center justify-center ">
           <h1>Loading...</h1>
         </div>
@@ -72,12 +91,9 @@ function Form() {
           <form className="" action={SubmitForm}>
             {data?.Champs?.sort((a: any, b: any) => a.rang - b.rang)?.map(
               ({ rang, champ, Icon, Fields }: ChampsType, index: number) => {
-                console.log(champ);
                 if (!NewEmployeeSections.includes(champ.toUpperCase())) return;
                 const Component = sectionIcon[Icon.toUpperCase()];
-                console.log(champ);
-                const ComponentChamps = CreateEmployeeSection[champ] || FiledsChamps;
-
+                const ComponentChamps =  CreateEmployeeSection[champ] || FiledsChamps;
                 return (
                   <div
                     className="mt-4 flex w-full flex-col place-items-start justify-center gap-[2rem] border-b border-gray-18 pb-8"
@@ -103,8 +119,13 @@ function Form() {
               },
             )}
             <EmployementStatus />
+            <AccessSection />
             {touched && (
-              <ChangesSection touched={true} setTouched={setTouched} />
+              <ChangesSection
+                SubmitTxt={"Add New Employee"}
+                touched={true}
+                setTouched={setTouched}
+              />
             )}
           </form>
         </div>

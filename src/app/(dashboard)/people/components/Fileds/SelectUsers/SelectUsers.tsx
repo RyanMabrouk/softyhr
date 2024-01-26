@@ -1,5 +1,14 @@
 import React, { ReactNode, useState } from "react";
-import { MenuItem, Select } from "@mui/material";
+import {
+  Autocomplete,
+  Box,
+  ListItemIcon,
+  ListItemText,
+  MenuItem,
+  Select,
+  TextField,
+  makeStyles,
+} from "@mui/material";
 import useProfiles from "@/hooks/useProfiles";
 import Image from "next/image";
 import avatar from "@/app/(dashboard)/people/[employeeId]/avatar.png";
@@ -24,13 +33,10 @@ function SelectGeneric({
   inputLabel?: string | ReactNode;
 }) {
   const [value, setValue] = useState();
-  const HandleChange = (e: any) => {
-    console.log(e.target.value);
-    setValue(e.target.value);
-  };
+  const [ValueInput, setValueInput] = useState<any>();
   return (
     <>
-      <div className="relative flex flex-col items-start justify-center">
+      {/* <div className="relative flex flex-col items-start justify-center">
         {label && (
           <label
             className={
@@ -63,33 +69,101 @@ function SelectGeneric({
           displayEmpty
           onChange={HandleChange}
         >
-          <div className="scrollBar-green max-h-[20rem] overflow-auto">
-            {options?.map((option: any, index: number) => {
-              return (
-                <MenuItem
-                  value={option?.value}
-                  className="p-1 px-4"
-                  sx={{ color: "300", fontSize: "14px" }}
-                  key={option?.label + index}
-                >
-                  <div className="flex items-center justify-center gap-[1rem]">
+          {options?.map((option: any, index: number) => {
+            return (
+              <MenuItem
+                value={option?.value}
+                className="pver p-1 px-4"
+                sx={{ color: "300", fontSize: "14px" }}
+                key={option?.label + index}
+              >
+                <div className="flex items-center justify-center gap-[0.2rem]">
+                  <ListItemIcon className="flex items-center justify-center gap-[1rem]">
                     <Image
                       height={100}
                       width={100}
-                      className="h-[2rem] w-[2rem] rounded-full object-cover"
+                      className="h-[1.5rem] w-[1.5rem] rounded-full object-cover"
                       alt=""
                       src={option?.picture || avatar}
                     />
-                    <h1 className="text-gray-29">{option?.label}</h1>
-                  </div>
-                </MenuItem>
-              );
-            })}
-          </div>
+                  </ListItemIcon>
+                  <ListItemText
+                    className="text-gray-29"
+                    primary={option?.label}
+                  />
+                </div>
+              </MenuItem>
+            );
+          })}
         </Select>
         <input
           required={required}
           type="text"
+          className="absolute bottom-0 left-10 h-[1px] w-[1px] opacity-0"
+          value={value || ""}
+        />
+      </div>*/}
+      <div className="relative flex flex-col items-start justify-center">
+        {label && (
+          <label
+            className={
+              "relative w-fit text-sm text-gray-21 " +
+              (required ? " after:text-red-500 after:content-['*']" : "")
+            }
+          >
+            {label}
+          </label>
+        )}
+        <Autocomplete
+          disablePortal
+          id="combo-box-demo"
+          className={`relative z-10 !p-0 !font-medium !text-gray-29 [&_.MuiOutlinedInput-notchedOutline]:border-none`}
+          autoHighlight
+          sx={{
+            border: "1px solid #D9D9D9",
+            color: "black",
+            ".MuiSvgIcon-root ": {
+              fill: "#D9D9D9 !important",
+            },
+            height: "2rem",
+            minWidth: "15rem",
+            borderRadius: "0.1rem !important",
+            fontWeight: "300",
+            fontSize: "1rem",
+          }}
+          inputValue={ValueInput}
+          onInputChange={(event, newInputValue: string | null) => {
+            setValueInput(newInputValue);
+          }}
+          onChange={(event: any, newValue: any) => {
+            console.log(newValue?.value);
+            setValue(newValue?.value);
+          }}
+          value={value}
+          options={options}
+          renderOption={(props, option: any) => (
+            <Box
+              component="li"
+              sx={{ "& > img": { mr: 2, flexShrink: 0 } }}
+              {...props}
+              key={option.key}
+            >
+              <Image
+                height={100}
+                width={100}
+                className="h-[1.5rem] w-[1.5rem] rounded-full object-cover"
+                alt=""
+                src={option?.picture || avatar}
+              />
+              {option?.label}
+            </Box>
+          )}
+          renderInput={(params) => <TextField className="!p-0" {...params} />}
+        />
+        <input
+          required={required}
+          type="text"
+          name={label}
           className="absolute bottom-0 left-10 h-[1px] w-[1px] opacity-0"
           value={value || ""}
         />

@@ -3,7 +3,7 @@ import { usePathname } from "next/navigation";
 import React from "react";
 import { VscTriangleDown } from "react-icons/vsc";
 
-function HireStatus({ Hiring }: any) {
+function HireStatus({ Hiring, candidateId }: any) {
   const pathname = usePathname();
   return (
     <MenuLinksGeneric
@@ -24,6 +24,8 @@ function HireStatus({ Hiring }: any) {
             pathname: pathname,
             query: {
               popup: "HIRE_CANDIDATE",
+              ApplicationId: Hiring?.id,
+              Candidate: candidateId,
             },
           },
         },

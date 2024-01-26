@@ -27,7 +27,7 @@ function Page({ params: { Job_id } }: { params: { Job_id: string } }) {
     };
   });
   return (
-    <div className="flex h-full w-full flex-col items-center justify-center bg-white">
+    <div className="flex h-full w-full flex-col items-center justify-start bg-white">
       <div className="flex w-5/6 flex-col gap-[1rem]">
         <div className="flex w-full items-center justify-center">
           {isPending || Hiring?.isPending ? (
@@ -43,7 +43,7 @@ function Page({ params: { Job_id } }: { params: { Job_id: string } }) {
               </Link>
               <div className="flex items-center justify-center gap-[0.5rem]">
                 <MdOutlineEventNote className="text-4xl text-color-primary-8" />
-                <div className="flex flex-col items-center justify-center gap-1">
+                <div className="flex flex-col items-start justify-center gap-1">
                   <h1 className="text-semibold text-lg text-color-primary-8">
                     {Hiring?.data[0]?.job_information?.["Posting Title"]}
                   </h1>

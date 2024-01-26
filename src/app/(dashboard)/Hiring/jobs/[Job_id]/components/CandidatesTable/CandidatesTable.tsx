@@ -162,7 +162,7 @@ export default function CandiatesTable({ candidate, Hiring }: any) {
         console.log("objectobject");
         return (
           <div className=" flex items-center justify-start gap-2 z-10">
-           <HireStatus Hiring={user}/>
+           <HireStatus Hiring={Hiring} candidateId={user?.id}/>
           </div>
         );
       case "actions":
