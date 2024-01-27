@@ -1,7 +1,7 @@
 import React from "react";
 import { IoMdSettings } from "react-icons/io";
 import { usePathname } from "next/navigation";
-import { MenuLinksGeneric } from "../../../../_ui/MenuLinksGeneric";
+import { MenuLinksGeneric } from "../../../../../_ui/MenuLinksGeneric";
 export function ChangePolicyMenuBtn({ id }: { id: number }) {
   const pathname = usePathname();
   const [open, setOpen] = React.useState(false);

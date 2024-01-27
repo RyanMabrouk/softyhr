@@ -11,8 +11,7 @@ import {
 } from "@mui/material";
 import useProfiles from "@/hooks/useProfiles";
 import Image from "next/image";
-import avatar from "@/app/(dashboard)/people/[employeeId]/avatar.png";
-
+import avatar from "/public/avatar.png";
 function SelectGeneric({
   label,
   defaultValue,

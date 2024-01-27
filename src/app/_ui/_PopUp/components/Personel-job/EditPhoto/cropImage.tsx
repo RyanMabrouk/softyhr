@@ -2,7 +2,6 @@
 import { v4 as uuidv4 } from "uuid";
 import {
   Box,
-  Button,
   DialogActions,
   DialogContent,
   Slider,
@@ -14,16 +13,23 @@ import getCroppedImg from "./utils/imageConfig";
 import { FaTrash } from "react-icons/fa6";
 import Image from "next/image";
 import { UploadImage } from "@/actions/UploadFiles/uploadImage";
-import useToast from "@/hooks/useToast";
 import updateData from "@/api/updateData";
 import { usePathname, useRouter } from "next/navigation";
 import { useQueryClient } from "@tanstack/react-query";
-import avatar from "./avatar.png";
+import avatar from "/public/avatar.png";
 
 const base_image_url =
   "https://ybwqmrrlvmpdikvmkqra.supabase.co/storage/v1/object/public/avatar/";
 
-const CropEasy = ({ URL, alt, user_id }) => {
+const CropEasy = ({
+  URL,
+  alt,
+  user_id,
+}: {
+  URL?: string;
+  alt?: string;
+  user_id?: string;
+}) => {
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const router = useRouter();
   const pathname = usePathname();
@@ -32,13 +38,13 @@ const CropEasy = ({ URL, alt, user_id }) => {
   const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
   const [isLoading, setLoading] = useState(false);
   const queryClient = useQueryClient();
-  const cropComplete = (croppedArea, croppedAreaPixels) => {
+  const cropComplete = (croppedArea: any, croppedAreaPixels: any) => {
     setCroppedAreaPixels(croppedAreaPixels);
   };
 
   const DeleteProfileImage = async () => {
     await updateData("profiles", [{ picture: null }], {
-      user_id,
+      user_id: user_id ?? "",
     });
     setphotoURL(avatar?.src);
     queryClient.invalidateQueries({ queryKey: ["profiles", user_id] });
@@ -53,19 +59,22 @@ const CropEasy = ({ URL, alt, user_id }) => {
     const response = await UploadImage(formData, imagename, "avatar");
     if (response?.uploaded) {
       updateData("profiles", [{ picture: base_image_url + imagename }], {
-        user_id,
+        user_id: user_id ?? "",
       });
     }
     router.push(pathname);
     queryClient.invalidateQueries({ queryKey: ["profiles", user_id] });
+    queryClient.invalidateQueries({ queryKey: ["profiles"] });
   };
 
   //------upload-image-locally------
-  const UploadCurrentImage = (e) => {
-    const file = e.currentTarget.files[0];
+  const UploadCurrentImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.currentTarget?.files?.[0];
     var urlCreator = window?.URL || window?.webkitURL;
-    if (file) var imageUrl = urlCreator?.createObjectURL(file);
-    setphotoURL(imageUrl);
+    if (file) {
+      let imageUrl = urlCreator?.createObjectURL(file);
+      setphotoURL(imageUrl);
+    }
   };
 
   return (
@@ -106,7 +115,7 @@ const CropEasy = ({ URL, alt, user_id }) => {
                   style={{ color: "#2E7918", width: "100%" }}
                   step={0.1}
                   value={zoom}
-                  onChange={(e, zoom) => setZoom(zoom)}
+                  onChange={(e, zoom) => setZoom(Number(zoom))}
                 />
               </Box>
             </Box>
@@ -122,7 +131,7 @@ const CropEasy = ({ URL, alt, user_id }) => {
                 type="file"
                 name="image"
                 accept="image/png/jpeg"
-                onChange={UploadCurrentImage}
+                onChange={(e) => UploadCurrentImage(e)}
               />
               Modifier la photo
             </button>
@@ -187,6 +196,6 @@ const CropEasy = ({ URL, alt, user_id }) => {
 
 export default CropEasy;
 
-const zoomPercent = (value) => {
+const zoomPercent = (value: number) => {
   return `${Math.round(value * 100)}%`;
 };

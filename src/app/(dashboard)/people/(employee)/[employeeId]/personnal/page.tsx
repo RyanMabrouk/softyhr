@@ -1,6 +1,6 @@
 "use client";
 
-import UserSection from "../../components/UserSection";
+import UserSection from "../../../components/UserSection";
 
 interface PersonnalTypeProps {
   params: { employeeId: string };

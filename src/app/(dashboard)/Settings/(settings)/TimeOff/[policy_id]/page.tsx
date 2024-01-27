@@ -1,5 +1,5 @@
 "use client";
-import { HistoryTable } from "@/app/(dashboard)/people/[employeeId]/TimeOff/HistoryTable";
+import { HistoryTable } from "@/app/(dashboard)/people/(employee)/[employeeId]/TimeOff/HistoryTable";
 import { generateLeaveCategorieIcon } from "@/helpers/leave.helpers";
 import useData from "@/hooks/useData";
 import {

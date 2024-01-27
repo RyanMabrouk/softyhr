@@ -4,7 +4,7 @@ import { FaHistory, FaLongArrowAltDown } from "react-icons/fa";
 import { HistoryTable } from "./HistoryTable";
 import historyTableFilters from "./_context/historyTableFilters";
 import { historyTableFiltersContextType } from "./_context/historyTableFilters"; // Import the type of the context
-import { UnderlinedLink } from "../../../../_ui/UnderlinedLink";
+import { UnderlinedLink } from "../../../../../_ui/UnderlinedLink";
 import { formatDDMMYYYY } from "@/helpers/date.helpers";
 import useData from "@/hooks/useData";
 import { Filters } from "./Filters";

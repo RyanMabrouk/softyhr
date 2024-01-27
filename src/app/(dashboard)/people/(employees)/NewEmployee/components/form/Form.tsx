@@ -15,11 +15,11 @@ import updateData from "@/api/updateData";
 import useToast from "@/hooks/useToast";
 import FiledsChamps from "@/app/(dashboard)/people/components/Fileds/Fileds";
 import { Profile_Type } from "@/types/database.tables.types";
-import ChangesSection from "../../../components/ChangesSection/ChangesSection";
+import ChangesSection from "../../../../components/ChangesSection/ChangesSection";
 import Education from "./Education";
 import EmployementStatus from "../EmployementStatus";
 import AccessSection from "../AccessSection";
-import formulateData from "../../../components/utils/formulateData";
+import formulateData from "../../../../components/utils/formulateData";
 import { CreateNewEmployee } from "@/actions/hiring/CreateNewEmployee";
 import useCandidate from "@/hooks/useCandidate";
 
@@ -41,12 +41,9 @@ function Form() {
     candidates: { data: candidate_data, isPending: candidate_isPending },
   }: any = useCandidate({ id: Candidate });
 
-
   const pathname = usePathname();
   const Router = useRouter();
   const SubmitForm = async (formdata: FormData) => {
-
-
     //-----formulate_data-------
     let result: any = {};
     data?.Champs.forEach((champ: any) => {
@@ -59,7 +56,7 @@ function Form() {
       });
       result = { ...result, [champ?.champ]: { ...Champ } };
     });
-    
+
     const NewData = formulateData(formdata, {
       data: {
         ...result,
@@ -67,7 +64,7 @@ function Form() {
         parent_id: candidate_data[0]?.["Hiring Lead"],
       },
     });
-    
+
     //----create_new_user--and--submit_profile_data
     const response = await CreateNewEmployee(
       NewData,
@@ -78,7 +75,6 @@ function Form() {
 
     setTouched(false);
   };
-
 
   return (
     <>
@@ -93,7 +89,8 @@ function Form() {
               ({ rang, champ, Icon, Fields }: ChampsType, index: number) => {
                 if (!NewEmployeeSections.includes(champ.toUpperCase())) return;
                 const Component = sectionIcon[Icon.toUpperCase()];
-                const ComponentChamps =  CreateEmployeeSection[champ] || FiledsChamps;
+                const ComponentChamps =
+                  CreateEmployeeSection[champ] || FiledsChamps;
                 return (
                   <div
                     className="mt-4 flex w-full flex-col place-items-start justify-center gap-[2rem] border-b border-gray-18 pb-8"

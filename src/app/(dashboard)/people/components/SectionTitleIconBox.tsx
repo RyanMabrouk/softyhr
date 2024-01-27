@@ -7,27 +7,33 @@ import { TbMenu2 } from "react-icons/tb";
 
 export default function SectionTitleIconBox() {
   const pathname = usePathname();
-
-  const titleIconObj: any = {
-    "/people/list": {
+  const titleIconObj = [
+    {
+      path: "/people/list",
       label: "People",
-      icon: <TbMenu2 fontSize="2.4rem" stroke="#527A01" />,
+      icon: <TbMenu2 className="#527A01 text-[2.4rem]" />,
     },
-    "/people/directory": {
+    {
+      path: "/people/directory",
       label: "Directory",
-      icon: <BiSolidContact fontSize="2.4rem" fill="#527A01" />,
+      icon: <BiSolidContact className="#527A01 text-[2.4rem]" />,
     },
-    "/people/orgchart": {
+    {
+      path: "/people/orgchart",
       label: "Org Chart",
-      icon: <RiOrganizationChart fontSize="2.4rem" fill="#527A01" />,
+      icon: <RiOrganizationChart className="#527A01 text-[2.4rem]" />,
     },
-  };
+  ];
 
   return (
     <div className="-ml-2 flex items-center gap-2 ">
-      {titleIconObj[pathname].icon}
+      {titleIconObj.find((item) => pathname?.includes(item.path))?.icon ?? (
+        <></>
+      )}
       <p className="text-3xl font-semibold text-color-primary-8">
-        {titleIconObj[pathname].label}
+        {titleIconObj.find((item) => pathname?.includes(item.path))?.label ?? (
+          <></>
+        )}
       </p>
     </div>
   );
