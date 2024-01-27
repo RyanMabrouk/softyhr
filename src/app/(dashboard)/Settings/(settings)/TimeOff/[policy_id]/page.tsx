@@ -20,6 +20,7 @@ import usePolicy from "@/hooks/useCategory";
 import { EmployyeSettingsBtn } from "./EmployyeSettingsBtn";
 import useLeaveData from "@/hooks/useLeaveData";
 import { BsPlusSlashMinus } from "react-icons/bs";
+import useProfilesData from "@/hooks/useProfilesData";
 export default function Page() {
   const pathname = usePathname();
   const { policy_id } = useParams();
@@ -27,8 +28,10 @@ export default function Page() {
     all_users_leave_balance: { data: all_users_leave_balance },
   } = useLeaveData();
   const {
-    all_profiles_basic_info: { data: all_profiles_basic_info },
-  } = useData();
+    profiles: { data: all_profiles_basic_info },
+  } = useProfilesData({
+    columns: 'user_id,role,picture,"Basic Information"',
+  });
   const { policy, category } = usePolicy({ policy_id: Number(policy_id) });
   const policy_type =
     policy?.type === "traditional" ? (

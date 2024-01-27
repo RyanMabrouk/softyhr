@@ -11,17 +11,17 @@ export default function SectionTitleIconBox() {
     {
       path: "/people/list",
       label: "People",
-      icon: <TbMenu2 className="#527A01 text-[2.4rem]" />,
+      icon: <TbMenu2 className="text-[2.4rem] text-fabric-700" />,
     },
     {
       path: "/people/directory",
       label: "Directory",
-      icon: <BiSolidContact className="#527A01 text-[2.4rem]" />,
+      icon: <BiSolidContact className="text-[2.4rem] text-fabric-700" />,
     },
     {
       path: "/people/orgchart",
       label: "Org Chart",
-      icon: <RiOrganizationChart className="#527A01 text-[2.4rem]" />,
+      icon: <RiOrganizationChart className="text-[2.4rem] text-fabric-700" />,
     },
   ];
 
