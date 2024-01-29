@@ -28,12 +28,13 @@ import AddCollaborate from "./AddCollaborate";
 import CandidateReports from "./CandidateReports";
 import HiringInfos from "./HiringInfos";
 import { PiDotsThreeOutlineVerticalFill } from "react-icons/pi";
-import { useQueryClient } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { BiCommentAdd } from "react-icons/bi";
-import HireStatus from "./HireStatus";
 import RatingGeneric from "./RatingGeneric";
 import { formatCustomDate } from "@/helpers/date.helpers";
 import EditJobOpening from "@/app/(dashboard)/Hiring/_ui/HiringTable/EditJobOpening/EditJobOpening";
+import { renderCell } from "./renderCell";
+import useCandidate from "@/hooks/useCandidate";
 
 const statusColorMap: Record<string, ChipProps["color"]> = {
   active: "success",
@@ -42,6 +43,7 @@ const statusColorMap: Record<string, ChipProps["color"]> = {
 };
 
 const INITIAL_VISIBLE_COLUMNS = [
+  "id",
   "Candidate Info",
   "Status",
   "Rating",
@@ -50,10 +52,15 @@ const INITIAL_VISIBLE_COLUMNS = [
   "actions",
 ];
 
-type User = any;
-
-export default function CandiatesTable({ candidate, Hiring }: any) {
+export default function CandiatesTable({
+  data,
+  setpage,
+  page,
+  Hiring,
+  totalPages,
+}: any) {
   const [filterValue, setFilterValue] = React.useState("");
+  console.log(data);
   const [selectedKeys, setSelectedKeys] = React.useState<Selection>(
     new Set([]),
   );
@@ -61,14 +68,6 @@ export default function CandiatesTable({ candidate, Hiring }: any) {
     new Set(INITIAL_VISIBLE_COLUMNS),
   );
   const [statusFilter, setStatusFilter] = React.useState<Selection>("all");
-  const [rowsPerPage, setRowsPerPage] = React.useState(8);
-  const [sortDescriptor, setSortDescriptor] = React.useState<SortDescriptor>({
-    column: "age",
-    direction: "ascending",
-  });
-  const [page, setPage] = React.useState(1);
-
-  const pages = Math.ceil(candidate.length / rowsPerPage);
 
   const hasSearchFilter = Boolean(filterValue);
 
@@ -80,130 +79,11 @@ export default function CandiatesTable({ candidate, Hiring }: any) {
     );
   }, [visibleColumns]);
   const queryClient = useQueryClient();
+
   const filteredItems = React.useMemo(() => {
-    console.log(candidate);
-    let filteredUsers = [...candidate];
+    return data;
+  }, [data, filterValue, statusFilter]);
 
-    if (hasSearchFilter) {
-      filteredUsers = filteredUsers.filter((user) =>
-        user.name.toLowerCase().includes(filterValue.toLowerCase()),
-      );
-    }
-    if (
-      statusFilter !== "all" &&
-      Array.from(statusFilter).length !== statusOptions.length
-    ) {
-      filteredUsers = filteredUsers.filter((user) =>
-        Array.from(statusFilter).includes(user.status),
-      );
-    }
-
-    return filteredUsers;
-  }, [candidate, filterValue, statusFilter, hasSearchFilter]);
-
-  const items = React.useMemo(() => {
-    const start = (page - 1) * rowsPerPage;
-    const end = start + rowsPerPage;
-
-    return filteredItems.slice(start, end);
-  }, [page, filteredItems, rowsPerPage]);
-
-  const sortedItems = React.useMemo(() => {
-    return [...items].sort((a: User, b: User) => {
-      const first = a[sortDescriptor.column as keyof User] as number;
-      const second = b[sortDescriptor.column as keyof User] as number;
-      const cmp = first < second ? -1 : first > second ? 1 : 0;
-
-      return sortDescriptor.direction === "descending" ? -cmp : cmp;
-    });
-  }, [sortDescriptor, items]);
-  console.log(Hiring);
-  const renderCell = (user: User, columnKey: React.Key) => {
-    const cellValue = user[columnKey as keyof User];
-    switch (columnKey) {
-      case "Candidate Info":
-        return (
-          <h1 className="cursor-pointer text-color5-500 hover:text-color-primary-8 hover:underline">
-            {user?.["Candidate Info"]}
-          </h1>
-        );
-      case "Status":
-        return (
-          <div className="flex flex-col">
-            <p className="text-bold text-small capitalize">{user.Status}</p>
-            <p className="text-default-500 font-base text-base capitalize text-gray-15">
-              {user.Status_update}
-            </p>
-          </div>
-        );
-      case "Rating":
-        console.log(user?.Rating);
-        return (
-         <RatingGeneric DefaultValue={user?.Rating} id={user?.id} tableName="candidates" />
-        );
-      case "Applied":
-        return (
-          <div className="text-default-600 gap-1 border-none capitalize">
-            {formatCustomDate(user.Applied)}
-          </div>
-        );
-      case "Changes Status":
-        console.log("objectobject");
-        return (
-          <div className=" flex items-center justify-start gap-2 z-10">
-           <HireStatus Hiring={Hiring} candidateId={user?.id}/>
-          </div>
-        );
-      case "actions":
-        return (
-          <div className="relative flex items-center justify-end gap-2">
-            <Dropdown className="border-1 border-default-200 flex items-center justify-center bg-background">
-              <DropdownTrigger>
-                <Button
-                  className="flex items-center justify-center"
-                  isIconOnly
-                  radius="full"
-                  size="sm"
-                  variant="light"
-                >
-                  <PiDotsThreeOutlineVerticalFill />
-                </Button>
-              </DropdownTrigger>
-              <DropdownMenu className="shadow-green ">
-                <DropdownItem className="group hover:!bg-color-primary-8">
-                  <div className="flex items-end justify-center gap-[0.5rem] duration-200 ease-linear">
-                    <BiCommentAdd className="text-xl text-color-primary-7 group-hover:!text-white" />
-                    <h1 className="text-black group-hover:!text-white">
-                      Add Comment
-                    </h1>
-                  </div>
-                </DropdownItem>
-              </DropdownMenu>
-            </Dropdown>
-          </div>
-        );
-      default:
-        return cellValue;
-    }
-  }
-
-  const onRowsPerPageChange = React.useCallback(
-    (e: React.ChangeEvent<HTMLSelectElement>) => {
-      setRowsPerPage(Number(e.target.value));
-      setPage(1);
-    },
-    [],
-  );
-
-  const onSearchChange = React.useCallback((value?: string) => {
-    if (value) {
-      setFilterValue(value);
-      setPage(1);
-    } else {
-      setFilterValue("");
-    }
-  }, []);
-  console.log(Hiring);
   const topContent = React.useMemo(() => {
     return (
       <div className="flex w-full flex-col gap-4 pt-4">
@@ -218,9 +98,7 @@ export default function CandiatesTable({ candidate, Hiring }: any) {
         <div className="flex w-full items-end justify-between gap-3 border-t border-gray-18 pt-2">
           <div className="flex w-full items-center justify-start gap-[0.5rem] text-lg font-semibold text-color-primary-7">
             <FaUserCircle className=" text-3xl font-semibold !text-color-primary-8" />
-            <h1>
-              {candidate?.length} Candidates {"( 1 New )"}
-            </h1>
+            <h1>{totalPages} Candidates</h1>
             <AddCandidate />
           </div>
           <div className="flex w-full items-center justify-end gap-3">
@@ -274,18 +152,18 @@ export default function CandiatesTable({ candidate, Hiring }: any) {
           color="default"
           isDisabled={hasSearchFilter}
           page={page}
-          total={pages}
+          total={Math.ceil(totalPages / 6) - 1}
           variant="light"
-          onChange={setPage}
+          onChange={setpage}
         />
         <span className="text-small text-default-400">
           {selectedKeys === "all"
             ? "All items selected"
-            : `${selectedKeys.size} of ${items.length} selected`}
+            : `${selectedKeys.size} of ${totalPages} selected`}
         </span>
       </div>
     );
-  }, [selectedKeys, items.length, page, pages, hasSearchFilter]);
+  }, [selectedKeys, totalPages, page, hasSearchFilter]);
 
   const classNames = React.useMemo(
     () => ({
@@ -314,6 +192,7 @@ export default function CandiatesTable({ candidate, Hiring }: any) {
     }),
     [],
   );
+
   return (
     <Table
       isCompact
@@ -339,11 +218,9 @@ export default function CandiatesTable({ candidate, Hiring }: any) {
       selectedKeys={selectedKeys}
       selectionMode="multiple"
       showSelectionCheckboxes={true}
-      sortDescriptor={sortDescriptor}
       topContent={topContent}
       topContentPlacement="outside"
       onSelectionChange={setSelectedKeys}
-      onSortChange={setSortDescriptor}
     >
       <TableHeader columns={headerColumns}>
         {(column) => (
@@ -356,11 +233,11 @@ export default function CandiatesTable({ candidate, Hiring }: any) {
           </TableColumn>
         )}
       </TableHeader>
-      <TableBody emptyContent={"No candidate found"} items={sortedItems}>
-        {(item) => (
+      <TableBody emptyContent={"No candidate found"} items={filteredItems}>
+        {(item: any) => (
           <TableRow key={item?.id}>
             {(columnKey) => (
-              <TableCell>{renderCell(item, columnKey)}</TableCell>
+              <TableCell>{renderCell(Hiring, item, columnKey)}</TableCell>
             )}
           </TableRow>
         )}

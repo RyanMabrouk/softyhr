@@ -5,7 +5,7 @@ export default function useHiring(match?: {
   [key: string]: string | number | boolean | null | string[] | undefined;
 }) {
   const { data: Hiring, isPending } = useQuery({
-    queryKey: ["Hiring",match && match],
+    queryKey: ["Hiring",match && match ],
     queryFn: () =>
       getData("Hiring", {
         org: true,

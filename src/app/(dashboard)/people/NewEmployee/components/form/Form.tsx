@@ -10,7 +10,6 @@ import {
   useRouter,
   useSearchParams,
 } from "next/navigation";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import updateData from "@/api/updateData";
 import useToast from "@/hooks/useToast";
 import FiledsChamps from "@/app/(dashboard)/people/components/Fileds/Fileds";
@@ -22,6 +21,7 @@ import AccessSection from "../AccessSection";
 import formulateData from "../../../components/utils/formulateData";
 import { CreateNewEmployee } from "@/actions/hiring/CreateNewEmployee";
 import useCandidate from "@/hooks/useCandidate";
+import { useQueryClient } from "@tanstack/react-query";
 
 export const CreateEmployeeSection: any = {
   Education: Education,

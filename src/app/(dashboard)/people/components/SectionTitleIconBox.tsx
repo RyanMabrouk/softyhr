@@ -25,9 +25,9 @@ export default function SectionTitleIconBox() {
 
   return (
     <div className="-ml-2 flex items-center gap-2 ">
-      {titleIconObj[pathname].icon}
+      {titleIconObj[pathname]?.icon}
       <p className="text-3xl font-semibold text-color-primary-8">
-        {titleIconObj[pathname].label}
+        {titleIconObj[pathname]?.label}
       </p>
     </div>
   );

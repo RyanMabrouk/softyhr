@@ -8,14 +8,12 @@ import { v4 as uuidv4 } from "uuid";
 import { sectionIcon } from "@/constants/userInfo";
 import { ChampsType } from "@/types/userInfoTypes.type";
 import { usePathname, useRouter } from "next/navigation";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Section } from "@/constants/userInfoSections";
 import formulateData from "../components/utils/formulateData";
+import { useMutation, useQueryClient } from "@tanstack/react-query";  
 import updateData from "@/api/updateData";
 import useToast from "@/hooks/useToast";
-import {
-  Profile_Type,
-} from "@/types/database.tables.types";
+import { Profile_Type } from "@/types/database.tables.types";
 import useEmployeeData from "@/hooks/useEmloyeeData";
 
 interface UserSection {

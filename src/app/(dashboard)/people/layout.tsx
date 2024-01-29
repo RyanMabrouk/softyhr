@@ -15,7 +15,7 @@ function layout({ children }: EmployeesPropsType) {
     <div className="mx-auto mt-12 w-files_screen">
       <div className="flex items-center justify-between border-b border-gray-4 pb-4">
         <div className="flex flex-col  gap-6">
-          <SectionTitleIconBox />
+       {/*<SectionTitleIconBox />*/}
           <ButtonAdd name={"New Employee"} />
         </div>
         <div className="flex flex-col items-end gap-8">

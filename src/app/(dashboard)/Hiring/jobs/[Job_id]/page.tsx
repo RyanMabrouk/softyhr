@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import CandiatesTable from "./components/CandidatesTable/CandidatesTable";
 import useCandidate from "@/hooks/useCandidate";
 import useHiring from "@/hooks/useHiring";
@@ -7,13 +7,33 @@ import Link from "next/link";
 import { FaPlusCircle } from "react-icons/fa";
 import { MdOutlineEventNote } from "react-icons/md";
 import { FaArrowLeftLong } from "react-icons/fa6";
+import { useQueryClient } from "@tanstack/react-query";
+import getCandidate from "@/api/getCandidates";
+import TableSkeleton from "./components/CandidatesTable/TableSkeleton";
 
 function Page({ params: { Job_id } }: { params: { Job_id: string } }) {
+  const [page, setpage] = useState<number>(1);
+  const [filter, setFilter] = useState<string>("*");
+  const queryClient = useQueryClient();
   const {
-    candidates: { data, isPending },
-  } = useCandidate({ job_id: Job_id });
-
+    candidates: { data, isPending, meta, isPlaceholderData },
+  } = useCandidate({ job_id: Job_id, status: filter }, page, 6);
   const { Hiring } = useHiring({ id: Job_id });
+
+  React.useEffect(() => {
+    if (!isPlaceholderData) {
+      queryClient.prefetchQuery({
+        queryKey: ["Candidates", Job_id, page + 1],
+        queryFn: () =>
+          getCandidate("candidates", {
+            match: { job_id: Job_id, status: filter },
+            StartPage: (page + 1) * 6,
+            EndPage: (page + 2) * 6,
+          }),
+      });
+    }
+  }, [page]);
+
   const CandidateTableData: any = data?.map((candidate: any) => {
     return {
       id: candidate?.id,
@@ -26,12 +46,13 @@ function Page({ params: { Job_id } }: { params: { Job_id: string } }) {
       "Last Email": candidate?.["Last Email"] || "",
     };
   });
+  console.log(isPending);
   return (
     <div className="flex h-full w-full flex-col items-center justify-start bg-white">
       <div className="flex w-5/6 flex-col gap-[1rem]">
         <div className="flex w-full items-center justify-center">
           {isPending || Hiring?.isPending ? (
-            <h1>Loading...</h1>
+            <TableSkeleton />
           ) : (
             <div className="mt-6 flex w-full flex-col items-start justify-center gap-2">
               <Link
@@ -53,8 +74,15 @@ function Page({ params: { Job_id } }: { params: { Job_id: string } }) {
                 </div>
               </div>
               <CandiatesTable
+                setpage={setpage}
                 Hiring={Hiring?.data[0]}
-                candidate={CandidateTableData}
+                data={CandidateTableData}
+                setFilter={setFilter}
+                filter={filter}
+                Job_id={Job_id}
+                page={page}
+                totalPages={meta?.totalPages}
+                isPlaceholderData={isPlaceholderData}
               />
             </div>
           )}

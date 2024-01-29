@@ -3,8 +3,9 @@ import { usePathname } from "next/navigation";
 import React from "react";
 import { VscTriangleDown } from "react-icons/vsc";
 
-function HireStatus({ Hiring, candidateId }: any) {
+function HireStatus({ Hiring, candidate }: any) {
   const pathname = usePathname();
+  console.log(Hiring);
   return (
     <MenuLinksGeneric
       id="Hiring_status"
@@ -25,7 +26,7 @@ function HireStatus({ Hiring, candidateId }: any) {
             query: {
               popup: "HIRE_CANDIDATE",
               ApplicationId: Hiring?.id,
-              Candidate: candidateId,
+              Candidate: candidate?.id,
             },
           },
         },
@@ -44,7 +45,7 @@ function HireStatus({ Hiring, candidateId }: any) {
         id="timeoff_settings"
         className="flex cursor-pointer flex-row items-center justify-center gap-3 rounded-sm border border-gray-25 px-3 py-0.5 shadow-sm transition-all ease-linear hover:shadow-md"
       >
-        <h1 className="text-base text-gray-29">{Hiring?.Status}</h1>
+        <h1 className="text-base text-gray-29">{candidate?.Status}</h1>
         <VscTriangleDown className="h-3 w-3 text-gray-25" />
       </div>
     </MenuLinksGeneric>
