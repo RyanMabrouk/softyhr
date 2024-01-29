@@ -1,14 +1,43 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "d3-org-chart";
 import "d3-flextree";
+import { jsPDF } from "jspdf";
 
 import { OrgChart } from "d3-org-chart";
 import { TbArrowBigUpLinesFilled } from "react-icons/tb";
 import { FaExpandAlt } from "react-icons/fa";
 import { BiCollapse } from "react-icons/bi";
+import ExportSelect from "@/app/(dashboard)/people/components/ExportSelect.tsx";
 
 export default function OrgChartComponent({ data }) {
   const chartContainerRef = useRef(null);
+  const [selectedOption, setSelectOption] = useState(null);
+
+  function handleSelectedOption(option) {
+    setSelectOption(option);
+  }
+  function downloadPdf(chart) {
+    chart.exportImg({
+      save: false,
+      full: true,
+      onLoad: (base64) => {
+        var pdf = new jsPDF();
+        var img = new Image();
+        img.src = base64;
+        img.onload = function () {
+          pdf.addImage(
+            img,
+            "JPEG",
+            5,
+            5,
+            595 / 3,
+            ((img.height / img.width) * 595) / 3,
+          );
+          pdf.save("chart.pdf");
+        };
+      },
+    });
+  }
 
   useEffect(() => {
     let chart;
@@ -16,7 +45,6 @@ export default function OrgChartComponent({ data }) {
       return;
     }
 
-    console.log(data);
     const mappedData = data.map((d) => {
       const width = Math.round(Math.random() * 50 + 300);
       const height = Math.round(Math.random() * 20 + 130);
@@ -130,8 +158,6 @@ export default function OrgChartComponent({ data }) {
       .initialZoom(0.6)
       .compact(false)
       .render();
-    console.log(chart);
-    // Add event listener to the button
     document.getElementById("fitButton").addEventListener("click", () => {
       chart.fit().initialZoom(0.6).render();
     });
@@ -144,23 +170,13 @@ export default function OrgChartComponent({ data }) {
 
     //
     document.getElementById("inputSearch").addEventListener("input", (e) => {
-      // Get input value
       const value = e.srcElement.value;
-
-      // Clear previous higlighting
       chart.clearHighlighting();
-
-      // Get chart nodes
       const data = chart.data();
-
-      // Mark all previously expanded nodes for collapse
       data.forEach((d) => (d._expanded = false));
-
-      // Loop over data and check if input value matches any name
       data.forEach((d) => {
         console.log(d);
         if (value != "" && d.name.toLowerCase().includes(value.toLowerCase())) {
-          // If matches, mark node as highlighted
           d._highlighted = true;
           d._expanded = true;
         }
@@ -171,11 +187,18 @@ export default function OrgChartComponent({ data }) {
 
       console.log("filtering chart", e.srcElement.value);
     });
+    if (selectedOption === "img") {
+      chart.exportImg({ full: true });
+      handleSelectedOption(null);
+    }
+    if (selectedOption === "pdf") {
+      downloadPdf(chart);
+      handleSelectedOption(null);
+    }
 
-    // Clean up event listener when component unmounts
     return () => {
       document.getElementById("fitButton").removeEventListener("click", () => {
-        chart.render();
+        chart.fit().initialZoom(0.6).render();
       });
       document
         .getElementById("expandButton")
@@ -188,35 +211,44 @@ export default function OrgChartComponent({ data }) {
           chart.collapseAll().fit();
         });
     };
-  }, [data]);
+  }, [data, selectedOption]);
 
   return (
     <div>
-      <div className="flex items-center gap-4">
-        <input
-          id="inputSearch"
-          type="text"
-          placeholder="Jump to an employee..."
-          className=" w-80 border border-gray-4 px-2 py-1 outline-1 transition-all duration-300 placeholder:text-sm placeholder:text-gray-6 focus:outline-color1-300 "
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-4">
+          <input
+            id="inputSearch"
+            type="text"
+            placeholder="Jump to an employee..."
+            className=" w-80 border border-gray-4 px-2 py-1 outline-1 transition-all duration-300 placeholder:text-sm placeholder:text-gray-6 focus:outline-color1-300 "
+          />
+          <button
+            className=" cursor-pointer  border border-color-primary-8 p-[0.3rem] opacity-80 hover:opacity-60"
+            id="expandButton"
+          >
+            <FaExpandAlt className="text-xl" />
+          </button>
+          <button
+            className=" cursor-pointer  border border-color-primary-8 p-[0.3rem] opacity-80 hover:opacity-60"
+            id="collapseButton"
+          >
+            <BiCollapse className="text-xl" />
+          </button>
+          <button
+            id="fitButton"
+            className=" cursor-pointer  border border-color-primary-8 p-[0.3rem] opacity-80 hover:opacity-60"
+          >
+            <TbArrowBigUpLinesFilled className="text-xl" />
+          </button>
+        </div>
+        <ExportSelect
+          options={[
+            { value: "img", label: "Export IMG" },
+            { value: "pdf", label: "Export PDF" },
+          ]}
+          onSelect={handleSelectedOption}
         />
-        <button
-          className=" cursor-pointer  border border-color-primary-8 p-[0.3rem] opacity-80 hover:opacity-60"
-          id="expandButton"
-        >
-          <FaExpandAlt className="text-xl" />
-        </button>
-        <button
-          className=" cursor-pointer  border border-color-primary-8 p-[0.3rem] opacity-80 hover:opacity-60"
-          id="collapseButton"
-        >
-          <BiCollapse className="text-xl" />
-        </button>
-        <button
-          id="fitButton"
-          className=" cursor-pointer  border border-color-primary-8 p-[0.3rem] opacity-80 hover:opacity-60"
-        >
-          <TbArrowBigUpLinesFilled className="text-xl" />
-        </button>
       </div>
       <div className="mt-6 shadow-lg	" ref={chartContainerRef}></div>
     </div>
