@@ -22,21 +22,6 @@ export default function useData() {
         user: true,
       }),
   });
-
-  // ------------------All Profiles Basic Information--------------------
-  const { data: all_profiles_basic_info, isPending: isPending9 } = useQuery({
-    queryKey: [
-      "profiles",
-      {
-        column: 'user_id,role,picture,"Basic Information"',
-      },
-    ],
-    queryFn: () =>
-      getData("profiles", {
-        org: true,
-        column: 'user_id,role,picture,"Basic Information"',
-      }),
-  });
   //------------------Folders--------------------------------------
   const { data: folders, isPending: isPending1 } = useQuery({
     queryKey: ["folders"],
@@ -76,11 +61,6 @@ export default function useData() {
       data: files?.data,
       error: files?.error,
       isPending: isPending10,
-    },
-    all_profiles_basic_info: {
-      data: all_profiles_basic_info?.data,
-      error: all_profiles_basic_info?.error,
-      isPending: isPending9,
     },
   };
 }

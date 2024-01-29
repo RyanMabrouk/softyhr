@@ -1,19 +1,13 @@
 "use client";
-import Image from "next/image";
-import React, { useState } from "react";
+import React from "react";
 import PopUpSkeleton from "../../../PopUpSkeleton";
-import { FaTrash } from "react-icons/fa6";
-import Cropper from "react-easy-crop";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import CropEasy from "./cropImage";
-import useData from "@/hooks/useData";
 import Loader from "@/app/(dashboard)/people/components/Loader/Loader";
 import useEmployeeData from "@/hooks/useEmloyeeData";
 
 function EditPhoto() {
-  const router = useRouter();
   const { employeeId } = useParams();
-
   const {
     employee_profile: { data, isPending },
   } = useEmployeeData({ employeeId });

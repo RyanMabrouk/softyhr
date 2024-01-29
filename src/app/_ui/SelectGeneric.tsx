@@ -69,19 +69,23 @@ export function SelectGeneric({
         {group
           ? options?.map((option: any, i: number) => {
               return option?.group_name ? (
-                <MenuItem
-                  key={option?.group_name}
-                  className="peer capitalize text-gray-27 opacity-50"
-                  disabled
-                  value="none"
-                >
-                  {option?.group_name}
-                </MenuItem>
+                <>
+                  <hr className="m-0 h-[unset] !w-full shrink-0 border-solid border-[rgba(0,0,0,0.12)] bg-gray-14" />
+                  <MenuItem
+                    key={option?.group_name}
+                    className="group peer !max-h-7  w-full border-y border-black !px-2 !py-1 text-center text-[0.8rem] capitalize text-gray-21 !opacity-100"
+                    disabled
+                    aria-readonly
+                    value="none"
+                  >
+                    <span className="text-pretty">{option?.group_name}</span>
+                  </MenuItem>
+                </>
               ) : (
                 <MenuItem
                   value={option?.value}
-                  className={`peer capitalize text-gray-27 hover:!bg-fabric-700 hover:text-white ${
-                    option?.disabled ? "opacity-50" : ""
+                  className={`peer !max-h-8 !px-2 !py-2 text-[0.95rem] capitalize text-gray-27 hover:!bg-fabric-700 hover:text-white ${
+                    option?.disabled ? "opacity-50" : "opacity-90"
                   }`}
                   key={option?.label + i}
                   disabled={option?.disabled}

@@ -4,15 +4,15 @@ import React, { ReactNode } from "react";
 import Link from "next/link";
 import { EmployeRoutesType, EmployeeRoute } from "@/constants/employeeRoute";
 import { usePathname } from "next/navigation";
-import UserInfo from "../components/UserInfo/UserInfo";
 import { Settings, changementRequest } from "@/constants/userInfo";
 import useEmployeeData from "@/hooks/useEmloyeeData";
 import { MdEdit } from "react-icons/md";
-import avatar from "./avatar.png";
+import avatar from "/public/avatar.png";
 import { SelectGeneric } from "@/app/_ui/SelectGeneric";
 import { IoMdSettings } from "react-icons/io";
 import { Footer } from "@/app/_ui/Footer";
 import Initialize from "@/provider/Initilize";
+import UserInfo from "../../components/UserInfo/UserInfo";
 interface EmployePropsType {
   params: { employeeId: string };
   children: ReactNode;
@@ -95,7 +95,7 @@ export default function Layout({
             </div>
           </div>
         </div>
-        <div className="items-stretc flex h-full w-full grow pl-[12%] pr-[15%]">
+        <div className="flex h-fit w-full grow pl-[12%] pr-[15%]">
           <UserInfo employeeId={employeeId} />
           {children}
         </div>

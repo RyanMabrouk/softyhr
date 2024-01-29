@@ -24,6 +24,7 @@ import { SelectedEmployees } from "./components/SelectedEmployees";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import addEmployeesToPolicy from "@/actions/settings/leave/addEmployeesToPolicy";
 import useToast from "@/hooks/useToast";
+import useProfilesData from "@/hooks/useProfilesData";
 export type usersWithoutCurrentPolicy = {
   user_id: string;
   name: string;
@@ -36,8 +37,10 @@ export default function AddEmployeesToPolicy() {
   const Router = useRouter();
   const { policy, category } = usePolicy({ policy_id: Number(policy_id) });
   const {
-    all_profiles_basic_info: { data: all_profiles_basic_info },
-  } = useData();
+    profiles: { data: all_profiles_basic_info },
+  } = useProfilesData({
+    columns: 'user_id,role,picture,"Basic Information"',
+  });
   const {
     all_users_leave_balance: { data: all_users_leave_balance },
     leave_policies: { data: leave_policies },

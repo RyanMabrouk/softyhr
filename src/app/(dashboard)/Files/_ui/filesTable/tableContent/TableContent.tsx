@@ -93,7 +93,7 @@ export default function TableContent({ checkAll, setCheckAll }: any) {
   const filesArray = files;
 
   return (
-    <div className="relative w-full ">
+    <div className="relative w-full pb-6">
       {isLoading ? (
         <LoaderFiles />
       ) : filesArray?.length && fileIds.length ? (

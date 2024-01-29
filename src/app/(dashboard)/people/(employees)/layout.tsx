@@ -1,10 +1,8 @@
 import { ReactNode } from "react";
-import SectionTitleIconBox from "./components/SectionTitleIconBox";
+import SectionTitleIconBox from "../components/SectionTitleIconBox";
 import { RiShareBoxFill } from "react-icons/ri";
-
-import ButtonAdd from "./components/ButtonAdd";
-import Link from "next/link";
-import PeopleRouteLink from "./components/PeopleRouteLink";
+import ButtonAdd from "../components/ButtonAdd";
+import PeopleRouteLink from "../components/PeopleRouteLink";
 
 interface EmployeesPropsType {
   children: ReactNode;
@@ -12,7 +10,7 @@ interface EmployeesPropsType {
 
 function layout({ children }: EmployeesPropsType) {
   return (
-    <div className="mx-auto mt-12 w-files_screen">
+    <div className="mx-auto mt-6 w-files_screen">
       <div className="flex items-center justify-between border-b border-gray-4 pb-4">
         <div className="flex flex-col  gap-6">
        {/*<SectionTitleIconBox />*/}

@@ -23,7 +23,6 @@ export default function PeopleRouteLink({ href }: any) {
       icon: <RiOrganizationChart fontSize="1.4rem" fill={fill} />,
     },
   };
-
   return (
     <Link
       className={` flex gap-1 pb-4 ${pathname === href ? " border-b-2 border-color-primary-8" : ""}`}
