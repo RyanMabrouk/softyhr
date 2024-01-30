@@ -43,14 +43,14 @@ export function AccuralFrequencyInputs() {
       break;
   }
   return (
-    <div className="flex flex-row items-start gap-2 text-[0.95rem] text-gray-25 [&>span]:pt-1">
+    <div className="flex flex-row items-start gap-2 text-[0.95rem] text-gray-25 [&>span]:pt-2">
       <span>Employees accrue</span>
       <InputGeneric
         error={error?.accure_value?.[0]}
         setValueInParent={setAccureValue}
         type="number"
         name="accure_value"
-        className="!max-w-16"
+        className="mt-1 !max-w-16"
       />
       <span>{track_time_unit}</span>
       <SelectGeneric
@@ -63,15 +63,15 @@ export function AccuralFrequencyInputs() {
       />
       {accuralOptions &&
         accural_refresh_options.find((e) => e.value === accuralOptions)?.extra}
-      <div className="ml-3 flex flex-row items-center gap-1 pt-1.5">
-        <FaCalculator className="h-4 w-4" />
-        {accurances_per_year && (
+      {!!accurances_per_year && (
+        <div className="ml-3 flex flex-row items-center gap-1 pt-1.5">
+          <FaCalculator className="h-4 w-4" />
           <span className="">
             This comes out to {accurances_per_year.toFixed(2)} {track_time_unit}{" "}
             per year
           </span>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 }

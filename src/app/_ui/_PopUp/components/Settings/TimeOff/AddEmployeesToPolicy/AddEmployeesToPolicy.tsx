@@ -3,7 +3,7 @@ import CancelBtnGeneric from "@/app/_ui/CancelBtnGeneric";
 import { SubmitBtn } from "@/app/_ui/SubmitBtn";
 import PopUpSkeleton from "@/app/_ui/_PopUp/PopUpSkeleton";
 import { generateLeaveCategorieIcon } from "@/helpers/leave.helpers";
-import usePolicy from "@/hooks/useCategory";
+import usePolicy from "@/hooks/usePolicy";
 import useData from "@/hooks/useData";
 import useLeaveData from "@/hooks/useLeaveData";
 import {

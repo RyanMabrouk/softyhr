@@ -1,11 +1,11 @@
 import React from "react";
 import { FaBusinessTime } from "react-icons/fa";
-import { PolyciesSwiper } from "./PolyciesSwiper";
+import { PolyciesSwiper } from "./components/PolyciesSwiper";
 import { MdOutlineWatchLater } from "react-icons/md";
 import { Hr } from "./_ui/Hr";
-import { History } from "./History";
+import { History } from "./components/History";
 import { HistoryTableFiltersProvider } from "./_context/historyTableFilters";
-import { UpcomingTimeOff } from "./UpcomingTimeOff";
+import { UpcomingTimeOff } from "./components/UpcomingTimeOff";
 import { ChangeAccrualStartBtn } from "./_ui/Buttons/ChangeAccrualStartBtn";
 import { AddTimeOffPolicyBtn } from "./_ui/Buttons/AddTimeOffPolicyBtn";
 import { ToggleDateSortContextProvider } from "./_context/toggleDateSortContext";

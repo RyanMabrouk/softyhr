@@ -70,7 +70,7 @@ export default function UserInfo({ employeeId }: UserInfoPropsType) {
     className: "w-14 h-14 -mt-1",
   });
   return (
-    <div className="mb-0 flex max-w-[14rem] grow flex-col items-start justify-center gap-[0.5rem] bg-gray-14 pt-4 ">
+    <div className="mb-0 flex min-w-[14rem] grow flex-col items-start justify-center gap-[0.5rem] overflow-hidden bg-gray-14 pb-10 pt-4 ">
       {current_vacation && (
         <header className="-mb-5 flex w-full flex-row items-center justify-center gap-1 border-b-[10px] border-white px-6 pb-3 pt-7 leading-4">
           <div>{icon}</div>
@@ -80,51 +80,42 @@ export default function UserInfo({ employeeId }: UserInfoPropsType) {
           </div>
         </header>
       )}
-      <div className="mt-10 flex flex-col gap-[1rem] px-5">
+      <div className="mt-10 flex w-full flex-col gap-4 px-5">
         <div className=" flex flex-col items-start  justify-center gap-2">
           <div className="flex items-center justify-start gap-2 whitespace-nowrap text-sm text-gray-15">
             <MdOutlineHomeWork
               fill="gray"
               className="cursor-pointer duration-200 ease-in-out hover:!text-color-primary-8"
             />
-            <span className="text-sm">{user?.Contact?.["Work Phone"]}</span>
+            <span className="line-clamp-1 text-sm">
+              {user?.Contact?.["Work Phone"]}
+            </span>
           </div>
           <div className="flex items-center justify-start gap-2 whitespace-nowrap text-gray-15">
             <MdPhoneAndroid
               fill="gray"
               className="cursor-pointer duration-200 ease-in-out hover:!text-color-primary-8"
             />
-            <span className="text-sm">{user?.Contact?.["Mobile Phone"]}</span>
+            <span className="line-clamp-1 text-sm">
+              {user?.Contact?.["Mobile Phone"]}
+            </span>
           </div>
-          <div className="flex items-center justify-start gap-2 whitespace-nowrap text-gray-15">
+          <div className=" flex items-center justify-start gap-2 text-gray-15">
             <CiMail
               fill="gray"
               className="cursor-pointer duration-200 ease-in-out hover:!text-color-primary-8"
             />
-            <span className="text-sm">{user?.Contact?.["Work Email"]}</span>
+            <span className="line-clamp-1 text-sm  overflow-hidden text-ellipsis whitespace-nowrap">
+              {user?.Contact?.["Work Email"]}
+            </span>
           </div>
         </div>
-        <div className="-ml-4 flex flex-row items-center justify-evenly whitespace-nowrap text-gray-15">
-          <FaLinkedin
-            fill="gray"
-            className="cursor-pointer duration-200 ease-in-out hover:!text-color-primary-8"
-          />
-          <FaTwitter
-            fill="gray"
-            className="cursor-pointer duration-200 ease-in-out hover:!text-color-primary-8"
-          />
-          <FaFacebookSquare
-            fill="gray"
-            className="cursor-pointer duration-200 ease-in-out hover:!text-color-primary-8"
-          />
-          <FaPinterest
-            fill="gray"
-            className="cursor-pointer duration-200 ease-in-out hover:!text-color-primary-8"
-          />
-          <FaTwitter
-            fill="gray"
-            className="cursor-pointer duration-200 ease-in-out hover:!text-color-primary-8"
-          />
+        <div className=" flex w-full flex-row items-center justify-between px-2 whitespace-nowrap text-gray-15">
+          <FaLinkedin className="text-gray-35 cursor-pointer duration-200 ease-linear hover:text-color-primary-8" />
+          <FaTwitter className="text-gray-35 cursor-pointer duration-200 ease-linear hover:text-color-primary-8" />
+          <FaFacebookSquare className="text-gray-35 cursor-pointer duration-200 ease-linear hover:text-color-primary-8" />
+          <FaPinterest className="text-gray-35 cursor-pointer duration-200 ease-linear hover:text-color-primary-8" />
+          <FaTwitter className="text-gray-35 cursor-pointer duration-200 ease-linear hover:text-color-primary-8" />
         </div>
         <div className="h-px w-full  self-center bg-gray-16" />
         <div className=" flex flex-col gap-[0.3rem]">

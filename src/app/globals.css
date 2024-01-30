@@ -20,23 +20,17 @@
     box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
       var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
   }
-  .shadow-red {
-    --tw-shadow: 0px 0px 4px 1px #c20c0c !important;
-    --tw-shadow-colored: 0px 0px 4px 1px var(--tw-shadow-color) !important;
-    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
-      var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow) !important;
-  }
-  /* Remove default number input arrows style */
-  /* Chrome, Safari, Edge, Opera */
-  input::-webkit-outer-spin-button,
-  input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-  /* Firefox */
-  input[type="number"] {
-    -moz-appearance: textfield;
-  }
+}
+/* Remove default number input arrows style */
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
 }
 /* Reset Mui Select Componant selected bg color */
 .Mui-selected {
@@ -55,6 +49,7 @@
 /* Daisyui */
 @layer base {
   :root {
+    color-scheme: only light;
     --background: 0 0% 100%;
     --foreground: 0 0% 3.9%;
 
@@ -116,15 +111,6 @@
     --ring: 0 0% 83.1%;
   }
 }
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
-}
-
 .scrollBar-green::-webkit-scrollbar {
   width: 0.5rem;
   border-radius: 0.6rem;

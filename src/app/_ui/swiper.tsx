@@ -12,6 +12,7 @@ export default function CustomSwiper(props: {
   slides: any;
   initialSlide?: number;
   slidesPerView?: number;
+  spaceBetween?: number;
   centeredSlides?: boolean;
   loop?: boolean;
   navigation?: boolean | NavigationOptions | undefined;
@@ -28,7 +29,7 @@ export default function CustomSwiper(props: {
     <Swiper
       // install Swiper modules
       modules={[Virtual, Pagination, Navigation]}
-      spaceBetween={25}
+      spaceBetween={props.spaceBetween ?? 25}
       slidesPerView={props.slidesPerView ?? 1}
       centeredSlides={props.centeredSlides}
       initialSlide={props.initialSlide ?? 0} //virtual

@@ -37,6 +37,7 @@ import DeleteJob from "@/app/_ui/_PopUp/components/Hiring/DeleteJob/DeleteJob";
 import EditJobBoard from "@/app/_ui/_PopUp/components/Hiring/EditJobBoard/EditJobBoard";
 import HireCandidate from "@/app/_ui/_PopUp/components/Hiring/HireCandidate/HireCandidate";
 import DeleteFilesPopUp from "@/app/(dashboard)/Files/_ui/popUp/DeleteFilesPopUp";
+import CalculateLeaveBalance from "@/app/_ui/_PopUp/components/TimeOff/CalculateLeaveBalance/CalculateLeaveBalance";
 
 type PopupType = {
   [key: string]: () => React.JSX.Element;
@@ -81,4 +82,5 @@ export const popups: PopupType = {
   DELETE_LEAVE_POLICY_DATA: DeleteLeavePolicyData,
   ADD_NEW_POLICY: AddNewPolicy,
   ADD_EMPLOYEES_TO_POLICY: AddEmployeesToPolicy,
+  CALCULATE_LEAVE_BALANCE: CalculateLeaveBalance,
 };

@@ -37,4 +37,4 @@ export type FomDataType = {
   //------------------
   first_accural_date: "prorated" | "full_amount";
   accured_time_start: "start" | "end";
-} | null;
+};

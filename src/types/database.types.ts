@@ -11,44 +11,44 @@ export interface Database {
     Tables: {
       candidates: {
         Row: {
-          created_at: string;
-          Email: string | null;
-          "First Name": string | null;
-          id: number;
-          job_id: number | null;
-          "Last Name": string | null;
-          metadata: Json | null;
-          org_name: string | null;
-          Phone: string | null;
-          Ratings: number | null;
-          status: string | null;
-        };
+          created_at: string
+          Email: string | null
+          "First Name": string | null
+          id: number
+          job_id: number | null
+          "Last Name": string | null
+          metadata: Json | null
+          org_name: string | null
+          Phone: string | null
+          Ratings: number | null
+          status: string | null
+        }
         Insert: {
-          created_at?: string;
-          Email?: string | null;
-          "First Name"?: string | null;
-          id?: number;
-          job_id?: number | null;
-          "Last Name"?: string | null;
-          metadata?: Json | null;
-          org_name?: string | null;
-          Phone?: string | null;
-          Ratings?: number | null;
-          status?: string | null;
-        };
+          created_at?: string
+          Email?: string | null
+          "First Name"?: string | null
+          id?: number
+          job_id?: number | null
+          "Last Name"?: string | null
+          metadata?: Json | null
+          org_name?: string | null
+          Phone?: string | null
+          Ratings?: number | null
+          status?: string | null
+        }
         Update: {
-          created_at?: string;
-          Email?: string | null;
-          "First Name"?: string | null;
-          id?: number;
-          job_id?: number | null;
-          "Last Name"?: string | null;
-          metadata?: Json | null;
-          org_name?: string | null;
-          Phone?: string | null;
-          Ratings?: number | null;
-          status?: string | null;
-        };
+          created_at?: string
+          Email?: string | null
+          "First Name"?: string | null
+          id?: number
+          job_id?: number | null
+          "Last Name"?: string | null
+          metadata?: Json | null
+          org_name?: string | null
+          Phone?: string | null
+          Ratings?: number | null
+          status?: string | null
+        }
         Relationships: [
           {
             foreignKeyName: "candidates_job_id_fkey";
@@ -357,29 +357,29 @@ export interface Database {
       };
       leave_policies: {
         Row: {
-          categories_id: number;
-          created_at: string;
-          id: number;
-          name: string;
-          org_name: string;
-          type: Database["public"]["Enums"]["database_leave_policies_policy_type"];
-        };
+          categories_id: number
+          created_at: string
+          id: number
+          name: string
+          org_name: string
+          type: Database["public"]["Enums"]["database_leave_policies_policy_type"]
+        }
         Insert: {
-          categories_id: number;
-          created_at?: string;
-          id?: number;
-          name: string;
-          org_name: string;
-          type?: Database["public"]["Enums"]["database_leave_policies_policy_type"];
-        };
+          categories_id: number
+          created_at?: string
+          id?: number
+          name: string
+          org_name: string
+          type?: Database["public"]["Enums"]["database_leave_policies_policy_type"]
+        }
         Update: {
-          categories_id?: number;
-          created_at?: string;
-          id?: number;
-          name?: string;
-          org_name?: string;
-          type?: Database["public"]["Enums"]["database_leave_policies_policy_type"];
-        };
+          categories_id?: number
+          created_at?: string
+          id?: number
+          name?: string
+          org_name?: string
+          type?: Database["public"]["Enums"]["database_leave_policies_policy_type"]
+        }
         Relationships: [
           {
             foreignKeyName: "leave_policies_categories_id_fkey";
@@ -500,77 +500,77 @@ export interface Database {
       };
       profiles: {
         Row: {
-          accrual_start_date: string | null;
-          Address: Json | null;
-          "Basic Information": Json | null;
-          Bonus: Json[] | null;
-          Commission: Json[] | null;
-          Compensation: Json[] | null;
-          Contact: Json | null;
-          "Driver License": Json[] | null;
-          Education: Json[] | null;
-          "Employment Status": Json[] | null;
-          Hiring: Json | null;
-          Job: Json | null;
-          "Job Information": Json[] | null;
-          leave_balance: Json[] | null;
-          org_name: string;
-          supervisor_id: string | null;
-          picture: string | null;
-          role: string | null;
-          "Social Links": Json | null;
-          "Stock Options": Json[] | null;
-          user_id: string;
-          "Visa Information": Json[] | null;
-        };
+          accrual_start_date: string | null
+          Address: Json | null
+          "Basic Information": Json | null
+          Bonus: Json[] | null
+          Commission: Json[] | null
+          Compensation: Json[] | null
+          Contact: Json | null
+          "Driver License": Json[] | null
+          Education: Json[] | null
+          "Employment Status": Json[] | null
+          Hiring: Json | null
+          Job: Json | null
+          "Job Information": Json[] | null
+          leave_balance: Json[] | null
+          org_name: string
+          parent_id: string | null
+          picture: string | null
+          role: string | null
+          "Social Links": Json | null
+          "Stock Options": Json[] | null
+          user_id: string
+          "Visa Information": Json[] | null
+        }
         Insert: {
-          accrual_start_date?: string | null;
-          Address?: Json | null;
-          "Basic Information"?: Json | null;
-          Bonus?: Json[] | null;
-          Commission?: Json[] | null;
-          Compensation?: Json[] | null;
-          Contact?: Json | null;
-          "Driver License"?: Json[] | null;
-          Education?: Json[] | null;
-          "Employment Status"?: Json[] | null;
-          Hiring?: Json | null;
-          Job?: Json | null;
-          "Job Information"?: Json[] | null;
-          leave_balance?: Json[] | null;
-          org_name: string;
-          supervisor_id?: string | null;
-          picture?: string | null;
-          role?: string | null;
-          "Social Links"?: Json | null;
-          "Stock Options"?: Json[] | null;
-          user_id: string;
-          "Visa Information"?: Json[] | null;
-        };
+          accrual_start_date?: string | null
+          Address?: Json | null
+          "Basic Information"?: Json | null
+          Bonus?: Json[] | null
+          Commission?: Json[] | null
+          Compensation?: Json[] | null
+          Contact?: Json | null
+          "Driver License"?: Json[] | null
+          Education?: Json[] | null
+          "Employment Status"?: Json[] | null
+          Hiring?: Json | null
+          Job?: Json | null
+          "Job Information"?: Json[] | null
+          leave_balance?: Json[] | null
+          org_name: string
+          parent_id?: string | null
+          picture?: string | null
+          role?: string | null
+          "Social Links"?: Json | null
+          "Stock Options"?: Json[] | null
+          user_id: string
+          "Visa Information"?: Json[] | null
+        }
         Update: {
-          accrual_start_date?: string | null;
-          Address?: Json | null;
-          "Basic Information"?: Json | null;
-          Bonus?: Json[] | null;
-          Commission?: Json[] | null;
-          Compensation?: Json[] | null;
-          Contact?: Json | null;
-          "Driver License"?: Json[] | null;
-          Education?: Json[] | null;
-          "Employment Status"?: Json[] | null;
-          Hiring?: Json | null;
-          Job?: Json | null;
-          "Job Information"?: Json[] | null;
-          leave_balance?: Json[] | null;
-          org_name?: string;
-          supervisor_id?: string | null;
-          picture?: string | null;
-          role?: string | null;
-          "Social Links"?: Json | null;
-          "Stock Options"?: Json[] | null;
-          user_id?: string;
-          "Visa Information"?: Json[] | null;
-        };
+          accrual_start_date?: string | null
+          Address?: Json | null
+          "Basic Information"?: Json | null
+          Bonus?: Json[] | null
+          Commission?: Json[] | null
+          Compensation?: Json[] | null
+          Contact?: Json | null
+          "Driver License"?: Json[] | null
+          Education?: Json[] | null
+          "Employment Status"?: Json[] | null
+          Hiring?: Json | null
+          Job?: Json | null
+          "Job Information"?: Json[] | null
+          leave_balance?: Json[] | null
+          org_name?: string
+          parent_id?: string | null
+          picture?: string | null
+          role?: string | null
+          "Social Links"?: Json | null
+          "Stock Options"?: Json[] | null
+          user_id?: string
+          "Visa Information"?: Json[] | null
+        }
         Relationships: [
           {
             foreignKeyName: "profiles_org_name_fkey";

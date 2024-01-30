@@ -2,9 +2,9 @@
 import React, { useContext } from "react";
 import { FaHistory, FaLongArrowAltDown } from "react-icons/fa";
 import { HistoryTable } from "./HistoryTable";
-import historyTableFilters from "./_context/historyTableFilters";
-import { historyTableFiltersContextType } from "./_context/historyTableFilters"; // Import the type of the context
-import { UnderlinedLink } from "../../../../../_ui/UnderlinedLink";
+import historyTableFilters from "../_context/historyTableFilters";
+import { historyTableFiltersContextType } from "../_context/historyTableFilters"; // Import the type of the context
+import { UnderlinedLink } from "../../../../../../_ui/UnderlinedLink";
 import { formatDDMMYYYY } from "@/helpers/date.helpers";
 import useData from "@/hooks/useData";
 import { Filters } from "./Filters";
@@ -19,14 +19,14 @@ import {
 } from "@/types/database.tables.types";
 import { formatTotalHoursToTimeUnit } from "@/helpers/leave.helpers";
 import { useParams } from "next/navigation";
-import { EditLeaveRequestBtn } from "./_ui/Buttons/EditLeaveRequestBtn";
-import { DeleteLeaveRequestBtn } from "./_ui/Buttons/DeleteLeaveRequestBtn";
+import { EditLeaveRequestBtn } from "../_ui/Buttons/EditLeaveRequestBtn";
+import { DeleteLeaveRequestBtn } from "../_ui/Buttons/DeleteLeaveRequestBtn";
 import Link from "next/link";
 import useEmployeeData from "@/hooks/useEmloyeeData";
 import useLeaveData from "@/hooks/useLeaveData";
 import toggleDateSortContext, {
   toggleDateSortContextType,
-} from "./_context/toggleDateSortContext";
+} from "../_context/toggleDateSortContext";
 import useProfilesData from "@/hooks/useProfilesData";
 interface leave_data {
   user_id: string;
