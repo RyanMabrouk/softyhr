@@ -140,7 +140,7 @@ export function Amount({
                               );
                           }
                         }}
-                        className={`flex h-8 w-12 items-center justify-center border p-2 px-3 text-gray-27 focus:outline-none ${
+                        className={`flex h-8 w-12 items-center justify-center border p-2 px-3 text-gray-27 transition-all ease-linear focus:outline-none ${
                           formError?.["duration_date" + i]
                             ? "border-color9-500"
                             : "focus:shadow-green border-gray-18"

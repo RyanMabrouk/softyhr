@@ -65,6 +65,7 @@ export function Label({
   name: string;
   error?: boolean;
 }) {
+  if (!children) return;
   return (
     <div className={`flex flex-row items-center gap-1`}>
       {error && <BsExclamationCircleFill className="text-sm text-color9-500" />}

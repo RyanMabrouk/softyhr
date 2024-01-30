@@ -1,5 +1,5 @@
 "use client";
-import { HistoryTable } from "@/app/(dashboard)/people/(employee)/[employeeId]/TimeOff/HistoryTable";
+import { HistoryTable } from "@/app/(dashboard)/people/(employee)/[employeeId]/TimeOff/components/HistoryTable";
 import { generateLeaveCategorieIcon } from "@/helpers/leave.helpers";
 import useData from "@/hooks/useData";
 import {
@@ -16,7 +16,7 @@ import {
   MdTimelapse,
 } from "react-icons/md";
 import { UnderlinedLink } from "@/app/_ui/UnderlinedLink";
-import usePolicy from "@/hooks/useCategory";
+import usePolicy from "@/hooks/usePolicy";
 import { EmployyeSettingsBtn } from "./EmployyeSettingsBtn";
 import useLeaveData from "@/hooks/useLeaveData";
 import { BsPlusSlashMinus } from "react-icons/bs";

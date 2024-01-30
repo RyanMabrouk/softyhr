@@ -1,13 +1,13 @@
 import React from "react";
-import { AddLeaveRequestBtn } from "./_ui/Buttons/AddLeaveRequestBtn";
-import { AdjustLeavePolicyBalanceBtn } from "./_ui/Buttons/AdjustLeavePolicyBalanceBtn";
-import { FaCalculator } from "react-icons/fa6";
+import { AddLeaveRequestBtn } from "../_ui/Buttons/AddLeaveRequestBtn";
+import { AdjustLeavePolicyBalanceBtn } from "../_ui/Buttons/AdjustLeavePolicyBalanceBtn";
 import {
   database_leave_policies_policy_type,
   databese_leave_categories_track_time_unit_type,
 } from "@/types/database.tables.types";
 import { formatTotalHoursToTimeUnit } from "@/helpers/leave.helpers";
-import { ChangePolicyMenuBtn } from "./ChangePolicyMenuBtn";
+import { ChangePolicyMenuBtn } from "../_ui/Buttons/ChangePolicyMenuBtn";
+import { CalculatorBtn } from "./CalculatorBtn";
 export function Policy({
   id,
   icon,
@@ -30,7 +30,7 @@ export function Policy({
   return (
     <div className="group relative flex h-fit w-fit  flex-col items-center justify-between gap-1 pt-6 ">
       <div className="flex min-w-[20rem] flex-col items-center justify-center gap-1 rounded-md  bg-gray-14 px-[auto] py-3 group-hover:rounded-b-none  group-hover:bg-gray-17">
-        <span className="mb-1 max-w-full overflow-hidden text-ellipsis whitespace-nowrap text-center text-base font-bold capitalize leading-[1.467rem] text-[rgb(34,34,34)]">
+        <span className="mb-1 max-w-full overflow-hidden text-ellipsis whitespace-nowrap text-center text-base font-bold capitalize leading-[1.467rem] text-gray-27">
           {title}
         </span>
         <div className="flex flex-row items-center gap-1">
@@ -57,14 +57,7 @@ export function Policy({
       <ChangePolicyMenuBtn id={id} />
       <div className="absolute -top-2 box-border flex  w-full -translate-x-5 translate-y-10 flex-row items-center justify-center gap-2 rounded-[0px_0px_8px_8px] border-solid  border-[10px_2px_2px] py-3 text-center text-gray-25 opacity-0 transition-all delay-0 duration-200 ease-in-out group-hover:translate-x-0 group-hover:translate-y-0  group-hover:opacity-100">
         <AddLeaveRequestBtn id={id} />
-        {type === "traditional" && (
-          <div
-            className="tooltip tooltip-bottom z-[9999]"
-            data-tip="Under construction 🚧"
-          >
-            <FaCalculator className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-md border border-black bg-white px-2 text-center " />
-          </div>
-        )}
+        {type === "traditional" && <CalculatorBtn id={id} />}
         <AdjustLeavePolicyBalanceBtn id={id} />
       </div>
     </div>

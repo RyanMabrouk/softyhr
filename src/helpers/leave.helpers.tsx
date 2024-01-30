@@ -4,7 +4,6 @@ import {
   databese_leave_categories_type,
 } from "@/types/database.tables.types";
 import { formatYYYYMMDD, sameDay } from "./date.helpers";
-import useData from "@/hooks/useData";
 import { useSettings } from "@/hooks/useSettings";
 // generate Leave Categorie Icon
 export function generateLeaveCategorieIcon({
@@ -65,4 +64,26 @@ export function useArrayOfWorkingDays(
     currentDate.setDate(currentDate.getDate() + 1);
   }
   return dates;
+}
+export function numberOfdaysInArrayOfDatesBeforeDay(
+  accrual_days: Date[],
+  day: Date,
+) {
+  let accurals = accrual_days;
+  const currentYear = day.getFullYear();
+  let accural_creation_year = accrual_days?.[0]?.getFullYear();
+  while (currentYear > accural_creation_year) {
+    accurals = [
+      ...accurals,
+      ...accrual_days.map(
+        (date: Date) => new Date(currentYear, date.getMonth(), date.getDate()),
+      ),
+    ];
+    accural_creation_year += 1;
+  }
+  const days = accurals?.filter(
+    (date: Date) => date > new Date() && +date < +day,
+  );
+  console.log("🚀 ~ days:", days);
+  return days?.length;
 }

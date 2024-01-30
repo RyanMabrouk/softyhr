@@ -13,16 +13,25 @@ import { Setp2 } from "./_Step2/Setp2";
 import { Setp3 } from "./_Step3/Setp3";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import useToast from "@/hooks/useToast";
+import { useCategorieTimeUnit } from "./hooks/useCategorieTimeUnit";
 export function Form() {
   const { toast } = useToast();
   const Router = useRouter();
   const type: database_leave_policies_policy_type = useSearchParams().get(
     "type",
   ) as database_leave_policies_policy_type;
+  const categories_id = useSearchParams().get("categories_id");
+  const track_time_unit = useCategorieTimeUnit({
+    categories_id: Number(categories_id),
+  });
   const queryClient = useQueryClient();
   const { mutate: insert, isPending } = useMutation({
     mutationFn: async (formData: FormData) => {
-      const { error } = await insertNewPolicy({ formData, type });
+      const { error } = await insertNewPolicy({
+        formData,
+        type,
+        track_time_unit,
+      });
       if (error) {
         toast.error(error.message, error.type);
       } else {

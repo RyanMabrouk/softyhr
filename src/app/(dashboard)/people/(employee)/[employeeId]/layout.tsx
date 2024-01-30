@@ -21,18 +21,20 @@ export default function Layout({
   params: { employeeId },
   children,
 }: EmployePropsType) {
-  const { employee_profile: data } = useEmployeeData({ employeeId });
+  const {
+    employee_profile: { data: user },
+  } = useEmployeeData({ employeeId });
   const ActiveRoute =
     usePathname().split("/").slice(-1).join("") || EmployeeRoute[0]?.label;
   return (
     <Initialize>
-      <div className="flex h-full w-full flex-col ">
+      <div className="flex h-full w-full flex-col">
         <div className="z-20 flex h-[13rem] justify-center bg-gradient-to-r from-color-primary-7  to-color-primary-9 transition-all duration-300 ">
           <div className={"flex w-9/12 items-end justify-start gap-[4rem] "}>
             <Link href="?popup=EDIT_PROFILE_IMAGE" className="group  relative">
               <div className="z-10 -mb-9 h-[13rem] w-[13rem] rounded-full border-color-primary-2  active:border-2">
                 <Image
-                  src={data?.data?.picture || avatar}
+                  src={user?.picture || avatar}
                   alt="user-name"
                   priority
                   width={208}
@@ -49,10 +51,9 @@ export default function Layout({
             <div className={"flex-column flex w-full flex-col gap-[3rem] "}>
               <div className="flex items-start justify-between">
                 <h1 className="text-3xl font-bold text-white">
-                  {data?.data?.["Basic Information"]?.["First name"] +
+                  {user?.["Basic Information"]?.["First name"] +
                     " " +
-                    data?.data?.["Basic Information"]?.["Last name"] ||
-                    "your name"}
+                    user?.["Basic Information"]?.["Last name"]}
                 </h1>
                 <div className={"flex h-10 gap-[1rem] "}>
                   <SelectGeneric

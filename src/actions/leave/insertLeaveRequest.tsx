@@ -22,7 +22,7 @@ export default async function insertLeaveRequest({
   const total_duration = durations.reduce((acc, e) => acc + Number(e), 0);
   // get the type of the leave policy
   const { error: error0, policy_type: type } = await getPolicyType({
-    policy_id,
+    policy_id: policy_id,
   });
   if (error0) {
     return {
@@ -46,7 +46,7 @@ export default async function insertLeaveRequest({
     };
   }
   // Check if the user has a balance for the policy and get the balance
-  if (!old_balance) {
+  if (old_balance === undefined) {
     return {
       error: {
         message: "You don't have a balance for this policy",

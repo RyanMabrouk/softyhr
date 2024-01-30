@@ -8,6 +8,7 @@ import { useParams, useRouter, useSearchParams } from "next/navigation";
 import React from "react";
 import { BiSolidDislike } from "react-icons/bi";
 import PopUpSkeleton from "../../../PopUpSkeleton";
+import { TextFeildGeneric } from "@/app/_ui/TextFeildGeneric";
 
 export default function RejectLeaveRequest() {
   const { toast } = useToast();
@@ -55,19 +56,11 @@ export default function RejectLeaveRequest() {
           <div className="-mt-4 text-[15px] leading-[22px] text-gray-20">
             You can leave a comment on it if you would like to.
           </div>
-          <div className="flex w-full  flex-col gap-1">
-            <label htmlFor="note" className="text-sm text-gray-21">
-              Comment (Optional)
-            </label>
-            <textarea
-              name="note"
-              className="focus:shadow-green w-full rounded-md border  border-gray-18 px-2 py-1 shadow-[rgba(0,0,0,0.05)_0px_1px_0px_0px] placeholder:text-gray-14 focus:outline-none "
-              id="note"
-              cols={10}
-              rows={5}
-              draggable
-            />
-          </div>
+          <TextFeildGeneric
+            name="note"
+            label="Comment (Optional)"
+            required={false}
+          />
           <hr className="h-[3px] w-full bg-primary-gradient" />
           <div className="flex w-full flex-row items-center justify-start gap-4 px-2 pt-3">
             <SubmitBtn disabled={isPending} className="!w-fit">

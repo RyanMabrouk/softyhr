@@ -5,7 +5,6 @@ import Image from "next/image";
 import useToast from "@/hooks/useToast";
 import { useParams, useRouter } from "next/navigation";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import useData from "@/hooks/useData";
 import useEmployeeData from "@/hooks/useEmloyeeData";
 import default_avatar from "/public/default_avatar.jpeg";
 import { SelectGeneric } from "@/app/_ui/SelectGeneric";

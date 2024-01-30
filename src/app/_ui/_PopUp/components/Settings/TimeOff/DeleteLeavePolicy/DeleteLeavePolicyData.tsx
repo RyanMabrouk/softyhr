@@ -3,7 +3,7 @@ import CancelBtnGeneric from "@/app/_ui/CancelBtnGeneric";
 import { InputGeneric } from "@/app/_ui/InputGeneric";
 import { SubmitBtn } from "@/app/_ui/SubmitBtn";
 import PopUpSkeleton from "@/app/_ui/_PopUp/PopUpSkeleton";
-import usePolicy from "@/hooks/useCategory";
+import usePolicy from "@/hooks/usePolicy";
 import useLeaveData from "@/hooks/useLeaveData";
 import useToast from "@/hooks/useToast";
 import { database_profile_leave_balance_type } from "@/types/database.tables.types";

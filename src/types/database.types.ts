@@ -14,6 +14,7 @@ export interface Database {
           created_at: string
           Email: string | null
           "First Name": string | null
+          "Hiring Lead": string | null
           id: number
           job_id: number | null
           "Last Name": string | null
@@ -27,6 +28,7 @@ export interface Database {
           created_at?: string
           Email?: string | null
           "First Name"?: string | null
+          "Hiring Lead"?: string | null
           id?: number
           job_id?: number | null
           "Last Name"?: string | null
@@ -40,6 +42,7 @@ export interface Database {
           created_at?: string
           Email?: string | null
           "First Name"?: string | null
+          "Hiring Lead"?: string | null
           id?: number
           job_id?: number | null
           "Last Name"?: string | null
@@ -357,6 +360,8 @@ export interface Database {
       }
       leave_policies: {
         Row: {
+          accrual_days: string[] | null
+          accrual_value_in_hours: number
           categories_id: number
           created_at: string
           id: number
@@ -365,6 +370,8 @@ export interface Database {
           type: Database["public"]["Enums"]["database_leave_policies_policy_type"]
         }
         Insert: {
+          accrual_days?: string[] | null
+          accrual_value_in_hours?: number
           categories_id: number
           created_at?: string
           id?: number
@@ -373,6 +380,8 @@ export interface Database {
           type?: Database["public"]["Enums"]["database_leave_policies_policy_type"]
         }
         Update: {
+          accrual_days?: string[] | null
+          accrual_value_in_hours?: number
           categories_id?: number
           created_at?: string
           id?: number
@@ -513,7 +522,6 @@ export interface Database {
           Hiring: Json | null
           Job: Json | null
           "Job Information": Json[] | null
-          leave_balance: Json[] | null
           org_name: string
           parent_id: string | null
           picture: string | null
@@ -537,7 +545,6 @@ export interface Database {
           Hiring?: Json | null
           Job?: Json | null
           "Job Information"?: Json[] | null
-          leave_balance?: Json[] | null
           org_name: string
           parent_id?: string | null
           picture?: string | null
@@ -561,7 +568,6 @@ export interface Database {
           Hiring?: Json | null
           Job?: Json | null
           "Job Information"?: Json[] | null
-          leave_balance?: Json[] | null
           org_name?: string
           parent_id?: string | null
           picture?: string | null

@@ -9,7 +9,7 @@ import useToast from "@/hooks/useToast";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import useEmployeeData from "@/hooks/useEmloyeeData";
 import deleteCategorie from "@/actions/leave/deleteCategorie";
-import usePolicy from "@/hooks/useCategory";
+import usePolicy from "@/hooks/usePolicy";
 import CancelBtnGeneric from "@/app/_ui/CancelBtnGeneric";
 export default function DeleteLeavePolicy() {
   const { toast } = useToast();
@@ -75,7 +75,7 @@ export default function DeleteLeavePolicy() {
           <hr className="h-[3px] w-full bg-primary-gradient" />
           <div className="flex flex-row gap-4 px-2 pt-3">
             <SubmitBtn
-              className="!max-w-[20rem] !w-fit !px-2"
+              className="!w-fit !max-w-[20rem] !px-2"
               disabled={isPending}
             >{`Yes, Remove ${first_name}`}</SubmitBtn>
             <CancelBtnGeneric />

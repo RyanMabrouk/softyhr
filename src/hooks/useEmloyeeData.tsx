@@ -17,6 +17,7 @@ export default function useEmployeeData({
         match: { user_id: employeeId },
         org: true,
       }),
+    enabled: employeeId !== undefined && employeeId !== null,
   });
   //------------------- Users Basic Information--------------------
   const { data: employee_profile, isPending: isPending7 } = useQuery({
@@ -26,6 +27,7 @@ export default function useEmployeeData({
         org: true,
         match: { user_id: employeeId },
       }),
+    enabled: employeeId !== undefined && employeeId !== null,
   });
   //----------------- Leave Accrued--------------------
   const { data: leave_accrued, isPending: isPending4 } = useQuery({
@@ -35,6 +37,7 @@ export default function useEmployeeData({
         org: true,
         match: { user_id: employeeId },
       }),
+    enabled: employeeId !== undefined && employeeId !== null,
   });
   const { data: leave_balance, isPending: isPending5 } = useQuery({
     queryKey: ["leave_balance", employeeId],
@@ -43,6 +46,7 @@ export default function useEmployeeData({
         org: true,
         match: { user_id: employeeId },
       }),
+    enabled: employeeId !== undefined && employeeId !== null,
   });
   //------------------------------------------------------------
   return {

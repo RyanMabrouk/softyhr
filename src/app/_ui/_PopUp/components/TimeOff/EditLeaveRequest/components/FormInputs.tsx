@@ -17,13 +17,22 @@ import { WarningIfDatesAlreadyBooked } from "./WarningIfDatesAlreadyBooked";
 import useEmployeeData from "@/hooks/useEmloyeeData";
 import { CalendarRange } from "./CalendarRange";
 import useLeaveData from "@/hooks/useLeaveData";
+import { TextFeildGeneric } from "../../../../../TextFeildGeneric";
+import useData from "@/hooks/useData";
 export function FormInputs() {
   const searchParams = useSearchParams();
   const { setStartDate, setEndDate } =
     useContext<dateRangeContextType>(dateRangeContext);
-  const leave_request_id = Number(searchParams.get("leave_request_id"));
-  const leave_policy_id = Number(searchParams.get("leave_policy_id"));
-  const { employeeId } = useParams();
+  const leave_request_id: number | undefined = Number(
+    searchParams.get("leave_request_id"),
+  );
+  const leave_policy_id: number | undefined = Number(
+    searchParams.get("leave_policy_id"),
+  );
+  const {
+    user_profile: { data: user_profile },
+  } = useData();
+  const employeeId = useParams().employeeId ?? user_profile?.user_id;
   const {
     leave_categories: { data: leave_categories },
     leave_policies: { data: leave_policies },
@@ -42,15 +51,16 @@ export function FormInputs() {
       (request: database_leave_requests_type) => request.id == leave_request_id,
     );
   // Current User Leave Policy
-  const policy: database_leave_policies_type = leave_policies?.find(
+  const policy: database_leave_policies_type | undefined = leave_policies?.find(
     (policy: database_leave_policies_type) =>
       policy.id === request_data?.policy_id || policy.id === leave_policy_id,
   );
   // Current User Leave Policy Category
-  const categorie: databese_leave_categories_type = leave_categories?.find(
-    (categorie: databese_leave_categories_type) =>
-      policy.categories_id === categorie.id,
-  );
+  const categorie: databese_leave_categories_type | undefined =
+    leave_categories?.find(
+      (categorie: databese_leave_categories_type) =>
+        policy?.categories_id === categorie.id,
+    );
   return (
     <div className="flex flex-col gap-2 pb-3">
       <div className="flex flex-row gap-4">
@@ -68,15 +78,17 @@ export function FormInputs() {
           }
           setStartValueInParent={setStartDate}
           setEndValueInParent={setEndDate}
-          required={true}
+          required
         />
         <WarningIfDatesAlreadyBooked />
       </div>
       <SelectGeneric
         label="Time Off Category"
-        required={true}
+        required
         name="policy_id"
-        defaultValue={{ label: categorie?.name, value: String(policy?.id) }}
+        defaultValue={
+          policy && { label: categorie?.name, value: String(policy?.id) }
+        }
         options={leave_categories
           ?.filter((category: databese_leave_categories_type) =>
             current_user_categories_ids?.includes(category.id),
@@ -98,20 +110,12 @@ export function FormInputs() {
           track_time_unit={categorie?.track_time_unit ?? "hours"}
         />
       }
-      <div className="flex flex-col gap-1">
-        <label htmlFor="note" className="text-sm text-gray-21">
-          Note
-        </label>
-        <textarea
-          name="note"
-          className="focus:shadow-green maw-w-[20rem] rounded-md border  border-gray-18 px-2 py-1 shadow-[rgba(0,0,0,0.05)_0px_1px_0px_0px] placeholder:text-gray-14 focus:outline-none "
-          id="note"
-          cols={10}
-          rows={5}
-          defaultValue={request_data?.note ?? ""}
-          draggable
-        />
-      </div>
+      <TextFeildGeneric
+        name="note"
+        label="Note"
+        required={false}
+        defaultValue={request_data?.note ?? ""}
+      />
     </div>
   );
 }
