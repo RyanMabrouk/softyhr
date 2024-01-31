@@ -23,6 +23,7 @@ import PublishButton from "./components/PublishButton";
 import EditCard from "./components/EditCard";
 import { formatCustomDate, monthsAgo } from "@/helpers/date.helpers";
 import { CiLink } from "react-icons/ci";
+import { GetJobUrl } from "@/helpers/Hiring/GetJobUrl.helper";
 
 const columns = [
   { name: "id", uid: "id" },
@@ -173,7 +174,12 @@ export default function HiringTable({
                 <FaTrash cursor={"pointer"} fill={"gray"} />
               </Link>
               <div className="duration-250 flex h-[2rem] w-[2rem] cursor-pointer items-center justify-center ease-in-out hover:border hover:border-gray-27 hover:bg-gray-22">
-                <CiLink cursor={"pointer"} onClick={() => navigator.clipboard.writeText(GetJobUrl())} />
+                <CiLink
+                  cursor={"pointer"}
+                  onClick={() =>
+                    navigator.clipboard.writeText(GetJobUrl(user?.id))
+                  }
+                />
               </div>
               {user?.status != "Open" && <PublishButton id={user?.id} />}
             </div>
