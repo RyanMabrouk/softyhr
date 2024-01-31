@@ -1,21 +1,49 @@
 import getData from "@/api/getData";
+import getHiring from "@/api/getHiring";
 import { useQuery } from "@tanstack/react-query";
 
-export default function useHiring(match?: {
-  [key: string]: string | number | boolean | null | string[] | undefined;
-}) {
-  const { data: Hiring, isPending } = useQuery({
-    queryKey: ["Hiring",match && match ],
+export default function useHiring(
+  match?: {
+    [key: string]: string | number | boolean | null | string[] | undefined;
+  },
+  page?: number,
+  rowsPerPage?: number,
+  filter?: string | null,
+) {
+  const querykey: any = ["Hiring"];
+  if (page != undefined) {
+    querykey.push(page);
+  }
+  if (filter) {
+    querykey.push(filter);
+  }
+  console.log(match, page, rowsPerPage, filter);
+  const {
+    data: Hiring,
+    isPlaceholderData,
+    isPending,
+  } = useQuery({
+    queryKey: querykey,
     queryFn: () =>
-      getData("Hiring", {
-        org: true,
-      }),
+      page != undefined && rowsPerPage != undefined
+        ? getHiring("Hiring", {
+            match: match,
+            StartPage: (page - 1)* rowsPerPage,
+            EndPage: (page ) * rowsPerPage,
+            filter,
+          })
+        : getHiring("Hiring", {
+            match: match,
+            filter,
+          }),
   });
   return {
     Hiring: {
       data: Hiring?.data,
       error: Hiring?.error,
       isPending: isPending,
+      isPlaceholderData,
+      meta: Hiring?.meta,
     },
   };
 }

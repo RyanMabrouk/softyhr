@@ -12,8 +12,7 @@ function Page({ params: { job_id } }: { params: { job_id: string } }) {
     Hiring: { data, isPending },
   } = useHiring({ id: job_id });
 
-  console.log(job_id);
-  console.log(data);
+  
   return isPending ? (
     <Loader />
   ) : (

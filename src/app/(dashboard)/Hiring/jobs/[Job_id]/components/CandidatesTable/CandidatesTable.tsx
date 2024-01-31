@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import {
   Table,
   TableHeader,
@@ -12,13 +12,11 @@ import {
   Dropdown,
   DropdownMenu,
   DropdownItem,
-  User,
   Pagination,
   Selection,
   ChipProps,
-  SortDescriptor,
 } from "@nextui-org/react";
-import { columns, statusOptions } from "./data";
+import { columns, CandidateStatusOptions } from "./data";
 import { FaSortDown } from "react-icons/fa6";
 import Mail from "./Mail/Mail";
 import Settings from "./Settings/Settings";
@@ -27,14 +25,8 @@ import AddCandidate from "./AddCandidate";
 import AddCollaborate from "./AddCollaborate";
 import CandidateReports from "./CandidateReports";
 import HiringInfos from "./HiringInfos";
-import { PiDotsThreeOutlineVerticalFill } from "react-icons/pi";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { BiCommentAdd } from "react-icons/bi";
-import RatingGeneric from "./RatingGeneric";
-import { formatCustomDate } from "@/helpers/date.helpers";
 import EditJobOpening from "@/app/(dashboard)/Hiring/_ui/HiringTable/EditJobOpening/EditJobOpening";
 import { renderCell } from "./renderCell";
-import useCandidate from "@/hooks/useCandidate";
 
 const statusColorMap: Record<string, ChipProps["color"]> = {
   active: "success",
@@ -54,35 +46,26 @@ const INITIAL_VISIBLE_COLUMNS = [
 
 export default function CandiatesTable({
   data,
+  Job_id,
   setpage,
   page,
   Hiring,
+  filter,
+  setFilter,
   totalPages,
 }: any) {
-  const [filterValue, setFilterValue] = React.useState("");
-  console.log(data);
   const [selectedKeys, setSelectedKeys] = React.useState<Selection>(
     new Set([]),
   );
   const [visibleColumns, setVisibleColumns] = React.useState<Selection>(
     new Set(INITIAL_VISIBLE_COLUMNS),
   );
-  const [statusFilter, setStatusFilter] = React.useState<Selection>("all");
-
-  const hasSearchFilter = Boolean(filterValue);
-
   const headerColumns = React.useMemo(() => {
     if (visibleColumns === "all") return columns;
-
     return columns.filter((column) =>
       Array.from(visibleColumns).includes(column.uid),
     );
   }, [visibleColumns]);
-  const queryClient = useQueryClient();
-
-  const filteredItems = React.useMemo(() => {
-    return data;
-  }, [data, filterValue, statusFilter]);
 
   const topContent = React.useMemo(() => {
     return (
@@ -107,7 +90,7 @@ export default function CandiatesTable({
               <Dropdown className="">
                 <DropdownTrigger className="hidden min-w-40 items-center justify-between border border-gray-15 !bg-white py-[0.13rem] text-gray-11 sm:flex">
                   <Button size="sm">
-                    <h1 className="pl-4">{statusFilter}</h1>
+                    <h1 className="pl-4">{filter}</h1>
                     <div className="-mt-1 flex h-[2rem] w-[2rem] cursor-pointer items-center justify-center bg-gray-14 duration-150 ease-in-out">
                       <FaSortDown fill="gray" />
                     </div>
@@ -118,11 +101,13 @@ export default function CandiatesTable({
                   disallowEmptySelection
                   aria-label="Table Columns"
                   closeOnSelect={true}
-                  selectedKeys={statusFilter}
-                  selectionMode="single"
-                  onSelectionChange={setStatusFilter}
+                  selectedKeys={filter}
+                  selectionMode="multiple"
+                  onSelectionChange={(selected: any) => {
+                    setFilter(selected?.anchorKey);
+                  }}
                 >
-                  {statusOptions.map((status: any) => (
+                  {CandidateStatusOptions.map((status: any) => (
                     <DropdownItem
                       className="py-1 capitalize text-gray-11"
                       key={status.uid}
@@ -139,21 +124,19 @@ export default function CandiatesTable({
         </div>
       </div>
     );
-  }, [statusFilter]);
-
+  }, []);
   const bottomContent = React.useMemo(() => {
     return (
       <div className="flex items-center justify-between px-2 py-2">
         <Pagination
+          isCompact
           showControls
-          classNames={{
-            cursor: "bg-foreground text-background",
-          }}
-          color="default"
-          isDisabled={hasSearchFilter}
+          variant={"faded"}
+          showShadow
+          color="success"
           page={page}
           total={Math.ceil(totalPages / 6) - 1}
-          variant="light"
+          className=""
           onChange={setpage}
         />
         <span className="text-small text-default-400">
@@ -163,7 +146,7 @@ export default function CandiatesTable({
         </span>
       </div>
     );
-  }, [selectedKeys, totalPages, page, hasSearchFilter]);
+  }, [selectedKeys, totalPages, page]);
 
   const classNames = React.useMemo(
     () => ({
@@ -216,7 +199,7 @@ export default function CandiatesTable({
       color="default"
       classNames={classNames}
       selectedKeys={selectedKeys}
-      selectionMode="multiple"
+      selectionMode="single"
       showSelectionCheckboxes={true}
       topContent={topContent}
       topContentPlacement="outside"
@@ -233,7 +216,7 @@ export default function CandiatesTable({
           </TableColumn>
         )}
       </TableHeader>
-      <TableBody emptyContent={"No candidate found"} items={filteredItems}>
+      <TableBody emptyContent={"No candidate found"} items={data || []}>
         {(item: any) => (
           <TableRow key={item?.id}>
             {(columnKey) => (

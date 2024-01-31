@@ -27,9 +27,13 @@ export default function SectionTitleIconBox() {
 
   return (
     <div className="-ml-2 flex items-center gap-2 ">
-      {titleIconObj[pathname].icon}
+      {titleIconObj.find((item) => pathname?.includes(item.path))?.icon ?? (
+        <></>
+      )}
       <p className="text-3xl font-semibold text-color-primary-8">
-        {titleIconObj[pathname].label}
+        {titleIconObj.find((item) => pathname?.includes(item.path))?.label ?? (
+          <></>
+        )}
       </p>
     </div>
   );

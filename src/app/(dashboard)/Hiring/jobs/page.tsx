@@ -1,24 +1,46 @@
 "use client";
-import { CreateHiringJob, HirinSections } from "@/constants/Hiring";
+import { CreateHiringJob, HirinSections } from "@/constants/Hiring/Hiring";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { FaPlusCircle } from "react-icons/fa";
 import HiringTable from "../_ui/HiringTable/HiringTable";
 import useData from "@/hooks/useData";
-import { NewCandidates } from "@/helpers/CountNewCandidates";
+import { NewCandidates } from "@/helpers/Hiring/CountNewCandidates";
 import { Hiring_type } from "@/types/database.tables.types";
 import { HiringTableType } from "../_ui/HiringTable/Hiringtable.types";
 import useHiring from "@/hooks/useHiring";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { GetJobOpening } from "@/actions/hiring/GetJobOpening";
+import getHiring from "@/api/getHiring";
+import useCandidate from "@/hooks/useCandidate";
 
 function Page() {
-  const [page, setPage] = React.useState(1);
+  const [filter, setFilter] = useState<string | null>("All");
+  const [page, setPage] = useState(1);
   const queryClient = useQueryClient();
   const {
-    Hiring: { data, isPending },
-  } = useHiring();
+    Hiring: { data, isPending, meta, isPlaceholderData },
+  } = useHiring({}, page , 6, filter);
+
+  React.useEffect(() => {
+    queryClient.invalidateQueries({
+      queryKey: ["Hiring", page + 1, filter],
+    });
+    if (!isPlaceholderData && Math.ceil(meta?.totalPages / 6) - 1 > page) {
+      queryClient.prefetchQuery({
+        queryKey: ["Hiring", page + 1, filter],
+        queryFn: () =>
+          getHiring("Hiring", {
+            match: {},
+            StartPage: (page + 1) * 6,
+            EndPage: (page + 2) * 6,
+            filter,
+          }),
+      });
+    }
+    console.log(page + 1);
+  }, [page, filter]);
 
   const HiringDataTable: HiringTableType[] = data?.map(
     (Hiring: Hiring_type) => {
@@ -35,7 +57,6 @@ function Page() {
       };
     },
   );
-
   return (
     <div className="flex h-full w-full flex-col items-center justify-center bg-white">
       <div className="flex w-5/6 flex-col gap-[1rem]">
@@ -51,10 +72,13 @@ function Page() {
         <div className="flex w-full items-center justify-center">
           {isPending ? (
             <h1>Loading...</h1>
-          ):(
+          ) : (
             <HiringTable
               page={page}
+              totalPages={meta?.totalPages}
               setPage={setPage}
+              setFilter={setFilter}
+              filter={filter}
               Hiring={HiringDataTable}
             />
           )}

@@ -13,7 +13,7 @@ const Textarea = ({ RowField, setTouched, defaultValue }: InputPropsType) => {
   const [value, setValue] = useState<string>(String(defaultValue || ""));
   const Component = InputIcons[RowField?.Icon?.toUpperCase() || ""];
   return (
-    <div className="flex flex-col items-start justify-center">
+    <div className="flex w-full flex-col items-start justify-center">
       <h1
         className={
           "text-[14px] text-gray-29 " +
@@ -22,7 +22,7 @@ const Textarea = ({ RowField, setTouched, defaultValue }: InputPropsType) => {
       >
         {RowField?.name}
       </h1>
-      <div className="group flex items-center justify-start">
+      <div className="group flex w-full items-center justify-start">
         {RowField?.Icon && (
           <span className="absolute ml-[1px]  h-[1.9rem] w-[1.8rem] bg-gray-14">
             <Component
@@ -38,7 +38,7 @@ const Textarea = ({ RowField, setTouched, defaultValue }: InputPropsType) => {
         )}
         <textarea
           className={
-            "focus:focus-within:shadow-green h-[2rem] rounded-sm border border-gray-19 px-2 font-light outline-none  focus:!border-color-primary-3 " +
+            "focus:focus-within:shadow-green h-[2rem] w-full rounded-sm border border-gray-19 px-2 font-light outline-none  focus:!border-color-primary-3 " +
             (RowField?.Icon ? "pl-8 " : "")
           }
           value={value}
@@ -53,6 +53,6 @@ const Textarea = ({ RowField, setTouched, defaultValue }: InputPropsType) => {
       </div>
     </div>
   );
-}
+};
 
 export default memo(Textarea);

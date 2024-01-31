@@ -3,7 +3,7 @@ import AppQuestion from "./AppQuestion";
 import {
   ApplicationDefaultQuestions,
   ApplicationDefaultQuestionsType,
-} from "@/constants/Hiring";
+} from "@/constants/Hiring/Hiring";
 import { StepsContext } from "../../context/StepsProvider";
 
 function ApplicationQuestionsList() {

@@ -4,6 +4,8 @@ import { cookies } from "next/headers";
 import { Database } from "@/types/database.types";
 
 interface GetCandidateParamsType {
+  user?: boolean;
+  org?: boolean;
   match?: {
     [key: string]: string | number | boolean | null | string[] | undefined;
   };
@@ -17,7 +19,7 @@ interface metaType {
   totalPages: number | null;
 }
 
-export default async function getCandidate(
+export default async function getHiring(
   table: string,
   {
     match = undefined,
@@ -31,11 +33,11 @@ export default async function getCandidate(
   const {
     data: { session },
   } = await supabase.auth.getSession();
+  console.log(StartPage, EndPage);
   const org_name = session?.user.user_metadata.org_name;
   const user_id = session?.user?.id;
-  console.log(StartPage != undefined && EndPage, StartPage, EndPage);
   const data = match
-    ? StartPage != undefined && EndPage
+    ? StartPage != undefined && EndPage != undefined
       ? filter != "All"
         ? await supabase
             .from(table)
@@ -43,7 +45,7 @@ export default async function getCandidate(
             .match(match)
             .order("id")
             .eq("org_name", org_name)
-            .eq("status", filter)
+            .eq("Job Status", filter)
             .range(StartPage, EndPage)
         : await supabase
             .from(table)
@@ -65,7 +67,7 @@ export default async function getCandidate(
             .select(column, { count: "exact" })
             .order("id")
             .eq("org_name", org_name)
-            .eq("status", filter)
+            .eq("Job Status", filter)
             .range(StartPage, EndPage)
         : await supabase
             .from(table)
@@ -78,6 +80,7 @@ export default async function getCandidate(
           .select(column, { count: "exact" })
           .order("id")
           .eq("org_name", org_name);
+          console.log(data?.error, data);
   return {
     data: data?.data,
     error: data?.error,

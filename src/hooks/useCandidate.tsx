@@ -8,8 +8,19 @@ export default function useCandidate(
   },
   page?: number,
   rowsPerPage?: number,
+  filter?: string | null,
 ) {
-  console.log(page, match);
+  const querykey: any = ["Candidates"];
+  if (match && match.job_id) {
+    querykey.push(match.job_id);
+  }
+  if (page != undefined) {
+    querykey.push(page);
+  }
+  console.log("----------here----------", page);
+  if (filter) {
+    querykey.push(filter);
+  }
   const {
     data: candidates,
     isPending,
@@ -17,16 +28,18 @@ export default function useCandidate(
     isFetched,
     isPlaceholderData,
   } = useQuery({
-    queryKey: ["Candidates", match && match, page && page],
+    queryKey: querykey,
     queryFn: () =>
-      page && rowsPerPage
+      page != undefined && rowsPerPage != undefined
         ? getCandidate("candidates", {
             match: match,
-            StartPage: page * rowsPerPage,
-            EndPage: (page + 1) * rowsPerPage,
+            StartPage: (page - 1) * rowsPerPage,
+            EndPage: page  * rowsPerPage,
+            filter,
           })
         : getCandidate("candidates", {
             match: match,
+            filter,
           }),
     placeholderData: keepPreviousData,
     staleTime: 5000,

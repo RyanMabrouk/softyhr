@@ -1,7 +1,6 @@
 "use client";
 import { v4 as uuidv4 } from "uuid";
-import React, {  useState } from "react";
-import { HiOutlineDuplicate } from "react-icons/hi";
+import React, { useState } from "react";
 import {
   Table,
   TableHeader,
@@ -11,24 +10,19 @@ import {
   TableCell,
   User,
   Selection,
-  SortDescriptor,
+  Pagination,
 } from "@nextui-org/react";
 import { CgProfile } from "react-icons/cg";
 import Empty from "./components/Empty";
-import {  FaTrash } from "react-icons/fa6";
+import { FaTrash } from "react-icons/fa6";
 import { MdModeEditOutline } from "react-icons/md";
 import TopContent from "./components/TopContent";
-import {
-  HiringPropsType,
-  HiringTableType,
-  statusOptionsType,
-} from "./Hiringtable.types";
+import { HiringTableType, statusOptionsType } from "./Hiringtable.types";
 import Link from "next/link";
-import Paggination from "./components/Pagination";
-import { useQueryClient } from "@tanstack/react-query";
 import PublishButton from "./components/PublishButton";
 import EditCard from "./components/EditCard";
 import { formatCustomDate, monthsAgo } from "@/helpers/date.helpers";
+import { CiLink } from "react-icons/ci";
 
 const columns = [
   { name: "id", uid: "id" },
@@ -64,71 +58,30 @@ interface HiringTablePropsType {
   Hiring: HiringTableType[];
   page: number;
   setPage: React.Dispatch<React.SetStateAction<number>>;
+  totalPages: number;
+  filter: string | null;
+  setFilter: React.Dispatch<React.SetStateAction<string | null>>;
 }
 
 export default function HiringTable({
   Hiring,
   page,
+  filter,
   setPage,
+  totalPages,
+  setFilter,
 }: HiringTablePropsType) {
-  const [filterValue, setFilterValue] = React.useState("");
   const [visibleColumns, setVisibleColumns] = React.useState<Selection>(
     new Set(INITIAL_VISIBLE_COLUMNS),
   );
-
-  const queryClient = useQueryClient();
   const [ShowEdit, setShowEdit] = useState<boolean>(false);
-  const [statusFilter, setStatusFilter] = React.useState<Selection>("all");
-  const [sortDescriptor, setSortDescriptor] = React.useState<SortDescriptor>({
-    column: "age",
-    direction: "ascending",
-  });
-
-  const rowsPerPage = 7;
-
-  const hasSearchFilter = Boolean(filterValue);
 
   const headerColumns = React.useMemo(() => {
     if (visibleColumns === "all") return columns;
-
     return columns.filter((column: any) =>
       Array.from(visibleColumns).includes(column.uid),
     );
   }, [visibleColumns]);
-
-  const filteredItems = React.useMemo(() => {
-    let filteredUsers = [...Hiring];
-    if (
-      !(
-        (statusFilter instanceof Set && statusFilter.has("all")) ||
-        statusFilter == "all"
-      )
-    ) {
-      filteredUsers = filteredUsers.filter((user) =>
-        Array.from(statusFilter).includes(user.status),
-      );
-    }
-    return filteredUsers;
-  }, [Hiring, statusFilter]);
-
-  const items = React.useMemo(() => {
-    const start = (page - 1) * rowsPerPage;
-    const end = start + rowsPerPage;
-
-    return filteredItems.slice(start, end);
-  }, [page, filteredItems, rowsPerPage]);
-
-  const sortedItems = React.useMemo(() => {
-    return [...items].sort((a: HiringTableType, b: HiringTableType) => {
-      const first = a[sortDescriptor.column as keyof HiringTableType] as number;
-      const second = b[
-        sortDescriptor.column as keyof HiringTableType
-      ] as number;
-      const cmp = first < second ? -1 : first > second ? 1 : 0;
-
-      return sortDescriptor.direction === "descending" ? -cmp : cmp;
-    });
-  }, [sortDescriptor, items]);
 
   const renderCell = React.useCallback(
     (user: HiringTableType, columnKey: React.Key) => {
@@ -220,7 +173,7 @@ export default function HiringTable({
                 <FaTrash cursor={"pointer"} fill={"gray"} />
               </Link>
               <div className="duration-250 flex h-[2rem] w-[2rem] cursor-pointer items-center justify-center ease-in-out hover:border hover:border-gray-27 hover:bg-gray-22">
-                <HiOutlineDuplicate cursor={"pointer"} />
+                <CiLink cursor={"pointer"} onClick={() => navigator.clipboard.writeText(GetJobUrl())} />
               </div>
               {user?.status != "Open" && <PublishButton id={user?.id} />}
             </div>
@@ -269,23 +222,27 @@ export default function HiringTable({
       className="border-none !bg-white"
       classNames={classNames}
       bottomContent={
-        <Paggination
-          pages={Math.ceil(Hiring?.length / rowsPerPage)}
+        <Pagination
+          isCompact
+          showControls
+          variant={"faded"}
+          showShadow
+          color="success"
+          total={Math.ceil(totalPages / 6)}
           page={page}
-          setPage={setPage}
+          onChange={setPage}
         />
       }
-      sortDescriptor={sortDescriptor}
       topContent={
         <TopContent
+          filter={filter}
           statusOptions={statusOptions}
-          setStatusFilter={setStatusFilter}
-          statusFilter={statusFilter}
+          setFilter={setFilter}
           Hiring={Hiring}
+          totalpages={totalPages}
         />
       }
       topContentPlacement="outside"
-      onSortChange={setSortDescriptor}
     >
       <TableHeader columns={headerColumns}>
         {(column: statusOptionsType) => (
@@ -301,7 +258,7 @@ export default function HiringTable({
       <TableBody
         //      loadingContent={isPending}
         emptyContent={<Empty />}
-        items={sortedItems}
+        items={Hiring || []}
       >
         {(item) => (
           <TableRow

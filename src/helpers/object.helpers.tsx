@@ -1,5 +1,5 @@
 interface FormdataObjectType {
-  [key: string]: FormDataEntryValue;
+  [key: string]: FormDataEntryValue ;
 }
 
 export function FormdataToObject(formdata: FormData) {

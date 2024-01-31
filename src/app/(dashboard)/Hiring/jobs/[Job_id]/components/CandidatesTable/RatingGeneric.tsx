@@ -1,8 +1,9 @@
-"use client"
+"use client";
 import { Rating } from "@mui/material";
 import React, { useState } from "react";
 import useToast from "@/hooks/useToast";
 import updateData from "@/api/updateData";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface RatingGenericPropsType {
   DefaultValue: number;
@@ -16,6 +17,7 @@ function RatingGeneric({
   tableName,
 }: RatingGenericPropsType) {
   const { toast } = useToast();
+  const queryClient = useQueryClient();
   const [value, setValue] = useState<number>(DefaultValue);
   return (
     <Rating
@@ -30,6 +32,7 @@ function RatingGeneric({
         );
         if (response?.error) toast.error("something went wrong !");
         else setValue(newValue);
+        queryClient.invalidateQueries({ queryKey: ["Candidates"] });
       }}
     />
   );

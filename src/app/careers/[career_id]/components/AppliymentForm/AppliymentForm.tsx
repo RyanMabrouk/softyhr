@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 import Loader from "@/app/(dashboard)/people/components/Loader/Loader";
 import SubmitButton from "./SubmitButton";
 import { CreateCandidate } from "@/actions/hiring/CreateCandidate";
-import { FormulateFormData } from "@/helpers/CountNewCandidates";
+import { FormulateFormData } from "@/helpers/Hiring/CountNewCandidates";
 import useToast from "@/hooks/useToast";
 import { UploadImage } from "@/actions/UploadFiles/uploadImage";
 import { useQueryClient } from "@tanstack/react-query";

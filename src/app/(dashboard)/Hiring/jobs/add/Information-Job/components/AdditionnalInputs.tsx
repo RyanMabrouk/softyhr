@@ -1,4 +1,4 @@
-import { InformationJob_inputs } from "@/constants/Hiring";
+import { InformationJob_inputs } from "@/constants/Hiring/Hiring";
 import { Field } from "@/constants/userInfo";
 import { v4 as uuidv4 } from "uuid";
 import { RowFieldType } from "@/types/database.tables.types";

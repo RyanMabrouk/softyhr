@@ -1,7 +1,7 @@
 "use client";
 import getCurrentorg from '@/api/getCurrentOrg';
 import ChangesSection from '@/app/(dashboard)/people/components/ChangesSection/ChangesSection';
-import { HiringInfos, HiringInfosType } from '@/constants/Hiring';
+import { HiringInfos, HiringInfosType } from '@/constants/Hiring/Hiring';
 import { Hiring_type } from '@/types/database.tables.types'
 import React, { useState } from 'react'
 import { FaFacebookSquare } from 'react-icons/fa';

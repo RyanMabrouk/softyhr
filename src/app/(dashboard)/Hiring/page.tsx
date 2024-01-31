@@ -1,4 +1,4 @@
-import { HirinSections } from "@/constants/Hiring";
+import { HirinSections } from "@/constants/Hiring/Hiring";
 import { redirect } from "next/navigation";
 
 export default async function Page() {

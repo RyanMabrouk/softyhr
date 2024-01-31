@@ -2,11 +2,19 @@ import { formatCustomDate } from "@/helpers/date.helpers";
 import RatingGeneric from "./RatingGeneric";
 import HireStatus from "./HireStatus";
 import Hiring from "@/app/(dashboard)/Settings/(settings)/SettingsHiring/page";
-import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from "@nextui-org/react";
+import {
+  Button,
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownTrigger,
+} from "@nextui-org/react";
 import { PiDotsThreeOutlineVerticalFill } from "react-icons/pi";
 import { BiCommentAdd } from "react-icons/bi";
+import Link from "next/link";
+import { FaEdit } from "react-icons/fa";
 
-export const renderCell = (Hiring:any, user: any, columnKey: React.Key) => {
+export const renderCell = (Hiring: any, user: any, columnKey: React.Key) => {
   const cellValue = user[columnKey as keyof any];
   switch (columnKey) {
     case "id":
@@ -17,9 +25,12 @@ export const renderCell = (Hiring:any, user: any, columnKey: React.Key) => {
       );
     case "Candidate Info":
       return (
-        <h1 className="cursor-pointer text-color5-500 hover:text-color-primary-8 hover:underline">
+        <Link
+          href={`/Hiring/jobs/${Hiring?.id}/profile/${user?.id}/Candidate-info`}
+          className="cursor-pointer text-color5-500 hover:text-color-primary-8 hover:underline"
+        >
           {user?.["Candidate Info"]}
-        </h1>
+        </Link>
       );
     case "Status":
       return (
@@ -67,13 +78,24 @@ export const renderCell = (Hiring:any, user: any, columnKey: React.Key) => {
                 <PiDotsThreeOutlineVerticalFill />
               </Button>
             </DropdownTrigger>
-            <DropdownMenu className="shadow-green ">
+            <DropdownMenu className="shadow-green">
               <DropdownItem className="group hover:!bg-color-primary-8">
-                <div className="flex items-end justify-center gap-[0.5rem] duration-200 ease-linear">
+                <div className="flex items-end justify-start gap-[0.5rem] duration-200 ease-linear">
                   <BiCommentAdd className="text-xl text-color-primary-7 group-hover:!text-white" />
-                  <h1 className="text-black group-hover:!text-white">
+                  <Link href="/" className="text-black group-hover:!text-white">
                     Add Comment
-                  </h1>
+                  </Link>
+                </div>
+              </DropdownItem>
+              <DropdownItem className="group hover:!bg-color-primary-8">
+                <div className="flex items-end justify-start gap-[0.5rem] duration-200 ease-linear">
+                  <FaEdit className="text-xl text-color-primary-7 group-hover:!text-white" />
+                  <Link
+                    className="text-black group-hover:!text-white"
+                    href={`?popup=UPDATE_CANDIDATE&id=${user?.id}`}
+                  >
+                    Update candidate
+                  </Link>
                 </div>
               </DropdownItem>
             </DropdownMenu>

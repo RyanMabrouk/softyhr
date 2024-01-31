@@ -1,5 +1,5 @@
 "use client";
-import { CreateHiringJob, HirinSections } from "@/constants/Hiring";
+import { CreateHiringJob, HirinSections } from "@/constants/Hiring/Hiring";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import React, { ReactNode, memo, useContext, useState } from "react";

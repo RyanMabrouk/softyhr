@@ -5,7 +5,7 @@ import Checkbox from "@mui/material/Checkbox";
 import { FormControlLabel } from "@mui/material";
 import { StepsContext } from "../../context/StepsProvider";
 import SelectInput from "@/app/(dashboard)/people/components/Fileds/select/Select";
-import { GovermentJobCategory } from "@/constants/Hiring";
+import { GovermentJobCategory } from "@/constants/Hiring/Hiring";
 
 function AskGovermentJob() {
   const { Update_ApplicationDetails, ApplicationDetails } =

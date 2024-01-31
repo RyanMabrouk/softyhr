@@ -1,4 +1,4 @@
-import { CreateHiringJob } from "@/constants/Hiring";
+import { CreateHiringJob } from "@/constants/Hiring/Hiring";
 import { usePathname } from "next/navigation";
 import React from "react";
 import { useFormStatus } from "react-dom";

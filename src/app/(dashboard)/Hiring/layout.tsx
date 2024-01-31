@@ -5,10 +5,10 @@ import {
   HirinIcons,
   HirinSections,
   HirinSectionsType,
-} from "@/constants/Hiring";
+} from "@/constants/Hiring/Hiring";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { CreateHiringJob } from "@/constants/Hiring";
+import { CreateHiringJob } from "@/constants/Hiring/Hiring";
 import { v4 as uuidv4 } from "uuid";
 
 interface LayoutHiringProps {

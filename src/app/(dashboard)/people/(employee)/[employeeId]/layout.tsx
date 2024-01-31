@@ -24,6 +24,7 @@ export default function Layout({
   const { employee_profile: data } = useEmployeeData({ employeeId });
   const ActiveRoute =
     usePathname().split("/").slice(-1).join("") || EmployeeRoute[0]?.label;
+    
   return (
     <Initialize>
       <div className="flex h-full w-full flex-col ">

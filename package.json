@@ -43,6 +43,7 @@
     "next-themes": "^0.2.1",
     "nextjs-current-url": "^1.0.3",
     "nodemailer": "^6.9.8",
+    "pdfjs-dist": "^3.4.120",
     "pino": "^8.17.2",
     "pino-logflare": "^0.4.2",
     "primeflex": "^3.3.1",

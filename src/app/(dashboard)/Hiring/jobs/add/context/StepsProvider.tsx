@@ -1,5 +1,5 @@
 import React, { ReactNode, createContext, useReducer } from "react";
-import { ApplicationIniTialQuestions } from "@/constants/Hiring";
+import { ApplicationIniTialQuestions } from "@/constants/Hiring/Hiring";
 interface StepsProviderTypeProps {
   children: ReactNode;
 }
