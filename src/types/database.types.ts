@@ -9,6 +9,30 @@ export type Json =
 export interface Database {
   public: {
     Tables: {
+      candidate_comments: {
+        Row: {
+          candidate_id: number | null
+          comment_Author: string | null
+          comment_content: string | null
+          created_at: string
+          id: number
+        }
+        Insert: {
+          candidate_id?: number | null
+          comment_Author?: string | null
+          comment_content?: string | null
+          created_at?: string
+          id?: number
+        }
+        Update: {
+          candidate_id?: number | null
+          comment_Author?: string | null
+          comment_content?: string | null
+          created_at?: string
+          id?: number
+        }
+        Relationships: []
+      }
       candidates: {
         Row: {
           created_at: string
@@ -58,14 +82,14 @@ export interface Database {
             referencedColumns: ["id"];
           },
           {
-            foreignKeyName: "candidates_org_name_fkey";
-            columns: ["org_name"];
-            isOneToOne: false;
-            referencedRelation: "organizations";
-            referencedColumns: ["name"];
-          },
-        ];
-      };
+            foreignKeyName: "candidates_org_name_fkey"
+            columns: ["org_name"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["name"]
+          }
+        ]
+      }
       files: {
         Row: {
           addedBy: string | null;
@@ -155,35 +179,35 @@ export interface Database {
       };
       Hiring: {
         Row: {
-          Application_Details: Json | null;
-          candidates: Json[] | null;
-          created_at: string;
-          id: number;
-          "Job Status": string | null;
-          job_Boards: Json | null;
-          job_information: Json | null;
-          org_name: string | null;
-        };
+          Application_Details: Json | null
+          candidates: Json[] | null
+          created_at: string
+          id: number
+          "Job Status": string | null
+          job_Boards: Json | null
+          job_information: Json | null
+          org_name: string | null
+        }
         Insert: {
-          Application_Details?: Json | null;
-          candidates?: Json[] | null;
-          created_at?: string;
-          id?: number;
-          "Job Status"?: string | null;
-          job_Boards?: Json | null;
-          job_information?: Json | null;
-          org_name?: string | null;
-        };
+          Application_Details?: Json | null
+          candidates?: Json[] | null
+          created_at?: string
+          id?: number
+          "Job Status"?: string | null
+          job_Boards?: Json | null
+          job_information?: Json | null
+          org_name?: string | null
+        }
         Update: {
-          Application_Details?: Json | null;
-          candidates?: Json[] | null;
-          created_at?: string;
-          id?: number;
-          "Job Status"?: string | null;
-          job_Boards?: Json | null;
-          job_information?: Json | null;
-          org_name?: string | null;
-        };
+          Application_Details?: Json | null
+          candidates?: Json[] | null
+          created_at?: string
+          id?: number
+          "Job Status"?: string | null
+          job_Boards?: Json | null
+          job_information?: Json | null
+          org_name?: string | null
+        }
         Relationships: [
           {
             foreignKeyName: "Hiring_org_name_fkey";
@@ -491,13 +515,13 @@ export interface Database {
           name: string;
         };
         Update: {
-          country?: string;
-          created_at?: string;
-          employee_count?: string;
-          name?: string;
-        };
-        Relationships: [];
-      };
+          country?: string
+          created_at?: string
+          employee_count?: string
+          name?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           accrual_start_date: string | null
@@ -510,6 +534,8 @@ export interface Database {
           "Driver License": Json[] | null
           Education: Json[] | null
           "Employment Status": Json[] | null
+          files_ids: number[] | null
+          folders_ids: number[] | null
           Hiring: Json | null
           Job: Json | null
           "Job Information": Json[] | null
@@ -518,6 +544,7 @@ export interface Database {
           parent_id: string | null
           picture: string | null
           role: string | null
+          role_id: number
           "Social Links": Json | null
           "Stock Options": Json[] | null
           user_id: string
@@ -534,6 +561,8 @@ export interface Database {
           "Driver License"?: Json[] | null
           Education?: Json[] | null
           "Employment Status"?: Json[] | null
+          files_ids?: number[] | null
+          folders_ids?: number[] | null
           Hiring?: Json | null
           Job?: Json | null
           "Job Information"?: Json[] | null
@@ -542,6 +571,7 @@ export interface Database {
           parent_id?: string | null
           picture?: string | null
           role?: string | null
+          role_id?: number
           "Social Links"?: Json | null
           "Stock Options"?: Json[] | null
           user_id: string
@@ -558,6 +588,8 @@ export interface Database {
           "Driver License"?: Json[] | null
           Education?: Json[] | null
           "Employment Status"?: Json[] | null
+          files_ids?: number[] | null
+          folders_ids?: number[] | null
           Hiring?: Json | null
           Job?: Json | null
           "Job Information"?: Json[] | null
@@ -566,6 +598,7 @@ export interface Database {
           parent_id?: string | null
           picture?: string | null
           role?: string | null
+          role_id?: number
           "Social Links"?: Json | null
           "Stock Options"?: Json[] | null
           user_id?: string
@@ -587,14 +620,21 @@ export interface Database {
             referencedColumns: ["user_id"];
           },
           {
-            foreignKeyName: "profiles_user_id_fkey";
-            columns: ["user_id"];
-            isOneToOne: true;
-            referencedRelation: "users";
-            referencedColumns: ["id"];
+            foreignKeyName: "profiles_role_id_fkey"
+            columns: ["role_id"]
+            isOneToOne: false
+            referencedRelation: "roles"
+            referencedColumns: ["id"]
           },
-        ];
-      };
+          {
+            foreignKeyName: "profiles_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: true
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
       settings: {
         Row: {
           AppliementForm: Json | null;

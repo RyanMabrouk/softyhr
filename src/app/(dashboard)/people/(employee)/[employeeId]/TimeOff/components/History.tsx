@@ -6,7 +6,6 @@ import historyTableFilters from "../_context/historyTableFilters";
 import { historyTableFiltersContextType } from "../_context/historyTableFilters"; // Import the type of the context
 import { UnderlinedLink } from "../../../../../../_ui/UnderlinedLink";
 import { formatDDMMYYYY } from "@/helpers/date.helpers";
-import useData from "@/hooks/useData";
 import { Filters } from "./Filters";
 import {
   database_leave_accrued_type,
@@ -28,6 +27,7 @@ import toggleDateSortContext, {
   toggleDateSortContextType,
 } from "../_context/toggleDateSortContext";
 import useProfilesData from "@/hooks/useProfilesData";
+import RoleGuard from "@/app/_ui/RoleGuard";
 interface leave_data {
   user_id: string;
   reviewed_by: string | "";
@@ -65,15 +65,9 @@ export function History() {
   const {
     leave_accrued: { data: leave_accrued, isPending: isPending4 },
     leave_requests: { data: leave_requests, isPending: isPending2 },
-    employee_profile: { data: employee_profile, isPending: isPending1 },
   } = useEmployeeData({ employeeId: employeeId as string });
   const isPending =
-    isPending1 ||
-    isPending2 ||
-    isPending3 ||
-    isPending4 ||
-    isPending5 ||
-    isPending6;
+    isPending2 || isPending3 || isPending4 || isPending5 || isPending6;
   // format leave requests data
   const leave_requests_data: leave_data_types = leave_requests
     ?.filter((e: database_leave_requests_type) => e.status !== "pending")
@@ -302,19 +296,24 @@ export function History() {
                           : e.Balance}
                       </span>
                     ),
-                    " ": !e.duration_accrued &&
-                      employee_profile?.role === "admin" && (
-                        <div className=" flex h-[4.25rem] w-full  flex-row  items-start justify-center gap-1 px-4 pt-3 text-center align-top text-gray-27  ">
+                    " ": !e.duration_accrued && (
+                      <div className=" flex h-[4.25rem] w-full  flex-row  items-start justify-center gap-1 px-4 pt-3 text-center align-top text-gray-27  ">
+                        <RoleGuard permissions={["delete:leave_requests"]}>
                           <DeleteLeaveRequestBtn
                             className="hidden h-7 w-7 cursor-pointer rounded-md border border-transparent px-0.5 text-gray-25 transition-all ease-linear hover:border hover:border-black hover:bg-white group-hover:block"
                             leave_request_id={e.id}
                           />
+                        </RoleGuard>
+                        <RoleGuard
+                          permissions={["edit:approved_leave_requests"]}
+                        >
                           <EditLeaveRequestBtn
                             className=" hidden h-7 w-7 cursor-pointer  rounded-md border border-transparent px-0.5 text-gray-25 transition-all ease-linear hover:border hover:border-black hover:bg-white group-hover:block"
                             leave_request_id={e.id}
                           />
-                        </div>
-                      ),
+                        </RoleGuard>
+                      </div>
+                    ),
                   }))}
               />
             )

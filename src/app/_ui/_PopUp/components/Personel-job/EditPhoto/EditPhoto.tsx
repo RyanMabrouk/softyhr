@@ -16,7 +16,7 @@ function EditPhoto() {
       {isPending ? (
         <Loader />
       ) : (
-        <PopUpSkeleton title="Modifier la photo">
+        <PopUpSkeleton title="Modifier la photo" className="flex flex-col">
           <div className="judtify-center flex min-w-[40rem] flex-col items-center gap-[1rem] px-6 py-6">
             <div className="flex flex-col items-center justify-center gap-[2rem]">
               <CropEasy user_id={data?.user_id} alt={""} URL={data?.picture} />

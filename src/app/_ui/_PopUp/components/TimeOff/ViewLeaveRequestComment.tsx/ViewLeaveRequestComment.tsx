@@ -125,7 +125,7 @@ function ViewLeaveRequestComment() {
           )}
           <hr className="h-[3px] w-full bg-primary-gradient" />
           <Button
-            className="!max-w-[10rem]"
+            className="!max-w-[10rem] self-start justify-self-start"
             type="button"
             onClick={() => Router.push(pathname)}
           >

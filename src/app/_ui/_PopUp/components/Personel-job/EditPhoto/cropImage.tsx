@@ -17,6 +17,8 @@ import updateData from "@/api/updateData";
 import { usePathname, useRouter } from "next/navigation";
 import { useQueryClient } from "@tanstack/react-query";
 import avatar from "/public/avatar.png";
+import { SubmitBtn } from "@/app/_ui/SubmitBtn";
+import CancelBtnGeneric from "@/app/_ui/CancelBtnGeneric";
 
 const base_image_url =
   "https://ybwqmrrlvmpdikvmkqra.supabase.co/storage/v1/object/public/avatar/";
@@ -135,7 +137,7 @@ const CropEasy = ({
               />
               Modifier la photo
             </button>
-            <div className="duration-250 flex h-[2rem] w-[2rem] cursor-pointer items-center justify-center border border-gray-15 ease-in-out hover:!bg-gray-22">
+            <div className="flex h-[2rem] w-[2rem] cursor-pointer items-center justify-center border border-gray-15 duration-200 ease-in-out hover:!bg-gray-22">
               <FaTrash
                 onClick={DeleteProfileImage}
                 className="!text-xs !text-gray-13"
@@ -171,24 +173,12 @@ const CropEasy = ({
           />
         </div>
       </div>
-      <div className="h-[0.1rem] w-full bg-gradient-to-r from-color-primary-1 to-color-primary-3" />
-      <div className="flex items-start justify-center gap-[1rem] self-start">
-        <button
-          onClick={ChangeProfileImage}
-          type="submit"
-          className={
-            "text-bold mt-4 rounded bg-color-primary-8 p-2 px-5 text-white duration-300 ease-in-out hover:!bg-color-primary-3 "
-          }
-        >
-          Sauvgarder
-        </button>
-        <button
-          type="reset"
-          onClick={() => router.push(pathname)}
-          className="text-bold mt-4 rounded p-2 px-5 text-color5-500 duration-300 ease-in-out "
-        >
-          Cancel
-        </button>
+      <hr className="h-[3px] w-full bg-primary-gradient" />
+      <div className="flex w-full flex-row items-center justify-start gap-4">
+        <SubmitBtn className="max-w-[9rem]" onClick={ChangeProfileImage}>
+          Save
+        </SubmitBtn>
+        <CancelBtnGeneric />
       </div>
     </div>
   );

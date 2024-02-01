@@ -42,7 +42,7 @@ function Page() {
         <div className="mt-4 w-full">
           <Link
             href={HirinSections[0]?.path + "/add/" + CreateHiringJob[0]}
-            className="duration-250 focus-within:shadow-green flex w-[11.5rem] items-center justify-center gap-[0.5rem] border border-color-primary-8 py-1  text-color-primary-8 ease-in-out hover:!border-color-primary-7 hover:!text-color-primary-7"
+            className="focus-within:shadow-green flex w-[11.5rem] items-center justify-center gap-[0.5rem] border border-color-primary-8 py-1 text-color-primary-8  duration-200 ease-in-out hover:!border-color-primary-7 hover:!text-color-primary-7"
           >
             <FaPlusCircle />
             Add Job Openings
@@ -51,7 +51,7 @@ function Page() {
         <div className="flex w-full items-center justify-center">
           {isPending ? (
             <h1>Loading...</h1>
-          ):(
+          ) : (
             <HiringTable
               page={page}
               setPage={setPage}

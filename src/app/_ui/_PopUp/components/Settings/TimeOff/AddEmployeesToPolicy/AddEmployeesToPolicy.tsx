@@ -25,6 +25,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import addEmployeesToPolicy from "@/actions/settings/leave/addEmployeesToPolicy";
 import useToast from "@/hooks/useToast";
 import useProfilesData from "@/hooks/useProfilesData";
+import { PiUploadSimple } from "react-icons/pi";
 export type usersWithoutCurrentPolicy = {
   user_id: string;
   name: string;
@@ -96,6 +97,9 @@ export default function AddEmployeesToPolicy() {
   const [employees, setEmployees] = useState<usersWithoutCurrentPolicy[]>(
     usersWithoutCurrentPolicy,
   );
+  if (usersWithoutCurrentPolicy && !employees) {
+    setEmployees(usersWithoutCurrentPolicy);
+  }
   const [selectedEmployees, setSelectedEmployees] = useState<
     usersWithoutCurrentPolicy[]
   >([]);
@@ -202,6 +206,10 @@ export default function AddEmployeesToPolicy() {
               dropNonSelected={dropNonSelected}
             />
           </section>
+          <p className="-mt-3 flex flex-row items-center gap-1.5 text-sm text-gray-26">
+            <PiUploadSimple />
+            <span>Drag and drop to select employees</span>
+          </p>
           {policy?.type === "unlimited" && (
             <section className="flex flex-row gap-1">
               <TiWarning className="h-6 w-6" />

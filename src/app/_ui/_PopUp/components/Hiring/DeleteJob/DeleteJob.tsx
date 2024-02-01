@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { RxAvatar } from "react-icons/rx";
 import PopUpSkeleton from "../../../PopUpSkeleton";
-import { test } from "@/actions/test";
 import SubmitBtn from "./SubmitBtn";
 import Link from "next/link";
 import { deleteJobOpening } from "@/actions/hiring/DeleteJobOpening";
@@ -30,7 +29,7 @@ function DeleteJob() {
     router.push("/Hiring/jobs");
     queryClient.invalidateQueries({ queryKey: ["Hiring"] });
   }
-  console.log(data?.find((job:Hiring_type)=> job?.id == id));
+  console.log(data?.find((job: Hiring_type) => job?.id == id));
   return (
     <PopUpSkeleton title="Just Checking...">
       <form
@@ -79,7 +78,7 @@ function DeleteJob() {
             className={
               "border border-gray-14 bg-white px-4 py-1 text-lg text-gray-14 " +
               (Value == "Delete"
-                ? "! cursor-pointer !bg-color-primary-8"
+                ? " cursor-pointer !bg-color-primary-8"
                 : "cursor-not-allowed")
             }
             disabled={Value != "Delete"}
