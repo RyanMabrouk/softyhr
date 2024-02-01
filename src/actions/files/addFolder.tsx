@@ -10,7 +10,7 @@ export const addFolder = async (name: any) => {
     org_name: org?.name,
   };
 
-  const { error } = await postData("folders", payload);
+  const { error, data } = await postData("folders", payload);
   if (error) {
     return {
       error: {
@@ -19,6 +19,6 @@ export const addFolder = async (name: any) => {
       },
     };
   } else {
-    return { error: null };
+    return { data, error: null };
   }
 };

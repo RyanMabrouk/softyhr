@@ -14,7 +14,7 @@ function layout({ children }: EmployeesPropsType) {
       <div className="flex items-center justify-between border-b border-gray-4 pb-4">
         <div className="flex flex-col  gap-6">
           <SectionTitleIconBox />
-          <ButtonAdd name={"New Employee"} />
+          <ButtonAdd name={"New Employee"} href={"/people/NewEmployee"} />
         </div>
         <div className="flex flex-col items-end gap-8">
           <a

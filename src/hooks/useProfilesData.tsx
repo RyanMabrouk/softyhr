@@ -1,7 +1,10 @@
 "use client";
 import getData from "@/api/getData";
 import { useQuery } from "@tanstack/react-query";
-export default function useProfilesData({ columns }: { columns: string }) {
+export default function useProfilesData(
+  { columns }: { columns: string },
+  userId?: any,
+) {
   // ------------------All Profiles Basic Information--------------------
   const { data: profiles, isPending: isPending } = useQuery({
     queryKey: ["profiles", columns],
@@ -9,6 +12,7 @@ export default function useProfilesData({ columns }: { columns: string }) {
       getData("profiles", {
         org: true,
         column: columns,
+        match: { user_id: userId },
       }),
   });
   return {

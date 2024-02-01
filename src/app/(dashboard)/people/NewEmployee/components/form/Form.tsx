@@ -15,11 +15,11 @@ import updateData from "@/api/updateData";
 import useToast from "@/hooks/useToast";
 import FiledsChamps from "@/app/(dashboard)/people/components/Fileds/Fileds";
 import { Profile_Type } from "@/types/database.tables.types";
-import ChangesSection from "../../../../components/ChangesSection/ChangesSection";
+import ChangesSection from "../../../components/ChangesSection/ChangesSection";
 import Education from "./Education";
 import EmployementStatus from "../EmployementStatus";
 import AccessSection from "../AccessSection";
-import formulateData from "../../../../components/utils/formulateData";
+import formulateData from "../../../components/utils/formulateData";
 import { CreateNewEmployee } from "@/actions/hiring/CreateNewEmployee";
 import useCandidate from "@/hooks/useCandidate";
 
@@ -61,7 +61,7 @@ function Form() {
       data: {
         ...result,
         Hiring: { "Hire Date": new Date() },
-        parent_id: candidate_data[0]?.["Hiring Lead"],
+        supervisor_id: candidate_data[0]?.["Hiring Lead"],
       },
     });
 

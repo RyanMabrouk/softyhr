@@ -33,6 +33,7 @@ export default function DeleteFilesPopUp() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["files"] });
+      queryClient.invalidateQueries({ queryKey: ["folders"] });
     },
   });
 
@@ -87,6 +88,7 @@ export default function DeleteFilesPopUp() {
                 className="cursor-pointer bg-gray-4 px-4 py-2 font-semibold text-gray-23 hover:bg-gray-6 "
                 type="button"
                 onClick={() => {
+                  queryClient.setQueryData(["fileIds"], []);
                   Router.push(pathname);
                 }}
               >

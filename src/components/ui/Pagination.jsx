@@ -8,6 +8,8 @@ const StyledPagination = styled.div`
   align-items: center;
   justify-content: space-between;
   margin-top: 2rem;
+  position: absolute;
+  bottom: 0;
 `;
 
 const P = styled.p`

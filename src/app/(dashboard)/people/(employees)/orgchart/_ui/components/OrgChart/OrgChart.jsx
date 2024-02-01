@@ -8,11 +8,12 @@ import { TbArrowBigUpLinesFilled } from "react-icons/tb";
 import { FaExpandAlt } from "react-icons/fa";
 import { BiCollapse } from "react-icons/bi";
 import ExportSelect from "@/app/(dashboard)/people/components/ExportSelect.tsx";
+import { useRouter } from "next/navigation";
 
 export default function OrgChartComponent({ data }) {
   const chartContainerRef = useRef(null);
   const [selectedOption, setSelectOption] = useState(null);
-
+  const { replace } = useRouter();
   function handleSelectedOption(option) {
     setSelectOption(option);
   }
@@ -133,7 +134,6 @@ export default function OrgChartComponent({ data }) {
         expanded: expanded,
       };
     });
-
     chart = new OrgChart()
       .container(chartContainerRef.current)
       .data(mappedData)
@@ -157,6 +157,7 @@ export default function OrgChartComponent({ data }) {
       })
       .initialZoom(0.6)
       .compact(false)
+      .onNodeClick((d) => replace(`/people/${d.data.nodeId}/personnal`))
       .render();
     document.getElementById("fitButton").addEventListener("click", () => {
       chart.fit().initialZoom(0.6).render();
@@ -175,7 +176,6 @@ export default function OrgChartComponent({ data }) {
       const data = chart.data();
       data.forEach((d) => (d._expanded = false));
       data.forEach((d) => {
-        console.log(d);
         if (value != "" && d.name.toLowerCase().includes(value.toLowerCase())) {
           d._highlighted = true;
           d._expanded = true;
@@ -184,8 +184,6 @@ export default function OrgChartComponent({ data }) {
 
       // Update data and rerender graph
       chart.data(data).render().fit();
-
-      console.log("filtering chart", e.srcElement.value);
     });
     if (selectedOption === "img") {
       chart.exportImg({ full: true });
@@ -197,21 +195,21 @@ export default function OrgChartComponent({ data }) {
     }
 
     return () => {
-      document.getElementById("fitButton").removeEventListener("click", () => {
+      document.getElementById("fitButton")?.removeEventListener("click", () => {
         chart.fit().initialZoom(0.6).render();
       });
       document
         .getElementById("expandButton")
-        .removeEventListener("click", () => {
+        ?.removeEventListener("click", () => {
           chart.expandAll().fit();
         });
       document
         .getElementById("collapseButton")
-        .removeEventListener("click", () => {
+        ?.removeEventListener("click", () => {
           chart.collapseAll().fit();
         });
     };
-  }, [data, selectedOption]);
+  }, [data, replace, selectedOption]);
 
   return (
     <div>
@@ -221,7 +219,7 @@ export default function OrgChartComponent({ data }) {
             id="inputSearch"
             type="text"
             placeholder="Jump to an employee..."
-            className=" w-80 border border-gray-4 px-2 py-1 outline-1 transition-all duration-300 placeholder:text-sm placeholder:text-gray-6 focus:outline-color1-300 "
+            className=" w-80 border border-gray-4 bg-white px-2 py-1 outline-1 transition-all duration-300 placeholder:text-sm placeholder:text-gray-6 focus:outline-color1-300 "
           />
           <button
             className=" cursor-pointer  border border-color-primary-8 p-[0.3rem] opacity-80 hover:opacity-60"

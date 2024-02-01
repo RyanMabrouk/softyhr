@@ -9,3 +9,19 @@ export function checkIfOjectValuesAreEmpty(obj: any) {
   }
   return true;
 }
+// A function to extract value as an array and compare them
+export function equalsCheck(a: any, b: any) {
+  if (a?.length != b?.length) {
+    return false;
+  } else {
+    let result = false;
+    for (let i = 0; i < a?.length; i++) {
+      if (a[i] !== b[i]) {
+        return false;
+      } else {
+        result = true;
+      }
+    }
+    return result;
+  }
+}

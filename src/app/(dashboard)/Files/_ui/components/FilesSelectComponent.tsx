@@ -9,8 +9,7 @@ const FilesSelectComponent = ({ isThereFile, onSelect, options }: any) => {
   const [selectedLabel, setSelectedLabel] = useState("");
 
   const [isDropdownOpen, setDropdownOpen] = useState(false);
-  //
-  //
+
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
@@ -18,16 +17,16 @@ const FilesSelectComponent = ({ isThereFile, onSelect, options }: any) => {
   const notDisabled = searchParams.has("popup") ? isThereFile : true;
 
   function handleChange(term: any) {
-    const params = new URLSearchParams(searchParams);
-    if (term) {
-      params.set("sortBy", term);
-    } else {
-      params.delete("sortBy");
+    if (!searchParams.has("popup")) {
+      const params = new URLSearchParams(searchParams);
+      if (term) {
+        params.set("sortBy", term);
+      } else {
+        params.delete("sortBy");
+      }
+      replace(`${pathname}?${params.toString()}`);
     }
-    replace(`${pathname}?${params.toString()}`);
   }
-  //
-  //
 
   const dropdownRef = useRef<HTMLDivElement>(null);
 

@@ -5,8 +5,6 @@ import { useDrag } from "react-dnd";
 import FilesCheckBox from "../../components/FilesCheckBox";
 import { FaRegFileImage } from "react-icons/fa6";
 import { FaRegFilePdf } from "react-icons/fa";
-import { v4 as uuidv4 } from "uuid";
-
 import FileDownloadButton from "../../components/FileDownloadButton";
 import FilesSelectSettingsArrowDown from "../../components/FilesSelectSettingsArrowDown";
 import { useRouter } from "next/navigation";
@@ -14,10 +12,11 @@ import { formatDateFiles } from "@/helpers/date.helpers";
 import { ItemTypes } from "@/constants/filesConstants";
 import { moveFile } from "@/actions/files/moveFile";
 import useToast from "@/hooks/useToast";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { addFile } from "@/actions/files/addFile";
-import { UploadImage } from "@/actions/UploadFiles/uploadImage";
 import getSession from "@/api/getSession";
+import useData from "@/hooks/useData";
+import useFullName from "@/hooks/useFullName";
 
 export default function FileBox({ file, pushFileId, removeFileId }: any) {
   const {
@@ -34,6 +33,12 @@ export default function FileBox({ file, pushFileId, removeFileId }: any) {
   const { replace } = useRouter();
   const queryClient = useQueryClient();
   const [selectedOption, setSelectOption] = useState(null);
+
+  const {
+    user_profile: { data: cur_user, isPending: isPending_user },
+  } = useData();
+
+  const role = cur_user?.role;
 
   const data: any = queryClient.getQueryData(["fileIds"]);
   useEffect(() => {
@@ -70,7 +75,6 @@ export default function FileBox({ file, pushFileId, removeFileId }: any) {
   });
 
   async function handleDuplicate() {
-    console.log(file);
     if (file.size > 50000000) {
       toast.error("the size of the file cannot exceed 50MB ");
     } else {
@@ -81,7 +85,7 @@ export default function FileBox({ file, pushFileId, removeFileId }: any) {
       const payload = {
         file_url,
         addedBy: user_id,
-        name: "Duplicated " + name,
+        name: "duplicated " + name,
         org_name,
         size,
         file_type,
@@ -107,7 +111,6 @@ export default function FileBox({ file, pushFileId, removeFileId }: any) {
       handleSelectedOption(null);
     }
     if (selectedOption === "duplicate") {
-      console.log("duplicate");
       handleDuplicate();
       handleSelectedOption(null);
     }
@@ -153,6 +156,9 @@ export default function FileBox({ file, pushFileId, removeFileId }: any) {
       isDragging: !!monitor.isDragging(),
     }),
   }));
+
+  //
+  const { FullName, isPendingFullName } = useFullName(addedBy);
   return (
     <div
       ref={drag}
@@ -182,20 +188,31 @@ export default function FileBox({ file, pushFileId, removeFileId }: any) {
             {name}
           </a>
           <p className=" text-[0.85rem] text-stone-500">
-            Added {formatDateFiles(addedAt)} by {addedBy} ({size}KB)
+            Added {formatDateFiles(addedAt)} by{" "}
+            {isPendingFullName ? "" : FullName} ({size}
+            KB)
           </p>
         </div>
       </div>
       <div className=" z-30 hidden items-center gap-2">
         <FileDownloadButton fileUrl={file_url} fileName={name} />
         <FilesSelectSettingsArrowDown
-          options={[
-            { value: "share", label: "Share With Employees" },
-            { value: "emailAtt", label: "Email Attachment" },
-            { value: "rename", label: "Rename" },
-            { value: "duplicate", label: "Duplicate" },
-            { value: "delete", label: "Delete" },
-          ]}
+          options={
+            role === "admin"
+              ? [
+                  { value: "share", label: "Share With Employees" },
+                  { value: "emailAtt", label: "Email Attachment" },
+                  { value: "rename", label: "Rename" },
+                  { value: "duplicate", label: "Duplicate" },
+                  { value: "delete", label: "Delete" },
+                ]
+              : [
+                  { value: "share", label: "Share With Employees" },
+                  { value: "emailAtt", label: "Email Attachment" },
+                  { value: "rename", label: "Rename" },
+                  { value: "duplicate", label: "Duplicate" },
+                ]
+          }
           onSelect={handleSelectedOption}
         />
       </div>

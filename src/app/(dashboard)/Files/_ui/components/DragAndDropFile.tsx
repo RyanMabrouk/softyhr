@@ -16,7 +16,6 @@ const DragAndDropFileInput = ({
     const droppedFiles: any = Array.from(e.dataTransfer.files);
     setSelectedFiles(droppedFiles);
 
-    // Trigger the handleAddFile callback directly when files are dropped
     if (droppedFiles.length) {
       handleAddFile(...droppedFiles);
     }

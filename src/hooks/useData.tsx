@@ -23,23 +23,23 @@ export default function useData() {
       }),
   });
   //------------------Folders--------------------------------------
-  const { data: folders, isPending: isPending1 } = useQuery({
-    queryKey: ["folders"],
-    queryFn: () =>
-      getData("folders", {
-        org: true,
-        column: "*,files(*)",
-      }),
-  });
+  // const { data: folders, isPending: isPending1 } = useQuery({
+  //   queryKey: ["folders"],
+  //   queryFn: () =>
+  //     getData("folders", {
+  //       org: true,
+  //       column: "*,files(*)",
+  //     }),
+  // });
 
   //------------------Files--------------------------------------
-  const { data: files, isPending: isPending10 } = useQuery({
-    queryKey: ["files"],
-    queryFn: () =>
-      getData("files", {
-        org: true,
-      }),
-  });
+  // const { data: files, isPending: isPending10 } = useQuery({
+  //   queryKey: ["files"],
+  //   queryFn: () =>
+  //     getData("files", {
+  //       org: true,
+  //     }),
+  // });
   //------------------------------------------------------------
   return {
     settings: {
@@ -52,15 +52,15 @@ export default function useData() {
       error: user_profile?.error,
       isPending: isPending6,
     },
-    folders: {
-      data: folders?.data,
-      error: folders?.error,
-      isPending: isPending1,
-    },
-    files: {
-      data: files?.data,
-      error: files?.error,
-      isPending: isPending10,
-    },
+    // folders: {
+    //   data: folders?.data,
+    //   error: folders?.error,
+    //   isPending: isPending1,
+    // },
+    // files: {
+    //   data: files?.data,
+    //   error: files?.error,
+    //   isPending: isPending10,
+    // },
   };
 }

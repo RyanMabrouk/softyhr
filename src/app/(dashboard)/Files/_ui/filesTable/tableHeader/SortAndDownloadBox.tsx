@@ -25,7 +25,7 @@ export default function SortAndDownloadBox() {
         />
       </div>
       <FilesDownloadButton />
-      <FilesTrashButton check={true} />
+      <FilesTrashButton />
     </div>
   );
 }

@@ -8,10 +8,23 @@ import { IoFolderOpenSharp } from "react-icons/io5";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import FilesSelectArrowDown from "../../components/FilesSelectArrowDown";
 import { useQueryClient } from "@tanstack/react-query";
+import useFoldersIds from "@/actions/files/useFoldersIds";
+import useData from "@/hooks/useData";
 
 export default function FolderBox({ folder, setCheckAll }: any) {
-  const { id, name, files } = folder;
-  const numFiles = files.length;
+  let { id, name, files } = folder;
+  const {
+    user_profile: { data: cur_user, isPending: isPending_user },
+  } = useData();
+
+  const role = cur_user?.role;
+  const { filesIds } = useFoldersIds();
+  const numFiles =
+    role === "admin"
+      ? files?.map((file: any) => file.id)?.length
+      : files
+          ?.map((file: any) => file.id)
+          .filter((id: any) => filesIds.includes(id))?.length;
 
   const searchParams = useSearchParams();
   const pathname = usePathname();
@@ -25,10 +38,10 @@ export default function FolderBox({ folder, setCheckAll }: any) {
       replace(`Files?popup=RENAME_FOLDER&id=${id}`);
       handleSelectedOption(null);
     }
-    if (selectedOption === "share") {
-      replace(`Files?popup=SHARE_FOLDER&id=${id}`);
-      handleSelectedOption(null);
-    }
+    // if (selectedOption === "share") {
+    //   replace(`Files?popup=SHARE_FOLDER&id=${id}`);
+    //   handleSelectedOption(null);
+    // }
     if (selectedOption === "delete") {
       replace(`Files?popup=DELETE_FOLDER&id=${id}`);
       handleSelectedOption(null);
@@ -60,9 +73,6 @@ export default function FolderBox({ folder, setCheckAll }: any) {
     }
     replace(`${pathname}?${params.toString()}`);
   }
-  // function handleDrop(id: any) {
-  //   handleFolderId(id);
-  // }
 
   const [{ isOver }, drop] = useDrop(
     () => ({
@@ -98,20 +108,20 @@ export default function FolderBox({ folder, setCheckAll }: any) {
           <span className="text-sm text-stone-400"> ({numFiles})</span>
         </button>
       )}
-
-      {/* <button className=" hidden p-1 transition-all duration-300 hover:border hover:border-stone-400">
-        <TiArrowSortedDown fill="#232323" />
-      </button> */}
-      <div>
-        <FilesSelectArrowDown
-          options={[
-            { value: "rename", label: "Rename..." },
-            { value: "share", label: "Share Folder..." },
-            { value: "delete", label: "Delete..." },
-          ]}
-          onSelect={handleSelectedOption}
-        />
-      </div>
+      {role === "admin" ? (
+        <div>
+          <FilesSelectArrowDown
+            options={[
+              { value: "rename", label: "Rename..." },
+              // { value: "share", label: "Share Folder..." },
+              { value: "delete", label: "Delete..." },
+            ]}
+            onSelect={handleSelectedOption}
+          />
+        </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 }

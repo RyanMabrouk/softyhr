@@ -2,7 +2,7 @@
 import postData from "@/api/postData";
 
 export const addFile = async (payload: any) => {
-  const { error } = await postData("files", payload);
+  const { error, data } = await postData("files", payload);
   if (error) {
     return {
       error: {
@@ -11,6 +11,6 @@ export const addFile = async (payload: any) => {
       },
     };
   } else {
-    return { error: null };
+    return { data, error: null };
   }
 };
