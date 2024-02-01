@@ -28,7 +28,10 @@ export function Policy({
   type: database_leave_policies_policy_type;
 }) {
   return (
-    <div className="group relative flex h-fit w-fit  flex-col items-center justify-between gap-1 pt-6 ">
+    <div
+      className="group relative flex h-fit w-fit  flex-col items-center justify-between gap-1 pt-6 "
+      suppressHydrationWarning
+    >
       <div className="flex min-w-[20rem] flex-col items-center justify-center gap-1 rounded-md  bg-gray-14 px-[auto] py-3 group-hover:rounded-b-none  group-hover:bg-gray-17">
         <span className="mb-1 max-w-full overflow-hidden text-ellipsis whitespace-nowrap text-center text-base font-bold capitalize leading-[1.467rem] text-gray-27">
           {title}

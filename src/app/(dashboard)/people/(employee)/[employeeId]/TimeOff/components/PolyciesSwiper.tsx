@@ -17,6 +17,7 @@ import { generateLeaveCategorieIcon } from "@/helpers/leave.helpers";
 import { useParams } from "next/navigation";
 import useEmployeeData from "@/hooks/useEmloyeeData";
 import useLeaveData from "@/hooks/useLeaveData";
+import { Player } from "@lottiefiles/react-lottie-player";
 interface formatted_policy_type {
   id: number;
   name: string;
@@ -94,13 +95,10 @@ export function PolyciesSwiper() {
           )?.balance ?? 0,
       };
     });
-  if (isPending) {
-    return <div>Loading...</div>;
-  }
   return (
     <>
       <section className="relative mx-auto block w-full max-w-[57.5vw] px-12 ">
-        {policies?.length > 0 && (
+        {policies && policies?.length > 0 ? (
           <>
             <div className="btn_swiper_arrow_left absolute -left-5 top-[40%] cursor-pointer ">
               <FaArrowLeft
@@ -126,6 +124,18 @@ export function PolyciesSwiper() {
               ))}
             />
           </>
+        ) : (
+          <div className="flex w-full flex-col items-center justify-center text-sm">
+            <Player
+              src="https://lottie.host/a0bea92a-9e29-43fc-b1a4-403b36011fd7/ZRZhRyx6xp.json"
+              className="h-40 w-40"
+              loop
+              autoplay
+            />
+            <span className="-mt-6 text-gray-34">
+              This user has no active policies
+            </span>
+          </div>
         )}
       </section>
     </>

@@ -51,7 +51,7 @@ export default function CustomSwiper(props: {
       observer={true}
       className="w-full"
     >
-      {props.slides.map((slide: any, index: number) => (
+      {props.slides?.map((slide: any, index: number) => (
         <SwiperSlide
           key={"slide" + index}
           className="h-fit w-fit max-w-[20rem]"

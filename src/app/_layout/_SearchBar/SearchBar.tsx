@@ -1,6 +1,7 @@
 import { styled, alpha } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
 import { IoSearchSharp } from "react-icons/io5";
+import { tr } from "date-fns/locale";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",

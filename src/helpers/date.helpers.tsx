@@ -4,7 +4,6 @@ export function InvalidDate(date: Date) {
 }
 // format date to 31/12/2024
 export function formatDDMMYYYY(date: Date) {
-  if (InvalidDate(date)) return InvalidDate(date);
   return new Date(date).toLocaleDateString("en-GB");
 }
 // format date to 2024-12-31

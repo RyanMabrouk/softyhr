@@ -1,4 +1,3 @@
-"use client";
 import { formatTotalHoursToTimeUnit } from "@/helpers/leave.helpers";
 import {
   database_leave_policies_policy_type,

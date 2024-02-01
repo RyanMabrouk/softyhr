@@ -3,6 +3,8 @@ import SectionTitleIconBox from "../components/SectionTitleIconBox";
 import { RiShareBoxFill } from "react-icons/ri";
 import ButtonAdd from "../components/ButtonAdd";
 import PeopleRouteLink from "../components/PeopleRouteLink";
+import Link from "next/link";
+import { IoMdAddCircleOutline } from "react-icons/io";
 
 interface EmployeesPropsType {
   children: ReactNode;
@@ -14,7 +16,13 @@ function layout({ children }: EmployeesPropsType) {
       <div className="flex items-center justify-between border-b border-gray-4 pb-4">
         <div className="flex flex-col  gap-6">
           <SectionTitleIconBox />
-          <ButtonAdd name={"New Employee"} />
+          <Link
+            href="/people/NewEmployee"
+            className={`focus-within:shadow-green flex w-36 px-2 items-center justify-center gap-1 rounded-md border border-fabric-700 py-1 text-[0.95rem] font-semibold text-fabric-700 duration-200 ease-linear hover:bg-fabric-700 hover:text-white`}
+          >
+            <IoMdAddCircleOutline className="h-5 w-5" />
+            <span>New Employee</span>
+          </Link>
         </div>
         <div className="flex flex-col items-end gap-8">
           <a

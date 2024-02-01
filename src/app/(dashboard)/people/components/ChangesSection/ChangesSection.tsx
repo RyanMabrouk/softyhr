@@ -28,7 +28,7 @@ function ChangesSection({
           <button
             disabled={pending}
             className={
-              "text-bold rounded bg-color-primary-8 p-2 px-5 text-white duration-300 ease-in-out hover:!bg-color-primary-3 " +
+              " rounded-md bg-fabric-700 px-2 py-2 font-semibold  text-white  transition-all ease-linear hover:!bg-fabric-600" +
               (pending ? "  animate-pulse " : "")
             }
             type="submit"
@@ -36,10 +36,10 @@ function ChangesSection({
             {pending ? (
               <div className="flex items-center justify-center gap-[0.3rem]">
                 <span className="box-border inline-block h-5 w-5 animate-[spin_1s_linear_infinite] rounded-[50%] border-[3px] border-solid border-white border-b-transparent"></span>
-                {PendingSubmitTxt || "saving..."}
+                {PendingSubmitTxt || "Saving..."}
               </div>
             ) : (
-              SubmitTxt || "save changes"
+              SubmitTxt || "Save changes"
             )}
           </button>
           <button

@@ -3,13 +3,13 @@ import React from "react";
 export default function ButtonAdd({ name, href, classname }: any) {
   return (
     <a
-      className={`duration-250 focus-within:shadow-green flex w-[10rem] items-center justify-center gap-[0.5rem] border border-color-primary-8 py-1 text-[0.95rem] font-semibold  text-color-primary-8 ease-in-out hover:!border-color-primary-7 hover:!text-color-primary-7 ${classname}`}
+      className={`focus-within:shadow-green flex w-[10rem] items-center justify-center gap-[0.5rem] border border-color-primary-8 py-1 text-[0.95rem] font-semibold text-color-primary-8  duration-200 ease-in-out hover:!border-color-primary-7 hover:!text-color-primary-7 ${classname}`}
       href={href ? href : "#"}
     >
       <svg
         stroke="currentColor"
         fill="currentColor"
-        stroke-width="0"
+        strokeWidth="0"
         viewBox="0 0 512 512"
         height="1em"
         width="1em"

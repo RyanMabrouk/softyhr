@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { Suspense } from "react";
 import { CiMail } from "react-icons/ci";
 import { BsSignpostFill } from "react-icons/bs";
 import { MdOutlineHomeWork, MdPhoneAndroid } from "react-icons/md";
@@ -31,19 +31,21 @@ import useData from "@/hooks/useData";
 import { generateLeaveCategorieIcon } from "@/helpers/leave.helpers";
 import { UnderlinedLink } from "@/app/_ui/UnderlinedLink";
 import useLeaveData from "@/hooks/useLeaveData";
+import Loader from "../Loader/Loader";
 
 interface UserInfoPropsType {
   employeeId: string;
 }
 export default function UserInfo({ employeeId }: UserInfoPropsType) {
   const {
-    leave_categories: { data: leave_categories },
-    leave_policies: { data: leave_policies },
+    leave_categories: { data: leave_categories, isPending: isPending1 },
+    leave_policies: { data: leave_policies, isPending: isPending2 },
   } = useLeaveData();
   const {
-    employee_profile: { data: user },
-    leave_requests: { data: leave_requests },
+    employee_profile: { data: user, isPending: isPending3 },
+    leave_requests: { data: leave_requests, isPending: isPending4 },
   } = useEmployeeData({ employeeId: employeeId });
+  const isPending = isPending1 || isPending2 || isPending3 || isPending4;
   // chekck if the user is on vacation
   const current_vacation = leave_requests?.find(
     (request: database_leave_requests_type) =>
@@ -82,40 +84,46 @@ export default function UserInfo({ employeeId }: UserInfoPropsType) {
       )}
       <div className="mt-10 flex w-full flex-col gap-4 px-5">
         <div className=" flex flex-col items-start  justify-center gap-2">
-          <div className="flex items-center justify-start gap-2 whitespace-nowrap text-sm text-gray-15">
-            <MdOutlineHomeWork
-              fill="gray"
-              className="cursor-pointer duration-200 ease-in-out hover:!text-color-primary-8"
-            />
-            <span className="line-clamp-1 text-sm">
-              {user?.Contact?.["Work Phone"]}
-            </span>
-          </div>
-          <div className="flex items-center justify-start gap-2 whitespace-nowrap text-gray-15">
-            <MdPhoneAndroid
-              fill="gray"
-              className="cursor-pointer duration-200 ease-in-out hover:!text-color-primary-8"
-            />
-            <span className="line-clamp-1 text-sm">
-              {user?.Contact?.["Mobile Phone"]}
-            </span>
-          </div>
-          <div className=" flex items-center justify-start gap-2 text-gray-15">
-            <CiMail
-              fill="gray"
-              className="cursor-pointer duration-200 ease-in-out hover:!text-color-primary-8"
-            />
-            <span className="line-clamp-1 text-sm  overflow-hidden text-ellipsis whitespace-nowrap">
-              {user?.Contact?.["Work Email"]}
-            </span>
-          </div>
+          {user?.Contact?.["Work Phone"] && (
+            <div className="flex items-center justify-start gap-2 whitespace-nowrap text-sm text-gray-15">
+              <MdOutlineHomeWork
+                fill="gray"
+                className="cursor-pointer duration-200 ease-in-out hover:!text-color-primary-8"
+              />
+              <span className="line-clamp-1 text-sm">
+                {user?.Contact?.["Work Phone"]}
+              </span>
+            </div>
+          )}
+          {user?.Contact?.["Mobile Phone"] && (
+            <div className="flex items-center justify-start gap-2 whitespace-nowrap text-gray-15">
+              <MdPhoneAndroid
+                fill="gray"
+                className="cursor-pointer duration-200 ease-in-out hover:!text-color-primary-8"
+              />
+              <span className="line-clamp-1 text-sm">
+                {user?.Contact?.["Mobile Phone"]}
+              </span>
+            </div>
+          )}
+          {user?.Contact?.["Work Email"] && (
+            <div className=" flex items-center justify-start gap-2 text-gray-15">
+              <CiMail
+                fill="gray"
+                className="cursor-pointer duration-200 ease-in-out hover:!text-color-primary-8"
+              />
+              <span className="line-clamp-1 overflow-hidden  text-ellipsis whitespace-nowrap text-sm">
+                {user?.Contact?.["Work Email"]}
+              </span>
+            </div>
+          )}
         </div>
-        <div className=" flex w-full flex-row items-center justify-between px-2 whitespace-nowrap text-gray-15">
-          <FaLinkedin className="text-gray-35 cursor-pointer duration-200 ease-linear hover:text-color-primary-8" />
-          <FaTwitter className="text-gray-35 cursor-pointer duration-200 ease-linear hover:text-color-primary-8" />
-          <FaFacebookSquare className="text-gray-35 cursor-pointer duration-200 ease-linear hover:text-color-primary-8" />
-          <FaPinterest className="text-gray-35 cursor-pointer duration-200 ease-linear hover:text-color-primary-8" />
-          <FaTwitter className="text-gray-35 cursor-pointer duration-200 ease-linear hover:text-color-primary-8" />
+        <div className=" flex w-full flex-row items-center justify-between whitespace-nowrap px-2 text-gray-15">
+          <FaLinkedin className="cursor-pointer text-gray-35 duration-200 ease-linear hover:text-color-primary-8" />
+          <FaTwitter className="cursor-pointer text-gray-35 duration-200 ease-linear hover:text-color-primary-8" />
+          <FaFacebookSquare className="cursor-pointer text-gray-35 duration-200 ease-linear hover:text-color-primary-8" />
+          <FaPinterest className="cursor-pointer text-gray-35 duration-200 ease-linear hover:text-color-primary-8" />
+          <FaTwitter className="cursor-pointer text-gray-35 duration-200 ease-linear hover:text-color-primary-8" />
         </div>
         <div className="h-px w-full  self-center bg-gray-16" />
         <div className=" flex flex-col gap-[0.3rem]">
@@ -129,39 +137,49 @@ export default function UserInfo({ employeeId }: UserInfoPropsType) {
         </div>
         <div className="h-px w-full  self-center bg-gray-16" />
         <div className="flex flex-col items-start justify-center gap-[0.5rem]">
-          <div className="flex items-center justify-start gap-[1REM] text-gray-15">
-            <FaHashtag className="cursor-pointer duration-200 ease-in-out hover:!text-color-primary-8" />
-            <span>{user?.["Basic Information"]?.Employee}</span>
-          </div>
-          <div className="flex items-center justify-start gap-[1REM] text-sm font-normal text-gray-15">
-            <BsSignpostFill className="cursor-pointer duration-200 ease-in-out hover:!text-color-primary-8" />
-            <span>
-              {
-                user?.["Employment Status"]?.sort(
-                  (a: any, b: any) =>
-                    new Date(a?.Date || a?.["Effective Date"]).getTime() -
-                    new Date(b?.Date || b?.["Effective Date"]).getTime(),
-                )[user?.["Employment Status"].length - 1]?.["Employment Status"]
-              }
-            </span>
-          </div>
+          {user?.["Basic Information"] && (
+            <div className="flex items-center justify-start gap-[1REM] text-gray-15">
+              <FaHashtag className="cursor-pointer duration-200 ease-in-out hover:!text-color-primary-8" />
+              <span>{user?.["Basic Information"]?.Employee}</span>
+            </div>
+          )}
+          {user?.["Employment Status"] && (
+            <div className="flex items-center justify-start gap-[1REM] text-sm font-normal text-gray-15">
+              <BsSignpostFill className="cursor-pointer duration-200 ease-in-out hover:!text-color-primary-8" />
+              <span>
+                {
+                  user?.["Employment Status"]?.sort(
+                    (a: any, b: any) =>
+                      new Date(a?.Date || a?.["Effective Date"]).getTime() -
+                      new Date(b?.Date || b?.["Effective Date"]).getTime(),
+                  )[user?.["Employment Status"].length - 1]?.[
+                    "Employment Status"
+                  ]
+                }
+              </span>
+            </div>
+          )}
           <div className="flex items-center justify-start gap-[1REM] text-sm  font-normal text-gray-15">
             <IoIosPeople className="cursor-pointer duration-200 ease-in-out hover:!text-color-primary-8" />
             <span>Operations</span>
           </div>
-          <div className="flex items-center justify-start gap-[1REM] text-sm font-normal text-gray-15">
-            <FaMapLocation className="cursor-pointer duration-200 ease-in-out hover:!text-color-primary-8" />
-            <span>{user?.Address?.Country || ""}</span>
-          </div>
-          <div className="flex items-center justify-start gap-[1REM] text-sm  font-normal text-gray-15">
-            <IoLocationSharp className="cursor-pointer duration-200 ease-in-out hover:!text-color-primary-8" />
-            <span>
-              {user?.Address?.State || "" + ", " + user?.Address?.City || ""}
-            </span>
-          </div>
+          {user?.Address?.Country && (
+            <div className="flex items-center justify-start gap-[1REM] text-sm font-normal text-gray-15">
+              <FaMapLocation className="cursor-pointer duration-200 ease-in-out hover:!text-color-primary-8" />
+              <span>{user?.Address?.Country || ""}</span>
+            </div>
+          )}
+          {user?.Address?.State && user?.Address?.City && (
+            <div className="flex items-center justify-start gap-[1REM] text-sm  font-normal text-gray-15">
+              <IoLocationSharp className="cursor-pointer duration-200 ease-in-out hover:!text-color-primary-8" />
+              <span>
+                {user?.Address?.State || "" + ", " + user?.Address?.City || ""}
+              </span>
+            </div>
+          )}
           <div className="flex items-center justify-start gap-[1REM] text-sm  font-normal text-gray-15">
             <CiClock2 className="cursor-pointer duration-200 ease-in-out hover:!text-color-primary-8" />
-            <span>{updateTime()} Local Time</span>
+            <time suppressHydrationWarning>{updateTime()} Local Time</time>
           </div>
         </div>
         <div className="h-px w-full  self-center bg-gray-16" />

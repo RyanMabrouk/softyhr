@@ -128,12 +128,12 @@ function UserProfile() {
             </div>
           </div>
           <main
-            className="flex flex-col justify-center rounded-b-md text-sm text-gray-27"
+            className="flex flex-col justify-center rounded-b-md text-sm text-gray-27 transition-all ease-linear"
             role="button"
           >
             <Link
               onClick={() => setToggleView((old) => !old)}
-              className="border-t bg-white px-3 py-2 text-base hover:bg-fabric-700 hover:text-white"
+              className="border-t bg-white px-3 py-2 text-base transition-all ease-linear hover:bg-fabric-700 hover:text-white"
               href={"/Settings/Account"}
             >
               Account settings
@@ -145,7 +145,7 @@ function UserProfile() {
               }}
             >
               <button
-                className="w-full cursor-pointer border-t bg-white px-3 py-2 text-left text-base hover:bg-fabric-700 hover:text-white"
+                className="w-full cursor-pointer border-t bg-white px-3 py-2 text-left text-base transition-all ease-linear hover:bg-fabric-700 hover:text-white"
                 type="submit"
               >
                 Log out

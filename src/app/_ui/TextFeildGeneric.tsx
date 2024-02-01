@@ -20,14 +20,14 @@ export function TextFeildGeneric({
   placeholder?: string;
 }) {
   return (
-    <div className="flex flex-col gap-1">
+    <div className="flex w-full flex-col gap-1">
       <Label required={required} error={error ? true : false} name={name}>
         {label}
       </Label>
       <textarea
         name={name}
         id={name}
-        className="focus:shadow-green maw-w-[20rem] rounded-md border border-gray-18 px-2  py-1 shadow-[rgba(0,0,0,0.05)_0px_1px_0px_0px] outline-none transition-all ease-linear placeholder:text-gray-14 focus:outline-none "
+        className="focus:shadow-green maw-w-[20rem] w-full rounded-md border border-gray-18 px-2  py-1 shadow-[rgba(0,0,0,0.05)_0px_1px_0px_0px] outline-none transition-all ease-linear placeholder:text-gray-14 focus:outline-none "
         cols={10}
         rows={5}
         onChange={(e) => setValueInParent && setValueInParent(e.target.value)}

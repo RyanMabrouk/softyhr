@@ -18,12 +18,11 @@ function SelectInput({
   label,
   minWidth,
 }: SelectInputPropsType) {
-  const [value, setValue] = useState(String(defaultValue));
+  const [value, setValue] = useState(String(defaultValue) ?? "");
   const HandleChange = (e: any) => {
     if (setTouched) setTouched(true);
     setValue(e.target.value);
   };
-  console.log(value);
   return (
     <div className="relative flex flex-col items-start justify-center">
       <h1
@@ -79,7 +78,10 @@ function SelectInput({
         required={RowField?.required}
         type="text"
         className="absolute bottom-0 left-10 h-[1px] w-[1px] opacity-0"
-        value={value || ""}
+        value={value}
+        readOnly
+        hidden
+        autoFocus
       />
     </div>
   );

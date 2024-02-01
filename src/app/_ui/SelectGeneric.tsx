@@ -70,12 +70,12 @@ export function SelectGeneric({
                     <hr className="m-0 h-[unset] !w-full shrink-0 border-solid border-[rgba(0,0,0,0.12)] bg-gray-14" />
                     <MenuItem
                       key={option?.group_name}
-                      className="group peer !max-h-7  w-full border-y border-black !px-2 !py-1 text-center text-[0.8rem] capitalize text-gray-21 !opacity-100"
+                      className="group peer !max-h-7  !w-full !border-y !border-black !px-2 !py-1 !text-center !text-[0.8rem] !capitalize !text-gray-21 !opacity-100"
                       disabled
                       aria-readonly
                       value="none"
                     >
-                      <span className="text-pretty">{option?.group_name}</span>
+                      {option?.group_name}
                     </MenuItem>
                   </>
                 ) : (
