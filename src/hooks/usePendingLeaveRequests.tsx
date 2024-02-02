@@ -6,12 +6,12 @@ import {
 } from "@/types/database.tables.types";
 import { PostgrestError } from "@supabase/supabase-js";
 import { useQuery } from "@tanstack/react-query";
-export default function useRole({ id }: { id: number | undefined }): {
+export default function usePendingLeaveRequests(): {
   pending_leave_requests: {
     data: database_leave_requests_type[] | null;
     error: PostgrestError | null;
     isPending: boolean;
-  } | null;
+  };
 } {
   const status: database_leave_request_status_type = "pending";
   const { data: pending_leave_requests, isPending } = useQuery({
@@ -24,7 +24,7 @@ export default function useRole({ id }: { id: number | undefined }): {
   });
   return {
     pending_leave_requests: {
-      data: pending_leave_requests?.data?.[0],
+      data: pending_leave_requests?.data,
       error: pending_leave_requests?.error,
       isPending: isPending,
     },
