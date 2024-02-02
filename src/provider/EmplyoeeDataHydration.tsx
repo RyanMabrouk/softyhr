@@ -11,7 +11,7 @@ export async function EmplyoeeDataHydration({
   employeeId,
 }: {
   children: React.ReactNode;
-  employeeId: string | string[];
+  employeeId: string;
 }) {
   const queryClient = new QueryClient();
   console.log("🚀 ~ employeeId:", employeeId);
