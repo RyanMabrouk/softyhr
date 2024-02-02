@@ -94,7 +94,7 @@ export type champ_type = {
 
 export interface RowFieldType {
   name: string;
-  options?: string[] | undefined;
+  options?: string[] | Object[] | undefined;
   required?: boolean;
   placeHolder?: string | undefined;
   type: "select" | "text" | "radio";

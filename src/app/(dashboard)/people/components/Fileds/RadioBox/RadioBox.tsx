@@ -38,11 +38,13 @@ function RadioBox({ RowField, setTouched, user, champ }: RadioBoxPropsType) {
       >
         <Radio.Group onChange={onChange} value={value} name={RowField?.name}>
           <Space direction="vertical">
-            {RowField?.options?.map((value: string, index: number) => (
-              <Radio key={index} value={value}>
-                {value}
-              </Radio>
-            ))}
+            {RowField?.options?.map(
+              (value: any, index: number) => (
+                <Radio key={index} value={value}>
+                  {value}
+                </Radio>
+              ),
+            )}
           </Space>
         </Radio.Group>
       </ConfigProvider>

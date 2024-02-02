@@ -1,7 +1,7 @@
 import React, { ReactNode, memo } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { Field } from "@/constants/userInfo";
-import { RowFieldType } from "@/types/userInfoTypes.type";
+import { RowFieldType, insert_RowFieldType } from "@/types/userInfoTypes.type";
 import Input from "./Input/Input";
 import { Profile_Type, RowType } from "@/types/database.tables.types";
 interface FiledsChampsPropsType {
@@ -26,7 +26,7 @@ function FiledsChamps({
               className="flex items-end justify-center gap-[1rem]"
               key={uuidv4()}
             >
-              {Row?.map((RowField: RowFieldType) => {
+              {Row?.map((RowField: insert_RowFieldType) => {
                 const Component =
                   Field[RowField.type.toUpperCase() || "INPUT"] || Input;
                 return (
