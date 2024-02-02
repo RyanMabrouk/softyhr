@@ -35,11 +35,10 @@ export interface Database {
       }
       candidates: {
         Row: {
-<<<<<<< HEAD
-<<<<<<< HEAD
           created_at: string
           Email: string | null
           "First Name": string | null
+          "Hiring Lead": string | null
           id: number
           job_id: number | null
           "Last Name": string | null
@@ -49,7 +48,6 @@ export interface Database {
           Ratings: number | null
           status: string | null
         }
-<<<<<<< HEAD
         Insert: {
           created_at?: string
           Email?: string | null
@@ -80,11 +78,11 @@ export interface Database {
         }
         Relationships: [
           {
-            foreignKeyName: "candidates_job_id_fkey";
-            columns: ["job_id"];
-            isOneToOne: false;
-            referencedRelation: "Hiring";
-            referencedColumns: ["id"];
+            foreignKeyName: "candidates_job_id_fkey"
+            columns: ["job_id"]
+            isOneToOne: false
+            referencedRelation: "Hiring"
+            referencedColumns: ["id"]
           },
           {
             foreignKeyName: "candidates_org_name_fkey"
@@ -95,99 +93,125 @@ export interface Database {
           }
         ]
       }
+      divisions: {
+        Row: {
+          created_at: string
+          id: number
+          name: string
+          org_name: string
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+          name: string
+          org_name: string
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          name?: string
+          org_name?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "divisions_org_name_fkey"
+            columns: ["org_name"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["name"]
+          }
+        ]
+      }
       files: {
         Row: {
-          addedBy: string | null;
-          created_at: string;
-          file_type: string | null;
-          file_url: string | null;
-          folderId: number | null;
-          id: number;
-          name: string | null;
-          org_name: string | null;
-          size: number | null;
-        };
+          addedBy: string | null
+          created_at: string
+          file_type: string | null
+          file_url: string | null
+          folderId: number | null
+          id: number
+          name: string | null
+          org_name: string | null
+          size: number | null
+        }
         Insert: {
-          addedBy?: string | null;
-          created_at?: string;
-          file_type?: string | null;
-          file_url?: string | null;
-          folderId?: number | null;
-          id?: number;
-          name?: string | null;
-          org_name?: string | null;
-          size?: number | null;
-        };
+          addedBy?: string | null
+          created_at?: string
+          file_type?: string | null
+          file_url?: string | null
+          folderId?: number | null
+          id?: number
+          name?: string | null
+          org_name?: string | null
+          size?: number | null
+        }
         Update: {
-          addedBy?: string | null;
-          created_at?: string;
-          file_type?: string | null;
-          file_url?: string | null;
-          folderId?: number | null;
-          id?: number;
-          name?: string | null;
-          org_name?: string | null;
-          size?: number | null;
-        };
+          addedBy?: string | null
+          created_at?: string
+          file_type?: string | null
+          file_url?: string | null
+          folderId?: number | null
+          id?: number
+          name?: string | null
+          org_name?: string | null
+          size?: number | null
+        }
         Relationships: [
           {
-            foreignKeyName: "files_addedBy_fkey";
-            columns: ["addedBy"];
-            isOneToOne: false;
-            referencedRelation: "profiles";
-            referencedColumns: ["user_id"];
+            foreignKeyName: "files_addedBy_fkey"
+            columns: ["addedBy"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["user_id"]
           },
           {
-            foreignKeyName: "files_folderId_fkey";
-            columns: ["folderId"];
-            isOneToOne: false;
-            referencedRelation: "folders";
-            referencedColumns: ["id"];
+            foreignKeyName: "files_folderId_fkey"
+            columns: ["folderId"]
+            isOneToOne: false
+            referencedRelation: "folders"
+            referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "files_org_name_fkey";
-            columns: ["org_name"];
-            isOneToOne: false;
-            referencedRelation: "organizations";
-            referencedColumns: ["name"];
-          },
-        ];
-      };
+            foreignKeyName: "files_org_name_fkey"
+            columns: ["org_name"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["name"]
+          }
+        ]
+      }
       folders: {
         Row: {
-          created_at: string;
-          id: number;
-          name: string;
-          org_name: string | null;
-        };
+          created_at: string
+          id: number
+          name: string
+          org_name: string | null
+        }
         Insert: {
-          created_at?: string;
-          id?: number;
-          name: string;
-          org_name?: string | null;
-        };
+          created_at?: string
+          id?: number
+          name: string
+          org_name?: string | null
+        }
         Update: {
-          created_at?: string;
-          id?: number;
-          name?: string;
-          org_name?: string | null;
-        };
+          created_at?: string
+          id?: number
+          name?: string
+          org_name?: string | null
+        }
         Relationships: [
           {
-            foreignKeyName: "folders_org_name_fkey";
-            columns: ["org_name"];
-            isOneToOne: false;
-            referencedRelation: "organizations";
-            referencedColumns: ["name"];
-          },
-        ];
-      };
+            foreignKeyName: "folders_org_name_fkey"
+            columns: ["org_name"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["name"]
+          }
+        ]
+      }
       Hiring: {
         Row: {
-<<<<<<< HEAD
-<<<<<<< HEAD
           Application_Details: Json | null
-          candidates: Json[] | null
           created_at: string
           id: number
           "Job Status": string | null
@@ -195,7 +219,6 @@ export interface Database {
           job_information: Json | null
           org_name: string | null
         }
-<<<<<<< HEAD
         Insert: {
           Application_Details?: Json | null
           created_at?: string
@@ -216,72 +239,72 @@ export interface Database {
         }
         Relationships: [
           {
-            foreignKeyName: "Hiring_org_name_fkey";
-            columns: ["org_name"];
-            isOneToOne: false;
-            referencedRelation: "organizations";
-            referencedColumns: ["name"];
-          },
-        ];
-      };
+            foreignKeyName: "Hiring_org_name_fkey"
+            columns: ["org_name"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["name"]
+          }
+        ]
+      }
       leave_accrued: {
         Row: {
-          balance: number;
-          created_at: string;
-          duration: number;
-          id: number;
-          note: string | null;
-          org_name: string | null;
-          policy_id: number;
-          start_at: string;
-          user_id: string;
-        };
+          balance: number
+          created_at: string
+          duration: number
+          id: number
+          note: string | null
+          org_name: string | null
+          policy_id: number
+          start_at: string
+          user_id: string
+        }
         Insert: {
-          balance: number;
-          created_at?: string;
-          duration?: number;
-          id?: number;
-          note?: string | null;
-          org_name?: string | null;
-          policy_id: number;
-          start_at: string;
-          user_id: string;
-        };
+          balance: number
+          created_at?: string
+          duration?: number
+          id?: number
+          note?: string | null
+          org_name?: string | null
+          policy_id: number
+          start_at: string
+          user_id: string
+        }
         Update: {
-          balance?: number;
-          created_at?: string;
-          duration?: number;
-          id?: number;
-          note?: string | null;
-          org_name?: string | null;
-          policy_id?: number;
-          start_at?: string;
-          user_id?: string;
-        };
+          balance?: number
+          created_at?: string
+          duration?: number
+          id?: number
+          note?: string | null
+          org_name?: string | null
+          policy_id?: number
+          start_at?: string
+          user_id?: string
+        }
         Relationships: [
           {
-            foreignKeyName: "leave_accrued_org_name_fkey";
-            columns: ["org_name"];
-            isOneToOne: false;
-            referencedRelation: "organizations";
-            referencedColumns: ["name"];
+            foreignKeyName: "leave_accrued_org_name_fkey"
+            columns: ["org_name"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["name"]
           },
           {
-            foreignKeyName: "leave_accrued_policy_id_fkey";
-            columns: ["policy_id"];
-            isOneToOne: false;
-            referencedRelation: "leave_policies";
-            referencedColumns: ["id"];
+            foreignKeyName: "leave_accrued_policy_id_fkey"
+            columns: ["policy_id"]
+            isOneToOne: false
+            referencedRelation: "leave_policies"
+            referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "leave_accrued_user_id_fkey";
-            columns: ["user_id"];
-            isOneToOne: false;
-            referencedRelation: "users";
-            referencedColumns: ["id"];
-          },
-        ];
-      };
+            foreignKeyName: "leave_accrued_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
       leave_balance: {
         Row: {
           balance: number
@@ -387,6 +410,8 @@ export interface Database {
       }
       leave_policies: {
         Row: {
+          accrual_days: string[] | null
+          accrual_value_in_hours: number
           categories_id: number
           created_at: string
           id: number
@@ -394,7 +419,6 @@ export interface Database {
           org_name: string
           type: Database["public"]["Enums"]["database_leave_policies_policy_type"]
         }
-<<<<<<< HEAD
         Insert: {
           accrual_days?: string[] | null
           accrual_value_in_hours?: number
@@ -417,101 +441,101 @@ export interface Database {
         }
         Relationships: [
           {
-            foreignKeyName: "leave_policies_categories_id_fkey";
-            columns: ["categories_id"];
-            isOneToOne: false;
-            referencedRelation: "leave_categories";
-            referencedColumns: ["id"];
+            foreignKeyName: "leave_policies_categories_id_fkey"
+            columns: ["categories_id"]
+            isOneToOne: false
+            referencedRelation: "leave_categories"
+            referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "leave_policies_org_name_fkey";
-            columns: ["org_name"];
-            isOneToOne: false;
-            referencedRelation: "organizations";
-            referencedColumns: ["name"];
-          },
-        ];
-      };
+            foreignKeyName: "leave_policies_org_name_fkey"
+            columns: ["org_name"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["name"]
+          }
+        ]
+      }
       leave_requests: {
         Row: {
-          balance: number;
-          created_at: string;
-          duration_used: Json[];
-          end_at: string;
-          id: number;
-          note: string | null;
-          org_name: string | null;
-          policy_id: number;
-          reviewed_at: string | null;
-          reviewed_by: string | null;
-          reviewed_comment: string | null;
-          start_at: string;
-          status: string;
-          user_id: string;
-        };
+          balance: number
+          created_at: string
+          duration_used: Json[]
+          end_at: string
+          id: number
+          note: string | null
+          org_name: string | null
+          policy_id: number
+          reviewed_at: string | null
+          reviewed_by: string | null
+          reviewed_comment: string | null
+          start_at: string
+          status: string
+          user_id: string
+        }
         Insert: {
-          balance: number;
-          created_at?: string;
-          duration_used: Json[];
-          end_at: string;
-          id?: number;
-          note?: string | null;
-          org_name?: string | null;
-          policy_id: number;
-          reviewed_at?: string | null;
-          reviewed_by?: string | null;
-          reviewed_comment?: string | null;
-          start_at: string;
-          status?: string;
-          user_id: string;
-        };
+          balance: number
+          created_at?: string
+          duration_used: Json[]
+          end_at: string
+          id?: number
+          note?: string | null
+          org_name?: string | null
+          policy_id: number
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          reviewed_comment?: string | null
+          start_at: string
+          status?: string
+          user_id: string
+        }
         Update: {
-          balance?: number;
-          created_at?: string;
-          duration_used?: Json[];
-          end_at?: string;
-          id?: number;
-          note?: string | null;
-          org_name?: string | null;
-          policy_id?: number;
-          reviewed_at?: string | null;
-          reviewed_by?: string | null;
-          reviewed_comment?: string | null;
-          start_at?: string;
-          status?: string;
-          user_id?: string;
-        };
+          balance?: number
+          created_at?: string
+          duration_used?: Json[]
+          end_at?: string
+          id?: number
+          note?: string | null
+          org_name?: string | null
+          policy_id?: number
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          reviewed_comment?: string | null
+          start_at?: string
+          status?: string
+          user_id?: string
+        }
         Relationships: [
           {
-            foreignKeyName: "leave_requests_org_name_fkey";
-            columns: ["org_name"];
-            isOneToOne: false;
-            referencedRelation: "organizations";
-            referencedColumns: ["name"];
+            foreignKeyName: "leave_requests_org_name_fkey"
+            columns: ["org_name"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["name"]
           },
           {
-            foreignKeyName: "leave_requests_policy_id_fkey";
-            columns: ["policy_id"];
-            isOneToOne: false;
-            referencedRelation: "leave_policies";
-            referencedColumns: ["id"];
+            foreignKeyName: "leave_requests_policy_id_fkey"
+            columns: ["policy_id"]
+            isOneToOne: false
+            referencedRelation: "leave_policies"
+            referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "leave_requests_reviewed_by_fkey";
-            columns: ["reviewed_by"];
-            isOneToOne: false;
-            referencedRelation: "users";
-            referencedColumns: ["id"];
+            foreignKeyName: "leave_requests_reviewed_by_fkey"
+            columns: ["reviewed_by"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "leave_requests_user_id_fkey";
-            columns: ["user_id"];
-            isOneToOne: false;
-            referencedRelation: "users";
-            referencedColumns: ["id"];
-          },
-        ];
-      };
+            foreignKeyName: "leave_requests_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
       organizations: {
         Row: {
           country: string
@@ -526,10 +550,6 @@ export interface Database {
           name: string
         }
         Update: {
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 2d15600 (inbox early demo (under construction))
           country?: string
           created_at?: string
           employee_count?: string
@@ -537,89 +557,6 @@ export interface Database {
         }
         Relationships: []
       }
-      profiles: {
-        Row: {
-          accrual_start_date: string | null
-          Address: Json | null
-          "Basic Information": Json | null
-          Bonus: Json[] | null
-          Commission: Json[] | null
-          Compensation: Json[] | null
-          Contact: Json | null
-          "Driver License": Json[] | null
-          Education: Json[] | null
-          "Employment Status": Json[] | null
-          Hiring: Json | null
-          Job: Json | null
-          "Job Information": Json[] | null
-          org_name: string
-          picture: string | null
-          role: string | null
-          role_id: number
-          "Social Links": Json | null
-          "Stock Options": Json[] | null
-          supervisor_id: string | null
-          user_id: string
-          "Visa Information": Json[] | null
-        }
-        Insert: {
-          accrual_start_date?: string | null
-          Address?: Json | null
-          "Basic Information"?: Json | null
-          Bonus?: Json[] | null
-          Commission?: Json[] | null
-          Compensation?: Json[] | null
-          Contact?: Json | null
-          "Driver License"?: Json[] | null
-          Education?: Json[] | null
-          "Employment Status"?: Json[] | null
-          Hiring?: Json | null
-          Job?: Json | null
-          "Job Information"?: Json[] | null
-          org_name: string
-          picture?: string | null
-          role?: string | null
-          role_id?: number
-          "Social Links"?: Json | null
-          "Stock Options"?: Json[] | null
-          supervisor_id?: string | null
-          user_id: string
-          "Visa Information"?: Json[] | null
-        }
-        Update: {
-          accrual_start_date?: string | null
-          Address?: Json | null
-          "Basic Information"?: Json | null
-          Bonus?: Json[] | null
-          Commission?: Json[] | null
-          Compensation?: Json[] | null
-          Contact?: Json | null
-          "Driver License"?: Json[] | null
-          Education?: Json[] | null
-          "Employment Status"?: Json[] | null
-          Hiring?: Json | null
-          Job?: Json | null
-          "Job Information"?: Json[] | null
-          org_name?: string
-          picture?: string | null
-          role?: string | null
-          role_id?: number
-          "Social Links"?: Json | null
-          "Stock Options"?: Json[] | null
-          supervisor_id?: string | null
-          user_id?: string
-          "Visa Information"?: Json[] | null
-        }
-=======
-          country?: string;
-          created_at?: string;
-          employee_count?: string;
-          name?: string;
-        };
-        Relationships: [];
-      };
-=======
->>>>>>> 2d15600 (inbox early demo (under construction))
       permissions: {
         Row: {
           created_at: string
@@ -644,24 +581,127 @@ export interface Database {
         }
         Relationships: [
           {
-            foreignKeyName: "profiles_org_name_fkey";
-            columns: ["org_name"];
-            isOneToOne: false;
-            referencedRelation: "organizations";
-            referencedColumns: ["name"];
+            foreignKeyName: "permissions_org_name_fkey"
+            columns: ["org_name"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["name"]
           },
           {
-            foreignKeyName: "profiles_parent_id_fkey"
-            columns: ["parent_id"]
+            foreignKeyName: "permissions_role_id_fkey"
+            columns: ["role_id"]
+            isOneToOne: false
+            referencedRelation: "roles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "permissions_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      profiles: {
+        Row: {
+          accrual_start_date: string | null
+          Address: Json | null
+          "Basic Information": Json | null
+          Bonus: Json[] | null
+          Commission: Json[] | null
+          Compensation: Json[] | null
+          Contact: Json | null
+          "Driver License": Json[] | null
+          Education: Json[] | null
+          "Employment Status": Json[] | null
+          files_ids: number[] | null
+          Hiring: Json | null
+          Job: Json | null
+          "Job Information": Json[] | null
+          org_name: string
+          picture: string | null
+          role: string | null
+          role_id: number
+          "Social Links": Json | null
+          "Stock Options": Json[] | null
+          supervisor_id: string | null
+          user_id: string
+          "Visa Information": Json[] | null
+        }
+        Insert: {
+          accrual_start_date?: string | null
+          Address?: Json | null
+          "Basic Information"?: Json | null
+          Bonus?: Json[] | null
+          Commission?: Json[] | null
+          Compensation?: Json[] | null
+          Contact?: Json | null
+          "Driver License"?: Json[] | null
+          Education?: Json[] | null
+          "Employment Status"?: Json[] | null
+          files_ids?: number[] | null
+          Hiring?: Json | null
+          Job?: Json | null
+          "Job Information"?: Json[] | null
+          org_name: string
+          picture?: string | null
+          role?: string | null
+          role_id?: number
+          "Social Links"?: Json | null
+          "Stock Options"?: Json[] | null
+          supervisor_id?: string | null
+          user_id: string
+          "Visa Information"?: Json[] | null
+        }
+        Update: {
+          accrual_start_date?: string | null
+          Address?: Json | null
+          "Basic Information"?: Json | null
+          Bonus?: Json[] | null
+          Commission?: Json[] | null
+          Compensation?: Json[] | null
+          Contact?: Json | null
+          "Driver License"?: Json[] | null
+          Education?: Json[] | null
+          "Employment Status"?: Json[] | null
+          files_ids?: number[] | null
+          Hiring?: Json | null
+          Job?: Json | null
+          "Job Information"?: Json[] | null
+          org_name?: string
+          picture?: string | null
+          role?: string | null
+          role_id?: number
+          "Social Links"?: Json | null
+          "Stock Options"?: Json[] | null
+          supervisor_id?: string | null
+          user_id?: string
+          "Visa Information"?: Json[] | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "profiles_org_name_fkey"
+            columns: ["org_name"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["name"]
+          },
+          {
+            foreignKeyName: "profiles_role_id_fkey"
+            columns: ["role_id"]
+            isOneToOne: false
+            referencedRelation: "roles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "profiles_supervisor_id_fkey"
+            columns: ["supervisor_id"]
             isOneToOne: false
             referencedRelation: "profiles"
             referencedColumns: ["user_id"]
           },
           {
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 2d15600 (inbox early demo (under construction))
             foreignKeyName: "profiles_user_id_fkey"
             columns: ["user_id"]
             isOneToOne: true
@@ -670,42 +710,74 @@ export interface Database {
           }
         ]
       }
-      settings: {
+      roles: {
         Row: {
-          AppliementForm: Json | null;
-          default_hours_per_day: number[];
-          Hiring: Json | null;
-          job: Json | null;
-          org_name: string;
-          personnal: Json | null;
-        };
+          created_at: string
+          id: number
+          name: string
+          org_name: string
+          permissions: string[]
+        }
         Insert: {
-          AppliementForm?: Json | null;
-          default_hours_per_day?: number[];
-          Hiring?: Json | null;
-          job?: Json | null;
-          org_name: string;
-          personnal?: Json | null;
-        };
+          created_at?: string
+          id?: number
+          name?: string
+          org_name: string
+          permissions: string[]
+        }
         Update: {
-          AppliementForm?: Json | null;
-          default_hours_per_day?: number[];
-          Hiring?: Json | null;
-          job?: Json | null;
-          org_name?: string;
-          personnal?: Json | null;
-        };
+          created_at?: string
+          id?: number
+          name?: string
+          org_name?: string
+          permissions?: string[]
+        }
         Relationships: [
           {
-            foreignKeyName: "settings_org_name_fkey";
-            columns: ["org_name"];
-            isOneToOne: true;
-            referencedRelation: "organizations";
-            referencedColumns: ["name"];
-          },
-        ];
-      };
-    };
+            foreignKeyName: "roles_org_name_fkey"
+            columns: ["org_name"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["name"]
+          }
+        ]
+      }
+      settings: {
+        Row: {
+          AppliementForm: Json | null
+          default_hours_per_day: number[]
+          Hiring: Json | null
+          job: Json | null
+          org_name: string
+          personnal: Json | null
+        }
+        Insert: {
+          AppliementForm?: Json | null
+          default_hours_per_day?: number[]
+          Hiring?: Json | null
+          job?: Json | null
+          org_name: string
+          personnal?: Json | null
+        }
+        Update: {
+          AppliementForm?: Json | null
+          default_hours_per_day?: number[]
+          Hiring?: Json | null
+          job?: Json | null
+          org_name?: string
+          personnal?: Json | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "settings_org_name_fkey"
+            columns: ["org_name"]
+            isOneToOne: true
+            referencedRelation: "organizations"
+            referencedColumns: ["name"]
+          }
+        ]
+      }
+    }
     Views: {
       [_ in never]: never
     }
