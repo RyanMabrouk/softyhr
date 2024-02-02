@@ -101,7 +101,7 @@ export function TimeOff() {
       };
     });
   return (
-    <section className="flex w-full max-w-[27.5rem] flex-col gap-2 rounded-md border border-white bg-white p-1 pb-6 font-semibold shadow-md">
+    <section className="flex h-[16rem] w-full max-w-[27.5rem] flex-col justify-between rounded-md border border-white bg-white p-1 pb-6 font-semibold shadow-md">
       <header className="flex flex-row items-center justify-between rounded-md bg-gray-14 px-6 py-2 text-fabric-700">
         <div className="flex flex-row items-center gap-1.5">
           <BsFillStopwatchFill className="h-5 w-5 text-fabric-700" />
