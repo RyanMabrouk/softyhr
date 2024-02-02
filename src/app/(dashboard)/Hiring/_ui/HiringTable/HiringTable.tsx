@@ -158,7 +158,7 @@ export default function HiringTable({
               <div className="relative">
                 <div
                   onClick={() => setShowEdit(true)}
-                  className="duration-250 flex h-[2rem] w-[2rem] cursor-pointer items-center justify-center ease-in-out hover:border hover:border-gray-27 hover:bg-gray-22"
+                  className="duration-200 flex h-[2rem] w-[2rem] cursor-pointer items-center justify-center ease-in-out hover:border hover:border-gray-27 hover:bg-gray-22"
                 >
                   <MdModeEditOutline
                     className="text-lg"
@@ -171,7 +171,7 @@ export default function HiringTable({
               </div>
               <Link
                 href={`?popup=DELETE_JOB&id=${user?.id}`}
-                className="duration-250 flex h-[2rem] w-[2rem] cursor-pointer items-center justify-center ease-in-out hover:border hover:border-gray-27 hover:bg-gray-22"
+                className="duration-200 flex h-[2rem] w-[2rem] cursor-pointer items-center justify-center ease-in-out hover:border hover:border-gray-27 hover:bg-gray-22"
               >
                 <FaTrash cursor={"pointer"} fill={"gray"} />
               </Link>

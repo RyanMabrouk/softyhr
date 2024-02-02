@@ -9,15 +9,44 @@ import { getFiles } from "@/actions/files/apiFIles";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import Pagination from "@/components/ui/Pagination";
 import useData from "@/hooks/useData";
+import GetFoldersByIDs from "@/actions/files/getFolders";
+import { equalsCheck } from "@/helpers/array.helpers";
+import { PAGE_SIZE } from "@/constants/filesConstants";
+import getData from "@/api/getData";
+import GetFilesByIDs from "@/actions/files/getFiles";
+import useFoldersIds from "@/actions/files/useFoldersIds";
 
 export default function TableContent({ checkAll, setCheckAll }: any) {
   const searchParams = useSearchParams();
 
-  const {
-    files: { data: allFiles, isPending: isPendingAllFiles },
-  } = useData();
-  const allFilesIds = allFiles?.map((file: { id: any }) => file.id);
+  const { data: allFilesAdmin, isPending: isPending10 } = useQuery({
+    queryKey: ["files"],
+    queryFn: () =>
+      getData("files", {
+        org: true,
+      }),
+  });
+  const allFilesIdsAdmin = allFilesAdmin?.data?.map((file: any) => file.id);
 
+  const {
+    user_profile: { data: cur_user, isPending: isPending_user },
+  } = useData();
+
+  const role = cur_user?.role;
+
+  const { wantedFoldersIds, filesIds } = useFoldersIds();
+
+  const { data: { data: wantedFolders } = {} } = useQuery({
+    queryKey: ["folders", wantedFoldersIds],
+    queryFn: async () => await GetFoldersByIDs(wantedFoldersIds),
+  });
+  const allFilesIds = wantedFolders
+    ?.map((fold) => fold.files)
+    .flat(2)
+    .map((file) => file.id)
+    .filter((id) => filesIds.includes(id));
+
+  //////////////////////
   const [page, setPage] = useState(1);
   function handlePage(num: number) {
     setPage(num);
@@ -30,44 +59,48 @@ export default function TableContent({ checkAll, setCheckAll }: any) {
     ? queryClient.getQueryData(["fileIds"])
     : [];
 
+  const { folder }: any = useFolderData(wantedId);
+  const isPending = folder.isPending;
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const fileIds =
+    !isPending && wantedId
+      ? role === "admin"
+        ? folder?.data[0]?.files &&
+          folder?.data[0]?.files.map((file: any) => file.id)
+        : folder?.data[0]?.files &&
+          folder?.data[0]?.files
+            .map((file: any) => file.id)
+            .filter((id: any) => filesIds.includes(id))
+      : []
+        ? role === "admin"
+          ? allFilesIdsAdmin
+          : allFilesIds
+        : [];
+
   function pushFileId(id: any) {
     filesIdArr.push(id);
     queryClient.setQueryData(["fileIds"], filesIdArr);
-    const data = queryClient.getQueryData(["fileIds"]);
-    if (wantedId) {
-      if (filesIdArr?.length === fileIds?.length) setCheckAll(true);
-    } else {
-      if (filesIdArr?.length === allFilesIds?.length) setCheckAll(true);
-    }
+    if (filesIdArr?.length === fileIds?.length) setCheckAll(true);
   }
+
   function removeFileId(id: number) {
     filesIdArr = filesIdArr
       .map((id: any) => +id)
       .filter((fileId: number) => fileId !== id);
     queryClient.setQueryData(["fileIds"], filesIdArr);
-    const data = queryClient.getQueryData(["fileIds"]);
     if (checkAll) setCheckAll(false);
   }
-  const { folder }: any = useFolderData(wantedId);
-  const isPending = folder.isPending;
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const fileIds =
-    !isPending && wantedId
-      ? folder?.data[0]?.files
-        ? folder?.data[0]?.files.map((file: any) => file.id)
-        : []
-      : ["all"];
 
   useEffect(
     function () {
-      if (fileIds[0] === "all") {
+      if (equalsCheck(fileIds, allFilesIds)) {
         if (filesIdArr?.length !== allFilesIds?.length) setCheckAll(false);
       } else {
         if (filesIdArr?.length !== fileIds?.length) setCheckAll(false);
       }
     },
     [
+      allFilesIds,
       allFilesIds?.length,
       fileIds,
       fileIds?.length,
@@ -90,6 +123,18 @@ export default function TableContent({ checkAll, setCheckAll }: any) {
     queryKey: ["files", sortBy, ids, wantedId, page],
     queryFn: () => getFiles({ sortBy, ids, page }),
   });
+
+  // PRE-FETCHING
+  if (count) {
+    const pageCount = Math.ceil(count / PAGE_SIZE);
+    if (page < pageCount) {
+      queryClient.prefetchQuery({
+        queryKey: ["files", sortBy, ids, wantedId, page + 1],
+        queryFn: () => getFiles({ sortBy, ids, page: page + 1 }),
+      });
+    }
+  }
+
   const filesArray = files;
 
   return (
@@ -112,7 +157,9 @@ export default function TableContent({ checkAll, setCheckAll }: any) {
       ) : (
         <FolderEmpty />
       )}
-      <Pagination count={count} page={page} handlePage={handlePage} />
+      {filesArray?.length && fileIds.length ? (
+        <Pagination count={count} page={page} handlePage={handlePage} />
+      ) : null}
     </div>
   );
 }

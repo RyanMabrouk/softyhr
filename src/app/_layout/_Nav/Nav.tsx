@@ -8,15 +8,18 @@ import { useParams, usePathname } from "next/navigation";
 import { BsFillQuestionCircleFill } from "react-icons/bs";
 import { IoMdSettings } from "react-icons/io";
 import SearchBar from "../_SearchBar/SearchBar";
-import defaultAvatar from "/public/default_avatar.jpeg";
-import { FaInbox } from "react-icons/fa6";
 import useData from "@/hooks/useData";
+import { database_profile_type } from "@/types/database.tables.types";
+import { UserProfile } from "./UserProfile";
+import { Inbox } from "./Inbox";
 
 export default function Nav() {
   const { employeeId: paramsid } = useParams();
   const currentPath = usePathname();
   const {
     user_profile: { data: user },
+  }: {
+    user_profile: { data: database_profile_type | undefined };
   } = useData();
   const employeeId = paramsid ? paramsid : user?.user_id;
   return (
@@ -39,10 +42,7 @@ export default function Nav() {
                 return (
                   <Link
                     key={index}
-                    className={
-                      "flex h-20 items-center justify-center px-6 capitalize text-gray-9 transition delay-75 ease-in-out hover:bg-gray-14 " +
-                      (isActive ? "bg-gray-14 font-bold !text-fabric-700" : "")
-                    }
+                    className={`flex h-20 items-center justify-center px-6 capitalize text-gray-9 transition delay-75 ease-in-out hover:bg-gray-14 ${isActive ? "bg-gray-14 font-bold !text-fabric-700" : ""}`}
                     href={defaultPath ? defaultPath(employeeId as string) : ""}
                   >
                     {label}
@@ -55,23 +55,14 @@ export default function Nav() {
         <div className="flex h-full flex-row items-center gap-8">
           <SearchBar />
           <div className="flex flex-row items-center gap-3">
-            <div className="relative mr-1">
-              <FaInbox className="h-7 w-7 cursor-pointer font-bold text-gray-15 transition-all ease-linear hover:text-fabric-700" />
-              <div className="absolute right-[-30%] top-[-25%] flex h-6 w-6 cursor-default items-center justify-center rounded-full border-2 border-gray-17 bg-fabric-700 px-1 text-center text-[0.70rem] text-white">
-                <span>50</span>
-              </div>
-            </div>
+            <Inbox />
             <BsFillQuestionCircleFill className="h-7 w-7 cursor-pointer font-bold text-gray-15  transition-all ease-linear hover:text-fabric-700" />
             <Link href={"/Settings"}>
               <IoMdSettings
                 className={`h-8 w-8 cursor-pointer font-bold  text-gray-15 transition-all ease-linear hover:text-fabric-700 ${currentPath.includes("/Settings") ? "text-fabric-700" : ""}`}
               />
             </Link>
-            <Image
-              className="h-8 w-8 rounded-full"
-              src={defaultAvatar}
-              alt=""
-            />
+            <UserProfile />
           </div>
         </div>
       </nav>

@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { Suspense } from "react";
 import { CiMail } from "react-icons/ci";
 import { BsSignpostFill, BsTwitterX } from "react-icons/bs";
 import { MdOutlineHomeWork, MdPhoneAndroid } from "react-icons/md";
@@ -41,13 +41,14 @@ interface UserInfoPropsType {
 }
 export default function UserInfo({ employeeId }: UserInfoPropsType) {
   const {
-    leave_categories: { data: leave_categories },
-    leave_policies: { data: leave_policies },
+    leave_categories: { data: leave_categories, isPending: isPending1 },
+    leave_policies: { data: leave_policies, isPending: isPending2 },
   } = useLeaveData();
   const {
-    employee_profile: { data: user },
-    leave_requests: { data: leave_requests },
+    employee_profile: { data: user, isPending: isPending3 },
+    leave_requests: { data: leave_requests, isPending: isPending4 },
   } = useEmployeeData({ employeeId: employeeId });
+  const isPending = isPending1 || isPending2 || isPending3 || isPending4;
   // chekck if the user is on vacation
   const current_vacation = leave_requests?.find(
     (request: database_leave_requests_type) =>
@@ -152,39 +153,49 @@ export default function UserInfo({ employeeId }: UserInfoPropsType) {
         </div>
         <div className="h-px w-full  self-center bg-gray-16" />
         <div className="flex flex-col items-start justify-center gap-[0.5rem]">
-          <div className="flex items-center justify-start gap-[1REM] text-gray-15">
-            <FaHashtag className="cursor-pointer duration-200 ease-in-out hover:!text-color-primary-8" />
-            <span>{user?.["Basic Information"]?.Employee}</span>
-          </div>
-          <div className="flex items-center justify-start gap-[1REM] text-sm font-normal text-gray-15">
-            <BsSignpostFill className="cursor-pointer duration-200 ease-in-out hover:!text-color-primary-8" />
-            <span>
-              {
-                user?.["Employment Status"]?.sort(
-                  (a: any, b: any) =>
-                    new Date(a?.Date || a?.["Effective Date"]).getTime() -
-                    new Date(b?.Date || b?.["Effective Date"]).getTime(),
-                )[user?.["Employment Status"].length - 1]?.["Employment Status"]
-              }
-            </span>
-          </div>
+          {user?.["Basic Information"] && (
+            <div className="flex items-center justify-start gap-[1REM] text-gray-15">
+              <FaHashtag className="cursor-pointer duration-200 ease-in-out hover:!text-color-primary-8" />
+              <span>{user?.["Basic Information"]?.Employee}</span>
+            </div>
+          )}
+          {user?.["Employment Status"] && (
+            <div className="flex items-center justify-start gap-[1REM] text-sm font-normal text-gray-15">
+              <BsSignpostFill className="cursor-pointer duration-200 ease-in-out hover:!text-color-primary-8" />
+              <span>
+                {
+                  user?.["Employment Status"]?.sort(
+                    (a: any, b: any) =>
+                      new Date(a?.Date || a?.["Effective Date"]).getTime() -
+                      new Date(b?.Date || b?.["Effective Date"]).getTime(),
+                  )[user?.["Employment Status"].length - 1]?.[
+                    "Employment Status"
+                  ]
+                }
+              </span>
+            </div>
+          )}
           <div className="flex items-center justify-start gap-[1REM] text-sm  font-normal text-gray-15">
             <IoIosPeople className="cursor-pointer duration-200 ease-in-out hover:!text-color-primary-8" />
             <span>Operations</span>
           </div>
-          <div className="flex items-center justify-start gap-[1REM] text-sm font-normal text-gray-15">
-            <FaMapLocation className="cursor-pointer duration-200 ease-in-out hover:!text-color-primary-8" />
-            <span>{user?.Address?.Country || ""}</span>
-          </div>
-          <div className="flex items-center justify-start gap-[1REM] text-sm  font-normal text-gray-15">
-            <IoLocationSharp className="cursor-pointer duration-200 ease-in-out hover:!text-color-primary-8" />
-            <span>
-              {user?.Address?.State || "" + ", " + user?.Address?.City || ""}
-            </span>
-          </div>
+          {user?.Address?.Country && (
+            <div className="flex items-center justify-start gap-[1REM] text-sm font-normal text-gray-15">
+              <FaMapLocation className="cursor-pointer duration-200 ease-in-out hover:!text-color-primary-8" />
+              <span>{user?.Address?.Country || ""}</span>
+            </div>
+          )}
+          {user?.Address?.State && user?.Address?.City && (
+            <div className="flex items-center justify-start gap-[1REM] text-sm  font-normal text-gray-15">
+              <IoLocationSharp className="cursor-pointer duration-200 ease-in-out hover:!text-color-primary-8" />
+              <span>
+                {user?.Address?.State || "" + ", " + user?.Address?.City || ""}
+              </span>
+            </div>
+          )}
           <div className="flex items-center justify-start gap-[1REM] text-sm  font-normal text-gray-15">
             <CiClock2 className="cursor-pointer duration-200 ease-in-out hover:!text-color-primary-8" />
-            <span>{updateTime()} Local Time</span>
+            <time suppressHydrationWarning>{updateTime()} Local Time</time>
           </div>
         </div>
         <div className="h-px w-full  self-center bg-gray-16" />

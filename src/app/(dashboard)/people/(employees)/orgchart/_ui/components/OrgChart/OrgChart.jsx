@@ -174,17 +174,17 @@ export default function OrgChartComponent({ data }) {
 
     // Clean up event listener when component unmounts
     return () => {
-      document.getElementById("fitButton")?.removeEventListener("click", () => {
+      document.getElementById("fitButton").removeEventListener("click", () => {
         chart.render();
       });
       document
         .getElementById("expandButton")
-        ?.removeEventListener("click", () => {
+        .removeEventListener("click", () => {
           chart.expandAll().fit();
         });
       document
         .getElementById("collapseButton")
-        ?.removeEventListener("click", () => {
+        .removeEventListener("click", () => {
           chart.collapseAll().fit();
         });
     };

@@ -2,6 +2,7 @@ import React from "react";
 import { formatYYYYMMDD } from "@/helpers/date.helpers";
 import { useAlreadyBooked } from "@/app/_ui/_PopUp/components/TimeOff/EditLeaveRequest/hooks/useAlreadyBooked";
 import { useParams } from "next/navigation";
+import useData from "@/hooks/useData";
 export function DateInput({
   name,
   label,
@@ -13,7 +14,10 @@ export function DateInput({
   defaultValue: string | "";
   setValueInParent?: React.Dispatch<React.SetStateAction<Date>>;
 }) {
-  const { employeeId } = useParams();
+  const {
+    user_profile: { data: user_profile },
+  } = useData();
+  const employeeId = useParams().employeeId ?? user_profile?.user_id;
   const already_booked = useAlreadyBooked(employeeId);
   return (
     <div className="flex flex-col gap-1">

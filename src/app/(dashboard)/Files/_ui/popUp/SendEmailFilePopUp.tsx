@@ -1,8 +1,6 @@
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import React, { useState } from "react";
-import { CgClose } from "react-icons/cg";
+import React from "react";
 import ButtonPopUp from "../components/ButtonPopUp";
-import { AiOutlineFileText } from "react-icons/ai";
 import { SubmitHandler, useForm } from "react-hook-form";
 import Error from "../components/Error";
 import PopUpSkeleton from "@/app/_ui/_PopUp/PopUpSkeleton";
@@ -10,11 +8,17 @@ import useFileData from "@/hooks/useFileData";
 import LoaderPopUp from "../components/Loader/LoaderPopUp/LoaderPopUp";
 import { FaRegFileImage, FaRegFilePdf } from "react-icons/fa6";
 import { formatDateFiles } from "@/helpers/date.helpers";
+import { useQueryClient } from "@tanstack/react-query";
+import { sendMail } from "@/api/sendEmail";
+import useToast from "@/hooks/useToast";
 
 export default function SendEmailFilePopUp() {
   const Router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const queryClient = useQueryClient();
+  const { toast } = useToast();
+
   const {
     register,
     handleSubmit,
@@ -35,7 +39,20 @@ export default function SendEmailFilePopUp() {
 
   function onError(errors: any) {}
 
-  const onSubmit: SubmitHandler<FormValues> = (data) => {
+  const onSubmit: SubmitHandler<FormValues> = async (data) => {
+    try {
+      await sendMail(
+        data.email,
+        data.subject,
+        `<div className='flex flex-col gap-1'>
+        <p className='text-lg'>${data.message}</p>
+        <a href="${file.data[0].file_url}">${file.data[0].name}</a>
+        </div>`,
+      );
+      toast.success("Email Sent", "Success");
+    } catch (err) {
+      toast.error("Error while Sneding Email please try again");
+    }
     Router.replace(pathname);
   };
 
@@ -57,7 +74,6 @@ export default function SendEmailFilePopUp() {
               (file.data[0].file_type === "image" && (
                 <FaRegFileImage fontSize="1.8rem" fill="#777270" />
               ))}
-
             <p className="text-lg text-gray-11">{file.data[0].name}</p>
             <p className=" text-sm text-gray-15">
               {`Added ${formatDateFiles(file.data[0].created_at)} by ${
@@ -126,6 +142,7 @@ export default function SendEmailFilePopUp() {
                 className="cursor-pointer text-color5-500 hover:underline "
                 type="reset"
                 onClick={() => {
+                  queryClient.setQueryData(["fileIds"], []);
                   Router.push(pathname);
                 }}
               >

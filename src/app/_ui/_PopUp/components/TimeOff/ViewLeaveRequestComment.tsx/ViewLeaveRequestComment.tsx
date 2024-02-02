@@ -8,7 +8,12 @@ import {
   databese_leave_categories_type,
 } from "@/types/database.tables.types";
 import Image from "next/image";
-import { useParams, useRouter, useSearchParams } from "next/navigation";
+import {
+  useParams,
+  usePathname,
+  useRouter,
+  useSearchParams,
+} from "next/navigation";
 import React from "react";
 import default_avatar from "/public/default_avatar.jpeg";
 import default_user_avatar from "/public/default_avatar.png";
@@ -20,6 +25,7 @@ import useLeaveData from "@/hooks/useLeaveData";
 import useProfilesData from "@/hooks/useProfilesData";
 function ViewLeaveRequestComment() {
   const Router = useRouter();
+  const pathname = usePathname();
   const { employeeId } = useParams();
   const leave_request_id = useSearchParams().get("leave_request_id");
   const {
@@ -119,9 +125,9 @@ function ViewLeaveRequestComment() {
           )}
           <hr className="h-[3px] w-full bg-primary-gradient" />
           <Button
-            className="!max-w-[10rem]"
+            className="!max-w-[10rem] self-start justify-self-start"
             type="button"
-            onClick={() => Router.back()}
+            onClick={() => Router.push(pathname)}
           >
             Thanks, I'm done.
           </Button>

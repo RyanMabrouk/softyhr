@@ -3,13 +3,13 @@ const month_name = "accure_refresh_start_month";
 const day_name = "accure_refresh_start_day";
 const weekday_name = "accure_refresh_start_weekday";
 export const days_of_the_week = [
-  { label: "Sunday", value: "1" },
-  { label: "Monday", value: "2" },
-  { label: "Tuesday", value: "3" },
-  { label: "Wednesday", value: "4" },
-  { label: "Thursday", value: "5" },
-  { label: "Friday", value: "6" },
-  { label: "Saturday", value: "7" },
+  { label: "Sunday", value: "Sunday" },
+  { label: "Monday", value: "Monday" },
+  { label: "Tuesday", value: "Tuesday" },
+  { label: "Wednesday", value: "Wednesday" },
+  { label: "Thursday", value: "Thursday" },
+  { label: "Friday", value: "Friday" },
+  { label: "Saturday", value: "Saturday" },
 ];
 export const months = [
   { label: "January", value: "1" },

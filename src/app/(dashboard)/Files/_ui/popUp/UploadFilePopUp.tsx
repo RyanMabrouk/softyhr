@@ -6,7 +6,7 @@ import DragAndDropFileInput from "../components/DragAndDropFile";
 import UploadFileCheckBox from "../components/UploadFileCheckBox";
 import ButtonPopUp from "../components/ButtonPopUp";
 import useToast from "@/hooks/useToast";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import FilesSelectComponent from "../components/FilesSelectComponent";
 import useData from "@/hooks/useData";
@@ -16,6 +16,12 @@ import getCurrentorg from "@/api/getCurrentOrg";
 import getSession from "@/api/getSession";
 import { addFile } from "@/actions/files/addFile";
 import PopUpSkeleton from "@/app/_ui/_PopUp/PopUpSkeleton";
+import getData from "@/api/getData";
+import SelectSharedUsers from "../components/SelectSharedUsers";
+import { IoMdCloseCircleOutline } from "react-icons/io";
+import useProfiles from "@/hooks/useProfiles";
+import { addFiletoUser } from "@/actions/files/addFiletoUser";
+import getUser from "@/api/getUser";
 
 interface FileObject {
   size: number;
@@ -31,14 +37,35 @@ export default function UploadFilePopUp() {
   const [selectedFolder, setSelectedFolder] = useState(null);
   const [canUpload, setCanUpload] = useState(true);
 
-  // const [isTyping, setIsTyping] = useState("");
+  const [selectedShared, setSelectedShared] = useState([]);
+  const [isChecked, setIsChecked] = useState(false);
 
   const {
-    folders: { data: allFolders, isPending },
-  } = useData();
+    profiles: { data: profiles, isPending: isPendingAllProfiles },
+  } = useProfiles();
+
+  function handleCheckedAllUsers() {
+    setIsChecked((check) => !check);
+    setSelectedShared([]);
+  }
+
+  function handleSelectedShared(selected: any) {
+    const arr: any = [...selectedShared, selected];
+    setSelectedShared(arr);
+  }
+
+  const { data: allFolders, isPending: isPending } = useQuery({
+    queryKey: ["folders"],
+    queryFn: () =>
+      getData("folders", {
+        org: true,
+        column: "*,files(*)",
+      }),
+  });
+
   const options: any = [];
   !isPending &&
-    allFolders?.map((fold: any) => {
+    allFolders?.data?.map((fold: any) => {
       options.push({ label: fold.name, value: fold.id });
     });
   function handleSelect(id: any) {
@@ -47,15 +74,16 @@ export default function UploadFilePopUp() {
 
   const { mutateAsync: addFileApi } = useMutation({
     mutationFn: async (payload: any) => {
-      const { error }: any = await addFile(payload);
+      const { error, data }: any = await addFile(payload);
       if (error) {
         toast.error("error found while uploading .Please Try Again  ");
       } else {
         toast.success("File Created", "Success");
-        Router.push(pathname);
+        return data;
       }
     },
     onSuccess: () => {
+      Router.push(pathname);
       queryClient.invalidateQueries({ queryKey: ["files"] });
       queryClient.invalidateQueries({ queryKey: ["folders"] });
     },
@@ -100,7 +128,21 @@ export default function UploadFilePopUp() {
             file_type: fileType,
             folderId: selectedFolder,
           };
-          addFileApi(payload);
+          const data = await addFileApi(payload);
+          const fileId = data?.[0].id;
+          if (selectedShared.length > 0 && !isChecked) {
+            selectedShared.forEach((user: any) => {
+              let userId = user?.user_id;
+              addFiletoUser(userId, fileId);
+            });
+          } else if (isChecked) {
+            profiles
+              .filter((user: any) => user.role === "employee")
+              .forEach((user: any) => {
+                let userId = user?.user_id;
+                addFiletoUser(userId, fileId);
+              });
+          }
         }
       }
     }
@@ -118,6 +160,10 @@ export default function UploadFilePopUp() {
   function handleAddFile(selectedFile: any) {
     const newFiles = [...files, selectedFile];
     setFiles(newFiles);
+  }
+  function handleDeleteShared(id: any) {
+    const newShared = selectedShared.filter((user: any) => user.user_id !== id);
+    setSelectedShared(newShared);
   }
 
   return (
@@ -166,20 +212,50 @@ export default function UploadFilePopUp() {
               />
             </div>
             <div className="flex items-center gap-2">
-              <UploadFileCheckBox isThereFile={isThereFile} />
+              <UploadFileCheckBox
+                isChecked={isChecked}
+                handleCheck={handleCheckedAllUsers}
+                disabled={!isThereFile}
+              />
               <p className="mb-1 text-gray-20">
                 Share these file(s) with all Employees
               </p>
             </div>
             <div className="flex flex-col gap-2">
-              <label htmlFor="input" className="text-gray-20">
-                Share These File(s) with Individuals or Groups
-              </label>
-              <input
-                type="text"
-                placeholder="Enter names or groups"
-                disabled={!isThereFile}
-                className="p-2 outline-1 transition-all duration-300 focus:outline-color1-300"
+              {selectedShared.map((user: any) => (
+                <div
+                  key={user.user_id}
+                  className={` flex w-fit cursor-pointer items-center gap-2 rounded-md px-4 py-2 text-sm text-gray-700 transition-all duration-150 hover:bg-white   
+                  `}
+                >
+                  {
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={
+                        user?.picture
+                          ? user?.picture
+                          : "https://raw.githubusercontent.com/bumbeishvili/Assets/master/Projects/D3/Organization%20Chart/general.jpg"
+                      }
+                      alt="user picture"
+                      className="h-8 w-8 rounded-full object-cover "
+                    />
+                  }
+                  <p>{`${user?.["Basic Information"]?.["First name"]}     ${user?.["Basic Information"]?.["Last name"]} `}</p>
+                  <button
+                    className="hover:opacity-70"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleDeleteShared(user.user_id);
+                    }}
+                  >
+                    <IoMdCloseCircleOutline className={"text-lg"} />
+                  </button>
+                </div>
+              ))}
+              <SelectSharedUsers
+                disabled={isThereFile && !isChecked}
+                onSelect={handleSelectedShared}
+                selectedShared={selectedShared}
               />
             </div>
           </div>
@@ -193,6 +269,7 @@ export default function UploadFilePopUp() {
               className="cursor-pointer text-color5-500 hover:underline "
               type="button"
               onClick={() => {
+                queryClient.setQueryData(["fileIds"], []);
                 Router.push(pathname);
               }}
             >

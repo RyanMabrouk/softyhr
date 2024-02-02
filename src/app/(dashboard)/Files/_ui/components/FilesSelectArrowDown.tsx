@@ -55,7 +55,7 @@ const FilesSelectArrowDown = ({ onSelect, options }: any) => {
             event.stopPropagation();
             handleDropdownToggle();
           }}
-          className=" p-1 transition-all duration-300 hover:border hover:border-stone-400 "
+          className=" p-1 transition-all  border border-transparent ease-linear hover:border-stone-400 "
         >
           <TiArrowSortedDown fill="#636363" />
         </button>

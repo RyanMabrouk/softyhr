@@ -18,15 +18,15 @@ import CancelBtnGeneric from "@/app/_ui/CancelBtnGeneric";
 
 export function From() {
   const Router = useRouter();
-  const { employeeId } = useParams();
+  const {
+    user_profile: { data: user_profile },
+  } = useData();
+  const employeeId = useParams().employeeId ?? user_profile?.user_id;
   const searchParams = useSearchParams();
   const leave_request_id = Number(searchParams.get("leave_request_id"));
   const { toast } = useToast();
   const formRef = useRef<HTMLFormElement>(null);
   const { formError } = useContext<errorContextType>(errorContext);
-  const {
-    user_profile: { data: user_profile },
-  } = useData();
   const {
     leave_requests: { data: leave_requests },
   } = useEmployeeData({ employeeId: employeeId });
@@ -128,6 +128,10 @@ export function From() {
             toast.error("Duration must be greater than 0", "Error");
             return;
           }
+          if (formData.get("policy_id") === "none") {
+            toast.error("Please select a category", "Error");
+            return;
+          }
           if (formError && !checkIfOjectValuesAreEmpty(formError)) return;
           leave_request_id ? update(formData) : insert(formData);
         }}
@@ -138,7 +142,7 @@ export function From() {
         <hr className="h-[3px] w-full bg-primary-gradient" />
         <div className="flex flex-row gap-4 px-2 pt-3">
           <SubmitBtn disabled={isCanceling} className="!w-fit">
-            Save
+            {leave_request_id ? "Save" : "Send Request"}
           </SubmitBtn>
           {user_profile?.user_id === request_data?.user_id && (
             <button

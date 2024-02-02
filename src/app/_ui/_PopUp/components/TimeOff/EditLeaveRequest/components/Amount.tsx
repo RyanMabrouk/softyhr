@@ -14,6 +14,7 @@ import { default_duration_type } from "../EditLeaveRequest";
 import { databese_leave_categories_track_time_unit_type } from "@/types/database.tables.types";
 import { Json } from "@/types/database.types";
 import { errorContext, errorContextType } from "../context/errorContext";
+import { useTotalDurationContext } from "../context/TotalDurationContext";
 export function Amount({
   default_duration,
   track_time_unit,
@@ -70,14 +71,15 @@ export function Amount({
     "date",
   );
   // calculate the total duration
-  const [totalDuration, setTotalDuration] = useState(null);
+  const { totalDuration, setTotalDuration } = useTotalDurationContext();
   useEffect(() => {
-    setTotalDuration(
-      active_duration?.reduce(
-        (acc, duration) => acc + Number(duration.duration),
-        0,
-      ),
-    );
+    setTotalDuration &&
+      setTotalDuration(
+        active_duration?.reduce(
+          (acc, duration) => acc + Number(duration.duration),
+          0,
+        ),
+      );
   }, [active_duration, formError]);
   if (totalDuration === null) return;
   return (
@@ -140,7 +142,7 @@ export function Amount({
                               );
                           }
                         }}
-                        className={`flex h-8 w-12 items-center justify-center border p-2 px-3 text-gray-27 focus:outline-none ${
+                        className={`flex h-8 w-12 items-center justify-center border p-2 px-3 text-gray-27 transition-all ease-linear focus:outline-none ${
                           formError?.["duration_date" + i]
                             ? "border-color9-500"
                             : "focus:shadow-green border-gray-18"
@@ -162,7 +164,7 @@ export function Amount({
         <div className="flex w-full flex-row items-center gap-1  rounded-b-md bg-gray-14 px-4 py-3 text-lg  font-normal">
           Total:{" "}
           <span className=" capitalize">
-            {formatTotalHoursToTimeUnit(totalDuration, track_time_unit)}
+            {formatTotalHoursToTimeUnit(totalDuration ?? 0, track_time_unit)}
           </span>
         </div>
       </div>

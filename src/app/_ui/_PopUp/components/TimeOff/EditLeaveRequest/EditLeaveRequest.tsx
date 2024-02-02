@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { useParams, useRouter, useSearchParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 import React from "react";
 import default_avatar from "/public/default_avatar.jpeg";
 import { Hr } from "@/app/(dashboard)/people/(employee)/[employeeId]/TimeOff/_ui/Hr";
@@ -8,13 +8,17 @@ import ErrorContextProvider from "./context/errorContext";
 import { From } from "./components/From";
 import useEmployeeData from "@/hooks/useEmloyeeData";
 import PopUpSkeleton from "../../../PopUpSkeleton";
+import useData from "@/hooks/useData";
 
 export type default_duration_type = {
   date: string;
   duration: string;
 };
 export default function EditLeaveRequest() {
-  const { employeeId } = useParams();
+  const {
+    user_profile: { data: user_profile },
+  } = useData();
+  const employeeId = useParams().employeeId ?? user_profile?.user_id;
   const searchParams = useSearchParams();
   const leave_request_id = Number(searchParams.get("leave_request_id"));
   const {

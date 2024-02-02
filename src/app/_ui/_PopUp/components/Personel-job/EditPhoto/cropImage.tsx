@@ -136,7 +136,7 @@ const CropEasy = ({
               />
               Modifier la photo
             </button>
-            <div className="duration-250 flex h-[2rem] w-[2rem] cursor-pointer items-center justify-center border border-gray-15 ease-in-out hover:!bg-gray-22">
+            <div className="flex h-[2rem] w-[2rem] cursor-pointer items-center justify-center border border-gray-15 duration-200 ease-in-out hover:!bg-gray-22">
               <FaTrash
                 onClick={DeleteProfileImage}
                 className="!text-xs !text-gray-13"

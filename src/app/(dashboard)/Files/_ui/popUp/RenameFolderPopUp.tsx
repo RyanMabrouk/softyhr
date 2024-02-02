@@ -71,6 +71,7 @@ export default function RenameFolderPopUp() {
               className="cursor-pointer text-color5-500 hover:underline "
               type="button"
               onClick={() => {
+                queryClient.setQueryData(["fileIds"], []);
                 Router.push(pathname);
               }}
             >

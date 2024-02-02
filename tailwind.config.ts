@@ -56,6 +56,10 @@ const config: Config = {
         "accordion-up": "accordion-up 0.2s ease-out",
       },
       keyframes: {
+        "fade-in": {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
+        },
         show: {
           "0%": { bottom: "0" },
           "100%": { transform: "5rem" },
@@ -220,7 +224,7 @@ const config: Config = {
         "gray-15": "#999999",
         "gray-16": "#E0E0E0",
         "gray-17": "#EBEBEB",
-        "gray-18": "#CCCCCC",
+        "gray-18": "#CCC",
         "gray-19": "#D9D9D9",
         "gray-20": "#444",
         "gray-21": "#686868",

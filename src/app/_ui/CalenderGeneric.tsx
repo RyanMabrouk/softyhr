@@ -11,6 +11,7 @@ import {
 import { useEffect, useState } from "react";
 import { formatYYYYMMDD } from "@/helpers/date.helpers";
 import { CalendarIcon } from "@radix-ui/react-icons";
+import { Label } from "./InputGeneric";
 export function CalendarGeneric({
   className,
   name,
@@ -18,7 +19,8 @@ export function CalendarGeneric({
   defaultValue,
   error,
   setValueInParent,
-  allowPastDates = false,
+  allowPastDates = false, // allow dates in the future
+  allowPreviousDates = true, // allow dates in the past
   required,
   setAction,
 }: {
@@ -29,6 +31,7 @@ export function CalendarGeneric({
   error?: boolean;
   setValueInParent?: React.Dispatch<React.SetStateAction<Date>> | undefined;
   allowPastDates?: boolean;
+  allowPreviousDates?: boolean;
   required?: boolean;
   setAction?: () => void | undefined;
 }) {
@@ -38,15 +41,9 @@ export function CalendarGeneric({
   }, [date, setValueInParent]);
   return (
     <div className="flex flex-col gap-1">
-      <label
-        htmlFor="date_range"
-        className={`relative w-fit text-sm ${
-          error ? "text-color9-500" : "text-gray-21"
-        }`}
-      >
+      <Label name={name} required={required} error={error}>
         {label}
-        {required && <span className="absolute -right-2 top-0 text-sm">*</span>}
-      </label>
+      </Label>
       <div
         className={cn(
           `group grid w-fit gap-2 rounded-sm border  ${
@@ -75,7 +72,9 @@ export function CalendarGeneric({
                 !date && "text-muted-foreground",
               )}
             >
-              <CalendarIcon className="-ml-1 mr-2 h-5 w-5 group-focus-within:text-fabric-700" />
+              <CalendarIcon
+                className={`-ml-1 mr-2 h-5 w-5  ${error ? "!text-color9-500" : "group-focus-within:text-fabric-700"}`}
+              />
               <div className={`${error ? "text-color9-500" : ""}`}>
                 {date ? format(date, "PPP") : <span>Pick a date</span>}
               </div>
@@ -89,7 +88,15 @@ export function CalendarGeneric({
               selected={date}
               onSelect={setDate}
               onDayClick={setAction}
-              disabled={(date) => (allowPastDates ? false : date > new Date())}
+              disabled={(date) =>
+                allowPastDates
+                  ? allowPreviousDates
+                    ? date < new Date()
+                    : false
+                  : allowPreviousDates
+                    ? date > new Date() && date < new Date()
+                    : date > new Date()
+              }
               initialFocus
             />
           </PopoverContent>

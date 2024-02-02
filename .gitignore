@@ -38,4 +38,4 @@ next-env.d.ts
 # Firebase
 .firebase
 .github
-firebase-debug.log*
+firebase-debug.log*sendgrid.env

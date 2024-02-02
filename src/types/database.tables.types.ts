@@ -1,4 +1,9 @@
 import { Database } from "./database.types";
+// Permesssions
+export type database_permissions_type =
+  Database["public"]["Tables"]["permissions"]["Row"];
+// Roles
+export type database_roles_type = Database["public"]["Tables"]["roles"]["Row"];
 // leave balance
 export type database_profile_leave_balance_type =
   Database["public"]["Tables"]["leave_balance"]["Row"];

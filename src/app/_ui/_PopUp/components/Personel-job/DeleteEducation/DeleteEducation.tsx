@@ -65,9 +65,11 @@ function DeleteEducation() {
             </h1>
           </div>
         </div>
-        <div className="h-[0.1rem] w-full bg-color-primary-8" />
+        <hr className="h-[3px] w-full bg-primary-gradient" />
         <div className="flex items-center justify-start gap-[1rem] self-start ">
           <button
+            className="!px-4"
+            disabled={isPending}
             onClick={() => {
               mutateAsync({
                 id: id,
@@ -75,16 +77,8 @@ function DeleteEducation() {
                 user_id: data?.data?.user_id,
               });
             }}
-            className="rounded-sm bg-color-primary-9 p-2 capitalize text-white duration-150 ease-in-out hover:bg-color-primary-10"
           >
-            {isPending ? (
-              <div className="flex items-center justify-center gap-[0.3rem]">
-                <span className="box-border inline-block h-5 w-5 animate-[spin_1s_linear_infinite] rounded-[50%] border-[3px] border-solid border-white border-b-transparent"></span>
-                Deleting...
-              </div>
-            ) : (
-              "yes, delete education"
-            )}
+            yes, delete education
           </button>
           <CancelBtnGeneric />
         </div>

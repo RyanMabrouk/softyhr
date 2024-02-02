@@ -2,7 +2,11 @@ import React from "react";
 import { redirect } from "next/navigation";
 import getSession from "@/api/getSession";
 import Nav from "../_layout/_Nav/Nav";
-async function Layout({ children }: { children: React.ReactNode }) {
+export default async function Layout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const session = await getSession();
   if (!session) redirect("/login");
   return (
@@ -12,5 +16,3 @@ async function Layout({ children }: { children: React.ReactNode }) {
     </div>
   );
 }
-
-export default Layout;
