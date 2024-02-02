@@ -99,7 +99,9 @@ export function CalendarRange({
                 !date && "text-muted-foreground",
               )}
             >
-              <CalendarIcon className="-ml-1 mr-2 h-5 w-5 group-focus-within:text-fabric-700" />
+              <CalendarIcon
+                className={`-ml-1 mr-2 h-5 w-5  ${already_booked ? "!text-color9-500" : "group-focus-within:text-fabric-700"}`}
+              />
               <div className={`${already_booked ? "text-color9-500" : ""}`}>
                 {date?.from && !InvalidDate(date?.from) ? (
                   date?.to && !InvalidDate(date?.to) ? (

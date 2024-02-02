@@ -11,30 +11,31 @@ export interface Database {
     Tables: {
       candidate_comments: {
         Row: {
-          candidate_id: number | null
-          comment_Author: string | null
-          comment_content: string | null
-          created_at: string
-          id: number
-        }
+          candidate_id: number | null;
+          comment_Author: string | null;
+          comment_content: string | null;
+          created_at: string;
+          id: number;
+        };
         Insert: {
-          candidate_id?: number | null
-          comment_Author?: string | null
-          comment_content?: string | null
-          created_at?: string
-          id?: number
-        }
+          candidate_id?: number | null;
+          comment_Author?: string | null;
+          comment_content?: string | null;
+          created_at?: string;
+          id?: number;
+        };
         Update: {
-          candidate_id?: number | null
-          comment_Author?: string | null
-          comment_content?: string | null
-          created_at?: string
-          id?: number
-        }
-        Relationships: []
-      }
+          candidate_id?: number | null;
+          comment_Author?: string | null;
+          comment_content?: string | null;
+          created_at?: string;
+          id?: number;
+        };
+        Relationships: [];
+      };
       candidates: {
         Row: {
+<<<<<<< HEAD
           created_at: string
           Email: string | null
           "First Name": string | null
@@ -73,6 +74,49 @@ export interface Database {
           Ratings?: number | null
           status?: string | null
         }
+=======
+          created_at: string;
+          Email: string | null;
+          "First Name": string | null;
+          "Hiring Lead": string | null;
+          id: number;
+          job_id: number | null;
+          "Last Name": string | null;
+          metadata: Json | null;
+          org_name: string | null;
+          Phone: string | null;
+          Ratings: number | null;
+          status: string | null;
+        };
+        Insert: {
+          created_at?: string;
+          Email?: string | null;
+          "First Name"?: string | null;
+          "Hiring Lead"?: string | null;
+          id?: number;
+          job_id?: number | null;
+          "Last Name"?: string | null;
+          metadata?: Json | null;
+          org_name?: string | null;
+          Phone?: string | null;
+          Ratings?: number | null;
+          status?: string | null;
+        };
+        Update: {
+          created_at?: string;
+          Email?: string | null;
+          "First Name"?: string | null;
+          "Hiring Lead"?: string | null;
+          id?: number;
+          job_id?: number | null;
+          "Last Name"?: string | null;
+          metadata?: Json | null;
+          org_name?: string | null;
+          Phone?: string | null;
+          Ratings?: number | null;
+          status?: string | null;
+        };
+>>>>>>> 4280430 (.)
         Relationships: [
           {
             foreignKeyName: "candidates_job_id_fkey";
@@ -82,6 +126,7 @@ export interface Database {
             referencedColumns: ["id"];
           },
           {
+<<<<<<< HEAD
             foreignKeyName: "candidates_org_name_fkey"
             columns: ["org_name"]
             isOneToOne: false
@@ -90,6 +135,45 @@ export interface Database {
           }
         ]
       }
+=======
+            foreignKeyName: "candidates_org_name_fkey";
+            columns: ["org_name"];
+            isOneToOne: false;
+            referencedRelation: "organizations";
+            referencedColumns: ["name"];
+          },
+        ];
+      };
+      divisions: {
+        Row: {
+          created_at: string;
+          id: number;
+          name: string;
+          org_name: string;
+        };
+        Insert: {
+          created_at?: string;
+          id?: number;
+          name: string;
+          org_name: string;
+        };
+        Update: {
+          created_at?: string;
+          id?: number;
+          name?: string;
+          org_name?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "divisions_org_name_fkey";
+            columns: ["org_name"];
+            isOneToOne: false;
+            referencedRelation: "organizations";
+            referencedColumns: ["name"];
+          },
+        ];
+      };
+>>>>>>> 4280430 (.)
       files: {
         Row: {
           addedBy: string | null;
@@ -179,6 +263,7 @@ export interface Database {
       };
       Hiring: {
         Row: {
+<<<<<<< HEAD
           Application_Details: Json | null
           candidates: Json[] | null
           created_at: string
@@ -208,6 +293,34 @@ export interface Database {
           job_information?: Json | null
           org_name?: string | null
         }
+=======
+          Application_Details: Json | null;
+          created_at: string;
+          id: number;
+          "Job Status": string | null;
+          job_Boards: Json | null;
+          job_information: Json | null;
+          org_name: string | null;
+        };
+        Insert: {
+          Application_Details?: Json | null;
+          created_at?: string;
+          id?: number;
+          "Job Status"?: string | null;
+          job_Boards?: Json | null;
+          job_information?: Json | null;
+          org_name?: string | null;
+        };
+        Update: {
+          Application_Details?: Json | null;
+          created_at?: string;
+          id?: number;
+          "Job Status"?: string | null;
+          job_Boards?: Json | null;
+          job_information?: Json | null;
+          org_name?: string | null;
+        };
+>>>>>>> 4280430 (.)
         Relationships: [
           {
             foreignKeyName: "Hiring_org_name_fkey";
@@ -381,6 +494,7 @@ export interface Database {
       };
       leave_policies: {
         Row: {
+<<<<<<< HEAD
           categories_id: number
           created_at: string
           id: number
@@ -404,6 +518,37 @@ export interface Database {
           org_name?: string
           type?: Database["public"]["Enums"]["database_leave_policies_policy_type"]
         }
+=======
+          accrual_days: string[] | null;
+          accrual_value_in_hours: number;
+          categories_id: number;
+          created_at: string;
+          id: number;
+          name: string;
+          org_name: string;
+          type: Database["public"]["Enums"]["database_leave_policies_policy_type"];
+        };
+        Insert: {
+          accrual_days?: string[] | null;
+          accrual_value_in_hours?: number;
+          categories_id: number;
+          created_at?: string;
+          id?: number;
+          name: string;
+          org_name: string;
+          type?: Database["public"]["Enums"]["database_leave_policies_policy_type"];
+        };
+        Update: {
+          accrual_days?: string[] | null;
+          accrual_value_in_hours?: number;
+          categories_id?: number;
+          created_at?: string;
+          id?: number;
+          name?: string;
+          org_name?: string;
+          type?: Database["public"]["Enums"]["database_leave_policies_policy_type"];
+        };
+>>>>>>> 4280430 (.)
         Relationships: [
           {
             foreignKeyName: "leave_policies_categories_id_fkey";
@@ -515,6 +660,7 @@ export interface Database {
           name: string;
         };
         Update: {
+<<<<<<< HEAD
           country?: string
           created_at?: string
           employee_count?: string
@@ -604,6 +750,140 @@ export interface Database {
           user_id?: string
           "Visa Information"?: Json[] | null
         }
+=======
+          country?: string;
+          created_at?: string;
+          employee_count?: string;
+          name?: string;
+        };
+        Relationships: [];
+      };
+      permissions: {
+        Row: {
+          created_at: string;
+          files_ids: number[] | null;
+          org_name: string;
+          role_id: number;
+          user_id: string;
+        };
+        Insert: {
+          created_at?: string;
+          files_ids?: number[] | null;
+          org_name: string;
+          role_id: number;
+          user_id: string;
+        };
+        Update: {
+          created_at?: string;
+          files_ids?: number[] | null;
+          org_name?: string;
+          role_id?: number;
+          user_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "permissions_org_name_fkey";
+            columns: ["org_name"];
+            isOneToOne: false;
+            referencedRelation: "organizations";
+            referencedColumns: ["name"];
+          },
+          {
+            foreignKeyName: "permissions_role_id_fkey";
+            columns: ["role_id"];
+            isOneToOne: false;
+            referencedRelation: "roles";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "permissions_user_id_fkey";
+            columns: ["user_id"];
+            isOneToOne: false;
+            referencedRelation: "users";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      profiles: {
+        Row: {
+          accrual_start_date: string | null;
+          Address: Json | null;
+          "Basic Information": Json | null;
+          Bonus: Json[] | null;
+          Commission: Json[] | null;
+          Compensation: Json[] | null;
+          Contact: Json | null;
+          "Driver License": Json[] | null;
+          Education: Json[] | null;
+          "Employment Status": Json[] | null;
+          files_ids: number[] | null;
+          folders_ids: number[] | null;
+          Hiring: Json | null;
+          Job: Json | null;
+          "Job Information": Json[] | null;
+          org_name: string;
+          supervisor_id: string | null;
+          picture: string | null;
+          role: string | null;
+          role_id: number;
+          "Social Links": Json | null;
+          "Stock Options": Json[] | null;
+          user_id: string;
+          "Visa Information": Json[] | null;
+        };
+        Insert: {
+          accrual_start_date?: string | null;
+          Address?: Json | null;
+          "Basic Information"?: Json | null;
+          Bonus?: Json[] | null;
+          Commission?: Json[] | null;
+          Compensation?: Json[] | null;
+          Contact?: Json | null;
+          "Driver License"?: Json[] | null;
+          Education?: Json[] | null;
+          "Employment Status"?: Json[] | null;
+          files_ids?: number[] | null;
+          folders_ids?: number[] | null;
+          Hiring?: Json | null;
+          Job?: Json | null;
+          "Job Information"?: Json[] | null;
+          org_name: string;
+          supervisor_id?: string | null;
+          picture?: string | null;
+          role?: string | null;
+          role_id?: number;
+          "Social Links"?: Json | null;
+          "Stock Options"?: Json[] | null;
+          user_id: string;
+          "Visa Information"?: Json[] | null;
+        };
+        Update: {
+          accrual_start_date?: string | null;
+          Address?: Json | null;
+          "Basic Information"?: Json | null;
+          Bonus?: Json[] | null;
+          Commission?: Json[] | null;
+          Compensation?: Json[] | null;
+          Contact?: Json | null;
+          "Driver License"?: Json[] | null;
+          Education?: Json[] | null;
+          "Employment Status"?: Json[] | null;
+          files_ids?: number[] | null;
+          folders_ids?: number[] | null;
+          Hiring?: Json | null;
+          Job?: Json | null;
+          "Job Information"?: Json[] | null;
+          org_name?: string;
+          supervisor_id?: string | null;
+          picture?: string | null;
+          role?: string | null;
+          role_id?: number;
+          "Social Links"?: Json | null;
+          "Stock Options"?: Json[] | null;
+          user_id?: string;
+          "Visa Information"?: Json[] | null;
+        };
+>>>>>>> 4280430 (.)
         Relationships: [
           {
             foreignKeyName: "profiles_org_name_fkey";
@@ -620,13 +900,14 @@ export interface Database {
             referencedColumns: ["user_id"];
           },
           {
-            foreignKeyName: "profiles_role_id_fkey"
-            columns: ["role_id"]
-            isOneToOne: false
-            referencedRelation: "roles"
-            referencedColumns: ["id"]
+            foreignKeyName: "profiles_role_id_fkey";
+            columns: ["role_id"];
+            isOneToOne: false;
+            referencedRelation: "roles";
+            referencedColumns: ["id"];
           },
           {
+<<<<<<< HEAD
             foreignKeyName: "profiles_user_id_fkey"
             columns: ["user_id"]
             isOneToOne: true
@@ -635,6 +916,48 @@ export interface Database {
           }
         ]
       }
+=======
+            foreignKeyName: "profiles_user_id_fkey";
+            columns: ["user_id"];
+            isOneToOne: true;
+            referencedRelation: "users";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      roles: {
+        Row: {
+          created_at: string;
+          id: number;
+          name: string;
+          org_name: string;
+          permissions: string[];
+        };
+        Insert: {
+          created_at?: string;
+          id?: number;
+          name?: string;
+          org_name: string;
+          permissions: string[];
+        };
+        Update: {
+          created_at?: string;
+          id?: number;
+          name?: string;
+          org_name?: string;
+          permissions?: string[];
+        };
+        Relationships: [
+          {
+            foreignKeyName: "roles_org_name_fkey";
+            columns: ["org_name"];
+            isOneToOne: false;
+            referencedRelation: "organizations";
+            referencedColumns: ["name"];
+          },
+        ];
+      };
+>>>>>>> 4280430 (.)
       settings: {
         Row: {
           AppliementForm: Json | null;
