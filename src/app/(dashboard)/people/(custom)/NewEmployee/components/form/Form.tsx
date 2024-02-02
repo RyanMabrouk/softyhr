@@ -15,13 +15,13 @@ import updateData from "@/api/updateData";
 import useToast from "@/hooks/useToast";
 import FiledsChamps from "@/app/(dashboard)/people/components/Fileds/Fileds";
 import { Profile_Type } from "@/types/database.tables.types";
-import ChangesSection from "../../../components/ChangesSection/ChangesSection";
 import Education from "./Education";
 import EmployementStatus from "../EmployementStatus";
 import AccessSection from "../AccessSection";
-import formulateData from "../../../components/utils/formulateData";
 import { CreateNewEmployee } from "@/actions/hiring/CreateNewEmployee";
 import useCandidate from "@/hooks/useCandidate";
+import formulateData from "@/app/(dashboard)/people/components/utils/formulateData";
+import ChangesSection from "@/app/(dashboard)/people/components/ChangesSection/ChangesSection";
 
 export const CreateEmployeeSection: any = {
   Education: Education,

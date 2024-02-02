@@ -1,9 +1,8 @@
 "use client";
 import React from "react";
-import OrgChartComponent from "./OrgChart";
-
 import useProfilesOrgChart from "@/hooks/useProfilesOrgChart";
 import LoaderFiles from "@/app/(dashboard)/Files/_ui/components/Loader/LoaderFiles";
+import OrgChartComponent from "../components/OrgChart/OrgChart";
 
 const OrgChartBody = () => {
   const { profiles } = useProfilesOrgChart();

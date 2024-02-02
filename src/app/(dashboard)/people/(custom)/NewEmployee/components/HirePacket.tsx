@@ -1,8 +1,6 @@
 import React from "react";
 import Checkbox from "@mui/material/Checkbox";
 import { BiSolidCommentDetail } from "react-icons/bi";
-import UserSection from "../../components/UserSection";
-import Form from "./form/Form";
 
 interface HirePacketPropsType {
   checked: boolean;
