@@ -14,6 +14,7 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { GetJobOpening } from "@/actions/hiring/GetJobOpening";
 import getHiring from "@/api/getHiring";
 import useCandidate from "@/hooks/useCandidate";
+import TableSkeleton from "../_ui/HiringTable/components/TableSkeleton";
 
 function Page() {
   const [filter, setFilter] = useState<string | null>("All");
@@ -39,7 +40,6 @@ function Page() {
           }),
       });
     }
-    console.log(page + 1);
   }, [page, filter]);
 
   const HiringDataTable: HiringTableType[] = data?.map(
@@ -49,7 +49,7 @@ function Page() {
         Candiates: Hiring?.candidates?.length || 0,
         NewCandidates: NewCandidates(Hiring?.candidates || []),
         job_opening: Hiring?.job_information?.["Posting Title"] || "",
-        hiring_lead: Hiring?.job_information?.["Hiring Lead"] || "",
+        hiring_lead: Hiring?.job_information?.["name"] || "",
         CreatedOn: new Date(Hiring?.created_at || "").toDateString() || "",
         department: Hiring?.job_information?.["Departement"] || "",
         Location: Hiring?.job_information?.["Job Location"] || "",
@@ -71,7 +71,7 @@ function Page() {
         </div>
         <div className="flex w-full items-center justify-center">
           {isPending ? (
-            <h1>Loading...</h1>
+            <TableSkeleton/>
           ) : (
             <HiringTable
               page={page}

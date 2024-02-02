@@ -35,7 +35,7 @@ export default async function getCandidate(
   const user_id = session?.user?.id;
   console.log(StartPage != undefined && EndPage, StartPage, EndPage);
   const data = match
-    ? StartPage != undefined && EndPage
+    ? StartPage != undefined && EndPage != undefined
       ? filter != "All"
         ? await supabase
             .from(table)

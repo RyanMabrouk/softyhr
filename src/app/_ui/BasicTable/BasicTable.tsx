@@ -7,7 +7,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { v4 as uuidv4 } from "uuid";
-import { SortByDate } from "@/helpers/sort.helper";
+import { SortByDate } from "@/helpers/Hiring/sort.helper";
 import { MdModeEditOutline } from "react-icons/md";
 import { FaTrash } from "react-icons/fa6";
 import Link from "next/link";
@@ -31,7 +31,11 @@ export default function BasicTable({
   return (
     <div className="border-gray h-full w-full border-b">
       <TableContainer component={Paper} sx={{ boxShadow: "none" }}>
-        <Table sx={{ minWidth: 1100 }} aria-label="simple table">
+        <Table
+          sx={{ minWidth: 1100 }}
+          aria-label="simple table"
+          className={data?.length == 0 || !data ? "bg-gray-14" : ""}
+        >
           <TableHead sx={{ backgroundColor: "#EBEBEB" }}>
             <TableRow>
               {TableRows?.map((RowField: RowFieldType) => {
@@ -50,7 +54,7 @@ export default function BasicTable({
               <TableCell></TableCell>
             </TableRow>
           </TableHead>
-          {data?.length == 0 ? (
+          {data?.length == 0 || !data ? (
             <div className="text-semibold bg-gray-14 py-2 pl-4 text-lg text-gray-15">
               No {champ} entries have been added.
             </div>

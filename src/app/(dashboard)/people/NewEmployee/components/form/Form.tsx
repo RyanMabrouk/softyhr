@@ -43,6 +43,7 @@ function Form() {
 
   const pathname = usePathname();
   const Router = useRouter();
+
   const SubmitForm = async (formdata: FormData) => {
     //-----formulate_data-------
     let result: any = {};
@@ -56,12 +57,11 @@ function Form() {
       });
       result = { ...result, [champ?.champ]: { ...Champ } };
     });
-
     const NewData = formulateData(formdata, {
       data: {
         ...result,
-        Hiring: { "Hire Date": new Date() },
-        parent_id: candidate_data[0]?.["Hiring Lead"],
+        Job: { "Hire Date": new Date() },
+        supervisor_id: candidate_data[0]?.["Hiring Lead"] || "",
       },
     });
 

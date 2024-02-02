@@ -3,9 +3,9 @@ export function NewCandidates(array: any) {
   current_date.setDate(current_date.getDate() - 3);
   const NewCandidates = array?.filter((candidate: any) => {
     if (
-      new Date(candidate?.date).getFullYear() == current_date.getFullYear() &&
-      new Date(candidate?.date).getMonth() == current_date.getMonth() &&
-      new Date(candidate?.date).getDay() > current_date.getDay() - 3
+      new Date(candidate?.created_at).getFullYear() == current_date.getFullYear() &&
+      new Date(candidate?.created_at).getMonth() == current_date.getMonth() &&
+      new Date(candidate?.created_at).getDay() > current_date.getDay() - 3
     ) {
       return candidate;
     }

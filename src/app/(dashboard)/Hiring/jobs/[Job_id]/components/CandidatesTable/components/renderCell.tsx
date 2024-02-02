@@ -25,20 +25,23 @@ export const renderCell = (Hiring: any, user: any, columnKey: React.Key) => {
       );
     case "Candidate Info":
       return (
-        <Link
-          href={`/Hiring/jobs/${Hiring?.id}/profile/${user?.id}/Candidate-info`}
-          className="cursor-pointer text-color5-500 hover:text-color-primary-8 hover:underline"
-        >
-          {user?.["Candidate Info"]}
-        </Link>
+        <div className="flex flex-col items-start justify-center gap-2">
+          <Link
+            href={`/Hiring/jobs/${Hiring?.id}/profile/${user?.id}/Candidate-info`}
+            className="cursor-pointer text-color5-500 hover:text-color-primary-8 hover:underline"
+          >
+            {user?.["Candidate Info"]}
+          </Link>
+          <h1 className="text-sm text-gray-15">
+            {`${Hiring?.job_information?.["Job Location"] || "No adresse"} - ${Hiring.job_information?.["Location"]}`}
+          </h1>
+        </div>
       );
     case "Status":
       return (
         <div className="flex flex-col">
           <p className="text-bold text-small capitalize">{user.Status}</p>
-          <p className="text-default-500 font-base text-base capitalize text-gray-15">
-            {user.Status_update}
-          </p>
+          <p className="text-sm text-gray-15">{user.Status_update}</p>
         </div>
       );
     case "Rating":
@@ -57,9 +60,8 @@ export const renderCell = (Hiring: any, user: any, columnKey: React.Key) => {
         </div>
       );
     case "Changes Status":
-      console.log("objectobject");
       return (
-        <div className=" z-10 flex items-center justify-start gap-2">
+        <div className=" z-10 flex items-start justify-start gap-2">
           <HireStatus Hiring={Hiring} candidate={user} />
         </div>
       );

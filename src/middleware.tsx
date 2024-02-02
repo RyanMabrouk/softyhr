@@ -14,7 +14,6 @@ export default async function middleware(req: NextRequest) {
     match: { name: current_org },
   });
   if (org?.length === 0) {
-    //req.headers.set("host", "localhost:3001");
     return NextResponse.rewrite(new URL("/", req.url));
   }
   return NextResponse.rewrite(url);

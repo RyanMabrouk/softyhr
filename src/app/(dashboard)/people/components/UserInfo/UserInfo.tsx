@@ -1,11 +1,12 @@
 "use client";
 import React from "react";
 import { CiMail } from "react-icons/ci";
-import { BsSignpostFill } from "react-icons/bs";
+import { BsSignpostFill, BsTwitterX } from "react-icons/bs";
 import { MdOutlineHomeWork, MdPhoneAndroid } from "react-icons/md";
 import {
   FaFacebookSquare,
   FaHashtag,
+  FaInstagram,
   FaLinkedin,
   FaPinterest,
   FaTwitter,
@@ -31,6 +32,9 @@ import useData from "@/hooks/useData";
 import { generateLeaveCategorieIcon } from "@/helpers/leave.helpers";
 import { UnderlinedLink } from "@/app/_ui/UnderlinedLink";
 import useLeaveData from "@/hooks/useLeaveData";
+import useProfilesData from "@/hooks/useProfilesData";
+import ManagerSection from "./components/managerSection";
+import Link from "next/link";
 
 interface UserInfoPropsType {
   employeeId: string;
@@ -69,8 +73,9 @@ export default function UserInfo({ employeeId }: UserInfoPropsType) {
     categorie: category,
     className: "w-14 h-14 -mt-1",
   });
+
   return (
-    <div className="mb-0 flex max-w-[14rem] grow flex-col items-start justify-center gap-[0.5rem] bg-gray-14 pt-4 ">
+    <div className="mb-0 flex max-w-[16rem] grow flex-col items-start justify-center gap-[0.5rem] bg-gray-14 pt-4 ">
       {current_vacation && (
         <header className="-mb-5 flex w-full flex-row items-center justify-center gap-1 border-b-[10px] border-white px-6 pb-3 pt-7 leading-4">
           <div>{icon}</div>
@@ -81,59 +86,68 @@ export default function UserInfo({ employeeId }: UserInfoPropsType) {
         </header>
       )}
       <div className="mt-10 flex flex-col gap-[1rem] px-5">
-        <div className=" flex flex-col items-start  justify-center gap-2">
+        <div className=" flex flex-col items-start  justify-center gap-3">
           <div className="flex items-center justify-start gap-2 whitespace-nowrap text-sm text-gray-15">
-            <MdOutlineHomeWork
-              fill="gray"
-              className="cursor-pointer duration-200 ease-in-out hover:!text-color-primary-8"
-            />
-            <span className="text-sm">{user?.Contact?.["Work Phone"]}</span>
+            <MdOutlineHomeWork className="text-gray cursor-pointer duration-200 ease-in-out hover:!text-color-primary-8" />
+            <span className="text-sm">
+              {user?.Contact?.["Work Phone"] || "No Work Phone"}
+            </span>
           </div>
           <div className="flex items-center justify-start gap-2 whitespace-nowrap text-gray-15">
-            <MdPhoneAndroid
-              fill="gray"
-              className="cursor-pointer duration-200 ease-in-out hover:!text-color-primary-8"
-            />
-            <span className="text-sm">{user?.Contact?.["Mobile Phone"]}</span>
+            <MdPhoneAndroid className="text-gray cursor-pointer duration-200 ease-in-out hover:!text-color-primary-8" />
+            <span className="text-sm">
+              {user?.Contact?.["Mobile Phone"] || "No Mobile Phone"}
+            </span>
           </div>
           <div className="flex items-center justify-start gap-2 whitespace-nowrap text-gray-15">
-            <CiMail
-              fill="gray"
-              className="cursor-pointer duration-200 ease-in-out hover:!text-color-primary-8"
-            />
+            <CiMail className="text-gray cursor-pointer duration-200 ease-in-out hover:!text-color-primary-8" />
             <span className="text-sm">{user?.Contact?.["Work Email"]}</span>
           </div>
         </div>
         <div className="-ml-4 flex flex-row items-center justify-evenly whitespace-nowrap text-gray-15">
-          <FaLinkedin
-            fill="gray"
-            className="cursor-pointer duration-200 ease-in-out hover:!text-color-primary-8"
-          />
-          <FaTwitter
-            fill="gray"
-            className="cursor-pointer duration-200 ease-in-out hover:!text-color-primary-8"
-          />
-          <FaFacebookSquare
-            fill="gray"
-            className="cursor-pointer duration-200 ease-in-out hover:!text-color-primary-8"
-          />
-          <FaPinterest
-            fill="gray"
-            className="cursor-pointer duration-200 ease-in-out hover:!text-color-primary-8"
-          />
-          <FaTwitter
-            fill="gray"
-            className="cursor-pointer duration-200 ease-in-out hover:!text-color-primary-8"
-          />
+          <a
+            href={
+              user?.["Social Links"]?.LinkedIn || "https://www.linkedin.com/"
+            }
+          >
+            <FaLinkedin className="text-gray cursor-pointer duration-200 ease-in-out hover:!text-color-primary-8" />
+          </a>
+          <a
+            href={
+              user?.["Social Links"]?.Facebook || "https://www.Facebook.com/"
+            }
+          >
+            <FaFacebookSquare className="text-gray cursor-pointer duration-200 ease-in-out hover:!text-color-primary-8" />
+          </a>
+          <a
+            href={
+              user?.["Social Links"]?.Pinterest || "https://www.Pinterest.com"
+            }
+          >
+            <FaPinterest className="text-gray cursor-pointer duration-200 ease-in-out hover:!text-color-primary-8" />
+          </a>
+          <a
+            href={user?.["Social Links"]?.Twitter || "https://www.linkedin.com"}
+          >
+            <BsTwitterX className="text-gray cursor-pointer duration-200 ease-in-out hover:!text-color-primary-8" />
+          </a>
+          <a
+            href={
+              user?.["Social Links"]?.Instagram || "https://www.instagram.com"
+            }
+          >
+            <FaInstagram className="text-gray cursor-pointer duration-200 ease-in-out hover:!text-color-primary-8" />
+          </a>
         </div>
         <div className="h-px w-full  self-center bg-gray-16" />
         <div className=" flex flex-col gap-[0.3rem]">
           <h1 className="text-sm text-color-primary-7">Hiring Date</h1>
           <h1 className="text-500 text-sm font-bold text-gray-15">
-            {formatCustomDate(user?.Job?.["Hire Date"]) || ""}
+            {formatCustomDate(user?.Job?.["Hire Date"]) || "0000-00-00"}
           </h1>
           <h1 className="text-sm font-medium text-gray-13">
-            {YearsAndDaysSinceDate(new Date(user?.Job?.["Hire Date"]))}
+            {YearsAndDaysSinceDate(new Date(user?.Job?.["Hire Date"])) ||
+              "0000-00-00"}
           </h1>
         </div>
         <div className="h-px w-full  self-center bg-gray-16" />
@@ -174,6 +188,7 @@ export default function UserInfo({ employeeId }: UserInfoPropsType) {
           </div>
         </div>
         <div className="h-px w-full  self-center bg-gray-16" />
+        <ManagerSection user={user} />
         <div className="flex flex-col items-start justify-center gap-[0.5rem]">
           <h1 className="text-sm text-color-primary-7">Rapports directs</h1>
           <UnderlinedLink>

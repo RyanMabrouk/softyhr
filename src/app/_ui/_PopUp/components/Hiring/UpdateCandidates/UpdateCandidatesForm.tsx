@@ -1,5 +1,5 @@
 import { test } from "@/actions/test";
-import { CandidateStatusOptions } from "@/app/(dashboard)/Hiring/jobs/[Job_id]/components/CandidatesTable/data";
+import { CandidateStatusOptions } from "@/app/(dashboard)/Hiring/jobs/[Job_id]/components/CandidatesTable/components/config";
 import SelectInput from "@/app/(dashboard)/people/components/Fileds/select/Select";
 import Textarea from "@/app/(dashboard)/people/components/Fileds/textarea/textarea";
 import CancelBtnGeneric from "@/app/_ui/CancelBtnGeneric";
@@ -35,7 +35,7 @@ function UpdateCandidatesForm({ id }: { id: string | null }) {
         RowField={{
           name: "status",
           required: true,
-          options: CandidateStatusOptions,
+          options: CandidateStatusOptions.filter((e) => e?.name != "All"),
         }}
       />
       <Textarea RowField={{ name: "comment" }} />

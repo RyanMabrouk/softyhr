@@ -17,6 +17,9 @@ export default function useHiring(
   if (filter) {
     querykey.push(filter);
   }
+  if(match){
+    querykey.push(match);
+  }
   console.log(match, page, rowsPerPage, filter);
   const {
     data: Hiring,
@@ -30,6 +33,7 @@ export default function useHiring(
             match: match,
             StartPage: (page - 1)* rowsPerPage,
             EndPage: (page ) * rowsPerPage,
+            column:"*,candidates(id,created_at)",
             filter,
           })
         : getHiring("Hiring", {

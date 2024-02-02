@@ -5,13 +5,15 @@ import { useFormStatus } from "react-dom";
 interface SubmitButtonPropsType {
   textSubmitting: string;
   text: string;
-  className?:string;
+  className?: string;
+  onClick?: any;
 }
 
 function SubmitButton({
   textSubmitting,
   text,
   className,
+  onClick,
 }: SubmitButtonPropsType) {
   const { pending } = useFormStatus();
   return (
@@ -20,9 +22,9 @@ function SubmitButton({
     >
       <button
         disabled={pending}
+        onClick={onClick}
         className={
-          "text-bold rounded bg-color-primary-8 p-2 px-5 text-white duration-300 ease-in-out hover:!bg-color-primary-3 " +
-          (pending ? "  animate-pulse " : "")
+          "text-bold rounded bg-color-primary-8 p-2 px-5 text-white duration-300 ease-in-out hover:!bg-color-primary-3 "
         }
         type="submit"
       >

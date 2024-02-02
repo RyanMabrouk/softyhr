@@ -16,12 +16,14 @@ import "swiper/css";
 import "swiper/css/navigation";
 import CustomSwiper from "@/app/_ui/swiper";
 import AppliymentForm from "./components/AppliymentForm/AppliymentForm";
+import { useRouter } from "next/navigation";
 
 function Page({ params: { career_id } }: { params: { career_id: string } }) {
+  const router = useRouter();
   const {
-    Hiring: { data, isPending },
+    Hiring: { data, isPending, error },
   } = useHiring({ id: career_id, "Job Status": "Open" });
-  const [CurrentBtn, setCurrentBtn] = useState<string>("Apply for This job");
+
   return (
     <div className=" flex h-screen w-[99dvw] items-start justify-center gap-[2rem] py-8 pt-8">
       <div className="flex w-2/4 flex-col items-center justify-center gap-[2rem] py-4">

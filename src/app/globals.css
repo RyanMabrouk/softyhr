@@ -41,7 +41,7 @@
 /* Reset Mui Select Componant selected bg color */
 .Mui-selected {
   --tw-bg-opacity: 1 !important;
-  background-color: rgb(82 122 0 / var(--tw-bg-opacity)) !important;
+  /*background-color: rgb(82 122 0 / var(--tw-bg-opacity)) !important;*/
   --tw-text-opacity: 1 !important;
   color: rgb(255 255 255 / var(--tw-text-opacity)) !important;
 }

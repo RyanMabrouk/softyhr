@@ -1,6 +1,6 @@
 "use client";
 import { DatePicker, DatePickerProps } from "antd";
-import React, { useState } from "react";
+import React, { memo, useState } from "react";
 import "dayjs/locale/zh-cn";
 import dayjs from "dayjs";
 import { getYearDiff } from "@/helpers/date.helpers";
@@ -51,4 +51,4 @@ function DateInput({ RowField, setTouched, defaultValue = "" }: DateInputPropsTy
   );
 }
 
-export default DateInput;
+export default memo(DateInput);

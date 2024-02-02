@@ -31,7 +31,8 @@ function SelectGeneric({
   required?: boolean;
   inputLabel?: string | ReactNode;
 }) {
-  const [value, setValue] = useState();
+  console.log(defaultValue);
+  const [value, setValue] = useState<any>(defaultValue);
   const [ValueInput, setValueInput] = useState<any>();
   return (
     <>
@@ -69,7 +70,7 @@ function SelectGeneric({
           }}
           onChange={(event: any, newValue: any) => {
             console.log(newValue?.value);
-            setValue(newValue?.value);
+            setValue(newValue);
           }}
           value={value}
           options={options}
@@ -97,20 +98,33 @@ function SelectGeneric({
           type="text"
           name={label}
           className="absolute bottom-0 left-10 h-[1px] w-[1px] opacity-0"
-          value={value || ""}
+          value={value?.value || ""}
+        />
+        <input
+          required={required}
+          type="text"
+          name={"name"}
+          className="absolute bottom-0 left-10 h-[1px] w-[1px] opacity-0"
+          value={value?.label || ""}
         />
       </div>
     </>
   );
 }
 
-function SelectUsers({ RowField }: any) {
+function SelectUsers({ RowField, defaultValue }: any) {
   const {
     profiles: { data, isPending },
   } = useProfiles();
+  if(isPending) return;
   return (
     <SelectGeneric
       label={RowField?.name}
+      defaultValue={
+        defaultValue ? {
+        value: defaultValue,
+        label: `${data?.find((user: any) => user?.user_id == defaultValue)?.["Basic Information"]?.["First name"]}     ${data?.find((user: any) => user?.user_id == defaultValue)?.["Basic Information"]?.["Last name"]} `,
+      }:  undefined}
       options={data?.map((user: any) => {
         return {
           picture: user?.picture,

@@ -24,6 +24,7 @@ import EditCard from "./components/EditCard";
 import { formatCustomDate, monthsAgo } from "@/helpers/date.helpers";
 import { CiLink } from "react-icons/ci";
 import { GetJobUrl } from "@/helpers/Hiring/GetJobUrl.helper";
+import EditJobOpening from "./EditJobOpening/EditJobOpening";
 
 const columns = [
   { name: "id", uid: "id" },
@@ -119,7 +120,7 @@ export default function HiringTable({
                 {user.job_opening}
               </Link>
               <div className="flex items-center justify-center text-sm font-normal text-gray-11">
-                <p>{user.department}</p>
+                <p>{user.department} - </p>
                 <p>{user.Location}</p>
               </div>
             </div>
@@ -166,6 +167,7 @@ export default function HiringTable({
                   />
                 </div>
                 {ShowEdit && <EditCard />}
+                <EditJobOpening id={user?.id}/>
               </div>
               <Link
                 href={`?popup=DELETE_JOB&id=${user?.id}`}
@@ -176,8 +178,8 @@ export default function HiringTable({
               <div className="duration-250 flex h-[2rem] w-[2rem] cursor-pointer items-center justify-center ease-in-out hover:border hover:border-gray-27 hover:bg-gray-22">
                 <CiLink
                   cursor={"pointer"}
-                  onClick={() =>
-                    navigator.clipboard.writeText(GetJobUrl(user?.id))
+                  onClick={async () =>
+                    navigator.clipboard.writeText(await GetJobUrl(user?.id))
                   }
                 />
               </div>

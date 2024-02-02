@@ -13,9 +13,16 @@ const columns = [
 
 const CandidateStatusOptions = [
   { name: "All", uid: "All" },
+  { name: "Not Qualified", uid: "Not Qualified" },
+  { name: "Declined Offer", uid: "Declined Offer" },
+  { name: "Interviwed", uid: "Interviwed" },
+  { name: "Put On Hold", uid: "Put On Hold" },
   { name: "NEW", uid: "NEW" },
-  { name: "Hired", uid: "hired" },
+  { name: "Hired", uid: "Hired" },
   { name: "Not a Fit", uid: "Not a Fit" },
 ];
 
+export const candidateStatusGeneric: string[] = [
+ "Not Qualified","Declined Offer" , "Interviwed" , "Put On Hold" ,"NEW" ,"Hired" , "Not a Fit" 
+];
 export { columns, CandidateStatusOptions };

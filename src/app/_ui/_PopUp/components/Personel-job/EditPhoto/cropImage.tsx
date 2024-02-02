@@ -17,6 +17,7 @@ import updateData from "@/api/updateData";
 import { usePathname, useRouter } from "next/navigation";
 import { useQueryClient } from "@tanstack/react-query";
 import avatar from "/public/avatar.png";
+import SubmitButton from "@/app/careers/[career_id]/components/AppliymentForm/SubmitButton";
 
 const base_image_url =
   "https://ybwqmrrlvmpdikvmkqra.supabase.co/storage/v1/object/public/avatar/";
@@ -173,22 +174,7 @@ const CropEasy = ({
       </div>
       <div className="h-[0.1rem] w-full bg-gradient-to-r from-color-primary-1 to-color-primary-3" />
       <div className="flex items-start justify-center gap-[1rem] self-start">
-        <button
-          onClick={ChangeProfileImage}
-          type="submit"
-          className={
-            "text-bold mt-4 rounded bg-color-primary-8 p-2 px-5 text-white duration-300 ease-in-out hover:!bg-color-primary-3 "
-          }
-        >
-          Sauvgarder
-        </button>
-        <button
-          type="reset"
-          onClick={() => router.push(pathname)}
-          className="text-bold mt-4 rounded p-2 px-5 text-color5-500 duration-300 ease-in-out "
-        >
-          Cancel
-        </button>
+        <SubmitButton text="Save" textSubmitting="Saving..." onClick={ChangeProfileImage}/>
       </div>
     </div>
   );

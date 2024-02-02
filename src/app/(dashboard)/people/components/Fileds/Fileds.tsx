@@ -21,26 +21,26 @@ function FiledsChamps({
     <>
       {FieldsArray?.sort((a: any, b: any) => a.rang - b.rang)?.map(
         ({ Row }: any) => {
-            return (
-              <div
-                className="flex items-end justify-center gap-[1rem]"
-                key={uuidv4()}
-              >
-                {Row?.map((RowField: any) => {
-                  const Component = Field[RowField?.type.toUpperCase()] || Input;
-                  return (
-                    <Component
-                      champ={champ || ""}
-                      defaultValue={user?.[champ || ""]?.[RowField?.name]}
-                      user={user}
-                      setTouched={setTouched}
-                      key={uuidv4()}
-                      RowField={RowField}
-                    />
-                  );
-                })}
-              </div>
-            );
+          return (
+            <div
+              className="flex items-end justify-center gap-[1rem]"
+              key={uuidv4()}
+            >
+              {Row?.map((RowField: any) => {
+                const Component = Field[RowField?.type.toUpperCase()] || Input;
+                return (
+                  <Component
+                    champ={champ || ""}
+                    defaultValue={user?.[champ || ""]?.[RowField?.name]}
+                    user={user}
+                    setTouched={setTouched}
+                    key={uuidv4()}
+                    RowField={RowField}
+                  />
+                );
+              })}
+            </div>
+          );
         },
       )}
     </>

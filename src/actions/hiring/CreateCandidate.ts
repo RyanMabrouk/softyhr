@@ -7,7 +7,7 @@ import getCurrentorg from "@/api/getCurrentOrg";
 export const CreateCandidate = async (NewCandaidate: any) => {
   const supabase = createServerActionClient({ cookies });
   const org = await getCurrentorg();
-
+  console.log(NewCandaidate);
   const { data, error } = await supabase
     .from("candidates")
     .insert([{...NewCandaidate, org_name: org?.name}])

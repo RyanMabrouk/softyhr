@@ -5,6 +5,7 @@ import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
 import getCurrentorg from "@/api/getCurrentOrg";
 import { Profile_Type } from "@/types/database.tables.types";
 import { createClient } from "@supabase/supabase-js";
+import { addFolder } from "../files/addFolder";
 
 export const CreateNewEmployee = async (
   NewEmployeData: Profile_Type,
@@ -40,10 +41,18 @@ export const CreateNewEmployee = async (
           org_name: org?.name,
           user_id: user?.user?.id,
           role: "employee",
+          role_id: 2,
+          files_ids: [],
         },
       ])
       .select();
-    if (profile_error) {
+      console.log(NewEmployeData);
+    const  { error  } = await addFolder(
+      NewEmployeData?.["Basic Information"]?.["First name"] +
+        " " +
+        NewEmployeData?.["Basic Information"]?.["Last name"],
+    );
+    if (profile_error || error) {
       return {
         Submitted: false,
         Error: profile_error,

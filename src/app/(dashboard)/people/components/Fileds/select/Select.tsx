@@ -23,7 +23,6 @@ function SelectInput({
     if (setTouched) setTouched(true);
     setValue(e.target.value);
   };
-  console.log(value);
   return (
     <div className="relative flex flex-col items-start justify-center">
       <h1

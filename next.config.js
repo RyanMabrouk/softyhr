@@ -1,6 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
   swcMinify: true,
   logging: {
     fetches: {
@@ -34,6 +33,10 @@ const nextConfig = {
         pathname: "**",
       },
     ],
+  },
+  webpack: (config) => {
+    config.externals = [...config.externals, { canvas: "canvas" }];
+    return config;
   },
 };
 

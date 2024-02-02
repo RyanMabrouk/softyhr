@@ -25,8 +25,8 @@ function Education({
   FieldsArray,
   setTouched,
   champ,
-  setData,
   DATA,
+  setData,
   employeeId,
 }: EducationPropsType): ReactNode {
   const { employee_profile: Data } = useEmployeeData({ employeeId });
@@ -37,7 +37,7 @@ function Education({
   };
   return (
     <div className="flex flex-col items-start ">
-      {[...Data?.data?.[champ] || [], ...DATA]?.map((data: any) => {
+      {[...(Data?.data?.[champ] || []), ...(DATA || [])]?.map((data: any) => {
         {
           return (
             <div className="flex justify-center gap-[1rem] py-2" key={data?.id}>
@@ -72,11 +72,8 @@ function Education({
                       (education: any) => education.id == data?.id,
                     ).length === 0
                   )
-                    setData(
-                      (old: any) =>
-                        old?.filter(
-                          (education: any) => education.id != data?.id,
-                        ),
+                    setData((old: any) =>
+                      old?.filter((education: any) => education.id != data?.id),
                     );
                   else {
                     Show_DeleteEducation(data?.id);
@@ -93,8 +90,8 @@ function Education({
       <div
         className="flex cursor-pointer items-center justify-center gap-[0.5rem] pt-4 text-color5-600"
         onClick={() =>
-          setData([
-            ...DATA,
+          setData((old: any) => [
+            ...old,
             {
               id: uuidv4(),
               GPA: "",

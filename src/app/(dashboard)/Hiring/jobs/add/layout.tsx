@@ -132,7 +132,7 @@ const LayoutComponent = memo(function LayoutComponent({
               action={submitForm}
               className="flex w-full items-start justify-start gap-[1rem]"
             >
-              <div className="flex w-3/12 flex-col items-center gap-[1rem] rounded-xl bg-gray-14 p-4 px-8 pb-8">
+              <div className="flex w-3/12 flex-col items-center gap-[1rem] rounded-xl bg-gray-14 p-4 px-8 pb-8 shadow-md">
                 <div className="flex w-full flex-col items-start justify-center  border-b border-gray-15 pb-4">
                   {CreateHiringJob?.map((path: string, index: number) => {
                     return (

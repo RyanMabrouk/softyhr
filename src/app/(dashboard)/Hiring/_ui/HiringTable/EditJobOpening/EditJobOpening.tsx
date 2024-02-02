@@ -2,12 +2,17 @@
 import { MenuLinksGeneric } from "@/app/_ui/MenuLinksGeneric";
 import { usePathname } from "next/navigation";
 import React, { useState } from "react";
+import { IconType } from "react-icons";
 import { BsBriefcaseFill } from "react-icons/bs";
 import { MdEventNote, MdOutlineEventNote } from "react-icons/md";
 import { PiCertificateFill, PiCertificateLight } from "react-icons/pi";
 import { VscTriangleDown } from "react-icons/vsc";
 
-function EditJobOpening() {
+interface EditJobOpeningPropsType {
+  text?: string;
+  id?: string;
+}
+function EditJobOpening({  text, id }: EditJobOpeningPropsType) {
   const pathname = usePathname();
   const [open, setOpen] = useState<boolean>(false);
   return (
@@ -23,9 +28,9 @@ function EditJobOpening() {
             </div>
           ),
           link: {
-            pathname: pathname,
+            pathname: `/Hiring/jobs/edit/Information-Job`,
             query: {
-              popup: "EDIT_JOB_INFORMATION",
+             id: String(id)
             },
           },
         },
@@ -63,7 +68,7 @@ function EditJobOpening() {
         id="timeoff_settings"
         className="flex cursor-pointer flex-row items-center justify-center gap-1 border border-color-primary-8 px-2 py-1.5 transition-all ease-linear hover:shadow-md"
       >
-        <h1 className="font-semibold text-color-primary-8">Edit Job Opening</h1>
+        <h1>{text}</h1>
         <VscTriangleDown
           className={`h-3 w-3 text-gray-25 ${open ? " rotate-180 duration-300 ease-linear" : ""} `}
         />

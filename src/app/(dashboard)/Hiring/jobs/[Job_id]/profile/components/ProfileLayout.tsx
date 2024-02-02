@@ -11,7 +11,7 @@ import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
 import React, { ReactNode } from "react";
 import { BsArrowLeft } from "react-icons/bs";
-import { FaInfoCircle } from "react-icons/fa";
+import avatar  from "/public/avatar.png";
 
 function ProfileLayout({ children }: { children: ReactNode }) {
   const params = useParams();
@@ -49,7 +49,7 @@ function ProfileLayout({ children }: { children: ReactNode }) {
                 <div className="flex items-center justify-start gap-[1rem]">
                   <div className="z-10 h-[6rem] w-[6rem] rounded-full border-color-primary-2 ">
                     <Image
-                      src={candidates_data?.data?.picture}
+                      src={candidates_data?.data?.picture || avatar}
                       alt="user-name"
                       priority
                       width={208}

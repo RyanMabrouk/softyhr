@@ -37,7 +37,7 @@ function AddEntry() {
     queryClient.invalidateQueries({ queryKey: ["profiles", employeeId] });
     if (response?.error) toast.error(response?.error?.Message);
     else {
-      toast.success(`${section_name} Deleted Successfully`);
+      toast.success(`${section_name} added Successfully`);
       console.log("response");
     }
     router.push(pathname);

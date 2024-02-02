@@ -8,7 +8,7 @@ import { MdOutlineEventNote } from "react-icons/md";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { useQueryClient } from "@tanstack/react-query";
 import getCandidate from "@/api/getCandidates";
-import TableSkeleton from "./components/CandidatesTable/TableSkeleton";
+import TableSkeleton from "./components/CandidatesTable/components/TableSkeleton";
 import useEmployeeData from "@/hooks/useEmloyeeData";
 
 function Page({ params: { Job_id } }: { params: { Job_id: string } }) {

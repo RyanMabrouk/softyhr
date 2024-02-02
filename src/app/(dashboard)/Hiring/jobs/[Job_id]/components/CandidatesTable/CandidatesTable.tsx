@@ -16,17 +16,23 @@ import {
   Selection,
   ChipProps,
 } from "@nextui-org/react";
-import { columns, CandidateStatusOptions } from "./data";
+import { columns, CandidateStatusOptions } from "./components/config";
 import { FaSortDown } from "react-icons/fa6";
-import Mail from "./Mail/Mail";
-import Settings from "./Settings/Settings";
-import { FaUserCircle } from "react-icons/fa";
-import AddCandidate from "./AddCandidate";
-import AddCollaborate from "./AddCollaborate";
-import CandidateReports from "./CandidateReports";
-import HiringInfos from "./HiringInfos";
+import Mail from "./components/Mail/Mail";
+import Settings from "./components/Settings/Settings";
+import { FaRegEdit, FaUserCircle } from "react-icons/fa";
+import AddCandidate from "./components/AddCandidate";
+import AddCollaborate from "./components/AddCollaborate";
+import CandidateReports from "./components/CandidateReports";
+import HiringInfos from "./components/HiringInfos";
 import EditJobOpening from "@/app/(dashboard)/Hiring/_ui/HiringTable/EditJobOpening/EditJobOpening";
-import { renderCell } from "./renderCell";
+import { renderCell } from "./components/renderCell";
+import { VscTriangleDown } from "react-icons/vsc";
+import DropDownGeneric from "@/app/_ui/DropDownGeneric";
+import { BsBriefcaseFill } from "react-icons/bs";
+import { MdEventNote } from "react-icons/md";
+import { PiCertificateFill } from "react-icons/pi";
+import { usePathname } from "next/navigation";
 
 const statusColorMap: Record<string, ChipProps["color"]> = {
   active: "success",
@@ -57,6 +63,7 @@ export default function CandiatesTable({
   const [selectedKeys, setSelectedKeys] = React.useState<Selection>(
     new Set([]),
   );
+  const pathname = usePathname();
   const [visibleColumns, setVisibleColumns] = React.useState<Selection>(
     new Set(INITIAL_VISIBLE_COLUMNS),
   );
@@ -72,7 +79,68 @@ export default function CandiatesTable({
       <div className="flex w-full flex-col gap-4 pt-4">
         <div className="flex w-full items-center justify-between gap-[1rem]">
           <div className="flex w-full items-center justify-start gap-[1rem]">
-            <EditJobOpening />
+            <div>
+              <DropDownGeneric
+                DropDownButton={() => (
+                  <div className="flex cursor-pointer flex-row items-start justify-start gap-1 rounded-sm border border-color-primary-8 px-2 py-1.5 transition-all ease-linear hover:shadow-md">
+                    <FaRegEdit className="text-2xl text-color-primary-8 " />
+                    <h1 className="font-semibold text-color-primary-8">
+                      Edit Job Opening
+                    </h1>
+                  </div>
+                )}
+                options={[
+                  {
+                    Component: () => (
+                      <div className="flex items-center justify-start gap-4">
+                        <BsBriefcaseFill className="text-lg !text-color-primary-7" />
+                        <h1 className="group-hover:text-white">
+                          Edit Job Information...
+                        </h1>
+                      </div>
+                    ),
+                    link: {
+                      pathname: `/Hiring/jobs/edit/Information-Job`,
+                      query: {
+                        id: String(Hiring?.id),
+                      },
+                    },
+                  },
+                  {
+                    Component: () => (
+                      <div className="flex items-center justify-start gap-4">
+                        <MdEventNote className="text-lg !text-color-primary-7" />
+                        <h1 className="group-hover:text-white">
+                          Edit Application Details...
+                        </h1>
+                      </div>
+                    ),
+                    link: {
+                      pathname: pathname,
+                      query: {
+                        popup: "EDIT_APPLICATION_DETAILS",
+                      },
+                    },
+                  },
+                  {
+                    Component: () => (
+                      <div className="flex items-center justify-start gap-4">
+                        <PiCertificateFill className="text-lg !text-color-primary-7" />
+                        <h1 className="group-hover:text-white">
+                          Manage Job Boards...
+                        </h1>
+                      </div>
+                    ),
+                    link: {
+                      pathname: pathname,
+                      query: {
+                        popup: "EDIT_JOB_BOARDS",
+                      },
+                    },
+                  },
+                ]}
+              />
+            </div>
             <AddCollaborate />
             <CandidateReports />
           </div>
@@ -135,7 +203,7 @@ export default function CandiatesTable({
           showShadow
           color="success"
           page={page}
-          total={Math.ceil(totalPages / 6) - 1}
+          total={Math.ceil(totalPages / 6)}
           className=""
           onChange={setpage}
         />

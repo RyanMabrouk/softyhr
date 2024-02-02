@@ -41,7 +41,7 @@ export default async function getHiring(
       ? filter != "All"
         ? await supabase
             .from(table)
-            .select(column, { count: "exact" })
+            .select(column , { count: "exact" })
             .match(match)
             .order("id")
             .eq("org_name", org_name)
@@ -49,14 +49,14 @@ export default async function getHiring(
             .range(StartPage, EndPage)
         : await supabase
             .from(table)
-            .select(column, { count: "exact" })
+            .select(column , { count: "exact" })
             .match(match)
             .order("id")
             .eq("org_name", org_name)
             .range(StartPage, EndPage)
       : await supabase
           .from(table)
-          .select(column, { count: "exact" })
+          .select(column , { count: "exact" })
           .match(match)
           .order("id")
           .eq("org_name", org_name)
@@ -64,23 +64,23 @@ export default async function getHiring(
       ? filter
         ? await supabase
             .from(table)
-            .select(column, { count: "exact" })
+            .select(column , { count: "exact" })
             .order("id")
             .eq("org_name", org_name)
             .eq("Job Status", filter)
             .range(StartPage, EndPage)
         : await supabase
             .from(table)
-            .select(column, { count: "exact" })
+            .select(column , { count: "exact" })
             .order("id")
             .eq("org_name", org_name)
             .range(StartPage, EndPage)
       : await supabase
           .from(table)
-          .select(column, { count: "exact" })
+          .select(column , { count: "exact" })
           .order("id")
           .eq("org_name", org_name);
-          console.log(data?.error, data);
+  console.log(data?.error, data);
   return {
     data: data?.data,
     error: data?.error,
