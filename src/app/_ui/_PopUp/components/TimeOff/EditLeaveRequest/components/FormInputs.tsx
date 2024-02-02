@@ -1,12 +1,11 @@
 "use client";
 import {
-  database_leave_policies_type,
   database_leave_requests_type,
   database_profile_leave_balance_type,
   databese_leave_categories_type,
 } from "@/types/database.tables.types";
 import { useParams, useSearchParams } from "next/navigation";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import {
   dateRangeContext,
   dateRangeContextType,
@@ -19,6 +18,9 @@ import { CalendarRange } from "./CalendarRange";
 import useLeaveData from "@/hooks/useLeaveData";
 import { TextFeildGeneric } from "../../../../../TextFeildGeneric";
 import useData from "@/hooks/useData";
+import usePolicy from "@/hooks/usePolicy";
+import TotalDurationContextProvider from "../context/TotalDurationContext";
+import { WarningIfUserDoesntHaveEnoughBalance } from "./WarningIfUserDoesntHaveEnoughBalance";
 export function FormInputs() {
   const searchParams = useSearchParams();
   const { setStartDate, setEndDate } =
@@ -35,7 +37,6 @@ export function FormInputs() {
   const employeeId = useParams().employeeId ?? user_profile?.user_id;
   const {
     leave_categories: { data: leave_categories },
-    leave_policies: { data: leave_policies },
   } = useLeaveData();
   const {
     leave_requests: { data: leave_requests },
@@ -50,17 +51,15 @@ export function FormInputs() {
     leave_requests?.find(
       (request: database_leave_requests_type) => request.id == leave_request_id,
     );
-  // Current User Leave Policy
-  const policy: database_leave_policies_type | undefined = leave_policies?.find(
-    (policy: database_leave_policies_type) =>
-      policy.id === request_data?.policy_id || policy.id === leave_policy_id,
+  const policy_id = request_data?.policy_id ?? leave_policy_id;
+  // Selected Policy
+  const [selectedPolicy, setSelectedPolicy] = useState<string | undefined>(
+    String(policy_id),
   );
-  // Current User Leave Policy Category
-  const categorie: databese_leave_categories_type | undefined =
-    leave_categories?.find(
-      (categorie: databese_leave_categories_type) =>
-        policy?.categories_id === categorie.id,
-    );
+  // default policy and Category
+  const { policy, category } = usePolicy({
+    policy_id: Number(selectedPolicy) ?? policy_id,
+  });
   return (
     <div className="flex flex-col gap-2 pb-3">
       <div className="flex flex-row gap-4">
@@ -86,8 +85,9 @@ export function FormInputs() {
         label="Time Off Category"
         required
         name="policy_id"
+        setValueInParent={setSelectedPolicy}
         defaultValue={
-          policy && { label: categorie?.name, value: String(policy?.id) }
+          policy && { label: category?.name, value: String(policy?.id) }
         }
         options={leave_categories
           ?.filter((category: databese_leave_categories_type) =>
@@ -102,14 +102,20 @@ export function FormInputs() {
             )?.policy_id,
           }))}
       />
-      {
-        <Amount
-          default_duration={request_data?.duration_used ?? []}
-          default_satrt_at={request_data?.start_at ?? ""}
-          default_end_at={request_data?.end_at ?? ""}
-          track_time_unit={categorie?.track_time_unit ?? "hours"}
-        />
-      }
+      <TotalDurationContextProvider>
+        <div className="flex flex-row items-center gap-4">
+          <Amount
+            default_duration={request_data?.duration_used ?? []}
+            default_satrt_at={request_data?.start_at ?? ""}
+            default_end_at={request_data?.end_at ?? ""}
+            track_time_unit={category?.track_time_unit ?? "hours"}
+          />
+          <WarningIfUserDoesntHaveEnoughBalance
+            employeeId={employeeId as string}
+            policy_id={selectedPolicy}
+          />
+        </div>
+      </TotalDurationContextProvider>
       <TextFeildGeneric
         name="note"
         label="Note"

@@ -72,7 +72,9 @@ export function CalendarGeneric({
                 !date && "text-muted-foreground",
               )}
             >
-              <CalendarIcon className="-ml-1 mr-2 h-5 w-5 group-focus-within:text-fabric-700" />
+              <CalendarIcon
+                className={`-ml-1 mr-2 h-5 w-5  ${error ? "!text-color9-500" : "group-focus-within:text-fabric-700"}`}
+              />
               <div className={`${error ? "text-color9-500" : ""}`}>
                 {date ? format(date, "PPP") : <span>Pick a date</span>}
               </div>

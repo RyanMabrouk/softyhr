@@ -61,7 +61,7 @@ function Form() {
       data: {
         ...result,
         Hiring: { "Hire Date": new Date() },
-        parent_id: candidate_data[0]?.["Hiring Lead"],
+        supervisor_id: candidate_data[0]?.["Hiring Lead"],
       },
     });
 

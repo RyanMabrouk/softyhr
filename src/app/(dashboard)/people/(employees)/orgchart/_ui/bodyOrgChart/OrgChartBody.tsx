@@ -28,7 +28,7 @@ const OrgChartBody = () => {
         isLoggedUser: false,
         positionName: prof?.["Job Information"]?.[0]?.["Job Title"],
         id: prof?.user_id ? prof?.user_id : "",
-        parentId: prof?.parent_id,
+        parentId: prof?.supervisor_id,
         size: "",
       });
     });
