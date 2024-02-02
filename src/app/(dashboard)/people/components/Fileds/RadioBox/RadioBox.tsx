@@ -2,12 +2,23 @@
 import React, { useState } from "react";
 import type { RadioChangeEvent } from "antd";
 import { ConfigProvider, Radio, Space } from "antd";
+import { RowFieldType } from "@/types/database.tables.types";
 
-function RadioBox({ RowField, setTouched, user, champ }: any) {
-  const [value, setValue] = useState(String(user?.[champ]?.[RowField?.name || ""]));
-  
+interface RadioBoxPropsType {
+  RowField: RowFieldType;
+  setTouched?: React.Dispatch<React.SetStateAction<boolean>> | undefined;
+  defaultValue?: string;
+  user?:any;
+  champ:string;
+}
+
+function RadioBox({ RowField, setTouched, user, champ }: RadioBoxPropsType) {
+  const [value, setValue] = useState(
+    String(user?.[champ]?.[RowField?.name || ""]),
+  );
+
   const onChange = (e: RadioChangeEvent) => {
-    setTouched(true);
+    setTouched && setTouched(true);
     setValue(e.target.value);
   };
 

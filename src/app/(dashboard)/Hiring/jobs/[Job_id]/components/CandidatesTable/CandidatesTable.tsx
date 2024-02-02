@@ -16,7 +16,7 @@ import {
   Selection,
   ChipProps,
 } from "@nextui-org/react";
-import { columns, CandidateStatusOptions } from "./components/config";
+import { columns, CandidateStatusOptions, TableCandidateType } from "./components/config";
 import { FaSortDown } from "react-icons/fa6";
 import Mail from "./components/Mail/Mail";
 import Settings from "./components/Settings/Settings";
@@ -33,6 +33,8 @@ import { BsBriefcaseFill } from "react-icons/bs";
 import { MdEventNote } from "react-icons/md";
 import { PiCertificateFill } from "react-icons/pi";
 import { usePathname } from "next/navigation";
+import { CandidateType } from "@/types/candidate.types";
+import { Hiring_type } from "@/types/database.tables.types";
 
 const statusColorMap: Record<string, ChipProps["color"]> = {
   active: "success",
@@ -50,6 +52,17 @@ const INITIAL_VISIBLE_COLUMNS = [
   "actions",
 ];
 
+export interface CandidateTablePropsType {
+  data: TableCandidateType[];
+  Job_id: string;
+  setpage: React.Dispatch<React.SetStateAction<number>>;
+  page: number;
+  Hiring: Hiring_type;
+  filter: string;
+  setFilter: React.Dispatch<React.SetStateAction<string>>;
+  totalPages: number;
+}
+
 export default function CandiatesTable({
   data,
   Job_id,
@@ -59,7 +72,7 @@ export default function CandiatesTable({
   filter,
   setFilter,
   totalPages,
-}: any) {
+}: CandidateTablePropsType) {
   const [selectedKeys, setSelectedKeys] = React.useState<Selection>(
     new Set([]),
   );
@@ -285,7 +298,7 @@ export default function CandiatesTable({
         )}
       </TableHeader>
       <TableBody emptyContent={"No candidate found"} items={data || []}>
-        {(item: any) => (
+        {(item: TableCandidateType) => (
           <TableRow key={item?.id}>
             {(columnKey) => (
               <TableCell>{renderCell(Hiring, item, columnKey)}</TableCell>

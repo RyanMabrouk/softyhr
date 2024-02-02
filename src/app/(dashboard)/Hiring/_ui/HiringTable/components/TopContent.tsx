@@ -57,7 +57,7 @@ export default function TopContent({
               aria-label="Table Columns"
               closeOnSelect={true}
               selectionMode="single"
-               onSelectionChange={(selected: any) => {
+               onSelectionChange={(selected:any) => {
                     setFilter(selected?.anchorKey);
                   }}
             >

@@ -3,12 +3,19 @@ import { MenuLinksGeneric } from "@/app/_ui/MenuLinksGeneric";
 import { usePathname } from "next/navigation";
 import React from "react";
 import { VscTriangleDown } from "react-icons/vsc";
-import { candidateStatusGeneric } from "./config";
+import { TableCandidateType, candidateStatusGeneric } from "./config";
 import { EditCandidateStatus } from "@/actions/hiring/EditCandidate";
 import { useQueryClient } from "@tanstack/react-query";
 import useToast from "@/hooks/useToast";
+import { Hiring_type } from "@/types/database.tables.types";
+import { CandidateType } from "@/types/candidate.types";
 
-function HireStatus({ Hiring, candidate }: any) {
+interface HiringStatusPropsType {
+  Hiring: Hiring_type;
+  candidate: TableCandidateType;
+}
+
+function HireStatus({ Hiring, candidate }: HiringStatusPropsType) {
   const pathname = usePathname();
   const queryClient = useQueryClient();
   const { toast } = useToast();

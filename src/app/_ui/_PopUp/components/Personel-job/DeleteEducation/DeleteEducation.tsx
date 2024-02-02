@@ -9,10 +9,11 @@ import { useParams } from "next/navigation";
 import { FaRegTrashAlt } from "react-icons/fa";
 import PopUpSkeleton from "../../../PopUpSkeleton";
 import CancelBtnGeneric from "@/app/_ui/CancelBtnGeneric";
+import { EducationType } from "@/app/(dashboard)/people/components/UserSection";
 
 interface DeleteEducationFnType {
   id: string | null;
-  data: any;
+  data: EducationType[];
   user_id: string;
 }
 
@@ -29,11 +30,11 @@ function DeleteEducation() {
   const { mutateAsync, isPending } = useMutation({
     mutationFn: async ({ id, data, user_id }: DeleteEducationFnType) => {
       const NewEducation = data?.filter(
-        (education: any) => education?.id != id,
+        (education: EducationType) => education?.id != id,
       );
       return await deleteEducation(NewEducation, user_id);
     },
-    onSuccess: (data: any) => {
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["profiles", employeeId] });
       toast.success("Education deleted successfully", "Deleted");
       Router.push(pathname);

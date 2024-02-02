@@ -94,7 +94,7 @@ export type champ_type = {
 
 export interface RowFieldType {
   name: string;
-  options?: Object[] | undefined;
+  options?: string[] | undefined;
   required?: boolean;
   placeHolder?: string | undefined;
   type: "select" | "text" | "radio";
@@ -106,6 +106,7 @@ export type RowType = {
   rang: number;
 };
 export type Profile_Type = {
+  supervisor_id?:string;
   Addresse?: ObjectOfStrings | null;
   "Basic Information"?: ObjectOfStrings | null;
   Bonus?: Bonus_Type[] | null;
@@ -125,6 +126,7 @@ export type Profile_Type = {
   "Stock Options"?: StockOptions_Type[] | null;
   user_id: string;
   "Visa Information"?: Visa_information_Type[] | null;
+  picture?: string | null;
 };
 
 export type Bonus_Type = {

@@ -11,7 +11,8 @@ import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
 import React, { ReactNode } from "react";
 import { BsArrowLeft } from "react-icons/bs";
-import avatar  from "/public/avatar.png";
+import avatar from "/public/avatar.png";
+import CandidatesInfos from "./CandidatesInfos";
 
 function ProfileLayout({ children }: { children: ReactNode }) {
   const params = useParams();
@@ -105,7 +106,10 @@ function ProfileLayout({ children }: { children: ReactNode }) {
               </div>
             </div>
           </div>
-          {children}
+          <div className="w-full h-full flex items-center justify-start">
+            {children}
+            <CandidatesInfos />
+          </div>
         </div>
       )}
     </>

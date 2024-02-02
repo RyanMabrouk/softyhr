@@ -13,7 +13,7 @@ import formulateData from "../components/utils/formulateData";
 import { useMutation, useQueryClient } from "@tanstack/react-query";  
 import updateData from "@/api/updateData";
 import useToast from "@/hooks/useToast";
-import { Profile_Type } from "@/types/database.tables.types";
+import { Profile_Type, RowType } from "@/types/database.tables.types";
 import useEmployeeData from "@/hooks/useEmloyeeData";
 
 interface UserSection {
@@ -21,12 +21,17 @@ interface UserSection {
   employeeId: string;
 }
 
+export interface EducationType{
+  [key:string]:string | null;
+  id:string;
+} 
+
 function UserSection({ section, employeeId }: UserSection) {
   const router = useRouter();
   const { data, isPending } = useSettings(section);
   const { toast } = useToast();
   const [touched, setTouched] = useState<boolean>(false);
-  const [Data, setData] = useState<any>([]);
+  const [Data, setData] = useState<EducationType | null[]>([]);
   const queryClient = useQueryClient();
 
   const { mutateAsync } = useMutation({
@@ -75,7 +80,9 @@ function UserSection({ section, employeeId }: UserSection) {
             </h1>
           </div>
           <form className="Form-Profile" action={SubmitForm}>
-            {data?.Champs?.sort((a: any, b: any) => a.rang - b.rang)?.map(
+            {data?.Champs?.sort(
+              (a: ChampsType, b: ChampsType) => a.rang - b.rang,
+            )?.map(
               ({ rang, champ, Icon, Fields }: ChampsType, index: number) => {
                 const Component = sectionIcon[Icon.toUpperCase()];
                 const ComponentChamps = Section[champ] || FiledsChamps;
@@ -97,9 +104,7 @@ function UserSection({ section, employeeId }: UserSection) {
                         DATA={Data}
                         setTouched={setTouched}
                         key={rang || uuidv4()}
-                        FieldsArray={Fields?.sort(
-                          (a: any, b: any) => a?.rang - b?.rang,
-                        )}
+                        FieldsArray={Fields}
                       />
                     </div>
                   </div>

@@ -5,7 +5,7 @@ import { usePathname, useRouter } from "next/navigation";
 import React, { ReactNode, memo, useContext, useState } from "react";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { TiClipboard } from "react-icons/ti";
-import StepsProvider, { StepType, StepsContext } from "./context/StepsProvider";
+import StepsProvider, { ObjectOfStrings, StepType, StepsContext } from "./context/StepsProvider";
 import { FormdataToObject } from "@/helpers/object.helpers";
 import { RiCheckboxCircleFill, RiCheckboxCircleLine } from "react-icons/ri";
 import SubmitFormBtn from "./SubmitFormBtn";
@@ -47,8 +47,10 @@ const LayoutComponent = memo(function LayoutComponent({
     "Application-Details": Update_ApplicationDetails,
     "Job-Boards": Update_JobBoards,
   };
-
-  const stepValidation: any = {
+interface stepValidationType {
+  [key: string]: StepType<ObjectOfStrings> | undefined;
+}
+  const stepValidation: stepValidationType = {
     "Information-Job": InformationJob,
     "Application-Details": ApplicationDetails,
     "Job-Boards": JobBoards,

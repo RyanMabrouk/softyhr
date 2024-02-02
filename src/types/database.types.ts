@@ -9,11 +9,36 @@ export type Json =
 export interface Database {
   public: {
     Tables: {
+      candidate_comments: {
+        Row: {
+          candidate_id: number | null;
+          comment_Author: string | null;
+          comment_content: string | null;
+          created_at: string;
+          id: number;
+        };
+        Insert: {
+          candidate_id?: number | null;
+          comment_Author?: string | null;
+          comment_content?: string | null;
+          created_at?: string;
+          id?: number;
+        };
+        Update: {
+          candidate_id?: number | null;
+          comment_Author?: string | null;
+          comment_content?: string | null;
+          created_at?: string;
+          id?: number;
+        };
+        Relationships: [];
+      };
       candidates: {
         Row: {
           created_at: string;
           Email: string | null;
           "First Name": string | null;
+          "Hiring Lead": string | null;
           id: number;
           job_id: number | null;
           "Last Name": string | null;
@@ -27,6 +52,7 @@ export interface Database {
           created_at?: string;
           Email?: string | null;
           "First Name"?: string | null;
+          "Hiring Lead"?: string | null;
           id?: number;
           job_id?: number | null;
           "Last Name"?: string | null;
@@ -40,6 +66,7 @@ export interface Database {
           created_at?: string;
           Email?: string | null;
           "First Name"?: string | null;
+          "Hiring Lead"?: string | null;
           id?: number;
           job_id?: number | null;
           "Last Name"?: string | null;
@@ -59,6 +86,35 @@ export interface Database {
           },
           {
             foreignKeyName: "candidates_org_name_fkey";
+            columns: ["org_name"];
+            isOneToOne: false;
+            referencedRelation: "organizations";
+            referencedColumns: ["name"];
+          },
+        ];
+      };
+      divisions: {
+        Row: {
+          created_at: string;
+          id: number;
+          name: string;
+          org_name: string;
+        };
+        Insert: {
+          created_at?: string;
+          id?: number;
+          name: string;
+          org_name: string;
+        };
+        Update: {
+          created_at?: string;
+          id?: number;
+          name?: string;
+          org_name?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "divisions_org_name_fkey";
             columns: ["org_name"];
             isOneToOne: false;
             referencedRelation: "organizations";
@@ -156,7 +212,6 @@ export interface Database {
       Hiring: {
         Row: {
           Application_Details: Json | null;
-          candidates: Json[] | null;
           created_at: string;
           id: number;
           "Job Status": string | null;
@@ -166,7 +221,6 @@ export interface Database {
         };
         Insert: {
           Application_Details?: Json | null;
-          candidates?: Json[] | null;
           created_at?: string;
           id?: number;
           "Job Status"?: string | null;
@@ -176,7 +230,6 @@ export interface Database {
         };
         Update: {
           Application_Details?: Json | null;
-          candidates?: Json[] | null;
           created_at?: string;
           id?: number;
           "Job Status"?: string | null;
@@ -357,6 +410,8 @@ export interface Database {
       };
       leave_policies: {
         Row: {
+          accrual_days: string[] | null;
+          accrual_value_in_hours: number;
           categories_id: number;
           created_at: string;
           id: number;
@@ -365,6 +420,8 @@ export interface Database {
           type: Database["public"]["Enums"]["database_leave_policies_policy_type"];
         };
         Insert: {
+          accrual_days?: string[] | null;
+          accrual_value_in_hours?: number;
           categories_id: number;
           created_at?: string;
           id?: number;
@@ -373,6 +430,8 @@ export interface Database {
           type?: Database["public"]["Enums"]["database_leave_policies_policy_type"];
         };
         Update: {
+          accrual_days?: string[] | null;
+          accrual_value_in_hours?: number;
           categories_id?: number;
           created_at?: string;
           id?: number;
@@ -498,6 +557,52 @@ export interface Database {
         };
         Relationships: [];
       };
+      permissions: {
+        Row: {
+          created_at: string;
+          files_ids: number[] | null;
+          org_name: string;
+          role_id: number;
+          user_id: string;
+        };
+        Insert: {
+          created_at?: string;
+          files_ids?: number[] | null;
+          org_name: string;
+          role_id: number;
+          user_id: string;
+        };
+        Update: {
+          created_at?: string;
+          files_ids?: number[] | null;
+          org_name?: string;
+          role_id?: number;
+          user_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "permissions_org_name_fkey";
+            columns: ["org_name"];
+            isOneToOne: false;
+            referencedRelation: "organizations";
+            referencedColumns: ["name"];
+          },
+          {
+            foreignKeyName: "permissions_role_id_fkey";
+            columns: ["role_id"];
+            isOneToOne: false;
+            referencedRelation: "roles";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "permissions_user_id_fkey";
+            columns: ["user_id"];
+            isOneToOne: false;
+            referencedRelation: "users";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
       profiles: {
         Row: {
           accrual_start_date: string | null;
@@ -510,16 +615,17 @@ export interface Database {
           "Driver License": Json[] | null;
           Education: Json[] | null;
           "Employment Status": Json[] | null;
+          files_ids: number[] | null;
           Hiring: Json | null;
           Job: Json | null;
           "Job Information": Json[] | null;
-          leave_balance: Json[] | null;
           org_name: string;
-          supervisor_id: string | null;
           picture: string | null;
           role: string | null;
+          role_id: number;
           "Social Links": Json | null;
           "Stock Options": Json[] | null;
+          supervisor_id: string | null;
           user_id: string;
           "Visa Information": Json[] | null;
         };
@@ -534,16 +640,17 @@ export interface Database {
           "Driver License"?: Json[] | null;
           Education?: Json[] | null;
           "Employment Status"?: Json[] | null;
+          files_ids?: number[] | null;
           Hiring?: Json | null;
           Job?: Json | null;
           "Job Information"?: Json[] | null;
-          leave_balance?: Json[] | null;
           org_name: string;
-          supervisor_id?: string | null;
           picture?: string | null;
           role?: string | null;
+          role_id?: number;
           "Social Links"?: Json | null;
           "Stock Options"?: Json[] | null;
+          supervisor_id?: string | null;
           user_id: string;
           "Visa Information"?: Json[] | null;
         };
@@ -558,16 +665,17 @@ export interface Database {
           "Driver License"?: Json[] | null;
           Education?: Json[] | null;
           "Employment Status"?: Json[] | null;
+          files_ids?: number[] | null;
           Hiring?: Json | null;
           Job?: Json | null;
           "Job Information"?: Json[] | null;
-          leave_balance?: Json[] | null;
           org_name?: string;
-          supervisor_id?: string | null;
           picture?: string | null;
           role?: string | null;
+          role_id?: number;
           "Social Links"?: Json | null;
           "Stock Options"?: Json[] | null;
+          supervisor_id?: string | null;
           user_id?: string;
           "Visa Information"?: Json[] | null;
         };
@@ -578,6 +686,13 @@ export interface Database {
             isOneToOne: false;
             referencedRelation: "organizations";
             referencedColumns: ["name"];
+          },
+          {
+            foreignKeyName: "profiles_role_id_fkey";
+            columns: ["role_id"];
+            isOneToOne: false;
+            referencedRelation: "roles";
+            referencedColumns: ["id"];
           },
           {
             foreignKeyName: "profiles_supervisor_id_fkey";
@@ -592,6 +707,38 @@ export interface Database {
             isOneToOne: true;
             referencedRelation: "users";
             referencedColumns: ["id"];
+          },
+        ];
+      };
+      roles: {
+        Row: {
+          created_at: string;
+          id: number;
+          name: string;
+          org_name: string;
+          permissions: string[];
+        };
+        Insert: {
+          created_at?: string;
+          id?: number;
+          name?: string;
+          org_name: string;
+          permissions: string[];
+        };
+        Update: {
+          created_at?: string;
+          id?: number;
+          name?: string;
+          org_name?: string;
+          permissions?: string[];
+        };
+        Relationships: [
+          {
+            foreignKeyName: "roles_org_name_fkey";
+            columns: ["org_name"];
+            isOneToOne: false;
+            referencedRelation: "organizations";
+            referencedColumns: ["name"];
           },
         ];
       };

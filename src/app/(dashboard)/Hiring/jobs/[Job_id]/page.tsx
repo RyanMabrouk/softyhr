@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import CandiatesTable from "./components/CandidatesTable/CandidatesTable";
+import CandiatesTable, { CandidateTablePropsType } from "./components/CandidatesTable/CandidatesTable";
 import useCandidate from "@/hooks/useCandidate";
 import useHiring from "@/hooks/useHiring";
 import Link from "next/link";
@@ -10,10 +10,12 @@ import { useQueryClient } from "@tanstack/react-query";
 import getCandidate from "@/api/getCandidates";
 import TableSkeleton from "./components/CandidatesTable/components/TableSkeleton";
 import useEmployeeData from "@/hooks/useEmloyeeData";
+import { TableCandidateType } from "./components/CandidatesTable/components/config";
+import { CandidateType } from "@/types/candidate.types";
 
 function Page({ params: { Job_id } }: { params: { Job_id: string } }) {
   const [page, setpage] = useState<number>(1);
-  const [filter, setFilter] = useState<string | null>("All");
+  const [filter, setFilter] = useState<string>("All");
   const queryClient = useQueryClient();
   const {
     candidates: { data, isPending, meta, isPlaceholderData },
@@ -38,7 +40,7 @@ function Page({ params: { Job_id } }: { params: { Job_id: string } }) {
    }
   }, [page, filter]);
 
-  const CandidateTableData: any = data?.map((candidate: any) => {
+  const CandidateTableData: any = data?.map((candidate: CandidateType) => {
     return {
       id: candidate?.id,
       "Candidate Info":
@@ -47,7 +49,7 @@ function Page({ params: { Job_id } }: { params: { Job_id: string } }) {
       Status_update: "Updated Just Now",
       Rating: candidate?.Ratings,
       Applied: candidate?.created_at,
-      "Last Email": candidate?.["Last Email"] || "",
+    //  "Last Email": candidate?.["Last Email"] || "",
     };
   });
   return (
@@ -85,7 +87,6 @@ function Page({ params: { Job_id } }: { params: { Job_id: string } }) {
                 Job_id={Job_id}
                 page={page}
                 totalPages={meta?.totalPages}
-                isPlaceholderData={isPlaceholderData}
               />
             </div>
           )}

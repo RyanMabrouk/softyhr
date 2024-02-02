@@ -4,8 +4,9 @@ import Image from "next/image";
 import avatar from "/public/avatar.png";
 import React from "react";
 import Link from "next/link";
+import { Profile_Type } from "@/types/database.tables.types";
 
-function ManagerSection({ user }: any) {
+function ManagerSection({ user }: {user:Profile_Type}) {
   const {
     profiles: { data: manager, isPending },
   } = useProfilesData(

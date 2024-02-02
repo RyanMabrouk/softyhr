@@ -3,11 +3,11 @@ import { v4 as uuidv4 } from "uuid";
 import { Field } from "@/constants/userInfo";
 import { RowFieldType } from "@/types/userInfoTypes.type";
 import Input from "./Input/Input";
-import { RowType } from "@/types/database.tables.types";
+import { Profile_Type, RowType } from "@/types/database.tables.types";
 interface FiledsChampsPropsType {
   FieldsArray: RowType[];
   setTouched?: React.Dispatch<React.SetStateAction<boolean>> | undefined;
-  user?: any | undefined;
+  user?: { [key:string]: any | undefined} ;
   champ?: string;
 }
 function FiledsChamps({
@@ -19,15 +19,16 @@ function FiledsChamps({
   console.log(FieldsArray);
   return (
     <>
-      {FieldsArray?.sort((a: any, b: any) => a.rang - b.rang)?.map(
-        ({ Row }: any) => {
+      {FieldsArray?.sort((a: RowType, b: RowType) => a.rang - b.rang)?.map(
+        ({ Row }: RowType) => {
           return (
             <div
               className="flex items-end justify-center gap-[1rem]"
               key={uuidv4()}
             >
-              {Row?.map((RowField: any) => {
-                const Component = Field[RowField?.type.toUpperCase()] || Input;
+              {Row?.map((RowField: RowFieldType) => {
+                const Component =
+                  Field[RowField.type.toUpperCase() || "INPUT"] || Input;
                 return (
                   <Component
                     champ={champ || ""}

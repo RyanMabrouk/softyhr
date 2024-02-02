@@ -26,7 +26,7 @@ export interface StepsState {
 
 interface StepsAction {
   type: Actions;
-  payload?: any;
+  payload?: ObjectOfStrings;
 }
 
 

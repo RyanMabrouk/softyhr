@@ -29,7 +29,7 @@ function HirePacket({ checked, setChecked }: HirePacketPropsType) {
         <div className="flex items-center justify-center gap-2 bg-gray-14 pb-2 ">
           <Checkbox
             checked={checked}
-            onChange={(e: any) => {
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               setChecked(e.target.checked);
             }}
             color="success"

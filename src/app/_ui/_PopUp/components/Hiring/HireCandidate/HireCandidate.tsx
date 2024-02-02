@@ -12,7 +12,7 @@ function HireCandidate() {
   const  ApplicationId = params.get("ApplicationId");
   const  Candidate  = params.get("Candidate");
   const pathname = usePathname();
-  const [checked, setCheked] = useState();
+  const [checked, setCheked] = useState<boolean>();
   console.log(ApplicationId, Candidate);
   return (
     <PopUpSkeleton title="Hire">
@@ -23,7 +23,7 @@ function HireCandidate() {
         <div className="flex items-center justify-center gap-3 bg-gray-14 p-6">
           <Checkbox
             checked={checked}
-            onChange={(e: any) => {
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               setCheked(e.target.checked);
             }}
             color="success"

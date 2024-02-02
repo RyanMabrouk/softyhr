@@ -7,8 +7,6 @@ interface TabPanelProps {
   value: number;
 }
 
-
-
 function CustomTabPanel(props: TabPanelProps) {
   const { children, value, index, ...other } = props;
 
@@ -19,9 +17,10 @@ function CustomTabPanel(props: TabPanelProps) {
       id={`simple-tabpanel-${index}`}
       aria-labelledby={`simple-tab-${index}`}
       {...other}
+      className="!w-full"
     >
       {value === index && (
-        <Box sx={{ p: 3 }}>
+        <Box className="!w-full" key={index} sx={{ p: 3 }}>
           <h1>{children}</h1>
         </Box>
       )}
@@ -38,7 +37,7 @@ function Props(index: number) {
 
 interface TabsType {
   label: string;
-  Component: ()=> JSX.Element;
+  Component: () => JSX.Element;
 }
 
 function TabsPannelGeneric({ TabsPannel }: { TabsPannel: TabsType[] }) {
@@ -52,6 +51,7 @@ function TabsPannelGeneric({ TabsPannel }: { TabsPannel: TabsType[] }) {
         sx={{
           borderBottom: 1,
           borderColor: "divider",
+          width: "100%",
         }}
       >
         <Tabs
@@ -64,12 +64,13 @@ function TabsPannelGeneric({ TabsPannel }: { TabsPannel: TabsType[] }) {
             },
           }}
         >
-          {TabsPannel?.map(({ label }: any, index: number) => (
+          {TabsPannel?.map(({ label }: {label:string}, index: number) => (
             <Tab
               className="!bg-white !text-color-primary-8"
               style={{
                 backgroundColor: "red",
               }}
+              key={index}
               label={<h1 className="!bg-white !text-color1-500">{label}</h1>}
               {...Props(index)}
             />
@@ -77,7 +78,7 @@ function TabsPannelGeneric({ TabsPannel }: { TabsPannel: TabsType[] }) {
         </Tabs>
       </Box>
       {TabsPannel?.map(({ Component }: any, index: number) => (
-        <CustomTabPanel value={value} index={index}>
+        <CustomTabPanel key={index} value={value} index={index}>
           <Component />
         </CustomTabPanel>
       ))}

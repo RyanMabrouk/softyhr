@@ -13,9 +13,15 @@ import { PiDotsThreeOutlineVerticalFill } from "react-icons/pi";
 import { BiCommentAdd } from "react-icons/bi";
 import Link from "next/link";
 import { FaEdit } from "react-icons/fa";
+import { TableCandidateType } from "./config";
+import { Hiring_type } from "@/types/database.tables.types";
 
-export const renderCell = (Hiring: any, user: any, columnKey: React.Key) => {
-  const cellValue = user[columnKey as keyof any];
+export const renderCell = (
+  Hiring: Hiring_type,
+  user: TableCandidateType,
+  columnKey: React.Key,
+) => {
+  const cellValue = user[columnKey as keyof TableCandidateType];
   switch (columnKey) {
     case "id":
       return (

@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from "react";
+import React, { ReactNode, SyntheticEvent, useState } from "react";
 import {
   Autocomplete,
   Box,
@@ -6,12 +6,19 @@ import {
   ListItemText,
   MenuItem,
   Select,
+  SelectChangeEvent,
   TextField,
   makeStyles,
 } from "@mui/material";
 import useProfiles from "@/hooks/useProfiles";
 import Image from "next/image";
 import avatar from "/public/avatar.png";
+import { Profile_Type, RowFieldType } from "@/types/database.tables.types";
+
+interface SelectValueType {
+  label:string;
+  value:string;
+}
 function SelectGeneric({
   label,
   defaultValue,
@@ -31,9 +38,8 @@ function SelectGeneric({
   required?: boolean;
   inputLabel?: string | ReactNode;
 }) {
-  console.log(defaultValue);
-  const [value, setValue] = useState<any>(defaultValue);
-  const [ValueInput, setValueInput] = useState<any>();
+  const [value, setValue] = useState<SelectValueType | null>(defaultValue || {value:"",label:""});
+  const [ValueInput, setValueInput] = useState<string | null>();
   return (
     <>
       <div className="relative flex flex-col items-start justify-center">
@@ -64,13 +70,13 @@ function SelectGeneric({
             fontWeight: "300",
             fontSize: "1rem",
           }}
-          inputValue={ValueInput}
+          inputValue={ValueInput || ""}
           onInputChange={(event, newInputValue: string | null) => {
             setValueInput(newInputValue);
           }}
-          onChange={(event: any, newValue: any) => {
-            console.log(newValue?.value);
-            setValue(newValue);
+          onChange={(event: SyntheticEvent<Element, Event>, value: SelectValueType | null,) => {
+            console.log(value?.value);
+            setValue(value);
           }}
           value={value}
           options={options}
@@ -112,20 +118,28 @@ function SelectGeneric({
   );
 }
 
-function SelectUsers({ RowField, defaultValue }: any) {
+interface SelectUsers {
+  RowField: RowFieldType;
+  defaultValue:string | null;
+}
+
+function SelectUsers({ RowField, defaultValue }: SelectUsers) {
   const {
     profiles: { data, isPending },
   } = useProfiles();
-  if(isPending) return;
+  if (isPending) return;
   return (
     <SelectGeneric
       label={RowField?.name}
       defaultValue={
-        defaultValue ? {
-        value: defaultValue,
-        label: `${data?.find((user: any) => user?.user_id == defaultValue)?.["Basic Information"]?.["First name"]}     ${data?.find((user: any) => user?.user_id == defaultValue)?.["Basic Information"]?.["Last name"]} `,
-      }:  undefined}
-      options={data?.map((user: any) => {
+        defaultValue
+          ? {
+              value: defaultValue,
+              label: `${data?.find((user: Profile_Type) => user?.user_id == defaultValue)?.["Basic Information"]?.["First name"]}     ${data?.find((user: Profile_Type) => user?.user_id == defaultValue)?.["Basic Information"]?.["Last name"]} `,
+            }
+          : undefined
+      }
+      options={data?.map((user: Profile_Type) => {
         return {
           picture: user?.picture,
           label: `${user?.["Basic Information"]?.["First name"]}     ${user?.["Basic Information"]?.["Last name"]} `,
@@ -137,15 +151,3 @@ function SelectUsers({ RowField, defaultValue }: any) {
 }
 
 export default SelectUsers;
-/*
-    <SelectGeneric
-      inputLabel={RowField?.name}
-      setValueInParent={setValue}
-      options={data?.map((user: any) => {
-        return {
-          icon: user?.picture,
-          label: `${user?.["Basic Information"]?.["First name"]}     ${user?.["Basic Information"]?.["Last name"]} `,
-          value: user?.user_id,
-        };
-      })}
-    />*/

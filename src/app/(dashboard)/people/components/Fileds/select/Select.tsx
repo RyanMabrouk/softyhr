@@ -1,5 +1,5 @@
 "use client";
-import { FormControl, MenuItem, Select } from "@mui/material";
+import { FormControl, MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import React, { useState } from "react";
 import { RowFieldType } from "@/types/userInfoTypes.type";
 import { Row } from "react-day-picker";
@@ -19,7 +19,7 @@ function SelectInput({
   minWidth,
 }: SelectInputPropsType) {
   const [value, setValue] = useState(String(defaultValue));
-  const HandleChange = (e: any) => {
+  const HandleChange = (e: SelectChangeEvent<string>) => {
     if (setTouched) setTouched(true);
     setValue(e.target.value);
   };
