@@ -11,13 +11,23 @@ export default async function Hydration({
   children: React.ReactNode;
 }) {
   const queryClient = new QueryClient();
-  await queryClient.prefetchQuery({
-    queryKey: ["user_profile"],
-    queryFn: () =>
-      getData("profiles", {
-        user: true,
-      }),
-  });
+  await Promise.all([
+    queryClient.prefetchQuery({
+      queryKey: ["user_profile"],
+      queryFn: () =>
+        getData("profiles", {
+          user: true,
+        }),
+    }),
+    queryClient.prefetchQuery({
+      queryKey: ["permissions"],
+      queryFn: () =>
+        getData("permissions", {
+          org: true,
+          user: true,
+        }),
+    }),
+  ]);
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       {children}
