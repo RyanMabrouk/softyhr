@@ -1,11 +1,8 @@
 import React from "react";
 import Checkbox from "@mui/material/Checkbox";
 import { BiSolidCommentDetail } from "react-icons/bi";
-<<<<<<<< HEAD:src/app/(dashboard)/people/NewEmployee/components/HirePacket.tsx
 import UserSection from "../../components/UserSection";
 import Form from "./form/Form";
-========
->>>>>>>> 2b7dfb0d4a5cc48616094d402491f1881a9b2002:src/app/(dashboard)/people/(custom)/NewEmployee/components/HirePacket.tsx
 
 interface HirePacketPropsType {
   checked: boolean;

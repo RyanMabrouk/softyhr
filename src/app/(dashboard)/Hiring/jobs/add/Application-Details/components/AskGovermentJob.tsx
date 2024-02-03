@@ -3,7 +3,7 @@ import { TbNorthStar } from "react-icons/tb";
 import { Switch } from "antd";
 import Checkbox from "@mui/material/Checkbox";
 import { FormControlLabel } from "@mui/material";
-import { StepsContext } from "../../context/StepsProvider";
+import { StepsContext } from "../../context/StepsContext";
 import SelectInput from "@/app/(dashboard)/people/components/Fileds/select/Select";
 import { GovermentJobCategory } from "@/constants/Hiring/Hiring";
 

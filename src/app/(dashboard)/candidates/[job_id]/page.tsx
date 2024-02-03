@@ -1,7 +1,7 @@
 "use client";
 import Loader from "@/app/_ui/Loader/Loader";
 import AppliymentForm from "@/app/careers/[career_id]/components/AppliymentForm/AppliymentForm";
-import useHiring from "@/hooks/useHiring";
+import useHiring from "@/hooks/Hiring/useHiring";
 import Link from "next/link";
 import React from "react";
 import { BsArrowLeft } from "react-icons/bs";

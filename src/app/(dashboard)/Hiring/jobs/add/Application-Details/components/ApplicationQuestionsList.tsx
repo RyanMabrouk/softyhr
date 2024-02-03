@@ -4,7 +4,7 @@ import {
   ApplicationDefaultQuestions,
   ApplicationDefaultQuestionsType,
 } from "@/constants/Hiring/Hiring";
-import { StepsContext } from "../../context/StepsProvider";
+import { StepsContext } from "../../context/StepsContext";
 
 function ApplicationQuestionsList() {
   const { ApplicationDetails } = useContext(StepsContext);

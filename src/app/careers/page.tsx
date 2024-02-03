@@ -2,7 +2,7 @@
 import React from "react";
 import Loader from "../_ui/Loader/Loader";
 import JobopeningList from "./components/JobopeningList";
-import useHiring from "@/hooks/useHiring";
+import useHiring from "@/hooks/Hiring/useHiring";
 import Empty from "./components/Empty";
 
 function Page() {

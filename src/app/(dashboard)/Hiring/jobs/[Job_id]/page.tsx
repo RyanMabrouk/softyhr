@@ -1,8 +1,8 @@
 "use client";
 import React, { useState } from "react";
 import CandiatesTable, { CandidateTablePropsType } from "./components/CandidatesTable/CandidatesTable";
-import useCandidate from "@/hooks/useCandidate";
-import useHiring from "@/hooks/useHiring";
+import useCandidate from "@/hooks/Hiring/useCandidate";
+import useHiring from "@/hooks/Hiring/useHiring";
 import Link from "next/link";
 import { MdOutlineEventNote } from "react-icons/md";
 import { FaArrowLeftLong } from "react-icons/fa6";

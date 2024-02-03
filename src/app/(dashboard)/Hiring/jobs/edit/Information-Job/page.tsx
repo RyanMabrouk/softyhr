@@ -3,7 +3,7 @@ import React, { memo, useContext, useEffect, useRef, useState } from "react";
 import FiledsChamps from "@/app/(dashboard)/people/components/Fileds/Fileds";
 import useData from "@/hooks/useData";
 import AdditionnalInputs from "./components/AdditionnalInputs";
-import useHiring from "@/hooks/useHiring";
+import useHiring from "@/hooks/Hiring/useHiring";
 import { useRouter, useSearchParams } from "next/navigation";
 import SubmitButton from "@/app/careers/[career_id]/components/AppliymentForm/SubmitButton";
 import { CgNotes } from "react-icons/cg";

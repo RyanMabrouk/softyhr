@@ -3,7 +3,7 @@ import { getValidSubdomain } from "./api/getValidSubdomain";
 import getData from "./api/getData";
 import { organizations_type } from "./types/database.tables.types";
 export const config = {
-  matcher: ["/", "/Home", "/NOT-FOUND", "/employees", "/employees/:employeeId"], //routes that pass through middleware.ts before handle them
+  matcher: ["/", "/Home", "/NOT-FOUND", "/employees", "/employees/:employeeId"], 
 };
 export default async function middleware(req: NextRequest) {
   const url = req.nextUrl;

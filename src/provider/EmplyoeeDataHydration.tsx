@@ -17,6 +17,13 @@ export async function EmplyoeeDataHydration({
   console.log("🚀 ~ employeeId:", employeeId);
   await Promise.all([
     queryClient.prefetchQuery({
+      queryKey: ["settings"],
+      queryFn: () =>
+      getData("settings", {
+        org: true,
+      }),
+    }),
+    queryClient.prefetchQuery({
       queryKey: ["leave_requests", employeeId],
       queryFn: () =>
         getData("leave_requests", {

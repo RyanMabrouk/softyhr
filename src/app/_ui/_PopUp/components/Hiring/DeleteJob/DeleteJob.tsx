@@ -8,7 +8,7 @@ import { deleteJobOpening } from "@/actions/hiring/DeleteJobOpening";
 import { useRouter, useSearchParams } from "next/navigation";
 import useToast from "@/hooks/useToast";
 import { useQueryClient } from "@tanstack/react-query";
-import useHiring from "@/hooks/useHiring";
+import useHiring from "@/hooks/Hiring/useHiring";
 import { Hiring_type } from "@/types/database.tables.types";
 
 function DeleteJob() {

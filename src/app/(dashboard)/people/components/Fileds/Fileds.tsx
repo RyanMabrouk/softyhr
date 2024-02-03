@@ -16,7 +16,7 @@ function FiledsChamps({
   user,
   champ,
 }: FiledsChampsPropsType): ReactNode {
-  console.log(FieldsArray);
+  
   return (
     <>
       {FieldsArray?.sort((a: RowType, b: RowType) => a.rang - b.rang)?.map(

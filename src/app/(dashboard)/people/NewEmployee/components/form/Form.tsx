@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { useSettings } from "@/hooks/useSettings";
+import { useSettings } from "@/hooks/Settings/useSettings";
 import { v4 as uuidv4 } from "uuid";
 import { NewEmployeeSections, sectionIcon } from "@/constants/userInfo";
 import { ChampsType } from "@/types/userInfoTypes.type";
@@ -14,24 +14,14 @@ import updateData from "@/api/updateData";
 import useToast from "@/hooks/useToast";
 import FiledsChamps from "@/app/(dashboard)/people/components/Fileds/Fileds";
 import { Profile_Type } from "@/types/database.tables.types";
-<<<<<<<< HEAD:src/app/(dashboard)/people/NewEmployee/components/form/Form.tsx
 import ChangesSection from "../../../components/ChangesSection/ChangesSection";
 import Education from "./Education";
 import EmployementStatus from "../EmployementStatus";
 import AccessSection from "../AccessSection";
 import formulateData from "../../../components/utils/formulateData";
 import { CreateNewEmployee } from "@/actions/hiring/CreateNewEmployee";
-import useCandidate from "@/hooks/useCandidate";
+import useCandidate from "@/hooks/Hiring/useCandidate";
 import { useQueryClient } from "@tanstack/react-query";
-========
-import Education from "./Education";
-import EmployementStatus from "../EmployementStatus";
-import AccessSection from "../AccessSection";
-import { CreateNewEmployee } from "@/actions/hiring/CreateNewEmployee";
-import useCandidate from "@/hooks/useCandidate";
-import formulateData from "@/app/(dashboard)/people/components/utils/formulateData";
-import ChangesSection from "@/app/(dashboard)/people/components/ChangesSection/ChangesSection";
->>>>>>>> 2b7dfb0d4a5cc48616094d402491f1881a9b2002:src/app/(dashboard)/people/(custom)/NewEmployee/components/form/Form.tsx
 
 export const CreateEmployeeSection: any = {
   Education: Education,
@@ -70,13 +60,8 @@ function Form() {
     const NewData = formulateData(formdata, {
       data: {
         ...result,
-<<<<<<<< HEAD:src/app/(dashboard)/people/NewEmployee/components/form/Form.tsx
         Job: { "Hire Date": new Date() },
         supervisor_id: candidate_data[0]?.["Hiring Lead"] || "",
-========
-        Hiring: { "Hire Date": new Date() },
-        supervisor_id: candidate_data[0]?.["Hiring Lead"],
->>>>>>>> 2b7dfb0d4a5cc48616094d402491f1881a9b2002:src/app/(dashboard)/people/(custom)/NewEmployee/components/form/Form.tsx
       },
     });
 

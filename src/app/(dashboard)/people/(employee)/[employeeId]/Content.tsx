@@ -63,28 +63,28 @@ export function Content() {
             </div>
           </div>
           <div className="flex">
-            {EmployeeRoute?.filter((route) => route?.defaultPath == true)
-              ?.sort((a, b) => a.rang - b.rang)
-              ?.map(
-                ({ rang, label, path, defaultPath }: EmployeRoutesType) =>
-                  defaultPath && (
-                    <Link
-                      key={rang}
-                      href={path(employeeId as string)}
-                      className={
-                        "flex items-center justify-center overflow-hidden rounded-t-md p-3 px-6 capitalize text-white transition ease-in-out " +
-                        (ActiveRoute == label
-                          ? `bg-white font-bold !text-color-primary-9 `
-                          : `font-normal hover:bg-gray-24`)
+          {EmployeeRoute?.filter((route) => route?.defaultPath == true)
+              ?.sort((a, b) => a.rang - b.rang) 
+              ?.map( 
+                ({ rang, label, path, defaultPath }: EmployeRoutesType) => 
+                defaultPath && ( 
+                  <Link 
+                      key={rang}  
+                      href={path(employeeId as string)} 
+                      className={ 
+                        "flex items-center justify-center overflow-hidden rounded-t-md p-3 px-6 capitalize text-white transition ease-in-out " + 
+                        (ActiveRoute == label 
+                          ? `bg-white font-bold !text-color-primary-9 ` 
+                          : `font-normal hover:bg-gray-24`)  
                       }
-                    >
-                      {label}
-                    </Link>
+                    > 
+                      {label} 
+                    </Link>   
                   ),
               )}
-          </div>
-        </div>
-      </div>
+          </div> 
+        </div> 
+      </div> 
     </div>
-  );
+  ); 
 }

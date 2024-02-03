@@ -3,7 +3,7 @@ import React, { memo, useState } from "react";
 import FiledsChamps from "../components/Fileds/Fileds";
 import { FaAddressCard } from "react-icons/fa";
 import ChangesSection from "../components/ChangesSection/ChangesSection";
-import { useSettings } from "@/hooks/useSettings";
+import { useSettings } from "@/hooks/Settings/useSettings";
 import { v4 as uuidv4 } from "uuid";
 import { sectionIcon } from "@/constants/userInfo";
 import { ChampsType } from "@/types/userInfoTypes.type";
@@ -29,6 +29,7 @@ export interface EducationType{
 function UserSection({ section, employeeId }: UserSection) {
   const router = useRouter();
   const { data, isPending } = useSettings(section);
+  console.log(data)
   const { toast } = useToast();
   const [touched, setTouched] = useState<boolean>(false);
   const [Data, setData] = useState<EducationType | null[]>([]);

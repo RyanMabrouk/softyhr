@@ -14,20 +14,19 @@ export default function Layout({
   params: { employeeId },
   children,
 }: EmployePropsType) {
-  const { employee_profile: data } = useEmployeeData({ employeeId });
-  const ActiveRoute =
-    usePathname().split("/").slice(-1).join("") || EmployeeRoute[0]?.label;
-    
-  return (
-    <EmplyoeeDataHydration employeeId={employeeId}>
-      <div className="flex h-full w-full flex-col">
-        <Content />
-        <div className="flex h-fit w-full grow pl-[12%] pr-[15%]">
-          <UserInfo employeeId={employeeId} />
-          {children}
+ // const { employee_profile: data } = useEmployeeData({ employeeId });
+  /*const ActiveRoute =
+    usePathname().split("/").slice(-1).join("") || EmployeeRoute[0]?.label;*/
+    return (
+      <EmplyoeeDataHydration employeeId={employeeId}>
+        <div className="flex h-full w-full flex-col"> 
+          <Content />
+          <div className="flex h-fit w-full grow pl-[12%] pr-[15%]">
+            <UserInfo employeeId={employeeId} />
+            {children}
+          </div>
+          <Footer />
         </div>
-        <Footer />
-      </div>
-    </EmplyoeeDataHydration>
-  );
+      </EmplyoeeDataHydration>
+    );
 }

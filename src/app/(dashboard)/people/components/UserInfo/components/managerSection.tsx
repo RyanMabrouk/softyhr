@@ -8,15 +8,14 @@ import { Profile_Type } from "@/types/database.tables.types";
 
 function ManagerSection({ user }: {user:Profile_Type}) {
   const {
-    profiles: { data: manager, isPending },
+    profiles: { data, isPending, error },
   } = useProfilesData(
     { user_id: user?.supervisor_id },
     'user_id,role,picture,supervisor_id,"Basic Information","Job Information"',
   );
-  console.log(manager);
   return (
     <>
-      {!isPending ? (
+     { !isPending && !error && (
         <div className="flex flex-col items-start justify-center gap-[0.5rem]">
           <h1 className="text-sm text-color-primary-7">Manager</h1>
           <UnderlinedLink>
@@ -25,19 +24,17 @@ function ManagerSection({ user }: {user:Profile_Type}) {
               width={100}
               className="h-[1.5rem] w-[1.5rem] rounded-full object-cover"
               alt=""
-              src={manager[0]?.picture || avatar}
+              src={data[0]?.picture || avatar}
             />
             <Link
-              href={`/people/${manager[0]?.user_id}/personnal`}
+              href={`/people/${data[0]?.user_id}/personnal`}
               className="cursor-pointer text-sm font-normal text-gray-15 underline-offset-1 hover:text-fabric-700 hover:underline"
             >
-              {`${manager[0]?.["Basic Information"]?.["First name"]} ${manager[0]?.["Basic Information"]?.["Last name"]}`}
+              {`${data[0]?.["Basic Information"]?.["First name"]} ${data[0]?.["Basic Information"]?.["Last name"]}`}
             </Link>
           </UnderlinedLink>
         </div>
-      ) : (
-        <h1>Loading...</h1>
-      )}
+      ) }
     </>
   );
 }

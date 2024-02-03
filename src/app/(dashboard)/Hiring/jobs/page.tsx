@@ -9,11 +9,11 @@ import useData from "@/hooks/useData";
 import { NewCandidates } from "@/helpers/Hiring/CountNewCandidates";
 import { Hiring_type } from "@/types/database.tables.types";
 import { HiringTableType } from "../_ui/HiringTable/Hiringtable.types";
-import useHiring from "@/hooks/useHiring";
+import useHiring from "@/hooks/Hiring/useHiring";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { GetJobOpening } from "@/actions/hiring/GetJobOpening";
 import getHiring from "@/api/getHiring";
-import useCandidate from "@/hooks/useCandidate";
+import useCandidate from "@/hooks/Hiring/useCandidate";
 import TableSkeleton from "../_ui/HiringTable/components/TableSkeleton";
 
 function Page() {

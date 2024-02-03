@@ -1,4 +1,4 @@
-import { useSettings } from "@/hooks/useSettings";
+import { useSettings } from "@/hooks/Settings/useSettings";
 import { Hiring_type } from "@/types/database.tables.types";
 import React from "react";
 import { v4 as uuidv4 } from "uuid";

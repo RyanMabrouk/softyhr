@@ -5,7 +5,7 @@ import { usePathname, useRouter } from "next/navigation";
 import React, { ReactNode, memo, useContext, useState } from "react";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { TiClipboard } from "react-icons/ti";
-import StepsProvider, { ObjectOfStrings, StepType, StepsContext } from "./context/StepsProvider";
+import StepsProvider, { ObjectOfStrings, StepType, StepsContext } from "./context/StepsContext";
 import { FormdataToObject } from "@/helpers/object.helpers";
 import { RiCheckboxCircleFill, RiCheckboxCircleLine } from "react-icons/ri";
 import SubmitFormBtn from "./SubmitFormBtn";

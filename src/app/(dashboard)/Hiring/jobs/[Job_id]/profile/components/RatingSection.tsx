@@ -3,8 +3,8 @@ import RatingGeneric from "../../components/CandidatesTable/components/RatingGen
 import { useParams } from "next/navigation";
 import { FaMessage } from "react-icons/fa6";
 import HireStatus from "../../components/CandidatesTable/components/HireStatus";
-import useCandidate from "@/hooks/useCandidate";
-import useHiring from "@/hooks/useHiring";
+import useCandidate from "@/hooks/Hiring/useCandidate";
+import useHiring from "@/hooks/Hiring/useHiring";
 
 function RatingSection() {
   const Params = useParams();

@@ -3,7 +3,7 @@ import { CgClose } from "react-icons/cg";
 import UpdateCandidatesForm from "./UpdateCandidatesForm";
 import PopUpSkeleton from "../../../PopUpSkeleton";
 import { useSearchParams } from "next/navigation";
-import useCandidate from "@/hooks/useCandidate";
+import useCandidate from "@/hooks/Hiring/useCandidate";
 import { FaUserCircle } from "react-icons/fa";
 
 function UpdateCandidate() {

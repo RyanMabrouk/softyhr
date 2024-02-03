@@ -10,7 +10,7 @@ import ApplySectionSkeleton from "./components/ApplySection/ApplySectionSkeleton
 import DescriptionSkeleton from "./components/Description/DescriptionSkeleton";
 import Description from "./components/Description/Description";
 import ApplySection from "./components/ApplySection/ApplySection";
-import useHiring from "@/hooks/useHiring";
+import useHiring from "@/hooks/Hiring/useHiring";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";

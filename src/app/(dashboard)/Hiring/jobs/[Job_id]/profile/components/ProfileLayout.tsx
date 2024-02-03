@@ -4,8 +4,8 @@ import {
   CandidateProfileRoutesType,
 } from "@/constants/Hiring/CandidateRoutes.constants";
 import { formatCustomDate, monthsAgo } from "@/helpers/date.helpers";
-import useCandidate from "@/hooks/useCandidate";
-import useHiring from "@/hooks/useHiring";
+import useCandidate from "@/hooks/Hiring/useCandidate";
+import useHiring from "@/hooks/Hiring/useHiring";
 import Image from "next/image";
 import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";

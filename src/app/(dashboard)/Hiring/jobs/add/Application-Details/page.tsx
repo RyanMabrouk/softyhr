@@ -1,6 +1,6 @@
 "use client";
 import React, { useContext } from "react";
-import { StepsContext } from "../context/StepsProvider";
+import { StepsContext } from "../context/StepsContext";
 import { useRouter } from "next/navigation";
 import AppQuestion from "./components/AppQuestion";
 import ApplicationQuestionsList from "./components/ApplicationQuestionsList";
