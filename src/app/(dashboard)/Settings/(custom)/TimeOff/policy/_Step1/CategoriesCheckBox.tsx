@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { generateLeaveCategorieIcon } from "@/helpers/leave.helpers";
 import { CheckBox } from "@/app/_ui/_PopUp/components/Settings/TimeOff/AddNewPolicy/CheckBox";
 import { NewCategoryBtn } from "./NewCategoryBtn";
-import useLeaveData from "@/hooks/useLeaveData";
+import useLeaveData from "@/hooks/TimeOff/useLeaveData";
 import {
   database_leave_policies_type,
   databese_leave_categories_type,

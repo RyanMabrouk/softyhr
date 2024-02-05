@@ -4,7 +4,7 @@ import {
   databese_leave_categories_type,
 } from "@/types/database.tables.types";
 import useData from "./useData";
-import useLeaveData from "./useLeaveData";
+import useLeaveData from "./TimeOff/useLeaveData";
 export default function usePolicy({ policy_id }: { policy_id: number }): {
   policy: database_leave_policies_type | undefined;
   category: databese_leave_categories_type | undefined;
@@ -19,5 +19,5 @@ export default function usePolicy({ policy_id }: { policy_id: number }): {
   const category = leave_categories?.find(
     (c: databese_leave_categories_type) => c.id === policy?.categories_id,
   );
-  return { policy, category };
+  return { policy: policy, category: category };
 }

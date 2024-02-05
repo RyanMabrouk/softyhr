@@ -16,7 +16,7 @@ import {
 import { generateLeaveCategorieIcon } from "@/helpers/leave.helpers";
 import { useParams } from "next/navigation";
 import useEmployeeData from "@/hooks/useEmloyeeData";
-import useLeaveData from "@/hooks/useLeaveData";
+import useLeaveData from "@/hooks/TimeOff/useLeaveData";
 import { Player } from "@lottiefiles/react-lottie-player";
 interface formatted_policy_type {
   id: number;

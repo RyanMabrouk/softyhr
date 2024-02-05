@@ -31,7 +31,7 @@ import {
 import useData from "@/hooks/useData";
 import { generateLeaveCategorieIcon } from "@/helpers/leave.helpers";
 import { UnderlinedLink } from "@/app/_ui/UnderlinedLink";
-import useLeaveData from "@/hooks/useLeaveData";
+import useLeaveData from "@/hooks/TimeOff/useLeaveData";
 import useProfilesData from "@/hooks/useProfilesData";
 import ManagerSection from "./components/managerSection";
 import Link from "next/link";

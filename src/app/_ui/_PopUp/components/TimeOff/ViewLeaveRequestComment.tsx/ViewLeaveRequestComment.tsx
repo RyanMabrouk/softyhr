@@ -21,7 +21,7 @@ import { formatTotalHoursToTimeUnit } from "@/helpers/leave.helpers";
 import { formatDateToMonDDYYYY } from "@/helpers/date.helpers";
 import useEmployeeData from "@/hooks/useEmloyeeData";
 import PopUpSkeleton from "../../../PopUpSkeleton";
-import useLeaveData from "@/hooks/useLeaveData";
+import useLeaveData from "@/hooks/TimeOff/useLeaveData";
 import useProfilesData from "@/hooks/useProfilesData";
 function ViewLeaveRequestComment() {
   const Router = useRouter();

@@ -1,5 +1,5 @@
 "use client";
-import useLeaveData from "@/hooks/useLeaveData";
+import useLeaveData from "@/hooks/TimeOff/useLeaveData";
 import {
   database_leave_policies_type,
   database_profile_leave_balance_type,

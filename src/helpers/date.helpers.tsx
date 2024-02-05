@@ -143,13 +143,8 @@ export function formatCustomDate(inputDate: string) {
   }).format(date);
 }
 export function monthsAgo(inputDate: string) {
-  // Parse the input date
   const date = new Date(inputDate);
-
-  // Get the current date
   const currentDate = new Date();
-
-  // Calculate the difference in months
   const monthsDifference =
     (currentDate.getFullYear() - date.getFullYear()) * 12 +
     currentDate.getMonth() -
@@ -164,4 +159,25 @@ export function monthsAgo(inputDate: string) {
   } else {
     return "Invalid date";
   }
+}
+// get the date of the last day of the week
+export function getSaturday(date: Date) {
+  return new Date(
+    date.getFullYear(),
+    date.getMonth(),
+    date.getDate() + 6 - date.getDay(),
+  );
+}
+// get the date of the last day of the month
+export function lastDayOfMonth(date: Date) {
+  return new Date(date.getFullYear(), date.getMonth() + 1, 0);
+}
+// get the date of the first day of the month
+export function firstDayOfMonth(date: Date) {
+  return new Date(date.getFullYear(), date.getMonth(), 1);
+}
+// get the date of the first day of the week
+export function getSunday(date: Date) {
+  const day = date.getDay();
+  return new Date(date.getFullYear(), date.getMonth(), date.getDate() - day);
 }

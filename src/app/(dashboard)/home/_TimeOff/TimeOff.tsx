@@ -3,7 +3,7 @@ import CustomSwiper from "@/app/_ui/swiper";
 import { generateLeaveCategorieIcon } from "@/helpers/leave.helpers";
 import useData from "@/hooks/useData";
 import useEmployeeData from "@/hooks/useEmloyeeData";
-import useLeaveData from "@/hooks/useLeaveData";
+import useLeaveData from "@/hooks/TimeOff/useLeaveData";
 import {
   database_leave_policies_policy_type,
   database_leave_policies_type,

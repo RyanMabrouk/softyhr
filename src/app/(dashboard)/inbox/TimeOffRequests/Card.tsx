@@ -5,18 +5,30 @@ import { IoIosArrowForward } from "react-icons/io";
 import Link from "next/link";
 import { ApproveButton } from "./ApproveButton";
 import { DenyButton } from "./DenyButton";
+import { database_leave_request_duration_used_type } from "@/types/database.tables.types";
+import { formatDateToMonDDYYYY } from "@/helpers/date.helpers";
 export function Card({
   id,
+  policy_id,
+  duration_used,
+  user_id,
   name,
   date,
   note,
   picture,
+  start_at,
+  end_at,
 }: {
   id: number;
   name: string;
   date: string;
   note: string | null;
   picture?: string | null;
+  policy_id: number;
+  duration_used: database_leave_request_duration_used_type[];
+  user_id: string;
+  start_at: string;
+  end_at: string;
 }) {
   return (
     <>
@@ -39,11 +51,16 @@ export function Card({
               <span className="text-sm leading-6 text-gray-21">-</span>
               <span className="text-sm leading-6 text-gray-21">{date}</span>
             </div>
-            <span className="text-sm leading-6 text-gray-21">{note ?? ""}</span>
+            <span className="text-sm leading-6 text-gray-21 min-h-max">{note || `Is requesting vacation from ${formatDateToMonDDYYYY(new Date(start_at))} to ${formatDateToMonDDYYYY(new Date(end_at))}`}</span>
           </div>
         </section>
         <section className="flex flex-row items-center gap-3">
-          <ApproveButton id={id} className="hidden group-hover:block" />
+          <ApproveButton request={{
+            id: id,
+            policy_id: policy_id,
+            user_id:user_id ,
+            duration_used:duration_used ,
+          }} className="hidden group-hover:block" />
           <DenyButton
             id={id}
             className="hidden !border-gray-23 group-hover:block"

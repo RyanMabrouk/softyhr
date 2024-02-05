@@ -4,7 +4,7 @@ import { InputGeneric } from "@/app/_ui/InputGeneric";
 import { SubmitBtn } from "@/app/_ui/SubmitBtn";
 import PopUpSkeleton from "@/app/_ui/_PopUp/PopUpSkeleton";
 import usePolicy from "@/hooks/usePolicy";
-import useLeaveData from "@/hooks/useLeaveData";
+import useLeaveData from "@/hooks/TimeOff/useLeaveData";
 import useToast from "@/hooks/useToast";
 import { database_profile_leave_balance_type } from "@/types/database.tables.types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";

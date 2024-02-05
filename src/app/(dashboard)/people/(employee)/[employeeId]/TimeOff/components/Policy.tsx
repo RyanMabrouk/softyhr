@@ -1,12 +1,12 @@
 import React from "react";
-import { AddLeaveRequestBtn } from "../_ui/Buttons/AddLeaveRequestBtn";
-import { AdjustLeavePolicyBalanceBtn } from "../_ui/Buttons/AdjustLeavePolicyBalanceBtn";
+import { AddLeaveRequestBtn } from "./Buttons/AddLeaveRequestBtn";
+import { AdjustLeavePolicyBalanceBtn } from "./Buttons/AdjustLeavePolicyBalanceBtn";
 import {
   database_leave_policies_policy_type,
   databese_leave_categories_track_time_unit_type,
 } from "@/types/database.tables.types";
 import { formatTotalHoursToTimeUnit } from "@/helpers/leave.helpers";
-import { ChangePolicyMenuBtn } from "../_ui/Buttons/ChangePolicyMenuBtn";
+import { ChangePolicyMenuBtn } from "./Buttons/ChangePolicyMenuBtn";
 import { CalculatorBtn } from "./CalculatorBtn";
 export function Policy({
   id,

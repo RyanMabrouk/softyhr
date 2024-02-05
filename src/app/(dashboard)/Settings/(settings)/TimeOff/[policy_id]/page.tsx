@@ -18,7 +18,7 @@ import {
 import { UnderlinedLink } from "@/app/_ui/UnderlinedLink";
 import usePolicy from "@/hooks/usePolicy";
 import { EmployyeSettingsBtn } from "./EmployyeSettingsBtn";
-import useLeaveData from "@/hooks/useLeaveData";
+import useLeaveData from "@/hooks/TimeOff/useLeaveData";
 import { BsPlusSlashMinus } from "react-icons/bs";
 import useProfilesData from "@/hooks/useProfilesData";
 export default function Page() {
