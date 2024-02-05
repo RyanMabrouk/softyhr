@@ -10,7 +10,13 @@ export default async function Hydration({
 }: {
   children: React.ReactNode;
 }) {
-  const queryClient = new QueryClient();
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        staleTime: 5 * 60 * 1000,
+      },
+    },
+  });
   await Promise.all([
     queryClient.prefetchQuery({
       queryKey: ["user_profile"],
