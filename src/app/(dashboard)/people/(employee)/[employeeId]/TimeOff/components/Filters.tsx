@@ -1,7 +1,7 @@
 "use client";
 import React, { useContext } from "react";
-import historyTableFilters from "../_context/historyTableFilters";
-import { historyTableFiltersContextType } from "../_context/historyTableFilters";
+import historyTableFilters from "../context/historyTableFilters";
+import { historyTableFiltersContextType } from "../context/historyTableFilters";
 import { leave_data_types } from "./History";
 import { capitalizeFirstLetter } from "@/helpers/string.helpers";
 import { SelectGeneric } from "@/app/_ui/SelectGeneric";

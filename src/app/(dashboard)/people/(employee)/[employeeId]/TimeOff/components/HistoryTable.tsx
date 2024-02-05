@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import { Hr } from "../_ui/Hr";
+import { Hr } from "./Hr";
 
 export function HistoryTable({
   Headers,

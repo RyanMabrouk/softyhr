@@ -3,7 +3,7 @@ import CancelBtnGeneric from "@/app/_ui/CancelBtnGeneric";
 import { InputGeneric } from "@/app/_ui/InputGeneric";
 import { SubmitBtn } from "@/app/_ui/SubmitBtn";
 import PopUpSkeleton from "@/app/_ui/_PopUp/PopUpSkeleton";
-import useLeaveData from "@/hooks/useLeaveData";
+import useLeaveData from "@/hooks/TimeOff/useLeaveData";
 import useToast from "@/hooks/useToast";
 import { databese_leave_categories_type } from "@/types/database.tables.types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";

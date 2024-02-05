@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import usePendingLeaveRequests from "@/hooks/usePendingLeaveRequests";
+import usePendingLeaveRequests from "@/hooks/TimeOff/usePendingLeaveRequests";
 import useProfiles from "@/hooks/useProfiles";
 import { database_profile_type } from "@/types/database.tables.types";
 import { formatDateToMonDDYYYY } from "@/helpers/date.helpers";
@@ -25,7 +25,7 @@ export default function Page() {
         " " +
         user?.["Basic Information"]?.["Last name"],
       picture: user?.picture,
-      date: formatDateToMonDDYYYY(new Date(e.start_at)),
+      date: formatDateToMonDDYYYY(new Date(e.created_at)),
     };
   });
   const queryclient = useQueryClient();
@@ -49,7 +49,16 @@ export default function Page() {
   });
   return (
     <div className="ml-5 flex h-full w-full flex-col">
-      {pendingData?.map((e) => <Card {...e} key={"card" + e.id} />)}
+      {pendingData?.map((e) => (
+        <Card
+          {...e}
+          duration_used={e.duration_used.map((d: any) => ({
+            date: String(d.date),
+            duration: d.duration,
+          }))}
+          key={"card" + e.id}
+        />
+      ))}
     </div>
   );
 }

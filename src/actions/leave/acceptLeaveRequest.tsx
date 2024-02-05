@@ -1,6 +1,6 @@
 "use server";
 import updateData from "@/api/updateData";
-import { request_type } from "@/app/(dashboard)/people/(employee)/[employeeId]/TimeOff/_ui/Buttons/AcceptRequestBtn";
+import { request_type } from "@/app/(dashboard)/people/(employee)/[employeeId]/TimeOff/components/Buttons/AcceptRequestBtn";
 import { database_leave_request_status_type } from "@/types/database.tables.types";
 import updateLeaveBalance from "./updateLeaveBalance";
 import { getPolicyType } from "./getPolicyType";

@@ -2,13 +2,13 @@ import React from "react";
 import { FaBusinessTime } from "react-icons/fa";
 import { PolyciesSwiper } from "./components/PolyciesSwiper";
 import { MdOutlineWatchLater } from "react-icons/md";
-import { Hr } from "./_ui/Hr";
+import { Hr } from "./components/Hr";
 import { History } from "./components/History";
-import { HistoryTableFiltersProvider } from "./_context/historyTableFilters";
+import { HistoryTableFiltersProvider } from "./context/historyTableFilters";
 import { UpcomingTimeOff } from "./components/UpcomingTimeOff";
-import { ChangeAccrualStartBtn } from "./_ui/Buttons/ChangeAccrualStartBtn";
-import { AddTimeOffPolicyBtn } from "./_ui/Buttons/AddTimeOffPolicyBtn";
-import { ToggleDateSortContextProvider } from "./_context/toggleDateSortContext";
+import { ChangeAccrualStartBtn } from "./components/Buttons/ChangeAccrualStartBtn";
+import { AddTimeOffPolicyBtn } from "./components/Buttons/AddTimeOffPolicyBtn";
+import { ToggleDateSortContextProvider } from "./context/toggleDateSortContext";
 import { LeaveDataHydration } from "../../../../../../provider/LeaveDataHydration";
 export default function Page({
   params,

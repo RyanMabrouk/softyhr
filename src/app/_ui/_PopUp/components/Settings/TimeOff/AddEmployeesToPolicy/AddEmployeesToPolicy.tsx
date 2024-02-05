@@ -5,7 +5,7 @@ import PopUpSkeleton from "@/app/_ui/_PopUp/PopUpSkeleton";
 import { generateLeaveCategorieIcon } from "@/helpers/leave.helpers";
 import usePolicy from "@/hooks/usePolicy";
 import useData from "@/hooks/useData";
-import useLeaveData from "@/hooks/useLeaveData";
+import useLeaveData from "@/hooks/TimeOff/useLeaveData";
 import {
   database_leave_policies_type,
   database_profile_leave_balance_type,
