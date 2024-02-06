@@ -1,9 +1,6 @@
 "use client";
 import React from "react";
 import usePendingLeaveRequests from "@/hooks/TimeOff/usePendingLeaveRequests";
-import useProfiles from "@/hooks/useProfiles";
-import { database_profile_type } from "@/types/database.tables.types";
-import { formatDateToMonDDYYYY } from "@/helpers/date.helpers";
 import { Card } from "../components/Card";
 import useRealTime from "@/hooks/useRealTime";
 import { useQueryClient } from "@tanstack/react-query";
@@ -41,7 +38,7 @@ export default function Page() {
     },
   });
   return (
-    <div className="ml-5 flex min-h-full w-full flex-col">
+    <div className="mb-10 ml-5 flex min-h-full w-full flex-col">
       {pendingData && pendingData.length > 0 ? (
         pendingData?.map((e) => (
           <Card

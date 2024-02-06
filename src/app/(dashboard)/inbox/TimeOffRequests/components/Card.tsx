@@ -84,13 +84,13 @@ export function Card({
               <span className="text-sm leading-6 text-gray-21">-</span>
               <span className="text-sm leading-6 text-gray-21">{date}</span>
             </div>
-            <span className="min-h-max text-sm leading-6 text-gray-21">
+            <span className="mr-6 line-clamp-2 min-h-max text-sm leading-6 text-gray-21">
               {note ||
                 `Is requesting vacation from ${formatDateToMonDDYYYY(new Date(start_at))} to ${formatDateToMonDDYYYY(new Date(end_at))}`}
             </span>
           </div>
         </section>
-        <section className="flex flex-row items-center gap-3">
+        <section className="flex flex-row items-center gap-3 transition-all ease-linear">
           {status === "pending" && (
             <>
               <ApproveButton
@@ -109,13 +109,13 @@ export function Card({
             </>
           )}
           {status === "approved" && (
-            <div className="flex flex-row items-center gap-0.5 font-semibold text-fabric-700">
+            <div className="flex flex-row items-center gap-0.5 font-semibold text-fabric-700 transition-all ease-linear">
               <FaCheckCircle className={`h-4 w-4 `} />
               <span>Approved</span>
             </div>
           )}
           {status === "rejected" && (
-            <div className="flex flex-row items-center gap-0.5 font-semibold text-color9-500">
+            <div className="flex flex-row items-center gap-0.5 font-semibold text-color9-500 transition-all ease-linear">
               <MdCancel className="h-5 w-5 " />
               <span>Rejected</span>
             </div>

@@ -20,7 +20,7 @@ export default function Page() {
   });
   const isPending = isPending1 || isPending2;
   return (
-    <div className="ml-5 flex min-h-full w-full flex-col">
+    <div className="mb-10 ml-5 flex min-h-full w-full flex-col">
       {formatted_leavs && formatted_leavs.length > 0 ? (
         formatted_leavs?.map((e) => (
           <Card

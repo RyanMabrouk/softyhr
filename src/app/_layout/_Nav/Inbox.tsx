@@ -3,23 +3,12 @@ import Link from "next/link";
 import React from "react";
 import { FaInbox } from "react-icons/fa6";
 import RoleGuard from "@/app/_ui/RoleGuard";
-import getData from "@/api/getData";
-import { useQueryClient } from "@tanstack/react-query";
 export function Inbox() {
   const [toggleView, setToggleView] = React.useState(false);
-  const queryClient = useQueryClient();
-  queryClient.prefetchQuery({
-    queryKey: ["permissions", "user"],
-    queryFn: () =>
-      getData("permissions", {
-        org: true,
-        user: true,
-      }),
-  });
   const links = [
     {
       label: "Time Off requests",
-      path: "/inbox/TimeOffRequests",
+      path: "/inbox/TimeOffRequests/pending",
       permissions: ["accept:leave_requests", "deny:leave_requests"],
     },
   ];
