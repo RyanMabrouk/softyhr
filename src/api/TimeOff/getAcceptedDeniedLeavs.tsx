@@ -18,7 +18,7 @@ export default async function getAcceptedDeniedLeavs({
   const { data, error } = await supabase
     .from("leave_requests")
     .select("*")
-    .filter("status", "in", `("${status}", "${status2}")`)
+    .filter("status", "in", `("${status}","${status2}")`)
     .match({ org_name: org_name });
   return { data: data, error: error };
 }

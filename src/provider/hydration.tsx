@@ -26,7 +26,7 @@ export default async function Hydration({
         }),
     }),
     queryClient.prefetchQuery({
-      queryKey: ["permissions"],
+      queryKey: ["permissions", "user"],
       queryFn: () =>
         getData("permissions", {
           org: true,
