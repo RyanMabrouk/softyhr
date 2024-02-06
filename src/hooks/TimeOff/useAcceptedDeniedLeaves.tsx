@@ -17,7 +17,7 @@ export default function useAcceptedDeniedLeaves({ page }: { page: number }): {
   const status: database_leave_request_status_type = "approved";
   const status2: database_leave_request_status_type = "rejected";
   const { data: accepted_denied_leaves, isPending } = useQuery({
-    queryKey: ["leave_requests", status, status2],
+    queryKey: ["leave_requests", status, status2, page],
     queryFn: () => getAcceptedDeniedLeavs({ status, status2, page }),
     enabled: page !== undefined && page !== null,
   });
