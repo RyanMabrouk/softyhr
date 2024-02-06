@@ -1,6 +1,6 @@
 import React from "react";
-import { useAcceptLeaveRequest } from "../../people/(employee)/[employeeId]/TimeOff/hooks/useAcceptLeaveRequest";
-import { request_type } from "../../people/(employee)/[employeeId]/TimeOff/types/types";
+import { useAcceptLeaveRequest } from "../../../people/(employee)/[employeeId]/TimeOff/hooks/useAcceptLeaveRequest";
+import { request_type } from "../../../people/(employee)/[employeeId]/TimeOff/types/types";
 
 export function ApproveButton({
   request,

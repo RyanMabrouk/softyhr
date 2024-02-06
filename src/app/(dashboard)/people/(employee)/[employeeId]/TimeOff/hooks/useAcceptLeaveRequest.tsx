@@ -8,14 +8,16 @@ import { request_type } from "../types/types";
 
 export function useAcceptLeaveRequest({
   request,
+  onSuccess,
 }: {
   request: request_type;
+  onSuccess?: () => void;
 }) {
   const { toast } = useToast();
   const queryClient = useQueryClient();
   const {
     user_profile: { data: user_profile },
-  }: { [key: string]: { data: database_profile_type; }; } = useData();
+  }: { [key: string]: { data: database_profile_type } } = useData();
   const { mutate: accept, isPending: isAccepting } = useMutation({
     mutationFn: async () => {
       const { error } = await acceptLeaveRequest({
@@ -35,10 +37,11 @@ export function useAcceptLeaveRequest({
       queryClient.invalidateQueries({
         queryKey: ["leave_balance", request.user_id],
       });
+      onSuccess && onSuccess();
     },
   });
   return {
     accept,
-    isAccepting
+    isAccepting,
   };
 }

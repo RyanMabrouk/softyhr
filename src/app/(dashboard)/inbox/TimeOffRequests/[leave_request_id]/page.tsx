@@ -3,35 +3,36 @@ import Image from "next/image";
 import { useParams } from "next/navigation";
 import React from "react";
 import defaut_avatar from "/public/default_avatar.png";
-import { ApproveButton } from "../ApproveButton";
-import { DenyButton } from "../DenyButton";
+import { ApproveButton } from "../components/ApproveButton";
+import { DenyButton } from "../components/DenyButton";
 import { TbArrowBigRightFilled } from "react-icons/tb";
 import { BiSolidUpArrow } from "react-icons/bi";
-import { Calendar } from "./Calendar";
-import { CalendarView } from "./CalendarView";
+import { Calendar } from "./components/Calendar";
+import { CalendarView } from "./components/CalendarView";
 import useProfiles from "@/hooks/useProfiles";
-import usePendingLeaveRequests from "@/hooks/TimeOff/usePendingLeaveRequests";
 import usePolicy from "@/hooks/usePolicy";
 import { formatDateToMonDDYYYY } from "@/helpers/date.helpers";
 import {
   database_leave_request_duration_used_type,
+  database_leave_request_status_type,
   database_profile_type,
 } from "@/types/database.tables.types";
-import useAcceptedLeaveRequests from "@/hooks/TimeOff/useAcceptedLeaveRequests";
 import { CgArrowLeft } from "react-icons/cg";
 import Link from "next/link";
 import { Player } from "@lottiefiles/react-lottie-player";
+import { FaCheckCircle } from "react-icons/fa";
+import { MdCancel } from "react-icons/md";
+import Loader from "@/app/_ui/Loader/Loader";
+import useLeaveRequest from "@/hooks/TimeOff/useLeaveRequest";
+import useAcceptedLeavesBetweenTwoDates from "@/hooks/TimeOff/useAcceptedLeavesBetweenTwoDates";
 export default function Page() {
   const { leave_request_id } = useParams();
   const {
     profiles: { data: profiles },
   } = useProfiles();
   const {
-    pending_leave_requests: { data: pending_leave_requests },
-  } = usePendingLeaveRequests();
-  const leave_request_data = pending_leave_requests?.find(
-    (e) => e.id === Number(leave_request_id),
-  );
+    leave_request: { data: leave_request_data },
+  } = useLeaveRequest({ id: Number(leave_request_id) });
   const profile = profiles?.find(
     (p: database_profile_type) => p.user_id === leave_request_data?.user_id,
   );
@@ -48,6 +49,8 @@ export default function Page() {
   const leave_request = leave_request_data
     ? {
         ...leave_request_data,
+        status:
+          leave_request_data?.status as database_leave_request_status_type,
         user_id: leave_request_data?.user_id as string,
         id: leave_request_data?.id as number,
         policy_id: leave_request_data?.policy_id as number,
@@ -64,8 +67,8 @@ export default function Page() {
     : null;
   // accepted leave requests
   const {
-    accepted_leave_requests: { data: accepted_leave_requests },
-  } = useAcceptedLeaveRequests({
+    accepted_leave_requests: { data: accepted_leave_requests, isPending },
+  } = useAcceptedLeavesBetweenTwoDates({
     end_at: leave_request?.end_at,
     start_at: leave_request?.start_at,
   });
@@ -105,15 +108,27 @@ export default function Page() {
             </div>
             {/*<span className="text-sm leading-6 text-gray-21">
               {leave_request?.note ?? ""}
-  </span>*/}
+              </span>*/}
           </div>
         </section>
+        {leave_request?.status === "approved" && (
+          <div className="flex flex-row items-center gap-0.5 font-semibold text-fabric-700">
+            <FaCheckCircle className={`h-4 w-4 `} />
+            <span>Approved</span>
+          </div>
+        )}
+        {leave_request?.status === "rejected" && (
+          <div className="flex flex-row items-center gap-0.5 font-semibold text-color9-500">
+            <MdCancel className="h-5 w-5 " />
+            <span>Rejected</span>
+          </div>
+        )}
       </header>
       <hr className="mb-6 h-[unset] w-full shrink-0 border-solid border-[rgba(0,0,0,0.12)] bg-gray-14" />
       <main className="mb-20 mt-6 flex h-fit w-full max-w-[80%] flex-col justify-center shadow-md">
         <header className="flex h-fit w-full flex-row items-center justify-between rounded-t-md bg-gray-23 px-6 py-4">
           <h1 className="text-xl text-white">TimeOffRequests</h1>
-          {leave_request && (
+          {leave_request && leave_request.status === "pending" && (
             <section className="flex flex-row items-center gap-3">
               <ApproveButton
                 request={leave_request}
@@ -201,6 +216,8 @@ export default function Page() {
                       </div>
                     </div>
                   ))
+                ) : isPending ? (
+                  <Loader />
                 ) : (
                   <Player
                     src="https://lottie.host/85fb7313-2848-45c2-bdb9-2b729f57afc2/AwfmWMtW8n.json"
@@ -223,11 +240,19 @@ export default function Page() {
                 </footer>*/}
       </main>
       <Link
-        href={`/inbox/TimeOffRequests`}
+        href={
+          leave_request?.status === "approved"
+            ? `/inbox/TimeOffRequests/accepted`
+            : `/inbox/TimeOffRequests/pending`
+        }
         className="absolute -top-9 left-0 flex cursor-pointer flex-row items-center gap-1.5 text-sm text-gray-21 hover:text-color5-500 hover:underline"
       >
         <CgArrowLeft />
-        <span>Time Off Requests</span>
+        <span>
+          {leave_request?.status === "approved"
+            ? "Completed"
+            : "Time Off Requests"}
+        </span>
       </Link>
     </div>
   );

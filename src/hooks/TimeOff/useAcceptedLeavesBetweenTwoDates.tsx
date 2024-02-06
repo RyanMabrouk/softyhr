@@ -1,14 +1,12 @@
 "use client";
-import getAcceptedLeaveRequests from "@/api/getAcceptedLeaveRequests";
-import getData from "@/api/getData";
+import getAcceptedLeaveRequests from "@/api/TimeOff/getAcceptedLeaveRequests";
 import {
   database_leave_request_status_type,
   database_leave_requests_type,
 } from "@/types/database.tables.types";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { PostgrestError } from "@supabase/supabase-js";
 import { useQuery } from "@tanstack/react-query";
-export default function useAcceptedLeaveRequests({
+export default function useAcceptedLeavesBetweenTwoDates({
   end_at,
   start_at,
 }: {
