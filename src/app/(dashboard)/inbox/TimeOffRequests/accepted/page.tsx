@@ -46,6 +46,10 @@ export default function Page() {
           />
         </div>
       )}
+      <div className="flex flex-row items-center gap-6">
+        b
+        <button>Next</button>
+      </div>
     </div>
   );
 }
