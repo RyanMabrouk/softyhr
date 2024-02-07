@@ -57,7 +57,7 @@ function EditEntry() {
          {settings?.data[0]?.["personnal"]?.Champs?.filter((section:any)=> section?.champ == section_name )[0]?.Fields?.map((RowField: any) => {
                   const Component = Field[RowField?.type.toUpperCase()];
                   const section = data[section_name]?.filter((item:any)=>item?.id == item_id)
-                  console.log(data[section_name]?.filter((item:any)=>item?.id == item_id)[0]?.[RowField?.name],RowField?.name);
+                  //console.log(data[section_name]?.filter((item:any)=>item?.id == item_id)[0]?.[RowField?.name],RowField?.name);
                   return (
                     <Component
                       defaultValue={section[0]?.[RowField?.name] || ""}
@@ -69,7 +69,7 @@ function EditEntry() {
                 {settings?.data[0]?.["job"]?.Champs?.filter((section:any)=> section?.champ == section_name )[0]?.Fields?.map((RowField: any) => {
                   const Component = Field[RowField?.type.toUpperCase()];
                    const section = data[section_name]?.filter((item:any)=>item?.id == item_id)
-                  console.log(data[section_name]?.filter((item:any)=>item?.id == item_id)[0]?.[RowField?.name],RowField?.name);  
+                  //console.log(data[section_name]?.filter((item:any)=>item?.id == item_id)[0]?.[RowField?.name],RowField?.name);  
                   return (
                     <Component
                       key={uuidv4()}

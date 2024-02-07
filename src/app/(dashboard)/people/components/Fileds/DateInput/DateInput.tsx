@@ -16,7 +16,7 @@ function DateInput({ RowField, setTouched, defaultValue = "" }: DateInputPropsTy
   const [value, setValue] = useState<string>(String(defaultValue));
   const onChange: DatePickerProps["onChange"] = (date, dateString) => {
     setTouched && setTouched(true);
-    console.log(dateString > new Date().toISOString());
+    //console.log(dateString > new Date().toISOString());
     if(dateString > new Date().toISOString() && RowField?.name != "End Date" && RowField?.name != "Expiration") setValue("");
     else setValue(dateString);
   };

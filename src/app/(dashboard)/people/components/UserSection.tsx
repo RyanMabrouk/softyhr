@@ -29,7 +29,6 @@ export interface EducationType{
 function UserSection({ section, employeeId }: UserSection) {
   const router = useRouter();
   const { data, isPending } = useSettings(section);
-  console.log(data)
   const { toast } = useToast();
   const [touched, setTouched] = useState<boolean>(false);
   const [Data, setData] = useState<EducationType | null[]>([]);

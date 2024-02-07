@@ -24,7 +24,6 @@ export const CreateNewEmployee = async (
         email_confirm: true,
         user_metadata: { org_name: org?.name },
       });
-    console.log(register_error, user);
     if (register_error) {
       return {
         registred: false,
@@ -46,7 +45,6 @@ export const CreateNewEmployee = async (
         },
       ])
       .select();
-      console.log(NewEmployeData);
     const  { error  } = await addFolder(
       NewEmployeData?.["Basic Information"]?.["First name"] +
         " " +

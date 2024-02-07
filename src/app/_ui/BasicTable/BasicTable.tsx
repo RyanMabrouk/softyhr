@@ -27,7 +27,6 @@ export default function BasicTable({
   data,
   champ,
 }: BasicTablePropsType) {
-  console.log(champ, data);
   return (
     <div className="border-gray h-full w-full border-b">
       <TableContainer component={Paper} sx={{ boxShadow: "none" }}>

@@ -99,7 +99,6 @@ function StepsProvider({ children }: StepsProviderTypeProps) {
   };
 
   const Update_InformationJob = (payload: ObjectOfStrings) => {
-    console.log(payload);
     dispatch({
       type: Actions.INFORMATION_JOB,
       payload,
@@ -112,7 +111,6 @@ function StepsProvider({ children }: StepsProviderTypeProps) {
       payload,
     });
   };
-  console.log(state);
   return (
     <StepsContext.Provider
       value={{

@@ -15,7 +15,6 @@ function RatingSection() {
   const {
     Hiring: { data: Hiring_data, isPending: Hiring_isPending },
   } = useHiring({ id: Job_id });
-  console.log(candidates_data);
   return (
     <div className="border-gray-36 flex flex-col items-center justify-center gap-3 rounded-md border-4 bg-white p-4 shadow-lg">
       {Hiring_isPending || candidates_isPending ? (

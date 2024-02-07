@@ -31,7 +31,6 @@ function DeleteItem() {
 
   const SubmitForm=async()=>{
      const response = await Delete_Entry(section_name,data,item_id);
-    console.log(section_name,data,item_id, response);
       if(response?.error) toast.error(response?.error?.Message);
       else toast.success(`${section_name} Deleted Successfully`);
      queryClient.invalidateQueries({ queryKey: ["profiles", employeeId] });

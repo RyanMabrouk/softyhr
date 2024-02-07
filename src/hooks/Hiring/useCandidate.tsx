@@ -17,7 +17,6 @@ export default function useCandidate(
   if (page != undefined) {
     querykey.push(page);
   }
-  console.log("----------here----------", page);
   if (filter) {
     querykey.push(filter);
   }

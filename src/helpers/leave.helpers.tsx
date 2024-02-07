@@ -84,6 +84,5 @@ export function numberOfdaysInArrayOfDatesBeforeDay(
   const days = accurals?.filter(
     (date: Date) => date > new Date() && +date < +day,
   );
-  console.log("🚀 ~ days:", days);
   return days?.length;
 }

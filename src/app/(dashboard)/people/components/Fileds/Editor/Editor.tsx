@@ -59,7 +59,7 @@ function Editor({ RowField, defaultValue, editable = true }: EditorPropsType) {
   };
 
 
-   console.log(defaultValue ? JSON.stringify(JSON.parse(value)) : JSON.stringify(value))
+   //console.log(defaultValue ? JSON.stringify(JSON.parse(value)) : JSON.stringify(value))
   
   return (
     <div className="w-full pt-2">

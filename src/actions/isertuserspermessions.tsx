@@ -5,7 +5,6 @@ export default async function isertuserspermessions() {
   const { data: users, error: error1 } = await getData("profiles", {
     column: "role_id,user_id,org_name,files_ids",
   });
-  console.log(users);
   console.error(error1);
   const { data, error } = await postData(
     "permissions",
@@ -17,5 +16,4 @@ export default async function isertuserspermessions() {
     })),
   );
   console.error("error -->", error);
-  console.log(data);
 }

@@ -78,8 +78,6 @@ const config: Config = {
       },
       width: {
         screen: "100dvw",
-        files_screen: "1355px",
-        percentage78: "78%",
       },
       minHeight: {
         screen: "100dvh",
@@ -247,6 +245,7 @@ const config: Config = {
         "gray-38": "#eaeaea",
         "gray-39": "#aaa",
         "gray-40": "#F9F9F9",
+        "gray-41": "#cbcbcb",
 
         "color-teal-2": "#284D59",
 

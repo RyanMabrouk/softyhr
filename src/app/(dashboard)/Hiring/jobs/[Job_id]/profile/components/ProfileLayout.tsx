@@ -17,7 +17,6 @@ import CandidatesInfos from "./CandidatesInfos";
 function ProfileLayout({ children }: { children: ReactNode }) {
   const params = useParams();
   const { Candidate_id, Job_id } = params;
-  console.log(Candidate_id, Job_id);
   const {
     candidates: { data: candidates_data, isPending: candidates_isPending },
   } = useCandidate({ id: Candidate_id });
@@ -43,7 +42,7 @@ function ProfileLayout({ children }: { children: ReactNode }) {
                 href={`/Hiring/jobs/${Job_id}`}
                 className="flex items-center justify-center gap-2 text-sm text-gray-18 duration-200 ease-linear hover:text-color-primary-8 hover:underline"
               >
-                <BsArrowLeft classname="" />
+                <BsArrowLeft />
                 {`${Hiring_data[0]?.job_information?.["Posting Title"]} - ${Hiring_data[0]?.job_information?.["Job Location"]}`}
               </Link>
               <div className={"flex-column flex w-full flex-col gap-[1.3rem] "}>
@@ -106,7 +105,7 @@ function ProfileLayout({ children }: { children: ReactNode }) {
               </div>
             </div>
           </div>
-          <div className="w-full h-full flex items-center justify-start">
+          <div className="flex h-full w-full items-center justify-start">
             {children}
             <CandidatesInfos />
           </div>

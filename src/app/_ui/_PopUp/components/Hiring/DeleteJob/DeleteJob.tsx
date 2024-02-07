@@ -29,7 +29,7 @@ function DeleteJob() {
     router.push("/Hiring/jobs");
     queryClient.invalidateQueries({ queryKey: ["Hiring"] });
   }
-  console.log(data?.find((job: Hiring_type) => job?.id == id));
+  //console.log(data?.find((job: Hiring_type) => job?.id == id));
   return (
     <PopUpSkeleton title="Just Checking...">
       <form

@@ -26,8 +26,6 @@ export function SearchContextProvider({
 export const useSearch = () => {
   const { Search, setSearch } =
     useContext<SearchContextContextType>(SearchContext);
-  console.log("🚀 ~ useSearch ~ Search:", Search);
-
   return {
     Search,
     setSearch,

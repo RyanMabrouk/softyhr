@@ -69,7 +69,6 @@ function AppliymentForm({
       "Hiring Lead": job?.job_information?.["Hiring Lead"],
     });
     if (response?.Submitted) {
-      console.log("Candidates", job?.id);
       QueryClient.invalidateQueries({ queryKey: ["Candidates"] });
       if (!pathname.includes("careers")) {
         router.push(`/Hiring/jobs/${job?.id}`);

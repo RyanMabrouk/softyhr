@@ -108,7 +108,6 @@ export default function AddEmployeesToPolicy() {
     ev.preventDefault();
     if (ev.currentTarget.className.includes("dropzone")) {
       const id = ev.dataTransfer.getData("text/plain");
-      console.log("dropSelected id =", id);
       setEmployees((prev) => {
         const employee = selectedEmployees.find((e) => e.user_id === id);
         if (employee) {
@@ -123,7 +122,6 @@ export default function AddEmployeesToPolicy() {
     ev.preventDefault();
     if (ev.currentTarget.className.includes("dropzone")) {
       const id = ev.dataTransfer.getData("text/plain");
-      console.log("dropNonSelected id =", id);
       setSelectedEmployees((prev) => {
         const employee = employees.find((e) => e.user_id === id);
         if (employee) {

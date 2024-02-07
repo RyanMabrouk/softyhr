@@ -51,7 +51,6 @@ export const renderCell = (
         </div>
       );
     case "Rating":
-      console.log(user?.Rating);
       return (
         <RatingGeneric
           DefaultValue={user?.Rating}

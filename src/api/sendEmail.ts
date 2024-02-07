@@ -12,13 +12,13 @@ export async function sendMail(toWho: any, subject: any, content: any) {
     };
     transporter.sendMail(mailOptions, function (err, info) {
       if (err) {
-        console.log("Error sending message: " + err);
+        console.error("Error sending message: " + err);
       } else {
-        console.log("Message sent succesfully.");
+        console.log("🚀 ~ Mail sent succesfully.");
       }
     });
   } catch (error) {
-    console.log("Other error sending message: " + error);
+    console.error("Other error sending message: " + error);
   }
 }
 

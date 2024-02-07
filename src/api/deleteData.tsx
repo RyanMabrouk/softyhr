@@ -6,7 +6,6 @@ export default async function deleteData(
   { match }: { [key: string]: any },
 ) {
   const supabase = createServerActionClient({ cookies });
-  console.log(table, match);
   const { error } = await supabase.from(table).delete().match(match);
   return { error };
 }
