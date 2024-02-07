@@ -18,7 +18,7 @@ import { CalendarRange } from "./CalendarRange";
 import useLeaveData from "@/hooks/TimeOff/useLeaveData";
 import { TextFeildGeneric } from "../../../../../TextFeildGeneric";
 import useData from "@/hooks/useData";
-import usePolicy from "@/hooks/usePolicy";
+import usePolicy from "@/hooks/TimeOff/usePolicy";
 import TotalDurationContextProvider from "../context/TotalDurationContext";
 import { WarningIfUserDoesntHaveEnoughBalance } from "./WarningIfUserDoesntHaveEnoughBalance";
 export function FormInputs() {

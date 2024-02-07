@@ -1,9 +1,9 @@
 "use server";
 import updateData from "@/api/updateData";
-import { request_type } from "@/app/(dashboard)/people/(employee)/[employeeId]/TimeOff/components/Buttons/AcceptRequestBtn";
 import { database_leave_request_status_type } from "@/types/database.tables.types";
 import updateLeaveBalance from "./updateLeaveBalance";
 import { getPolicyType } from "./getPolicyType";
+import { request_type } from "@/app/(dashboard)/people/(employee)/[employeeId]/TimeOff/types/types";
 export default async function acceptLeaveRequest({
   request,
   reviewed_by,

@@ -2,8 +2,6 @@
 import React from "react";
 import usePendingLeaveRequests from "@/hooks/TimeOff/usePendingLeaveRequests";
 import { Card } from "../components/Card";
-import useRealTime from "@/hooks/useRealTime";
-import { useQueryClient } from "@tanstack/react-query";
 import Loader from "@/app/_ui/Loader/Loader";
 import { Player } from "@lottiefiles/react-lottie-player";
 import useFormattedLeaves from "../hooks/useFormattedLeavs";
@@ -18,25 +16,6 @@ export default function Page() {
     leave_requests: pending_leave_requests,
   });
   const isPending = isPending1 || isPending2;
-  const queryclient = useQueryClient();
-  useRealTime({
-    table: "leave_requests",
-    event: "INSERT",
-    onReceive: (payload) => {
-      queryclient.invalidateQueries({
-        queryKey: ["leave_requests", "pending"],
-      });
-    },
-  });
-  useRealTime({
-    table: "leave_requests",
-    event: "UPDATE",
-    onReceive: (payload) => {
-      queryclient.invalidateQueries({
-        queryKey: ["leave_requests", "pending"],
-      });
-    },
-  });
   return (
     <div className="mb-10 ml-5 flex min-h-full w-full flex-col">
       {pendingData && pendingData.length > 0 ? (

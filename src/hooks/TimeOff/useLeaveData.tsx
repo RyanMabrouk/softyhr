@@ -24,6 +24,7 @@ export default function useLeaveData() {
     queryFn: () =>
       getData("leave_balance", {
         org: true,
+        column: "user_id,policy_id",
       }),
   });
   return {

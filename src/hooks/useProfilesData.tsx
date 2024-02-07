@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 
 export default function useProfilesData({
   match,
-  columns,
+  columns = 'user_id,role,picture,files_ids,"Basic Information"',
 }: {
   match?: {
     [key: string]: string | number | boolean | null | string[] | undefined;
@@ -20,6 +20,7 @@ export default function useProfilesData({
         column: columns,
         match,
       }),
+    enabled: columns !== null,
   });
   return {
     profiles: {

@@ -11,7 +11,7 @@ import changePolicy from "@/actions/leave/changePolicy";
 import useToast from "@/hooks/useToast";
 import useEmployeeData from "@/hooks/useEmloyeeData";
 import { database_leave_policies_type } from "@/types/database.tables.types";
-import usePolicy from "@/hooks/usePolicy";
+import usePolicy from "@/hooks/TimeOff/usePolicy";
 import useLeaveData from "@/hooks/TimeOff/useLeaveData";
 import CancelBtnGeneric from "@/app/_ui/CancelBtnGeneric";
 export default function ChangeLeavePolicy() {

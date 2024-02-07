@@ -6,16 +6,17 @@ import React from "react";
 import Link from "next/link";
 import { Profile_Type } from "@/types/database.tables.types";
 
-function ManagerSection({ user }: {user:Profile_Type}) {
+function ManagerSection({ user }: { user: Profile_Type }) {
   const {
     profiles: { data, isPending, error },
-  } = useProfilesData(
-    { user_id: user?.supervisor_id },
-    'user_id,role,picture,supervisor_id,"Basic Information","Job Information"',
-  );
+  } = useProfilesData({
+    match: { user_id: user?.supervisor_id },
+    columns:
+      'user_id,role,picture,supervisor_id,"Basic Information","Job Information"',
+  });
   return (
     <>
-     { !isPending && !error && (
+      {!isPending && !error && (
         <div className="flex flex-col items-start justify-center gap-[0.5rem]">
           <h1 className="text-sm text-color-primary-7">Manager</h1>
           <UnderlinedLink>
@@ -34,7 +35,7 @@ function ManagerSection({ user }: {user:Profile_Type}) {
             </Link>
           </UnderlinedLink>
         </div>
-      ) }
+      )}
     </>
   );
 }

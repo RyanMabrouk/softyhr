@@ -16,31 +16,12 @@ export default function useData() {
 
   //------------------- User Profile--------------------
   const { data: user_profile, isPending: isPending6 } = useQuery({
-    queryKey: ["user_profile"],
+    queryKey: ["profiles", "user"],
     queryFn: () =>
       getData("profiles", {
         user: true,
       }),
   });
-  //------------------Folders--------------------------------------
-  // const { data: folders, isPending: isPending1 } = useQuery({
-  //   queryKey: ["folders"],
-  //   queryFn: () =>
-  //     getData("folders", {
-  //       org: true,
-  //       column: "*,files(*)",
-  //     }),
-  // });
-
-  //------------------Files--------------------------------------
-  // const { data: files, isPending: isPending10 } = useQuery({
-  //   queryKey: ["files"],
-  //   queryFn: () =>
-  //     getData("files", {
-  //       org: true,
-  //     }),
-  // });
-  //------------------------------------------------------------
   return {
     settings: {
       data: settings?.data,
@@ -52,15 +33,5 @@ export default function useData() {
       error: user_profile?.error,
       isPending: isPending6,
     },
-    // folders: {
-    //   data: folders?.data,
-    //   error: folders?.error,
-    //   isPending: isPending1,
-    // },
-    // files: {
-    //   data: files?.data,
-    //   error: files?.error,
-    //   isPending: isPending10,
-    // },
   };
 }

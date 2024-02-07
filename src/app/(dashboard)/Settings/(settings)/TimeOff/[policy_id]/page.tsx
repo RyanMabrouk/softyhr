@@ -1,7 +1,6 @@
 "use client";
 import { HistoryTable } from "@/app/(dashboard)/people/(employee)/[employeeId]/TimeOff/components/HistoryTable";
 import { generateLeaveCategorieIcon } from "@/helpers/leave.helpers";
-import useData from "@/hooks/useData";
 import {
   database_profile_leave_balance_type,
   database_profile_type,
@@ -16,17 +15,20 @@ import {
   MdTimelapse,
 } from "react-icons/md";
 import { UnderlinedLink } from "@/app/_ui/UnderlinedLink";
-import usePolicy from "@/hooks/usePolicy";
+import usePolicy from "@/hooks/TimeOff/usePolicy";
 import { EmployyeSettingsBtn } from "./EmployyeSettingsBtn";
 import useLeaveData from "@/hooks/TimeOff/useLeaveData";
 import { BsPlusSlashMinus } from "react-icons/bs";
 import useProfilesData from "@/hooks/useProfilesData";
+import useLeaveBalances from "@/hooks/TimeOff/useLeaveBalances";
 export default function Page() {
   const pathname = usePathname();
   const { policy_id } = useParams();
   const {
     all_users_leave_balance: { data: all_users_leave_balance },
-  } = useLeaveData();
+  } = useLeaveBalances({
+    policy_id: Number(policy_id),
+  });
   const {
     profiles: { data: all_profiles_basic_info },
   } = useProfilesData({
@@ -103,12 +105,8 @@ export default function Page() {
           Headers={["Name", "Status", "Balance", " "]}
           layout="grid-cols-[1fr,1fr,1fr,1fr]"
           data={
-            all_users_leave_balance
-              ?.filter(
-                (p: database_profile_leave_balance_type) =>
-                  p.policy_id === Number(policy_id),
-              )
-              ?.map((e: database_profile_leave_balance_type) => {
+            all_users_leave_balance?.map(
+              (e: database_profile_leave_balance_type) => {
                 const user = all_profiles_basic_info?.find(
                   (p: database_profile_type) => p.user_id === e.user_id,
                 );
@@ -131,7 +129,8 @@ export default function Page() {
                     </div>
                   ),
                 };
-              }) ?? []
+              },
+            ) ?? []
           }
         />
       }

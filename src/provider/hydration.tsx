@@ -19,7 +19,7 @@ export default async function Hydration({
   });
   await Promise.all([
     queryClient.prefetchQuery({
-      queryKey: ["user_profile"],
+      queryKey: ["profiles", "user"],
       queryFn: () =>
         getData("profiles", {
           user: true,

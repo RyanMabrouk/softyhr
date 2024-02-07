@@ -3,8 +3,8 @@ import {
   database_leave_policies_type,
   databese_leave_categories_type,
 } from "@/types/database.tables.types";
-import useData from "./useData";
-import useLeaveData from "./TimeOff/useLeaveData";
+import useData from "../useData";
+import useLeaveData from "./useLeaveData";
 export default function usePolicy({ policy_id }: { policy_id: number }): {
   policy: database_leave_policies_type | undefined;
   category: databese_leave_categories_type | undefined;

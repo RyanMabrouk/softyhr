@@ -5,12 +5,20 @@ import { Card } from "../components/Card";
 import Loader from "@/app/_ui/Loader/Loader";
 import { Player } from "@lottiefiles/react-lottie-player";
 import useAcceptedDeniedLeaves from "@/hooks/TimeOff/useAcceptedDeniedLeaves";
-import { TbPlayerTrackNext } from "react-icons/tb";
 import { useQueryClient } from "@tanstack/react-query";
 import { database_leave_request_status_type } from "@/types/database.tables.types";
 import getAcceptedDeniedLeavs from "@/api/TimeOff/getAcceptedDeniedLeavs";
+import { SelectGeneric } from "@/app/_ui/SelectGeneric";
+import { PaginationButtons } from "../components/PaginationButtons";
 export default function Page() {
+  const cards_per_page_in_client = 9;
   const [page, setPage] = React.useState(1);
+  const [filter, setFilter] = React.useState<"all" | "approved" | "rejected">(
+    "all",
+  );
+  const [sort, setSort] = React.useState<"user_id" | "reviewed_at">(
+    "reviewed_at",
+  );
   const queryclient = useQueryClient();
   const {
     accepted_denied_leaves: {
@@ -19,14 +27,19 @@ export default function Page() {
     },
   } = useAcceptedDeniedLeaves({
     page: page,
+    filter,
+    sort,
   });
-  if (accepted_denied_leaves?.length === 8 && page) {
-    const status: database_leave_request_status_type = "approved";
-    const status2: database_leave_request_status_type = "rejected";
+  if (accepted_denied_leaves?.length === cards_per_page_in_client && page) {
+    const status = filter === "all" ? ["approved", "rejected"] : [filter];
     queryclient.prefetchQuery({
-      queryKey: ["leave_requests", status, status2, page + 1],
+      queryKey: ["leave_requests", status, page + 1, sort, filter],
       queryFn: () =>
-        getAcceptedDeniedLeavs({ status, status2, page: page + 1 }),
+        getAcceptedDeniedLeavs({
+          status: status as database_leave_request_status_type[],
+          page: page + 1,
+          sort,
+        }),
     });
   }
   const { data: formatted_leavs, isPending: isPending2 } = useFormattedLeaves({
@@ -34,7 +47,7 @@ export default function Page() {
   });
   const isPending = isPending1 || isPending2;
   return (
-    <div className="mb-10 ml-5 flex min-h-full w-full flex-col">
+    <div className="relative mb-5 ml-5 flex min-h-full w-full flex-col">
       {formatted_leavs && formatted_leavs.length > 0 ? (
         formatted_leavs?.map((e) => (
           <Card
@@ -60,46 +73,53 @@ export default function Page() {
           />
         </div>
       )}
-      <div className="flex w-full flex-row items-center justify-center">
-        <div className="mt-4 flex w-60 flex-row items-center gap-7">
-          <button
-            disabled={page === 1}
-            onClick={() => setPage((old) => old - 1)}
-            className={`flex cursor-pointer flex-row items-center gap-0.5 self-start justify-self-start text-color5-500 hover:underline disabled:hidden`}
-          >
-            <TbPlayerTrackNext className="-mb-1 rotate-180 text-[0.75rem]" />
-            <span>Prev</span>
-          </button>
-          <div
-            className={`flex w-fit flex-row items-center justify-items-center gap-1.5 self-center justify-self-center text-gray-21 ${page === 1 ? "ml-auto" : ""}`}
-          >
-            <button
-              disabled={page === 1}
-              onClick={() => setPage((old) => old - 1)}
-              className=" cursor-pointer rounded-sm border border-fabric-700 px-2 py-0.5 text-sm transition-all ease-linear hover:border-white hover:bg-fabric-700 hover:text-white disabled:hidden"
-            >
-              {page - 1}
-            </button>
-            <button className="cursor-pointer rounded-sm border border-gray-14 bg-gray-14 px-2 py-0.5 text-sm transition-all ease-linear hover:border-white hover:bg-fabric-700 hover:text-white">
-              {page}
-            </button>
-            <button
-              disabled={formatted_leavs && formatted_leavs.length < 8}
-              className=" cursor-pointer rounded-sm border border-fabric-700 px-2 py-0.5 text-sm transition-all ease-linear hover:border-white hover:bg-fabric-700 hover:text-white disabled:hidden"
-              onClick={() => setPage((old) => old + 1)}
-            >
-              {page + 1}
-            </button>
-          </div>
-          <button
-            disabled={formatted_leavs && formatted_leavs.length < 8}
-            onClick={() => setPage((old) => old + 1)}
-            className={`flex cursor-pointer flex-row items-center gap-0.5 self-end justify-self-end text-color5-500 hover:underline disabled:hidden`}
-          >
-            <span>Next</span>
-            <TbPlayerTrackNext className="-mb-1 text-[0.75rem]" />
-          </button>
-        </div>
+      <PaginationButtons
+        page={page}
+        setPage={setPage}
+        dataLength={formatted_leavs?.length ?? 0}
+        cards_per_page_in_client={cards_per_page_in_client}
+      />
+      <div className="absolute -top-12 right-0 flex flex-row items-center gap-2 text-sm">
+        <SelectGeneric
+          inputLabel="Filter"
+          className=" !w-[7.5rem]"
+          setValueInParent={(e) => {
+            setPage(1);
+            setFilter(e);
+          }}
+          options={[
+            {
+              label: "All",
+              value: "all",
+            },
+            {
+              label: "Approved",
+              value: "approved",
+            },
+            {
+              label: "Rejected",
+              value: "rejected",
+            },
+          ]}
+        />
+        <SelectGeneric
+          inputLabel="Sort"
+          className="!w-[7.5rem]"
+          setValueInParent={(e) => {
+            setPage(1);
+            setSort(e);
+          }}
+          options={[
+            {
+              label: "Employee",
+              value: "user_id",
+            },
+            {
+              label: "Completed Date",
+              value: "reviewed_at",
+            },
+          ]}
+        />
       </div>
     </div>
   );
