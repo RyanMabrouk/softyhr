@@ -241,7 +241,7 @@ export default function Page() {
       </main>
       <Link
         href={
-          leave_request?.status === "approved"
+          leave_request?.status === "approved" || "rejected"
             ? `/inbox/TimeOffRequests/accepted`
             : `/inbox/TimeOffRequests/pending`
         }
@@ -249,7 +249,7 @@ export default function Page() {
       >
         <CgArrowLeft />
         <span>
-          {leave_request?.status === "approved"
+          {leave_request?.status === "approved" || "rejected"
             ? "Completed"
             : "Time Off Requests"}
         </span>
