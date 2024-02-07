@@ -10,7 +10,7 @@ import { BiSolidUpArrow } from "react-icons/bi";
 import { Calendar } from "./components/Calendar";
 import { CalendarView } from "./components/CalendarView";
 import useProfiles from "@/hooks/useProfiles";
-import usePolicy from "@/hooks/usePolicy";
+import usePolicy from "@/hooks/TimeOff/usePolicy";
 import { formatDateToMonDDYYYY } from "@/helpers/date.helpers";
 import {
   database_leave_request_duration_used_type,

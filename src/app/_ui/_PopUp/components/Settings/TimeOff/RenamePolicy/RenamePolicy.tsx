@@ -5,7 +5,7 @@ import { SubmitBtn } from "@/app/_ui/SubmitBtn";
 import PopUpSkeleton from "@/app/_ui/_PopUp/PopUpSkeleton";
 import { generateLeaveCategorieIcon } from "@/helpers/leave.helpers";
 import { capitalizeFirstLetter } from "@/helpers/string.helpers";
-import usePolicy from "@/hooks/usePolicy";
+import usePolicy from "@/hooks/TimeOff/usePolicy";
 import useToast from "@/hooks/useToast";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useParams, useRouter } from "next/navigation";

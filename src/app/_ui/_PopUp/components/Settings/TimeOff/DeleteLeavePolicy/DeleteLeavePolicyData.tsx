@@ -3,7 +3,7 @@ import CancelBtnGeneric from "@/app/_ui/CancelBtnGeneric";
 import { InputGeneric } from "@/app/_ui/InputGeneric";
 import { SubmitBtn } from "@/app/_ui/SubmitBtn";
 import PopUpSkeleton from "@/app/_ui/_PopUp/PopUpSkeleton";
-import usePolicy from "@/hooks/usePolicy";
+import usePolicy from "@/hooks/TimeOff/usePolicy";
 import useLeaveData from "@/hooks/TimeOff/useLeaveData";
 import useToast from "@/hooks/useToast";
 import { database_profile_leave_balance_type } from "@/types/database.tables.types";
@@ -11,6 +11,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useParams, useRouter } from "next/navigation";
 import React from "react";
 import { FaRegTrashCan } from "react-icons/fa6";
+import useLeaveBalances from "@/hooks/TimeOff/useLeaveBalances";
 export default function DeleteLeavePolicyData() {
   const [safeWord, setSafeWord] = React.useState("");
   const { toast } = useToast();
@@ -18,12 +19,11 @@ export default function DeleteLeavePolicyData() {
   const { policy_id } = useParams();
   const {
     all_users_leave_balance: { data: all_users_leave_balance },
-  } = useLeaveData();
+  } = useLeaveBalances({
+    policy_id: Number(policy_id),
+  });
   const { policy } = usePolicy({ policy_id: Number(policy_id) });
-  const number_of_employees = all_users_leave_balance?.filter(
-    (b: database_profile_leave_balance_type) =>
-      b.policy_id === Number(policy_id),
-  ).length;
+  const number_of_employees = all_users_leave_balance?.length;
   // delete category mutation
   const queryClient = useQueryClient();
   const { mutate: deletePol, isPending } = useMutation({

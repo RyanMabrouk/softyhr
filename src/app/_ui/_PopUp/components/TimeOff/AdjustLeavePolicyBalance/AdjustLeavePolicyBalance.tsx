@@ -10,7 +10,7 @@ import Image from "next/image";
 import PopUpSkeleton from "../../../PopUpSkeleton";
 import { SelectGeneric } from "@/app/_ui/SelectGeneric";
 import useEmployeeData from "@/hooks/useEmloyeeData";
-import usePolicy from "@/hooks/usePolicy";
+import usePolicy from "@/hooks/TimeOff/usePolicy";
 import CancelBtnGeneric from "@/app/_ui/CancelBtnGeneric";
 export default function AdjustLeavePolicyBalance() {
   const { toast } = useToast();

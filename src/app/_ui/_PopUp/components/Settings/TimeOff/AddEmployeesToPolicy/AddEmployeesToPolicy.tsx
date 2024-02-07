@@ -3,7 +3,7 @@ import CancelBtnGeneric from "@/app/_ui/CancelBtnGeneric";
 import { SubmitBtn } from "@/app/_ui/SubmitBtn";
 import PopUpSkeleton from "@/app/_ui/_PopUp/PopUpSkeleton";
 import { generateLeaveCategorieIcon } from "@/helpers/leave.helpers";
-import usePolicy from "@/hooks/usePolicy";
+import usePolicy from "@/hooks/TimeOff/usePolicy";
 import useData from "@/hooks/useData";
 import useLeaveData from "@/hooks/TimeOff/useLeaveData";
 import {
@@ -26,6 +26,7 @@ import addEmployeesToPolicy from "@/actions/settings/leave/addEmployeesToPolicy"
 import useToast from "@/hooks/useToast";
 import useProfilesData from "@/hooks/useProfilesData";
 import { PiUploadSimple } from "react-icons/pi";
+import useLeaveBalances from "@/hooks/TimeOff/useLeaveBalances";
 export type usersWithoutCurrentPolicy = {
   user_id: string;
   name: string;
@@ -46,17 +47,16 @@ export default function AddEmployeesToPolicy() {
     all_users_leave_balance: { data: all_users_leave_balance },
     leave_policies: { data: leave_policies },
   } = useLeaveData();
+  const {
+    all_users_leave_balance: { data: policy_users_blances },
+  } = useLeaveBalances({
+    policy_id: Number(policy_id),
+  });
   // current category policies
   const current_category_policies: database_leave_policies_type[] =
     leave_policies?.filter(
       (policy: database_leave_policies_type) =>
         policy?.categories_id === category?.id,
-    );
-  // user balances with current policy
-  const policy_users_blances: database_profile_leave_balance_type[] =
-    all_users_leave_balance?.filter(
-      (balance: database_profile_leave_balance_type) =>
-        balance?.policy_id === Number(policy_id),
     );
   // users without current policy
   const usersWithoutCurrentPolicy: usersWithoutCurrentPolicy[] =

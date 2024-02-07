@@ -9,7 +9,7 @@ import useToast from "@/hooks/useToast";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import useEmployeeData from "@/hooks/useEmloyeeData";
 import deleteCategorie from "@/actions/leave/deleteCategorie";
-import usePolicy from "@/hooks/usePolicy";
+import usePolicy from "@/hooks/TimeOff/usePolicy";
 import CancelBtnGeneric from "@/app/_ui/CancelBtnGeneric";
 export default function DeleteLeavePolicy() {
   const { toast } = useToast();

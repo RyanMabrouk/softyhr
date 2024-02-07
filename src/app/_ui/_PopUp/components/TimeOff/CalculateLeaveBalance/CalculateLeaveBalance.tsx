@@ -18,7 +18,7 @@ import {
   databese_leave_categories_type,
 } from "@/types/database.tables.types";
 import { CalendarGeneric } from "@/app/_ui/CalenderGeneric";
-import usePolicy from "@/hooks/usePolicy";
+import usePolicy from "@/hooks/TimeOff/usePolicy";
 import {
   formatTotalHoursToTimeUnit,
   numberOfdaysInArrayOfDatesBeforeDay,
