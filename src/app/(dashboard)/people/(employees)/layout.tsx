@@ -1,7 +1,6 @@
 import { ReactNode } from "react";
 import SectionTitleIconBox from "../components/SectionTitleIconBox";
 import { RiShareBoxFill } from "react-icons/ri";
-import ButtonAdd from "../components/ButtonAdd";
 import PeopleRouteLink from "../components/PeopleRouteLink";
 import Link from "next/link";
 import { IoMdAddCircleOutline } from "react-icons/io";

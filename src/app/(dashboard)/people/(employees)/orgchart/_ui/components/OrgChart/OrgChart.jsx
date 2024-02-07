@@ -132,16 +132,27 @@ export default function OrgChartComponent({ data }) {
       .initialZoom(0.6)
       .compact(false)
       .render();
-    // Add event listener to the button
-    document.getElementById("fitButton").addEventListener("click", () => {
+
+    // functions to handle button clicks
+    const renderChart = () => {
       chart.fit().initialZoom(0.6).render();
-    });
-    document.getElementById("expandButton").addEventListener("click", () => {
+    };
+
+    const expandAndFitChart = () => {
       chart.expandAll().fit();
-    });
-    document.getElementById("collapseButton").addEventListener("click", () => {
+    };
+
+    const collapseAndFitChart = () => {
       chart.collapseAll().fit();
-    });
+    };
+    // Add event listener to the button
+    document.getElementById("fitButton").addEventListener("click", renderChart);
+    document
+      .getElementById("expandButton")
+      .addEventListener("click", expandAndFitChart);
+    document
+      .getElementById("collapseButton")
+      .addEventListener("click", collapseAndFitChart);
 
     //
     document.getElementById("inputSearch").addEventListener("input", (e) => {
@@ -168,19 +179,18 @@ export default function OrgChartComponent({ data }) {
 
     // Clean up event listener when component unmounts
     return () => {
-      document.getElementById("fitButton").removeEventListener("click", () => {
-        chart.render();
-      });
-      document
-        .getElementById("expandButton")
-        .removeEventListener("click", () => {
-          chart.expandAll().fit();
-        });
-      document
-        .getElementById("collapseButton")
-        .removeEventListener("click", () => {
-          chart.collapseAll().fit();
-        });
+      const fitButton = document.getElementById("fitButton");
+      const expandButton = document.getElementById("expandButton");
+      const collapseButton = document.getElementById("collapseButton");
+      if (fitButton) {
+        fitButton.removeEventListener("click", renderChart);
+      }
+      if (expandButton) {
+        expandButton.removeEventListener("click", expandAndFitChart);
+      }
+      if (collapseButton) {
+        collapseButton.removeEventListener("click", collapseAndFitChart);
+      }
     };
   }, [data]);
 

@@ -29,7 +29,7 @@ export default function PeopleRouteLink({ href }: any) {
     >
       {titleIconObj?.[href]?.icon}
       <p
-        className={`transition-all ease-linear group-hover:text-fabric-700 ${pathname === href ? "font-semibold text-fabric-700" : "text-gray-10"}`}
+        className={`transition-all ease-linear group-hover:text-fabric-700 font-semibold ${pathname === href ? " text-fabric-700" : "text-gray-10"}`}
       >
         {titleIconObj?.[href]?.label}
       </p>
