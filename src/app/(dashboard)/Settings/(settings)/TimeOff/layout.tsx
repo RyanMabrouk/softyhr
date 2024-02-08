@@ -11,8 +11,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const { policy_id } = useParams();
   return (
     <RoleGuard permissions={["access:/Settings/TimeOff"]}>
-      <div className="flex h-full w-full flex-row">
-        <nav className="mb-0 flex  h-full min-h-screen min-w-[15rem] grow flex-col border-r border-fabric-400 px-6 py-4 text-gray-21 ">
+      <div className="flex h-full min-h-screen w-full flex-1 grow border-collapse flex-row">
+        <nav className="relative mb-0 flex h-full min-h-full min-w-[15rem] grow border-collapse flex-col border-r border-fabric-400 px-6  py-4 text-gray-21 ">
           <header className="mb-6 text-xl text-black opacity-85">
             Time Off
           </header>
@@ -51,7 +51,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             </div>
           ))}
         </nav>
-        <section className="h-full w-full">{children}</section>
+        <section className="h-full min-h-screen w-full">{children}</section>
       </div>
     </RoleGuard>
   );

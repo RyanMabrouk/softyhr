@@ -5,7 +5,6 @@ export type FomDataType = {
   // Step 2
   accure_value: string;
   accure_refresh:
-    | "daily"
     | "twice_a_month"
     | "yearly"
     | "monthly"

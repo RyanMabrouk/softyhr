@@ -90,7 +90,6 @@ const DaysOfTheMonthSelect = () => (
   />
 );
 const accural_refresh_options: accural_refresh_options_type[] = [
-  { label: "Daily", value: "daily", extra: <></> },
   {
     label: "Weekly",
     value: "weekly",

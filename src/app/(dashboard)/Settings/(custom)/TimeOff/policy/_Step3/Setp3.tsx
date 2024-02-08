@@ -46,14 +46,12 @@ export function Setp3() {
             {policy_settings?.accure_refresh.replaceAll("_", " ")}
           </strong>
           <div>{`${
-            policy_settings?.accure_refresh !== "daily"
-              ? policy_settings?.accure_refresh_start_weekday
-                ? `on ${policy_settings?.accure_refresh_start_weekday}.`
-                : policy_settings?.accure_refresh_start_month &&
-                    policy_settings?.accure_refresh_start_month?.length > 0
-                  ? `on ${policy_settings?.accure_refresh_start_day?.reduce((acc, e: string, i, arr) => acc + `${e} of ${policy_settings?.accure_refresh_start_month?.[i]} ${i !== arr.length - 1 ? (arr.length === 2 || i === arr.length - 2 ? " and " : " ,") : "."}`, "")}`
-                  : `on ${policy_settings?.accure_refresh_start_day?.reduce((acc, e: string, i, arr) => acc + `${e} ${i !== arr.length - 1 ? " and " : " ."}`, "")}`
-              : "."
+            policy_settings?.accure_refresh_start_weekday
+              ? `on ${policy_settings?.accure_refresh_start_weekday}.`
+              : policy_settings?.accure_refresh_start_month &&
+                  policy_settings?.accure_refresh_start_month?.length > 0
+                ? `on ${policy_settings?.accure_refresh_start_day?.reduce((acc, e: string, i, arr) => acc + `${e} of ${policy_settings?.accure_refresh_start_month?.[i]} ${i !== arr.length - 1 ? (arr.length === 2 || i === arr.length - 2 ? " and " : " ,") : "."}`, "")}`
+                : `on ${policy_settings?.accure_refresh_start_day?.reduce((acc, e: string, i, arr) => acc + `${e} ${i !== arr.length - 1 ? " and " : " ."}`, "")}`
           }`}</div>
         </div>
         {policy_settings?.accure_limit && (
