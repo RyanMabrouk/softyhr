@@ -26,20 +26,24 @@ function HireStatus({ Hiring, candidate }: HiringStatusPropsType) {
           <h1 className="group-hover:text-white">{label}</h1>
         </div>
       ),
-      action: async() =>{ 
-        const response = await EditCandidateStatus(candidate?.id, label)
-        if(response?.error) toast.error(response?.error?.Message)
+      action: async () => {
+        const response = await EditCandidateStatus(candidate?.id, label);
+        if (response?.error) toast.error(response?.error?.Message);
         else toast.success(response?.Message);
-        queryClient.invalidateQueries({queryKey:["Candidates"]})
+        queryClient.invalidateQueries({ queryKey: ["Candidates"] });
       },
     };
   });
   return (
     <DropDownGeneric
       DropDownButton={() => (
-        <div className="flex cursor-pointer flex-row items-center justify-center gap-3 rounded-sm border border-gray-25 px-[1.7rem] py-0.5 shadow-sm transition-all ease-linear hover:shadow-md">
-          <h1 className="text-base text-gray-29">{candidate?.Status}</h1>
-          <VscTriangleDown className="h-3 w-3 text-gray-25" />
+        <div className="flex cursor-pointer flex-row items-center justify-between gap-3 overflow-hidden rounded-sm border border-gray-15 shadow-sm transition-all ease-linear hover:shadow-md">
+          <h1 className="px-[1rem] text-base text-gray-29">
+            {candidate?.status}
+          </h1>
+          <div className="flex h-[2rem] w-[2rem] items-center justify-center bg-gray-14">
+            <VscTriangleDown className=" text-gray-25" />
+          </div>
         </div>
       )}
       options={[

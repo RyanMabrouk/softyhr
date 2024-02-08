@@ -29,7 +29,16 @@ export const CandidateProfileRoutes: CandidateProfileRoutesType[] = [
 
 export interface CandidateProfileRoutesType {
   label: string;
-  Pathname:string;
-  Icon:IconType;
+  Pathname: string;
+  Icon: IconType;
   path: (job_id: string, CandidateId: string) => string;
 }
+
+export const VisibleDetailsCandidate = [
+  "Zip",
+  "City",
+  "Desired Pay",
+  "LinkedIn URL",
+  "Date available",
+  "Email"
+];

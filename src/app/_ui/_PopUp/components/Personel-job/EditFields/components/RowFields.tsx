@@ -1,5 +1,5 @@
 "use client";
-import { UpdateSettings } from "@/api/updateSettings";
+import { UpdateSettings } from "@/api/Settings/updateSettings";
 import { ReorderFields } from "@/app/_ui/_PopUp/helper/ReorderFields.helper";
 import { sectionType } from "@/types/database.tables.types";
 import { RowFieldType } from "@/types/userInfoTypes.type";
@@ -53,14 +53,14 @@ function RowFields({
           champ,
         ),
       );
-      setSettings(
-        {...ReorderFields(
+      setSettings({
+        ...ReorderFields(
           item.Row,
           dropResult.get(monitor.targetId).spec.Row,
           data,
           champ,
-        )}
-      );
+        ),
+      });
       /*mutateAsync({
         RowStart: item.Row,
         champ: item.champ,

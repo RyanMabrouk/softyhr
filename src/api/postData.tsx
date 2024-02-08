@@ -7,5 +7,6 @@ export default async function postData(
 ) {
   const supabase = createServerActionClient({ cookies });
   const { data, error } = await supabase.from(table).insert(payload).select();
+  console.log(data, error);
   return { data: data, error: error };
 }

@@ -11,12 +11,17 @@ import { Edit_JobOpening } from "@/actions/hiring/EditJobOpening";
 import useToast, { ToastContainer } from "@/hooks/useToast";
 import { TiClipboard } from "react-icons/ti";
 import { useQueryClient } from "@tanstack/react-query";
+import ChangesSection from "@/app/(dashboard)/people/components/ChangesSection/ChangesSection";
+import { FaArrowLeftLong } from "react-icons/fa6";
+import UnsavedChanges from "@/app/_ui/_PopUp/components/Hiring/UnsavedChanges/UnsavedChanges";
 
 function Page() {
   const params = useSearchParams();
   const id = params?.get("id");
   const QueryClient = useQueryClient();
+  const [touched, setTouched] = useState<boolean>(false);
   const router = useRouter();
+  const [Show, setShow] = useState<boolean>(false);
   const {
     Hiring: { data: Hiring_data, isPending: Hiring_isPending },
   } = useHiring({ id });
@@ -43,9 +48,16 @@ function Page() {
       {isPending || Hiring_isPending ? (
         <h1>Loading...</h1>
       ) : (
-        <div className="flex min-h-full min-w-full items-center justify-center bg-gray-14 py-8">
-          <div className="min-w-4/6 flex min-h-full flex-col items-start justify-start gap-[1.5rem] rounded-xl bg-white p-2 px-12 py-6">
-            <div className="flex items-center justify-center gap-2">
+        <div className="flex min-h-full min-w-full items-center justify-center  py-8">
+          <div className="flex min-h-full w-11/12 flex-col items-start justify-start gap-[1.5rem] rounded-xl p-2 px-12 py-6">
+            <button
+              onClick={() => setShow(true)}
+              className="flex items-center justify-center gap-[0.5rem] text-sm text-gray-11"
+            >
+              <FaArrowLeftLong fontSize="0.7rem" />
+              <h1 className="hover:underline">Job Opening</h1>
+            </button>
+            <div className="flex w-full border-b border-gray-18 items-center justify-center gap-2">
               <CgNotes className="text-3xl text-color-primary-8" />
               <h1 className="text-semibold  text-3xl text-color-primary-8">
                 Job Information
@@ -60,6 +72,7 @@ function Page() {
             >
               <div className="flex flex-col items-start justify-start gap-[1rem]">
                 <FiledsChamps
+                  setTouched={setTouched}
                   FieldsArray={data[0]["Hiring"]["Fields"]}
                   champ={"hiring"}
                   user={{
@@ -76,13 +89,18 @@ function Page() {
                   Job_locationValue={Hiring_data[0]?.job_information?.Location}
                 />
               </div>
-
-              <SubmitButton
-                text="Edit Job Information"
-                textSubmitting="Saving..."
-              />
+              <ChangesSection setTouched={setTouched} />
             </form>
           </div>
+        </div>
+      )}
+      {Show && (
+        <div className="fixed top-0 z-30 flex h-screen w-screen items-center justify-center">
+          <div
+            className="absolute z-50 h-full w-full bg-gray-14"
+            onClick={() => setShow(false)}
+          />
+          <UnsavedChanges setShow={setShow} />
         </div>
       )}
     </>

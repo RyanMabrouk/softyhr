@@ -1,5 +1,5 @@
 "use server";
-import { UpdateSettings } from "@/api/updateSettings";
+import { UpdateSettings } from "@/api/Settings/updateSettings";
 export default async function chnageDefaultHours({
   formData,
 }: {

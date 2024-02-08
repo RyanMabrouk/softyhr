@@ -1,4 +1,4 @@
-import getCandidate from "@/api/getCandidates";
+import getCandidate from "@/api/Hiring/getCandidates";
 import getData from "@/api/getData";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 
@@ -9,6 +9,7 @@ export default function useCandidate(
   page?: number,
   rowsPerPage?: number,
   filter?: string | null,
+  column?: string,
 ) {
   const querykey: any = ["Candidates"];
   if (match && match.job_id) {
@@ -17,7 +18,6 @@ export default function useCandidate(
   if (page != undefined) {
     querykey.push(page);
   }
-  console.log("----------here----------", page);
   if (filter) {
     querykey.push(filter);
   }
@@ -32,13 +32,15 @@ export default function useCandidate(
     queryFn: () =>
       page != undefined && rowsPerPage != undefined
         ? getCandidate("candidates", {
-            match: match,
+            match,
+            column,
             StartPage: (page - 1) * rowsPerPage,
-            EndPage: page  * rowsPerPage,
+            EndPage: page * rowsPerPage,
             filter,
           })
         : getCandidate("candidates", {
-            match: match,
+            match,
+            column,
             filter,
           }),
     placeholderData: keepPreviousData,

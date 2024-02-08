@@ -3,34 +3,35 @@ import TabsPannelGeneric from "@/app/_ui/TabsPannelGeneric";
 import { Box, Tab, Tabs } from "@mui/material";
 import React from "react";
 import PdfViewer from "./Components/pdfViewer";
+import ApplicationQuestions from "./Components/ApplicationQuestions";
+import useCandidate from "@/hooks/Hiring/useCandidate";
+import { useParams } from "next/navigation";
 
 function Page() {
-  const [value, setValue] = React.useState(0);
+  const params = useParams();
+  const { Candidate_id } = params;
+  const {
+    candidates: { data, isPending },
+  } = useCandidate({ id: Candidate_id });
 
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue);
-  };
   return (
     <div className="flex h-full w-full flex-col items-center justify-start">
-      <div className="w-3/5">
+      <div className="flex w-3/5 flex-col items-start justify-center gap-[2rem]">
         <TabsPannelGeneric
           TabsPannel={[
             {
               label: "Resume",
-              Component: () => (
-                <PdfViewer url="https://shrifiles.b-cdn.net/samples-doc/sample-corporate-resume.pdf" />
-              ),
+              Component: () => <PdfViewer url={data[0]?.metadata?.Resume} />,
             },
             {
               label: "Cover Letter",
               Component: () => (
-                <PdfViewer url="https://shrifiles.b-cdn.net/samples-doc/sample-corporate-resume.pdf" />
+                <PdfViewer url={data[0]?.metadata?.["Cover Letter"]} />
               ),
             },
           ]}
         />
-      </div>
-      <div>
+        <ApplicationQuestions candidate={data[0]} />
       </div>
     </div>
   );

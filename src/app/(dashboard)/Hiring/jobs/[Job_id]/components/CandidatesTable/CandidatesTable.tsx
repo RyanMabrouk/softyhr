@@ -36,12 +36,6 @@ import { usePathname } from "next/navigation";
 import { CandidateType } from "@/types/candidate.types";
 import { Hiring_type } from "@/types/database.tables.types";
 
-const statusColorMap: Record<string, ChipProps["color"]> = {
-  active: "success",
-  paused: "danger",
-  vacation: "warning",
-};
-
 const INITIAL_VISIBLE_COLUMNS = [
   "id",
   "Candidate Info",
@@ -49,6 +43,7 @@ const INITIAL_VISIBLE_COLUMNS = [
   "Rating",
   "Applied",
   "Changes Status",
+  "Last Email",
   "actions",
 ];
 
@@ -309,3 +304,4 @@ export default function CandiatesTable({
     </Table>
   );
 }
+

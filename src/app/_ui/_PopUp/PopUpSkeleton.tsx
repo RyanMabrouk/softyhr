@@ -7,7 +7,7 @@ export default function PopUpSkeleton({
   children,
   className,
 }: {
-  title: string;
+  title?: string;
   className?: string;
   children: React.ReactNode;
 }) {

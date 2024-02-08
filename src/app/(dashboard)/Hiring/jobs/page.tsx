@@ -12,7 +12,7 @@ import { HiringTableType } from "../_ui/HiringTable/Hiringtable.types";
 import useHiring from "@/hooks/Hiring/useHiring";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { GetJobOpening } from "@/actions/hiring/GetJobOpening";
-import getHiring from "@/api/getHiring";
+import getHiring from "@/api/Hiring/getHiring";
 import useCandidate from "@/hooks/Hiring/useCandidate";
 import TableSkeleton from "../_ui/HiringTable/components/TableSkeleton";
 
@@ -22,7 +22,7 @@ function Page() {
   const queryClient = useQueryClient();
   const {
     Hiring: { data, isPending, meta, isPlaceholderData },
-  } = useHiring({}, page , 6, filter);
+  } = useHiring({}, "*",page, 6, filter);
 
   React.useEffect(() => {
     queryClient.invalidateQueries({
@@ -63,7 +63,7 @@ function Page() {
         <div className="mt-4 w-full">
           <Link
             href={HirinSections[0]?.path + "/add/" + CreateHiringJob[0]}
-            className="focus-within:shadow-green flex w-[11.5rem] items-center justify-center gap-[0.5rem] border border-color-primary-8 py-1 text-color-primary-8  duration-200 ease-in-out hover:!border-color-primary-7 hover:!text-color-primary-7"
+            className="focus-within:shadow-green flex w-[11.5rem] items-center justify-center gap-[0.5rem] rounded-sm border border-color-primary-8 py-1 text-color-primary-8  duration-200 ease-in-out hover:!border-color-primary-7 hover:!text-color-primary-7"
           >
             <FaPlusCircle />
             Add Job Openings
@@ -71,7 +71,7 @@ function Page() {
         </div>
         <div className="flex w-full items-center justify-center">
           {isPending ? (
-            <TableSkeleton/>
+            <TableSkeleton />
           ) : (
             <HiringTable
               page={page}

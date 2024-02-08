@@ -12,13 +12,30 @@ export async function sendMail(toWho: any, subject: any, content: any) {
     };
     transporter.sendMail(mailOptions, function (err, info) {
       if (err) {
-        console.log("Error sending message: " + err);
+        return {
+          Error:err,
+          Status:'failed',
+          message: "Error sending message",
+        };
       } else {
-        console.log("Message sent succesfully.");
+        return {
+          Error: null,
+          Status:'success',
+          message: "Message sent succesfully.",
+        }
       }
     });
+     return {
+       Error: null,
+       Status: "success",
+       message: "Message sent succesfully.",
+     };
   } catch (error) {
-    console.log("Other error sending message: " + error);
+    return {
+      Error: error,
+      Status: "failed",
+      message: "Something Went Wrong",
+    };
   }
 }
 

@@ -8,7 +8,7 @@ import {
   useMutation,
   useQueryClient,
 } from "@tanstack/react-query";
-import { UpdateSettings } from "@/api/updateSettings";
+import { UpdateSettings } from "@/api/Settings/updateSettings";
 import { RowType, sectionType } from "@/types/database.tables.types";
 import RowFields from "./RowFields";
 

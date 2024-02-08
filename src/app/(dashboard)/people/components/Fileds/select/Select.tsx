@@ -9,6 +9,7 @@ interface SelectInputPropsType {
   defaultValue?: string | null;
   label?: string;
   minWidth?: string;
+  setSelectedKeys?: React.Dispatch<React.SetStateAction<string | null>> | undefined;
 }
 
 function SelectInput({
@@ -17,11 +18,13 @@ function SelectInput({
   defaultValue = "",
   label,
   minWidth,
+  setSelectedKeys
 }: SelectInputPropsType) {
   const [value, setValue] = useState(String(defaultValue));
   const HandleChange = (e: SelectChangeEvent<string>) => {
     if (setTouched) setTouched(true);
     setValue(e.target.value);
+    setSelectedKeys && setSelectedKeys(e.target.value)
   };
   return (
     <div className="relative flex flex-col items-start justify-center">

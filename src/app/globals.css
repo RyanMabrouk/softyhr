@@ -138,3 +138,6 @@
   padding-top: 0.3rem !important;
   padding-left: 0.5rem !important;
 }
+.blockbuilder-branding {
+  display: none !important;
+}

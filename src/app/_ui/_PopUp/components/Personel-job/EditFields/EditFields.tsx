@@ -9,7 +9,7 @@ import { GiRapidshareArrow } from "react-icons/gi";
 import RowFiedlsList from "./components/RowFiedlsList";
 import Loader from "@/app/(dashboard)/people/components/Loader/Loader";
 import { champ_type, sectionType } from "@/types/database.tables.types";
-import { UpdateSettings } from "@/api/updateSettings";
+import { UpdateSettings } from "@/api/Settings/updateSettings";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import PopUpSkeleton from "../../../PopUpSkeleton";
 

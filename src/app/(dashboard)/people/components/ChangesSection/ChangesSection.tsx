@@ -28,7 +28,7 @@ function ChangesSection({
           <button
             disabled={pending}
             className={
-              " rounded-md bg-fabric-700 px-2 py-2 font-semibold  text-white  transition-all ease-linear hover:!bg-fabric-600" +
+              " rounded-sm bg-fabric-700 px-2 py-2 font-semibold  text-white  transition-all ease-linear hover:!bg-fabric-600" +
               (pending ? "  animate-pulse " : "")
             }
             type="submit"

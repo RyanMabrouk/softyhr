@@ -1,4 +1,5 @@
-import React from "react";
+import { email_history_type } from "@/types/candidate.types";
+import React, { ReactNode } from "react";
 
 const columns = [
   { name: "ID", uid: "id", sortable: true },
@@ -8,6 +9,7 @@ const columns = [
   { name: "Applied", uid: "Applied" },
   { name: "Last Email", uid: "Last Email" },
   { name: "Changes Status", uid: "Changes Status" },
+  { name: "Last_Email", uid: "Last_Email" },
   { name: "", uid: "actions" },
 ];
 
@@ -29,11 +31,11 @@ export { columns, CandidateStatusOptions };
 
 
 export interface TableCandidateType {
-      id: string,
-      "Candidate Info":string,
-      Status: string,
-      Status_update: string,
-      Rating: number,
-      Applied: string,
-      "Last Email": string,
+  id: string;
+  "Candidate Info": string;
+  status: string;
+  Status_update: string;
+  Rating: number;
+  Applied: string;
+  "Last Email": any;
 };

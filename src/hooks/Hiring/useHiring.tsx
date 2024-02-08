@@ -1,48 +1,58 @@
-  import getData from "@/api/getData";
-  import getHiring from "@/api/getHiring";
-  import { useQuery } from "@tanstack/react-query";
+import getData from "@/api/getData";
+import getHiring from "@/api/Hiring/getHiring";
+import { useQuery } from "@tanstack/react-query";
 
-  export type MultipleValue = string | number | boolean | null | string[] | undefined;
+export type MultipleValue =
+  | string
+  | number
+  | boolean
+  | null
+  | string[]
+  | undefined;
 
+type QueryKeyType = string | number | MultipleValue;
 
-  type QueryKeyType = string | number | MultipleValue
-
-  export default function useHiring(
-    match?: {
-    [key:string]: MultipleValue
-    },
-    page?: number,
-    rowsPerPage?: number,
-    filter?: string | null,
-  ) {
-    const queryKey: any = ["Hiring", page, filter, match].filter(Boolean) as QueryKeyType;
-    const {
-      data: Hiring,
+export default function useHiring(
+  match?: {
+    [key: string]: MultipleValue;
+  },
+  column?: string,
+  page?: number,
+  rowsPerPage?: number,
+  filter?: string | null,
+) {
+  const queryKey: any = ["Hiring", page, filter, match].filter(
+    Boolean,
+  ) as QueryKeyType;
+  console.log(column);
+  const {
+    data: Hiring,
+    isPlaceholderData,
+    isPending,
+  } = useQuery({
+    queryKey: queryKey,
+    queryFn: () =>
+      page != undefined && rowsPerPage != undefined
+        ? getHiring("Hiring", {
+            match,
+            StartPage: (page - 1) * rowsPerPage,
+            EndPage: page * rowsPerPage,
+            column: `${column || "*"},candidates(id,created_at)`,
+            filter,
+          })
+        : getHiring("Hiring", {
+            match,
+            filter,
+            column,
+          }),
+  });
+  return {
+    Hiring: {
+      data: Hiring?.data,
+      error: Hiring?.error,
+      isPending: isPending,
       isPlaceholderData,
-      isPending,
-    } = useQuery({
-      queryKey: queryKey,
-      queryFn: () =>
-        page != undefined && rowsPerPage != undefined
-          ? getHiring("Hiring", {
-              match: match,
-              StartPage: (page - 1)* rowsPerPage,
-              EndPage: (page ) * rowsPerPage,
-              column:"*,candidates(id,created_at)",
-              filter,
-            })
-          : getHiring("Hiring", { 
-              match: match,
-              filter,
-            }),
-    });
-    return {
-      Hiring: {
-        data: Hiring?.data,
-        error: Hiring?.error,
-        isPending: isPending,
-        isPlaceholderData,
-        meta: Hiring?.meta,
-      },
-    };
-  }
+      meta: Hiring?.meta,
+    },
+  };
+}

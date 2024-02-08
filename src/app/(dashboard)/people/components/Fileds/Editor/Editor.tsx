@@ -58,9 +58,10 @@ function Editor({ RowField, defaultValue, editable = true }: EditorPropsType) {
     dark: darkRedTheme,
   };
 
+  console.log(
+    value != null ? JSON.stringify(JSON.parse(value)) : JSON.stringify(value),
+  );
 
-   console.log(defaultValue ? JSON.stringify(JSON.parse(value)) : JSON.stringify(value))
-  
   return (
     <div className="w-full pt-2">
       <h1 className="text-[14px] text-gray-29">{RowField?.name}</h1>
@@ -76,7 +77,11 @@ function Editor({ RowField, defaultValue, editable = true }: EditorPropsType) {
           autoFocus
           hidden
           name={RowField?.name}
-          value={defaultValue ? JSON.stringify(JSON.parse(value)) : JSON.stringify(value)}
+          value={
+            value != null
+              ? JSON.stringify(JSON.parse(value))
+              : JSON.stringify(value)
+          }
         />
       </div>
     </div>

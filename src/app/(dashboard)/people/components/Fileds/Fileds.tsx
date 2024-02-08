@@ -6,7 +6,7 @@ import Input from "./Input/Input";
 import { Profile_Type, RowType } from "@/types/database.tables.types";
 interface FiledsChampsPropsType {
   FieldsArray: RowType[];
-  setTouched?: React.Dispatch<React.SetStateAction<boolean>> | undefined;
+  setTouched?: React.Dispatch<React.SetStateAction<boolean>>;
   user?: { [key:string]: any | undefined} ;
   champ?: string;
 }

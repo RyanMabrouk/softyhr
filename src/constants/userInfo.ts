@@ -44,6 +44,7 @@ import textarea from "@/app/(dashboard)/people/components/Fileds/textarea/textar
 import dynamic from "next/dynamic";
 import InputFile from "@/app/(dashboard)/people/components/Fileds/File/File";
 import SelectUsers from "@/app/(dashboard)/people/components/Fileds/SelectUsers/SelectUsers";
+import { IoSearchSharp } from "react-icons/io5";
 const Editor = dynamic(
   () => import("@/app/(dashboard)/people/components/Fileds/Editor/Editor"),
   { ssr: false },
@@ -95,4 +96,5 @@ export const InputIcons: ObjectIconsType = {
   MDPHONEANDROID: MdPhoneAndroid,
   CIMAIL: CiMail,
   FAINSTAGRAM: FaInstagram,
+  IOSEARCHSHARP: IoSearchSharp,
 };

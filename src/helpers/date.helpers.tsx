@@ -143,25 +143,52 @@ export function formatCustomDate(inputDate: string) {
   }).format(date);
 }
 export function monthsAgo(inputDate: string) {
-  // Parse the input date
   const date = new Date(inputDate);
 
-  // Get the current date
   const currentDate = new Date();
 
-  // Calculate the difference in months
   const monthsDifference =
     (currentDate.getFullYear() - date.getFullYear()) * 12 +
     currentDate.getMonth() -
     date.getMonth();
 
-  if (monthsDifference === 0) {
-    return "This month";
-  } else if (monthsDifference === 1) {
-    return "1 month ago";
-  } else if (monthsDifference > 1) {
-    return `${monthsDifference} months ago`;
+  if (monthsDifference === 0) { 
+    return "This month"; 
+  } else if (monthsDifference === 1) { 
+    return "1 month ago"; 
+  } else if (monthsDifference > 1) { 
+    return `${monthsDifference} months ago`; 
+  } else { 
+    return "Invalid date"; 
+  }
+}
+export function DaysAgo(inputDate: string) {
+  const date = new Date(inputDate);
+  const currentDate = new Date();
+
+  const differenceInMillis = currentDate.getTime() - date.getTime();
+  const differenceInSeconds = differenceInMillis / 1000;
+  const differenceInMinutes = differenceInSeconds / 60;
+  const differenceInHours = differenceInMinutes / 60;
+  const differenceInDays = Math.floor(differenceInHours / 24);
+
+  if (differenceInDays === 0) {
+    if (differenceInHours < 1) {
+      if (differenceInMinutes < 1) {
+        return "just now";
+      } else {
+        return `${Math.floor(differenceInMinutes)} minutes ago`;
+      }
+    } else if (differenceInHours < 24) {
+      return `${Math.floor(differenceInHours)} hours ago`;
+    }
+  } else if (differenceInDays === 1) {
+    return "yesterday";
+  } else if (differenceInDays >= 2 && differenceInDays <= 7) {
+    return `${differenceInDays} days ago`;
   } else {
-    return "Invalid date";
+    // If it's more than 7 days ago, return the actual date
+    const options: any = { year: "numeric", month: "numeric", day: "numeric" };
+    return date.toLocaleDateString(undefined, options);
   }
 }

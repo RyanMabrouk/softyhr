@@ -76,7 +76,6 @@ export default function HiringTable({
   const [visibleColumns, setVisibleColumns] = React.useState<Selection>(
     new Set(INITIAL_VISIBLE_COLUMNS),
   );
-  const [ShowEdit, setShowEdit] = useState<boolean>(false);
 
   const headerColumns = React.useMemo(() => {
     if (visibleColumns === "all") return columns;
@@ -155,20 +154,7 @@ export default function HiringTable({
         case "actions":
           return (
             <div className="ease flex items-center justify-end gap-2 opacity-0 duration-150 group-hover:!opacity-100">
-              <div className="relative">
-                <div
-                  onClick={() => setShowEdit(true)}
-                  className="duration-200 flex h-[2rem] w-[2rem] cursor-pointer items-center justify-center ease-in-out hover:border hover:border-gray-27 hover:bg-gray-22"
-                >
-                  <MdModeEditOutline
-                    className="text-lg"
-                    cursor={"pointer"}
-                    fill={"gray"}
-                  />
-                </div>
-                {ShowEdit && <EditCard />}
                 <EditJobOpening id={user?.id}/>
-              </div>
               <Link
                 href={`?popup=DELETE_JOB&id=${user?.id}`}
                 className="duration-200 flex h-[2rem] w-[2rem] cursor-pointer items-center justify-center ease-in-out hover:border hover:border-gray-27 hover:bg-gray-22"
@@ -190,7 +176,7 @@ export default function HiringTable({
           return cellValue;
       }
     },
-    [ShowEdit],
+    [],
   );
   const classNames = React.useMemo(
     () => ({

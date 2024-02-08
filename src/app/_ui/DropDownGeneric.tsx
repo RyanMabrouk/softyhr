@@ -34,13 +34,13 @@ function DropDownGeneric({
       </DropdownTrigger>
       <DropdownMenu
         variant="faded"
-        className="flex w-full flex-col items-start justify-center rounded-md border border-color-primary-8 bg-white !p-0 shadow-md"
+        className="flex w-full flex-col items-start justify-center rounded-md border border-gray-15 bg-white !p-0 shadow-md"
         aria-label="Dropdown menu with icons"
       >
         {options?.map(({ link, Component, action }: any, index: number) => {
           const ComponentWrapper = link
             ? () => (
-                <div className="w-full px-2 duration-200 ease-linear hover:bg-color-primary-6(§è(è§(">
+                <div className="hover:bg-color-primary-6(§è(è§( w-full px-2 duration-200 ease-linear">
                   <Link href={link} className="">
                     <Component />
                   </Link>
@@ -51,7 +51,7 @@ function DropDownGeneric({
                   <Component />
                 </h1>
               );
-              
+
           return (
             <DropdownItem
               className="duration-250 w-fill group flex ease-linear hover:bg-color-primary-8"
@@ -59,7 +59,6 @@ function DropDownGeneric({
               onClick={action && action}
             >
               <ComponentWrapper />
-              
             </DropdownItem>
           );
         })}

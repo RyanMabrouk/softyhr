@@ -25,7 +25,6 @@ export function FormulateFormData(formdata: FormData) {
   formdata.delete("Email");
   formdata.delete("Phone");
   formdata.forEach(function (value: FormDataEntryValue, key: string) {
-    console.log(key, value);
     metadata[key] = value;
   });
   return { ...data, metadata };

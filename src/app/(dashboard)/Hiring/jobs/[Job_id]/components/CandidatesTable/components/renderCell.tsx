@@ -1,4 +1,4 @@
-import { formatCustomDate } from "@/helpers/date.helpers";
+import { DaysAgo, formatCustomDate } from "@/helpers/date.helpers";
 import RatingGeneric from "./RatingGeneric";
 import HireStatus from "./HireStatus";
 import Hiring from "@/app/(dashboard)/Settings/(settings)/SettingsHiring/page";
@@ -46,7 +46,7 @@ export const renderCell = (
     case "Status":
       return (
         <div className="flex flex-col">
-          <p className="text-bold text-small capitalize">{user.Status}</p>
+          <p className="text-bold text-small capitalize">{user.status}</p>
           <p className="text-sm text-gray-15">{user.Status_update}</p>
         </div>
       );
@@ -71,6 +71,11 @@ export const renderCell = (
           <HireStatus Hiring={Hiring} candidate={user} />
         </div>
       );
+    case "Last Email":
+      const Component = user?.["Last Email"];
+      return (
+          <Component/>
+      );
     case "actions":
       return (
         <div className="relative flex items-center justify-end gap-2">
@@ -90,19 +95,11 @@ export const renderCell = (
               <DropdownItem className="group hover:!bg-color-primary-8">
                 <div className="flex items-end justify-start gap-[0.5rem] duration-200 ease-linear">
                   <BiCommentAdd className="text-xl text-color-primary-7 group-hover:!text-white" />
-                  <Link href="/" className="text-black group-hover:!text-white">
-                    Add Comment
-                  </Link>
-                </div>
-              </DropdownItem>
-              <DropdownItem className="group hover:!bg-color-primary-8">
-                <div className="flex items-end justify-start gap-[0.5rem] duration-200 ease-linear">
-                  <FaEdit className="text-xl text-color-primary-7 group-hover:!text-white" />
                   <Link
+                    href={`?popup=CREATE_COMMENT&id=${user?.id}`}
                     className="text-black group-hover:!text-white"
-                    href={`?popup=UPDATE_CANDIDATE&id=${user?.id}`}
                   >
-                    Update candidate
+                    Add Comment
                   </Link>
                 </div>
               </DropdownItem>

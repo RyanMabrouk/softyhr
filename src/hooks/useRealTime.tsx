@@ -10,7 +10,7 @@ export default function useRealTime({
   table: string;
   filter?: {
     column: string;
-    value: string;
+    value: string | number;
   };
   event?: string;
   onReceive: (payload: any) => void;

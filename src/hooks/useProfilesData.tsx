@@ -6,7 +6,7 @@ export default function useProfilesData( match?: {
     [key: string]: string | number | boolean | null | string[] | undefined},
     columns?: string) {
   // ------------------All Profiles Basic Information--------------------
-  const { data: profiles, isPending: isPending } = useQuery({
+  const { data: profiles, isPending: isPending, isFetched } = useQuery({
     queryKey: ["profiles", columns],
     queryFn: () =>
       getData("profiles", {
@@ -20,6 +20,7 @@ export default function useProfilesData( match?: {
       data: profiles?.data,
       error: profiles?.error,
       isPending,
+      isFetched,
     },
   };
 }

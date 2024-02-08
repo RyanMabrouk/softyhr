@@ -48,7 +48,7 @@ const Textarea = ({ RowField, setTouched, defaultValue }: InputPropsType) => {
             if (setTouched) setTouched(true);
           }}
           placeholder={RowField?.placeHolder || ""}
-          {...(RowField?.required && { required: true })}
+          required={RowField?.required || false}
         />
       </div>
     </div>
