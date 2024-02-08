@@ -22,7 +22,7 @@ function Page() {
   const queryClient = useQueryClient();
   const {
     Hiring: { data, isPending, meta, isPlaceholderData },
-  } = useHiring({}, page , 6, filter);
+  } = useHiring({}, page, 6, filter);
 
   React.useEffect(() => {
     queryClient.invalidateQueries({
@@ -40,7 +40,7 @@ function Page() {
           }),
       });
     }
-  }, [page, filter]);
+  }, [page, filter, meta?.totalPages, isPlaceholderData, queryClient]);
 
   const HiringDataTable: HiringTableType[] = data?.map(
     (Hiring: Hiring_type) => {
@@ -71,7 +71,7 @@ function Page() {
         </div>
         <div className="flex w-full items-center justify-center">
           {isPending ? (
-            <TableSkeleton/>
+            <TableSkeleton />
           ) : (
             <HiringTable
               page={page}

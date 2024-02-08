@@ -1,6 +1,8 @@
 "use client";
 import React, { useState } from "react";
-import CandiatesTable, { CandidateTablePropsType } from "./components/CandidatesTable/CandidatesTable";
+import CandiatesTable, {
+  CandidateTablePropsType,
+} from "./components/CandidatesTable/CandidatesTable";
 import useCandidate from "@/hooks/Hiring/useCandidate";
 import useHiring from "@/hooks/Hiring/useHiring";
 import Link from "next/link";
@@ -26,19 +28,19 @@ function Page({ params: { Job_id } }: { params: { Job_id: string } }) {
     queryClient.invalidateQueries({
       queryKey: ["Candidates", Job_id, page + 1, filter],
     });
-   if (!isPlaceholderData && Math.ceil(meta?.totalPages / 6) - 1 > page) {
-     queryClient.prefetchQuery({
-       queryKey: ["Candidates", Job_id, page + 1, filter],
-       queryFn: () =>
-         getCandidate("candidates", {
-           match: { job_id: Job_id },
-           StartPage: (page + 1) * 6,
-           EndPage: (page + 2) * 6,
-           filter,
-         }),
-     });
-   }
-  }, [page, filter]);
+    if (!isPlaceholderData && Math.ceil(meta?.totalPages / 6) - 1 > page) {
+      queryClient.prefetchQuery({
+        queryKey: ["Candidates", Job_id, page + 1, filter],
+        queryFn: () =>
+          getCandidate("candidates", {
+            match: { job_id: Job_id },
+            StartPage: (page + 1) * 6,
+            EndPage: (page + 2) * 6,
+            filter,
+          }),
+      });
+    }
+  }, [page, filter, Job_id, meta?.totalPages, isPlaceholderData, queryClient]);
 
   const CandidateTableData: any = data?.map((candidate: CandidateType) => {
     return {
@@ -49,7 +51,7 @@ function Page({ params: { Job_id } }: { params: { Job_id: string } }) {
       Status_update: "Updated Just Now",
       Rating: candidate?.Ratings,
       Applied: candidate?.created_at,
-    //  "Last Email": candidate?.["Last Email"] || "",
+      //  "Last Email": candidate?.["Last Email"] || "",
     };
   });
   return (

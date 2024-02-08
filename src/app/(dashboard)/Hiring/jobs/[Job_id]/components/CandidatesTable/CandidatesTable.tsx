@@ -16,7 +16,11 @@ import {
   Selection,
   ChipProps,
 } from "@nextui-org/react";
-import { columns, CandidateStatusOptions, TableCandidateType } from "./components/config";
+import {
+  columns,
+  CandidateStatusOptions,
+  TableCandidateType,
+} from "./components/config";
 import { FaSortDown } from "react-icons/fa6";
 import Mail from "./components/Mail/Mail";
 import Settings from "./components/Settings/Settings";
@@ -205,7 +209,7 @@ export default function CandiatesTable({
         </div>
       </div>
     );
-  }, []);
+  }, [Hiring, filter, setFilter, totalPages, pathname]);
   const bottomContent = React.useMemo(() => {
     return (
       <div className="flex items-center justify-between px-2 py-2">
@@ -227,7 +231,7 @@ export default function CandiatesTable({
         </span>
       </div>
     );
-  }, [selectedKeys, totalPages, page]);
+  }, [selectedKeys, totalPages, page, setpage]);
 
   const classNames = React.useMemo(
     () => ({

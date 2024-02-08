@@ -65,7 +65,7 @@ export default function CalculateLeaveBalance() {
         ) *
           (policy?.accrual_value_in_hours ?? 0),
     );
-  }, [chalendarDate, policy]);
+  }, [chalendarDate, policy, current_policy_balance]);
   // current employee full name
   const first_name: string =
     employee_profile?.["Basic Information"]?.["First name"];
