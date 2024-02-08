@@ -49,5 +49,5 @@ export default function useRealTime({
     return () => {
       supabase.removeChannel(channel);
     };
-  }, [supabase]);
+  }, [table, event, filter, onReceive, channelName, supabase]);
 }

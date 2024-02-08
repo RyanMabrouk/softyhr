@@ -1,7 +1,8 @@
 "use client";
 import useRealTime from "@/hooks/useRealTime";
 import { useQueryClient } from "@tanstack/react-query";
-export function ListenForRealTimeData() {
+export function RealTimeDataLeaveRequets() {
+  console.log("🚀 ~ RealTimeDataLeaveRequets ~ RealTimeData for LeaveRequets:");
   const queryclient = useQueryClient();
   useRealTime({
     table: "leave_requests",

@@ -1,4 +1,5 @@
 "use client";
+import useAllLeaveBalances from "@/hooks/TimeOff/useAllLeaveBalances";
 import useLeaveData from "@/hooks/TimeOff/useLeaveData";
 import {
   database_leave_policies_type,
@@ -17,8 +18,10 @@ export default function useCategoriesData() {
   const {
     leave_categories: { data: leave_categories },
     leave_policies: { data: leave_policies },
-    all_users_leave_balance: { data: all_users_leave_balance },
   } = useLeaveData();
+  const {
+    all_users_leave_balance: { data: all_users_leave_balance },
+  } = useAllLeaveBalances();
   const categories_data: categories_data_type[] = leave_categories?.map(
     (category: databese_leave_categories_type) => {
       const policies_ids = leave_policies

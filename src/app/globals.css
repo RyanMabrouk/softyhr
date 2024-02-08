@@ -21,8 +21,10 @@
       var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
   }
 }
-/* Daisyui */
 @layer base {
+  body {
+    -webkit-font-smoothing: antialiased;
+  }
   /* Remove default number input arrows style */
   /* Chrome, Safari, Edge, Opera */
   input::-webkit-outer-spin-button,
@@ -33,6 +35,7 @@
   /* Firefox */
   input[type="number"] {
     -moz-appearance: textfield;
+    appearance: textfield;
   }
 }
 /* Reset Mui Select Componant selected bg color */
@@ -48,6 +51,30 @@
 .MuiMenu-list {
   padding-top: 0 !important;
   padding-bottom: 0 !important;
+}
+.scrollBar-green::-webkit-scrollbar {
+  width: 0.5rem;
+  border-radius: 0.6rem;
+}
+.scrollBar-green::-webkit-scrollbar-thumb {
+  background-color: #eef3e5;
+  border-radius: 0.5rem;
+}
+.scrollBar-green::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+.scrollBar-green::-webkit-scrollbar-track-piece {
+  background-color: transparent;
+}
+.scrollBar-green::-webkit-scrollbar-corner {
+  background-color: transparent;
+}
+.MuiOutlinedInput-root {
+  padding: 0 !important;
+}
+.MuiAutocomplete-input {
+  padding-top: 0.3rem !important;
+  padding-left: 0.5rem !important;
 }
 /* Daisyui */
 @layer base {
@@ -113,28 +140,4 @@
     --input: 0 0% 14.9%;
     --ring: 0 0% 83.1%;
   }
-}
-.scrollBar-green::-webkit-scrollbar {
-  width: 0.5rem;
-  border-radius: 0.6rem;
-}
-.scrollBar-green::-webkit-scrollbar-thumb {
-  background-color: #eef3e5;
-  border-radius: 0.5rem;
-}
-.scrollBar-green::-webkit-scrollbar-track {
-  background-color: transparent;
-}
-.scrollBar-green::-webkit-scrollbar-track-piece {
-  background-color: transparent;
-}
-.scrollBar-green::-webkit-scrollbar-corner {
-  background-color: transparent;
-}
-.MuiOutlinedInput-root {
-  padding: 0 !important;
-}
-.MuiAutocomplete-input {
-  padding-top: 0.3rem !important;
-  padding-left: 0.5rem !important;
 }

@@ -102,8 +102,7 @@ export function PolyciesSwiper() {
           <>
             <div className="btn_swiper_arrow_left absolute -left-5 top-[40%] cursor-pointer ">
               <FaArrowLeft
-                className="h-10 w-10 border border-gray-26 p-2 text-gray-25"
-                hidden={activeIndex === 0}
+                className={`h-10 w-10 border border-gray-26 p-2 text-gray-25 ${activeIndex === 0 ? "hidden" : ""}`}
               />
             </div>
             <div

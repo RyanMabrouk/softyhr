@@ -87,7 +87,7 @@ export function Card({
               </div>
               <span className="mr-20 line-clamp-2 min-h-max text-sm leading-6 text-gray-21">
                 {note ||
-                  `Is requesting vacation from ${formatDateToMonDDYYYY(new Date(start_at))} to ${formatDateToMonDDYYYY(new Date(end_at))}`}
+                  `Is requesting Time off from ${formatDateToMonDDYYYY(new Date(start_at))} to ${formatDateToMonDDYYYY(new Date(end_at))}`}
               </span>
             </div>
           </section>

@@ -4,7 +4,6 @@ import { SubmitBtn } from "@/app/_ui/SubmitBtn";
 import PopUpSkeleton from "@/app/_ui/_PopUp/PopUpSkeleton";
 import { generateLeaveCategorieIcon } from "@/helpers/leave.helpers";
 import usePolicy from "@/hooks/TimeOff/usePolicy";
-import useData from "@/hooks/useData";
 import useLeaveData from "@/hooks/TimeOff/useLeaveData";
 import {
   database_leave_policies_type,
@@ -27,6 +26,7 @@ import useToast from "@/hooks/useToast";
 import useProfilesData from "@/hooks/useProfilesData";
 import { PiUploadSimple } from "react-icons/pi";
 import useLeaveBalances from "@/hooks/TimeOff/useLeaveBalances";
+import useAllLeaveBalances from "@/hooks/TimeOff/useAllLeaveBalances";
 export type usersWithoutCurrentPolicy = {
   user_id: string;
   name: string;
@@ -44,9 +44,11 @@ export default function AddEmployeesToPolicy() {
     columns: 'user_id,role,picture,"Basic Information"',
   });
   const {
-    all_users_leave_balance: { data: all_users_leave_balance },
     leave_policies: { data: leave_policies },
   } = useLeaveData();
+  const {
+    all_users_leave_balance: { data: all_users_leave_balance },
+  } = useAllLeaveBalances();
   const {
     all_users_leave_balance: { data: policy_users_blances },
   } = useLeaveBalances({

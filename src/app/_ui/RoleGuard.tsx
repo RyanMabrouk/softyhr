@@ -22,5 +22,5 @@ export default function RoleGuard({
     return children;
   }
   // if not
-  return;
+  return false;
 }

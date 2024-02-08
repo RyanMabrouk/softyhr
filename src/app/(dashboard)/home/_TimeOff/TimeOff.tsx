@@ -165,7 +165,7 @@ export function TimeOff() {
             pathname: pathname,
             query: { popup: "EDIT_LEAVE_REQUEST" },
           }}
-          className=" flex w-full flex-row items-center justify-center gap-1 rounded-sm bg-fabric-700 px-4 py-1.5 text-lg font-semibold text-white shadow-sm outline-none transition-all ease-linear hover:shadow-md focus:outline-none "
+          className=" flex w-full flex-row items-center justify-center gap-1 rounded-sm bg-fabric-700 px-4 py-1.5 text-lg font-semibold text-white shadow-sm outline-none transition-all ease-linear hover:bg-fabric-600 hover:shadow-md focus:outline-none "
         >
           <BsFillStopwatchFill className="h-5 w-5" />
           <span>Request Time Off</span>
