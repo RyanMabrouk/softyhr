@@ -34,6 +34,9 @@ export default function RejectLeaveRequest() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
+        queryKey: ["leave_requests"],
+      });
+      queryClient.invalidateQueries({
         queryKey: ["leave_requests", employeeId],
       });
       Router.back();
