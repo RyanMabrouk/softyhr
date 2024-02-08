@@ -17,13 +17,14 @@ export default function useFormattedLeaves({
     const user = profiles?.find(
       (p: database_profile_type) => p.user_id === e.user_id,
     );
+    const name =
+      user?.["Basic Information"]?.["First name"] +
+      " " +
+      user?.["Basic Information"]?.["Last name"];
     return {
       ...e,
       status: e.status as database_leave_request_status_type,
-      name:
-        user?.["Basic Information"]?.["First name"] +
-        " " +
-        user?.["Basic Information"]?.["Last name"],
+      name: name,
       picture: user?.picture,
       date: formatDateToMonDDYYYY(new Date(e.created_at)),
     };

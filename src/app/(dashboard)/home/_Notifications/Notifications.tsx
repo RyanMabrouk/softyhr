@@ -1,10 +1,10 @@
 "use client";
-import React, { useEffect } from "react";
+import React from "react";
 import { GrAnnounce } from "react-icons/gr";
 import { Player } from "@lottiefiles/react-lottie-player";
 import Loader from "@/app/_ui/Loader/Loader";
-import { usePendingLeaveRequestNotifications } from "./_pendingNotifs/hooks/usePendingLeaveRequestNotifications";
 import RoleGuard from "@/app/_ui/RoleGuard";
+import { GetPendingNotifications } from "./_pendingNotifs/GetPendingNotifications";
 export type NotificationType = {
   notification: JSX.Element | null;
   createdAt: Date;
@@ -30,14 +30,14 @@ export function Notifications() {
         />
       </RoleGuard>
       {/* This is the componant */}
-      <section className="flex max-h-[30rem] min-h-[30rem] w-full flex-col self-stretch rounded-md border border-white bg-white pb-4 pl-1 pt-1 shadow-md">
+      <section className="flex max-h-[30rem] min-h-[30rem] w-full flex-col self-stretch rounded-md border border-white bg-white px-1 pb-4 pt-1 shadow-md">
         <header className="flex flex-row items-center gap-1.5 rounded-t-md bg-gray-14 px-6 py-2 text-fabric-700">
           <GrAnnounce className="h-5 w-5 text-fabric-700" />
           <span className="text-lg font-semibold">
             What's happening at rayes
           </span>
         </header>
-        <main className="flex h-full w-full flex-col overflow-y-scroll pb-1 pt-2.5 shadow-inner">
+        <main className="flex h-full w-full flex-col overflow-y-auto pb-1 pt-2.5 shadow-inner">
           {isPending ? (
             <div className="flex h-full w-full items-center justify-center">
               <Loader />
@@ -67,21 +67,4 @@ export function Notifications() {
       </section>
     </>
   );
-}
-function GetPendingNotifications({
-  setNotifications,
-  setIsPending,
-}: {
-  setNotifications: React.Dispatch<React.SetStateAction<NotificationType[]>>;
-  setIsPending: React.Dispatch<React.SetStateAction<boolean>>;
-}) {
-  const { data: pendingNotifs, isPending: isPending1 } =
-    usePendingLeaveRequestNotifications();
-  if (pendingNotifs) {
-    setNotifications((old) => [...old, ...pendingNotifs]);
-  }
-  useEffect(() => {
-    setIsPending((old) => (old ? old : isPending1));
-  }, [isPending1, setIsPending]);
-  return null;
 }
