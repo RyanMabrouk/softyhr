@@ -38,7 +38,7 @@ function Component() {
     const { error } = await postData("candidate_emails", [
       {
         email: data?.Email,
-        email_object: "Hiring",
+        email_object: Mail?.email_object,
         user_sender: user_data?.data[0]?.user_id,
         candidate_receiver: id,
       },
