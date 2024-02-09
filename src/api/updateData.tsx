@@ -11,7 +11,7 @@ export default async function updateData(
     [key: string]: string | number | boolean | null | string[];
   },
 ) {
-  const supabase = createServerActionClient({ cookies })
+  const supabase = createServerActionClient({ cookies });
   const org = await getCurrentorg();
   const { data, error } = await supabase
     .from(table)

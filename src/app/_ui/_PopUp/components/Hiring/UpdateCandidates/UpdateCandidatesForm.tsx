@@ -1,8 +1,6 @@
-import { test } from "@/actions/test";
 import { CandidateStatusOptions } from "@/app/(dashboard)/Hiring/jobs/[Job_id]/components/CandidatesTable/components/config";
 import SelectInput from "@/app/(dashboard)/people/components/Fileds/select/Select";
 import Textarea from "@/app/(dashboard)/people/components/Fileds/textarea/textarea";
-import CancelBtnGeneric from "@/app/_ui/CancelBtnGeneric";
 import SubmitButton from "@/app/careers/[career_id]/components/AppliymentForm/SubmitButton";
 import { FormdataToObject } from "@/helpers/object.helpers";
 import React from "react";
@@ -23,7 +21,7 @@ function UpdateCandidatesForm({ id }: { id: string | null }) {
     if (response?.status == "success") toast?.success(response?.Message);
     else toast?.error(response?.Message);
     Router.push(pathname);
-    queryClient.invalidateQueries({queryKey:["Candidates"]});
+    queryClient.invalidateQueries({ queryKey: ["Candidates"] });
   };
 
   return (
