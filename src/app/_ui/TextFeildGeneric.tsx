@@ -23,6 +23,7 @@ export function TextFeildGeneric({
         {label}
       </Label>
       <textarea
+        {...props}
         name={name}
         id={name}
         className="focus:shadow-green maw-w-[20rem] w-full rounded-md border border-gray-18 px-2  py-1 shadow-[rgba(0,0,0,0.05)_0px_1px_0px_0px] outline-none transition-all ease-linear placeholder:text-gray-32 focus:outline-none "
@@ -31,7 +32,6 @@ export function TextFeildGeneric({
         onChange={(e) => setValueInParent && setValueInParent(e.target.value)}
         required={required}
         draggable
-        {...props}
       />
     </div>
   );

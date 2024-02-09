@@ -1,5 +1,5 @@
 import { Box, Tab, Tabs } from "@mui/material";
-import React, { ReactNode } from "react";
+import React from "react";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -64,7 +64,7 @@ function TabsPannelGeneric({ TabsPannel }: { TabsPannel: TabsType[] }) {
             },
           }}
         >
-          {TabsPannel?.map(({ label }: {label:string}, index: number) => (
+          {TabsPannel?.map(({ label }: { label: string }, index: number) => (
             <Tab
               className="!bg-white !text-color-primary-8"
               style={{

@@ -1,12 +1,11 @@
 // import Swiper core and required modules
-import React, { FormEventHandler } from "react";
+import React from "react";
 import { Pagination, Navigation, Virtual } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-// Import Swiper styles
+import { NavigationOptions, SwiperOptions } from "swiper/types";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import { NavigationOptions, SwiperOptions } from "swiper/types";
 export default function CustomSwiper(props: {
   slides: any;
   initialSlide?: number;

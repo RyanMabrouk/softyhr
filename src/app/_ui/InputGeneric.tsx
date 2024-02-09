@@ -32,6 +32,7 @@ export function InputGeneric({
       )}
       <div className="relative flex w-fit flex-row items-center justify-center gap-1.5">
         <input
+          {...props}
           step=".01"
           type={type}
           className={`w-full max-w-[10rem] rounded-md border border-gray-18 px-2 py-1 shadow-sm placeholder:text-gray-16 focus:outline-none ${shadow === "red" || error ? "focus:shadow-red !border-color9-500" : "focus:shadow-green"} ${props.className}`}
@@ -41,7 +42,6 @@ export function InputGeneric({
           onChange={(e) => {
             setValueInParent && setValueInParent(e.target.value);
           }}
-          {...props}
         />
         {error && (
           <span className="absolute -bottom-[1.375rem] left-0 w-max text-sm text-color9-500">
@@ -71,9 +71,9 @@ export function Label({
     <div className={`flex flex-row items-center gap-1`}>
       {error && <BsExclamationCircleFill className="text-sm text-color9-500" />}
       <label
+        {...props}
         htmlFor={name + "_id"}
         className={`relative w-fit text-sm text-gray-21 ${error && "!text-color9-500"}`}
-        {...props}
       >
         {children}
         {required && <span className="absolute -right-2 top-0 text-sm">*</span>}

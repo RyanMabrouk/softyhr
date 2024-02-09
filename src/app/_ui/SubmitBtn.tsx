@@ -11,13 +11,15 @@ export function SubmitBtn({
   children,
   blocked,
   formAction,
-  ...props
+  className,
+  disabled,
 }: SubmitBtnProps) {
   const { pending } = useFormStatus();
   return (
     <Button
-      {...props}
-      disabled={pending || props.disabled}
+      className={className}
+      blocked={blocked}
+      disabled={pending || disabled}
       formAction={formAction}
       type="submit"
     >
