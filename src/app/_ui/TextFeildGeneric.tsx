@@ -1,24 +1,22 @@
-"use client";
-import React from "react";
+import React, { ChangeEventHandler, TextareaHTMLAttributes } from "react";
 import { Label } from "@/app/_ui/InputGeneric";
-
+type TextFieldProps = TextareaHTMLAttributes<HTMLTextAreaElement> & {
+  name: string;
+  label: string;
+  required?: boolean;
+  error?: string;
+  setValueInParent?: any;
+  onChange?: ChangeEventHandler<HTMLTextAreaElement>;
+};
 export function TextFeildGeneric({
   name,
   label,
   required,
   error,
   setValueInParent,
-  defaultValue,
-  placeholder,
-}: {
-  name: string;
-  label: string;
-  required?: boolean;
-  error?: string;
-  setValueInParent?: any;
-  defaultValue?: string;
-  placeholder?: string;
-}) {
+  onChange,
+  ...props
+}: TextFieldProps) {
   return (
     <div className="flex w-full flex-col gap-1">
       <Label required={required} error={error ? true : false} name={name}>
@@ -31,9 +29,9 @@ export function TextFeildGeneric({
         cols={10}
         rows={5}
         onChange={(e) => setValueInParent && setValueInParent(e.target.value)}
-        placeholder={placeholder}
-        defaultValue={defaultValue}
+        required={required}
         draggable
+        {...props}
       />
     </div>
   );

@@ -1,4 +1,3 @@
-"use client";
 import React, { ButtonHTMLAttributes } from "react";
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   children: string;
