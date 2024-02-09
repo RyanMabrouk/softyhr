@@ -20,6 +20,10 @@ const Myclass = plugin(function ({ addUtilities }: any) {
     ".bg-gray-gradient": {
       backgroundImage: "linear-gradient(-180deg, #eee, #fbfbfb)",
     },
+    ".bg-white-gradient": {
+      backgroundImage:
+        "linear-gradient(to bottom,   rgba(255, 255, 255, 0) 0%,rgba(255, 255, 255, 1) 100%)",
+    },
     ".scroll-snap-none": {
       scrollSnapType: "none",
     },
@@ -78,8 +82,6 @@ const config: Config = {
       },
       width: {
         screen: "100dvw",
-        files_screen: "1355px",
-        percentage78: "78%",
       },
       minHeight: {
         screen: "100dvh",

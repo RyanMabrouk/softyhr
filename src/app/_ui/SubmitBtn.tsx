@@ -1,25 +1,29 @@
 "use client";
-import React from "react";
+import React, { ButtonHTMLAttributes } from "react";
 import { useFormStatus } from "react-dom";
 import { Button } from "./Button";
-
-export function SubmitBtn(props: {
+type SubmitBtnProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   children: string;
-  className?: string;
-  disabled?: boolean;
   blocked?: boolean;
-  onClick?: () => void;
   formAction?: (formData: FormData) => void;
-}) {
+};
+export function SubmitBtn({
+  children,
+  blocked,
+  formAction,
+  className,
+  disabled,
+}: SubmitBtnProps) {
   const { pending } = useFormStatus();
   return (
     <Button
-      {...props}
-      disabled={pending || props.disabled}
-      formAction={props.formAction}
+      className={className}
+      blocked={blocked}
+      disabled={pending || disabled}
+      formAction={formAction}
       type="submit"
     >
-      {props.children}
+      {children}
     </Button>
   );
 }

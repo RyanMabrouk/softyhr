@@ -17,8 +17,8 @@ import { FaFileDownload } from "react-icons/fa";
 interface TopContentPropsType {
   statusOptions: statusOptionsType[];
   Hiring: HiringTableType[];
-  totalpages:number;
-  filter:string | null;
+  totalpages: number;
+  filter: string | null;
   setFilter: React.Dispatch<React.SetStateAction<string | null>>;
 }
 
@@ -27,7 +27,7 @@ export default function TopContent({
   Hiring,
   filter,
   totalpages,
-  setFilter
+  setFilter,
 }: TopContentPropsType) {
   return (
     <div className="flex items-center justify-between  gap-4">
@@ -38,8 +38,10 @@ export default function TopContent({
       </div>
       <div className="flex items-center justify-between gap-3">
         <h1 className="text-normal font-medium ">
-       {`${Hiring?.filter((job: HiringTableType) => job?.status === "Open")
-            ?.length || 0} of ${Hiring?.length || 0} open · Show`}
+          {`${
+            Hiring?.filter((job: HiringTableType) => job?.status === "Open")
+              ?.length || 0
+          } of ${Hiring?.length || 0} open · Show`}
         </h1>
         <div className="flex min-w-16">
           <Dropdown className="w-full">
@@ -57,9 +59,9 @@ export default function TopContent({
               aria-label="Table Columns"
               closeOnSelect={true}
               selectionMode="single"
-               onSelectionChange={(selected:any) => {
-                    setFilter(selected?.anchorKey);
-                  }}
+              onSelectionChange={(selected: any) => {
+                setFilter(selected?.anchorKey);
+              }}
             >
               {statusOptions.map((status: statusOptionsType) => (
                 <DropdownItem

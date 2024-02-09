@@ -11,7 +11,7 @@ export default function FilesTableHeader({ checkAll, setCheckAll }: any) {
         <UploadButton />
         <AddFolder />
       </div>
-      <div className="flex w-percentage78 items-center justify-between">
+      <div className="flex w-[78%] items-center justify-between">
         <FolderTitleBox checkAll={checkAll} setCheckAll={setCheckAll} />
         <SortAndDownloadBox />
       </div>

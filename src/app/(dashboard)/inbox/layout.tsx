@@ -1,5 +1,6 @@
 "use client";
 import { Footer } from "@/app/_ui/Footer";
+import RoleGuard from "@/app/_ui/RoleGuard";
 import Link from "next/link";
 import React from "react";
 import { AiFillLike } from "react-icons/ai";
@@ -12,11 +13,17 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     {
       label: "Inbox",
       icon: <HiInboxArrowDown className="h-5 w-5" />,
+      permessions: [],
       options: [
         {
           icon: <AiFillLike />,
           label: "Time off requests",
-          path: "/inbox/TimeOffRequests",
+          path: "/inbox/TimeOffRequests/pending",
+          permessions: [
+            "accept:leave_requests",
+            "deny:leave_requests",
+            "view:leave_requests_note",
+          ],
         },
       ],
     },
@@ -27,7 +34,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         {
           icon: <AiFillLike />,
           label: "Time off requests",
-          path: "/inbox/CompletedTimeOffRequests",
+          path: "/inbox/TimeOffRequests/accepted",
+          permessions: [
+            "accept:leave_requests",
+            "deny:leave_requests",
+            "view:leave_requests_note",
+          ],
         },
       ],
     },
@@ -45,9 +57,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         </header>
         <hr className="m-0 h-[unset] w-full shrink-0 border-solid border-[rgba(0,0,0,0.12)] bg-gray-14" />
         <main className="flex flex-row">
-          <nav className="mb-0 flex min-h-screen max-w-[15rem] min-w-[15rem] grow flex-col bg-gray-14  px-5 py-4 ">
+          <nav className="mb-0 flex min-h-screen min-w-[15rem] max-w-[15rem] grow flex-col bg-gray-14  px-5 py-4 ">
             {Links.map((e) => (
-              <div key={e.label} className="flex w-full flex-col">
+              <div className="flex w-full flex-col" key={e.label}>
                 <main
                   className="flex flex-row items-center gap-2 rounded-sm px-3 py-2 text-lg text-gray-21 transition-all ease-linear hover:bg-white hover:text-fabric-700"
                   role="button"
@@ -59,14 +71,15 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 {toggle === e.label && (
                   <>
                     {e.options.map((o) => (
-                      <Link
-                        key={o.path}
-                        href={o.path}
-                        className={`ml-9 flex w-fit flex-row items-center gap-1 py-1.5 text-gray-21 transition-all ease-linear hover:text-fabric-700 hover:underline`}
-                      >
-                        {o.icon}
-                        <span>{o.label}</span>
-                      </Link>
+                      <RoleGuard key={o.path} permissions={o.permessions}>
+                        <Link
+                          href={o.path}
+                          className={`ml-9 flex w-fit flex-row items-center gap-1 py-1.5 text-gray-21 transition-all ease-linear hover:text-fabric-700 hover:underline`}
+                        >
+                          {o.icon}
+                          <span>{o.label}</span>
+                        </Link>
+                      </RoleGuard>
                     ))}
                     <hr className="mt-2 h-[unset] w-full shrink-0 border-solid border-[rgba(0,0,0,0.12)] bg-gray-14" />
                   </>

@@ -1,16 +1,11 @@
-import React, { ReactNode } from "react";
+import React from "react";
 import {
   Dropdown,
   DropdownTrigger,
   DropdownMenu,
   DropdownItem,
   Button,
-  cn,
 } from "@nextui-org/react";
-import { BsBriefcaseFill } from "react-icons/bs";
-import { MdEventNote } from "react-icons/md";
-import { PiCertificateFill } from "react-icons/pi";
-import { IconType } from "react-icons";
 import Link from "next/link";
 
 interface DropDownGenericPropsTYpe {

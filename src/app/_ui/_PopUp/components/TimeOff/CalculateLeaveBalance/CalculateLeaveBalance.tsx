@@ -11,14 +11,14 @@ import { Button } from "@/app/_ui/Button";
 import useEmployeeData from "@/hooks/useEmloyeeData";
 import default_avatar from "/public/default_avatar.jpeg";
 import Image from "next/image";
-import useLeaveData from "@/hooks/useLeaveData";
+import useLeaveData from "@/hooks/TimeOff/useLeaveData";
 import { SelectGeneric } from "@/app/_ui/SelectGeneric";
 import {
   database_profile_leave_balance_type,
   databese_leave_categories_type,
 } from "@/types/database.tables.types";
 import { CalendarGeneric } from "@/app/_ui/CalenderGeneric";
-import usePolicy from "@/hooks/usePolicy";
+import usePolicy from "@/hooks/TimeOff/usePolicy";
 import {
   formatTotalHoursToTimeUnit,
   numberOfdaysInArrayOfDatesBeforeDay,
@@ -65,7 +65,7 @@ export default function CalculateLeaveBalance() {
         ) *
           (policy?.accrual_value_in_hours ?? 0),
     );
-  }, [chalendarDate, policy]);
+  }, [chalendarDate, policy, current_policy_balance]);
   // current employee full name
   const first_name: string =
     employee_profile?.["Basic Information"]?.["First name"];

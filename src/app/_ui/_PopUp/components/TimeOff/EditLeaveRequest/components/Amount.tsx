@@ -80,7 +80,7 @@ export function Amount({
           0,
         ),
       );
-  }, [active_duration, formError]);
+  }, [active_duration, formError, setTotalDuration]);
   if (totalDuration === null) return;
   return (
     <div className="flex flex-col gap-1">

@@ -11,7 +11,7 @@ import SearchBar from "../_SearchBar/SearchBar";
 import useData from "@/hooks/useData";
 import { database_profile_type } from "@/types/database.tables.types";
 import { UserProfile } from "./UserProfile";
-import { Inbox } from "./Inbox";
+import { Inbox } from "./Inbox/Inbox";
 
 export default function Nav() {
   const { employeeId: paramsid } = useParams();

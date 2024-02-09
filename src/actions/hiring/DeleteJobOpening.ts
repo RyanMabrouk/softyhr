@@ -5,9 +5,8 @@ import deleteData from "@/api/deleteData";
 
 export const deleteJobOpening = async (id: Number) => {
   const supabase = createServerActionClient({ cookies });
-  console.log(id);
   const { error } = await supabase.from("Hiring").delete().eq("id", id);
-  console.log(error);
+  console.error(error);
   if (error) {
     return {
       Error: error,

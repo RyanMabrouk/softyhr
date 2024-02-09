@@ -39,7 +39,7 @@ export default function ItemsDropdownGeneric({
       </label>
       <div
         role="button"
-        className="relative flex cursor-pointer h-9 flex-row items-center justify-center gap-1 rounded-md border border-gray-18 px-1.5 py-0.5 shadow-sm transition-all ease-linear hover:shadow-md"
+        className="relative flex h-9 cursor-pointer flex-row items-center justify-center gap-1 rounded-md border border-gray-18 px-1.5 py-0.5 shadow-sm transition-all ease-linear hover:shadow-md"
         onClick={() => setOpen((old) => !old)}
       >
         <span className="">

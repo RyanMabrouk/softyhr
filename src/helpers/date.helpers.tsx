@@ -192,3 +192,24 @@ export function DaysAgo(inputDate: string) {
     return date.toLocaleDateString(undefined, options);
   }
 }
+// get the date of the last day of the week
+export function getSaturday(date: Date) {
+  return new Date(
+    date.getFullYear(),
+    date.getMonth(),
+    date.getDate() + 6 - date.getDay(),
+  );
+}
+// get the date of the last day of the month
+export function lastDayOfMonth(date: Date) {
+  return new Date(date.getFullYear(), date.getMonth() + 1, 0);
+}
+// get the date of the first day of the month
+export function firstDayOfMonth(date: Date) {
+  return new Date(date.getFullYear(), date.getMonth(), 1);
+}
+// get the date of the first day of the week
+export function getSunday(date: Date) {
+  const day = date.getDay();
+  return new Date(date.getFullYear(), date.getMonth(), date.getDate() - day);
+}

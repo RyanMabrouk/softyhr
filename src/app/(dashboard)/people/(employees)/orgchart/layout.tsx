@@ -5,7 +5,7 @@ interface EmployeesPropsType {
 }
 function layout({ children }: EmployeesPropsType) {
   return (
-    <div className="mx-auto mt-12 w-files_screen">
+    <div className="mt-4">
       <OrgChartContainer />
     </div>
   );

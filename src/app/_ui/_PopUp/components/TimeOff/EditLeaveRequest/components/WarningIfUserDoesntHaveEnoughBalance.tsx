@@ -2,7 +2,7 @@
 import { database_profile_leave_balance_type } from "@/types/database.tables.types";
 import React from "react";
 import useEmployeeData from "@/hooks/useEmloyeeData";
-import usePolicy from "@/hooks/usePolicy";
+import usePolicy from "@/hooks/TimeOff/usePolicy";
 import { useTotalDurationContext } from "../context/TotalDurationContext";
 import { formatTotalHoursToTimeUnit } from "@/helpers/leave.helpers";
 

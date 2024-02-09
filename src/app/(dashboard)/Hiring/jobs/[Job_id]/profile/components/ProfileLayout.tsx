@@ -18,7 +18,6 @@ import Loader from "@/app/_ui/Loader/Loader";
 function ProfileLayout({ children }: { children: ReactNode }) {
   const params = useParams();
   const { Candidate_id, Job_id } = params;
-  console.log(Candidate_id, Job_id);
   const {
     candidates: { data: candidates_data, isPending: candidates_isPending },
   } = useCandidate({ id: Candidate_id });

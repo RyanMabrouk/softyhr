@@ -10,9 +10,8 @@ export default function CancelBtnGeneric({ onClick }: CancelBtnGenericProps) {
   return (
     <Link
       className="flex flex-row items-center justify-center"
-      href={{
-        pathname: pathname,
-      }}
+      href={pathname}
+      scroll={false}
     >
       <button
         className="cursor-pointer text-color5-500 transition-all duration-300 ease-linear hover:underline"

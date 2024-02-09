@@ -9,22 +9,21 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import FilesSelectArrowDown from "../../components/FilesSelectArrowDown";
 import { useQueryClient } from "@tanstack/react-query";
 import useFoldersIds from "@/actions/files/useFoldersIds";
-import useData from "@/hooks/useData";
+import RoleGuard from "@/app/_ui/RoleGuard";
+import useUserRole from "@/hooks/useUserRole";
 
 export default function FolderBox({ folder, setCheckAll }: any) {
   let { id, name, files } = folder;
-  const {
-    user_profile: { data: cur_user, isPending: isPending_user },
-  } = useData();
-
-  const role = cur_user?.role;
   const { filesIds } = useFoldersIds();
-  const numFiles =
-    role === "admin"
-      ? files?.map((file: any) => file.id)?.length
-      : files
-          ?.map((file: any) => file.id)
-          .filter((id: any) => filesIds.includes(id))?.length;
+  // active user role
+  const {
+    role: { data: role },
+  } = useUserRole();
+  const numFiles = role?.permissions.includes("read:files")
+    ? files?.map((file: any) => file.id)?.length
+    : files
+        ?.map((file: any) => file.id)
+        .filter((id: any) => filesIds.includes(id))?.length;
 
   const searchParams = useSearchParams();
   const pathname = usePathname();
@@ -108,20 +107,16 @@ export default function FolderBox({ folder, setCheckAll }: any) {
           <span className="text-sm text-stone-400"> ({numFiles})</span>
         </button>
       )}
-      {role === "admin" ? (
-        <div>
-          <FilesSelectArrowDown
-            options={[
-              { value: "rename", label: "Rename..." },
-              // { value: "share", label: "Share Folder..." },
-              { value: "delete", label: "Delete..." },
-            ]}
-            onSelect={handleSelectedOption}
-          />
-        </div>
-      ) : (
-        ""
-      )}
+      <RoleGuard permissions={["delete:files"]}>
+        <FilesSelectArrowDown
+          options={[
+            { value: "rename", label: "Rename..." },
+            // { value: "share", label: "Share Folder..." },
+            { value: "delete", label: "Delete..." },
+          ]}
+          onSelect={handleSelectedOption}
+        />
+      </RoleGuard>
     </div>
   );
 }

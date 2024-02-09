@@ -13,7 +13,13 @@ export async function EmplyoeeDataHydration({
   children: React.ReactNode;
   employeeId: string;
 }) {
-  const queryClient = new QueryClient();
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        staleTime: 5 * 60 * 1000,
+      },
+    },
+  });
   console.log("🚀 ~ employeeId:", employeeId);
   await Promise.all([
     queryClient.prefetchQuery({

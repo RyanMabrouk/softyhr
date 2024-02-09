@@ -40,7 +40,7 @@ function Page() {
           }),
       });
     }
-  }, [page, filter]);
+  }, [page, filter, meta?.totalPages, isPlaceholderData, queryClient]);
 
   const HiringDataTable: HiringTableType[] = data?.map(
     (Hiring: Hiring_type) => {

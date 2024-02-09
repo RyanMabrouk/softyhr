@@ -8,13 +8,11 @@ import { insert_CandidateType } from "@/types/candidate.types";
 export const CreateCandidate = async (NewCandaidate: insert_CandidateType) => {
   const supabase = createServerActionClient({ cookies });
   const org = await getCurrentorg();
-  console.log(NewCandaidate);
   const { data, error } = await supabase
     .from("candidates")
     .insert([{ ...NewCandaidate, org_name: org?.name }])
     .select();
-  console.log("data", data);
-  console.log(error);
+  console.error(error);
   if (error) {
     return {
       Submitted: false,

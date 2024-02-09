@@ -25,7 +25,7 @@ export default function PopUpSkeleton({
           <div
             onClick={() => {
               queryClient.setQueryData(["fileIds"], []);
-              Router.push(pathname);
+              Router.push(pathname, { scroll: false });
             }}
           >
             <CgClose className="cursor-pointer text-3xl text-gray-15" />

@@ -1,12 +1,10 @@
 import React from "react";
-import styles from "./LoaderPopUp.module.css";
+import Loader from "@/app/_ui/Loader/Loader";
 
-function LoaderPopUp() {
+export default function LoaderPopUp() {
   return (
     <div className="items m-auto mt-10 flex h-full w-full justify-center">
-      <span className={styles.loader}></span>
+      <Loader />
     </div>
   );
 }
-
-export default LoaderPopUp;

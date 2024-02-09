@@ -19,7 +19,6 @@ export function formatFormData({
     // Step 2 -----------------------------------------
     accure_value: formData?.get("accure_value") as string,
     accure_refresh: formData?.get("accure_refresh") as
-      | "daily"
       | "twice_a_month"
       | "yearly"
       | "monthly"

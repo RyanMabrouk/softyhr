@@ -13,7 +13,7 @@ import updateLeaveCategory from "@/actions/settings/leave/updateLeaveCategory";
 import { capitalizeFirstLetter } from "@/helpers/string.helpers";
 import { CheckBoxGeneric } from "./CheckBoxGeneric";
 import ItemsDropdownGeneric from "../../../../../ItemsDropdownGeneric";
-import useLeaveData from "@/hooks/useLeaveData";
+import useLeaveData from "@/hooks/TimeOff/useLeaveData";
 import CancelBtnGeneric from "@/app/_ui/CancelBtnGeneric";
 export default function EditLeaveCategory() {
   const { toast } = useToast();

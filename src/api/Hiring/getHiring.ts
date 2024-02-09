@@ -33,7 +33,6 @@ export default async function getHiring(
   const {
     data: { session },
   } = await supabase.auth.getSession();
-  console.log(StartPage, EndPage);
   const org_name = session?.user.user_metadata.org_name;
   const user_id = session?.user?.id;
   const data = match
@@ -80,7 +79,6 @@ export default async function getHiring(
           .select(column , { count: "exact" })
           .order("id")
           .eq("org_name", org_name);
-  console.log(data?.error, data);
   return {
     data: data?.data,
     error: data?.error,

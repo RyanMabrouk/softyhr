@@ -36,7 +36,7 @@ const OrgChartContainer = () => {
       {isPending ? (
         <LoaderFiles />
       ) : (
-        <div className="mt-10 ">
+        <div className="mt-0">
           <OrgChartComponent data={wantedData} />
         </div>
       )}

@@ -3,7 +3,7 @@ import CustomSwiper from "@/app/_ui/swiper";
 import { generateLeaveCategorieIcon } from "@/helpers/leave.helpers";
 import useData from "@/hooks/useData";
 import useEmployeeData from "@/hooks/useEmloyeeData";
-import useLeaveData from "@/hooks/useLeaveData";
+import useLeaveData from "@/hooks/TimeOff/useLeaveData";
 import {
   database_leave_policies_policy_type,
   database_leave_policies_type,
@@ -138,22 +138,9 @@ export function TimeOff() {
                 }}
                 slidesPerView={2}
                 spaceBetween={10}
-                slides={
-                  isPending
-                    ? [
-                        <div
-                          key={"policy skeleton 1"}
-                          className="my-2 h-32 w-40 animate-pulse rounded-md bg-slate-100"
-                        ></div>,
-                        <div
-                          key={"policy skeleton 2"}
-                          className="my-2 h-32 w-40 animate-pulse rounded-md bg-slate-100"
-                        ></div>,
-                      ]
-                    : policies?.map((policy, i: number) => (
-                        <PolicyInfo key={policy.name + i} {...policy} />
-                      ))
-                }
+                slides={policies?.map((policy, i: number) => (
+                  <PolicyInfo key={policy.name + i} {...policy} />
+                ))}
               />
             </>
           )}
@@ -165,7 +152,7 @@ export function TimeOff() {
             pathname: pathname,
             query: { popup: "EDIT_LEAVE_REQUEST" },
           }}
-          className=" flex w-full flex-row items-center justify-center gap-1 rounded-sm bg-fabric-700 px-4 py-1.5 text-lg font-semibold text-white shadow-sm outline-none transition-all ease-linear hover:shadow-md focus:outline-none "
+          className=" flex w-full flex-row items-center justify-center gap-1 rounded-sm bg-fabric-700 px-4 py-1.5 text-lg font-semibold text-white shadow-sm outline-none transition-all ease-linear hover:bg-fabric-600 hover:shadow-md focus:outline-none "
         >
           <BsFillStopwatchFill className="h-5 w-5" />
           <span>Request Time Off</span>

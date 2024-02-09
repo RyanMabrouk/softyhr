@@ -52,6 +52,7 @@ FROM base as final
 ENV NODE_ENV production
 
 # Run the application as a non-root user.
+RUN mkdir -p /home/node/.npm && chown -R node:node /home/node/.npm
 USER node
 
 # Copy package.json so that package manager commands can be used.

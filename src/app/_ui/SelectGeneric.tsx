@@ -2,13 +2,9 @@ import React, { ReactNode } from "react";
 import { FormControl, MenuItem, Select } from "@mui/material";
 import { Label } from "./InputGeneric";
 export type Option = {
-  value: string | number;
-  label: string | ReactNode;
-};
-type GroupOptions = {
   group_name?: string; // add only the group name to create a group
-  label?: string;
-  value?: any;
+  label: string | ReactNode;
+  value: string | number;
   disabled?: boolean;
 };
 export function SelectGeneric({
@@ -29,7 +25,7 @@ export function SelectGeneric({
   name?: string;
   error?: boolean;
   defaultValue?: Option;
-  options: Option[] | GroupOptions[];
+  options: Option[];
   group?: boolean;
   required?: boolean;
   setValueInParent?: React.Dispatch<React.SetStateAction<any>> | undefined;
@@ -48,7 +44,7 @@ export function SelectGeneric({
           data-placeholder-trigger="keydown"
           label={label}
           id={label}
-          className={` group peer h-9 w-[12.5rem]  rounded-md  border  border-gray-18 py-1 capitalize text-gray-27 shadow-[rgba(0,0,0,0.05)_0px_1px_0px_0px] transition-all ease-linear placeholder:text-gray-14 hover:shadow-md [&_.MuiOutlinedInput-notchedOutline]:border-none ${className}`}
+          className={` group peer h-9 w-[12.5rem] rounded-md  border  border-gray-18  py-1 capitalize text-gray-27 shadow-[rgba(0,0,0,0.05)_0px_1px_0px_0px] transition-all ease-linear placeholder:text-gray-14 hover:shadow-md [&_.Mui-selected]:!bg-fabric-700 [&_.MuiOutlinedInput-notchedOutline]:border-none ${className}`}
           name={name}
           defaultValue={defaultValue ? defaultValue.value : "none"}
           displayEmpty
@@ -64,7 +60,7 @@ export function SelectGeneric({
           }}
         >
           {group
-            ? options?.map((option: any, i: number) => {
+            ? options?.map((option: Option, i: number): JSX.Element => {
                 return option?.group_name ? (
                   <>
                     <hr className="m-0 h-[unset] !w-full shrink-0 border-solid border-[rgba(0,0,0,0.12)] bg-gray-14" />
@@ -84,18 +80,18 @@ export function SelectGeneric({
                     className={`peer !max-h-8 !px-2 !py-2 text-[0.95rem] capitalize text-gray-27 hover:!bg-fabric-700 hover:text-white ${
                       option?.disabled ? "opacity-50" : "opacity-90"
                     }`}
-                    key={option?.label + i}
+                    key={Number(option?.value) + i}
                     disabled={option?.disabled}
                   >
                     {option?.label}
                   </MenuItem>
                 );
               })
-            : options?.map((option: any, i: number) => {
+            : options?.map((option, i) => {
                 return (
                   <MenuItem
                     value={option?.value}
-                    className="peer capitalize text-gray-27 hover:!bg-fabric-700 hover:text-white"
+                    className="peer capitalize text-gray-27 hover:!bg-fabric-700 hover:text-white "
                     key={(name ?? inputLabel ?? label) + i}
                   >
                     {option?.label}

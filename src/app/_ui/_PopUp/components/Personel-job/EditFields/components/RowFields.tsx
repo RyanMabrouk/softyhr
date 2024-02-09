@@ -45,16 +45,16 @@ function RowFields({
     accept: champ,
     drop: (item: any, monitor: any) => {
       const dropResult = monitor.internalMonitor.registry.dropTargets;
-      console.log(
+      /*console.log(
         ReorderFields(
           item.Row,
           dropResult.get(monitor.targetId).spec.Row,
           data,
           champ,
         ),
-      );
-      setSettings({
-        ...ReorderFields(
+      );*/
+      setSettings(
+        {...ReorderFields(
           item.Row,
           dropResult.get(monitor.targetId).spec.Row,
           data,

@@ -75,7 +75,6 @@ function SelectGeneric({
             setValueInput(newInputValue);
           }}
           onChange={(event: SyntheticEvent<Element, Event>, value: SelectValueType | null,) => {
-            console.log(value?.value);
             setValue(value);
           }}
           value={value}

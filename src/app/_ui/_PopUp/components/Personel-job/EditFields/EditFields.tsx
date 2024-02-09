@@ -56,7 +56,6 @@ function EditFields() {
     },
   });
   const [Settings, setSettings] = useState<any>(data);
-  console.log(Settings);
   return (
     <>
       {isPending ? (

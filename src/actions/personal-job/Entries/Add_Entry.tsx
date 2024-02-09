@@ -13,13 +13,12 @@ export const Add_Entry=async(formdata:FormData, champ:string, data:any)=>{
             Newdata[key] = value;
     }); 
     const supabase = createServerActionClient({ cookies });
-    console.log('user_id',data?.user_id);
     const { data: user_profile, error } = await supabase
       .from('profiles')
       .update({[champ]:[...(data?.[champ] || []),{...Newdata,id:uuidv4()}]})
       .eq('user_id',data?.user_id)
       .select()
-      console.log(error);
+      console.error(error);
       if(error) return { error:{ Message: `Error Adding ${champ}`, Type:error }}
       
 }   

@@ -33,9 +33,6 @@ export default async function insertNewPolicy({
       const accure_refresh = policy_settings.accure_refresh;
       // accural days of the next year
       switch (accure_refresh) {
-        case "daily":
-          accrual_days = [];
-          break;
         case "monthly":
           accrual_days = arrayOfSameDayInEveryMonth(
             Number(policy_settings.accure_refresh_start_day),
@@ -74,13 +71,13 @@ export default async function insertNewPolicy({
           ];
           break;
         default:
-          accrual_days = [];
+          accrual_days = null;
           break;
       }
       break;
     case "manual":
       accure_value = 0;
-      accrual_days = [];
+      accrual_days = null;
       break;
     default:
       accure_value = 0;

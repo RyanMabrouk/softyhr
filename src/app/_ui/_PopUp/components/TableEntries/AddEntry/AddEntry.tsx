@@ -38,7 +38,6 @@ function AddEntry() {
     if (response?.error) toast.error(response?.error?.Message);
     else {
       toast.success(`${section_name} added Successfully`);
-      console.log("response");
     }
     router.push(pathname);
   };

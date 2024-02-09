@@ -14,7 +14,7 @@ import { useParams, useRouter, useSearchParams } from "next/navigation";
 import React from "react";
 import { CgTrash } from "react-icons/cg";
 import PopUpSkeleton from "../../../PopUpSkeleton";
-import usePolicy from "@/hooks/usePolicy";
+import usePolicy from "@/hooks/TimeOff/usePolicy";
 import CancelBtnGeneric from "@/app/_ui/CancelBtnGeneric";
 export default function DeleteLeaveRequest() {
   const { toast } = useToast();

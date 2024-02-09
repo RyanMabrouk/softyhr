@@ -51,7 +51,7 @@ function Page({ params: { Job_id } }: { params: { Job_id: string } }) {
           }),
       });
     }
-  }, [page, filter]);
+  }, [page, filter, Job_id, meta?.totalPages, isPlaceholderData, queryClient]);
 
   const CandidateTableData: any = data?.map((candidate: CandidateType) => {
     return {

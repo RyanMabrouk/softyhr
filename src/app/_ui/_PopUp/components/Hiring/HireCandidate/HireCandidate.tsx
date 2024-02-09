@@ -13,7 +13,6 @@ function HireCandidate() {
   const  Candidate  = params.get("Candidate");
   const pathname = usePathname();
   const [checked, setCheked] = useState<boolean>();
-  console.log(ApplicationId, Candidate);
   return (
     <PopUpSkeleton title="Hire">
       <div className="relative flex flex-col items-center justify-start gap-4 overflow-hidden px-10 py-4">

@@ -40,7 +40,7 @@ export default async function getCandidate(
   } = await supabase.auth.getSession();
   const org_name = session?.user.user_metadata.org_name;
   const user_id = session?.user?.id;
-  console.log(StartPage != undefined && EndPage, StartPage, EndPage);
+  //console.log(StartPage != undefined && EndPage, StartPage, EndPage);
   const data = match
     ? StartPage != undefined && EndPage != undefined
       ? filter != "All"

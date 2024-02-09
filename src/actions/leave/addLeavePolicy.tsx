@@ -10,7 +10,7 @@ export default async function addLeavePolicy({
   policy_id: string | number;
   user_id: string | string[];
 }) {
-  console.log("addLeavePolicy");
+  console.log("🚀 ~ addLeavePolicy");
   const org = await getCurrentorg();
   const { error } = await postData("leave_balance", {
     org_name: org?.name,

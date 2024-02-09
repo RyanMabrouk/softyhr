@@ -11,7 +11,13 @@ export async function LeaveDataHydration({
 }: {
   children: React.ReactNode;
 }) {
-  const queryClient = new QueryClient();
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        staleTime: 5 * 60 * 1000,
+      },
+    },
+  });
   await Promise.all([
     queryClient.prefetchQuery({
       queryKey: ["leave_policies"],

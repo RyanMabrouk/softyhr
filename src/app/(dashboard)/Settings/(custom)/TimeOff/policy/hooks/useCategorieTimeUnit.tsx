@@ -1,5 +1,5 @@
 "use client";
-import useLeaveData from "@/hooks/useLeaveData";
+import useLeaveData from "@/hooks/TimeOff/useLeaveData";
 import {
   databese_leave_categories_track_time_unit_type,
   databese_leave_categories_type,

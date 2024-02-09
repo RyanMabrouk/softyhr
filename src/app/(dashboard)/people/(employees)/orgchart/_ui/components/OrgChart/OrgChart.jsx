@@ -1,3 +1,4 @@
+"use client";
 import React, { useEffect, useRef } from "react";
 import "d3-org-chart";
 import "d3-flextree";
@@ -15,8 +16,6 @@ export default function OrgChartComponent({ data }) {
     if (data.length === 0) {
       return;
     }
-
-    console.log(data);
     const mappedData = data.map((d) => {
       const width = Math.round(Math.random() * 50 + 300);
       const height = Math.round(Math.random() * 20 + 130);
@@ -37,12 +36,12 @@ export default function OrgChartComponent({ data }) {
         name: d.name,
         width: width,
         height: height,
-        borderWidth: 1,
+        borderWidth: 2,
         borderRadius: 5,
         borderColor: {
-          red: 15,
-          green: 140,
-          blue: 121,
+          red: 0,
+          green: 0,
+          blue: 0,
           alpha: 1,
         },
         backgroundColor: {
@@ -59,11 +58,11 @@ export default function OrgChartComponent({ data }) {
           centerLeftDistance: centerLeftDistance,
           cornerShape: cornerShape,
           shadow: false,
-          borderWidth: 0,
+          borderWidth: 5,
           borderColor: {
-            red: 19,
-            green: 123,
-            blue: 128,
+            red: 0,
+            green: 0,
+            blue: 0,
             alpha: 1,
           },
         },
@@ -72,14 +71,16 @@ export default function OrgChartComponent({ data }) {
           size: 30,
         },
         template: `<div>
-                <div style="margin-left:60px;
-                            margin-top:10px;
+                <div style="margin-left:95px;
+                            margin-top:15px;
                             font-size:16px;
                             font-weight:bold;
+                            color:#222;
                        ">${d.name} </div>
-               <div style="margin-left:62px;
-                            margin-top:6px;
-                            font-size:13px;
+               <div style="margin-left:95px;
+                            margin-top:0px;
+                            font-size:11px;
+                            color:#858585;
                        ">${d.positionName || ""} </div>
 
               
@@ -88,26 +89,27 @@ export default function OrgChartComponent({ data }) {
                            margin-top:15px;
                            font-size:12px;
                            position:absolute;
-                           bottom:5px;
+                           bottom:-24px;
+                           right:-115px;
                           ">
                     <div>${d.office || ""}</div>
                     <div style="font-size:12px;margin-top:5px">${d.area || ""}</div>
                </div>
             </div>`,
         connectorLineColor: {
-          red: 220,
-          green: 189,
-          blue: 207,
+          red: 133,
+          green: 133,
+          blue: 133,
           alpha: 1,
         },
-        connectorLineWidth: 5,
+        connectorLineWidth: 10,
         dashArray: "",
         expanded: expanded,
       };
     });
 
     chart = new OrgChart()
-      .container(chartContainerRef.current)
+      .container(chartContainerRef?.current)
       .data(mappedData)
       .nodeWidth((n) => 250)
       .nodeHeight((n) => 120)
@@ -115,51 +117,56 @@ export default function OrgChartComponent({ data }) {
       .siblingsMargin((d) => 100)
       .nodeContent((d) => {
         return `
-            <div class="outer-wrapper" style="padding-left:70px;padding-top:0px;background-color:none;width:120px;height:100px">
-              <img style="object-fit:cover;border-radius:50%;margin-left:-95px;margin-top:-24px;width:50px;height:55px" src="${d.data.nodeImage.url}"/>
+            <div class="outer-wrapper" style="position:relative;margin-top:38px;padding-left:70px;padding-top:0px;background-color:none;width:120px;height:100px;">
+              <img style="position:absolute;object-fit:cover;border-radius:100%;left:10px;top:7px;margin-top:0px;width:55px;height:55px" src="${d.data.nodeImage.url}"/>
 
-              <div  style="margin-left:-70px;margin-top:-40px;border-radius:15px;color:white;background-color:#8AC83C;width:${d.width}px;  height:130px">
+              <div  style="border:1px solid #cbcbcb;margin-left:-70px;margin-top:-40px;border-radius:15px;background-color:#f3f3f3;width:${d.width}px;  height:130px">
                  <div style="margin-left:-20px;padding-top:2px">${d.data.template}</div>
               
               </div>
 
-              <div style="color:white;margin-top:-40px;margin-left:-60px"> ${d.data._totalSubordinates} Subordinates <br/> ${d.data._directSubordinates} Direct</div>
+              <div style="color:#222;margin-top:-40px;margin-left:-60px"> ${d.data._totalSubordinates} Subordinates <br/> ${d.data._directSubordinates} Direct</div>
             </div>
             `;
       })
       .initialZoom(0.6)
       .compact(false)
       .render();
-    console.log(chart);
-    // Add event listener to the button
-    document.getElementById("fitButton").addEventListener("click", () => {
+
+    // functions to handle button clicks
+    const renderChart = () => {
       chart.fit().initialZoom(0.6).render();
-    });
-    document.getElementById("expandButton").addEventListener("click", () => {
+    };
+
+    const expandAndFitChart = () => {
       chart.expandAll().fit();
-    });
-    document.getElementById("collapseButton").addEventListener("click", () => {
+    };
+
+    const collapseAndFitChart = () => {
       chart.collapseAll().fit();
-    });
+    };
+    // Add event listener to the button
+    document.getElementById("fitButton").addEventListener("click", renderChart);
+    document
+      .getElementById("expandButton")
+      .addEventListener("click", expandAndFitChart);
+    document
+      .getElementById("collapseButton")
+      .addEventListener("click", collapseAndFitChart);
 
     //
     document.getElementById("inputSearch").addEventListener("input", (e) => {
       // Get input value
-      const value = e.srcElement.value;
-
+      const value = e.target.value;
       // Clear previous higlighting
       chart.clearHighlighting();
-
       // Get chart nodes
       const data = chart.data();
-
       // Mark all previously expanded nodes for collapse
       data.forEach((d) => (d._expanded = false));
-
       // Loop over data and check if input value matches any name
       data.forEach((d) => {
-        console.log(d);
-        if (value != "" && d.name.toLowerCase().includes(value.toLowerCase())) {
+        if (value && d.name.toLowerCase().includes(value?.toLowerCase())) {
           // If matches, mark node as highlighted
           d._highlighted = true;
           d._expanded = true;
@@ -168,57 +175,54 @@ export default function OrgChartComponent({ data }) {
 
       // Update data and rerender graph
       chart.data(data).render().fit();
-
-      console.log("filtering chart", e.srcElement.value);
     });
 
     // Clean up event listener when component unmounts
     return () => {
-      document.getElementById("fitButton").removeEventListener("click", () => {
-        chart.render();
-      });
-      document
-        .getElementById("expandButton")
-        .removeEventListener("click", () => {
-          chart.expandAll().fit();
-        });
-      document
-        .getElementById("collapseButton")
-        .removeEventListener("click", () => {
-          chart.collapseAll().fit();
-        });
+      const fitButton = document.getElementById("fitButton");
+      const expandButton = document.getElementById("expandButton");
+      const collapseButton = document.getElementById("collapseButton");
+      if (fitButton) {
+        fitButton.removeEventListener("click", renderChart);
+      }
+      if (expandButton) {
+        expandButton.removeEventListener("click", expandAndFitChart);
+      }
+      if (collapseButton) {
+        collapseButton.removeEventListener("click", collapseAndFitChart);
+      }
     };
   }, [data]);
 
   return (
-    <div>
-      <div className="flex items-center gap-4">
+    <div className="flex max-h-screen flex-col">
+      <div className="mx-auto flex w-[85rem] items-center gap-2 ">
         <input
           id="inputSearch"
           type="text"
           placeholder="Jump to an employee..."
-          className=" w-80 border border-gray-4 px-2 py-1 outline-1 transition-all duration-300 placeholder:text-sm placeholder:text-gray-6 focus:outline-color1-300 "
+          className=" focus:shadow-green w-80 border border-gray-4 px-2 py-1 outline-1 transition-shadow duration-300 placeholder:text-sm placeholder:text-gray-6 focus:outline-none "
         />
         <button
-          className=" cursor-pointer  border border-color-primary-8 p-[0.3rem] opacity-80 hover:opacity-60"
+          className=" cursor-pointer  border border-color-primary-8 p-[0.3rem] opacity-80 hover:text-fabric-700"
           id="expandButton"
         >
           <FaExpandAlt className="text-xl" />
         </button>
         <button
-          className=" cursor-pointer  border border-color-primary-8 p-[0.3rem] opacity-80 hover:opacity-60"
+          className=" cursor-pointer  border border-color-primary-8 p-[0.3rem] opacity-80 hover:text-fabric-700"
           id="collapseButton"
         >
           <BiCollapse className="text-xl" />
         </button>
         <button
           id="fitButton"
-          className=" cursor-pointer  border border-color-primary-8 p-[0.3rem] opacity-80 hover:opacity-60"
+          className=" cursor-pointer  border border-color-primary-8 p-[0.3rem] opacity-80 hover:text-fabric-700"
         >
           <TbArrowBigUpLinesFilled className="text-xl" />
         </button>
       </div>
-      <div className="mt-6 shadow-lg	" ref={chartContainerRef}></div>
+      <div className="mt-4 bg-gray-40	shadow-lg" ref={chartContainerRef}></div>
     </div>
   );
 }

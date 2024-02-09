@@ -17,7 +17,7 @@ import { capitalizeFirstLetter } from "@/helpers/string.helpers";
 import { SubmitBtn } from "@/app/_ui/SubmitBtn";
 import addLeavePolicy from "@/actions/leave/addLeavePolicy";
 import changePolicy from "@/actions/leave/changePolicy";
-import useLeaveData from "@/hooks/useLeaveData";
+import useLeaveData from "@/hooks/TimeOff/useLeaveData";
 import CancelBtnGeneric from "@/app/_ui/CancelBtnGeneric";
 export default function AddTimeOffPolicy() {
   const { toast } = useToast();

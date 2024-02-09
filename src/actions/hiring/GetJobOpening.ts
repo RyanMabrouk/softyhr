@@ -13,7 +13,6 @@ export const GetJobOpening = async (page: number) => {
     .select("", { count: "exact" })
     .eq("org_name", org_name)
     .range(page * 6 - 1, 6 + page * 6);
-  console.log(data, page);
   if (error) {
     return {
       error,

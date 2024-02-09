@@ -1,6 +1,6 @@
 "use client";
 import React, { Suspense } from "react";
-import { Hr } from "../_ui/Hr";
+import { Hr } from "./Hr";
 import { formatDateMMDD } from "@/helpers/date.helpers";
 import useData from "@/hooks/useData";
 import { FaCheckCircle } from "react-icons/fa";
@@ -15,13 +15,13 @@ import {
   formatTotalHoursToTimeUnit,
   generateLeaveCategorieIcon,
 } from "@/helpers/leave.helpers";
-import { EditLeaveRequestBtn } from "../_ui/Buttons/EditLeaveRequestBtn";
+import { EditLeaveRequestBtn } from "./Buttons/EditLeaveRequestBtn";
 import { useParams } from "next/navigation";
 import { MdCancel } from "react-icons/md";
-import { AcceptRequestBtn } from "../_ui/Buttons/AcceptRequestBtn";
-import { RejectRequestBtn } from "../_ui/Buttons/RejectRequestBtn";
+import { AcceptRequestBtn } from "./Buttons/AcceptRequestBtn";
+import { RejectRequestBtn } from "./Buttons/RejectRequestBtn";
 import useEmployeeData from "@/hooks/useEmloyeeData";
-import useLeaveData from "@/hooks/useLeaveData";
+import useLeaveData from "@/hooks/TimeOff/useLeaveData";
 import Loader from "@/app/_ui/Loader/Loader";
 import RoleGuard from "@/app/_ui/RoleGuard";
 type upcoming_leave_requests_data_type = {
