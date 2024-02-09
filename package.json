@@ -97,13 +97,5 @@
     "supabase": "^1.123.4",
     "tailwindcss": "^3.3.0",
     "typescript": "^5"
-  },
-  "husky": {
-    "hooks": {
-      "applypatch-msg": "echo \"[Husky] applypatch-msg\"",
-      "pre-applypatch": "echo \"[Husky] pre-applypatch\"",
-      "post-applypatch": "echo \"[Husky] post-applypatch\"",
-      "pre-commit": "echo \"[Husky] pre-commit\""
-    }
   }
 }

@@ -5,7 +5,7 @@ import JobopeningList from "./components/JobopeningList";
 import useHiring from "@/hooks/Hiring/useHiring";
 import Empty from "./components/Empty";
 
-function Page() {
+function page() {
   const { Hiring: data } = useHiring({ "Job Status": "Open" });
   console.log(data);
   return (
@@ -21,4 +21,4 @@ function Page() {
   );
 }
 
-export default Page;
+export default page;
