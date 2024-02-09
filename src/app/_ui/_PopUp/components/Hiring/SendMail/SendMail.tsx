@@ -17,7 +17,7 @@ import MailProvider, {
 } from "./context/MailContext";
 import { useQueryClient } from "@tanstack/react-query";
 
-function Componen t() {
+function Component() {
   const params = useSearchParams();
   const id = params.get("id");
   const pathname = usePathname();
