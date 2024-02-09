@@ -1,18 +1,18 @@
 //profile header
 
-export const changementRequest = [
-  { label: "Asset request...", action: () => "" },
-  { label: "Compensation...", action: () => "" },
-  { label: "Emplyoment Status...", action: () => "" },
-  { label: "Job Information...", action: () => "" },
-  { label: "Promotion...", action: () => "" },
-];
-export const Settings = [
-  { label: "Demande de signature", action: () => "" },
-  { label: "Telechargement de formulaire", action: () => "" },
-  { label: "Niveau d'accés BambooHR", description: "", action: () => "" },
-  { label: "Réinitialiser le mot de passe de l'utilisateur", action: () => "" },
-];
+export const changementRequest = []; /*[
+  { label: "Asset request...", value: "" },
+  { label: "Compensation...", value: "" },
+  { label: "Emplyoment Status...", value: "" },
+  { label: "Job Information...", value: "" },
+  { label: "Promotion...", value: "" },
+];*/
+export const Settings = []; /* [
+  { label: "Demande de signature", value: "" },
+  { label: "Telechargement de formulaire", value: "" },
+  { label: "Niveau d'accés BambooHR", description: "", value: "" },
+  { label: "Réinitialiser le mot de passe de l'utilisateur", value: "" },
+];*/
 
 //profile personnal champs
 
@@ -80,7 +80,6 @@ export const NewEmployeeSections = [
   "SOCIAL LINKS",
   "CONTACT",
 ];
-
 
 interface ObjectIconsType {
   [key: string]: IconType;
