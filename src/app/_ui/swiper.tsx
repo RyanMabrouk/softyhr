@@ -1,5 +1,4 @@
 // import Swiper core and required modules
-"use client";
 import React, { FormEventHandler } from "react";
 import { Pagination, Navigation, Virtual } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -52,10 +51,7 @@ export default function CustomSwiper(props: {
       className="w-full"
     >
       {props.slides?.map((slide: any, index: number) => (
-        <SwiperSlide
-          key={"slide" + index}
-          className="h-fit w-fit max-w-[20rem]"
-        >
+        <SwiperSlide key={"slide" + index} className="h-fit w-fit">
           {slide}
         </SwiperSlide>
       ))}

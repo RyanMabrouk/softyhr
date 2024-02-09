@@ -8,4 +8,10 @@ export const permessions = [
   "adjust:leave_balance",
   // Time Off settings
   "access:/Settings/TimeOff",
+  //files
+  "read:files",
+  "delete:files",
+  "share:files",
+  "upload:files",
+  "access:employee_files",
 ];

@@ -1,16 +1,11 @@
-import React, { ReactNode } from "react";
+import React from "react";
 import {
   Dropdown,
   DropdownTrigger,
   DropdownMenu,
   DropdownItem,
   Button,
-  cn,
 } from "@nextui-org/react";
-import { BsBriefcaseFill } from "react-icons/bs";
-import { MdEventNote } from "react-icons/md";
-import { PiCertificateFill } from "react-icons/pi";
-import { IconType } from "react-icons";
 import Link from "next/link";
 
 interface DropDownGenericPropsTYpe {
@@ -40,7 +35,7 @@ function DropDownGeneric({
         {options?.map(({ link, Component, action }: any, index: number) => {
           const ComponentWrapper = link
             ? () => (
-                <div className="w-full px-2 duration-200 ease-linear hover:bg-color-primary-6(§è(è§(">
+                <div className="hover:bg-color-primary-6(§è(è§( w-full px-2 duration-200 ease-linear">
                   <Link href={link} className="">
                     <Component />
                   </Link>
@@ -51,7 +46,7 @@ function DropDownGeneric({
                   <Component />
                 </h1>
               );
-              
+
           return (
             <DropdownItem
               className="duration-250 w-fill group flex ease-linear hover:bg-color-primary-8"
@@ -59,7 +54,6 @@ function DropDownGeneric({
               onClick={action && action}
             >
               <ComponentWrapper />
-              
             </DropdownItem>
           );
         })}

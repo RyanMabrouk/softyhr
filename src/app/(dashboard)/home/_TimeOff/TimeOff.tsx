@@ -138,22 +138,9 @@ export function TimeOff() {
                 }}
                 slidesPerView={2}
                 spaceBetween={10}
-                slides={
-                  isPending
-                    ? [
-                        <div
-                          key={"policy skeleton 1"}
-                          className="my-2 h-32 w-40 animate-pulse rounded-md bg-slate-100"
-                        ></div>,
-                        <div
-                          key={"policy skeleton 2"}
-                          className="my-2 h-32 w-40 animate-pulse rounded-md bg-slate-100"
-                        ></div>,
-                      ]
-                    : policies?.map((policy, i: number) => (
-                        <PolicyInfo key={policy.name + i} {...policy} />
-                      ))
-                }
+                slides={policies?.map((policy, i: number) => (
+                  <PolicyInfo key={policy.name + i} {...policy} />
+                ))}
               />
             </>
           )}

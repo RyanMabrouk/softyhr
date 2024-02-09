@@ -24,7 +24,7 @@ export function PolicyInfo({
   type: database_leave_policies_policy_type;
 }) {
   return (
-    <div className="flex w-full flex-col items-center justify-center rounded-md bg-white py-2 group-hover:rounded-b-none  group-hover:bg-gray-17">
+    <div className="flex w-full max-w-[10rem] flex-col items-center justify-center rounded-md bg-white py-2 group-hover:rounded-b-none  group-hover:bg-gray-17">
       <span className="mb-1 max-w-full overflow-hidden text-ellipsis whitespace-nowrap text-center font-bold capitalize text-gray-27">
         {title}
       </span>

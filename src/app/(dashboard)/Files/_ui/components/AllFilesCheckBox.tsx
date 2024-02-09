@@ -2,23 +2,17 @@
 import React from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useSearchParams } from "next/navigation";
-import useData from "@/hooks/useData";
 import useFolderData from "@/hooks/useFolderData";
 import GetFoldersByIDs from "@/actions/files/getFolders";
 import getData from "@/api/getData";
 import useFoldersIds from "@/actions/files/useFoldersIds";
+import useUserRole from "@/hooks/useUserRole";
 
 export default function AllFilesCheckBox({ checkAll, setCheckAll }: any) {
   const searchParams = useSearchParams();
   const queryClient = useQueryClient();
 
   let wantedId = searchParams.get("id");
-
-  const {
-    user_profile: { data: cur_user, isPending: isPending_user },
-  } = useData();
-
-  const role = cur_user?.role;
 
   const { wantedFoldersIds, filesIds } = useFoldersIds();
 
@@ -44,11 +38,14 @@ export default function AllFilesCheckBox({ checkAll, setCheckAll }: any) {
     (file: { id: any }) => file.id,
   );
   const { folder } = useFolderData(wantedId);
-
+  // active user role
+  const {
+    role: { data: role },
+  } = useUserRole();
   const isPending = folder.isPending;
   const fileIds =
     !isPending && wantedId
-      ? role === "admin"
+      ? role?.permissions.includes("read:files")
         ? folder?.data[0]?.files &&
           folder?.data[0]?.files.map((file: any) => file.id)
         : folder?.data[0]?.files &&
@@ -56,7 +53,7 @@ export default function AllFilesCheckBox({ checkAll, setCheckAll }: any) {
             .map((file: any) => file.id)
             .filter((id: any) => filesIds.includes(id))
       : []
-        ? role === "admin"
+        ? role?.permissions.includes("read:files")
           ? allFilesIdsAdmin
           : allFilesIds
         : [];

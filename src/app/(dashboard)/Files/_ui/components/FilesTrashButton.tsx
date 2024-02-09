@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { FaTrash } from "react-icons/fa";
 import { useQueryClient } from "@tanstack/react-query";
 import useData from "@/hooks/useData";
+import RoleGuard from "@/app/_ui/RoleGuard";
 
 export default function FilesTrashButton({ check }: any) {
   const {
@@ -26,16 +27,15 @@ export default function FilesTrashButton({ check }: any) {
     if (!isDisabled) Router.replace("Files?popup=DELETE_FILES");
   }
 
-  if (role === "admin")
-    return (
-      <div>
-        <button
-          className={`border-spacing-4  cursor-pointer  border border-color-primary-8 p-[0.4rem]  px-[0.6rem] opacity-80 hover:opacity-60 ${isDisabled ? "cursor-not-allowed " : ""} `}
-          onClick={handleClick}
-          onMouseEnter={handleMouseEnter}
-        >
-          <FaTrash fontSize="1rem" fill="#38312F" />
-        </button>
-      </div>
-    );
+  return (
+    <RoleGuard permissions={["delete:files"]}>
+      <button
+        className={`border-spacing-4  cursor-pointer  border border-color-primary-8 p-[0.4rem]  px-[0.6rem] opacity-80 hover:opacity-60 ${isDisabled ? "cursor-not-allowed " : ""} `}
+        onClick={handleClick}
+        onMouseEnter={handleMouseEnter}
+      >
+        <FaTrash fontSize="1rem" fill="#38312F" />
+      </button>
+    </RoleGuard>
+  );
 }

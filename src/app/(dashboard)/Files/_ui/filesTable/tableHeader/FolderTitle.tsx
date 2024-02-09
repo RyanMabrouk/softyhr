@@ -2,18 +2,14 @@
 import GetFoldersByIDs from "@/actions/files/getFolders";
 import useFoldersIds from "@/actions/files/useFoldersIds";
 import getData from "@/api/getData";
-import useData from "@/hooks/useData";
 import useFolderData from "@/hooks/useFolderData";
+import useUserRole from "@/hooks/useUserRole";
 import { useQuery } from "@tanstack/react-query";
 import { useSearchParams } from "next/navigation";
 import React from "react";
 
 export default function FolderTitle() {
   const searchParams = useSearchParams();
-
-  const {
-    user_profile: { data: cur_user, isPending: isPending_user },
-  } = useData();
   const { filesIds } = useFoldersIds();
 
   const { wantedFoldersIds } = useFoldersIds();
@@ -22,7 +18,6 @@ export default function FolderTitle() {
     queryKey: ["folders", wantedFoldersIds],
     queryFn: async () => await GetFoldersByIDs(wantedFoldersIds),
   });
-  const role = cur_user?.role;
   const allFilesIds = wantedFolders
     ?.map((fold: any) => fold.files)
     .flat(2)
@@ -48,12 +43,15 @@ export default function FolderTitle() {
     : !isPending
       ? wantedFolder?.data[0]?.name
       : null;
-
+  // active user role
+  const {
+    role: { data: role },
+  } = useUserRole();
   const numFiles = isInAllFilesFolder
-    ? role === "admin"
+    ? role?.permissions.includes("read:files")
       ? `(${allFiles?.data?.length})`
       : `(${allFilesIds?.length})`
-    : role === "admin"
+    : role?.permissions.includes("read:files")
       ? !isPending &&
         `(${wantedFolder?.data[0]?.files?.map((file: any) => file.id)?.length})`
       : !isPending &&

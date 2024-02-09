@@ -12,11 +12,11 @@ import { formatDateFiles } from "@/helpers/date.helpers";
 import { ItemTypes } from "@/constants/filesConstants";
 import { moveFile } from "@/actions/files/moveFile";
 import useToast from "@/hooks/useToast";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { addFile } from "@/actions/files/addFile";
 import getSession from "@/api/getSession";
-import useData from "@/hooks/useData";
 import useFullName from "@/hooks/useFullName";
+import useUserRole from "@/hooks/useUserRole";
 
 export default function FileBox({ file, pushFileId, removeFileId }: any) {
   const {
@@ -33,13 +33,6 @@ export default function FileBox({ file, pushFileId, removeFileId }: any) {
   const { replace } = useRouter();
   const queryClient = useQueryClient();
   const [selectedOption, setSelectOption] = useState(null);
-
-  const {
-    user_profile: { data: cur_user, isPending: isPending_user },
-  } = useData();
-
-  const role = cur_user?.role;
-
   const data: any = queryClient.getQueryData(["fileIds"]);
   useEffect(() => {
     setIsChecked(data?.includes(id) || false);
@@ -156,7 +149,21 @@ export default function FileBox({ file, pushFileId, removeFileId }: any) {
       isDragging: !!monitor.isDragging(),
     }),
   }));
-
+  // active user role
+  const {
+    role: { data: role },
+  } = useUserRole();
+  const options = [
+    { value: "emailAtt", label: "Email Attachment" },
+    { value: "rename", label: "Rename" },
+    { value: "duplicate", label: "Duplicate" },
+  ];
+  if (role?.permissions.includes("delete:files")) {
+    options.push({ value: "delete", label: "Delete" });
+  }
+  if (role?.permissions.includes("share:files")) {
+    options.push({ value: "share", label: "Share" });
+  }
   //
   const { FullName, isPendingFullName } = useFullName(addedBy);
   return (
@@ -197,22 +204,7 @@ export default function FileBox({ file, pushFileId, removeFileId }: any) {
       <div className=" z-30 hidden items-center gap-2">
         <FileDownloadButton fileUrl={file_url} fileName={name} />
         <FilesSelectSettingsArrowDown
-          options={
-            role === "admin"
-              ? [
-                  { value: "share", label: "Share With Employees" },
-                  { value: "emailAtt", label: "Email Attachment" },
-                  { value: "rename", label: "Rename" },
-                  { value: "duplicate", label: "Duplicate" },
-                  { value: "delete", label: "Delete" },
-                ]
-              : [
-                  { value: "share", label: "Share With Employees" },
-                  { value: "emailAtt", label: "Email Attachment" },
-                  { value: "rename", label: "Rename" },
-                  { value: "duplicate", label: "Duplicate" },
-                ]
-          }
+          options={options}
           onSelect={handleSelectedOption}
         />
       </div>

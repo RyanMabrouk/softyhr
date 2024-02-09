@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import FileBox from "./FileBox";
 import LoaderFiles from "../../components/Loader/LoaderFiles";
 import { useSearchParams } from "next/navigation";
@@ -8,13 +8,12 @@ import FolderEmpty from "../../components/FolderEmpty";
 import { getFiles } from "@/actions/files/apiFIles";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import Pagination from "@/components/ui/Pagination";
-import useData from "@/hooks/useData";
 import GetFoldersByIDs from "@/actions/files/getFolders";
 import { equalsCheck } from "@/helpers/array.helpers";
 import { PAGE_SIZE } from "@/constants/filesConstants";
 import getData from "@/api/getData";
-import GetFilesByIDs from "@/actions/files/getFiles";
 import useFoldersIds from "@/actions/files/useFoldersIds";
+import useUserRole from "@/hooks/useUserRole";
 
 export default function TableContent({ checkAll, setCheckAll }: any) {
   const searchParams = useSearchParams();
@@ -27,12 +26,6 @@ export default function TableContent({ checkAll, setCheckAll }: any) {
       }),
   });
   const allFilesIdsAdmin = allFilesAdmin?.data?.map((file: any) => file.id);
-
-  const {
-    user_profile: { data: cur_user, isPending: isPending_user },
-  } = useData();
-
-  const role = cur_user?.role;
 
   const { wantedFoldersIds, filesIds } = useFoldersIds();
 
@@ -62,20 +55,35 @@ export default function TableContent({ checkAll, setCheckAll }: any) {
   const { folder }: any = useFolderData(wantedId);
   const isPending = folder.isPending;
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  const fileIds =
-    !isPending && wantedId
-      ? role === "admin"
-        ? folder?.data[0]?.files &&
-          folder?.data[0]?.files.map((file: any) => file.id)
-        : folder?.data[0]?.files &&
-          folder?.data[0]?.files
-            .map((file: any) => file.id)
-            .filter((id: any) => filesIds.includes(id))
-      : []
-        ? role === "admin"
-          ? allFilesIdsAdmin
-          : allFilesIds
-        : [];
+  // active user role
+  const {
+    role: { data: role },
+  } = useUserRole();
+  const fileIds = useMemo(
+    () =>
+      !isPending && wantedId
+        ? role?.permissions.includes("read:files")
+          ? folder?.data[0]?.files &&
+            folder?.data[0]?.files.map((file: any) => file.id)
+          : folder?.data[0]?.files &&
+            folder?.data[0]?.files
+              .map((file: any) => file.id)
+              .filter((id: any) => filesIds.includes(id))
+        : []
+          ? role?.permissions.includes("read:files")
+            ? allFilesIdsAdmin
+            : allFilesIds
+          : [],
+    [
+      allFilesIds,
+      allFilesIdsAdmin,
+      filesIds,
+      folder?.data,
+      isPending,
+      role?.permissions,
+      wantedId,
+    ],
+  );
 
   function pushFileId(id: any) {
     filesIdArr.push(id);
