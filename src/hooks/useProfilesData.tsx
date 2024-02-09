@@ -26,8 +26,7 @@ export default function useProfilesData({
     profiles: {
       data: profiles?.data,
       error: profiles?.error,
-      isPending,
-      isFetched,
+      isPending
     },
   };
 }
