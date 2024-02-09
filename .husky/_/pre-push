@@ -1,0 +1,2 @@
+echo [Husky] check build before push
+npm run build
