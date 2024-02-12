@@ -102,12 +102,17 @@ export function useAcceptLeaveRequest({
       );
     },
     onSettled: () => {
+      console.log("invalidated");
       queryClient.invalidateQueries({
         queryKey: ["leave_requests"],
       });
       queryClient.invalidateQueries({
+        queryKey: ["leave_requests", "pending"],
+      });
+      queryClient.invalidateQueries({
         queryKey: ["leave_balance", request.user_id],
       });
+
       onSuccess && onSuccess();
     },
   });

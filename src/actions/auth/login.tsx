@@ -1,8 +1,11 @@
 "use server";
+import { getLogger } from "@/logging/log-util";
 import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
 import { cookies, headers } from "next/headers";
 import { redirect } from "next/navigation";
 export default async function login(formData: FormData) {
+  const logger = getLogger("auth");
+  logger.info("login");
   const header_url = headers().get("host") || "";
   const supabase = createServerActionClient({ cookies });
   const { data: user, error } = await supabase.auth.signInWithPassword({
@@ -10,6 +13,7 @@ export default async function login(formData: FormData) {
     password: formData.get("password") as string,
   });
   if (error) {
+    logger.error(error.message);
     return {
       error: {
         message: error.message,
@@ -24,13 +28,16 @@ export default async function login(formData: FormData) {
     } else {
       const { error: login_not_registered_error } =
         await supabase.auth.signOut();
-      if (login_not_registered_error)
+      if (login_not_registered_error) {
+        logger.error(login_not_registered_error.message);
         return {
           error: {
             message: login_not_registered_error.message,
             type: "Server Error",
           },
         };
+      }
+      logger.warn("User not registered in this domain");
       return {
         error: {
           message: "Your not registered in this domain",

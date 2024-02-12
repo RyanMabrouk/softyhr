@@ -2,6 +2,7 @@
 import getData from "@/api/getData";
 import updateData from "@/api/updateData";
 import { getPolicyType } from "./getPolicyType";
+import { getLogger } from "@/logging/log-util";
 export default async function updateLeaveBalance({
   user_id,
   policy_id,
@@ -15,11 +16,21 @@ export default async function updateLeaveBalance({
   categories_id?: number;
   new_policy_id?: number;
 }) {
+  const logger = getLogger("*");
+  logger.info(
+    "updating Leave Balance for ",
+    user_id,
+    " by ",
+    total_added_duration,
+    " policy => ",
+    policy_id,
+  );
   // get the new policy type
   const { policy_type: new_policy_type, error: error2 } = new_policy_id
     ? await getPolicyType({ policy_id: new_policy_id })
     : { policy_type: null, error: null };
   if (error2) {
+    logger.error(error2.message);
     return {
       new_policy_balance: null,
       error: {
@@ -33,6 +44,7 @@ export default async function updateLeaveBalance({
     match: { user_id: user_id, policy_id: policy_id },
   });
   if (error1) {
+    logger.error(error1.message);
     return {
       new_policy_balance: null,
       error: {
@@ -55,6 +67,7 @@ export default async function updateLeaveBalance({
     { user_id: user_id, policy_id: policy_id },
   );
   if (error) {
+    logger.error(error.message);
     return {
       new_policy_balance: null,
       error: {

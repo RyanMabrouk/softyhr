@@ -1,4 +1,5 @@
 "use server";
+import { getLogger } from "@/logging/log-util";
 import { database_leave_request_status_type } from "@/types/database.tables.types";
 import { Database } from "@/types/database.types";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
@@ -22,6 +23,10 @@ export default async function getAcceptedLeaveRequests({
     .match({ status: status, org_name: org_name })
     .lte("start_at", end_at.toISOString())
     .gte("end_at", start_at.toISOString());
-
+  const logger = getLogger("Inbox");
+  logger.info("getAcceptedLeaveRequests");
+  if (error) {
+    logger.error(error?.message);
+  }
   return { data: data, error: error };
 }

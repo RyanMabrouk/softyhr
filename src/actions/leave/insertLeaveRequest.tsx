@@ -3,8 +3,8 @@ import getCurrentorg from "@/api/getCurrentOrg";
 import getData from "@/api/getData";
 import postData from "@/api/postData";
 import { getDaysInBetween } from "@/helpers/date.helpers";
-import { database_leave_policies_policy_type } from "@/types/database.tables.types";
 import { getPolicyType } from "./getPolicyType";
+import { getLogger } from "@/logging/log-util";
 export default async function insertLeaveRequest({
   formData,
   user_id,
@@ -12,7 +12,8 @@ export default async function insertLeaveRequest({
   formData: FormData;
   user_id: string | string[];
 }) {
-  console.log("🚀 ~ insertLeaveRequest");
+  const logger = getLogger("*");
+  logger.info("insert Leave Request by", user_id);
   const start_at = formData.get("start_at") as string;
   const end_at = formData.get("end_at") as string;
   const durations = formData.getAll("duration_date");
@@ -25,6 +26,7 @@ export default async function insertLeaveRequest({
     policy_id: policy_id,
   });
   if (error0) {
+    logger.error(error0.message);
     return {
       error: {
         message: error0.message,
@@ -38,6 +40,7 @@ export default async function insertLeaveRequest({
   });
   const old_balance: number = data?.[0]?.balance;
   if (error1) {
+    logger.error(error1.message);
     return {
       error: {
         message: error1.message,
@@ -47,6 +50,7 @@ export default async function insertLeaveRequest({
   }
   // Check if the user has a balance for the policy and get the balance
   if (old_balance === undefined) {
+    logger.warn("user doesnt have a balance for this policy");
     return {
       error: {
         message: "You don't have a balance for this policy",
@@ -75,6 +79,7 @@ export default async function insertLeaveRequest({
   };
   const { error } = await postData("leave_requests", payload);
   if (error) {
+    logger.error(error.message);
     return {
       error: {
         message: error.message,

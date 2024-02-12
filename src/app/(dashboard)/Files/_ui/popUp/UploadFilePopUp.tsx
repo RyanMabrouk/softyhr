@@ -21,7 +21,6 @@ import SelectSharedUsers from "../components/SelectSharedUsers";
 import { IoMdCloseCircleOutline } from "react-icons/io";
 import useProfiles from "@/hooks/useProfiles";
 import { addFiletoUser } from "@/actions/files/addFiletoUser";
-import getUser from "@/api/getUser";
 
 interface FileObject {
   size: number;

@@ -1,8 +1,10 @@
 "use server";
+import { getLogger } from "@/logging/log-util";
 import { createTransport } from "nodemailer";
 require("dotenv").config();
-
 export async function sendMail(toWho: any, subject: any, content: any) {
+  const logger = getLogger("*");
+  logger.info("sendMail");
   try {
     const mailOptions = {
       from: "softyhr@gmail.com",
@@ -12,25 +14,27 @@ export async function sendMail(toWho: any, subject: any, content: any) {
     };
     transporter.sendMail(mailOptions, function (err, info) {
       if (err) {
+        logger.error(err);
         return {
-          Error:err,
-          Status:'failed',
+          Error: err,
+          Status: "failed",
           message: "Error sending message",
         };
       } else {
         return {
           Error: null,
-          Status:'success',
+          Status: "success",
           message: "Message sent succesfully.",
-        }
+        };
       }
     });
-     return {
-       Error: null,
-       Status: "success",
-       message: "Message sent succesfully.",
-     };
+    return {
+      Error: null,
+      Status: "success",
+      message: "Message sent succesfully.",
+    };
   } catch (error) {
+    logger.error(error);
     return {
       Error: error,
       Status: "failed",

@@ -6,6 +6,9 @@ const nextConfig = {
       fullUrl: true,
     },
   },
+  experimental: {
+    serverComponentsExternalPackages: ["@pino"],
+  },
   images: {
     remotePatterns: [
       {

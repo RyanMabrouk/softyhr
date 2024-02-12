@@ -2,12 +2,15 @@
 
 import getCurrentorg from "@/api/getCurrentOrg";
 import postData from "@/api/postData";
+import { getLogger } from "@/logging/log-util";
 
 export default async function insertLeaveCategorie({
   formData,
 }: {
   formData: FormData;
 }) {
+  const logger = getLogger("settings");
+  logger.info("insertLeaveCategorie");
   const org = await getCurrentorg();
   const payload = {
     org_name: org?.name,

@@ -2,16 +2,17 @@
 import React from "react";
 import usePendingLeaveRequests from "@/hooks/TimeOff/usePendingLeaveRequests";
 import useFormattedLeaves from "../../../../inbox/TimeOffRequests/hooks/useFormattedLeavs";
-import { PendingLeaveRequestNotification } from "../PendingLeaveRequestNotification";
+import { PendingLeaveRequestNotification } from "../components/PendingLeaveRequestNotification";
 import { NotificationType } from "../../Notifications";
-import RoleGuard from "@/app/_ui/RoleGuard";
 export function usePendingLeaveRequestNotifications(): {
   data: NotificationType[] | undefined;
   isPending: boolean;
+  isFetching: boolean;
 } {
   const {
     pending_leave_requests: {
       data: pending_leave_requests,
+      isFetching: isFetching,
       isPending: isPending1,
     },
   } = usePendingLeaveRequests();
@@ -21,6 +22,7 @@ export function usePendingLeaveRequestNotifications(): {
   const isPending = isPending1 || isPending2;
   return {
     data: pendingData?.map((e) => ({
+      id: "card_pending_leave_notif" + e.id,
       notification: (
         <PendingLeaveRequestNotification
           {...e}
@@ -34,5 +36,6 @@ export function usePendingLeaveRequestNotifications(): {
       createdAt: new Date(e.created_at),
     })),
     isPending: isPending,
+    isFetching: isFetching,
   };
 }

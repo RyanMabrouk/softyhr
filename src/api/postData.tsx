@@ -1,4 +1,5 @@
 "use server";
+import { getLogger } from "@/logging/log-util";
 import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 export default async function postData(
@@ -7,6 +8,9 @@ export default async function postData(
 ) {
   const supabase = createServerActionClient({ cookies });
   const { data, error } = await supabase.from(table).insert(payload).select();
-  console.log(data, error);
+  const logger = getLogger("*");
+  if (error) {
+    logger.error(error?.message);
+  }
   return { data: data, error: error };
 }

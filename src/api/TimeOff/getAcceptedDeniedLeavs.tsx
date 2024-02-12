@@ -1,4 +1,5 @@
 "use server";
+import { getLogger } from "@/logging/log-util";
 import { database_leave_request_status_type } from "@/types/database.tables.types";
 import { Database } from "@/types/database.types";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
@@ -13,6 +14,8 @@ export default async function getAcceptedDeniedLeavs({
   page: number;
   sort: "user_id" | "reviewed_at";
 }) {
+  const logger = getLogger("Inbox");
+  logger.info("getAcceptedDeniedLeavs");
   const supabase = createServerComponentClient<Database>({ cookies });
   const {
     data: { session },
@@ -31,5 +34,8 @@ export default async function getAcceptedDeniedLeavs({
     .match({ org_name: org_name })
     .order(sort, { ascending: false })
     .range(start, end);
+  if (error) {
+    logger.error(error?.message);
+  }
   return { data: data, error: error };
 }

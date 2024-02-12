@@ -2,6 +2,7 @@
 import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import getCurrentorg from "./getCurrentOrg";
+import { getLogger } from "@/logging/log-util";
 export default async function updateData(
   table: string,
   payload: {
@@ -19,5 +20,9 @@ export default async function updateData(
     .match(match)
     .eq("org_name", org?.name)
     .select();
+  const logger = getLogger("*");
+  if (error) {
+    logger.error(error?.message);
+  }
   return { data: data, error: error };
 }

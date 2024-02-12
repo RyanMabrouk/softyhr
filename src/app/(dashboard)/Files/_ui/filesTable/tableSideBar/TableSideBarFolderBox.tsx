@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from "uuid";
 import GetFoldersByIDs from "@/actions/files/getFolders";
 import { useQuery } from "@tanstack/react-query";
 import getData from "@/api/getData";
-import useFoldersIds from "@/actions/files/useFoldersIds";
+import useFoldersIds from "@/hooks/useFoldersIds";
 import RoleGuard from "@/app/_ui/RoleGuard";
 
 export default function TableSideBarFolderBox({ setCheckAll }: any) {

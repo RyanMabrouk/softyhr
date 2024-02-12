@@ -2,6 +2,7 @@
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { Database } from "@/types/database.types";
+import { getLogger } from "@/logging/log-util";
 
 interface GetCandidateParamsType {
   match?: {
@@ -85,6 +86,11 @@ export default async function getCandidate(
           .select(column, { count: "exact" })
           .order("id")
           .eq("org_name", org_name);
+  const logger = getLogger("Hiring");
+  logger.info("getCandidate");
+  if (data?.error) {
+    logger.error(data?.error?.message);
+  }
   return {
     data: data?.data,
     error: data?.error,

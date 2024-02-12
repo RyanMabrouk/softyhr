@@ -1,16 +1,16 @@
 "use server";
 import updateData from "@/api/updateData";
-import { cookies } from "next/headers";
-import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
-
+import { getLogger } from "@/logging/log-util";
+import getData from "@/api/getData";
 export async function removeFileFromUser(userId: any, fileId: any) {
-  const supabase = createServerActionClient({ cookies });
-
-  const { data } = await supabase
-    .from("profiles")
-    .select("files_ids")
-    .eq("user_id", userId);
-
+  const logger = getLogger("files");
+  logger.info("removeFileFromUser");
+  const { data } = await getData("profiles", {
+    match: {
+      user_id: userId,
+    },
+    column: "files_ids",
+  });
   const oldFilesIds: any = data?.[0].files_ids;
   const test = [
     oldFilesIds,

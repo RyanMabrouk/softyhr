@@ -2,6 +2,7 @@
 import addLeavePolicy from "@/actions/leave/addLeavePolicy";
 import changePolicy from "@/actions/leave/changePolicy";
 import { usersWithoutCurrentPolicy } from "@/app/_ui/_PopUp/components/Settings/TimeOff/AddEmployeesToPolicy/AddEmployeesToPolicy";
+import { getLogger } from "@/logging/log-util";
 export default async function addEmployeesToPolicy({
   users,
   policy_id,
@@ -11,6 +12,8 @@ export default async function addEmployeesToPolicy({
   policy_id: number;
   categories_id: number;
 }) {
+  const logger = getLogger("settings");
+  logger.info("addEmployeesToPolicy");
   const promises = users.map(async (user) => {
     const { error } = user.current_policy_id
       ? await changePolicy({
@@ -35,6 +38,7 @@ export default async function addEmployeesToPolicy({
   const results = await Promise.all(promises);
   const errors = results.filter((result) => result && result.error);
   if (errors.length > 0) {
+    logger.error(errors?.[0]?.error.message);
     return {
       error: errors?.[0]?.error,
     };

@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
-import { useAcceptLeaveRequest } from "../../../people/(employee)/[employeeId]/TimeOff/hooks/useAcceptLeaveRequest";
-import { request_type } from "../../../people/(employee)/[employeeId]/TimeOff/types/types";
+import { useAcceptLeaveRequest } from "../../../../people/(employee)/[employeeId]/TimeOff/hooks/useAcceptLeaveRequest";
+import { request_type } from "../../../../people/(employee)/[employeeId]/TimeOff/types/types";
 import { FaCheck } from "react-icons/fa";
 
 export function ApproveNotifBtn({

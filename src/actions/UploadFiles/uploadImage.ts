@@ -1,4 +1,5 @@
 "use server";
+import { getLogger } from "@/logging/log-util";
 import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 
@@ -8,6 +9,8 @@ export async function UploadImage(
   Bucketname: string,
   NameFormdata?: string,
 ) {
+  const logger = getLogger("*");
+  logger.info("UploadImage");
   const supabase = createServerActionClient({ cookies });
   const { data, error } = await supabase.storage
     .from(Bucketname)
@@ -16,6 +19,7 @@ export async function UploadImage(
       upsert: false,
     });
   if (error) {
+    logger.error(error.message);
     return {
       uploaded: false,
       Message: "Something went wrong when uploading file",

@@ -4,8 +4,9 @@ import { GrAnnounce } from "react-icons/gr";
 import { Player } from "@lottiefiles/react-lottie-player";
 import Loader from "@/app/_ui/Loader/Loader";
 import RoleGuard from "@/app/_ui/RoleGuard";
-import { GetPendingNotifications } from "./_pendingNotifs/GetPendingNotifications";
+import { GetPendingNotifications } from "./_pendingNotifs/components/GetPendingNotifications";
 export type NotificationType = {
+  id: string;
   notification: JSX.Element | null;
   createdAt: Date;
 };

@@ -12,7 +12,7 @@ import GetFoldersByIDs from "@/actions/files/getFolders";
 import { equalsCheck } from "@/helpers/array.helpers";
 import { PAGE_SIZE } from "@/constants/filesConstants";
 import getData from "@/api/getData";
-import useFoldersIds from "@/actions/files/useFoldersIds";
+import useFoldersIds from "@/hooks/useFoldersIds";
 import useUserRole from "@/hooks/useUserRole";
 
 export default function TableContent({ checkAll, setCheckAll }: any) {
@@ -146,7 +146,7 @@ export default function TableContent({ checkAll, setCheckAll }: any) {
   const filesArray = files;
 
   return (
-    <div className="relative w-full pb-6">
+    <div className="relative mb-28 w-full">
       {isLoading ? (
         <LoaderFiles />
       ) : filesArray?.length && fileIds.length ? (

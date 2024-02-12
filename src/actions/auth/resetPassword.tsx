@@ -1,9 +1,11 @@
 "use server";
 import getData from "@/api/getData";
-import { database_profile_type } from "@/types/database.tables.types";
+import { getLogger } from "@/logging/log-util";
 import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
 import { cookies, headers } from "next/headers";
 export default async function resetPassword(formData: FormData) {
+  const logger = getLogger("auth");
+  logger.info("resetPassword");
   //Url info
   const proto = headers().get("x-forwarded-proto") || "http";
   const header_url = headers().get("host") || "";
@@ -16,6 +18,7 @@ export default async function resetPassword(formData: FormData) {
     column: "Contact,org_name",
   });
   if (profiles_error) {
+    logger.error(profiles_error.message);
     return {
       error: {
         message: profiles_error.message,
@@ -28,6 +31,7 @@ export default async function resetPassword(formData: FormData) {
     );
     //user not found
     if (!profile) {
+      logger.warn("User profile not found");
       return {
         error: {
           message: "User profile not found",
@@ -41,6 +45,7 @@ export default async function resetPassword(formData: FormData) {
         redirectTo: `${proto}://${header_url}/auth/forgetPassword`,
       });
       if (error) {
+        logger.error(error.message);
         return {
           error: {
             message: error.message,
@@ -53,6 +58,7 @@ export default async function resetPassword(formData: FormData) {
         };
       }
     } else {
+      logger.warn("organization domain name not found");
       return {
         error: {
           message: "Please check your organization domain name",

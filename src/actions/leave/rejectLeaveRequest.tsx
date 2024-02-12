@@ -1,5 +1,6 @@
 "use server";
 import updateData from "@/api/updateData";
+import { getLogger } from "@/logging/log-util";
 import { database_leave_request_status_type } from "@/types/database.tables.types";
 export default async function rejectLeaveRequest({
   request_id,
@@ -10,6 +11,8 @@ export default async function rejectLeaveRequest({
   reviewed_by: string;
   reviewed_comment: string;
 }) {
+  const logger = getLogger("*");
+  logger.info("reject Leave Request");
   const status: database_leave_request_status_type = "rejected";
   const { error } = await updateData(
     "leave_requests",
@@ -21,12 +24,14 @@ export default async function rejectLeaveRequest({
     },
     { id: request_id },
   );
-  if (error)
+  if (error) {
+    logger.error(error.message);
     return {
       error: {
         message: error.message,
         type: "Error Rejecting Leave Request",
       },
     };
+  }
   return { error: null };
 }

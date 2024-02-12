@@ -1,5 +1,6 @@
 "use server";
 import updateData from "@/api/updateData";
+import { getLogger } from "@/logging/log-util";
 export default async function ToggleLeaveCategorieStatus({
   id,
   disabled,
@@ -7,7 +8,8 @@ export default async function ToggleLeaveCategorieStatus({
   id: number;
   disabled: boolean;
 }) {
-  console.log("🚀 ~ ToggleLeaveCategorieSatus ~");
+  const logger = getLogger("settings");
+  logger.info("ToggleLeaveCategorieStatus");
   const { error } = await updateData(
     "leave_categories",
     { disabled: disabled },

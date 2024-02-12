@@ -2,6 +2,7 @@
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { Database } from "@/types/database.types";
+import { getLogger } from "@/logging/log-util";
 
 interface GetCandidateParamsType {
   user?: boolean;
@@ -37,31 +38,36 @@ export default async function getComment(
   const user_id = session?.user?.id;
   const data = match
     ? StartPage != undefined && EndPage != undefined
-      ?  await supabase
-            .from(table)
-            .select(column )
-            .match(match)
-            .order("id")
-            .eq("org_name", org_name)
-            .range(StartPage, EndPage)
+      ? await supabase
+          .from(table)
+          .select(column)
+          .match(match)
+          .order("id")
+          .eq("org_name", org_name)
+          .range(StartPage, EndPage)
       : await supabase
           .from(table)
-          .select(column )
+          .select(column)
           .match(match)
           .order("id")
           .eq("org_name", org_name)
     : StartPage && EndPage
       ? await supabase
-            .from(table)
-            .select(column )
-            .order("id")
-            .eq("org_name", org_name)
-            .range(StartPage, EndPage)
+          .from(table)
+          .select(column)
+          .order("id")
+          .eq("org_name", org_name)
+          .range(StartPage, EndPage)
       : await supabase
           .from(table)
-          .select(column )
+          .select(column)
           .order("id")
           .eq("org_name", org_name);
+  const logger = getLogger("Hiring");
+  logger.info("getComment");
+  if (data?.error) {
+    logger.error(data?.error?.message);
+  }
   return {
     data: data?.data,
     error: data?.error,

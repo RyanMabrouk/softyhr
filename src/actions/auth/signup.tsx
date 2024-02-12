@@ -2,7 +2,10 @@
 import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
 import { cookies, headers } from "next/headers";
 import postData from "@/api/postData";
+import { getLogger } from "@/logging/log-util";
 export default async function signup(formData: FormData) {
+  const logger = getLogger("auth");
+  logger.info("signup");
   const headersList = headers();
   const header_url = headersList.get("host") || "";
   const proto = headers().get("x-forwarded-proto") || "http";
@@ -30,11 +33,13 @@ export default async function signup(formData: FormData) {
     options: options,
   });
   if (signup_error) {
+    logger.error(signup_error.message);
     return {
       error: { message: signup_error.message, type: "Signup Error" },
     };
   }
   if (data?.user?.identities?.length === 0) {
+    logger.warn("user already have an account");
     return {
       error: { message: "You already have an account", type: "Signup Error" },
     };
@@ -48,6 +53,7 @@ export default async function signup(formData: FormData) {
       },
     ]);
     if (organizations_error) {
+      logger.error(organizations_error.message);
       return {
         error: {
           message: organizations_error.message,
@@ -98,6 +104,7 @@ export default async function signup(formData: FormData) {
         },
       ]);
       if (profiles_error) {
+        logger.error(profiles_error.message);
         return {
           error: {
             message: profiles_error.message,
@@ -112,6 +119,7 @@ export default async function signup(formData: FormData) {
           },
         ]);
         if (settings_error) {
+          logger.error(settings_error.message);
           return {
             error: {
               message: settings_error.message,

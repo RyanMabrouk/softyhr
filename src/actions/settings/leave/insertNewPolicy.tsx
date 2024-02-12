@@ -2,6 +2,7 @@
 import getCurrentorg from "@/api/getCurrentOrg";
 import postData from "@/api/postData";
 import { formatFormData } from "@/app/(dashboard)/Settings/(custom)/TimeOff/policy/helpers/formatFormData";
+import { getLogger } from "@/logging/log-util";
 import {
   database_leave_policies_policy_type,
   databese_leave_categories_track_time_unit_type,
@@ -15,7 +16,8 @@ export default async function insertNewPolicy({
   type: database_leave_policies_policy_type;
   track_time_unit: databese_leave_categories_track_time_unit_type;
 }) {
-  console.log("🚀 ~ insertNewPolicy ");
+  const logger = getLogger("settings");
+  logger.info("insertNewPolicy");
   const org = await getCurrentorg();
   const policy_settings = formatFormData({
     formData: formData,

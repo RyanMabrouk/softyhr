@@ -2,6 +2,7 @@
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { Database } from "@/types/database.types";
+import { getLogger } from "@/logging/log-util";
 
 interface GetCandidateParamsType {
   user?: boolean;
@@ -34,13 +35,12 @@ export default async function getHiring(
     data: { session },
   } = await supabase.auth.getSession();
   const org_name = session?.user.user_metadata.org_name;
-  const user_id = session?.user?.id;
   const data = match
     ? StartPage != undefined && EndPage != undefined
       ? filter != "All"
         ? await supabase
             .from(table)
-            .select(column , { count: "exact" })
+            .select(column, { count: "exact" })
             .match(match)
             .order("id")
             .eq("org_name", org_name)
@@ -48,14 +48,14 @@ export default async function getHiring(
             .range(StartPage, EndPage)
         : await supabase
             .from(table)
-            .select(column , { count: "exact" })
+            .select(column, { count: "exact" })
             .match(match)
             .order("id")
             .eq("org_name", org_name)
             .range(StartPage, EndPage)
       : await supabase
           .from(table)
-          .select(column , { count: "exact" })
+          .select(column, { count: "exact" })
           .match(match)
           .order("id")
           .eq("org_name", org_name)
@@ -63,22 +63,27 @@ export default async function getHiring(
       ? filter
         ? await supabase
             .from(table)
-            .select(column , { count: "exact" })
+            .select(column, { count: "exact" })
             .order("id")
             .eq("org_name", org_name)
             .eq("Job Status", filter)
             .range(StartPage, EndPage)
         : await supabase
             .from(table)
-            .select(column , { count: "exact" })
+            .select(column, { count: "exact" })
             .order("id")
             .eq("org_name", org_name)
             .range(StartPage, EndPage)
       : await supabase
           .from(table)
-          .select(column , { count: "exact" })
+          .select(column, { count: "exact" })
           .order("id")
           .eq("org_name", org_name);
+  const logger = getLogger("Hiring");
+  logger.info("getHiring");
+  if (data?.error) {
+    logger.error(data?.error?.message);
+  }
   return {
     data: data?.data,
     error: data?.error,

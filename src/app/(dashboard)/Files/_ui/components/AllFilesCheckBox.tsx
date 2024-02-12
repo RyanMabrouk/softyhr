@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation";
 import useFolderData from "@/hooks/useFolderData";
 import GetFoldersByIDs from "@/actions/files/getFolders";
 import getData from "@/api/getData";
-import useFoldersIds from "@/actions/files/useFoldersIds";
+import useFoldersIds from "@/hooks/useFoldersIds";
 import useUserRole from "@/hooks/useUserRole";
 
 export default function AllFilesCheckBox({ checkAll, setCheckAll }: any) {
