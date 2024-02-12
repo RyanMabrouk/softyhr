@@ -14,10 +14,7 @@ export default async function acceptLeaveRequest({
 }) {
   const logger = getLogger("*");
   logger.info(
-    "Accepting Leave Request from ",
-    request.user_id,
-    " by ",
-    reviewed_by,
+    "Accepting Leave Request from " + request.user_id + " by " + reviewed_by,
   );
   // get the type of the leave policy
   const { error: error0, policy_type: type } = await getPolicyType({

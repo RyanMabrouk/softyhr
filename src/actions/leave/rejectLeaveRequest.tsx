@@ -12,7 +12,7 @@ export default async function rejectLeaveRequest({
   reviewed_comment: string;
 }) {
   const logger = getLogger("*");
-  logger.info("reject Leave Request");
+  logger.info("rejectLeaveRequest");
   const status: database_leave_request_status_type = "rejected";
   const { error } = await updateData(
     "leave_requests",

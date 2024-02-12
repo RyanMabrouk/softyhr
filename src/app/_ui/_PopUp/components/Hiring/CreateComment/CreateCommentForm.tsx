@@ -18,11 +18,6 @@ function CreateCommentForm({ id }: { id: string | null }) {
   } = useUserProfile();
 
   async function CreateNewCommentHandler(formdata: FormData) {
-    console.log(
-      String(formdata?.get("newComment")),
-      data?.data[0]?.user_id,
-      id || "",
-    );
     const response = await CreateNewComment(
       String(formdata?.get("newComment")),
       data?.data[0]?.user_id,

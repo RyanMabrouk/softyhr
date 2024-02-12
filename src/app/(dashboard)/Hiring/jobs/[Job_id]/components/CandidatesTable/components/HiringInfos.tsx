@@ -1,10 +1,7 @@
 import React from "react";
 import Avatar from "./Avatar";
 import useEmployeeData from "@/hooks/useEmloyeeData";
-import { Hiring_type } from "@/types/database.tables.types";
-
 function HiringInfos({ Hiring }: any) {
-  console.log("🚀 ~ HiringInfos ~ HiringInfos:");
   const {
     employee_profile: { data, isPending },
   } = useEmployeeData({ employeeId: Hiring?.job_information?.["Hiring Lead"] });

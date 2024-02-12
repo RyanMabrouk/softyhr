@@ -19,7 +19,7 @@ export default async function updateLeaveRequest({
   old_request: database_leave_requests_insert_type;
 }) {
   const logger = getLogger("*");
-  logger.info("update Leave Request");
+  logger.info("updateLeaveRequest");
   const start_at = formData.get("start_at") as string;
   const end_at = formData.get("end_at") as string;
   const durations = formData.getAll("duration_date");

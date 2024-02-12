@@ -7,7 +7,6 @@ import Empty from "./components/Empty";
 
 function Page() {
   const { Hiring: data } = useHiring({ "Job Status": "Open" });
-  console.log(data);
   return (
     <div className="flex h-screen w-screen items-center justify-center">
       {data?.data ? (

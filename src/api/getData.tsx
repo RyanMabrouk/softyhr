@@ -11,7 +11,6 @@ type getDataParams = {
   };
   column?: string;
 };
-
 export default async function getData(
   table: string,
   {
@@ -27,19 +26,22 @@ export default async function getData(
   },
 ): Promise<{ data: any; error: any }> {
   const supabase = createServerComponentClient<Database>({ cookies });
-  const {
-    data: { session },
-  } = await supabase.auth.getSession();
-  const org_name = session?.user.user_metadata.org_name;
-  const user_id = session?.user?.id;
   let query = supabase.from(table).select(column);
   if (match) {
     query = query.match(match);
   }
   if (user) {
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
+    const user_id = session?.user?.id;
     query = query.eq("user_id", user_id);
   }
   if (org) {
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
+    const org_name = session?.user.user_metadata.org_name;
     query = query.eq("org_name", org_name);
   }
   const { data, error } = await query;

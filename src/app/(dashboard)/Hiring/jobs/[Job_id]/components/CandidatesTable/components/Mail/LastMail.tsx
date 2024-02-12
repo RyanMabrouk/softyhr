@@ -12,23 +12,7 @@ function LastMail({ candidate }: { candidate: CandidateType }) {
     (a: any, b: any) =>
       new Date(b.created_at).getTime() - new Date(a.created_at).getTime(),
   )?.[0];
-  console.log(candidate?.id);
-  console.log(
-    candidate?.candidate_emails?.sort(
-      (a: any, b: any) =>
-        new Date(b.created_at).getTime() + new Date(a.created_at).getTime(),
-    ),
-  );
-  console.log(
-    candidate?.user_emails?.sort(
-      (a: any, b: any) =>
-        new Date(b.created_at).getTime() + new Date(a.created_at).getTime(),
-    ),
-  );
-  console.log(last_email_user?.created_at > last_email_candidate?.created_at ||
-    new Date(last_email_user?.created_at).getTime() >
-      new Date(last_email_candidate?.created_at).getTime());
-      console.log(last_email_user, last_email_candidate);
+
   if (
     last_email_user &&
     last_email_user.candidate_sender === candidate?.id &&

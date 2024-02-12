@@ -3,7 +3,10 @@ import getData from "@/api/getData";
 import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
+import { getLogger } from "@/logging/log-util";
 export async function GET(request: NextRequest) {
+  const logger = getLogger("*");
+  logger.info("intercepted in caalback api route");
   const requestUrl = new URL(request.url);
   const code = requestUrl.searchParams.get("code");
   try {
@@ -28,6 +31,7 @@ export async function GET(request: NextRequest) {
       const error = requestUrl.searchParams.get("error");
       const error_description =
         requestUrl.searchParams.get("error_description");
+      logger.error(error + ", discription :" + error_description);
       throw new Error("code is not defined");
     }
   } catch (error) {

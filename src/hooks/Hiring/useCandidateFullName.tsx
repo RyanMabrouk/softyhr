@@ -1,6 +1,5 @@
 "use client";
 import getCandidate from "@/api/Hiring/getCandidates";
-import getData from "@/api/getData";
 import { useQuery } from "@tanstack/react-query";
 export default function useCandidateFullName(CandidateId: string | null) {
   const { data: profile, isPending } = useQuery({
@@ -12,5 +11,5 @@ export default function useCandidateFullName(CandidateId: string | null) {
       }),
   });
   const FullName = `${profile?.data?.[0]?.["First Name"]} ${profile?.data?.[0]?.["Last Name"]}`;
-  return { FullName, data : profile?.data?.[0],  isPending };
+  return { FullName, data: profile?.data?.[0], isPending };
 }

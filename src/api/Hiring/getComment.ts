@@ -33,9 +33,7 @@ export default async function getComment(
   const {
     data: { session },
   } = await supabase.auth.getSession();
-  console.log(StartPage, EndPage);
   const org_name = session?.user.user_metadata.org_name;
-  const user_id = session?.user?.id;
   const data = match
     ? StartPage != undefined && EndPage != undefined
       ? await supabase

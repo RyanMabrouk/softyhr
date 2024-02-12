@@ -1,8 +1,5 @@
-import getCandidate from "@/api/Hiring/getCandidates";
 import getComment from "@/api/Hiring/getComment";
-import getData from "@/api/getData";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
-
 export default function useComment(
   match?: {
     [key: string]: string | number | boolean | null | string[] | undefined;

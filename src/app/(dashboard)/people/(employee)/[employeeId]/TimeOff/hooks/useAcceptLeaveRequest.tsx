@@ -102,7 +102,6 @@ export function useAcceptLeaveRequest({
       );
     },
     onSettled: () => {
-      console.log("invalidated");
       queryClient.invalidateQueries({
         queryKey: ["leave_requests"],
       });

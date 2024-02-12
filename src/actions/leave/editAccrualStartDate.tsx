@@ -11,7 +11,7 @@ export default async function editAccrualStartDate({
   user_id: string;
 }) {
   const logger = getLogger("*");
-  logger.info("edit Accrual Start Date");
+  logger.info("editAccrualStartDate");
   const accrual_start_date = formData.get("accrual_start_date") as string;
   const { error } = await updateData(
     "profiles",

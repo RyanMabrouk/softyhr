@@ -3,7 +3,10 @@ import getData from "@/api/getData";
 import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
+import { getLogger } from "@/logging/log-util";
 export async function GET(request: NextRequest) {
+  const logger = getLogger("*");
+  logger.info("intercepted in forget password api route");
   const requestUrl = new URL(request.url);
   const code = requestUrl.searchParams.get("code");
   try {
@@ -23,6 +26,7 @@ export async function GET(request: NextRequest) {
       );
     }
   } catch (error) {
+    logger.error(error);
     // URL to redirect if sign in process failes
     return NextResponse.redirect(`${requestUrl.origin}`);
   }

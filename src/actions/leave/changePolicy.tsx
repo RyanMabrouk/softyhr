@@ -12,12 +12,12 @@ export default async function changePolicy({
 }) {
   const logger = getLogger("*");
   logger.info(
-    "changing Policy for ",
-    user_id,
-    " from ",
-    old_policy_id,
-    " to ",
-    new_policy_id,
+    "changing Policy for " +
+      user_id +
+      " from " +
+      old_policy_id +
+      " to " +
+      new_policy_id,
   );
   const { error: balance_error } = await updateLeaveBalance({
     user_id: user_id,

@@ -11,9 +11,8 @@ export default async function addLeavePolicy({
   policy_id: string | number;
   user_id: string | string[];
 }) {
-  console.log("🚀 ~ addLeavePolicy");
   const logger = getLogger("*");
-  logger.info("added Leave Policy ", policy_id, " to ", user_id);
+  logger.info("added Leave Policy " + policy_id + " to " + user_id);
   const org = await getCurrentorg();
   const { error } = await postData("leave_balance", {
     org_name: org?.name,

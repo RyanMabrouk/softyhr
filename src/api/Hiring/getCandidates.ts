@@ -28,20 +28,11 @@ export default async function getCandidate(
     EndPage,
   }: GetCandidateParamsType,
 ): Promise<{ data: any; error: any; meta: any }> {
-  console.log({
-    match,
-    column,
-    StartPage,
-    filter,
-    EndPage,
-  });
   const supabase = createServerComponentClient<Database>({ cookies });
   const {
     data: { session },
   } = await supabase.auth.getSession();
   const org_name = session?.user.user_metadata.org_name;
-  const user_id = session?.user?.id;
-  //console.log(StartPage != undefined && EndPage, StartPage, EndPage);
   const data = match
     ? StartPage != undefined && EndPage != undefined
       ? filter != "All"

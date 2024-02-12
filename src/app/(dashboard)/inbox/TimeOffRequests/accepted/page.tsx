@@ -37,7 +37,6 @@ export default function Page() {
     filter,
     sort,
   });
-  console.log("🚀 ~ Page ~ next_page_data:", next_page_data);
   const { data: formatted_leavs, isPending: isPending2 } = useFormattedLeaves({
     leave_requests: accepted_denied_leaves,
   });

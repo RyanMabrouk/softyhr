@@ -7,7 +7,7 @@ export default async function deleteLeaveRequest({
   request_id: number;
 }) {
   const logger = getLogger("*");
-  logger.info("deleting Leave Request");
+  logger.info("deleteLeaveRequest");
   const { error } = await deleteData("leave_requests", {
     match: { id: request_id },
   });

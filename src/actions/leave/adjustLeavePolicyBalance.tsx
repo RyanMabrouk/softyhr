@@ -15,7 +15,7 @@ export default async function adjustLeavePolicyBalance({
   additionType: "1" | "-1";
 }) {
   const logger = getLogger("*");
-  logger.info("adjusting Leave Policy Balance for ", user_id);
+  logger.info("adjusting Leave Policy Balance for " + user_id);
   const org = await getCurrentorg();
   const added_hours =
     Number(formData.get("added_hours")) * Number(additionType);

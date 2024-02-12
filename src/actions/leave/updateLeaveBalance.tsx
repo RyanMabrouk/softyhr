@@ -18,12 +18,12 @@ export default async function updateLeaveBalance({
 }) {
   const logger = getLogger("*");
   logger.info(
-    "updating Leave Balance for ",
-    user_id,
-    " by ",
-    total_added_duration,
-    " policy => ",
-    policy_id,
+    "updateLeaveBalance for " +
+      user_id +
+      " by " +
+      total_added_duration +
+      " policy => " +
+      policy_id,
   );
   // get the new policy type
   const { policy_type: new_policy_type, error: error2 } = new_policy_id

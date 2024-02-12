@@ -9,7 +9,7 @@ export default async function deleteCategorie({
   user_id: string | string[];
 }) {
   const logger = getLogger("*");
-  logger.info("deleting Categorie");
+  logger.info("deleteCategorie");
   const { error } = await deleteData("leave_balance", {
     match: { user_id: user_id, categories_id: categories_id },
   });

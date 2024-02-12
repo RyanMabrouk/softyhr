@@ -24,7 +24,6 @@ export default function useHiring(
   const queryKey: any = ["Hiring", page, filter, match].filter(
     Boolean,
   ) as QueryKeyType;
-  console.log(column);
   const {
     data: Hiring,
     isPlaceholderData,

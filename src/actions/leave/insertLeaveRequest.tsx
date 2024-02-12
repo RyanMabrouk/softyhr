@@ -13,7 +13,7 @@ export default async function insertLeaveRequest({
   user_id: string | string[];
 }) {
   const logger = getLogger("*");
-  logger.info("insert Leave Request by", user_id);
+  logger.info("insert Leave Request by " + user_id);
   const start_at = formData.get("start_at") as string;
   const end_at = formData.get("end_at") as string;
   const durations = formData.getAll("duration_date");

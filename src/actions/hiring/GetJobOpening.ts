@@ -1,10 +1,8 @@
 "use server";
 import { cookies } from "next/headers";
 import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
-import deleteData from "@/api/deleteData";
 import getSession from "@/api/getSession";
 import { getLogger } from "@/logging/log-util";
-
 export const GetJobOpening = async (page: number) => {
   const logger = getLogger("hiring");
   logger.info("GetJobOpening");
