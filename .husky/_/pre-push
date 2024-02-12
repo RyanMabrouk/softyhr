@@ -1,2 +1,2 @@
-echo [Husky] check build before push
-npm run build
+#!/usr/bin/env sh
+. "${0%/*}/h"
