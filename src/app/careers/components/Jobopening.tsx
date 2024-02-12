@@ -11,8 +11,8 @@ interface JobopeningTypeProps {
 
 function Jobopening({ job }: JobopeningTypeProps) {
   return (
-    <div className="border-gray-31 flex w-full items-center justify-between border-t px-4 py-4 ">
-      <div className="items flex flex-col justify-center gap-[1rem]">
+    <div className="flex w-full items-center justify-between border-t border-gray-31 px-8 py-4 ">
+      <div className="flex w-4/12 flex-col items-start justify-start gap-[1rem]">
         <h1 className="text-sm capitalize text-color-primary-8 ">
           {job?.job_information?.Departement}
         </h1>
@@ -23,8 +23,8 @@ function Jobopening({ job }: JobopeningTypeProps) {
           {job?.job_information?.["Posting Title"]}
         </Link>
       </div>
-      <div className="items flex flex-col justify-center gap-[1rem]">
-        <div className="flex items-center justify-center gap-[0.3rem]">
+      <div className="flex w-4/12 flex-col items-start justify-start gap-[1rem]">
+        <div className="flex items-start justify-center gap-[0.3rem]">
           <MdLocationOn fill="#999999" />
           <h1 className="capitalize text-gray-27">
             {job?.job_information?.["Job Location"]?.slice(
@@ -40,8 +40,8 @@ function Jobopening({ job }: JobopeningTypeProps) {
           )}
         </h1>
       </div>
-      <div className="flex flex-col items-center justify-center gap-[1rem]">
-        <div className="flex items-center justify-center gap-[0.3rem]">
+      <div className="flex w-4/12 flex-col items-start justify-start gap-[1rem]">
+        <div className="flex items-start justify-center gap-[0.3rem]">
           <FaUserGroup fill="#999999" />
           <h1 className="text-sm capitalize text-gray-27">
             {job?.job_information?.Departement}

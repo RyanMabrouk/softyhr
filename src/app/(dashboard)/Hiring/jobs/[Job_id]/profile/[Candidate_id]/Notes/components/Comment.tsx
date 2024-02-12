@@ -31,7 +31,7 @@ function CommentCard({
         className={`flex shadow-sm border border-gray-14 w-full items-start justify-start gap-[1rem] rounded-lg bg-white pb-1 p-2 pt-4 ${className}`}
       >
         <Avatar
-          size={40}
+          size={20}
           icon={
             <Image
               alt={UserName}

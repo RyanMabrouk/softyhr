@@ -36,7 +36,7 @@ function AppliymentForm({
     const uploadPromises: any = [];
 
     //----upload_candidates_attachement-----
-    /* try{
+     try{
     formdata.forEach(async function (value: FormDataEntryValue, key: string) {
       if (typeof formdata.get(key) == "object") {
         const uploadPromise = UploadImage(
@@ -54,15 +54,7 @@ function AppliymentForm({
     await Promise.all(uploadPromises);
     }catch(error){
       toast.error("something went Wrong");
-    }*/
-    formdata.set(
-      "Cover Letter",
-      "https://ybwqmrrlvmpdikvmkqra.supabase.co/storage/v1/object/public/hiring/Resumea6fc2c85-b250-4179-9048-e03b59fbe9cd?t=2024-01-31T09%3A45%3A11.663Z",
-    );
-    formdata.set(
-      "Resume",
-      "https://ybwqmrrlvmpdikvmkqra.supabase.co/storage/v1/object/public/hiring/Resumea6fc2c85-b250-4179-9048-e03b59fbe9cd?t=2024-01-31T09%3A45%3A11.663Z",
-    );
+    }
     const response = await CreateCandidate({
       ...FormulateFormData(formdata),
       job_id: job?.id,
@@ -72,7 +64,7 @@ function AppliymentForm({
       QueryClient.invalidateQueries({ queryKey: ["Candidates"] });
       if (!pathname.includes("careers")) {
         router.push(`/Hiring/jobs/${job?.id}`);
-      }
+      }else router.push(`/careers`);
         toast.success(SuccessMessage);
     } else toast.error(response?.Msg);
   };

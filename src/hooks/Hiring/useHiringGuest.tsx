@@ -12,7 +12,7 @@ export type MultipleValue =
 
 type QueryKeyType = string | number | MultipleValue;
 
-export default function useHiring(
+export default function useHiringGuest(
   match?: {
     [key: string]: MultipleValue;
   },
@@ -24,6 +24,7 @@ export default function useHiring(
   const queryKey: any = ["Hiring", page, filter, match].filter(
     Boolean,
   ) as QueryKeyType;
+  console.log(column);
   const {
     data: Hiring,
     isPlaceholderData,

@@ -22,7 +22,7 @@ function Page() {
   const queryClient = useQueryClient();
   const {
     Hiring: { data, isPending, meta, isPlaceholderData },
-  } = useHiring({}, "*",page, 6, filter);
+  } = useHiring({}, "*", page, 6, filter);
 
   React.useEffect(() => {
     queryClient.invalidateQueries({
@@ -58,7 +58,7 @@ function Page() {
     },
   );
   return (
-    <div className="flex h-full w-full flex-col items-center justify-center bg-white">
+    <div className="shadow-black-top flex h-full w-full flex-col items-center justify-center bg-white">
       <div className="flex w-5/6 flex-col gap-[1rem]">
         <div className="mt-4 w-full">
           <Link

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import companyLogo from "/public/cropped (2).jpg";
 import Image from "next/image";
 import Link from "next/link";
@@ -14,15 +14,13 @@ import useHiring from "@/hooks/Hiring/useHiring";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
-import CustomSwiper from "@/app/_ui/swiper";
 import AppliymentForm from "./components/AppliymentForm/AppliymentForm";
-import { useRouter } from "next/navigation";
+import useHiringGuest from "@/hooks/Hiring/useHiringGuest";
 
 function Page({ params: { career_id } }: { params: { career_id: string } }) {
-  const router = useRouter();
   const {
     Hiring: { data, isPending, error },
-  } = useHiring({ id: career_id, "Job Status": "Open" });
+  } = useHiringGuest({ id: career_id, "Job Status": "Open" });
 
   return (
     <div className=" flex h-screen w-[99dvw] items-start justify-center gap-[2rem] py-8 pt-8">

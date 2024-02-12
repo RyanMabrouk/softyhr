@@ -186,7 +186,7 @@ export function DaysAgo(inputDate: string) {
     return "yesterday";
   } else if (differenceInDays >= 2 && differenceInDays <= 7) {
     return `${differenceInDays} days ago`;
-  } else {
+  } else { 
     // If it's more than 7 days ago, return the actual date
     const options: any = { year: "numeric", month: "numeric", day: "numeric" };
     return date.toLocaleDateString(undefined, options);

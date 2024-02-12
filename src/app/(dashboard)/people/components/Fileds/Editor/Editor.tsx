@@ -12,11 +12,16 @@ interface EditorPropsType {
   editable: boolean;
 }
 
-function Editor({ RowField, defaultValue, editable = true }: EditorPropsType) {
-  const [value, setValue] = useState<any>(defaultValue || null);
+function Editor({
+  RowField,
+  defaultValue = undefined,
+  editable = true,
+}: EditorPropsType) {
+  const [value, setValue] = useState<any>(
+    defaultValue ? JSON.parse(defaultValue) : undefined,
+  );
   const editor: BlockNoteEditor = useBlockNote({
     editable: editable,
-
     initialContent: defaultValue ? JSON.parse(defaultValue) : undefined,
     onEditorContentChange: (editor) => {
       setValue(editor.topLevelBlocks);
@@ -58,10 +63,6 @@ function Editor({ RowField, defaultValue, editable = true }: EditorPropsType) {
     dark: darkRedTheme,
   };
 
-  console.log(
-    value != null ? JSON.stringify(JSON.parse(value)) : JSON.stringify(value),
-  );
-
   return (
     <div className="w-full pt-2">
       <h1 className="text-[14px] text-gray-29">{RowField?.name}</h1>
@@ -77,11 +78,7 @@ function Editor({ RowField, defaultValue, editable = true }: EditorPropsType) {
           autoFocus
           hidden
           name={RowField?.name}
-          value={
-            value != null
-              ? JSON.stringify(JSON.parse(value))
-              : JSON.stringify(value)
-          }
+          value={JSON.stringify(value)}
         />
       </div>
     </div>

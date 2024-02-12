@@ -1,4 +1,3 @@
-import { test } from "@/actions/test";
 import { CandidateStatusOptions } from "@/app/(dashboard)/Hiring/jobs/[Job_id]/components/CandidatesTable/components/config";
 import SelectInput from "@/app/(dashboard)/people/components/Fileds/select/Select";
 import Textarea from "@/app/(dashboard)/people/components/Fileds/textarea/textarea";

@@ -14,6 +14,8 @@ import { useQueryClient } from "@tanstack/react-query";
 import ChangesSection from "@/app/(dashboard)/people/components/ChangesSection/ChangesSection";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import UnsavedChanges from "@/app/_ui/_PopUp/components/Hiring/UnsavedChanges/UnsavedChanges";
+import Loader from "@/app/_ui/Loader/Loader";
+import { useSettings } from "@/hooks/Settings/useSettings";
 
 function Page() {
   const params = useSearchParams();
@@ -26,9 +28,7 @@ function Page() {
     Hiring: { data: Hiring_data, isPending: Hiring_isPending },
   } = useHiring({ id });
   const { toast } = useToast();
-  const {
-    settings: { data, isPending },
-  } = useData();
+  const {  data, isPending  } = useSettings("Hiring");
 
   async function EditJobInformation_Handler(formdata: FormData) {
     const response = await Edit_JobOpening(
@@ -46,7 +46,7 @@ function Page() {
   return (
     <>
       {isPending || Hiring_isPending ? (
-        <h1>Loading...</h1>
+        <Loader />
       ) : (
         <div className="flex min-h-full min-w-full items-center justify-center  py-8">
           <div className="flex min-h-full w-11/12 flex-col items-start justify-start gap-[1.5rem] rounded-xl p-2 px-12 py-6">
@@ -57,7 +57,7 @@ function Page() {
               <FaArrowLeftLong fontSize="0.7rem" />
               <h1 className="hover:underline">Job Opening</h1>
             </button>
-            <div className="flex w-full border-b border-gray-18 items-center justify-center gap-2">
+            <div className="flex w-full items-start justify-start gap-2 border-b border-gray-18 pb-2">
               <CgNotes className="text-3xl text-color-primary-8" />
               <h1 className="text-semibold  text-3xl text-color-primary-8">
                 Job Information
@@ -73,7 +73,7 @@ function Page() {
               <div className="flex flex-col items-start justify-start gap-[1rem]">
                 <FiledsChamps
                   setTouched={setTouched}
-                  FieldsArray={data[0]["Hiring"]["Fields"]}
+                  FieldsArray={data?.["Fields"]}
                   champ={"hiring"}
                   user={{
                     hiring: {

@@ -7,11 +7,10 @@ import Empty from "./components/Empty";
 
 function Page() {
   const { Hiring: data } = useHiring({ "Job Status": "Open" });
-  console.log(data);
   return (
-    <div className="flex h-screen w-screen items-center justify-center">
+    <div className="flex h-screen w-screen items-center justify-center bg-gray-14">
       {data?.data ? (
-        <div className="flex  h-full w-full flex-col items-center justify-start bg-gray-14 pt-6">
+        <div className="flex  h-full w-full flex-col items-center justify-start bg-gray-14 pt-2">
           <JobopeningList data={data?.data} />
         </div>
       ) : (

@@ -1,4 +1,4 @@
-import React, { Dispatch, Key, SetStateAction } from "react";
+import React from "react";
 import {
   DropdownMenu,
   DropdownTrigger,
@@ -58,6 +58,7 @@ export default function TopContent({
               disallowEmptySelection
               aria-label="Table Columns"
               closeOnSelect={true}
+              selectedKeys={filter || "All"}
               selectionMode="single"
               onSelectionChange={(selected: any) => {
                 setFilter(selected?.anchorKey);

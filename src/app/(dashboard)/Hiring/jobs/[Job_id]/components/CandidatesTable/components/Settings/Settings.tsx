@@ -15,7 +15,7 @@ function Settings() {
           link: {
             pathname: pathname,
             query: {
-              popup: "CHANGE_DEFAULT_HOURS_PER_DAY",
+              popup: "",
             },
           },
         },
@@ -24,7 +24,7 @@ function Settings() {
           link: {
             pathname: pathname,
             query: {
-              popup: "CHANGE_DEFAULT_HOURS_PER_DAY",
+              popup: "",
             },
           },
         },
@@ -33,7 +33,7 @@ function Settings() {
           link: {
             pathname: pathname,
             query: {
-              popup: "CHANGE_DEFAULT_HOURS_PER_DAY",
+              popup: "",
             },
           },
         },

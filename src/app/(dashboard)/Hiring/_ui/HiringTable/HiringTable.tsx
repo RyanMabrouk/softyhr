@@ -42,7 +42,7 @@ const statusOptions = [
   { name: "Draft", uid: "Draft" },
   { name: "On Hold", uid: "On Hold" },
   { name: "Filled", uid: "Filled" },
-  { name: "all", uid: "all" },
+  { name: "All", uid: "All" },
   { name: "Canceled", uid: "Canceled" },
 ];
 
@@ -154,10 +154,10 @@ export default function HiringTable({
         case "actions":
           return (
             <div className="ease flex items-center justify-end gap-2 opacity-0 duration-150 group-hover:!opacity-100">
-                <EditJobOpening id={user?.id}/>
+              <EditJobOpening id={user?.id} />
               <Link
                 href={`?popup=DELETE_JOB&id=${user?.id}`}
-                className="duration-200 flex h-[2rem] w-[2rem] cursor-pointer items-center justify-center ease-in-out hover:border hover:border-gray-27 hover:bg-gray-22"
+                className="flex h-[2rem] w-[2rem] cursor-pointer items-center justify-center duration-200 ease-in-out hover:border hover:border-gray-27 hover:bg-gray-22"
               >
                 <FaTrash cursor={"pointer"} fill={"gray"} />
               </Link>

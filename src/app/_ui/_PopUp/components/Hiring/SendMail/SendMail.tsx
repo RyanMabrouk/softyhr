@@ -48,6 +48,7 @@ function Component() {
       toast.success(response?.message);
       queryClient.invalidateQueries({ queryKey: ["Candidates"] });
       Router.push(pathname);
+      queryClient.invalidateQueries({ queryKey: ["Candidates"] });
     } else toast.error(response?.message || "Something Went Wrong");
   };
   return (

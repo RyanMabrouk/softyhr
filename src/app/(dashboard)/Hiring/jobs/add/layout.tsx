@@ -5,7 +5,11 @@ import { usePathname, useRouter } from "next/navigation";
 import React, { ReactNode, memo, useContext, useState } from "react";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { TiClipboard } from "react-icons/ti";
-import StepsProvider, { ObjectOfStrings, StepType, StepsContext } from "./context/StepsContext";
+import StepsProvider, {
+  ObjectOfStrings,
+  StepType,
+  StepsContext,
+} from "./context/StepsContext";
 import { FormdataToObject } from "@/helpers/object.helpers";
 import { RiCheckboxCircleFill, RiCheckboxCircleLine } from "react-icons/ri";
 import SubmitFormBtn from "./SubmitFormBtn";
@@ -47,9 +51,9 @@ const LayoutComponent = memo(function LayoutComponent({
     "Application-Details": Update_ApplicationDetails,
     "Job-Boards": Update_JobBoards,
   };
-interface stepValidationType {
-  [key: string]: StepType<ObjectOfStrings> | undefined;
-}
+  interface stepValidationType {
+    [key: string]: StepType<ObjectOfStrings> | undefined;
+  }
   const stepValidation: stepValidationType = {
     "Information-Job": InformationJob,
     "Application-Details": ApplicationDetails,
@@ -139,9 +143,15 @@ interface stepValidationType {
                   {CreateHiringJob?.map((path: string, index: number) => {
                     return (
                       <Link
+                        aria-disabled={!stepValidation?.[path]?.done}
                         href={path}
                         className={
-                          "flex items-center justify-center gap-[1rem] py-2 "
+                          "flex items-center justify-center gap-[1rem] py-2 " +
+                          ((pathname.includes(path) &&
+                            path == CreateHiringJob[0]) ||
+                          stepValidation?.[path]?.done
+                            ? ""
+                            : " !cursor-not-allowed ")
                         }
                         key={index}
                       >
