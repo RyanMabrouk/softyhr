@@ -1,5 +1,4 @@
 "use client"; // Error components must be Client Components
-import { getLogger } from "@/logging/log-util";
 import { useEffect } from "react";
 export default function Error({
   error,
@@ -10,8 +9,7 @@ export default function Error({
 }) {
   useEffect(() => {
     // Log the error to an error reporting service
-    const logger = getLogger("*");
-    logger.error("ui error :" + error);
+    console.error("ui error :" + error);
   }, [error]);
   return (
     <div className="flex h-screen w-screen flex-col items-center justify-center gap-4">

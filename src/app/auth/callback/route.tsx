@@ -31,7 +31,7 @@ export async function GET(request: NextRequest) {
       const error = requestUrl.searchParams.get("error");
       const error_description =
         requestUrl.searchParams.get("error_description");
-      logger.error(error + ", discription :" + error_description);
+      logger.error(error + " discription :" + error_description);
       throw new Error("code is not defined");
     }
   } catch (error) {
