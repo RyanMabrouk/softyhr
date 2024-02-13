@@ -4,16 +4,9 @@ import { useSettings } from "@/hooks/Settings/useSettings";
 import { v4 as uuidv4 } from "uuid";
 import { NewEmployeeSections, sectionIcon } from "@/constants/userInfo";
 import { ChampsType } from "@/types/userInfoTypes.type";
-import {
-  useParams,
-  usePathname,
-  useRouter,
-  useSearchParams,
-} from "next/navigation";
-import updateData from "@/api/updateData";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import useToast from "@/hooks/useToast";
 import FiledsChamps from "@/app/(dashboard)/people/components/Fileds/Fileds";
-import { Profile_Type } from "@/types/database.tables.types";
 import ChangesSection from "../../../components/ChangesSection/ChangesSection";
 import Education from "./Education";
 import EmployementStatus from "../EmployementStatus";
@@ -21,29 +14,20 @@ import AccessSection from "../AccessSection";
 import formulateData from "../../../components/utils/formulateData";
 import { CreateNewEmployee } from "@/actions/hiring/CreateNewEmployee";
 import useCandidate from "@/hooks/Hiring/useCandidate";
-import { useQueryClient } from "@tanstack/react-query";
 
 export const CreateEmployeeSection: any = {
   Education: Education,
 };
 
 function Form() {
-  const router = useRouter();
   const { data, isPending } = useSettings("personnal");
   const { toast } = useToast();
   const [touched, setTouched] = useState<boolean>(true);
-  const queryClient = useQueryClient();
   const params = useSearchParams();
-  const ApplicationId = params.get("ApplicationId");
   const Candidate = params.get("Candidate");
-
   const {
     candidates: { data: candidate_data, isPending: candidate_isPending },
   }: any = useCandidate({ id: Candidate });
-
-  const pathname = usePathname();
-  const Router = useRouter();
-
   const SubmitForm = async (formdata: FormData) => {
     //-----formulate_data-------
     let result: any = {};
@@ -72,7 +56,6 @@ function Form() {
     );
     if (response?.Submitted) toast.success(response?.Message);
     else toast.error(response?.Message);
-
     setTouched(false);
   };
 
