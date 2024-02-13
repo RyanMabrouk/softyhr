@@ -1,13 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  serverActions: { allowedOrigins: ["localhost:3001", "rh.ixamee.com"] },
   swcMinify: true,
   logging: {
     fetches: {
       fullUrl: true,
     },
-  },
-  experimental: {
-    serverComponentsExternalPackages: ["@pino"],
   },
   images: {
     remotePatterns: [
