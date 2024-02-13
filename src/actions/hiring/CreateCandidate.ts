@@ -4,16 +4,18 @@ import { cookies, headers } from "next/headers";
 import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
 import getCurrentorg from "@/api/getCurrentOrg";
 import { insert_CandidateType } from "@/types/candidate.types";
+import { getLogger } from "@/logging/log-util";
 
 export const CreateCandidate = async (NewCandaidate: insert_CandidateType) => {
+  const logger = getLogger("hiring"); 
+  logger.info("CreateCandidate_enter");
   const supabase = createServerActionClient({ cookies });
   const org = await getCurrentorg();
-  const { data, error } = await supabase
+  const { error } = await supabase
     .from("candidates")
-    .insert([{ ...NewCandaidate, org_name: org?.name }])
-    .select();
-  console.error(error);
+    .insert([{ ...NewCandaidate, org_name: org?.name }]);
   if (error) {
+    logger.error(error.message);
     return {
       Submitted: false,
       Error: error,
@@ -22,6 +24,7 @@ export const CreateCandidate = async (NewCandaidate: insert_CandidateType) => {
         : "Something went Wrong",
     };
   } else {
+  logger.info("CreateCandidate_exit");
     return {
       Submitted: true,
       Error: null,

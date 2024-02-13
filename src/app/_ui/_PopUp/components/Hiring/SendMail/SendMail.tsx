@@ -43,7 +43,6 @@ function Component() {
         candidate_receiver: id,
       },
     ]);
-    console.log(response);
     if (response?.Status == "success" && !error) {
       toast.success(response?.message);
       queryClient.invalidateQueries({ queryKey: ["Candidates"] });

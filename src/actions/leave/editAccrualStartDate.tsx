@@ -1,6 +1,7 @@
 "use server";
 
 import updateData from "@/api/updateData";
+import { getLogger } from "@/logging/log-util";
 
 export default async function editAccrualStartDate({
   formData,
@@ -9,7 +10,8 @@ export default async function editAccrualStartDate({
   formData: FormData;
   user_id: string;
 }) {
-  console.log("🚀 ~ formData:", formData);
+  const logger = getLogger("*");
+  logger.info("editAccrualStartDate");
   const accrual_start_date = formData.get("accrual_start_date") as string;
   const { error } = await updateData(
     "profiles",
@@ -21,6 +23,7 @@ export default async function editAccrualStartDate({
     },
   );
   if (error) {
+    logger.error(error.message);
     return {
       error: {
         message: error.message,

@@ -27,11 +27,10 @@ function ProfileLayout({ children }: { children: ReactNode }) {
   const ActiveRoute =
     usePathname().split("/").slice(-1).join("") ||
     CandidateProfileRoutes[0]?.label;
-    console.log(Hiring_isPending);
   return (
     <>
       {Hiring_isPending || candidates_isPending ? (
-        <Loader/>
+        <Loader />
       ) : (
         <div className="flex h-full items-start justify-center">
           <div className="flex h-full w-full ">
@@ -46,7 +45,7 @@ function ProfileLayout({ children }: { children: ReactNode }) {
                     href={`/Hiring/jobs/${Job_id}`}
                     className="flex items-center justify-center gap-2 text-sm text-gray-18 duration-200 ease-linear hover:text-color-primary-8 hover:underline"
                   >
-                    <BsArrowLeft classname="" />
+                    <BsArrowLeft />
                     {`${Hiring_data[0]?.job_information?.["Posting Title"]} - ${Hiring_data[0]?.job_information?.["Job Location"]}`}
                   </Link>
                   <div

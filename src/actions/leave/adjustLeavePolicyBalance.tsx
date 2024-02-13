@@ -2,6 +2,7 @@
 import getCurrentorg from "@/api/getCurrentOrg";
 import postData from "@/api/postData";
 import updateLeaveBalance from "./updateLeaveBalance";
+import { getLogger } from "@/logging/log-util";
 export default async function adjustLeavePolicyBalance({
   formData,
   policy_id,
@@ -13,6 +14,8 @@ export default async function adjustLeavePolicyBalance({
   user_id: string | string[];
   additionType: "1" | "-1";
 }) {
+  const logger = getLogger("*");
+  logger.info("adjusting Leave Policy Balance for " + user_id);
   const org = await getCurrentorg();
   const added_hours =
     Number(formData.get("added_hours")) * Number(additionType);
@@ -24,6 +27,10 @@ export default async function adjustLeavePolicyBalance({
     total_added_duration: added_hours,
   });
   if (balanceError) {
+    logger.error(
+      "Server Error : Adjusting Leave Balance",
+      balanceError.message,
+    );
     return {
       error: {
         message: balanceError.message,
@@ -42,6 +49,10 @@ export default async function adjustLeavePolicyBalance({
   };
   const { error } = await postData("leave_accrued", payload);
   if (error) {
+    logger.error(
+      "Server Error : Adjusting Leave Accrueds table",
+      error.message,
+    );
     return {
       error: {
         message: error.message,

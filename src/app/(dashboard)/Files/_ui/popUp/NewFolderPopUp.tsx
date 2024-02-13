@@ -57,16 +57,12 @@ export default function NewFolderPopUp() {
               type="text"
               value={isTyping}
               onChange={(e) => setIsTyping(e.target.value)}
-              className=" w-80 border border-stone-400 px-2 py-1 outline-1 transition-all duration-300 focus:outline-color1-300 "
+              className=" focus:shadow-green w-80 border border-stone-400 px-2 py-1 outline-1 transition-shadow duration-300 focus:outline-none "
             />
 
             <hr className="mt-4 h-[3px] w-full bg-primary-gradient" />
             <div className="flex flex-row gap-4 px-2 pt-3">
-              <ButtonPopUp
-                // onClick={handleClick}
-                check={isTyping === ""}
-                className="!w-fit"
-              >
+              <ButtonPopUp check={isTyping === ""} className="!w-fit">
                 Save
               </ButtonPopUp>
               <button

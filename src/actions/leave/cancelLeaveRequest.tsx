@@ -5,6 +5,7 @@ import {
   database_leave_requests_type,
 } from "@/types/database.tables.types";
 import updateLeaveBalance from "./updateLeaveBalance";
+import { getLogger } from "@/logging/log-util";
 export default async function cancelLeaveRequest({
   leave_request,
   user_id,
@@ -12,6 +13,8 @@ export default async function cancelLeaveRequest({
   leave_request: database_leave_requests_type;
   user_id: string | string[];
 }) {
+  const logger = getLogger("*");
+  logger.info("canceled Leave Request by"+ user_id);
   // if the leave request is approved then remove it from the leave balance
   if (leave_request.status === "approved") {
     const request_duration: number = leave_request.duration_used.reduce(
@@ -24,6 +27,7 @@ export default async function cancelLeaveRequest({
       total_added_duration: request_duration,
     });
     if (balance_error) {
+      logger.error(balance_error.message);
       return {
         error: {
           message: balance_error.message,
@@ -42,6 +46,7 @@ export default async function cancelLeaveRequest({
     },
   );
   if (error) {
+    logger.error(error.message);
     return {
       error: {
         message: error.message,

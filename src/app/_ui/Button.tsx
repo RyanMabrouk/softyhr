@@ -16,7 +16,7 @@ export function Button({
     <button
       {...props}
       disabled={blocked || disabled}
-      className={`col-span-2 h-11 w-full min-w-[9rem] space-x-8 rounded-md capitalize shadow-sm transition-all ease-linear hover:shadow-md  ${blocked ? " cursor-not-allowed border bg-white px-2 py-2 font-semibold capitalize text-stone-400 disabled:border-gray-300" : "cursor-pointer bg-fabric-700 font-bold  text-white hover:bg-fabric-600 disabled:cursor-wait disabled:bg-color-primary-5  disabled:opacity-50"} ${className} `}
+      className={`col-span-2 h-11 w-full min-w-[9rem] space-x-8 rounded-md capitalize shadow-sm transition-all ease-linear  ${blocked ? " cursor-not-allowed border bg-white px-2 py-2 font-semibold capitalize text-stone-400 disabled:border-gray-300" : "cursor-pointer  bg-fabric-700 font-bold text-white  hover:bg-fabric-600 hover:shadow-md disabled:cursor-wait disabled:bg-color-primary-5  disabled:opacity-50"} ${className} `}
       onClick={props.onClick}
       formAction={formAction}
     >

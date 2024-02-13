@@ -14,7 +14,6 @@ function EmailForm() {
   const editor: BlockNoteEditor = useBlockNote({
     onEditorContentChange: (editor) => {
       const saveBlocksAsHTML = async () => {
-        console.log(editor.topLevelBlocks);
         const html: string = await editor.blocksToHTMLLossy(
           editor.topLevelBlocks,
         );

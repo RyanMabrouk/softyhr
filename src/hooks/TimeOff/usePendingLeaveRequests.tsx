@@ -11,10 +11,15 @@ export default function usePendingLeaveRequests(): {
     data: database_leave_requests_type[];
     error: PostgrestError | null;
     isPending: boolean;
+    isFetching: boolean;
   };
 } {
   const status: database_leave_request_status_type = "pending";
-  const { data: pending_leave_requests, isPending } = useQuery({
+  const {
+    data: pending_leave_requests,
+    isPending,
+    isFetching,
+  } = useQuery({
     queryKey: ["leave_requests", status],
     queryFn: () =>
       getData("leave_requests", {
@@ -26,6 +31,7 @@ export default function usePendingLeaveRequests(): {
     pending_leave_requests: {
       data: pending_leave_requests?.data,
       error: pending_leave_requests?.error,
+      isFetching: isFetching,
       isPending: isPending,
     },
   };

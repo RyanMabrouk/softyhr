@@ -19,7 +19,6 @@ export default function Page() {
   const [sort, setSort] = React.useState<"user_id" | "reviewed_at">(
     "reviewed_at",
   );
-  const queryclient = useQueryClient();
   const {
     accepted_denied_leaves: {
       data: accepted_denied_leaves,
@@ -30,18 +29,14 @@ export default function Page() {
     filter,
     sort,
   });
-  if (accepted_denied_leaves?.length === cards_per_page_in_client && page) {
-    const status = filter === "all" ? ["approved", "rejected"] : [filter];
-    queryclient.prefetchQuery({
-      queryKey: ["leave_requests", status, page + 1, sort, filter],
-      queryFn: () =>
-        getAcceptedDeniedLeavs({
-          status: status as database_leave_request_status_type[],
-          page: page + 1,
-          sort,
-        }),
-    });
-  }
+  // prefetch next page
+  const {
+    accepted_denied_leaves: { data: next_page_data },
+  } = useAcceptedDeniedLeaves({
+    page: page + 1,
+    filter,
+    sort,
+  });
   const { data: formatted_leavs, isPending: isPending2 } = useFormattedLeaves({
     leave_requests: accepted_denied_leaves,
   });
@@ -64,7 +59,7 @@ export default function Page() {
           <Loader />
         </div>
       ) : (
-        <div className="flex h-full w-full items-center justify-center">
+        <div className="flex h-full max-h-[45rem] w-full items-center justify-center">
           <Player
             src="https://lottie.host/85fb7313-2848-45c2-bdb9-2b729f57afc2/AwfmWMtW8n.json"
             className="h-60 w-60"
@@ -77,6 +72,7 @@ export default function Page() {
         page={page}
         setPage={setPage}
         dataLength={formatted_leavs?.length ?? 0}
+        nextPageLength={next_page_data?.length ?? 0}
         cards_per_page_in_client={cards_per_page_in_client}
       />
       <div className="absolute -top-12 right-0 flex flex-row items-center gap-2 text-sm">

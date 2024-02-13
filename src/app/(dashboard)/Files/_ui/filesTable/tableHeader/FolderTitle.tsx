@@ -1,6 +1,6 @@
 "use client";
 import GetFoldersByIDs from "@/actions/files/getFolders";
-import useFoldersIds from "@/actions/files/useFoldersIds";
+import useFoldersIds from "@/hooks/useFoldersIds";
 import getData from "@/api/getData";
 import useFolderData from "@/hooks/useFolderData";
 import useUserRole from "@/hooks/useUserRole";

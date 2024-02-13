@@ -8,7 +8,7 @@ import { IoFolderOpenSharp } from "react-icons/io5";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import FilesSelectArrowDown from "../../components/FilesSelectArrowDown";
 import { useQueryClient } from "@tanstack/react-query";
-import useFoldersIds from "@/actions/files/useFoldersIds";
+import useFoldersIds from "@/hooks/useFoldersIds";
 import RoleGuard from "@/app/_ui/RoleGuard";
 import useUserRole from "@/hooks/useUserRole";
 

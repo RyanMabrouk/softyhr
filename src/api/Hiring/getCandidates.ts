@@ -2,6 +2,7 @@
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { Database } from "@/types/database.types";
+import { getLogger } from "@/logging/log-util";
 
 interface GetCandidateParamsType {
   match?: {
@@ -27,20 +28,14 @@ export default async function getCandidate(
     EndPage,
   }: GetCandidateParamsType,
 ): Promise<{ data: any; error: any; meta: any }> {
-  console.log({
-    match,
-    column,
-    StartPage,
-    filter,
-    EndPage,
-  });
+  const logger = getLogger("Hiring");
+  logger.info("getCandidate_enter");
+
   const supabase = createServerComponentClient<Database>({ cookies });
   const {
     data: { session },
   } = await supabase.auth.getSession();
   const org_name = session?.user.user_metadata.org_name;
-  const user_id = session?.user?.id;
-  //console.log(StartPage != undefined && EndPage, StartPage, EndPage);
   const data = match
     ? StartPage != undefined && EndPage != undefined
       ? filter != "All"
@@ -85,6 +80,11 @@ export default async function getCandidate(
           .select(column, { count: "exact" })
           .order("id")
           .eq("org_name", org_name);
+          
+  logger.info("getCandidate");
+  if (data?.error) {
+    logger.error(data?.error?.message);
+  }
   return {
     data: data?.data,
     error: data?.error,

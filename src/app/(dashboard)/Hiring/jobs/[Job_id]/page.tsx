@@ -1,8 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import CandiatesTable, {
-  CandidateTablePropsType,
-} from "./components/CandidatesTable/CandidatesTable";
+import CandiatesTable from "./components/CandidatesTable/CandidatesTable";
 import useCandidate from "@/hooks/Hiring/useCandidate";
 import useHiring from "@/hooks/Hiring/useHiring";
 import Link from "next/link";
@@ -11,12 +9,7 @@ import { FaArrowLeftLong } from "react-icons/fa6";
 import { useQueryClient } from "@tanstack/react-query";
 import getCandidate from "@/api/Hiring/getCandidates";
 import TableSkeleton from "./components/CandidatesTable/components/TableSkeleton";
-import useEmployeeData from "@/hooks/useEmloyeeData";
-import { TableCandidateType } from "./components/CandidatesTable/components/config";
 import { CandidateType } from "@/types/candidate.types";
-import { DaysAgo } from "@/helpers/date.helpers";
-import MailSended from "./components/CandidatesTable/components/Mail/MailSended";
-import MailReceived from "./components/CandidatesTable/components/Mail/MailReceived";
 import LastMail from "./components/CandidatesTable/components/Mail/LastMail";
 
 function Page({ params: { Job_id } }: { params: { Job_id: string } }) {

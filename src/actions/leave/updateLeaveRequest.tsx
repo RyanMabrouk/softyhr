@@ -8,6 +8,7 @@ import {
 } from "@/types/database.tables.types";
 import updateLeaveBalance from "./updateLeaveBalance";
 import { getPolicyType } from "./getPolicyType";
+import { getLogger } from "@/logging/log-util";
 export default async function updateLeaveRequest({
   formData,
   user_id,
@@ -17,6 +18,8 @@ export default async function updateLeaveRequest({
   user_id: string | string[];
   old_request: database_leave_requests_insert_type;
 }) {
+  const logger = getLogger("*");
+  logger.info("updateLeaveRequest");
   const start_at = formData.get("start_at") as string;
   const end_at = formData.get("end_at") as string;
   const durations = formData.getAll("duration_date");
@@ -32,6 +35,7 @@ export default async function updateLeaveRequest({
   );
   // Check if the policy has a category
   if (categories_error) {
+    logger.error(categories_error.message);
     return {
       error: {
         message: categories_error.message,
@@ -56,6 +60,7 @@ export default async function updateLeaveRequest({
     id: Number(old_request.id),
   });
   if (error) {
+    logger.error(error.message);
     return {
       error: {
         message: error.message,
@@ -72,6 +77,7 @@ export default async function updateLeaveRequest({
       policy_id,
     });
     if (error0) {
+      logger.error(error0.message);
       return {
         error: {
           message: error0.message,
@@ -95,6 +101,7 @@ export default async function updateLeaveRequest({
           : old_leave_request_total_duration - total_duration,
     });
     if (error1) {
+      logger.error(error1.message);
       return {
         error: error1,
       };

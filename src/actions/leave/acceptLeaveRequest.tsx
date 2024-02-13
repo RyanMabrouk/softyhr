@@ -4,6 +4,7 @@ import { database_leave_request_status_type } from "@/types/database.tables.type
 import updateLeaveBalance from "./updateLeaveBalance";
 import { getPolicyType } from "./getPolicyType";
 import { request_type } from "@/app/(dashboard)/people/(employee)/[employeeId]/TimeOff/types/types";
+import { getLogger } from "@/logging/log-util";
 export default async function acceptLeaveRequest({
   request,
   reviewed_by,
@@ -11,11 +12,16 @@ export default async function acceptLeaveRequest({
   request: request_type;
   reviewed_by: string;
 }) {
+  const logger = getLogger("*");
+  logger.info(
+    "Accepting Leave Request from " + request.user_id + " by " + reviewed_by,
+  );
   // get the type of the leave policy
   const { error: error0, policy_type: type } = await getPolicyType({
     policy_id: request.policy_id,
   });
   if (error0) {
+    logger.error("Server Error Getting Policy Type :", error0.message);
     return {
       error: {
         message: error0.message,
@@ -34,6 +40,7 @@ export default async function acceptLeaveRequest({
       type === "unlimited" ? total_duration : 0 - total_duration,
   });
   if (errorBalance) {
+    logger.error("Error Updating Leave Balance :", errorBalance.message);
     return {
       error: {
         message: errorBalance.message,
@@ -52,6 +59,7 @@ export default async function acceptLeaveRequest({
     { id: request.id },
   );
   if (error) {
+    logger.error("Error Accepting Leave Request :", error.message);
     return {
       error: {
         message: error.message,

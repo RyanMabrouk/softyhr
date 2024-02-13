@@ -3,13 +3,10 @@ import SelectInput from "@/app/(dashboard)/people/components/Fileds/select/Selec
 import Textarea from "@/app/(dashboard)/people/components/Fileds/textarea/textarea";
 import CancelBtnGeneric from "@/app/_ui/CancelBtnGeneric";
 import SubmitButton from "@/app/careers/[career_id]/components/AppliymentForm/SubmitButton";
-import { FormdataToObject } from "@/helpers/object.helpers";
 import React, { useRef } from "react";
-import EditCandidate from "@/actions/Candidate/EditCandidate";
 import useToast from "@/hooks/useToast";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useQueryClient } from "@tanstack/react-query";
-import { FaLink } from "react-icons/fa";
 import { CreateNewComment } from "@/actions/hiring/Comment/CreateNewComment";
 import useUserProfile from "@/hooks/useUserProfile";
 
@@ -25,11 +22,6 @@ function CreateCommentForm({ id }: { id: string | null }) {
   } = useUserProfile();
 
   async function CreateNewCommentHandler(formdata: FormData) {
-    console.log(
-      String(formdata?.get("newComment")),
-      data?.data[0]?.user_id,
-      id || "",
-    );
     const response = await CreateNewComment(
       String(formdata?.get("newComment")),
       data?.data[0]?.user_id,
