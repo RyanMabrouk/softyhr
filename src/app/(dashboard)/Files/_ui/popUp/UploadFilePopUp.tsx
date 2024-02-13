@@ -9,7 +9,6 @@ import useToast from "@/hooks/useToast";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import FilesSelectComponent from "../components/FilesSelectComponent";
-import useData from "@/hooks/useData";
 import { UploadImage } from "@/actions/UploadFiles/uploadImage";
 import { v4 as uuidv4 } from "uuid";
 import getCurrentorg from "@/api/getCurrentOrg";
@@ -21,12 +20,10 @@ import SelectSharedUsers from "../components/SelectSharedUsers";
 import { IoMdCloseCircleOutline } from "react-icons/io";
 import useProfiles from "@/hooks/useProfiles";
 import { addFiletoUser } from "@/actions/files/addFiletoUser";
-
 interface FileObject {
   size: number;
   name: string;
 }
-
 export default function UploadFilePopUp() {
   const { toast } = useToast();
   const queryClient = useQueryClient();
@@ -34,8 +31,6 @@ export default function UploadFilePopUp() {
   const pathname = usePathname();
   const { handleSubmit } = useForm();
   const [selectedFolder, setSelectedFolder] = useState(null);
-  const [canUpload, setCanUpload] = useState(true);
-
   const [selectedShared, setSelectedShared] = useState([]);
   const [isChecked, setIsChecked] = useState(false);
 
