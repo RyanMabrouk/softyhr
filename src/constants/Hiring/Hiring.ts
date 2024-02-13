@@ -65,7 +65,12 @@ export const InformationJob_inputs = [
 ];
 
 export const ApplicationDefaultQuestions: ApplicationDefaultQuestionsType[] = [
-  { required: false, AddToAppliement: false, type: "file", name: "Resume" },
+  {
+    required: false,
+    AddToAppliement: false,
+    type: "file",
+    name: "Resume",
+  },
   { required: false, AddToAppliement: false, type: "text", name: "Adress" },
   { required: false, AddToAppliement: false, type: "text", name: "Linked URL" },
   {
@@ -124,6 +129,7 @@ export const ApplicationIniTialQuestions: any = {
     required: false,
     AddToAppliement: false,
     type: "file",
+    accept: "application/pdf, application/vnd.ms-excel",
     name: "Resume",
   },
   Adress: {
@@ -154,6 +160,7 @@ export const ApplicationIniTialQuestions: any = {
     required: false,
     AddToAppliement: false,
     type: "file",
+    accept: "application/pdf, application/vnd.ms-excel",
     name: "Cover Letter",
   },
   "Referred by": {

@@ -33,7 +33,7 @@ export function CalendarGeneric({
   allowPastDates?: boolean;
   allowPreviousDates?: boolean;
   required?: boolean;
-  setAction?: () => void | undefined;
+  setAction?: React.Dispatch<React.SetStateAction<Date>> | undefined;
 }) {
   const [date, setDate] = useState<Date | undefined>(defaultValue);
   useEffect(() => {

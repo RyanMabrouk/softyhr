@@ -30,7 +30,6 @@ import RenamePolicy from "@/app/_ui/_PopUp/components/Settings/TimeOff/RenamePol
 import DeleteLeavePolicyData from "@/app/_ui/_PopUp/components/Settings/TimeOff/DeleteLeavePolicy/DeleteLeavePolicyData";
 import AddNewPolicy from "@/app/_ui/_PopUp/components/Settings/TimeOff/AddNewPolicy/AddNewPolicy";
 import AddEmployeesToPolicy from "@/app/_ui/_PopUp/components/Settings/TimeOff/AddEmployeesToPolicy/AddEmployeesToPolicy";
-import DeleteEducation from "@/app/_ui/_PopUp/components/Personel-job/DeleteEducation/DeleteEducation";
 import EditApplicationDetails from "@/app/_ui/_PopUp/components/Hiring/EditApplicationDetails/EditApplicationDetails";
 import EditJobInformation from "@/app/_ui/_PopUp/components/Hiring/EditJobInformation/EditJobInformation";
 import DeleteJob from "@/app/_ui/_PopUp/components/Hiring/DeleteJob/DeleteJob";
@@ -40,6 +39,7 @@ import DeleteFilesPopUp from "@/app/(dashboard)/Files/_ui/popUp/DeleteFilesPopUp
 import CalculateLeaveBalance from "@/app/_ui/_PopUp/components/TimeOff/CalculateLeaveBalance/CalculateLeaveBalance";
 import CreateComment from "@/app/_ui/_PopUp/components/Hiring/CreateComment/CreateComment";
 import SendMail from "@/app/_ui/_PopUp/components/Hiring/SendMail/SendMail";
+import DeleteEducation from "@/app/_ui/_PopUp/components/Personel-job/Education/DeleteEducation/DeleteEducation";
 
 type PopupType = {
   [key: string]: () => React.JSX.Element;

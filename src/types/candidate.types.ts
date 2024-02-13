@@ -17,6 +17,7 @@ export interface CandidateType {
   status: string | null;
   candidate_emails?: any;
   user_emails?:any;
+  Questions?:Object;
 }
 
 interface ObjectOfString {

@@ -56,9 +56,10 @@ function AppliymentForm({
       toast.error("something went Wrong");
     }
     const response = await CreateCandidate({
-      ...FormulateFormData(formdata),
+      ...FormulateFormData(Formdata),
       job_id: job?.id,
       "Hiring Lead": job?.job_information?.["Hiring Lead"],
+      Questions: job?.Application_Details?.Application_Questions,
     });
     if (response?.Submitted) {
       QueryClient.invalidateQueries({ queryKey: ["Candidates"] });

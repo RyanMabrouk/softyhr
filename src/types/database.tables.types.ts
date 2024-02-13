@@ -105,6 +105,9 @@ export interface RowFieldType {
   type: "select" | "text" | "radio";
   Icon?: string | undefined;
   ExtraTxt?: string | undefined;
+  accept?: string | undefined;
+  allowPastDates?: boolean | undefined;
+  allowPreviousDates?: boolean | undefined;
 }
 export type RowType = {
   Row: RowFieldType[];

@@ -3,7 +3,7 @@ import useProfilesData from "./useProfilesData";
 export default function useProfiles() {
   // ------------------All Profiles Basic Information--------------------
   const { profiles } = useProfilesData({
-    columns: 'user_id,role,picture,files_ids,"Basic Information"',
+    columns: 'user_id,picture,"Basic Information"',
   });
   return {
     profiles: {

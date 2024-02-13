@@ -37,7 +37,7 @@ function Page() {
         <FaComment className="!text-2xl !text-color-primary-8" />
         <h1 className="text-2xl text-color-primary-8">{`Comments ( ${data?.length || 0} )`}</h1>
       </div>
-      <div className="flex h-full w-10/12 flex-col items-end justify-center gap-2 overflow-hidden rounded-lg bg-gray-14 p-4 px-6">
+      <div className="flex h-full w-10/12 flex-col items-center justify-center gap-2 overflow-hidden rounded-lg bg-gray-14 p-4 px-6">
         {isPending ? (
           <Loader />
         ) : data.length > 0 ? (

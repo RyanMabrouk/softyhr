@@ -1,11 +1,11 @@
 "use client";
 import TabsPannelGeneric from "@/app/_ui/TabsPannelGeneric";
-import { Box, Tab, Tabs } from "@mui/material";
 import React from "react";
-import PdfViewer from "./Components/pdfViewer";
+import dynamic from "next/dynamic";
 import ApplicationQuestions from "./Components/ApplicationQuestions";
 import useCandidate from "@/hooks/Hiring/useCandidate";
 import { useParams } from "next/navigation";
+import PdfViewer from "./Components/pdfViewer";
 
 function Page() {
   const params = useParams();

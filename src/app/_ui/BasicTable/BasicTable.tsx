@@ -58,7 +58,7 @@ export default function BasicTable({
               No {champ} entries have been added.
             </div>
           ) : (
-            <TableBody>
+            <TableBody key={uuidv4()}>
               {data
                 ?.sort(
                   (a: DataTableType, b: DataTableType) =>

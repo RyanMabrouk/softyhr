@@ -27,11 +27,11 @@ function AppQuestion({ name, required, show, type }: AppQuestionPropsType) {
                 Update_ApplicationDetails({
                   values: {
                     ...ApplicationDetails?.values,
-                    [name]: {
-                      ...ApplicationDetails?.values?.[name],
-                      AddToAppliement: e.target.checked,
-                      type,
-                    },
+                      [name]: {
+                        ...ApplicationDetails?.values?.[name],
+                        AddToAppliement: e.target.checked,
+                        type,
+                      },
                   },
                 });
               }}

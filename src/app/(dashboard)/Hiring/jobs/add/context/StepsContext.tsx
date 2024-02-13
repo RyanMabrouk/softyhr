@@ -34,7 +34,7 @@ interface StepsAction {
 export const initialState: StepsState = {
   ApplicationDetails: {
     done: false,
-    values: { ...ApplicationIniTialQuestions },
+    values: { Questions:{ ...ApplicationIniTialQuestions} },
   },
   InformationJob: {
     done: false,

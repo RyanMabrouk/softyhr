@@ -22,7 +22,7 @@ function ApplicationQuestions({ candidate }: ApplicationQuestionsPropsType) {
       <h1 className="font-base text-2xl">Application Questions for this Job</h1>
       {data[0]?.Application_Details?.Questions?.length > 0 ? (
         <div className="flex flex-col items-start justify-center gap-[0.4rem]">
-          {Object.entries(candidate?.metadata || {})?.map((Question) => {
+          {Object.entries(candidate?.Questions || {})?.map((Question) => {
             if (data[0]?.Application_Details?.Questions.includes(Question[0])) {
               index++;
               return (

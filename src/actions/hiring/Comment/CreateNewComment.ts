@@ -13,20 +13,20 @@ export const CreateNewComment = async (
   logger.info("CreateNewComment_enter");
   const supabase = createServerActionClient({ cookies });
   const org = await getCurrentorg();
-  const { error } = await supabase.from("candidate_comments").insert([
-    {
-      comment_content: NewComment,
-      org_name: org?.name,
-      reply_id,
-      comment_Author,
-      candidate_id,
-    },
-  ]);
-  if (error) {
+  const { error } = await supabase.from("candidate_comments").insert([ 
+    { 
+      comment_content: NewComment, 
+      org_name: org?.name, 
+      reply_id,   
+      comment_Author, 
+      candidate_id, 
+    }, 
+  ]); 
+  if (error) { 
     logger.error(error.message);
     return {
       Submitted: false,
-      Error: error,
+      Error: error, 
       message: "Something went Wrong",
     };
   } else {

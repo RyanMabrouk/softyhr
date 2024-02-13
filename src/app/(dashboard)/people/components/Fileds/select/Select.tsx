@@ -47,7 +47,7 @@ function SelectInput({
           },
           height: "2rem",
           minWidth: minWidth || "9rem",
-          borderRadius: "0.1rem !important",
+          borderRadius: "0.2rem !important",
           fontWeight: "300",
           fontSize: "1rem",
         }}
@@ -55,20 +55,20 @@ function SelectInput({
         defaultValue={value}
         renderValue={(selected) => {
           if (value === "undefined" || value == "") {
-            return <h1 className="text-gray-15">{label}</h1>;
+            return <h1 className="text-gray-29">{label}</h1>;
           }
           return selected;
         }}
         displayEmpty
         inputProps={{ "aria-label": "Without label" }}
         onChange={HandleChange}
-        className="relative z-10 !font-medium !text-gray-29 [&_.MuiOutlinedInput-notchedOutline]:border-none"
+        className="relative z-10 !font-medium !text-gray-13 [&_.MuiOutlinedInput-notchedOutline]:border-none"
       >
         {RowField?.options?.map((element: any, index: number) => {
           return (
             <MenuItem
               value={element?.label || element?.name || element}
-              className="p-1"
+              className="p-1 !text-gray-13"
               key={index}
               sx={{ color: "300", fontSize: "14px" }}
             >

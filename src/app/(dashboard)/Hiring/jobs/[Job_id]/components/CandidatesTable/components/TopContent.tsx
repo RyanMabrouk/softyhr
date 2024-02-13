@@ -51,7 +51,7 @@ function TopContent({ Hiring, totalPages, filter, setFilter }:any) {
                   link: {
                     pathname: `/Hiring/jobs/edit/Information-Job`,
                     query: {
-                      id: String(Hiring?.id),
+                      id: String(Hiring?.id)
                     },
                   },
                 },

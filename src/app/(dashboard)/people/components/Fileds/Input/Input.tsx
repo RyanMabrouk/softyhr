@@ -8,6 +8,7 @@ interface InputPropsType {
   setTouched?: React.Dispatch<React.SetStateAction<boolean>> | undefined;
   defaultValue?: string;
   className?: string;
+  setDate?: React.Dispatch<React.SetStateAction<any>> | undefined;
   setSelectedKeys?: React.Dispatch<React.SetStateAction<string>> | undefined;
 }
 const Input = ({
@@ -19,6 +20,8 @@ const Input = ({
 }: InputPropsType) => {
   const [value, setValue] = useState<string>(String(defaultValue || ""));
   const Component = InputIcons[RowField?.Icon?.toUpperCase() || ""];
+
+
   return (
     <div className="flex flex-col items-start justify-center">
       <h1

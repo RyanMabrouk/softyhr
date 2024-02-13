@@ -26,6 +26,7 @@ function InputFile({ RowField, defaultValue }: InputFilePropsType) {
         file:font-semibold file:text-color-primary-8"
         type="file"
         name={RowField?.name}
+        accept={RowField?.accept}
       />
     </div>
   );

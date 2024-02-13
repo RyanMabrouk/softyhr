@@ -19,12 +19,12 @@ import SelectInput from "@/app/(dashboard)/people/components/Fileds/select/Selec
 import Date from "@/app/(dashboard)/people/components/Fileds/DateInput/DateInput";
 import RadioBox from "@/app/(dashboard)/people/components/Fileds/RadioBox/RadioBox";
 import FiledsChamps from "@/app/(dashboard)/people/components/Fileds/Fileds";
-import Education from "@/app/(dashboard)/people/components/Fileds/Education";
 import TableChamps from "@/app/(dashboard)/people/components/Fileds/TableChamps";
 import textarea from "@/app/(dashboard)/people/components/Fileds/textarea/textarea";
 import Editor from "@/app/(dashboard)/people/components/Fileds/Editor/Editor";
 import InputFile from "@/app/(dashboard)/people/components/Fileds/File/File";
 import SelectUsers from "@/app/(dashboard)/people/components/Fileds/SelectUsers/SelectUsers";
+import Education from "@/app/(dashboard)/people/components/Fileds/Education/Education";
 
 export const Field: any = {
   TEXT: Input,

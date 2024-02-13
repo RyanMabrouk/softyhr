@@ -22,7 +22,7 @@ function ChangesSection({
   const queryClient = useQueryClient();
   const router = useRouter();
   return (
-    <div className="fixed bottom-0 left-0 z-50 flex h-[5rem] w-full items-center justify-end  gap-[2rem] overflow-hidden border-t border-gray-19 bg-gray-14 px-10 delay-200 ease-in-out  ">
+    <div className="fixed bottom-0 left-0 z-30 flex h-[5rem] w-full items-center justify-end  gap-[2rem] overflow-hidden border-t border-gray-19 bg-gray-14 px-10 delay-200 ease-in-out  ">
       <div className="flex w-4/5 items-center justify-between">
         <div className="-mt-4 flex items-center justify-center gap-[2rem]">
           <button

@@ -14,20 +14,20 @@ export const Delete_Entry = async (
   data: any,
   Entry_id: string,
 ) => {
-  const logger = getLogger("*");
-  logger.info("Delete_Entry_enter");
-  //console.log(Entry_id, data?.[champ]?.filter(({id}:any)=> id != Entry_id));
-  const NewData = data?.[champ]?.filter(({ id }: any) => id != Entry_id);
-  const supabase = createServerActionClient({ cookies });
-  const { data: user_profile, error } = await supabase
-    .from("profiles")
-    .update({ [champ]: NewData })
-    .eq("user_id", data?.user_id)
-    .select();
-  if (error) {
-    logger.error(error?.message);
-    return { error: { Message: `Error Deleting ${champ}`, Type: error } };
-  }
-  logger.info("Delete_Entry_exit");
+  
+  const logger = getLogger("*"); 
+  logger.info("Delete_Entry_enter"); 
+  const NewData = data?.[champ]?.filter(({ id }: any) => id != Entry_id); 
+  const supabase = createServerActionClient({ cookies });  
+  const { data: user_profile, error } = await supabase 
+    .from("profiles") 
+    .update({ [champ]: NewData }) 
+    .eq("user_id", data?.user_id) 
+    .select();  
+  if (error) { 
+    logger.error(error?.message); 
+    return { error: { Message: `Error Deleting ${champ}`, Type: error } }; 
+  } 
+  logger.info("Delete_Entry_exit"); 
 
 };

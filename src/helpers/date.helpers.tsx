@@ -213,3 +213,20 @@ export function getSunday(date: Date) {
   const day = date.getDay();
   return new Date(date.getFullYear(), date.getMonth(), date.getDate() - day);
 }
+
+//calculate the years difference between date and current date
+export function calculateYearDiff(dateString:string) {
+    var birthday = new Date(dateString);
+    var today = new Date();
+
+    var age = today.getFullYear() - birthday.getFullYear();
+    var monthDiff = today.getMonth() - birthday.getMonth();
+    
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthday.getDate())) {
+        age--;
+    }
+    
+    return age;
+}
+
+
