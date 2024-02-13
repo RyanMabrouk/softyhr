@@ -81,7 +81,7 @@ export default async function getCandidate(
           .order("id")
           .eq("org_name", org_name);
           
-  logger.info("getCandidate");
+  logger.info("getCandidate_exit");
   if (data?.error) {
     logger.error(data?.error?.message);
   }
