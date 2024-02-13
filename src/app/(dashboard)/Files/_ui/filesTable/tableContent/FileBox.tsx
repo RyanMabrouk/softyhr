@@ -15,8 +15,9 @@ import useToast from "@/hooks/useToast";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { addFile } from "@/actions/files/addFile";
 import getSession from "@/api/getSession";
-import useFullName from "@/hooks/useFullName";
 import useUserRole from "@/hooks/useUserRole";
+import useProfiles from "@/hooks/useProfiles";
+import { database_profile_type } from "@/types/database.tables.types";
 
 export default function FileBox({ file, pushFileId, removeFileId }: any) {
   const {
@@ -165,7 +166,16 @@ export default function FileBox({ file, pushFileId, removeFileId }: any) {
     options.push({ value: "share", label: "Share" });
   }
   //
-  const { FullName, isPendingFullName } = useFullName(addedBy);
+  const {
+    profiles: { data: profiles, isPending: isPendingFullName },
+  } = useProfiles();
+  const addedByProfile = profiles?.find(
+    (profile: database_profile_type) => profile.user_id === addedBy,
+  );
+  const FullName =
+    addedByProfile?.["Basic Information"]?.["First name"] +
+    " " +
+    addedByProfile?.["Basic Information"]?.["Last name"];
   return (
     <div
       ref={drag}
