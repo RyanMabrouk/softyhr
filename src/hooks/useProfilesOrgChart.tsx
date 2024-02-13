@@ -4,7 +4,7 @@ import useProfilesData from "./useProfilesData";
 export default function useProfilesOrgChart() {
   const { profiles: all_profiles_org_chat_info } = useProfilesData({
     columns:
-      'user_id,role,picture,supervisor_id,"Basic Information","Job Information"',
+      'user_id,picture,supervisor_id,"Basic Information","Job Information"',
   });
   return {
     profiles: {
