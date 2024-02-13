@@ -36,23 +36,23 @@ function AppliymentForm({
     const uploadPromises: any = [];
 
     //----upload_candidates_attachement-----
-     try{
-    formdata.forEach(async function (value: FormDataEntryValue, key: string) {
-      if (typeof formdata.get(key) == "object") {
-        const uploadPromise = UploadImage(
-          formdata,
-          key + identifient,
-          "hiring",
-          key,
-        );
-        uploadPromises.push(uploadPromise);
-        Formdata.set(key, key + identifient);
-      } else {
-        Formdata.set(key, value);
-      }
-    });
-    await Promise.all(uploadPromises);
-    }catch(error){
+    try {
+      formdata.forEach(async function (value: FormDataEntryValue, key: string) {
+        if (typeof formdata.get(key) == "object") {
+          const uploadPromise = UploadImage(
+            formdata,
+            key + identifient,
+            "hiring",
+            key,
+          );
+          uploadPromises.push(uploadPromise);
+          Formdata.set(key, key + identifient);
+        } else {
+          Formdata.set(key, value);
+        }
+      });
+      await Promise.all(uploadPromises);
+    } catch (error) {
       toast.error("something went Wrong");
     }
     const response = await CreateCandidate({
@@ -64,8 +64,8 @@ function AppliymentForm({
       QueryClient.invalidateQueries({ queryKey: ["Candidates"] });
       if (!pathname.includes("careers")) {
         router.push(`/Hiring/jobs/${job?.id}`);
-      }else router.push(`/careers`);
-        toast.success(SuccessMessage);
+      } else router.push(`/careers`);
+      toast.success(SuccessMessage);
     } else toast.error(response?.Msg);
   };
 

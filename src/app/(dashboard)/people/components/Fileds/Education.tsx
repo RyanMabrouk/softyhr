@@ -1,4 +1,8 @@
-import { ChampsType, RowFieldType, insert_RowFieldType } from "@/types/userInfoTypes.type";
+import {
+  ChampsType,
+  RowFieldType,
+  insert_RowFieldType,
+} from "@/types/userInfoTypes.type";
 import React, { ReactNode, SetStateAction, memo, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { Field } from "@/constants/userInfo";

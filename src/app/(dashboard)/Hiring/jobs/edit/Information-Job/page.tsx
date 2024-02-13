@@ -28,7 +28,7 @@ function Page() {
     Hiring: { data: Hiring_data, isPending: Hiring_isPending },
   } = useHiring({ id });
   const { toast } = useToast();
-  const {  data, isPending  } = useSettings("Hiring");
+  const { data, isPending } = useSettings("Hiring");
 
   async function EditJobInformation_Handler(formdata: FormData) {
     const response = await Edit_JobOpening(

@@ -86,7 +86,7 @@ function AddComment({
               <div className="flex items-center justify-between border-t px-3 py-2 dark:border-gray-600">
                 <button
                   type="submit"
-                  className="dark:focus:color-primary-3 text-lf inline-flex items-center rounded-lg bg-color-primary-8 px-4 py-2.5 text- font-semibold text-white duration-200 ease-linear hover:bg-color-primary-8 focus:ring-4 focus:ring-color-primary-7"
+                  className="dark:focus:color-primary-3 text-lf text- inline-flex items-center rounded-lg bg-color-primary-8 px-4 py-2.5 font-semibold text-white duration-200 ease-linear hover:bg-color-primary-8 focus:ring-4 focus:ring-color-primary-7"
                 >
                   Post comment
                 </button>

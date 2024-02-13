@@ -4,7 +4,6 @@ export async function middleware(req: NextRequest) {
   const res = NextResponse.next();
   const url = new URL(req.url);
   const supabase = createMiddlewareClient({ req, res });
-
   if (url.pathname === "/auth/callback") {
     const code = url.searchParams.get("code");
     if (code) {

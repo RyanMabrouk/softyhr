@@ -10,7 +10,7 @@ import { ChampsType } from "@/types/userInfoTypes.type";
 import { usePathname, useRouter } from "next/navigation";
 import { Section } from "@/constants/userInfoSections";
 import formulateData from "../components/utils/formulateData";
-import { useMutation, useQueryClient } from "@tanstack/react-query";  
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import updateData from "@/api/updateData";
 import useToast from "@/hooks/useToast";
 import { Profile_Type, RowType } from "@/types/database.tables.types";
@@ -21,10 +21,10 @@ interface UserSection {
   employeeId: string;
 }
 
-export interface EducationType{
-  [key:string]:string | null;
-  id:string;
-} 
+export interface EducationType {
+  [key: string]: string | null;
+  id: string;
+}
 
 function UserSection({ section, employeeId }: UserSection) {
   const router = useRouter();
