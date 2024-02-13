@@ -69,10 +69,10 @@ export function Content() {
                       key={rang}
                       href={path(employeeId as string)}
                       className={
-                        "flex items-center justify-center overflow-hidden rounded-t-md p-3 px-6 text-white transition ease-in-out first-letter:capitalize " +
+                        "flex items-center justify-center overflow-hidden rounded-t-md p-3 px-6 font-bold text-white transition ease-in-out first-letter:capitalize " +
                         (pathname.includes(path(employeeId as string))
-                          ? `bg-white font-bold !text-color-primary-9 `
-                          : `font-normal hover:bg-gray-24`)
+                          ? `bg-white !text-color-primary-9 `
+                          : ` hover:bg-gray-24`)
                       }
                     >
                       {label}
