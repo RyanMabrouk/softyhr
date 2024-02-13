@@ -66,12 +66,9 @@ function TabsPannelGeneric({ TabsPannel }: { TabsPannel: TabsType[] }) {
         >
           {TabsPannel?.map(({ label }: { label: string }, index: number) => (
             <Tab
-              className="!bg-white !text-color-primary-8"
-              style={{
-                backgroundColor: "red",
-              }}
+              className={`font-semibold transition-all ease-linear ${index === value ? "bg-fabric-700 !text-white" : "!bg-white text-fabric-700"}`}
               key={index}
-              label={<h1 className="!bg-white !text-color1-500">{label}</h1>}
+              label={<h1>{label}</h1>}
               {...Props(index)}
             />
           ))}
