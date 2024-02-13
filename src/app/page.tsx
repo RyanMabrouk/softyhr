@@ -2,7 +2,6 @@
 import getCurrentorg from "@/api/getCurrentOrg";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-
 export default async function Page() {
   const current_org = await getCurrentorg();
   if (current_org) redirect("/home");

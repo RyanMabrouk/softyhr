@@ -29,11 +29,11 @@ function EmployementStatus() {
   return (
     <div className="mt-4 flex w-full flex-col place-items-start justify-center gap-[2rem] border-b border-gray-18 pb-8">
       <h1 className="font-lg flex items-center justify-center gap-[0.5rem] text-xl  text-black">
-        <FaAddressCard fill="green" />
+        <FaAddressCard className="text-fabric-700" />
         Employement Status
       </h1>
       <div className="flex flex-col items-start justify-center gap-[1rem]">
-      {  <FiledsChamps champ="Employement Status" FieldsArray={Fields} />}
+        {<FiledsChamps champ="Employement Status" FieldsArray={Fields} />}
       </div>
     </div>
   );

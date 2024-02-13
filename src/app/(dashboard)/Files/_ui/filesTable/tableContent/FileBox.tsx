@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useEffect, useState } from "react";
 import { useDrag } from "react-dnd";
 import FilesCheckBox from "../../components/FilesCheckBox";
@@ -15,9 +14,9 @@ import useToast from "@/hooks/useToast";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { addFile } from "@/actions/files/addFile";
 import getSession from "@/api/getSession";
-import useFullName from "@/hooks/useFullName";
 import useUserRole from "@/hooks/useUserRole";
-
+import useProfiles from "@/hooks/useProfiles";
+import { database_profile_type } from "@/types/database.tables.types";
 export default function FileBox({ file, pushFileId, removeFileId }: any) {
   const {
     id,
@@ -154,7 +153,7 @@ export default function FileBox({ file, pushFileId, removeFileId }: any) {
     role: { data: role },
   } = useUserRole();
   const options = [
-    { value: "emailAtt", label: "Email Attachment" },
+    { value: "Email attachment", label: "Email Attachment" },
     { value: "rename", label: "Rename" },
     { value: "duplicate", label: "Duplicate" },
   ];
@@ -165,7 +164,16 @@ export default function FileBox({ file, pushFileId, removeFileId }: any) {
     options.push({ value: "share", label: "Share" });
   }
   //
-  const { FullName, isPendingFullName } = useFullName(addedBy);
+  const {
+    profiles: { data: profiles, isPending: isPendingFullName },
+  } = useProfiles();
+  const addedByProfile = profiles?.find(
+    (profile: database_profile_type) => profile.user_id === addedBy,
+  );
+  const FullName =
+    addedByProfile?.["Basic Information"]?.["First name"] +
+    " " +
+    addedByProfile?.["Basic Information"]?.["Last name"];
   return (
     <div
       ref={drag}
@@ -201,7 +209,7 @@ export default function FileBox({ file, pushFileId, removeFileId }: any) {
           </p>
         </div>
       </div>
-      <div className=" z-30 hidden items-center gap-2">
+      <div className=" z-30 hidden items-center gap-1">
         <FileDownloadButton fileUrl={file_url} fileName={name} />
         <FilesSelectSettingsArrowDown
           options={options}

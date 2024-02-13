@@ -27,7 +27,7 @@ function AccessSection() {
   return (
     <div className="mt-4 flex w-full flex-col place-items-start justify-center gap-[2rem] border-b border-gray-18 pb-28">
       <h1 className="font-lg flex items-center justify-center gap-[0.5rem] text-xl  text-black">
-        <TbLockCog fill="green" />
+        <TbLockCog className="text-fabric-700" />
         Self-service access
       </h1>
       <div className="flex items-center justify-start gap-[1rem]">

@@ -12,7 +12,7 @@ function ManagerSection({ user }: { user: Profile_Type }) {
   } = useProfilesData({
     match: { user_id: user?.supervisor_id },
     columns:
-      'user_id,role,picture,supervisor_id,"Basic Information","Job Information"',
+      'user_id,picture,supervisor_id,"Basic Information","Job Information"',
   });
   return (
     <>

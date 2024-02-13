@@ -16,8 +16,9 @@ import { UploadImage } from "@/actions/UploadFiles/uploadImage";
 import updateData from "@/api/updateData";
 import { usePathname, useRouter } from "next/navigation";
 import { useQueryClient } from "@tanstack/react-query";
-import avatar from "/public/avatar.png";
-import SubmitButton from "@/app/careers/[career_id]/components/AppliymentForm/SubmitButton";
+import avatar from "/public/default_avatar.png";
+import { Button } from "@/app/_ui/Button";
+import useToast from "@/hooks/useToast";
 
 const base_image_url =
   "https://ybwqmrrlvmpdikvmkqra.supabase.co/storage/v1/object/public/avatar/";
@@ -37,8 +38,8 @@ const CropEasy = ({
   const [photoURL, setphotoURL] = useState(URL || avatar?.src);
   const [zoom, setZoom] = useState(1);
   const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
-  const [isLoading, setLoading] = useState(false);
   const queryClient = useQueryClient();
+  const { toast } = useToast();
   const cropComplete = (croppedArea: any, croppedAreaPixels: any) => {
     setCroppedAreaPixels(croppedAreaPixels);
   };
@@ -59,13 +60,22 @@ const CropEasy = ({
     const imagename = "profile_Image" + uuidv4();
     const response = await UploadImage(formData, imagename, "avatar");
     if (response?.uploaded) {
-      updateData("profiles", [{ picture: base_image_url + imagename }], {
-        user_id: user_id ?? "",
-      });
+      const { error } = await updateData(
+        "profiles",
+        [{ picture: base_image_url + imagename }],
+        {
+          user_id: user_id ?? "",
+        },
+      );
+      if (error) {
+        toast.error(error.message, "Error");
+      } else {
+        toast.success("Your Image was updated", "Success");
+        router.push(pathname);
+        queryClient.invalidateQueries({ queryKey: ["profiles", user_id] });
+        queryClient.invalidateQueries({ queryKey: ["profiles"] });
+      }
     }
-    router.push(pathname);
-    queryClient.invalidateQueries({ queryKey: ["profiles", user_id] });
-    queryClient.invalidateQueries({ queryKey: ["profiles"] });
   };
 
   //------upload-image-locally------
@@ -122,11 +132,7 @@ const CropEasy = ({
             </Box>
           </DialogActions>
           <div className="relative flex items-center justify-center gap-[1rem]">
-            <button
-              className={
-                "text-bold relative rounded-sm border border-color-primary-8 px-8 py-[0.2rem] text-color-primary-8 shadow-md shadow-gray-14 duration-200 ease-in-out hover:!border-color-primary-7  hover:!text-color-primary-7"
-              }
-            >
+            <button className="text-bold relative rounded-sm border border-color-primary-8 px-8 py-[0.2rem] text-color-primary-8 shadow-md shadow-gray-14 duration-200 ease-in-out hover:!border-color-primary-7  hover:!text-color-primary-7">
               <input
                 className="absolute bottom-0 left-0 h-[2rem] w-full cursor-pointer opacity-0"
                 type="file"
@@ -134,7 +140,7 @@ const CropEasy = ({
                 accept="image/png/jpeg"
                 onChange={(e) => UploadCurrentImage(e)}
               />
-              Modifier la photo
+              Modify the photo
             </button>
             <div className="flex h-[2rem] w-[2rem] cursor-pointer items-center justify-center border border-gray-15 duration-200 ease-in-out hover:!bg-gray-22">
               <FaTrash
@@ -147,7 +153,7 @@ const CropEasy = ({
         </div>
         <div className="flex flex-col items-center justify-center gap-[1rem]">
           <div className="border-b border-gray-15 pr-16 text-[14px] text-gray-29">
-            Aperçu
+            Preview
           </div>
           <Image
             alt={alt || ""}
@@ -172,9 +178,9 @@ const CropEasy = ({
           />
         </div>
       </div>
-      <div className="h-[0.1rem] w-full bg-gradient-to-r from-color-primary-1 to-color-primary-3" />
+      <hr className="h-[3px] w-full bg-primary-gradient" />
       <div className="flex items-start justify-center gap-[1rem] self-start">
-        <SubmitButton text="Save" textSubmitting="Saving..." onClick={ChangeProfileImage}/>
+        <Button onClick={ChangeProfileImage}>Save</Button>
       </div>
     </div>
   );

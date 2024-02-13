@@ -16,7 +16,7 @@ function Page() {
           <div className="flex items-center justify-start gap-3">
             <FaUserCircle className="text-5xl text-color-primary-8" />
             <h1 className="text-2xl font-semibold text-color-primary-8">
-              New Employee
+              New employee
             </h1>
           </div>
           <div className="w-full">

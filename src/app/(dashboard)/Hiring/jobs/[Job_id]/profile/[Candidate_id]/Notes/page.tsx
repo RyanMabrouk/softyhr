@@ -56,7 +56,7 @@ function Page() {
                       <CommentCard
                         key={uuidv4()}
                         PictureUrl={comment?.profiles?.picture || ""}
-                        UserName={`${comment?.profiles?.["Basic Information"]?.["First Name"] || comment?.profiles?.["Basic Information"]?.["First name"]} ${comment?.profiles?.["Basic Information"]?.["Last Name"] || comment?.profiles?.["Basic Information"]?.["Last name"]}`}
+                        UserName={`${comment?.profiles?.["Basic Information"]?.["First Name"] || comment?.profiles?.["Basic Information"]?.["First name"]} ${comment?.profiles?.["Basic Information"]?.["Last name"] || comment?.profiles?.["Basic Information"]?.["Last name"]}`}
                         Created_at={comment?.created_at}
                         Comment_content={comment?.comment_content}
                       />
@@ -71,7 +71,7 @@ function Page() {
                                 PictureUrl={
                                   reply_comment?.profiles?.picture || ""
                                 }
-                                UserName={`${comment?.profiles?.["Basic Information"]?.["First Name"] || comment?.profiles?.["Basic Information"]?.["First name"]} ${comment?.profiles?.["Basic Information"]?.["Last Name"] || comment?.profiles?.["Basic Information"]?.["Last name"]}`}
+                                UserName={`${comment?.profiles?.["Basic Information"]?.["First Name"] || comment?.profiles?.["Basic Information"]?.["First name"]} ${comment?.profiles?.["Basic Information"]?.["Last name"] || comment?.profiles?.["Basic Information"]?.["Last name"]}`}
                                 Created_at={reply_comment?.created_at}
                                 Comment_content={reply_comment?.comment_content}
                               />

@@ -2,7 +2,7 @@
 import useData from "@/hooks/useData";
 import Image from "next/image";
 import React from "react";
-import avatar from "/public/avatar.png";
+import avatar from "/public/default_avatar.png";
 import Link from "next/link";
 export default function Header() {
   const {

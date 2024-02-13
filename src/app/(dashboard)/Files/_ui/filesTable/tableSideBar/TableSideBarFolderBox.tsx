@@ -22,6 +22,7 @@ export default function TableSideBarFolderBox({ setCheckAll }: any) {
   const { data: { data: wantedFolders } = {} } = useQuery({
     queryKey: ["folders", wantedFoldersIds],
     queryFn: async () => await GetFoldersByIDs(wantedFoldersIds),
+    enabled: wantedFoldersIds.length > 0,
   });
   return (
     <>

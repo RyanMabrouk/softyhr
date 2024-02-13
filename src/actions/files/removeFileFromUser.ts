@@ -5,7 +5,7 @@ import getData from "@/api/getData";
 export async function removeFileFromUser(userId: any, fileId: any) {
   const logger = getLogger("files");
   logger.info("removeFileFromUser");
-  const { data } = await getData("profiles", {
+  const { data } = await getData("permissions", {
     match: {
       user_id: userId,
     },
@@ -17,7 +17,7 @@ export async function removeFileFromUser(userId: any, fileId: any) {
     oldFilesIds.filter((id: any) => id !== Number(fileId)),
   ];
   const { error } = await updateData(
-    "profiles",
+    "permissions",
     { files_ids: oldFilesIds.filter((id: any) => id !== Number(fileId)) },
     { user_id: userId },
   );

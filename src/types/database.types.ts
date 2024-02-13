@@ -701,13 +701,11 @@ export type Database = {
           "Driver License": Json[] | null
           Education: Json[] | null
           "Employment Status": Json[] | null
-          files_ids: number[] | null
           Hiring: Json | null
           Job: Json | null
           "Job Information": Json[] | null
           org_name: string
           picture: string | null
-          role: string | null
           role_id: number
           "Social Links": Json | null
           "Stock Options": Json[] | null
@@ -726,13 +724,11 @@ export type Database = {
           "Driver License"?: Json[] | null
           Education?: Json[] | null
           "Employment Status"?: Json[] | null
-          files_ids?: number[] | null
           Hiring?: Json | null
           Job?: Json | null
           "Job Information"?: Json[] | null
           org_name: string
           picture?: string | null
-          role?: string | null
           role_id?: number
           "Social Links"?: Json | null
           "Stock Options"?: Json[] | null
@@ -751,13 +747,11 @@ export type Database = {
           "Driver License"?: Json[] | null
           Education?: Json[] | null
           "Employment Status"?: Json[] | null
-          files_ids?: number[] | null
           Hiring?: Json | null
           Job?: Json | null
           "Job Information"?: Json[] | null
           org_name?: string
           picture?: string | null
-          role?: string | null
           role_id?: number
           "Social Links"?: Json | null
           "Stock Options"?: Json[] | null

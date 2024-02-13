@@ -3,20 +3,20 @@ import { FaAddressCard } from "react-icons/fa";
 export const EmployeeRoute = [
   {
     rang: 1,
-    label: "personnal",
+    label: "Personal",
     path: (employeId: string) => `/people/${employeId}/personnal`,
     defaultPath: true,
     icon: FaAddressCard,
   },
   {
     rang: 2,
-    label: "job",
+    label: "Job",
     path: (employeId: string) => `/people/${employeId}/job`,
     defaultPath: true,
   },
   {
     rang: 3,
-    label: "TimeOff",
+    label: "Time off",
     path: (employeId: string) => `/people/${employeId}/TimeOff`,
     defaultPath: true,
   },

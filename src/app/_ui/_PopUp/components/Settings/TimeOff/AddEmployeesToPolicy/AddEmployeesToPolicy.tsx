@@ -27,6 +27,7 @@ import useProfilesData from "@/hooks/useProfilesData";
 import { PiUploadSimple } from "react-icons/pi";
 import useLeaveBalances from "@/hooks/TimeOff/useLeaveBalances";
 import useAllLeaveBalances from "@/hooks/TimeOff/useAllLeaveBalances";
+import useProfiles from "@/hooks/useProfiles";
 export type usersWithoutCurrentPolicy = {
   user_id: string;
   name: string;
@@ -40,9 +41,7 @@ export default function AddEmployeesToPolicy() {
   const { policy, category } = usePolicy({ policy_id: Number(policy_id) });
   const {
     profiles: { data: all_profiles_basic_info },
-  } = useProfilesData({
-    columns: 'user_id,role,picture,"Basic Information"',
-  });
+  } = useProfiles();
   const {
     leave_policies: { data: leave_policies },
   } = useLeaveData();

@@ -5,7 +5,6 @@ import FileSettingsButton from "./FileSettingsButton";
 
 const FilesSelectSettingsArrowDown = ({ onSelect, options }: any) => {
   const [selectedOption, setSelectedOption] = useState("");
-  const [selectedLabel, setSelectedLabel] = useState("");
 
   const [isDropdownOpen, setDropdownOpen] = useState(false);
 
@@ -30,7 +29,6 @@ const FilesSelectSettingsArrowDown = ({ onSelect, options }: any) => {
 
   const handleOptionClick = (option: any) => {
     setSelectedOption(option.label);
-    setSelectedLabel(option.label);
     setDropdownOpen(false);
     onSelect?.(option.value);
   };
@@ -43,24 +41,24 @@ const FilesSelectSettingsArrowDown = ({ onSelect, options }: any) => {
   }
 
   return (
-    <div className="relative inline-block  ">
+    <div className="relative inline-block ">
       <div
         onClick={handleDropdownToggle}
-        className="flex cursor-pointer items-center justify-between rounded-sm"
+        className="flex cursor-pointer items-center justify-between"
       >
         <button
           onClick={(event) => {
             event.stopPropagation();
             handleDropdownToggle();
           }}
-          className=" p-1 transition-all duration-300  "
+          className=" esae-linear transition-all "
         >
           <FileSettingsButton hover={true} />
         </button>
       </div>
       {isDropdownOpen && (
         <div
-          className="shadow-green absolute -left-[8rem] z-20 mt-2  w-44 origin-top-right rounded-sm bg-white shadow-lg ring-1 ring-black ring-opacity-5"
+          className="shadow-green absolute right-0 z-20 mt-0  w-44 origin-top-right rounded-sm bg-white shadow-lg ring-1 ring-black ring-opacity-5"
           onMouseLeave={handleMouseLeave}
         >
           <div

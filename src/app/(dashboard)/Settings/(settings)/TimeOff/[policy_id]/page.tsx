@@ -17,10 +17,9 @@ import {
 import { UnderlinedLink } from "@/app/_ui/UnderlinedLink";
 import usePolicy from "@/hooks/TimeOff/usePolicy";
 import { EmployyeSettingsBtn } from "./EmployyeSettingsBtn";
-import useLeaveData from "@/hooks/TimeOff/useLeaveData";
 import { BsPlusSlashMinus } from "react-icons/bs";
-import useProfilesData from "@/hooks/useProfilesData";
 import useLeaveBalances from "@/hooks/TimeOff/useLeaveBalances";
+import useProfiles from "@/hooks/useProfiles";
 export default function Page() {
   const pathname = usePathname();
   const { policy_id } = useParams();
@@ -31,9 +30,7 @@ export default function Page() {
   });
   const {
     profiles: { data: all_profiles_basic_info },
-  } = useProfilesData({
-    columns: 'user_id,role,picture,"Basic Information"',
-  });
+  } = useProfiles();
   const { policy, category } = usePolicy({ policy_id: Number(policy_id) });
   const policy_type =
     policy?.type === "traditional" ? (

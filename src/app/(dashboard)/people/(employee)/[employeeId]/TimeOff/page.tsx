@@ -25,7 +25,7 @@ export default function Page({
             <div className="flex flex-row items-center gap-1">
               <FaBusinessTime className="h-8 w-8 text-fabric-700" />
               <div className="text-2xl font-normal text-fabric-700 ">
-                Time Off
+                Time off
               </div>
             </div>
             <div className="flex flex-row items-center gap-2 leading-8 text-gray-25">

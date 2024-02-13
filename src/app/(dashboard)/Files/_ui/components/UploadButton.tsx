@@ -11,13 +11,11 @@ export default function UploadButton() {
   }
 
   return (
-    <div>
-      <button
-        className="flex border-spacing-4 items-center gap-1 border border-color-primary-8 px-2 py-1 font-semibold text-color-primary-8 hover:opacity-80"
-        onClick={handleClick}
-      >
-        <RiUploadFill fontSize="1.2rem" fill="#527A01" /> Upload
-      </button>
-    </div>
+    <button
+      className="flex border-spacing-4 items-center gap-1 rounded-md border border-fabric-700 px-2 py-1 font-semibold text-fabric-700 transition-all ease-linear hover:bg-fabric-700 hover:text-white"
+      onClick={handleClick}
+    >
+      <RiUploadFill className="text-[1.2rem]" /> Upload
+    </button>
   );
 }

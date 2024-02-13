@@ -42,19 +42,18 @@ function CreateCommentForm({ id }: { id: string | null }) {
           action={CreateNewCommentHandler}
           className="flex w-full flex-col items-start justify-center gap-[1rem] px-6 py-4"
         >
-         
-            <div className="mb-4 w-full rounded-lg border border-gray-200 bg-gray-50 dark:border-gray-600 dark:bg-gray-700">
-              <div className="w-full rounded-t-lg bg-white px-4 py-2 dark:bg-gray-800">
-                <label className="sr-only">Your comment</label>
-                <textarea
-                  rows={4}
-                  className="w-full border-0 bg-white px-0 text-base text-gray-900 outline-none focus:ring-0 dark:bg-gray-800 dark:text-white dark:placeholder-gray-400"
-                  placeholder="Write a comment..."
-                  required
-                  name="newComment"
-                ></textarea>
-              </div>
+          <div className="mb-4 w-full rounded-lg border border-gray-200 bg-gray-50 dark:border-gray-600 dark:bg-gray-700">
+            <div className="w-full rounded-t-lg bg-white px-4 py-2 dark:bg-gray-800">
+              <label className="sr-only">Your comment</label>
+              <textarea
+                rows={4}
+                className="w-full border-0 bg-white px-0 text-base text-gray-900 outline-none focus:ring-0 dark:bg-gray-800 dark:text-white dark:placeholder-gray-400"
+                placeholder="Write a comment..."
+                required
+                name="newComment"
+              ></textarea>
             </div>
+          </div>
           <div className="flex items-start justify-center gap-[1rem]">
             <SubmitButton text="Save" textSubmitting="Saving..." />
           </div>

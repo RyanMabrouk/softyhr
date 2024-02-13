@@ -44,7 +44,7 @@ export function SelectGeneric({
           data-placeholder-trigger="keydown"
           label={label}
           id={label}
-          className={` group peer h-9 w-[12.5rem] rounded-md  border  border-gray-18  py-1 capitalize text-gray-27 shadow-[rgba(0,0,0,0.05)_0px_1px_0px_0px] transition-all ease-linear placeholder:text-gray-14 hover:shadow-md [&_.Mui-selected]:!bg-fabric-700 [&_.MuiOutlinedInput-notchedOutline]:border-none ${className}`}
+          className={` group peer h-9 w-[12.5rem] rounded-md  border  border-gray-18  py-1 text-gray-27 shadow-[rgba(0,0,0,0.05)_0px_1px_0px_0px] transition-all ease-linear first-letter:capitalize placeholder:text-gray-14 hover:shadow-md [&_.Mui-selected]:!bg-fabric-700 [&_.MuiOutlinedInput-notchedOutline]:border-none ${className}`}
           name={name}
           defaultValue={defaultValue ? defaultValue.value : "none"}
           displayEmpty

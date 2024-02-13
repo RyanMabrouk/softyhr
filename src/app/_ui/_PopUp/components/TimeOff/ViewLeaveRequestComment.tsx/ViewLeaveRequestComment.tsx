@@ -23,6 +23,7 @@ import useEmployeeData from "@/hooks/useEmloyeeData";
 import PopUpSkeleton from "../../../PopUpSkeleton";
 import useLeaveData from "@/hooks/TimeOff/useLeaveData";
 import useProfilesData from "@/hooks/useProfilesData";
+import useProfiles from "@/hooks/useProfiles";
 function ViewLeaveRequestComment() {
   const Router = useRouter();
   const pathname = usePathname();
@@ -34,9 +35,7 @@ function ViewLeaveRequestComment() {
   } = useLeaveData();
   const {
     profiles: { data: all_profiles_basic_info },
-  } = useProfilesData({
-    columns: 'user_id,role,picture,"Basic Information"',
-  });
+  } = useProfiles();
   const {
     leave_requests: { data: leave_requests },
     employee_profile: { data: employee_profile },

@@ -1,11 +1,6 @@
 import { createPinoBrowserSend, createWriteStream } from "pino-logflare";
 import logLevelData from "./log-level";
 import pino, { Logger } from "pino";
-// create pino-logflare stream
-const stream = createWriteStream({
-  apiKey: process.env.PINO_API_KEY ?? "",
-  sourceToken: process.env.PINO_SOURCE_TOKEN ?? "",
-});
 // create pino-logflare browser stream
 const send = createPinoBrowserSend({
   apiKey: process.env.PINO_API_KEY ?? "",
@@ -26,6 +21,5 @@ export function getLogger(name: string): Logger {
       name,
       level: getLogLevel(name),
     },
-    stream,
   );
 }

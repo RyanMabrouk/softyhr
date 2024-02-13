@@ -1,8 +1,9 @@
 "use server";
 import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
 import { cookies, headers } from "next/headers";
-import postData from "@/api/postData";
 import { getLogger } from "@/logging/log-util";
+import { createOrg } from "./createOrg";
+import { createProfile } from "./createProfile";
 export default async function signup(formData: FormData) {
   const logger = getLogger("auth");
   logger.info("signup");
@@ -45,13 +46,13 @@ export default async function signup(formData: FormData) {
     };
   } else {
     //Create organization
-    const { error: organizations_error } = await postData("organizations", [
-      {
-        name: company,
-        employee_count: formData.get("employee_count") as string,
-        country: formData.get("country") as string,
-      },
-    ]);
+    const employee_count = formData.get("employee_count") as string;
+    const country = formData.get("country") as string;
+    const { error: organizations_error, roles } = await createOrg({
+      company,
+      employee_count,
+      country,
+    });
     if (organizations_error) {
       logger.error(organizations_error.message);
       return {
@@ -62,47 +63,19 @@ export default async function signup(formData: FormData) {
       };
     } else {
       //Create profile
-      const { error: profiles_error } = await postData("profiles", [
-        {
-          user_id: data?.user?.id,
-          org_name: company,
-          role: "admin",
-          "Basic Information": {
-            "Birth Date": "",
-            Age: "",
-            Gender: "",
-            "Marital Status": "",
-            NIN: "",
-            "Tax File Number": "",
-            SSN: "",
-            "First Name": formData.get("first_name"),
-            "Middle Name": "",
-            "Last Name": formData.get("last_name"),
-            "Preferred Name": "",
-            "Employee #": "",
-            Status: "",
-            "Secondary Language": "",
-          },
-          Contact: {
-            "Work Phone": "",
-            Ext: "",
-            "Mobile Phone": tel,
-            "Home Phone": "",
-            "Work Email": email,
-            "Home Email": "",
-          },
-          "Job Information": [
-            {
-              "Effective Date": new Date(),
-              Location: "",
-              Division: "",
-              Department: "",
-              "Job Title": job,
-              "Reports To": "",
-            },
-          ],
-        },
-      ]);
+      const first_name = formData.get("first_name") as string;
+      const last_name = formData.get("last_name") as string;
+      const user_id = data?.user?.id as string;
+      const { error: profiles_error } = await createProfile({
+        user_id,
+        company,
+        first_name,
+        last_name,
+        email,
+        tel,
+        job,
+        role_id: roles?.find((role) => role.name === "admin")?.id,
+      });
       if (profiles_error) {
         logger.error(profiles_error.message);
         return {
@@ -112,25 +85,9 @@ export default async function signup(formData: FormData) {
           },
         };
       } else {
-        //Create settings
-        const { error: settings_error } = await postData("settings", [
-          {
-            org_name: company,
-          },
-        ]);
-        if (settings_error) {
-          logger.error(settings_error.message);
-          return {
-            error: {
-              message: settings_error.message,
-              type: "creating settings failed",
-            },
-          };
-        } else {
-          return {
-            error: null,
-          };
-        }
+        return {
+          error: null,
+        };
       }
     }
   }

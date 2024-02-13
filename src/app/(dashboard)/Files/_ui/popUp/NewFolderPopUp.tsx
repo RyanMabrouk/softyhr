@@ -62,9 +62,7 @@ export default function NewFolderPopUp() {
 
             <hr className="mt-4 h-[3px] w-full bg-primary-gradient" />
             <div className="flex flex-row gap-4 px-2 pt-3">
-              <ButtonPopUp check={isTyping === ""} className="!w-fit">
-                Save
-              </ButtonPopUp>
+              <ButtonPopUp check={isTyping === ""}>Save</ButtonPopUp>
               <button
                 className="cursor-pointer text-color5-500 hover:underline "
                 type="button"

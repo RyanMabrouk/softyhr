@@ -17,6 +17,8 @@ export default function FolderTitle() {
   const { data: { data: wantedFolders } = {} } = useQuery({
     queryKey: ["folders", wantedFoldersIds],
     queryFn: async () => await GetFoldersByIDs(wantedFoldersIds),
+    enabled: wantedFoldersIds.length > 0,
+
   });
   const allFilesIds = wantedFolders
     ?.map((fold: any) => fold.files)
