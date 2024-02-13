@@ -4,7 +4,7 @@ import { useSettings } from "@/hooks/Settings/useSettings";
 import { v4 as uuidv4 } from "uuid";
 import { NewEmployeeSections, sectionIcon } from "@/constants/userInfo";
 import { ChampsType } from "@/types/userInfoTypes.type";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import useToast from "@/hooks/useToast";
 import FiledsChamps from "@/app/(dashboard)/people/components/Fileds/Fileds";
 import ChangesSection from "../../../components/ChangesSection/ChangesSection";

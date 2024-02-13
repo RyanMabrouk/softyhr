@@ -1,15 +1,10 @@
-import { RowFieldType, insert_RowFieldType } from "@/types/userInfoTypes.type";
+import { insert_RowFieldType } from "@/types/userInfoTypes.type";
 import React, { ReactNode, memo, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { Field } from "@/constants/userInfo";
 import { FaTrash } from "react-icons/fa";
 import { IoMdAddCircleOutline } from "react-icons/io";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import updateData from "@/api/updateData";
-import useToast from "@/hooks/useToast";
 import { usePathname, useRouter } from "next/navigation";
-import useData from "@/hooks/useData";
-import useEmployeeData from "@/hooks/useEmloyeeData";
 import { Profile_Type, RowType } from "@/types/database.tables.types";
 import { EducationType } from "../../../components/UserSection";
 interface EducationPropsType {
@@ -22,14 +17,11 @@ interface EducationPropsType {
   DATA: Object[];
   employeeId: string;
 }
-
 function Education({
   FieldsArray,
   setTouched,
   champ,
 }: EducationPropsType): ReactNode {
-  const router = useRouter();
-  const pathname = usePathname();
   const [data, setdata] = useState<EducationType[]>([]);
   return (
     <div className="flex flex-col items-start ">
