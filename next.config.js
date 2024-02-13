@@ -1,6 +1,11 @@
 /** @type {import('next').NextConfig} */
+const withBundleAnalyzer = require("@next/bundle-analyzer")({
+  enabled: process.env.ANALYZE === "true",
+});
 const nextConfig = {
-  serverActions: { allowedOrigins: ["localhost:3001", "rh.ixamee.com"] },
+  experimental: {
+    serverActions: { allowedOrigins: ["localhost:3001", "rh.ixamee.com"] },
+  },
   swcMinify: true,
   logging: {
     fetches: {
@@ -50,4 +55,4 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig;
+module.exports = withBundleAnalyzer(nextConfig);
