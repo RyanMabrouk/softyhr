@@ -5,6 +5,7 @@ import Hydration from "@/provider/hydration";
 import Store from "@/provider/store";
 import PopUp from "./_ui/_PopUp/PopUp";
 import { ToastContainer, ToastProvider } from "@/hooks/useToast";
+import Grafana from "./Grafana";
 
 const lato = Lato({
   weight: ["100", "300", "400", "700", "900"],
@@ -28,6 +29,7 @@ export default async function RootLayout({
         <Store>
           <Hydration>
             <ToastProvider>
+              <Grafana />
               <ToastContainer />
               <PopUp />
               {children}
