@@ -18,7 +18,7 @@ import useUserRole from "@/hooks/useUserRole";
 export default function TableContent({ checkAll, setCheckAll }: any) {
   const searchParams = useSearchParams();
 
-  const { data: allFilesAdmin, isPending: isPending10 } = useQuery({
+  const { data: allFilesAdmin } = useQuery({
     queryKey: ["files"],
     queryFn: () =>
       getData("files", {
@@ -32,6 +32,8 @@ export default function TableContent({ checkAll, setCheckAll }: any) {
   const { data: { data: wantedFolders } = {} } = useQuery({
     queryKey: ["folders", wantedFoldersIds],
     queryFn: async () => await GetFoldersByIDs(wantedFoldersIds),
+    enabled: wantedFoldersIds.length > 0,
+
   });
   const allFilesIds = wantedFolders
     ?.map((fold) => fold.files)

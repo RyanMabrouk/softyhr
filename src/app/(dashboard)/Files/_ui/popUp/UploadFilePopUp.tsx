@@ -35,7 +35,7 @@ export default function UploadFilePopUp() {
   const [isChecked, setIsChecked] = useState(false);
 
   const {
-    profiles: { data: profiles, isPending: isPendingAllProfiles },
+    profiles: { data: profiles },
   } = useProfiles();
 
   function handleCheckedAllUsers() {
@@ -66,7 +66,7 @@ export default function UploadFilePopUp() {
     setSelectedFolder(id);
   }
 
-  const { mutateAsync: addFileApi } = useMutation({
+  const { mutateAsync: addFileApi, isPending: isAddingFile } = useMutation({
     mutationFn: async (payload: any) => {
       const { error, data }: any = await addFile(payload);
       if (error) {
@@ -93,10 +93,8 @@ export default function UploadFilePopUp() {
     const { uploaded } = await UploadImage(formData, fileName, "files");
     return { uploaded, fileName, fileType, fileData };
   }
-
   async function onSubmit() {
     const l = files.length;
-
     for (let i = 0; i <= l - 1; i++) {
       if (files[i].size > 50000000) {
         toast.error("the size of the file cannot exceed 50MB ");
@@ -109,10 +107,8 @@ export default function UploadFilePopUp() {
           const org = await getCurrentorg();
           const orgName = org?.name;
           const { name, size } = fileData;
-
           const session = await getSession();
           const user_id = session?.user?.id;
-
           const payload = {
             file_url: `https://ybwqmrrlvmpdikvmkqra.supabase.co/storage/v1/object/public/files/${fileName}`,
             addedBy: user_id,
@@ -256,7 +252,7 @@ export default function UploadFilePopUp() {
 
           <hr className="mt-4 h-[3px] w-full bg-primary-gradient" />
           <div className="flex flex-row gap-4 px-2 pt-3">
-            <ButtonPopUp check={!isThereFile} className="!w-fit">
+            <ButtonPopUp check={!isThereFile} disabled={isAddingFile}>
               Upload
             </ButtonPopUp>
             <button

@@ -10,10 +10,10 @@ export default function AddFolder() {
   }
   return (
     <button
-      className="border-spacing-4 cursor-pointer border border-color-primary-8 px-2 py-1 hover:opacity-80"
+      className="border-spacing-4 cursor-pointer rounded-md border border-fabric-700 px-2 py-1 text-fabric-700 transition-all ease-linear hover:bg-fabric-700 hover:text-white"
       onClick={handleClick}
     >
-      <TbFolderPlus fontSize="1.5rem" stroke="#527A01" />
+      <TbFolderPlus className="text-2xl" />
     </button>
   );
 }

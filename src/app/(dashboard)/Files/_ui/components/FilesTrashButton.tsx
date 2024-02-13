@@ -30,11 +30,12 @@ export default function FilesTrashButton({ check }: any) {
   return (
     <RoleGuard permissions={["delete:files"]}>
       <button
-        className={`border-spacing-4  cursor-pointer  border border-color-primary-8 p-[0.4rem]  px-[0.6rem] opacity-80 hover:opacity-60 ${isDisabled ? "cursor-not-allowed " : ""} `}
+        data-tip="Delete All"
+        className={`tooltip border-spacing-4 cursor-pointer rounded-md border border-gray-25 p-[0.4rem] px-[0.6rem] text-gray-25  transition-all ease-linear  hover:border-gray-25 hover:bg-gray-25  hover:text-white  ${isDisabled ? "cursor-not-allowed" : ""}`}
         onClick={handleClick}
         onMouseEnter={handleMouseEnter}
       >
-        <FaTrash fontSize="1rem" fill="#38312F" />
+        <FaTrash />
       </button>
     </RoleGuard>
   );

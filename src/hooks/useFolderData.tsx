@@ -11,6 +11,7 @@ export default function useFolderData(folderId: any) {
         org: true,
         column: "*,files(*)",
       }),
+    enabled: folderId !== null && folderId !== undefined,
   });
   return {
     folder: {

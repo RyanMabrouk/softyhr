@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useEffect, useState } from "react";
 import { useDrag } from "react-dnd";
 import FilesCheckBox from "../../components/FilesCheckBox";
@@ -18,7 +17,6 @@ import getSession from "@/api/getSession";
 import useUserRole from "@/hooks/useUserRole";
 import useProfiles from "@/hooks/useProfiles";
 import { database_profile_type } from "@/types/database.tables.types";
-
 export default function FileBox({ file, pushFileId, removeFileId }: any) {
   const {
     id,
@@ -155,7 +153,7 @@ export default function FileBox({ file, pushFileId, removeFileId }: any) {
     role: { data: role },
   } = useUserRole();
   const options = [
-    { value: "emailAtt", label: "Email Attachment" },
+    { value: "Email attachment", label: "Email Attachment" },
     { value: "rename", label: "Rename" },
     { value: "duplicate", label: "Duplicate" },
   ];
@@ -211,7 +209,7 @@ export default function FileBox({ file, pushFileId, removeFileId }: any) {
           </p>
         </div>
       </div>
-      <div className=" z-30 hidden items-center gap-2">
+      <div className=" z-30 hidden items-center gap-1">
         <FileDownloadButton fileUrl={file_url} fileName={name} />
         <FilesSelectSettingsArrowDown
           options={options}
