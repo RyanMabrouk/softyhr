@@ -6,7 +6,6 @@ import { redirect } from "next/navigation";
 export default async function login(formData: FormData) {
   const logger = getLogger("auth");
   logger.info("login");
-  const header_url = headers().get("host") || "";
   const supabase = createServerActionClient({ cookies });
   const { data: user, error } = await supabase.auth.signInWithPassword({
     email: formData.get("email") as string,
@@ -21,9 +20,10 @@ export default async function login(formData: FormData) {
       },
     };
   } else {
-    const domain = header_url.substring(0, header_url.indexOf("."));
+    const host = headers().get("host")?.split(".");
+    const subdomain = host?.[0] === "www" ? host?.[1] : host?.[0];
     const user_org = user?.user?.user_metadata?.org_name;
-    if (user_org === domain) {
+    if (user_org === subdomain) {
       redirect("/home");
     } else {
       const { error: login_not_registered_error } =

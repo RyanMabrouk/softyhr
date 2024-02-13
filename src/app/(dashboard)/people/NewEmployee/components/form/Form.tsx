@@ -97,7 +97,7 @@ function Form() {
                     key={index}
                   >
                     <h1 className="font-lg flex items-center justify-center gap-[0.5rem] text-xl  text-black">
-                      <Component fill="green" />
+                      <Component className="text-fabric-700" />
                       {champ}
                     </h1>
                     <div className="flex flex-col items-start justify-center gap-[1rem]">

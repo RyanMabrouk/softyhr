@@ -26,8 +26,8 @@ import useLeaveData from "@/hooks/TimeOff/useLeaveData";
 import toggleDateSortContext, {
   toggleDateSortContextType,
 } from "../context/toggleDateSortContext";
-import useProfilesData from "@/hooks/useProfilesData";
 import RoleGuard from "@/app/_ui/RoleGuard";
+import useProfiles from "@/hooks/useProfiles";
 interface leave_data {
   user_id: string;
   reviewed_by: string | "";
@@ -59,9 +59,7 @@ export function History() {
   } = useLeaveData();
   const {
     profiles: { data: all_profiles_basic_info, isPending: isPending6 },
-  } = useProfilesData({
-    columns: 'user_id,role,picture,"Basic Information"',
-  });
+  } = useProfiles();
   const {
     leave_accrued: { data: leave_accrued, isPending: isPending4 },
     leave_requests: { data: leave_requests, isPending: isPending2 },

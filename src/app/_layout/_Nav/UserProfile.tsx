@@ -2,7 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import defaultAvatar from "/public/default_avatar.jpeg";
+import defaultAvatar from "/public/default_avatar.png";
 import useData from "@/hooks/useData";
 import signout from "@/actions/auth/signout";
 
@@ -21,7 +21,7 @@ export function UserProfile() {
     <div className="relative">
       <Image
         onClick={() => setToggleView((old) => !old)}
-        className="h-8 w-8 cursor-pointer rounded-full"
+        className="h-8 w-8 cursor-pointer rounded-full "
         src={user?.picture ?? defaultAvatar}
         alt=""
         priority

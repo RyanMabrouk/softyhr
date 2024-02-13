@@ -1,5 +1,3 @@
-import getData from "@/api/getData";
-import { useQuery } from "@tanstack/react-query";
 import useProfilesData from "./useProfilesData";
 export default function useProfilesOrgChart() {
   const { profiles: all_profiles_org_chat_info } = useProfilesData({

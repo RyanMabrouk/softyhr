@@ -20,6 +20,7 @@ import { BsFillStopwatchFill } from "react-icons/bs";
 import { FaCalculator } from "react-icons/fa6";
 import { IoMdArrowDropleft, IoMdArrowDropright } from "react-icons/io";
 import { PolicyInfo } from "./PolicyInfo";
+import { Player } from "@lottiefiles/react-lottie-player";
 interface formatted_policy_type {
   id: number;
   name: string;
@@ -116,7 +117,7 @@ export function TimeOff() {
       </header>
       <div>
         <section className="relative mx-auto block w-full px-8 ">
-          {policies?.length > 0 && (
+          {policies?.length > 0 ? (
             <>
               <div
                 hidden={activeIndex === 0}
@@ -143,6 +144,13 @@ export function TimeOff() {
                 ))}
               />
             </>
+          ) : (
+            <Player
+              src="https://lottie.host/a0bea92a-9e29-43fc-b1a4-403b36011fd7/ZRZhRyx6xp.json"
+              className="h-40 w-40"
+              loop
+              autoplay
+            />
           )}
         </section>
       </div>
