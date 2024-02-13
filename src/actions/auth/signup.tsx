@@ -1,11 +1,9 @@
 "use server";
 import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
 import { cookies, headers } from "next/headers";
-import postData from "@/api/postData";
 import { getLogger } from "@/logging/log-util";
-import getData from "@/api/getData";
-import { PostgrestError } from "@supabase/supabase-js";
-import { database_roles_type } from "@/types/database.tables.types";
+import { createOrg } from "./createOrg";
+import { createProfile } from "./createProfile";
 export default async function signup(formData: FormData) {
   const logger = getLogger("auth");
   logger.info("signup");
@@ -55,7 +53,6 @@ export default async function signup(formData: FormData) {
       employee_count,
       country,
     });
-    console.log("🚀 ~ signup ~ roles:", roles);
     if (organizations_error) {
       logger.error(organizations_error.message);
       return {
@@ -93,129 +90,5 @@ export default async function signup(formData: FormData) {
         };
       }
     }
-  }
-}
-export async function createOrg({
-  company,
-  employee_count,
-  country,
-}: {
-  company: string;
-  employee_count: string;
-  country: string;
-}): Promise<{
-  error: PostgrestError | null;
-  roles: database_roles_type[] | undefined | null;
-}> {
-  const { error } = await postData("organizations", [
-    {
-      name: company,
-      employee_count: employee_count,
-      country: country,
-    },
-  ]);
-  if (error) return { error, roles: undefined };
-  else {
-    const { data } = await getData("roles", {
-      match: {
-        org_name: company,
-      },
-    });
-    return {
-      roles: data,
-      error,
-    };
-  }
-}
-export async function createProfile({
-  user_id,
-  company,
-  first_name,
-  last_name,
-  email,
-  tel,
-  job,
-  supervisor_id = null,
-  role_id,
-}: {
-  user_id: string;
-  company: string;
-  first_name: string;
-  last_name: string;
-  email: string;
-  tel: string;
-  job: string;
-  role_id: number | undefined;
-  supervisor_id?: string | null;
-}) {
-  if (!role_id) throw new Error("role_id is not defined");
-  const { error } = await postData("profiles", [
-    {
-      user_id: user_id,
-      org_name: company,
-      supervisor_id: supervisor_id,
-      accrual_start_date: new Date(),
-      Hiring: {
-        "Hire Date": new Date(),
-      },
-      "Basic Information": {
-        Age: "",
-        NIN: "",
-        SIN: "",
-        SSN: "XXX-XX-XXXX",
-        Gender: "",
-        Status: "Active",
-        Employee: "",
-        Allergies: "Peanuts",
-        "Last name": last_name,
-        "Birth Date": "",
-        Birthplace: "",
-        "First name": first_name,
-        "Shirt Size": "",
-        "Shirt size": "",
-        Citizenship: "",
-        "Jacket Size": "",
-        "Middle name": " ",
-        "National ID": "",
-        Nationality: "",
-        "T-Shirt Size": "",
-        "Marital Status": "",
-        "Preferred name": "",
-        "Tax File Number": "",
-        "Secondary Language": "",
-        "Dietary Restrictions": "",
-      },
-      Contact: {
-        "Work Phone": "",
-        Ext: "",
-        "Mobile Phone": tel,
-        "Home Phone": "",
-        "Work Email": email,
-        "Home Email": "",
-      },
-      "Job Information": [
-        {
-          Location: "",
-          Division: "",
-          Department: "",
-          "Job Title": job,
-        },
-      ],
-    },
-  ]);
-  if (error)
-    return {
-      error,
-    };
-  else {
-    const { error: permissions_error } = await postData("permissions", {
-      user_id: user_id,
-      role_id: role_id,
-      org_name: company,
-      files_ids: [],
-    });
-    return {
-      error: permissions_error,
-    };
   }
 }
