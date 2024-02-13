@@ -135,9 +135,7 @@ export default function SendEmailFilePopUp() {
 
             <hr className="mt-4 h-[3px] w-full bg-primary-gradient" />
             <div className="flex flex-row gap-4 px-2 pt-3">
-              <ButtonPopUp check={false} className="!w-fit">
-                Save
-              </ButtonPopUp>
+              <ButtonPopUp check={false}>Save</ButtonPopUp>
               <button
                 className="cursor-pointer text-color5-500 hover:underline "
                 type="reset"
