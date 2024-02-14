@@ -48,7 +48,7 @@ const Input = ({
         )}
         <input
           className={
-            `focus:focus-within:shadow-green peer h-[2rem] overflow-hidden rounded-sm border border-gray-19 bg-white px-2 text-[0.95rem] font-normal outline-none  ${className} ` +
+            `focus:focus-within:shadow-green !text-gray-13 peer h-[2rem] overflow-hidden rounded-sm border border-gray-19 bg-white px-2 text-[0.95rem] font-normal outline-none  ${className} ` +
             (RowField?.Icon ? "pl-8 " : "")
           }
           type={RowField?.type}

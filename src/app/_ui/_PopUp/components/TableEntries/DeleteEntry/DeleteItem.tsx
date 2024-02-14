@@ -41,6 +41,8 @@ function DeleteItem() {
     else toast.success(`${section_name} Deleted Successfully`);
     queryClient.invalidateQueries({ queryKey: ["profiles", employeeId] });
     router.push(pathname);
+    queryClient.invalidateQueries({ queryKey: ["profiles", employeeId] });
+
   };
   return (
     <>

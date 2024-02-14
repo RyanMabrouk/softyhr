@@ -38,7 +38,7 @@ const Textarea = ({ RowField, setTouched, defaultValue }: InputPropsType) => {
         )}
         <textarea
           className={
-            "focus:focus-within:shadow-green h-[2rem] w-full rounded-sm border border-gray-19 px-2 font-light outline-none  focus:!border-color-primary-3 " +
+            "focus:focus-within:shadow-green h-[5rem] w-full rounded-sm border border-gray-19 px-2 font-normal !text-gray-13 outline-none  focus:!border-color-primary-3 " +
             (RowField?.Icon ? "pl-8 " : "")
           }
           value={value}

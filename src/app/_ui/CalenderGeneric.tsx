@@ -68,7 +68,7 @@ export function CalendarGeneric({
             <Button
               variant={"outline"}
               className={cn(
-                "w-[15rem] justify-start border border-transparent text-center font-normal ",
+                "w-[15rem] justify-start border border-transparent text-center !text-[0.95rem] !font-normal !text-gray-13 ",
                 !date && "text-muted-foreground",
               )}
             >
@@ -86,7 +86,10 @@ export function CalendarGeneric({
               mode="single"
               defaultMonth={date}
               selected={date}
+              fromYear={1960}
+              toYear={2060}
               onSelect={setDate}
+              captionLayout="dropdown-buttons"
               onDayClick={setAction}
               disabled={(date) =>
                 allowPastDates

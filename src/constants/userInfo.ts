@@ -45,6 +45,7 @@ import dynamic from "next/dynamic";
 import InputFile from "@/app/(dashboard)/people/components/Fileds/File/File";
 import SelectUsers from "@/app/(dashboard)/people/components/Fileds/SelectUsers/SelectUsers";
 import { IoSearchSharp } from "react-icons/io5";
+import DateInputRange from "@/app/(dashboard)/people/components/Fileds/DateInputRange/DateInputRange";
 const Editor = dynamic(
   () => import("@/app/(dashboard)/people/components/Fileds/Editor/Editor"),
   { ssr: false },
@@ -58,6 +59,7 @@ export const Field: any = {
   NUMBER: Input,
   SELECT: SelectInput,
   DATE: DateInput,
+  DATE_RANGE:DateInputRange,
   RADIO: RadioBox,
   TEXTAREA: textarea,
   EDITOR: Editor,

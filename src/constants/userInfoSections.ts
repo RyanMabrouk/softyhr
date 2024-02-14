@@ -25,6 +25,7 @@ import Editor from "@/app/(dashboard)/people/components/Fileds/Editor/Editor";
 import InputFile from "@/app/(dashboard)/people/components/Fileds/File/File";
 import SelectUsers from "@/app/(dashboard)/people/components/Fileds/SelectUsers/SelectUsers";
 import Education from "@/app/(dashboard)/people/components/Fileds/Education/Education";
+import DateInputRange from "@/app/(dashboard)/people/components/Fileds/DateInputRange/DateInputRange";
 
 export const Field: any = {
   TEXT: Input,
@@ -32,6 +33,7 @@ export const Field: any = {
   SELECT: SelectInput,
   DATE: Date,
   RADIO: RadioBox,
+  DATE_RANGE: DateInputRange,
   TEXTAREA: textarea,
   EDITOR: Editor,
   FILE: InputFile,

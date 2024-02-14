@@ -2,10 +2,18 @@
 
 import * as React from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { DayPicker } from "react-day-picker";
+import { DayPicker, DropdownProps } from "react-day-picker";
 
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
+import {
+  Button,
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownTrigger,
+} from "@nextui-org/react";
+import { FaSortDown } from "react-icons/fa";
 
 export type CalendarProps = React.ComponentProps<typeof DayPicker>;
 
@@ -24,6 +32,7 @@ function Calendar({
         month: "space-y-4",
         caption: "flex justify-center pt-1 relative items-center",
         caption_label: "text-sm font-medium",
+        caption_dropdowns: "flex justify-center gap-1",
         nav: "space-x-1 flex items-center",
         nav_button: cn(
           buttonVariants({ variant: "outline" }),
@@ -54,6 +63,44 @@ function Calendar({
         ...classNames,
       }}
       components={{
+        Dropdown: ({ value, onChange, children, ...props }: DropdownProps) => {
+          const options = React.Children.toArray(
+            children,
+          ) as React.ReactElement<React.HTMLProps<HTMLOptionElement>>[];
+          const selected = options.find((child) => child.props.value === value);
+          const handleChange = (value: string) => {
+            const changeEvent = {
+              target: { value },
+            } as React.ChangeEvent<HTMLSelectElement>;
+            onChange?.(changeEvent);
+          };
+          return (
+            <Dropdown>
+              <DropdownTrigger className="rounded-md border border-gray-15 px-1  shadow-sm focus:ring-0">
+                <Button
+                  size="sm"
+                  className="flex items-center justify-end gap-2"
+                >
+                  <div className="">{selected?.props?.children}</div>
+                  <FaSortDown fill="gray" className="-mt-1"/>
+                </Button>
+              </DropdownTrigger>
+              <DropdownMenu className="!max-h-[20rem] overflow-auto rounded-lg !bg-white shadow-lg">
+                {options.map((option, id: number) => (
+                  <DropdownItem
+                    onClick={() =>
+                      handleChange(option.props.value?.toString() || "")
+                    }
+                    key={`${option.props.value}-${id}`}
+                    value={option.props.value?.toString() ?? ""}
+                  >
+                    {option.props.children}
+                  </DropdownItem>
+                ))}
+              </DropdownMenu>
+            </Dropdown>
+          );
+        },
         IconLeft: ({ ...props }) => <ChevronLeft className="h-4 w-4" />,
         IconRight: ({ ...props }) => <ChevronRight className="h-4 w-4" />,
       }}

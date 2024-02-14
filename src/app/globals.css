@@ -38,6 +38,9 @@
     appearance: textfield;
   }
 }
+.rdp-vhidden {
+  @apply hidden;
+}
 /* Reset Mui Select Componant selected bg color */
 .Mui-selected {
   --tw-bg-opacity: 1 !important;

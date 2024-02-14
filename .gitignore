@@ -39,3 +39,8 @@ next-env.d.ts
 .firebase
 .github
 firebase-debug.log*sendgrid.env
+
+#pwa 
+sw.*
+workbox-*
+swe-worker-*

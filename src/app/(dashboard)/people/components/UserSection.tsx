@@ -15,6 +15,7 @@ import updateData from "@/api/updateData";
 import useToast from "@/hooks/useToast";
 import { Profile_Type, RowType } from "@/types/database.tables.types";
 import useEmployeeData from "@/hooks/useEmloyeeData";
+import Loader from "@/app/_ui/Loader/Loader";
 
 interface UserSection {
   section: string;
@@ -36,6 +37,7 @@ function UserSection({ section, employeeId }: UserSection) {
 
   const { mutateAsync } = useMutation({
     mutationFn: async (NewData: Profile_Type) => {
+      console.log(NewData);
       return await updateData("profiles", NewData, {
         user_id: NewData.user_id,
       });
@@ -62,8 +64,8 @@ function UserSection({ section, employeeId }: UserSection) {
   return (
     <>
       {isPending || user?.isPending ? (
-        <div className="flex h-[20rem] w-full items-center justify-center ">
-          <h1>Loading...</h1>
+        <div className="flex h-full w-full items-center justify-center ">
+          <Loader/>
         </div>
       ) : (
         <div className="flex h-full w-full flex-col items-start justify-start pb-10 pl-8">

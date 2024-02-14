@@ -1,5 +1,10 @@
 "use client";
-import { FormControl, MenuItem, Select, SelectChangeEvent } from "@mui/material";
+import {
+  FormControl,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+} from "@mui/material";
 import React, { useState } from "react";
 import { RowFieldType } from "@/types/userInfoTypes.type";
 import { Row } from "react-day-picker";
@@ -9,7 +14,9 @@ interface SelectInputPropsType {
   defaultValue?: string | null;
   label?: string;
   minWidth?: string;
-  setSelectedKeys?: React.Dispatch<React.SetStateAction<string | null>> | undefined;
+  setSelectedKeys?:
+    | React.Dispatch<React.SetStateAction<string | null>>
+    | undefined;
 }
 
 function SelectInput({
@@ -18,13 +25,13 @@ function SelectInput({
   defaultValue = "",
   label,
   minWidth,
-  setSelectedKeys
+  setSelectedKeys,
 }: SelectInputPropsType) {
   const [value, setValue] = useState(String(defaultValue));
   const HandleChange = (e: SelectChangeEvent<string>) => {
     if (setTouched) setTouched(true);
     setValue(e.target.value);
-    setSelectedKeys && setSelectedKeys(e.target.value)
+    setSelectedKeys && setSelectedKeys(e.target.value);
   };
   return (
     <div className="relative flex flex-col items-start justify-center">
@@ -48,21 +55,23 @@ function SelectInput({
           height: "2rem",
           minWidth: minWidth || "9rem",
           borderRadius: "0.2rem !important",
-          fontWeight: "300",
-          fontSize: "1rem",
         }}
         name={RowField?.name}
         defaultValue={value}
         renderValue={(selected) => {
           if (value === "undefined" || value == "") {
-            return <h1 className="text-gray-29">{label}</h1>;
+            return (
+              <h1 className="text-[0.95rem] font-normal !text-gray-13">
+                {label}
+              </h1>
+            );
           }
           return selected;
         }}
         displayEmpty
         inputProps={{ "aria-label": "Without label" }}
         onChange={HandleChange}
-        className="relative z-10 !font-medium !text-gray-13 [&_.MuiOutlinedInput-notchedOutline]:border-none"
+        className="relative z-10 text-[0.95rem] !font-normal !text-gray-13 [&_.MuiOutlinedInput-notchedOutline]:border-none"
       >
         {RowField?.options?.map((element: any, index: number) => {
           return (
@@ -70,9 +79,10 @@ function SelectInput({
               value={element?.label || element?.name || element}
               className="p-1 !text-gray-13"
               key={index}
-              sx={{ color: "300", fontSize: "14px" }}
             >
-              {element?.label || element?.name || element}
+              <h1 className="text-[0.95rem] !font-normal !text-gray-13">
+                {element?.label || element?.name || element}
+              </h1>
             </MenuItem>
           );
         })}

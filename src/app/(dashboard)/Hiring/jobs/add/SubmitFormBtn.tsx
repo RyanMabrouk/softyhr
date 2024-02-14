@@ -15,8 +15,8 @@ function SubmitFormBtn() {
     <button
       type="submit"
       className={
-        "hover:shadow-green flex w-full items-center justify-center border border-color-primary-8 bg-white p-1 px-2 text-lg  font-semibold text-color-primary-5 duration-200 ease-in-out hover:!border-color-primary-7 hover:!text-color-primary-8 " +
-        (currentStep == "Job-Boards" ? "!bg-color-primary-8 !text-white" : "")
+        "hover:shadow-green flex w-full items-center justify-center border border-color-primary-8 bg-white p-1 px-2 text-lg  font-semibold text-color-primary-5 duration-200 ease-in-out hover:!border-color-primary-7  " +
+        (currentStep == "Job-Boards" ? " !bg-color-primary-8 !text-white "  : " hover:!text-color-primary-8 ")
       }
     >
       {!(pending && currentStep == "Job-Boards") ? (

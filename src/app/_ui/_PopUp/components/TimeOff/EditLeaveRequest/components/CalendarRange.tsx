@@ -21,9 +21,11 @@ interface CalendarProps {
   label: string;
   defaultValue?: DateRange | undefined;
   required?: boolean;
+  setAction?: React.Dispatch<React.SetStateAction<Date>> | undefined;
   setStartValueInParent?:
     | React.Dispatch<React.SetStateAction<Date>>
     | undefined;
+  DataType?:string | undefined;
   setEndValueInParent?: React.Dispatch<React.SetStateAction<Date>> | undefined;
 }
 export function CalendarRange({
@@ -35,6 +37,8 @@ export function CalendarRange({
   setStartValueInParent,
   setEndValueInParent,
   required,
+  setAction,
+  DataType = 'date'
 }: CalendarProps) {
   const [date, setDate] = useState<DateRange | undefined>(defaultValue);
   // Sync the default value with the date
@@ -72,7 +76,7 @@ export function CalendarRange({
         )}
       >
         <input
-          type="date"
+          type={DataType}
           hidden
           autoFocus
           readOnly
@@ -81,7 +85,7 @@ export function CalendarRange({
           required={required}
         />
         <input
-          type="date"
+          type={DataType}
           hidden
           autoFocus
           readOnly
@@ -122,6 +126,7 @@ export function CalendarRange({
             <Calendar
               id="date_range"
               initialFocus
+              onDayClick={setAction}
               mode="range"
               defaultMonth={defaultValue?.from}
               selected={date}

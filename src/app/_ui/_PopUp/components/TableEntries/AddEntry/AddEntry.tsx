@@ -40,6 +40,8 @@ function AddEntry() {
       toast.success(`${section_name} added Successfully`);
     }
     router.push(pathname);
+    queryClient.invalidateQueries({ queryKey: ["profiles", employeeId] });
+
   };
 
   return (
