@@ -13,7 +13,7 @@ export function DeleteLeaveRequestBtn({
   const pathname = usePathname();
   return (
     <Link
-      className="tooltip z-[9999] flex flex-row items-center justify-center"
+      className="tooltip  flex flex-row items-center justify-center"
       data-tip="Delete"
       href={{
         pathname: pathname,

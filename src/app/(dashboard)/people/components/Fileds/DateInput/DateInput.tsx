@@ -30,7 +30,7 @@ function DateInput({
       <CalendarGeneric
         name={RowField?.name}
         label={RowField?.name}
-        allowPastDates={RowField?.allowPastDates}
+        allowFutureDates={RowField?.allowFutureDates}
         allowPreviousDates={RowField?.allowPreviousDates}
         setAction={() => setTouched && setTouched(true)}
         defaultValue={defaultValue != "" ? new Date(defaultValue) : undefined}

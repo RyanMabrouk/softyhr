@@ -7,8 +7,6 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import useToast from "@/hooks/useToast";
 import PopUpSkeleton from "@/app/_ui/_PopUp/PopUpSkeleton";
 import useData from "@/hooks/useData";
-import SelectSharedUsers from "../components/SelectSharedUsers";
-
 export default function NewFolderPopUp() {
   const { toast } = useToast();
   const queryClient = useQueryClient();

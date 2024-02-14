@@ -7,12 +7,13 @@ import useLeaveData from "@/hooks/TimeOff/useLeaveData";
 import useToast from "@/hooks/useToast";
 import { databese_leave_categories_type } from "@/types/database.tables.types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React from "react";
 import { FaRegTrashCan } from "react-icons/fa6";
 export default function DeleteLeaveCategory() {
   const [safeWord, setSafeWord] = React.useState("");
   const { toast } = useToast();
+  const pathname = usePathname();
   const categories_id = useSearchParams().get("categories_id");
   const {
     leave_categories: { data: leave_categories },
@@ -39,7 +40,7 @@ export default function DeleteLeaveCategory() {
       queryClient.invalidateQueries({ queryKey: ["leave_balance"] });
       queryClient.invalidateQueries({ queryKey: ["leave_requests"] });
       queryClient.invalidateQueries({ queryKey: ["leave_accrued"] });
-      Router.back();
+      Router.push(pathname);
     },
   });
   return (

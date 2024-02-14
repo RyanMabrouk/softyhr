@@ -10,7 +10,7 @@ import {
   database_profile_leave_balance_type,
   database_profile_type,
 } from "@/types/database.tables.types";
-import { useParams, useRouter } from "next/navigation";
+import { useParams, usePathname, useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { TiWarning } from "react-icons/ti";
 import {
@@ -36,6 +36,7 @@ export type usersWithoutCurrentPolicy = {
 };
 export default function AddEmployeesToPolicy() {
   const { policy_id } = useParams();
+  const pathname = usePathname();
   const { toast } = useToast();
   const Router = useRouter();
   const { policy, category } = usePolicy({ policy_id: Number(policy_id) });
@@ -150,7 +151,7 @@ export default function AddEmployeesToPolicy() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["leave_balance"] });
-      Router.back();
+      Router.push(pathname);
     },
   });
   return (

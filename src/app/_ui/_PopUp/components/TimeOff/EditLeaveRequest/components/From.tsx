@@ -1,12 +1,16 @@
 "use client";
 import useData from "@/hooks/useData";
 import { database_leave_requests_type } from "@/types/database.tables.types";
-import { useParams, useRouter, useSearchParams } from "next/navigation";
+import {
+  useParams,
+  usePathname,
+  useRouter,
+  useSearchParams,
+} from "next/navigation";
 import React, { useContext, useRef } from "react";
 import cancelLeaveRequest from "@/actions/leave/cancelLeaveRequest";
 import { SubmitBtn } from "@/app/_ui/SubmitBtn";
 import updateLeaveRequest from "@/actions/leave/updateLeaveRequest";
-import DateRangeContextProvider from "../context/dateRangeContext";
 import { FormInputs } from "./FormInputs";
 import useToast from "@/hooks/useToast";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -15,9 +19,11 @@ import { errorContext, errorContextType } from "../context/errorContext";
 import { checkIfOjectValuesAreEmpty } from "@/helpers/array.helpers";
 import useEmployeeData from "@/hooks/useEmloyeeData";
 import CancelBtnGeneric from "@/app/_ui/CancelBtnGeneric";
+import { useAlreadyBooked } from "../hooks/useAlreadyBooked";
 
 export function From() {
   const Router = useRouter();
+  const pathname = usePathname();
   const {
     user_profile: { data: user_profile },
   } = useData();
@@ -59,7 +65,7 @@ export function From() {
       queryClient.invalidateQueries({
         queryKey: ["leave_balance"],
       });
-      Router.back();
+      Router.push(pathname);
     },
   });
   // Mutation Function for Inserting Leave Request
@@ -85,7 +91,7 @@ export function From() {
       queryClient.invalidateQueries({
         queryKey: ["leave_balance"],
       });
-      Router.back();
+      Router.push(pathname);
     },
   });
   // Mutation Function for Canceling Leave Request
@@ -112,51 +118,49 @@ export function From() {
         queryKey: ["leave_balance"],
       });
       formRef.current?.reset();
-      Router.back();
+      Router.push(pathname);
     },
   });
+  const already_booked = useAlreadyBooked(employeeId);
   return (
-    <>
-      <form
-        ref={formRef}
-        className="flex w-full flex-col gap-4 px-2 pt-3"
-        action={async (formData: FormData) => {
-          const duration = formData
-            .getAll("duration_date")
-            .reduce((acc, e) => acc + Number(e), 0);
-          if (duration === 0) {
-            toast.error("Duration must be greater than 0", "Error");
-            return;
-          }
-          if (formData.get("policy_id") === "none") {
-            toast.error("Please select a category", "Error");
-            return;
-          }
-          if (formError && !checkIfOjectValuesAreEmpty(formError)) return;
-          leave_request_id ? update(formData) : insert(formData);
-        }}
-      >
-        <DateRangeContextProvider>
-          <FormInputs />
-        </DateRangeContextProvider>
-        <hr className="h-[3px] w-full bg-primary-gradient" />
-        <div className="flex flex-row gap-4 px-2 pt-3">
-          <SubmitBtn disabled={isCanceling} className="!w-fit">
-            {leave_request_id ? "Save" : "Send Request"}
-          </SubmitBtn>
-          {user_profile?.user_id === request_data?.user_id && (
-            <button
-              type="submit"
-              className="h-11 w-fit cursor-pointer rounded-md bg-gray-14 px-3 font-semibold text-gray-25 transition-all duration-300 ease-linear hover:bg-gray-16 disabled:cursor-wait disabled:bg-gray-16"
-              disabled={isCanceling || formError !== null}
-              formAction={(formData: FormData) => cancel(formData)}
-            >
-              Cancel Request
-            </button>
-          )}
-          <CancelBtnGeneric />
-        </div>
-      </form>
-    </>
+    <form
+      ref={formRef}
+      className="flex w-full flex-col gap-4 px-2 pt-3"
+      action={async (formData: FormData) => {
+        const duration = formData
+          .getAll("duration_date")
+          .reduce((acc, e) => acc + Number(e), 0);
+        if (duration === 0) {
+          toast.error("Duration must be greater than 0", "Error");
+          return;
+        }
+        if (formData.get("policy_id") === "none") {
+          toast.error("Please select a category", "Error");
+          return;
+        }
+        if (already_booked) return;
+        if (formError && !checkIfOjectValuesAreEmpty(formError)) return;
+        leave_request_id ? update(formData) : insert(formData);
+      }}
+    >
+      <FormInputs />
+      <hr className="h-[3px] w-full bg-primary-gradient" />
+      <div className="flex flex-row gap-4 px-2 pt-3">
+        <SubmitBtn disabled={isCanceling} className="!w-fit">
+          {leave_request_id ? "Save" : "Send request"}
+        </SubmitBtn>
+        {user_profile?.user_id === request_data?.user_id && (
+          <button
+            type="submit"
+            className="h-11 w-fit cursor-pointer rounded-md bg-gray-14 px-3 font-semibold text-gray-25 transition-all duration-300 ease-linear hover:bg-gray-16 disabled:cursor-wait disabled:bg-gray-16"
+            disabled={isCanceling || formError !== null}
+            formAction={(formData: FormData) => cancel(formData)}
+          >
+            Cancel request
+          </button>
+        )}
+        <CancelBtnGeneric />
+      </div>
+    </form>
   );
 }

@@ -33,7 +33,6 @@ export default function TableContent({ checkAll, setCheckAll }: any) {
     queryKey: ["folders", wantedFoldersIds],
     queryFn: async () => await GetFoldersByIDs(wantedFoldersIds),
     enabled: wantedFoldersIds.length > 0,
-
   });
   const allFilesIds = wantedFolders
     ?.map((fold) => fold.files)
@@ -148,7 +147,7 @@ export default function TableContent({ checkAll, setCheckAll }: any) {
   const filesArray = files;
 
   return (
-    <div className="relative mb-28 w-full">
+    <div className="relative mb-0 w-full">
       {isLoading ? (
         <LoaderFiles />
       ) : filesArray?.length && fileIds.length ? (
@@ -168,7 +167,7 @@ export default function TableContent({ checkAll, setCheckAll }: any) {
         <FolderEmpty />
       )}
       {filesArray?.length && fileIds.length ? (
-        <Pagination count={count} page={page} handlePage={handlePage} />
+        <Pagination count={Number(count)} page={page} handlePage={handlePage} />
       ) : null}
     </div>
   );

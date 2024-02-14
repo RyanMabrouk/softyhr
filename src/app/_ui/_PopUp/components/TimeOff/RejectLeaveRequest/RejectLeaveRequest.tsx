@@ -4,7 +4,12 @@ import useData from "@/hooks/useData";
 import useToast from "@/hooks/useToast";
 import { database_profile_type } from "@/types/database.tables.types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useParams, useRouter, useSearchParams } from "next/navigation";
+import {
+  useParams,
+  usePathname,
+  useRouter,
+  useSearchParams,
+} from "next/navigation";
 import React from "react";
 import { BiSolidDislike } from "react-icons/bi";
 import PopUpSkeleton from "../../../PopUpSkeleton";
@@ -13,6 +18,7 @@ import { TextFeildGeneric } from "@/app/_ui/TextFeildGeneric";
 export default function RejectLeaveRequest() {
   const { toast } = useToast();
   const Router = useRouter();
+  const pathname = usePathname();
   const { employeeId } = useParams();
   const leave_request_id = useSearchParams().get("leave_request_id");
   const {
@@ -39,7 +45,7 @@ export default function RejectLeaveRequest() {
       queryClient.invalidateQueries({
         queryKey: ["leave_requests", employeeId],
       });
-      Router.back();
+      Router.push(pathname);
     },
   });
   return (
@@ -72,7 +78,7 @@ export default function RejectLeaveRequest() {
             <button
               className="cursor-pointer text-color5-500 hover:underline "
               type="button"
-              onClick={() => Router.back()}
+              onClick={() => Router.push(pathname)}
             >
               No Thanks
             </button>

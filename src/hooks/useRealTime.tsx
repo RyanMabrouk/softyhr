@@ -1,24 +1,30 @@
 "use client";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 export default function useRealTime({
-  filter,
+  filters,
   table,
   event = "*",
   onReceive,
 }: {
   table: string;
-  filter?: {
+  filters?: {
     column: string;
     value: string | number;
-  };
-  event?: string;
+  }[];
+  event?: "UPDATE" | "INSERT" | "DELETE" | "*";
   onReceive: (payload: any) => void;
 }) {
   const supabase = createClientComponentClient();
   const channelName = table + "_" + event;
+  const filterString = filters?.reduce(
+    (acc, e, i) =>
+      acc +
+      `${e.column}=eq.${e.value}${i === filters?.length - 1 ? "" : " and "}`,
+    "",
+  );
   useEffect(() => {
-    const channel = filter
+    const channel = filterString
       ? supabase
           .channel(channelName)
           .on(
@@ -28,7 +34,7 @@ export default function useRealTime({
               event: event,
               schema: "public",
               table: table,
-              filter: `${filter.column}=eq.${filter.value}`,
+              filter: filterString,
             },
             onReceive,
           )
@@ -49,5 +55,5 @@ export default function useRealTime({
     return () => {
       supabase.removeChannel(channel);
     };
-  }, [table, event, filter, onReceive, channelName, supabase]);
+  }, [table, event, filterString, onReceive, channelName, supabase]);
 }

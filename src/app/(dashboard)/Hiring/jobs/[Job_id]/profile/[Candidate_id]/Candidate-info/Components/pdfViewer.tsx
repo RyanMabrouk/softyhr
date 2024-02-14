@@ -1,6 +1,5 @@
-import Loader from "@/app/_ui/Loader/Loader";
 import { Pagination } from "@nextui-org/react";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import { pdfjs, Document, Page } from "react-pdf";
 import "react-pdf/dist/esm/Page/AnnotationLayer.css";
 import "react-pdf/dist/esm/Page/TextLayer.css";
@@ -17,7 +16,7 @@ function PdfViewer({ url }: PdfViewerPropsType) {
   const [pageNumber, setPageNumber] = useState(1);
   function onDocumentLoadSuccess({ numPages }: { numPages: number }) {
     setNumPages(numPages);
-    }
+  }
   return (
     <div className="flex flex-col items-center justify-center gap-[1rem]">
       <div className="min-h-[800px] min-w-[630px] border-b border-t border-gray-18">

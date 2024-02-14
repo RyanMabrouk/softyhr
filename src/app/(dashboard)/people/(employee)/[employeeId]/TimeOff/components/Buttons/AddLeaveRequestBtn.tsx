@@ -7,7 +7,7 @@ export function AddLeaveRequestBtn({ id }: { id: number }) {
   const pathname = usePathname();
   return (
     <Link
-      className="tooltip tooltip-bottom z-[9999]"
+      className="tooltip tooltip-bottom "
       data-tip="Record time off"
       href={{
         pathname: pathname,

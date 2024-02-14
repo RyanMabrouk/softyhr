@@ -3,7 +3,12 @@ import { SubmitBtn } from "@/app/_ui/SubmitBtn";
 import useToast from "@/hooks/useToast";
 import { database_profile_leave_balance_type } from "@/types/database.tables.types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useParams, useRouter, useSearchParams } from "next/navigation";
+import {
+  useParams,
+  usePathname,
+  useRouter,
+  useSearchParams,
+} from "next/navigation";
 import default_avatar from "/public/default_avatar.jpeg";
 import React, { useState } from "react";
 import Image from "next/image";
@@ -15,6 +20,7 @@ import CancelBtnGeneric from "@/app/_ui/CancelBtnGeneric";
 export default function AdjustLeavePolicyBalance() {
   const { toast } = useToast();
   const Router = useRouter();
+  const pathname = usePathname();
   const [addedHours, setAddedHours] = useState(0);
   const [additionType, setAdditionType] = useState<"1" | "-1">("1"); // ["1", "-1"]
   const leave_policy_id = useSearchParams().get("leave_policy_id");
@@ -63,7 +69,7 @@ export default function AdjustLeavePolicyBalance() {
       queryClient.invalidateQueries({
         queryKey: ["leave_balance", employeeId],
       });
-      Router.back();
+      Router.push(pathname);
     },
   });
   return (

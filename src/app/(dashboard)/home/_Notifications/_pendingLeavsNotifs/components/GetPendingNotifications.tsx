@@ -17,7 +17,9 @@ export function GetPendingNotifications({
   useEffect(() => {
     if (!isPending1 && pendingNotifs) {
       setNotifications((old) => [
-        ...old.filter((e) => !e.id.includes("card_pending_leave_notif")),
+        ...old.filter(
+          (e) => !String(e.id).includes("card_pending_leave_notif"),
+        ),
         ...pendingNotifs,
       ]);
     }

@@ -60,6 +60,20 @@ export default async function acceptLeaveRequest({
   );
   if (error) {
     logger.error("Error Accepting Leave Request :", error.message);
+    const { error: errorBalance2 } = await updateLeaveBalance({
+      user_id: request.user_id,
+      policy_id: request.policy_id,
+      total_added_duration:
+        type === "unlimited" ? 0 - total_duration : total_duration,
+    });
+    if (errorBalance2) {
+      return {
+        error: {
+          message: errorBalance2.message,
+          type: "Error resetting leave balance",
+        },
+      };
+    }
     return {
       error: {
         message: error.message,

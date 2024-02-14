@@ -24,7 +24,7 @@ function Page() {
 
   const queryClient = useQueryClient();
   useRealTime({
-    filter: { column: "candidate_id", value: Number(Candidate_id) },
+    filters: [{ column: "candidate_id", value: Number(Candidate_id) }],
     table: "candidate_comments",
     onReceive: () => {
       queryClient.invalidateQueries({ queryKey: ["candidate_comments"] });

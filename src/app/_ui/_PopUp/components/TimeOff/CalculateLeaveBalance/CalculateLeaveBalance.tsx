@@ -114,7 +114,6 @@ export default function CalculateLeaveBalance() {
             required
             defaultValue={new Date()}
             setValueInParent={setCalendarDate}
-            allowPastDates
             allowPreviousDates={false}
           />
         </div>

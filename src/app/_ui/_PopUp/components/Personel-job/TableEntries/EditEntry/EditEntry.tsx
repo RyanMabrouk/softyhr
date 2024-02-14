@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import PopUpSkeleton from "../../../PopUpSkeleton";
+import PopUpSkeleton from "../../../../PopUpSkeleton";
 import {
   useParams,
   usePathname,
@@ -18,8 +18,8 @@ import Loader from "@/app/(dashboard)/people/components/Loader/Loader";
 import FiledsChamps from "@/app/(dashboard)/people/components/Fileds/Fileds";
 import { Field } from "@/constants/userInfo";
 import { useQueryClient } from "@tanstack/react-query";
-import { Edit_Entry } from "@/actions/personal-job/Entries/Edit_Entry";
 import useToast from "@/hooks/useToast";
+import { Edit_Entry } from "@/actions/personal-job/Entries/Edit_Entry";
 
 function EditEntry() {
   const searchParams = useSearchParams();
@@ -39,11 +39,9 @@ function EditEntry() {
   const SubmitForm = async (formdata: FormData) => {
     const response = await Edit_Entry(formdata, section_name, data, item_id);
     queryClient.invalidateQueries({ queryKey: ["profiles", employeeId] });
+    router.push(pathname);
     if (response?.error) toast.error(response?.error?.Message);
     else toast.success(`${section_name} Updated Successfully`);
-    router.push(pathname);
-    queryClient.invalidateQueries({ queryKey: ["profiles", employeeId] });
-
   };
 
   return (
@@ -71,14 +69,19 @@ function EditEntry() {
                 action={SubmitForm}
                 className="flex w-full flex-col items-start justify-center gap-[1rem]"
               >
-                {settings?.data[0]?.["personnal"]?.Champs?.filter( 
+                {settings?.data[0]?.["personnal"]?.Champs?.filter(
                   (section: any) => section?.champ == section_name,
                 )[0]?.Fields?.map((RowField: any) => {
                   const Component = Field[RowField?.type.toUpperCase()];
                   const section = data[section_name]?.filter(
                     (item: any) => item?.id == item_id,
                   );
-                  //console.log(data[section_name]?.filter((item:any)=>item?.id == item_id)[0]?.[RowField?.name],RowField?.name);
+                  /* console.log(
+                    data[section_name]?.filter(
+                      (item: any) => item?.id == item_id,
+                    )[0]?.[RowField?.name],
+                    RowField?.name,
+                  );*/
                   return (
                     <Component
                       defaultValue={section[0]?.[RowField?.name] || ""}
@@ -94,7 +97,12 @@ function EditEntry() {
                   const section = data[section_name]?.filter(
                     (item: any) => item?.id == item_id,
                   );
-                  //console.log(data[section_name]?.filter((item:any)=>item?.id == item_id)[0]?.[RowField?.name],RowField?.name);
+                  console.log(
+                    data[section_name]?.filter(
+                      (item: any) => item?.id == item_id,
+                    )[0]?.[RowField?.name],
+                    RowField?.name,
+                  );
                   return (
                     <Component
                       key={uuidv4()}

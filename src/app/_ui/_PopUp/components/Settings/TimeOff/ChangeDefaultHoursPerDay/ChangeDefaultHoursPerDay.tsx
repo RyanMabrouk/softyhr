@@ -5,12 +5,13 @@ import PopUpSkeleton from "@/app/_ui/_PopUp/PopUpSkeleton";
 import { useSettings } from "@/hooks/Settings/useSettings";
 import useToast from "@/hooks/useToast";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import React from "react";
 import { InputGeneric } from "../../../../../InputGeneric";
 import CancelBtnGeneric from "@/app/_ui/CancelBtnGeneric";
 export default function ChangeDefaultHoursPerDay() {
   const Router = useRouter();
+  const pathname = usePathname();
   const { toast } = useToast();
   const { data: settings } = useSettings("default_hours_per_day");
   const daysOfWeek = [
@@ -35,7 +36,7 @@ export default function ChangeDefaultHoursPerDay() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["settings"] });
-      Router.back();
+      Router.push(pathname);
     },
   });
   return (

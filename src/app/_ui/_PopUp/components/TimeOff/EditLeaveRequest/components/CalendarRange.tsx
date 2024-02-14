@@ -1,6 +1,7 @@
 "use client";
 import { CalendarIcon } from "@radix-ui/react-icons";
 import { format } from "date-fns";
+import React from 'react';
 import { DateRange } from "react-day-picker";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -12,7 +13,6 @@ import {
 } from "@/components/ui/popover";
 import { useParams } from "next/navigation";
 import { useAlreadyBooked } from "../hooks/useAlreadyBooked";
-import { InvalidDate, formatYYYYMMDD } from "@/helpers/date.helpers";
 import { useEffect, useState } from "react";
 interface CalendarProps {
   endDateName: string;
@@ -23,10 +23,12 @@ interface CalendarProps {
   required?: boolean;
   setAction?: React.Dispatch<React.SetStateAction<Date>> | undefined;
   setStartValueInParent?:
-    | React.Dispatch<React.SetStateAction<Date>>
+    | React.Dispatch<React.SetStateAction<Date | null>>
+    | undefined;
+  setEndValueInParent?:
+    | React.Dispatch<React.SetStateAction<Date | null>>
     | undefined;
   DataType?:string | undefined;
-  setEndValueInParent?: React.Dispatch<React.SetStateAction<Date>> | undefined;
 }
 export function CalendarRange({
   className,
@@ -45,12 +47,12 @@ export function CalendarRange({
   if (defaultValue && !date?.from && !date?.to) setDate(defaultValue);
   // Sync the date with the parent
   useEffect(() => {
-    setStartValueInParent && date?.from
-      ? setStartValueInParent(new Date(date?.from))
-      : null;
-    setEndValueInParent && date?.to
-      ? setEndValueInParent(new Date(date?.to))
-      : null;
+    if (setStartValueInParent) {
+      setStartValueInParent(date?.from ? new Date(date?.from) : null);
+    }
+    if (setEndValueInParent) {
+      setEndValueInParent(date?.to ? new Date(date?.to) : null);
+    }
   }, [date, setStartValueInParent, setEndValueInParent]);
   const { employeeId } = useParams();
   const already_booked = useAlreadyBooked(employeeId);
@@ -128,7 +130,7 @@ export function CalendarRange({
               initialFocus
               onDayClick={setAction}
               mode="range"
-              defaultMonth={defaultValue?.from}
+              defaultMonth={date?.from ?? defaultValue?.from ?? new Date()}
               selected={date}
               onSelect={setDate}
               numberOfMonths={2}

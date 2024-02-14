@@ -1,7 +1,7 @@
 import React from "react";
 import PopUpSkeleton from "../../../PopUpSkeleton";
 import default_avatar from "/public/default_avatar.jpeg";
-import { useParams, useRouter } from "next/navigation";
+import { useParams, usePathname, useRouter } from "next/navigation";
 import useEmployeeData from "@/hooks/useEmloyeeData";
 import Image from "next/image";
 import { SubmitBtn } from "@/app/_ui/SubmitBtn";
@@ -15,6 +15,7 @@ export default function AccrualStartDate() {
   const Router = useRouter();
   const { employeeId } = useParams();
   const queryClient = useQueryClient();
+  const pathname = usePathname();
   const {
     employee_profile: { data: employee_profile },
   } = useEmployeeData({ employeeId: employeeId });
@@ -38,7 +39,7 @@ export default function AccrualStartDate() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["profiles", employeeId] });
-      Router.back();
+      Router.push(pathname);
     },
   });
   return (

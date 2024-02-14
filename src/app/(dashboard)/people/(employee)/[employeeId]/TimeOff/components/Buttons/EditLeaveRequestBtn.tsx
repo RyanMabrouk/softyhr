@@ -12,7 +12,7 @@ export function EditLeaveRequestBtn({
   const pathname = usePathname();
   return (
     <Link
-      className="tooltip z-[9999] flex flex-row items-center justify-center"
+      className="tooltip flex flex-row items-center justify-center"
       data-tip="Edit"
       href={{
         pathname: pathname,
