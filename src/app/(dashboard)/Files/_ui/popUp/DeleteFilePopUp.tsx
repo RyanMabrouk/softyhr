@@ -12,6 +12,7 @@ import useFileData from "@/hooks/useFileData";
 import { formatDateFiles } from "@/helpers/date.helpers";
 import PopUpSkeleton from "@/app/_ui/_PopUp/PopUpSkeleton";
 import LoaderPopUp from "../components/Loader/LoaderPopUp/LoaderPopUp";
+import { InputGeneric } from "@/app/_ui/InputGeneric";
 
 export default function DeleteFilePopUp() {
   const { toast } = useToast();
@@ -71,7 +72,7 @@ export default function DeleteFilePopUp() {
             <p className="text-lg ">
               Are you sure you want to delete this file?
             </p>
-            <div className="mt-4 flex max-h-96 w-11/12 flex-col items-center gap-4 overflow-y-auto bg-gray-14 px-6 py-8">
+            <div className="mt-4 flex max-h-96 rounded-sm w-11/12 flex-col items-center gap-4 overflow-y-auto bg-gray-14 px-6 py-8">
               <div className="flex  w-[28rem] flex-col items-center  gap-4 p-6">
                 {(file?.data[0]?.file_type === "application" && (
                   <FaRegFilePdf fontSize="3rem" fill="#cc4373" />
@@ -93,11 +94,12 @@ export default function DeleteFilePopUp() {
                 <p className="text-center text-sm text-color2-500">
                   Type <strong>"Delete"</strong> to continue
                 </p>
-                <input
+                <InputGeneric
                   type="text"
+                  name="checkDelete"
                   value={isTypingDelete}
-                  onChange={(e) => setIsTypingDelete(e.target.value)}
-                  className="w-40 border border-stone-400 p-2  outline-1 transition-all duration-300 focus:outline-color2-300"
+                  setValueInParent={setIsTypingDelete}
+                  shadow="red"
                 />
               </div>
             </div>
@@ -107,7 +109,7 @@ export default function DeleteFilePopUp() {
                 Delete File
               </ButtonPopUp>
               <button
-                className="cursor-pointer bg-gray-4 px-4 py-2 font-semibold text-gray-23 hover:bg-gray-6 "
+                className="min-w-[10rem] cursor-pointer rounded-md bg-gray-4 px-4 py-2 font-semibold text-gray-23 transition-all ease-linear hover:bg-gray-6 "
                 type="button"
                 onClick={() => {
                   queryClient.setQueryData(["fileIds"], []);
