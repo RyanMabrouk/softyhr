@@ -9,7 +9,6 @@ import {
   FaInstagram,
   FaLinkedin,
   FaPinterest,
-  FaTwitter,
 } from "react-icons/fa";
 import { IoIosPeople } from "react-icons/io";
 import { IoLocationSharp } from "react-icons/io5";
