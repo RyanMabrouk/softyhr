@@ -1,8 +1,6 @@
 "use client";
 import getData from "@/api/getData";
 import { useQuery } from "@tanstack/react-query";
-// you can use this hook to get the current url
-import { useUrl } from "nextjs-current-url";
 //--------------------------------------------
 export default function useEmployeeData({
   employeeId,

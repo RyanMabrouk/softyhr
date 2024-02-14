@@ -44,9 +44,15 @@ function EducationList({
                 return (
                   <Component
                     champ={champ}
+                 /*   setSelectedKeys={
+                      RowField?.name == "Start Date"
+                        ? setstartDate
+                        : RowField?.name == "End Date" ?
+                        setEndDate
+                        : undefined
+                    }*/
                     defaultValue={data[RowField?.name]}
                     setTouched={setTouched}
-                    data={data}
                     key={uuidv4()}
                     RowField={RowField}
                   />

@@ -1,6 +1,5 @@
 "use server";
 import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
-import { v4 as uuidv4 } from "uuid";
 import { cookies } from "next/headers";
 import { getLogger } from "@/logging/log-util";
 interface EntryType {
