@@ -1,7 +1,6 @@
 "use client";
 import { createContext, useContext } from "react";
-import { notification } from "antd";
-import { Button, message, Space } from "antd";
+import { message } from "antd";
 type NotificationType = "success" | "info" | "warning" | "error";
 message.config({
   top: 100,
@@ -22,7 +21,9 @@ function createToast() {
       type: type,
       content: (
         <>
-          <span className="my-2 mr-1 text-[1.05rem] font-semibold">{message}</span>
+          <span className="my-2 mr-1 text-[1.05rem] font-semibold">
+            {message}
+          </span>
           <span className="my-2 ml-2 text-[1.05rem]">{description}</span>
         </>
       ),
