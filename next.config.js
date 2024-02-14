@@ -1,10 +1,7 @@
 /** @type {import('next').NextConfig} */
-const withBundleAnalyzer = require("@next/bundle-analyzer")({
-  enabled: process.env.ANALYZE === "true",
-});
 const nextConfig = {
   compiler: {
-   // removeConsole: process.env.NODE_ENV !== "development", // Remove console.log in production
+    // removeConsole: process.env.NODE_ENV !== "development", // Remove console.log in production
   },
   experimental: {
     serverActions: { allowedOrigins: ["localhost:3001", "rh.ixamee.com"] },
@@ -62,4 +59,4 @@ const withPWA = require("next-pwa")({
   dest: "public",
 });
 
-module.exports = withPWA(withBundleAnalyzer(nextConfig));
+module.exports = withPWA(nextConfig);
