@@ -19,7 +19,7 @@ export function CalendarGeneric({
   defaultValue,
   error,
   setValueInParent,
-  allowPastDates = false, // allow dates in the future
+  allowFutureDates = true, // allow dates in the future
   allowPreviousDates = true, // allow dates in the past
   required,
   setAction,
@@ -30,7 +30,7 @@ export function CalendarGeneric({
   defaultValue?: Date | undefined;
   error?: boolean;
   setValueInParent?: React.Dispatch<React.SetStateAction<Date>> | undefined;
-  allowPastDates?: boolean;
+  allowFutureDates?: boolean;
   allowPreviousDates?: boolean;
   required?: boolean;
   setAction?: React.Dispatch<React.SetStateAction<Date>> | undefined;
@@ -89,13 +89,13 @@ export function CalendarGeneric({
               onSelect={setDate}
               onDayClick={setAction}
               disabled={(date) =>
-                allowPastDates
+                allowFutureDates
                   ? allowPreviousDates
-                    ? date < new Date()
-                    : false
+                    ? false
+                    : date < new Date()
                   : allowPreviousDates
-                    ? date > new Date() && date < new Date()
-                    : date > new Date()
+                    ? date > new Date()
+                    : date > new Date() && date < new Date()
               }
               initialFocus
             />

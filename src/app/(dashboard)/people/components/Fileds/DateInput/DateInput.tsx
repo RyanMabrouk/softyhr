@@ -13,14 +13,14 @@ function DateInput({
   RowField,
   setTouched,
   defaultValue = "",
-  setSelectedKeys
+  setSelectedKeys,
 }: DateInputPropsType) {
   return (
     <div className="flex items-end justify-start gap-[1rem]">
       <CalendarGeneric
         name={RowField?.name}
         label={RowField?.name}
-        allowPastDates={RowField?.allowPastDates}
+        allowFutureDates={RowField?.allowFutureDates}
         allowPreviousDates={RowField?.allowPreviousDates}
         setAction={() => setTouched && setTouched(true)}
         defaultValue={defaultValue != "" ? new Date(defaultValue) : undefined}

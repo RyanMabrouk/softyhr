@@ -106,7 +106,7 @@ export interface RowFieldType {
   Icon?: string | undefined;
   ExtraTxt?: string | undefined;
   accept?: string | undefined;
-  allowPastDates?: boolean | undefined;
+  allowFutureDates?: boolean | undefined;
   allowPreviousDates?: boolean | undefined;
 }
 export type RowType = {
@@ -114,7 +114,7 @@ export type RowType = {
   rang: number;
 };
 export type Profile_Type = {
-  supervisor_id?:string;
+  supervisor_id?: string;
   Addresse?: ObjectOfStrings | null;
   "Basic Information"?: ObjectOfStrings | null;
   Bonus?: Bonus_Type[] | null;
