@@ -76,7 +76,7 @@ export default function UserInfo({ employeeId }: UserInfoPropsType) {
   });
 
   return (
-    <div className="mb-0 flex max-w-[16rem] grow flex-col items-start justify-center gap-[0.5rem] bg-gray-14 pt-4 ">
+    <div className="mb-0 flex min-w-[14rem] grow flex-col items-start justify-center gap-[0.5rem] bg-gray-14 pt-4 ">
       {current_vacation && (
         <header className="-mb-5 flex w-full flex-row items-center justify-center gap-1 border-b-[10px] border-white px-6 pb-3 pt-7 leading-4">
           <div>{icon}</div>
