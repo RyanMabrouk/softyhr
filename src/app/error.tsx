@@ -24,7 +24,7 @@ export default function Error({
       />
       <h2 className="text-xl font-semibold">Something went wrong!</h2>
       <button
-        className="text-lg text-fabric-700 transition-all ease-linear hover:text-blue-500 hover:underline"
+        className="text-lg text-blue-500 transition-all ease-linear hover:text-blue-500 hover:underline"
         onClick={() => Router.back()}
       >
         Go back
