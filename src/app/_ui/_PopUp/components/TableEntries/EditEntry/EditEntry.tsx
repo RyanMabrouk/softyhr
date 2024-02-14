@@ -111,7 +111,7 @@ function EditEntry() {
                   </button>
                   <button
                     type="reset"
-                    onClick={() => router.back()}
+                    onClick={() => router.push(pathname)}
                     className="text-bold mt-4 rounded p-2 px-5 text-color5-500 duration-300 ease-in-out "
                   >
                     Cancel

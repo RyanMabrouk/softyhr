@@ -2,15 +2,16 @@
 import deleteLeaveRequest from "@/actions/leave/deleteLeaveRequest";
 import { SubmitBtn } from "@/app/_ui/SubmitBtn";
 import { formatDateToMonDDYYYY } from "@/helpers/date.helpers";
-import useData from "@/hooks/useData";
 import useEmployeeData from "@/hooks/useEmloyeeData";
 import useToast from "@/hooks/useToast";
-import {
-  database_leave_policies_type,
-  database_leave_requests_type,
-} from "@/types/database.tables.types";
+import { database_leave_requests_type } from "@/types/database.tables.types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useParams, useRouter, useSearchParams } from "next/navigation";
+import {
+  useParams,
+  usePathname,
+  useRouter,
+  useSearchParams,
+} from "next/navigation";
 import React from "react";
 import { CgTrash } from "react-icons/cg";
 import PopUpSkeleton from "../../../PopUpSkeleton";
@@ -19,6 +20,7 @@ import CancelBtnGeneric from "@/app/_ui/CancelBtnGeneric";
 export default function DeleteLeaveRequest() {
   const { toast } = useToast();
   const Router = useRouter();
+  const pathname = usePathname();
   const queryClient = useQueryClient();
   const leave_request_id = useSearchParams().get("leave_request_id");
   const { employeeId } = useParams();
@@ -57,7 +59,7 @@ export default function DeleteLeaveRequest() {
       queryClient.invalidateQueries({
         queryKey: ["leave_requests", employeeId],
       });
-      Router.back();
+      Router.push(pathname);
     },
   });
   return (

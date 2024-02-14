@@ -3,7 +3,7 @@ import React from "react";
 import PopUpSkeleton from "../../../PopUpSkeleton";
 import Image from "next/image";
 import useToast from "@/hooks/useToast";
-import { useParams, useRouter } from "next/navigation";
+import { useParams, usePathname, useRouter } from "next/navigation";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import useEmployeeData from "@/hooks/useEmloyeeData";
 import default_avatar from "/public/default_avatar.jpeg";
@@ -23,6 +23,7 @@ export default function AddTimeOffPolicy() {
   const { toast } = useToast();
   const Router = useRouter();
   const { employeeId } = useParams();
+  const pathname = usePathname();
   const queryClient = useQueryClient();
   const {
     leave_policies: { data: leave_policies },
@@ -111,7 +112,7 @@ export default function AddTimeOffPolicy() {
       queryClient.invalidateQueries({
         queryKey: ["leave_balance", employeeId],
       });
-      Router.back();
+      Router.push(pathname);
     },
   });
   return (
@@ -142,7 +143,7 @@ export default function AddTimeOffPolicy() {
             defaultValue={{ label: "Policies", value: "none" }}
             required={true}
             group={true}
-            inputLabel="Policies"
+            inputLabel="-Select policies-"
             options={options}
           />
         </div>

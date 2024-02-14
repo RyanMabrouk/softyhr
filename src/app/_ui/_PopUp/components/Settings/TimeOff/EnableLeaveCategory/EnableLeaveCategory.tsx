@@ -4,13 +4,14 @@ import { SubmitBtn } from "@/app/_ui/SubmitBtn";
 import PopUpSkeleton from "@/app/_ui/_PopUp/PopUpSkeleton";
 import useToast from "@/hooks/useToast";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React from "react";
 import { IoMdEye } from "react-icons/io";
 
 export default function EnableLeaveCategory() {
   const { toast } = useToast();
   const Router = useRouter();
+  const pathname = usePathname();
   const categories_id = useSearchParams().get("categories_id");
   // enable category mutation
   const queryClient = useQueryClient();
@@ -28,7 +29,7 @@ export default function EnableLeaveCategory() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["leave_categories"] });
-      Router.back();
+      Router.push(pathname);
     },
   });
   return (

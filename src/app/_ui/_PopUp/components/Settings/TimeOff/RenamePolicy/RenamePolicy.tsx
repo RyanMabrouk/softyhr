@@ -8,11 +8,12 @@ import { capitalizeFirstLetter } from "@/helpers/string.helpers";
 import usePolicy from "@/hooks/TimeOff/usePolicy";
 import useToast from "@/hooks/useToast";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useParams, useRouter } from "next/navigation";
+import { useParams, usePathname, useRouter } from "next/navigation";
 import React from "react";
 
 export default function RenamePolicy() {
   const { toast } = useToast();
+  const pathname = usePathname();
   const Router = useRouter();
   const { policy_id } = useParams();
   const { category, policy } = usePolicy({ policy_id: Number(policy_id) });
@@ -32,7 +33,7 @@ export default function RenamePolicy() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["leave_policies"] });
-      Router.back();
+      Router.push(pathname);
     },
   });
   return (

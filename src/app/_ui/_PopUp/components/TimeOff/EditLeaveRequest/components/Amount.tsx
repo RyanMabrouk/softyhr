@@ -83,7 +83,9 @@ export function Amount({
   }, [active_duration, formError, setTotalDuration]);
   if (totalDuration === null) return;
   return (
-    <div className="flex flex-col gap-1">
+    <div
+      className={`flex flex-col gap-1 ${active_duration?.length > 0 ? "" : "opacity-50"}`}
+    >
       <label
         htmlFor={"Amount" + "_id"}
         className="relative w-fit text-sm text-gray-21"
@@ -91,9 +93,13 @@ export function Amount({
         {"Amount"}
         <span className="absolute -right-2 top-0 text-sm">*</span>
       </label>
-      <div className="flex w-fit flex-col items-center rounded-md border border-gray-18 text-gray-27">
-        <div className="focus:shadow-green max-h-[12.5rem] w-fit max-w-[20rem] overflow-y-scroll  pt-2 shadow-[rgba(0,0,0,0.05)_0px_1px_0px_0px] placeholder:text-gray-14 focus:outline-none ">
-          {active_duration?.length > 0 &&
+      <div
+        className={`flex w-fit flex-col items-center rounded-md  text-gray-27 ${active_duration?.length > 0 ? "border border-gray-18" : ""}`}
+      >
+        <div
+          className={`focus:shadow-green max-h-[12.5rem] w-fit max-w-[20rem]   pt-2 shadow-sm placeholder:text-gray-14 focus:outline-none ${active_duration?.length > 0 ? "overflow-y-scroll" : ""}`}
+        >
+          {active_duration?.length > 0 ? (
             active_duration
               ?.sort((a, b) => +new Date(a.date) - +new Date(b.date))
               .map((duration: default_duration_type, i) => (
@@ -109,6 +115,13 @@ export function Amount({
                         name={"duration_date"}
                         id={duration.date}
                         defaultValue={duration.duration}
+                        className={`flex h-8 w-12 items-center justify-center border p-2 px-3 text-gray-27 transition-all ease-linear focus:outline-none ${
+                          formError?.["duration_date" + i]
+                            ? "border-color9-500"
+                            : "focus:shadow-green border-gray-18"
+                        }`}
+                        placeholder={"0"}
+                        required
                         onChange={(e) => {
                           setOldRange((old) => [
                             { date: e.target.id, duration: e.target.value },
@@ -142,13 +155,6 @@ export function Amount({
                               );
                           }
                         }}
-                        className={`flex h-8 w-12 items-center justify-center border p-2 px-3 text-gray-27 transition-all ease-linear focus:outline-none ${
-                          formError?.["duration_date" + i]
-                            ? "border-color9-500"
-                            : "focus:shadow-green border-gray-18"
-                        }`}
-                        placeholder={"0"}
-                        required
                       />
                       <span>Hours</span>
                     </div>
@@ -159,14 +165,27 @@ export function Amount({
                     </span>
                   )}
                 </div>
-              ))}
+              ))
+          ) : (
+            <div className="-mt-2 ml-auto flex flex-row items-center gap-2 pr-8">
+              <input
+                disabled
+                type="number"
+                name={"duration_date"}
+                className={`focus:shadow-green rounded-sm flex h-8 w-12 items-center justify-center border border-gray-18 p-2 px-3 text-gray-27 transition-all ease-linear focus:outline-none `}
+              />
+              <span className="text-[0.90rem]">Hours</span>
+            </div>
+          )}
         </div>
-        <div className="flex w-full flex-row items-center gap-1  rounded-b-md bg-gray-14 px-4 py-3 text-lg  font-normal">
-          Total:{" "}
-          <span className=" capitalize">
-            {formatTotalHoursToTimeUnit(totalDuration ?? 0, track_time_unit)}
-          </span>
-        </div>
+        {active_duration?.length > 0 && (
+          <div className="flex w-full flex-row items-center gap-1  rounded-b-md bg-gray-14 px-4 py-3 text-lg  font-normal">
+            Total:{" "}
+            <span className=" capitalize">
+              {formatTotalHoursToTimeUnit(totalDuration ?? 0, track_time_unit)}
+            </span>
+          </div>
+        )}
       </div>
     </div>
   );

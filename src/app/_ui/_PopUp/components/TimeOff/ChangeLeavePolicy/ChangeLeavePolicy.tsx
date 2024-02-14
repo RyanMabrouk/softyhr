@@ -5,7 +5,12 @@ import Image from "next/image";
 import default_avatar from "/public/default_avatar.jpeg";
 import { SelectGeneric } from "@/app/_ui/SelectGeneric";
 import { SubmitBtn } from "@/app/_ui/SubmitBtn";
-import { useParams, useRouter, useSearchParams } from "next/navigation";
+import {
+  useParams,
+  usePathname,
+  useRouter,
+  useSearchParams,
+} from "next/navigation";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import changePolicy from "@/actions/leave/changePolicy";
 import useToast from "@/hooks/useToast";
@@ -19,6 +24,7 @@ export default function ChangeLeavePolicy() {
   const Router = useRouter();
   const searchParams = useSearchParams();
   const params = useParams();
+  const pathname = usePathname();
   const employeeId = params.employeeId ?? searchParams.get("employeeId");
   const policy_id = searchParams.get("policy_id") ?? params.policy_id;
   const queryClient = useQueryClient();
@@ -65,7 +71,7 @@ export default function ChangeLeavePolicy() {
       queryClient.invalidateQueries({
         queryKey: ["leave_balance"],
       });
-      Router.back();
+      Router.push(pathname);
     },
   });
   return (

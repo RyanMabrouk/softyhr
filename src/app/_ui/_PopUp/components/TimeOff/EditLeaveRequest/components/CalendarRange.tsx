@@ -22,9 +22,11 @@ interface CalendarProps {
   defaultValue?: DateRange | undefined;
   required?: boolean;
   setStartValueInParent?:
-    | React.Dispatch<React.SetStateAction<Date>>
+    | React.Dispatch<React.SetStateAction<Date | null>>
     | undefined;
-  setEndValueInParent?: React.Dispatch<React.SetStateAction<Date>> | undefined;
+  setEndValueInParent?:
+    | React.Dispatch<React.SetStateAction<Date | null>>
+    | undefined;
 }
 export function CalendarRange({
   className,
@@ -41,12 +43,12 @@ export function CalendarRange({
   if (defaultValue && !date?.from && !date?.to) setDate(defaultValue);
   // Sync the date with the parent
   useEffect(() => {
-    setStartValueInParent && date?.from
-      ? setStartValueInParent(new Date(date?.from))
-      : null;
-    setEndValueInParent && date?.to
-      ? setEndValueInParent(new Date(date?.to))
-      : null;
+    if (setStartValueInParent) {
+      setStartValueInParent(date?.from ? new Date(date?.from) : null);
+    }
+    if (setEndValueInParent) {
+      setEndValueInParent(date?.to ? new Date(date?.to) : null);
+    }
   }, [date, setStartValueInParent, setEndValueInParent]);
   const { employeeId } = useParams();
   const already_booked = useAlreadyBooked(employeeId);
@@ -123,7 +125,7 @@ export function CalendarRange({
               id="date_range"
               initialFocus
               mode="range"
-              defaultMonth={defaultValue?.from}
+              defaultMonth={date?.from ?? defaultValue?.from ?? new Date()}
               selected={date}
               onSelect={setDate}
               numberOfMonths={2}

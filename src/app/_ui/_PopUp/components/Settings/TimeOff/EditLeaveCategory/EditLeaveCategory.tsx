@@ -1,7 +1,7 @@
 import { InputGeneric } from "@/app/_ui/InputGeneric";
 import { SubmitBtn } from "@/app/_ui/SubmitBtn";
 import PopUpSkeleton from "@/app/_ui/_PopUp/PopUpSkeleton";
-import { useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React from "react";
 import { SelectGeneric } from "@/app/_ui/SelectGeneric";
 import icons from "@/constants/icons";
@@ -18,6 +18,7 @@ import CancelBtnGeneric from "@/app/_ui/CancelBtnGeneric";
 export default function EditLeaveCategory() {
   const { toast } = useToast();
   const SearchParams = useSearchParams();
+  const pathname = usePathname();
   const categories_id = SearchParams.get("categories_id");
   const Router = useRouter();
   const {
@@ -50,7 +51,7 @@ export default function EditLeaveCategory() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["leave_categories"] });
-      Router.back();
+      Router.push(pathname);
     },
   });
   // insert the category mutation
@@ -67,7 +68,7 @@ export default function EditLeaveCategory() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["leave_categories"] });
-      Router.back();
+      Router.push(pathname);
     },
   });
   return (

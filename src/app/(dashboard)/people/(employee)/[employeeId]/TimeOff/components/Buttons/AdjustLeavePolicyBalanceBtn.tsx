@@ -7,7 +7,7 @@ export function AdjustLeavePolicyBalanceBtn({ id }: { id: number }) {
   const pathname = usePathname();
   return (
     <Link
-      className="tooltip tooltip-bottom z-[9999]"
+      className="tooltip tooltip-bottom "
       data-tip="Adjust balance"
       href={{
         pathname: pathname,

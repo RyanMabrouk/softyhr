@@ -82,7 +82,7 @@ export function FormInputs() {
         <WarningIfDatesAlreadyBooked />
       </div>
       <SelectGeneric
-        label="Time Off Category"
+        label="Time off category"
         required
         name="policy_id"
         setValueInParent={setSelectedPolicy}

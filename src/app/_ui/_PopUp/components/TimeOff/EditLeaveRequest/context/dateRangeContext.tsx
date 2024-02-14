@@ -1,9 +1,9 @@
 import React, { createContext, useState } from "react";
 export type dateRangeContextType = Partial<{
-  startDate: Date;
-  setStartDate: React.Dispatch<React.SetStateAction<Date>>;
-  endDate: Date;
-  setEndDate: React.Dispatch<React.SetStateAction<Date>>;
+  startDate: Date | null;
+  setStartDate: React.Dispatch<React.SetStateAction<Date | null>>;
+  endDate: Date | null;
+  setEndDate: React.Dispatch<React.SetStateAction<Date | null>>;
 }>;
 export const dateRangeContext = createContext({});
 export default function DateRangeContextProvider({

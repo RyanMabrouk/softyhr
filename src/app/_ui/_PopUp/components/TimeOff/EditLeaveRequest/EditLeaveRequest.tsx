@@ -9,7 +9,7 @@ import { From } from "./components/From";
 import useEmployeeData from "@/hooks/useEmloyeeData";
 import PopUpSkeleton from "../../../PopUpSkeleton";
 import useData from "@/hooks/useData";
-
+import DateRangeContextProvider from "./context/dateRangeContext";
 export type default_duration_type = {
   date: string;
   duration: string;
@@ -59,7 +59,9 @@ export default function EditLeaveRequest() {
         </header>
         <Hr />
         <ErrorContextProvider>
-          <From />
+          <DateRangeContextProvider>
+            <From />
+          </DateRangeContextProvider>
         </ErrorContextProvider>
       </PopUpSkeleton>
     </>

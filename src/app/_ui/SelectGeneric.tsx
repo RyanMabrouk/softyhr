@@ -44,7 +44,7 @@ export function SelectGeneric({
           data-placeholder-trigger="keydown"
           label={label}
           id={label}
-          className={` group peer h-9 w-[12.5rem] rounded-md  border  border-gray-18  py-1 text-gray-27 shadow-[rgba(0,0,0,0.05)_0px_1px_0px_0px] transition-all ease-linear first-letter:capitalize placeholder:text-gray-14 hover:shadow-md [&_.Mui-selected]:!bg-fabric-700 [&_.MuiOutlinedInput-notchedOutline]:border-none ${className}`}
+          className={` group peer h-9 w-[12.5rem] rounded-sm  border  border-gray-18  py-1 text-gray-23 shadow-sm transition-all ease-linear first-letter:capitalize placeholder:text-gray-14 hover:shadow-md [&_.Mui-selected]:!bg-fabric-700 [&_.MuiOutlinedInput-notchedOutline]:border-none ${className}`}
           name={name}
           defaultValue={defaultValue ? defaultValue.value : "none"}
           displayEmpty
@@ -77,7 +77,7 @@ export function SelectGeneric({
                 ) : (
                   <MenuItem
                     value={option?.value}
-                    className={`peer !max-h-8 !px-2 !py-2 text-[0.95rem] capitalize text-gray-27 hover:!bg-fabric-700 hover:text-white ${
+                    className={`peer !max-h-8 !px-2 !py-2 text-[0.95rem] capitalize text-gray-23 hover:!bg-fabric-700 hover:text-white ${
                       option?.disabled ? "opacity-50" : "opacity-90"
                     }`}
                     key={Number(option?.value) + i}
@@ -91,7 +91,7 @@ export function SelectGeneric({
                 return (
                   <MenuItem
                     value={option?.value}
-                    className="peer capitalize text-gray-27 hover:!bg-fabric-700 hover:text-white "
+                    className="peer capitalize text-gray-23 hover:!bg-fabric-700 hover:text-white "
                     key={(name ?? inputLabel ?? label) + i}
                   >
                     {option?.label}
@@ -101,7 +101,7 @@ export function SelectGeneric({
           {inputLabel && (
             <MenuItem
               value="none"
-              className="peer invisible !hidden font-sans capitalize text-gray-27"
+              className="peer invisible !hidden font-sans capitalize text-gray-23"
               disabled
               //hidden={true}
             >

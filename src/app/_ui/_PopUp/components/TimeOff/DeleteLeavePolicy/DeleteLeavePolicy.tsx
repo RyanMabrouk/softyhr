@@ -2,8 +2,7 @@ import { SubmitBtn } from "@/app/_ui/SubmitBtn";
 import React from "react";
 import PopUpSkeleton from "../../../PopUpSkeleton";
 import { IoWarning } from "react-icons/io5";
-import useData from "@/hooks/useData";
-import { useParams, useSearchParams } from "next/navigation";
+import { useParams, usePathname, useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import useToast from "@/hooks/useToast";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -14,6 +13,7 @@ import CancelBtnGeneric from "@/app/_ui/CancelBtnGeneric";
 export default function DeleteLeavePolicy() {
   const { toast } = useToast();
   const Router = useRouter();
+  const pathname = usePathname();
   const searchParams = useSearchParams();
   const params = useParams();
   const employeeId = params.employeeId ?? searchParams.get("employeeId");
@@ -43,7 +43,7 @@ export default function DeleteLeavePolicy() {
       queryClient.invalidateQueries({
         queryKey: ["leave_balance", employeeId],
       });
-      Router.back();
+      Router.push(pathname);
     },
   });
   // current employee full name
