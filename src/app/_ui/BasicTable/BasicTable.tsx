@@ -12,6 +12,7 @@ import { MdModeEditOutline } from "react-icons/md";
 import { FaTrash } from "react-icons/fa6";
 import Link from "next/link";
 import { RowFieldType } from "@/types/database.tables.types";
+import { Empty } from "antd";
 
 interface BasicTablePropsType {
   TableRows: RowFieldType[];
@@ -56,7 +57,7 @@ export default function BasicTable({
           {data?.length == 0 || !data ? (
             <div className="text-semibold bg-gray-14 py-2 pl-4 text-lg text-gray-15">
               No {champ} entries have been added.
-            </div>
+          </div>
           ) : (
             <TableBody key={uuidv4()}>
               {data

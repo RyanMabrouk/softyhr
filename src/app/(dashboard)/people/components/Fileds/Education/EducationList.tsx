@@ -6,6 +6,7 @@ import { v4 as uuidv4 } from "uuid";
 import { Field } from "@/constants/userInfo";
 import { FaTrash } from "react-icons/fa";
 import { usePathname, useRouter } from "next/navigation";
+import Input from "../Input/Input";
 
 interface EducationListPropsType {
   setTouched?: React.Dispatch<React.SetStateAction<boolean>> | undefined;
@@ -40,17 +41,11 @@ function EducationList({
               key={uuidv4()}
             >
               {Row?.map((RowField: insert_RowFieldType) => {
-                const Component = Field[RowField?.type.toUpperCase()];
+                const Component = Field[RowField?.type.toUpperCase()] || Input;
                 return (
                   <Component
                     champ={champ}
-                 /*   setSelectedKeys={
-                      RowField?.name == "Start Date"
-                        ? setstartDate
-                        : RowField?.name == "End Date" ?
-                        setEndDate
-                        : undefined
-                    }*/
+                    data={data}
                     defaultValue={data[RowField?.name]}
                     setTouched={setTouched}
                     key={uuidv4()}

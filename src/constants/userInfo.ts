@@ -46,6 +46,7 @@ import InputFile from "@/app/(dashboard)/people/components/Fileds/File/File";
 import SelectUsers from "@/app/(dashboard)/people/components/Fileds/SelectUsers/SelectUsers";
 import { IoSearchSharp } from "react-icons/io5";
 import DateInputRange from "@/app/(dashboard)/people/components/Fileds/DateInputRange/DateInputRange";
+import { BsTwitterX } from "react-icons/bs";
 const Editor = dynamic(
   () => import("@/app/(dashboard)/people/components/Fileds/Editor/Editor"),
   { ssr: false },
@@ -90,7 +91,7 @@ interface ObjectIconsType {
 
 export const InputIcons: ObjectIconsType = {
   LINKEDIN: FaLinkedin,
-  TWITTER: FaTwitter,
+  TWITTER: BsTwitterX,
   SQUARE: FaFacebookSquare,
   PINTEREST: FaPinterest,
   MDOUTLINEHOMEWORK: MdOutlineHomeWork,

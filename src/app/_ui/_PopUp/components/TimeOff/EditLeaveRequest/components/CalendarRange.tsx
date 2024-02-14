@@ -131,6 +131,8 @@ export function CalendarRange({
               initialFocus
               onDayClick={setAction}
               mode="range"
+              fromYear={1960}
+              toYear={2060}
               defaultMonth={date?.from ?? defaultValue?.from ?? new Date()}
               selected={date}
               onSelect={setDate}
