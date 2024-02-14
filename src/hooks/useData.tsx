@@ -1,10 +1,20 @@
 "use client";
 import getData from "@/api/getData";
+import { PostgrestError } from "@supabase/supabase-js";
 import { useQuery } from "@tanstack/react-query";
-// you can use this hook to get the current url
-import { useUrl } from "nextjs-current-url";
 //--------------------------------------------
-export default function useData() {
+export default function useData(): {
+  settings: {
+    data: any | undefined;
+    error: PostgrestError | null;
+    isPending: boolean;
+  };
+  user_profile: {
+    data: any | undefined;
+    error: PostgrestError | null;
+    isPending: boolean;
+  };
+} {
   //--------------------Settings--------------------
   const { data: settings, isPending } = useQuery({
     queryKey: ["settings"],

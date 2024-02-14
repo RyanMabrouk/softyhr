@@ -1,4 +1,7 @@
 import { Database } from "./database.types";
+// Notifications
+export type database_notifications_type =
+  Database["public"]["Tables"]["notifications"]["Row"];
 // Permesssions
 export type database_permissions_type =
   Database["public"]["Tables"]["permissions"]["Row"];

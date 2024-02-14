@@ -4,17 +4,39 @@ import { GrAnnounce } from "react-icons/gr";
 import { Player } from "@lottiefiles/react-lottie-player";
 import Loader from "@/app/_ui/Loader/Loader";
 import RoleGuard from "@/app/_ui/RoleGuard";
-import { GetPendingNotifications } from "./_pendingNotifs/components/GetPendingNotifications";
+import { GetPendingNotifications } from "./_pendingLeavsNotifs/components/GetPendingNotifications";
+import { useLeaveRequestsNotifs } from "./hooks/useLeaveRequestsNotifs";
+import useRealTime from "@/hooks/useRealTime";
+import { useQueryClient } from "@tanstack/react-query";
+import useData from "@/hooks/useData";
 export type NotificationType = {
-  id: string;
+  id: string | number;
   notification: JSX.Element | null;
   createdAt: Date;
 };
 export function Notifications() {
-  const [Notifications, setNotifications] = React.useState<NotificationType[]>(
-    [],
-  );
-  const [isPending, setIsPending] = React.useState(false);
+  const queryClient = useQueryClient();
+  const {
+    user_profile: { data: user, isPending: isPending_user },
+  } = useData();
+  useRealTime({
+    table: "notifications",
+    event: "INSERT",
+    filters: [{ column: "user_id", value: user?.user_id }],
+    onReceive: (payload) => {
+      queryClient.invalidateQueries({
+        queryKey: ["notifications", "user"],
+      });
+    },
+  });
+  const { data: leave_notifs, isPending: isPending2 } =
+    useLeaveRequestsNotifs();
+  const [protectedNotifs, setProtectedNotifs] = React.useState<
+    NotificationType[]
+  >([]);
+  const [isPending1, setIsPending1] = React.useState(false);
+  const isPending = isPending1 || isPending2 || isPending_user;
+  const all_notifications = [...protectedNotifs, ...leave_notifs];
   return (
     <>
       {/* This pattern prevents unnecessary requests */}
@@ -26,8 +48,8 @@ export function Notifications() {
         ]}
       >
         <GetPendingNotifications
-          setIsPending={setIsPending}
-          setNotifications={setNotifications}
+          setIsPending={setIsPending1}
+          setNotifications={setProtectedNotifs}
         />
       </RoleGuard>
       {/* This is the componant */}
@@ -43,17 +65,17 @@ export function Notifications() {
             <div className="flex h-full w-full items-center justify-center">
               <Loader />
             </div>
-          ) : Notifications.length > 0 ? (
-            Notifications.sort((e) => +e.createdAt - +new Date()).map(
-              (e: NotificationType, i) => (
+          ) : all_notifications.length > 0 ? (
+            all_notifications
+              .sort((e) => +e.createdAt - +new Date())
+              .map((e: NotificationType, i) => (
                 <div key={"notif" + i} className="flex h-fit flex-col">
                   {e.notification}
-                  {Notifications.length - 1 !== i && (
+                  {all_notifications.length - 1 !== i && (
                     <hr className="m-0 h-[unset] w-full shrink-0 border-solid border-[rgba(0,0,0,0.12)] bg-gray-14" />
                   )}
                 </div>
-              ),
-            )
+              ))
           ) : (
             <div className="flex h-full w-full items-center justify-center">
               <Player

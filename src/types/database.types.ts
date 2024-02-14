@@ -622,6 +622,60 @@ export type Database = {
           }
         ]
       }
+      notifications: {
+        Row: {
+          created_at: string
+          description: string
+          id: number
+          message: string
+          org_name: string
+          status:
+            | Database["public"]["Enums"]["leave_request_status_type"]
+            | null
+          type: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          description: string
+          id?: number
+          message: string
+          org_name: string
+          status?:
+            | Database["public"]["Enums"]["leave_request_status_type"]
+            | null
+          type: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          description?: string
+          id?: number
+          message?: string
+          org_name?: string
+          status?:
+            | Database["public"]["Enums"]["leave_request_status_type"]
+            | null
+          type?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "public_notfications_org_name_fkey"
+            columns: ["org_name"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["name"]
+          },
+          {
+            foreignKeyName: "public_notfications_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
       organizations: {
         Row: {
           country: string
@@ -706,7 +760,6 @@ export type Database = {
           "Job Information": Json[] | null
           org_name: string
           picture: string | null
-          role_id: number
           "Social Links": Json | null
           "Stock Options": Json[] | null
           supervisor_id: string | null
@@ -729,7 +782,6 @@ export type Database = {
           "Job Information"?: Json[] | null
           org_name: string
           picture?: string | null
-          role_id?: number
           "Social Links"?: Json | null
           "Stock Options"?: Json[] | null
           supervisor_id?: string | null
@@ -752,7 +804,6 @@ export type Database = {
           "Job Information"?: Json[] | null
           org_name?: string
           picture?: string | null
-          role_id?: number
           "Social Links"?: Json | null
           "Stock Options"?: Json[] | null
           supervisor_id?: string | null
@@ -766,13 +817,6 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "organizations"
             referencedColumns: ["name"]
-          },
-          {
-            foreignKeyName: "profiles_role_id_fkey"
-            columns: ["role_id"]
-            isOneToOne: false
-            referencedRelation: "roles"
-            referencedColumns: ["id"]
           },
           {
             foreignKeyName: "profiles_supervisor_id_fkey"
@@ -884,7 +928,7 @@ export type Database = {
         }
         Relationships: [
           {
-            foreignKeyName: "user_emails_admin_receiver_fkey"
+            foreignKeyName: "public_user_emails_admin_receiver_fkey"
             columns: ["admin_receiver"]
             isOneToOne: false
             referencedRelation: "profiles"
