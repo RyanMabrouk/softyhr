@@ -3,9 +3,6 @@ import { Footer } from "@/app/_ui/Footer";
 import UserInfo from "../../components/UserInfo/UserInfo";
 import { EmplyoeeDataHydration } from "@/provider/EmplyoeeDataHydration";
 import { Content } from "./Content";
-import { usePathname } from "next/navigation";
-import useEmployeeData from "@/hooks/useEmloyeeData";
-import { EmployeeRoute } from "@/constants/employeeRoute";
 interface EmployePropsType {
   params: { employeeId: string };
   children: ReactNode;
