@@ -26,8 +26,6 @@ export const metadata: Metadata = {
       url: "https://www.linkedin.com/company/softylines/",
     },
   ],
-  viewport:
-    "minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover",
   icons: [
     { rel: "apple-touch-icon", url: "icons/icon-128x128.png" },
     { rel: "icon", url: "icons/icon-128x128.png" },
@@ -43,14 +41,10 @@ export default async function RootLayout({
     <html lang="en">
       <Head>
         <title>SoftyHr</title>
-        <meta name="description" content="Manage your employees with ease" />
         <link rel="manifest" href="/manifest.json" />
         <link rel="apple-touch-icon" href="/icons/icon-128x128.png" />
         <link rel="icon" href="/icons/icon-128x128.png" />
-        <meta
-          name="viewport"
-          content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover"
-        />
+        <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover" />
       </Head>
       <body className={lato.className + " min-h-screen"}>
         <Store>
