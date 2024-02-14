@@ -8,7 +8,6 @@ export default function Page() {
         <Header />
       </div>
       <Content />
-      {/*<Switch />*/}
     </div>
   );
 }
