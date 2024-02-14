@@ -76,13 +76,13 @@ function Calendar({
           };
           return (
             <Dropdown>
-              <DropdownTrigger className="rounded-md border border-gray-15 px-1  shadow-sm focus:ring-0">
+              <DropdownTrigger className=" px-1 shadow-sm focus:ring-0">
                 <Button
                   size="sm"
                   className="flex items-center justify-end gap-2"
                 >
                   <div className="">{selected?.props?.children}</div>
-                  <FaSortDown fill="gray" className="-mt-1"/>
+                  <FaSortDown fill="gray" className="-mt-1" />
                 </Button>
               </DropdownTrigger>
               <DropdownMenu className="!max-h-[20rem] overflow-auto rounded-lg !bg-white shadow-lg">
