@@ -1,6 +1,6 @@
 {
-  "name": "PWA App",
-  "short_name": "App",
+  "name": "Softyhr",
+  "short_name": "Softyhr",
   "icons": [
     {
       "src": "/icons/android-chrome-192x192.png",
