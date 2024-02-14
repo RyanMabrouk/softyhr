@@ -19,8 +19,6 @@ function Grafana() {
       });
     }
   }, []);
-
-  // ...
   return null;
 }
 export default Grafana;
