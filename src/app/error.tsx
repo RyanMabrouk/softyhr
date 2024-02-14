@@ -17,7 +17,7 @@ export default function Error({
   return (
     <div className="z-[9999] flex h-screen w-screen flex-col items-center justify-center gap-4">
       <Player
-        src="https://lottie.host/embed/fe6d5193-dee6-47e6-909b-490ba613151a/qH19788RBq.json"
+        src="https://lottie.host/fe6d5193-dee6-47e6-909b-490ba613151a/qH19788RBq.json"
         className="h-80 w-80"
         loop
         autoplay
