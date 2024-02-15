@@ -50,7 +50,7 @@ function Page({ params: { Job_id } }: { params: { Job_id: string } }) {
     return {
       id: candidate?.id,
       "Candidate Info":
-        candidate?.["First Name"] + " " + candidate?.["Last Name"],
+      candidate?.["First Name"] + " " + candidate?.["Last Name"],
       status: candidate?.status,
       Status_update: "Updated Just Now",
       Rating: candidate?.Ratings,
