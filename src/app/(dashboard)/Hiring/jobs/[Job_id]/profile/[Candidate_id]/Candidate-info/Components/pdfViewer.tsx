@@ -8,7 +8,7 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   import.meta.url,
 ).toString();
 interface PdfViewerPropsType {
-  url: string;
+  url: string | null;
 }
 
 function PdfViewer({ url }: PdfViewerPropsType) {
@@ -21,7 +21,7 @@ function PdfViewer({ url }: PdfViewerPropsType) {
     <div className="flex flex-col items-center justify-center gap-[1rem]">
       <div className="min-h-[800px] min-w-[630px] border-b border-t border-gray-18">
         <Document
-          file={{ url: url }}
+          file={{ url:  url || "" }}
           className={"self-center"}
           onLoadSuccess={onDocumentLoadSuccess}
         >

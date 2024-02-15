@@ -25,6 +25,7 @@ import { formatCustomDate, monthsAgo } from "@/helpers/date.helpers";
 import { CiLink } from "react-icons/ci";
 import { GetJobUrl } from "@/helpers/Hiring/GetJobUrl.helper";
 import EditJobOpening from "./EditJobOpening/EditJobOpening";
+import useToast from "@/hooks/useToast";
 
 const columns = [
   { name: "id", uid: "id" },
@@ -76,7 +77,7 @@ export default function HiringTable({
   const [visibleColumns, setVisibleColumns] = React.useState<Selection>(
     new Set(INITIAL_VISIBLE_COLUMNS),
   );
-
+  const { toast } = useToast();
   const headerColumns = React.useMemo(() => {
     if (visibleColumns === "all") return columns;
     return columns.filter((column: any) =>
@@ -164,9 +165,10 @@ export default function HiringTable({
               <div className="duration-250 flex h-[2rem] w-[2rem] cursor-pointer items-center justify-center ease-in-out hover:border hover:border-gray-27 hover:bg-gray-22">
                 <CiLink
                   cursor={"pointer"}
-                  onClick={async () =>
-                    navigator.clipboard.writeText(await GetJobUrl(user?.id))
-                  }
+                  onClick={async () => {
+                    navigator.clipboard.writeText(await GetJobUrl(user?.id));
+                    toast.success("Job Link copied successfully !");
+                  }}
                 />
               </div>
               {user?.status != "Open" && <PublishButton id={user?.id} />}

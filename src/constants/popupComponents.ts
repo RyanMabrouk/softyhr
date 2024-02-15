@@ -40,6 +40,7 @@ import CalculateLeaveBalance from "@/app/_ui/_PopUp/components/TimeOff/Calculate
 import CreateComment from "@/app/_ui/_PopUp/components/Hiring/CreateComment/CreateComment";
 import SendMail from "@/app/_ui/_PopUp/components/Hiring/SendMail/SendMail";
 import DeleteEducation from "@/app/_ui/_PopUp/components/Personel-job/Education/DeleteEducation/DeleteEducation";
+import DeleteCandidate from "@/app/_ui/_PopUp/components/Hiring/DeleteCandidate/DeleteCandidate";
 
 type PopupType = {
   [key: string]: () => React.JSX.Element;
@@ -86,5 +87,6 @@ export const popups: PopupType = {
   ADD_EMPLOYEES_TO_POLICY: AddEmployeesToPolicy,
   CREATE_COMMENT: CreateComment,
   CALCULATE_LEAVE_BALANCE: CalculateLeaveBalance,
-  SEND_MAIL:SendMail,
+  SEND_MAIL: SendMail,
+  DELETE_CANDIDATE:DeleteCandidate,
 };

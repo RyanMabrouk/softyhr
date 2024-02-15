@@ -15,6 +15,7 @@ import Link from "next/link";
 import { FaEdit } from "react-icons/fa";
 import { TableCandidateType } from "./config";
 import { Hiring_type } from "@/types/database.tables.types";
+import { MdDelete } from "react-icons/md";
 
 export const renderCell = (
   Hiring: Hiring_type,
@@ -99,6 +100,17 @@ export const renderCell = (
                     className="text-black group-hover:!text-white"
                   >
                     Add Comment
+                  </Link>
+                </div>
+              </DropdownItem>
+              <DropdownItem className="group hover:!bg-color-primary-8">
+                <div className="flex items-end justify-start gap-[0.5rem] duration-200 ease-linear">
+                  <MdDelete  className="text-xl text-color-primary-7 group-hover:!text-white" />
+                  <Link
+                    href={`?popup=DELETE_CANDIDATE&id=${user?.id}`}
+                    className="text-black group-hover:!text-white"
+                  >
+                    Delete Candidate
                   </Link>
                 </div>
               </DropdownItem>

@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { RxAvatar } from "react-icons/rx";
 import PopUpSkeleton from "../../../PopUpSkeleton";
-import SubmitBtn from "./SubmitBtn";
 import Link from "next/link";
 import { deleteJobOpening } from "@/actions/hiring/DeleteJobOpening";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -10,8 +9,10 @@ import useToast from "@/hooks/useToast";
 import { useQueryClient } from "@tanstack/react-query";
 import useHiring from "@/hooks/Hiring/useHiring";
 import { Hiring_type } from "@/types/database.tables.types";
+import SubmitBtn from "../DeleteJob/SubmitBtn";
+import useCandidate from "@/hooks/Hiring/useCandidate";
 
-function DeleteJob() {
+function DeleteCandidate() {
   const [Value, setValue] = useState<string>();
   const params = useSearchParams();
   const { toast } = useToast();
@@ -19,8 +20,8 @@ function DeleteJob() {
   const queryClient = useQueryClient();
   const id = Number(params?.get("id")) || 0;
   const {
-    Hiring: { data, isPending },
-  } = useHiring({id},"*,candidates(*)");
+    candidates: { data, isPending },
+  } = useCandidate({id});
 
   async function DeleteJob() {
     const response = await deleteJobOpening(id);
@@ -29,7 +30,7 @@ function DeleteJob() {
     router.push("/Hiring/jobs");
     queryClient.invalidateQueries({ queryKey: ["Hiring"] });
   }
-  
+  //console.log(data?.find((job: Hiring_type) => job?.id == id));
   return (
     <PopUpSkeleton title="Just Checking...">
       <form
@@ -92,4 +93,4 @@ function DeleteJob() {
   );
 }
 
-export default DeleteJob;
+export default DeleteCandidate;

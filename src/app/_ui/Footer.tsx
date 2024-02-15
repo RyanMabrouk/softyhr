@@ -1,7 +1,7 @@
 import Link from "next/link";
 export function Footer() {
   return (
-    <footer className=" flex w-full flex-row items-center justify-evenly  border-t-[2px] border-t-gray-14 px-48 py-7">
+    <footer className=" flex max-h-[7rem] w-full flex-row items-end justify-evenly border-t-[2px] border-t-gray-14 px-48 py-7">
       <div className="flex flex-row gap-2 text-sm font-light text-gray-21 no-underline">
         <Link
           href="#"

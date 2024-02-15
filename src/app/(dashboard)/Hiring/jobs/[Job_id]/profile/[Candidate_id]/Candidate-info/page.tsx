@@ -21,12 +21,12 @@ function Page() {
           TabsPannel={[
             {
               label: "Resume",
-              Component: () => <PdfViewer url={data[0]?.metadata?.Resume} />,
+              Component: () => <PdfViewer url={data?.[0]?.metadata?.Resume} />,
             },
             {
               label: "Cover Letter",
               Component: () => (
-                <PdfViewer url={data[0]?.metadata?.["Cover Letter"]} />
+                <PdfViewer url={data?.[0]?.metadata?.["Cover Letter"]} />
               ),
             },
           ]}
