@@ -1,23 +1,13 @@
 import React, { ReactNode, SyntheticEvent, useState } from "react";
-import {
-  Autocomplete,
-  Box,
-  ListItemIcon,
-  ListItemText,
-  MenuItem,
-  Select,
-  SelectChangeEvent,
-  TextField,
-  makeStyles,
-} from "@mui/material";
+import { Autocomplete, Box, TextField } from "@mui/material";
 import useProfiles from "@/hooks/useProfiles";
 import Image from "next/image";
 import avatar from "/public/avatar.png";
 import { Profile_Type, RowFieldType } from "@/types/database.tables.types";
 
 interface SelectValueType {
-  label:string;
-  value:string;
+  label: string;
+  value: string;
 }
 function SelectGeneric({
   label,
@@ -38,7 +28,9 @@ function SelectGeneric({
   required?: boolean;
   inputLabel?: string | ReactNode;
 }) {
-  const [value, setValue] = useState<SelectValueType | null>(defaultValue || {value:"",label:""});
+  const [value, setValue] = useState<SelectValueType | null>(
+    defaultValue || { value: "", label: "" },
+  );
   const [ValueInput, setValueInput] = useState<string | null>();
   return (
     <>
@@ -74,7 +66,10 @@ function SelectGeneric({
           onInputChange={(event, newInputValue: string | null) => {
             setValueInput(newInputValue);
           }}
-          onChange={(event: SyntheticEvent<Element, Event>, value: SelectValueType | null,) => {
+          onChange={(
+            event: SyntheticEvent<Element, Event>,
+            value: SelectValueType | null,
+          ) => {
             setValue(value);
           }}
           value={value}
@@ -119,7 +114,7 @@ function SelectGeneric({
 
 interface SelectUsers {
   RowField: RowFieldType;
-  defaultValue:string | null;
+  defaultValue: string | null;
 }
 
 function SelectUsers({ RowField, defaultValue }: SelectUsers) {
@@ -138,13 +133,20 @@ function SelectUsers({ RowField, defaultValue }: SelectUsers) {
             }
           : undefined
       }
-      options={data?.map((user: Profile_Type) => {
-        return {
-          picture: user?.picture,
-          label: `${user?.["Basic Information"]?.["First name"]}     ${user?.["Basic Information"]?.["Last name"]} `,
-          value: user?.user_id,
-        };
-      })}
+      options={
+        data?.map((user: Profile_Type) => {
+          return {
+            picture: user?.picture,
+            label: `${user?.["Basic Information"]?.["First name"]}     ${user?.["Basic Information"]?.["Last name"]} `,
+            value: user?.user_id,
+          };
+        }) ?? [
+          {
+            label: "",
+            value: "",
+          },
+        ]
+      }
     />
   );
 }

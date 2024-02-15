@@ -3,6 +3,7 @@ import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { Database } from "@/types/database.types";
 import { getLogger } from "@/logging/log-util";
+import { PostgrestError } from "@supabase/supabase-js";
 type getDataParams = {
   user?: boolean;
   org?: boolean;
@@ -24,7 +25,7 @@ export default async function getData(
     org: undefined,
     column: "*",
   },
-): Promise<{ data: any; error: any }> {
+): Promise<{ data: any[] | null; error: PostgrestError | null }> {
   const supabase = createServerComponentClient<Database>({ cookies });
   let query = supabase.from(table).select(column);
   if (match) {

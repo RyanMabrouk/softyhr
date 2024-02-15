@@ -5,11 +5,11 @@ import { drag } from "@/helpers/dragAndDrop.helpers";
 
 export function EmployeeCard({
   name,
-  current_policy_name,
+  current_name,
   user_id,
 }: {
   name: string;
-  current_policy_name: string;
+  current_name: string;
   user_id: string;
 }) {
   return (
@@ -22,8 +22,8 @@ export function EmployeeCard({
       <span className="line-clamp-1 overflow-ellipsis text-[1.025rem] group-hover:text-fabric-700">
         {capitalizeFirstLetter(name)}
       </span>
-      <span className="line-clamp-1 text-right ml-0.5 capitalize opacity-80 overflow-ellipsis text-sm text-gray-21">
-        {current_policy_name}
+      <span className="ml-0.5 line-clamp-1 overflow-ellipsis text-right text-sm capitalize text-gray-21 opacity-80">
+        {current_name}
       </span>
     </div>
   );

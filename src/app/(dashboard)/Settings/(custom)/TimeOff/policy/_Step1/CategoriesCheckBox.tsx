@@ -22,9 +22,10 @@ export function CategoriesCheckBox() {
   const categories_data = leave_categories?.map(
     (e: databese_leave_categories_type) => ({
       ...e,
-      number_of_policies: leave_policies?.filter(
-        (p: database_leave_policies_type) => p.categories_id === e.id,
-      ).length,
+      number_of_policies:
+        leave_policies?.filter(
+          (p: database_leave_policies_type) => p.categories_id === e.id,
+        ).length ?? 0,
     }),
   );
   return (

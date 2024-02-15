@@ -299,29 +299,35 @@ export type Database = {
         Row: {
           Application_Details: Json | null
           created_at: string
+          Form: Json | null
           id: number
           "Job Status": string | null
           job_Boards: Json | null
           job_information: Json | null
           org_name: string | null
+          Questions: Json | null
         }
         Insert: {
           Application_Details?: Json | null
           created_at?: string
+          Form?: Json | null
           id?: number
           "Job Status"?: string | null
           job_Boards?: Json | null
           job_information?: Json | null
           org_name?: string | null
+          Questions?: Json | null
         }
         Update: {
           Application_Details?: Json | null
           created_at?: string
+          Form?: Json | null
           id?: number
           "Job Status"?: string | null
           job_Boards?: Json | null
           job_information?: Json | null
           org_name?: string | null
+          Questions?: Json | null
         }
         Relationships: [
           {
@@ -837,6 +843,7 @@ export type Database = {
       roles: {
         Row: {
           created_at: string
+          description: string | null
           id: number
           name: string
           org_name: string
@@ -844,6 +851,7 @@ export type Database = {
         }
         Insert: {
           created_at?: string
+          description?: string | null
           id?: number
           name?: string
           org_name: string
@@ -851,6 +859,7 @@ export type Database = {
         }
         Update: {
           created_at?: string
+          description?: string | null
           id?: number
           name?: string
           org_name?: string
@@ -928,7 +937,7 @@ export type Database = {
         }
         Relationships: [
           {
-            foreignKeyName: "public_user_emails_admin_receiver_fkey"
+            foreignKeyName: "user_emails_admin_receiver_fkey"
             columns: ["admin_receiver"]
             isOneToOne: false
             referencedRelation: "profiles"

@@ -11,7 +11,7 @@ const OrgChartBody = () => {
 
   const allProfiles = !isPending ? profiles?.data : null;
   !isPending &&
-    allProfiles.forEach((prof: any) => {
+    allProfiles?.forEach((prof: any) => {
       wantedData.push({
         name:
           prof?.["Basic Information"]?.["First name"] +

@@ -1,16 +1,16 @@
 "use client";
 import React from "react";
-import { useSearch } from "../context/SearchContext";
-import { usersWithoutCurrentPolicy } from "../AddEmployeesToPolicy";
+import { useSearch } from "./context/SearchContext";
 import { EmployeeCard } from "./EmployeeCard";
 import { SearchBar } from "./SearchBar";
 import { allowDrop } from "@/helpers/dragAndDrop.helpers";
+import { usersWithoutCurrentId } from "./SwitchEmployeesDragAndDrop";
 
 export function AvailableEmployees({
   employees,
   dropSelected,
 }: {
-  employees: usersWithoutCurrentPolicy[];
+  employees: usersWithoutCurrentId[];
   dropSelected: (e: React.DragEvent<HTMLElement>) => void;
 }) {
   const { Search } = useSearch();
@@ -23,7 +23,7 @@ export function AvailableEmployees({
         onDragOver={(e) => allowDrop(e)}
       >
         <SearchBar />
-        <div className="h-full w-full overflow-y-scroll border-t border-t-gray-18">
+        <div className="h-full w-full overflow-y-auto border-t border-t-gray-18">
           {employees
             ?.filter((employee) =>
               Search ? employee.name.includes(Search) : true,

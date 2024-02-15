@@ -73,7 +73,7 @@ export default function Page() {
     start_at: leave_request?.start_at,
   });
   const accepted_leave_requests_data = accepted_leave_requests?.map((e) => {
-    const user_profile = profiles.find(
+    const user_profile = profiles?.find(
       (p: database_profile_type) => p.user_id === e.user_id,
     );
     return {

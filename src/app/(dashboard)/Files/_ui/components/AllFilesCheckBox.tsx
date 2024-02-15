@@ -42,9 +42,9 @@ export default function AllFilesCheckBox({ checkAll, setCheckAll }: any) {
   const fileIds =
     !isPending && wantedId
       ? role?.permissions.includes("read:files")
-        ? folder?.data[0]?.files &&
+        ? folder?.data?.[0]?.files &&
           folder?.data[0]?.files.map((file: any) => file.id)
-        : folder?.data[0]?.files &&
+        : folder?.data?.[0]?.files &&
           folder?.data[0]?.files
             .map((file: any) => file.id)
             .filter((id: any) => filesIds.includes(id))

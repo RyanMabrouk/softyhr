@@ -5,13 +5,13 @@ import { useQuery } from "@tanstack/react-query";
 //--------------------------------------------
 export default function useData(): {
   settings: {
-    data: any | undefined;
-    error: PostgrestError | null;
+    data: any[] | undefined | null;
+    error: PostgrestError | null | undefined;
     isPending: boolean;
   };
   user_profile: {
-    data: any | undefined;
-    error: PostgrestError | null;
+    data: any | undefined | null;
+    error: PostgrestError | null | undefined;
     isPending: boolean;
   };
 } {

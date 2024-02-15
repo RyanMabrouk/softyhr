@@ -1,23 +1,23 @@
 "use server";
 import addLeavePolicy from "@/actions/leave/addLeavePolicy";
 import changePolicy from "@/actions/leave/changePolicy";
-import { usersWithoutCurrentPolicy } from "@/app/_ui/_PopUp/components/Settings/TimeOff/AddEmployeesToPolicy/AddEmployeesToPolicy";
+import { usersWithoutCurrentId } from "@/app/_ui/_PopUp/components/Settings/TimeOff/components/SwitchEmployeesDragAndDrop/SwitchEmployeesDragAndDrop";
 import { getLogger } from "@/logging/log-util";
 export default async function addEmployeesToPolicy({
   users,
   policy_id,
   categories_id,
 }: {
-  users: usersWithoutCurrentPolicy[];
+  users: usersWithoutCurrentId[];
   policy_id: number;
   categories_id: number;
 }) {
   const logger = getLogger("settings");
   logger.info("addEmployeesToPolicy");
   const promises = users.map(async (user) => {
-    const { error } = user.current_policy_id
+    const { error } = user.current_id
       ? await changePolicy({
-          old_policy_id: user.current_policy_id,
+          old_policy_id: user.current_id,
           user_id: user.user_id,
           new_policy_id: policy_id,
         })

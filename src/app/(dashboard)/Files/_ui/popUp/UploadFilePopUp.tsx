@@ -127,7 +127,7 @@ export default function UploadFilePopUp() {
             });
           } else if (isChecked) {
             profiles
-              .filter((user: any) => user.role === "employee")
+              ?.filter((user: any) => user.role === "employee")
               .forEach((user: any) => {
                 let userId = user?.user_id;
                 addFiletoUser(userId, fileId);

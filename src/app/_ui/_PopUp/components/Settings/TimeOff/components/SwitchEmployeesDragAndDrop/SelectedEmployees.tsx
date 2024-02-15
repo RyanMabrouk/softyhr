@@ -2,21 +2,21 @@
 import React from "react";
 import { PiUsersThreeFill } from "react-icons/pi";
 import { EmployeeCard } from "./EmployeeCard";
-import { usersWithoutCurrentPolicy } from "../AddEmployeesToPolicy";
 import { allowDrop } from "@/helpers/dragAndDrop.helpers";
+import { usersWithoutCurrentId } from "./SwitchEmployeesDragAndDrop";
 
 export function SelectedEmployees({
   selectedEmployees,
   dropNonSelected,
 }: {
-  selectedEmployees: usersWithoutCurrentPolicy[];
+  selectedEmployees: usersWithoutCurrentId[];
   dropNonSelected: (e: React.DragEvent<HTMLElement>) => void;
 }) {
   return (
     <section className="flex min-h-full w-fit flex-col gap-1">
       <header className="font-semibold">Selected Employees</header>
       <main
-        className="dropzone flex h-80 w-72 flex-col gap-1 overflow-y-scroll rounded-sm border border-gray-18 bg-gray-28"
+        className="dropzone flex h-80 w-72 flex-col gap-1 overflow-y-auto rounded-sm border border-gray-18 bg-gray-28"
         onDrop={(e) => {
           dropNonSelected(e);
         }}

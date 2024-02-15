@@ -1,7 +1,3 @@
-import { CandidateStatusOptions } from "@/app/(dashboard)/Hiring/jobs/[Job_id]/components/CandidatesTable/components/config";
-import SelectInput from "@/app/(dashboard)/people/components/Fileds/select/Select";
-import Textarea from "@/app/(dashboard)/people/components/Fileds/textarea/textarea";
-import CancelBtnGeneric from "@/app/_ui/CancelBtnGeneric";
 import SubmitButton from "@/app/careers/[career_id]/components/AppliymentForm/SubmitButton";
 import React, { useRef } from "react";
 import useToast from "@/hooks/useToast";
@@ -24,7 +20,7 @@ function CreateCommentForm({ id }: { id: string | null }) {
   async function CreateNewCommentHandler(formdata: FormData) {
     const response = await CreateNewComment(
       String(formdata?.get("newComment")),
-      data?.data[0]?.user_id,
+      data?.data?.[0]?.user_id,
       id || "",
     );
     if (response?.Submitted) {

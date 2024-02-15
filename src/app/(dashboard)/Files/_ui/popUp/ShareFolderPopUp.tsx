@@ -28,7 +28,7 @@ export default function ShareFolderPopUp() {
             <div className="z-50 flex flex-col gap-2">
               <div className="flex flex-row justify-between">
                 <h1 className=" pb-2 text-2xl font-normal text-fabric-700">
-                  {`Share ${folder.data[0].name} Folder`}
+                  {`Share ${folder.data?.[0].name} Folder`}
                 </h1>
                 <div
                   onClick={() => {
