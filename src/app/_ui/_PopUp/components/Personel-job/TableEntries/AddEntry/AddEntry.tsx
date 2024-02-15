@@ -67,13 +67,13 @@ function AddEntry() {
                 action={SubmitForm}
                 className="flex w-full flex-col items-start justify-center gap-[1rem]"
               >
-                {settings?.data[0]?.["personnal"]?.Champs?.filter(
+                {settings?.data?.[0]?.["personnal"]?.Champs?.filter(
                   (section: any) => section?.champ == section_name,
                 )[0]?.Fields?.map((RowField: any) => {
                   const Component = Field[RowField?.type.toUpperCase()];
                   return <Component key={uuidv4()} RowField={RowField} />;
                 })}
-                {settings?.data[0]?.["job"]?.Champs?.filter(
+                {settings?.data?.[0]?.["job"]?.Champs?.filter(
                   (section: any) => section?.champ == section_name,
                 )[0]?.Fields?.map((RowField: any) => {
                   const Component = Field[RowField?.type.toUpperCase()];

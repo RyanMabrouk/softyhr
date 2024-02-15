@@ -5,8 +5,8 @@ import { PostgrestError } from "@supabase/supabase-js";
 import { useQuery } from "@tanstack/react-query";
 export default function useRole({ id }: { id: number | undefined }): {
   role: {
-    data: database_roles_type | null;
-    error: PostgrestError | null;
+    data: database_roles_type | null | undefined;
+    error: PostgrestError | null | undefined;
     isPending: boolean;
   };
 } {

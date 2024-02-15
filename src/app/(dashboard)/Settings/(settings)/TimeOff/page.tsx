@@ -3,12 +3,12 @@ import Link from "next/link";
 import React from "react";
 import { MdOutlineAddCircle } from "react-icons/md";
 import { CategoryEdit } from "./_componants/CategoryEdit";
-import { SettingsBtn } from "./_componants/buttons/SettingsBtn";
 import { AddCategoryBtn } from "./_componants/buttons/AddCategoryBtn";
 import useCategoriesData from "./hooks/useCategoriesData";
 import { BsFillStopwatchFill } from "react-icons/bs";
 import { generateLeaveCategorieIcon } from "@/helpers/leave.helpers";
 import { usePathname } from "next/navigation";
+import { SettingsBtn } from "./_componants/buttons/SettingsBtn";
 export default function Page() {
   const categories_data = useCategoriesData();
   const pathname = usePathname();

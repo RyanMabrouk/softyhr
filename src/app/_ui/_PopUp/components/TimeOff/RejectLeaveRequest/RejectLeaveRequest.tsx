@@ -23,13 +23,13 @@ export default function RejectLeaveRequest() {
   const leave_request_id = useSearchParams().get("leave_request_id");
   const {
     user_profile: { data: user_profile },
-  }: { [key: string]: { data: database_profile_type } } = useData();
+  } = useData();
   const queryClient = useQueryClient();
   const { mutate: reject, isPending } = useMutation({
     mutationFn: async (formData: FormData) => {
       const { error } = await rejectLeaveRequest({
         request_id: Number(leave_request_id),
-        reviewed_by: user_profile?.user_id,
+        reviewed_by: user_profile?.user_id ?? "",
         reviewed_comment: (formData.get("note") as string) ?? "",
       });
       if (error) {

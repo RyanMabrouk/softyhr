@@ -1,4 +1,4 @@
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import React, { useState } from "react";
 import ButtonPopUp from "../components/ButtonPopUp";
 import { addFolder } from "@/actions/files/addFolder";
@@ -6,25 +6,16 @@ import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import useToast from "@/hooks/useToast";
 import PopUpSkeleton from "@/app/_ui/_PopUp/PopUpSkeleton";
-import useData from "@/hooks/useData";
 export default function NewFolderPopUp() {
   const { toast } = useToast();
   const queryClient = useQueryClient();
-  const searchParams = useSearchParams();
   const Router = useRouter();
   const pathname = usePathname();
   const { handleSubmit } = useForm();
   const [isTyping, setIsTyping] = useState("");
-
-  const {
-    user_profile: { data: cur_user, isPending: isPending_user },
-  } = useData();
-  const role = cur_user?.role;
-
   const { mutateAsync: addFold } = useMutation({
     mutationFn: async (isTyping: any) => {
       const { error, data }: any = await addFolder(isTyping);
-      const folderId = data?.[0]?.id;
       if (error) {
         toast.error("Folder name existed Please try another name");
         setIsTyping("");

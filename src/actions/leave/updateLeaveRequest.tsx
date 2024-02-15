@@ -94,7 +94,7 @@ export default async function updateLeaveRequest({
     const { error: error1 } = await updateLeaveBalance({
       user_id: user_id,
       policy_id: policy_id,
-      categories_id: categories_id[0].categories_id,
+      categories_id: categories_id?.[0].categories_id,
       total_added_duration:
         type === "unlimited"
           ? 0 - (old_leave_request_total_duration - total_duration)

@@ -12,10 +12,7 @@ import useEmployeeData from "@/hooks/useEmloyeeData";
 import Image from "next/image";
 import { v4 as uuidv4 } from "uuid";
 import useData from "@/hooks/useData";
-import Input from "@/app/(dashboard)/people/components/Fileds/Input/Input";
-import DateInput from "@/app/(dashboard)/people/components/Fileds/DateInput/DateInput";
 import Loader from "@/app/(dashboard)/people/components/Loader/Loader";
-import FiledsChamps from "@/app/(dashboard)/people/components/Fileds/Fileds";
 import { Field } from "@/constants/userInfo";
 import { useQueryClient } from "@tanstack/react-query";
 import useToast from "@/hooks/useToast";
@@ -69,7 +66,7 @@ function EditEntry() {
                 action={SubmitForm}
                 className="flex w-full flex-col items-start justify-center gap-[1rem]"
               >
-                {settings?.data[0]?.["personnal"]?.Champs?.filter(
+                {settings?.data?.[0]?.["personnal"]?.Champs?.filter(
                   (section: any) => section?.champ == section_name,
                 )[0]?.Fields?.map((RowField: any) => {
                   const Component = Field[RowField?.type.toUpperCase()];
@@ -90,7 +87,7 @@ function EditEntry() {
                     />
                   );
                 })}
-                {settings?.data[0]?.["job"]?.Champs?.filter(
+                {settings?.data?.[0]?.["job"]?.Champs?.filter(
                   (section: any) => section?.champ == section_name,
                 )[0]?.Fields?.map((RowField: any) => {
                   const Component = Field[RowField?.type.toUpperCase()];

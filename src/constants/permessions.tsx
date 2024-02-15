@@ -6,8 +6,9 @@ export const permessions = [
   "edit:approved_leave_requests",
   "delete:leave_requests",
   "adjust:leave_balance",
-  // Time Off settings
+  //settings
   "access:/Settings/TimeOff",
+  "access:/Settings/AccessLevels",
   //files
   "read:files",
   "delete:files",

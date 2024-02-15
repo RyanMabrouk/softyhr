@@ -36,7 +36,7 @@ export function useAcceptLeaveRequest({
   const queryClient = useQueryClient();
   const {
     user_profile: { data: user_profile },
-  }: { [key: string]: { data: database_profile_type } } = useData();
+  } = useData();
   const { mutate: accept, isPending: isAccepting } = useMutation({
     mutationFn: async () => {
       const { error } = await acceptLeaveRequest({

@@ -6,13 +6,11 @@ export function HistoryTable({
   data,
   layout,
   emptyMessage = "There is no Data History for the selected filters..",
-  setToggleSort,
 }: {
   data: { [key: string]: any }[] | undefined;
   Headers: ReactNode[];
   layout: string;
   emptyMessage?: string;
-  setToggleSort?: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   // Headers Must Match the Keys in the data
   return (

@@ -40,11 +40,10 @@ export function PolyciesSwiper() {
     leave_requests: { data: leave_requests, isPending: isPending4 },
     leave_balance: { data: leave_balance, isPending: isPending5 },
   } = useEmployeeData({ employeeId: employeeId });
-  const isPending = isPending1 || isPending2 || isPending4 || isPending5;
   const user_policies_ids = leave_balance?.map(
     (e: database_profile_leave_balance_type) => e.policy_id,
   );
-  const policies: formatted_policy_type[] = leave_policies
+  const policies: formatted_policy_type[] | undefined = leave_policies
     ?.filter(
       (policy: database_leave_policies_type) =>
         user_policies_ids?.includes(policy.id) &&
@@ -58,7 +57,7 @@ export function PolyciesSwiper() {
         (categorie: databese_leave_categories_type) =>
           categorie.id === policy?.categories_id,
       );
-      const hours_scheduled = leave_requests
+      const hours_scheduled: number = leave_requests
         ?.filter(
           (leave: database_leave_requests_type) =>
             new Date(leave.start_at) > new Date() &&
@@ -82,7 +81,8 @@ export function PolyciesSwiper() {
         name: policy.name,
         type: policy.type,
         title: categorie?.name,
-        category_time_unit: categorie?.track_time_unit,
+        category_time_unit:
+          categorie?.track_time_unit as databese_leave_categories_track_time_unit_type,
         icon: generateLeaveCategorieIcon({
           categorie: categorie,
           className: "h-9 w-9",

@@ -83,7 +83,7 @@ function InboxLink({
 }: {
   label: string;
   path: string;
-  hook: () => { [key: string]: { data: any[] | undefined } };
+  hook: () => { [key: string]: { data: any[] | undefined | null } };
   dataSetName: string;
   setToggleView: React.Dispatch<React.SetStateAction<boolean>>;
   setNotifs: React.Dispatch<React.SetStateAction<notifs>>;

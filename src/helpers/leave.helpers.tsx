@@ -31,9 +31,9 @@ export function formatTotalHoursToTimeUnit(
   { remove_time_unit }: { remove_time_unit?: boolean } = {
     remove_time_unit: false,
   },
-) {
+): string {
   if (total_hours === 0) {
-    return remove_time_unit ? 0 : `0 ${time_unit}`;
+    return remove_time_unit ? "0" : `0 ${time_unit}`;
   }
   const total_time =
     time_unit === "days" ? (total_hours / 24).toFixed(2) : total_hours;

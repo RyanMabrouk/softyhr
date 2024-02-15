@@ -25,7 +25,7 @@ export function SelectGeneric({
   name?: string;
   error?: boolean;
   defaultValue?: Option;
-  options: Option[];
+  options: Option[] | undefined | null;
   group?: boolean;
   required?: boolean;
   setValueInParent?: React.Dispatch<React.SetStateAction<any>> | undefined;
@@ -44,7 +44,7 @@ export function SelectGeneric({
           data-placeholder-trigger="keydown"
           label={label}
           id={label}
-          className={` group peer h-9 w-[12.5rem] rounded-sm  border  border-gray-18  py-1 text-gray-23 shadow-sm transition-all ease-linear first-letter:capitalize placeholder:text-gray-14 hover:shadow-md [&_.Mui-selected]:!bg-fabric-700 [&_.MuiOutlinedInput-notchedOutline]:border-none ${className}`}
+          className={` group peer h-9 w-[12.5rem] rounded-sm border  border-gray-18  py-1  text-gray-23 shadow-sm transition-all ease-linear first-letter:capitalize  placeholder:text-gray-14 hover:shadow-md [&_.Mui-selected]:!bg-fabric-700 [&_.MuiOutlinedInput-notchedOutline]:border-none ${className}`}
           name={name}
           defaultValue={defaultValue ? defaultValue.value : "none"}
           displayEmpty
@@ -66,7 +66,7 @@ export function SelectGeneric({
                     <hr className="m-0 h-[unset] !w-full shrink-0 border-solid border-[rgba(0,0,0,0.12)] bg-gray-14" />
                     <MenuItem
                       key={option?.group_name}
-                      className="group peer !max-h-7  !w-full !border-y !border-black !px-2 !py-1 !text-center !text-[0.8rem] !capitalize !text-gray-21 !opacity-100"
+                      className="group peer !max-h-7 !w-full  !border-y !border-black !px-2 !py-1 !text-center !text-[0.8rem] !text-gray-21 !opacity-100 first-letter:capitalize"
                       disabled
                       aria-readonly
                       value="none"
@@ -91,7 +91,7 @@ export function SelectGeneric({
                 return (
                   <MenuItem
                     value={option?.value}
-                    className="peer capitalize text-gray-23 hover:!bg-fabric-700 hover:text-white "
+                    className="peer text-gray-23 first-letter:capitalize hover:!bg-fabric-700 hover:text-white "
                     key={(name ?? inputLabel ?? label) + i}
                   >
                     {option?.label}
@@ -101,7 +101,7 @@ export function SelectGeneric({
           {inputLabel && (
             <MenuItem
               value="none"
-              className="peer invisible !hidden font-sans capitalize text-gray-23"
+              className="peer invisible !hidden font-sans text-gray-23 first-letter:capitalize"
               disabled
               //hidden={true}
             >

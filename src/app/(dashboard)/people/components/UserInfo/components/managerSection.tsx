@@ -25,13 +25,13 @@ function ManagerSection({ user }: { user: Profile_Type }) {
               width={100}
               className="h-[1.5rem] w-[1.5rem] rounded-full object-cover"
               alt=""
-              src={data[0]?.picture || avatar}
+              src={data?.[0]?.picture || avatar}
             />
             <Link
-              href={`/people/${data[0]?.user_id}/personnal`}
+              href={`/people/${data?.[0]?.user_id}/personnal`}
               className="cursor-pointer text-sm font-normal text-gray-15 underline-offset-1 hover:text-fabric-700 hover:underline"
             >
-              {`${data[0]?.["Basic Information"]?.["First name"]} ${data[0]?.["Basic Information"]?.["Last name"]}`}
+              {`${data?.[0]?.["Basic Information"]?.["First name"]} ${data?.[0]?.["Basic Information"]?.["Last name"]}`}
             </Link>
           </UnderlinedLink>
         </div>
