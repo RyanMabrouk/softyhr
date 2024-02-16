@@ -31,7 +31,7 @@ function Component() {
   const queryClient = useQueryClient();
   const SendMailHandler = async () => {
     const response = await sendMail(
-      "ihebsebai4444@gmail.com",
+      data?.Email,
       Mail?.email_object,
       Mail?.email_html,
     );
@@ -45,8 +45,8 @@ function Component() {
     ]);
     if (response?.Status == "success" && !error) {
       toast.success(response?.message);
-      queryClient.invalidateQueries({ queryKey: ["Candidates"] });
       Router.push(pathname);
+      queryClient.invalidateQueries({ queryKey: ["Mails"] });
       queryClient.invalidateQueries({ queryKey: ["Candidates"] });
     } else toast.error(response?.message || "Something Went Wrong");
   };

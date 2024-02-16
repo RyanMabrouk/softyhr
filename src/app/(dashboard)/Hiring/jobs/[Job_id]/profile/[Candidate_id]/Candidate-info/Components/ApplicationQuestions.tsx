@@ -11,19 +11,14 @@ interface ApplicationQuestionsPropsType {
 }
 
 function ApplicationQuestions({ candidate }: ApplicationQuestionsPropsType) {
-  const params = useParams();
-  const { Job_id } = params;
-  const {
-    Hiring: { data },
-  } = useHiring({ id: Job_id }, "Application_Details");
+
   let index = 0;
   return (
     <div className="flex w-full flex-col items-start justify-center gap-[0.54rem]">
       <h1 className="font-base text-2xl">Application Questions for this Job</h1>
-      {data[0]?.Application_Details?.Questions?.length > 0 ? (
+      {candidate?.Questions ? (
         <div className="flex flex-col items-start justify-center gap-[0.4rem]">
           {Object.entries(candidate?.Questions || {})?.map((Question) => {
-            if (data[0]?.Application_Details?.Questions.includes(Question[0])) {
               index++;
               return (
                 <DetailsCard
@@ -33,11 +28,10 @@ function ApplicationQuestions({ candidate }: ApplicationQuestionsPropsType) {
                   Component={<h1 className="text-base">{Question[1]}</h1>}
                 />
               );
-            }
           })}
         </div>
       ) : (
-        <div className="flex h-full w-full items-center justify-center">
+        <div className="flex min-h-full bg-gray-14 rounded-md pt-4 w-full items-center justify-center">
           <Empty description="No Questions Available." />
         </div>
       )}

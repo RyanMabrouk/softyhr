@@ -56,6 +56,7 @@ export type Hiring_type = {
   Application_Details: Application_Details_type | null;
   candidates?: [] | null;
   created_at?: string;
+  Questions?:object;
   id?: number;
   "Job Status": string;
   job_information: {

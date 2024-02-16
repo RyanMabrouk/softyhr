@@ -4,64 +4,57 @@ import { RxAvatar } from "react-icons/rx";
 import PopUpSkeleton from "../../../PopUpSkeleton";
 import Link from "next/link";
 import { deleteJobOpening } from "@/actions/hiring/DeleteJobOpening";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import useToast from "@/hooks/useToast";
 import { useQueryClient } from "@tanstack/react-query";
 import useHiring from "@/hooks/Hiring/useHiring";
 import { Hiring_type } from "@/types/database.tables.types";
 import SubmitBtn from "../DeleteJob/SubmitBtn";
 import useCandidate from "@/hooks/Hiring/useCandidate";
+import { deleteCandidate } from "@/actions/hiring/DeleteCandidate";
 
 function DeleteCandidate() {
   const [Value, setValue] = useState<string>();
   const params = useSearchParams();
   const { toast } = useToast();
   const router = useRouter();
+  const { Job_id } = useParams();
   const queryClient = useQueryClient();
   const id = Number(params?.get("id")) || 0;
   const {
     candidates: { data, isPending },
   } = useCandidate({id});
 
-  async function DeleteJob() {
-    const response = await deleteJobOpening(id);
+  async function delete_candidate() {
+    const response = await deleteCandidate(id);
     if (response?.Error) toast.error(response?.Msg);
     else toast.success(response?.Msg);
-    router.push("/Hiring/jobs");
-    queryClient.invalidateQueries({ queryKey: ["Hiring"] });
+    router.push(`/Hiring/jobs/${Job_id}`);
+    queryClient.invalidateQueries({ queryKey: ["Candidates"] });
   }
-  //console.log(data?.find((job: Hiring_type) => job?.id == id));
+
   return (
     <PopUpSkeleton title="Just Checking...">
       <form
-        action={DeleteJob}
+        action={delete_candidate}
         className="flex min-w-[35rem] flex-col items-center justify-center gap-[1rem] px-5 py-6 "
       >
         <FaRegTrashAlt className="!text-6xl !text-red-700" />
         <h1 className="w-[30rem] text-center text-lg">
-          Are you sure you want to delete this job opening and all of its
-          candidates?
+          Are you sure you want to delete this candidate?
         </h1>
         <div className="flex flex-col items-center justify-start gap-[0.5rem] bg-gray-14 px-12 py-4">
           <div className="flex flex-col items-center justify-start">
-            <h1>
-              {
-                data?.find((job: Hiring_type) => job?.id == id)
-                  ?.job_information?.["Posting Title"]
-              }
-            </h1>
+            <h1>{data?.["First Name"]}</h1>
             <h1 className="text-sm font-light text-gray-29">
-              {
-                data?.find((job: Hiring_type) => job?.id == id)
-                  ?.job_information?.["Location"]
-              }
+              {data?.["Last Name"]}
             </h1>
             <div className="flex items-center justify-center gap-[0.5rem] text-sm font-light text-gray-29">
-              <RxAvatar className="text-lg !text-color-primary-8" />2 Candidates
+              <RxAvatar className="text-lg !text-color-primary-8" />
             </div>
           </div>
           <h1 className="text-sm text-red-700">
-            Type "Delete" to permanently delete this job opening.
+            Type "Delete" to permanently delete this candidate.
           </h1>
           <input
             className="focus:shadow-green h-[2rem] w-[8rem] pl-2 outline-none"

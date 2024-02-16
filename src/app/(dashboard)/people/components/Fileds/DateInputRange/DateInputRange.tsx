@@ -16,12 +16,13 @@ function DateInputRange({ RowField, setTouched, data }: DateInputPropsType) {
       <CalendarRange
         label={RowField?.name}
         DataType="text"
+        numberOfMonths={null}
         endDateName={RowField?.endDateName || "End Date"}
         startDateName={RowField?.startDateName || "Start Date"}
         setAction={() => setTouched && setTouched(true)}
         defaultValue={{
-          from: new Date(data?.[RowField?.startDateName  || ""] || ""),
-          to: new Date(data?.[RowField?.endDateName|| ""] || ""),
+          from: new Date(data?.[RowField?.startDateName || ""] || ""),
+          to: new Date(data?.[RowField?.endDateName || ""] || ""),
         }}
       />
     </div>

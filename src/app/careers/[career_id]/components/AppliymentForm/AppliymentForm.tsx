@@ -1,4 +1,3 @@
-import { useSettings } from "@/hooks/Settings/useSettings";
 import { Hiring_type } from "@/types/database.tables.types";
 import React from "react";
 import { v4 as uuidv4 } from "uuid";
@@ -11,6 +10,8 @@ import { UploadImage } from "@/actions/UploadFiles/uploadImage";
 import { useQueryClient } from "@tanstack/react-query";
 import ApplyFormSection from "@/app/careers/[career_id]/components/AppliymentForm/ApplyFormSection";
 import { usePathname, useRouter } from "next/navigation";
+import useHiringGuest from "@/hooks/Hiring/useHiringGuest";
+import { GetQuestions } from "@/helpers/Hiring/GetQuestions";
 
 interface AppliymentFormPropsType {
   job: Hiring_type;
@@ -26,11 +27,15 @@ function AppliymentForm({
   SubmittingButtonText,
 }: AppliymentFormPropsType) {
   const { toastContainer, toast } = useToast();
-  const { data, isPending } = useSettings("AppliementForm");
+  const {
+    Hiring: { data, isPending },
+  } = useHiringGuest(
+    { id: job?.id, "Job Status": "Open" }
+  );
   const QueryClient = useQueryClient();
   const router = useRouter();
   const pathname = usePathname();
-
+  console.log(data);
   const Base_url =
     "https://ybwqmrrlvmpdikvmkqra.supabase.co/storage/v1/object/public/hiring/";
   const SubmitForm = async (formdata: FormData) => {
@@ -58,11 +63,13 @@ function AppliymentForm({
     } catch (error) {
       toast.error("something went Wrong");
     }
+    const candidate = FormulateFormData(Formdata);
+    const Questions = GetQuestions(candidate, job?.Questions || {});
     const response = await CreateCandidate({
-      ...FormulateFormData(Formdata),
+      ...candidate,
       job_id: job?.id,
       "Hiring Lead": job?.job_information?.["Hiring Lead"],
-      Questions: job?.Application_Details?.Application_Questions,
+      Questions,
     });
     if (response?.Submitted) {
       QueryClient.invalidateQueries({ queryKey: ["Candidates"] });
@@ -83,22 +90,42 @@ function AppliymentForm({
             className="flex flex-col items-start justify-center gap-[1rem]"
             action={SubmitForm}
           >
-            {data?.map((FieldsArray: any, index: number) => {
-              return (
-                <div
-                  className="mt-4 flex w-full flex-col place-items-start justify-center gap-[2rem] border-b border-gray-18 pb-8"
-                  key={index}
-                >
-                  <div className="flex flex-col items-start justify-center gap-[1rem]">
-                    <ApplyFormSection
-                      key={uuidv4()}
-                      FieldsCheck={job?.Application_Details}
-                      FieldsArray={FieldsArray}
-                    />
+            {data[0]?.Form?.map(
+              (FieldsArray: any, index: number) => {
+                return (
+                  <div
+                    className="mt-4 flex w-full flex-col place-items-start justify-center gap-[2rem] border-b border-gray-18 pb-8"
+                    key={index}
+                  >
+                    <div className="flex flex-col items-start justify-center gap-[1rem]">
+                      <ApplyFormSection
+                        key={uuidv4()}
+                        FieldsCheck={job?.Application_Details}
+                        FieldsArray={FieldsArray}
+                      />
+                    </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              },
+            )}
+            {data[0]?.Questions?.map(
+              (FieldsArray: any, index: number) => {
+                return (
+                  <div
+                    className="mt-4 flex w-full flex-col place-items-start justify-center gap-[2rem] border-b border-gray-18 pb-8"
+                    key={index}
+                  >
+                    <div className="flex flex-col items-start justify-center gap-[1rem]">
+                      <ApplyFormSection
+                        key={uuidv4()}
+                        FieldsCheck={job?.Application_Details}
+                        FieldsArray={FieldsArray}
+                      />
+                    </div>
+                  </div>
+                );
+              },
+            )}
             <div className="-mt-4 flex items-center justify-center gap-[2rem]">
               <SubmitButton
                 textSubmitting={SubmittingButtonText}
