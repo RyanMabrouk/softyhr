@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   compiler: {
-    // removeConsole: process.env.NODE_ENV !== "development", // Remove console.log in production
+     removeConsole: process.env.NODE_ENV !== "development", // Remove console.log in production
   },
   experimental: {
     serverActions: { allowedOrigins: ["localhost:3001", "rh.ixamee.com"] },
@@ -43,14 +43,14 @@ const nextConfig = {
   webpack: (config) => {
     config.externals = [...config.externals, { canvas: "canvas" }];
     // Add the resolve configuration
-  /*  config.resolve = {
+    config.resolve = {
       ...config.resolve,
       alias: {
         ...config.resolve.alias,
         stream: "stream-browserify",
       },
     };
-*/
+
     return config;
   },
 };
