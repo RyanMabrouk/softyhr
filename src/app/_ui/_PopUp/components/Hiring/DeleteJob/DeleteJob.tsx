@@ -10,6 +10,7 @@ import useToast from "@/hooks/useToast";
 import { useQueryClient } from "@tanstack/react-query";
 import useHiring from "@/hooks/Hiring/useHiring";
 import { Hiring_type } from "@/types/database.tables.types";
+import Loader from "@/app/_ui/Loader/Loader";
 
 function DeleteJob() {
   const [Value, setValue] = useState<string>();
@@ -20,9 +21,9 @@ function DeleteJob() {
   const id = Number(params?.get("id")) || 0;
   const {
     Hiring: { data, isPending },
-  } = useHiring({id},"*,candidates(*)");
-
-  async function DeleteJob() {
+  } = useHiring({id},"*,candidates(id)");
+  console.log("data", data);
+  async function delete_job() {
     const response = await deleteJobOpening(id);
     if (response?.Error) toast.error(response?.Msg);
     else toast.success(response?.Msg);
@@ -32,8 +33,10 @@ function DeleteJob() {
   
   return (
     <PopUpSkeleton title="Just Checking...">
-      <form
-        action={DeleteJob}
+     {isPending ?
+      <Loader/>
+     :<form
+        action={delete_job}
         className="flex min-w-[35rem] flex-col items-center justify-center gap-[1rem] px-5 py-6 "
       >
         <FaRegTrashAlt className="!text-6xl !text-red-700" />
@@ -43,20 +46,13 @@ function DeleteJob() {
         </h1>
         <div className="flex flex-col items-center justify-start gap-[0.5rem] bg-gray-14 px-12 py-4">
           <div className="flex flex-col items-center justify-start">
-            <h1>
-              {
-                data?.find((job: Hiring_type) => job?.id == id)
-                  ?.job_information?.["Posting Title"]
-              }
-            </h1>
+            <h1>{data?.job_information?.["Posting Title"]}</h1>
             <h1 className="text-sm font-light text-gray-29">
-              {
-                data?.find((job: Hiring_type) => job?.id == id)
-                  ?.job_information?.["Location"]
-              }
+              {data?.job_information?.["Location"]}
             </h1>
             <div className="flex items-center justify-center gap-[0.5rem] text-sm font-light text-gray-29">
-              <RxAvatar className="text-lg !text-color-primary-8" />2 Candidates
+              <RxAvatar className="text-lg !text-color-primary-8" />
+              {data[0]?.candidates?.length || 0} Candidates
             </div>
           </div>
           <h1 className="text-sm text-red-700">
@@ -87,7 +83,7 @@ function DeleteJob() {
             Keep Job Opening
           </Link>
         </div>
-      </form>
+      </form>}
     </PopUpSkeleton>
   );
 }

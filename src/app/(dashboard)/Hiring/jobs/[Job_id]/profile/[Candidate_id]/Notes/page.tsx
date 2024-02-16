@@ -11,6 +11,7 @@ import useRealTime from "@/hooks/useRealTime";
 import AddComment from "./components/AddComment";
 import ReplyComment from "./components/ReplyComment";
 import { useQueryClient } from "@tanstack/react-query";
+import CommentsListSkeleton from "./components/CommentsListSkeleton";
 
 function Page() {
   const params = useParams();
@@ -39,7 +40,7 @@ function Page() {
       </div>
       <div className="flex h-full w-10/12 flex-col items-center justify-center gap-2 overflow-hidden rounded-lg bg-gray-14 p-4 px-6">
         {isPending ? (
-          <Loader />
+          <CommentsListSkeleton />
         ) : data.length > 0 ? (
           <>
             <AddComment
@@ -62,7 +63,7 @@ function Page() {
                       />
                     )}
                     {comment?.candidate_comments?.length > 0 ? (
-                      <div className="flex w-11/12 flex-col items-end justify-end gap-[0.4rem]">
+                      <div className="flex w-11/12 flex-col items-end justify-end gap-[0.4rem] self-end">
                         {comment?.candidate_comments?.map(
                           (reply_comment: any, index: number) => {
                             return (

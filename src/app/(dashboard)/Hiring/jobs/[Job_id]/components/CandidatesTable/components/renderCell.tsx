@@ -40,7 +40,9 @@ export const renderCell = (
             {user?.["Candidate Info"]}
           </Link>
           <h1 className="text-sm text-gray-15">
-            {`${Hiring?.job_information?.["Job Location"] || "No adresse"} - ${Hiring.job_information?.["Location"]}`}
+            {Hiring?.job_information?.[
+              "Job Location"
+            ]?`${Hiring?.job_information?.["Job Location"] } - ${Hiring.job_information?.["Location"]}`:"Remote"}
           </h1>
         </div>
       );

@@ -48,7 +48,7 @@ function CommentCard({
           <div className="flex items-start justify-center">
             <h1 className="text-sm text-gray-33 ">{DaysAgo(Created_at)}</h1>
           </div>
-          <h1 className="py-2 text-base">{Comment_content}</h1>
+          <h1 className="py-2 text-base w-full">{Comment_content}</h1>
         </div>
       </div>
     </>

@@ -95,7 +95,7 @@ function ApplySection({ job }: ApplySectionPropsType) {
                 className="flex w-full flex-col items-start justify-center gap-[0.3rem] border-b border-gray-32 pb-4"
               >
                 <h1 className="text-sm text-gray-15">{label}</h1>
-                <h1 className="">{String(job?.job_information?.[name])}</h1>
+                <h1 className="">{String(job?.job_information?.[name]) || label=="Location" && "Remote"}</h1>
               </div>
             ),
           )}

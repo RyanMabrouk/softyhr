@@ -1,7 +1,7 @@
 "use client";
 import { CalendarIcon } from "@radix-ui/react-icons";
 import { format } from "date-fns";
-import React from 'react';
+import React from "react";
 import { DateRange } from "react-day-picker";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -29,7 +29,8 @@ interface CalendarProps {
   setEndValueInParent?:
     | React.Dispatch<React.SetStateAction<Date | null>>
     | undefined;
-  DataType?:string | undefined;
+  DataType?: string | undefined;
+  numberOfMonths?:number | null;
 }
 export function CalendarRange({
   className,
@@ -41,7 +42,8 @@ export function CalendarRange({
   setEndValueInParent,
   required,
   setAction,
-  DataType = 'date'
+  DataType = "date",
+  numberOfMonths ,
 }: CalendarProps) {
   const [date, setDate] = useState<DateRange | undefined>(defaultValue);
   // Sync the default value with the date
@@ -102,7 +104,7 @@ export function CalendarRange({
               id="date"
               variant={"outline"}
               className={cn(
-                "w-[15rem] justify-start border border-transparent text-center font-normal ",
+                "w-[15rem] justify-start border border-transparent text-center !text-[0.95rem] !font-normal !text-gray-13 ",
                 !date && "text-muted-foreground",
               )}
             >
@@ -136,7 +138,7 @@ export function CalendarRange({
               defaultMonth={date?.from ?? defaultValue?.from ?? new Date()}
               selected={date}
               onSelect={setDate}
-              numberOfMonths={2}
+              {...(numberOfMonths != null ? { numberOfMonths: 2 } : {})}
             />
           </PopoverContent>
         </Popover>

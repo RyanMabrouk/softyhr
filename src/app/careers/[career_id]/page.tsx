@@ -20,7 +20,9 @@ import useHiringGuest from "@/hooks/Hiring/useHiringGuest";
 function Page({ params: { career_id } }: { params: { career_id: string } }) {
   const {
     Hiring: { data, isPending, error },
-  } = useHiringGuest({ id: career_id, "Job Status": "Open" });
+  } = useHiringGuest(
+    { id: career_id, "Job Status": "Open" }
+  );
 
   return (
     <div className=" flex h-screen w-[99dvw] items-start justify-center gap-[2rem] py-8 pt-8">
@@ -52,7 +54,7 @@ function Page({ params: { career_id } }: { params: { career_id: string } }) {
                   <h1 className="text-sm text-gray-15">
                     {data[0]?.job_information?.["Departement"] +
                       " · " +
-                      data[0]?.job_information?.["Job Location"]}
+                     ( data[0]?.job_information?.["Job Location"] || "Remote")}
                   </h1>
                 </div>
                 <Swiper

@@ -42,6 +42,7 @@ const LayoutComponent = memo(function LayoutComponent({
 
   const {
     user_profile: { data: user },
+    settings: { data, isPending },
   } = useData();
   const [Show, setShow] = useState<boolean>(false);
   const Router = useRouter();
@@ -59,18 +60,24 @@ const LayoutComponent = memo(function LayoutComponent({
     "Application-Details": ApplicationDetails,
     "Job-Boards": JobBoards,
   };
-
+  console.log(data);
   //------create_new_job------------
   async function CreateNewJob() {
     if (ApplicationDetails?.done && InformationJob?.done) {
       const NewJob = {
         job_information: { ...InformationJob?.values },
-        Application_Details: { ...ApplicationDetails?.values },
+        Application_Details: {
+          ...ApplicationDetails?.values,
+        },
         job_Boards: { ...JobBoards?.values },
         org_name: user?.org_name,
+        ...data?.[0]?.["AppliementForm"],
         ["Job Status"]: InformationJob?.values?.["Job Status"],
       };
-      const response = await CreateJobOpening(NewJob);
+      const response = await CreateJobOpening(
+        NewJob,
+        data?.[0]?.["AppliementForm"],
+      );
       if (response?.Error) toast.error(response?.Msg);
       else toast.success(response?.Msg);
       router.push("/Hiring/jobs");
