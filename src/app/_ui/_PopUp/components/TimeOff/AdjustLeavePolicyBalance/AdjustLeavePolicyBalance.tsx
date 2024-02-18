@@ -28,7 +28,7 @@ export default function AdjustLeavePolicyBalance() {
   const {
     employee_profile: { data: employee_profile },
     leave_balance: { data: leave_balance },
-  } = useEmployeeData({ employeeId: employeeId });
+  } = useEmployeeData({ employeeId: String(employeeId) });
   // current policy balance
   const policy_balance = leave_balance?.find(
     (e: database_profile_leave_balance_type) =>

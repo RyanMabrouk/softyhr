@@ -104,7 +104,7 @@ export function CalendarRange({
               id="date"
               variant={"outline"}
               className={cn(
-                "w-[15rem] justify-start border border-transparent text-center !text-[0.95rem] !font-normal !text-gray-13 ",
+                "h-9 w-60 justify-start border border-transparent text-center font-normal  text-[0.95rem] text-gray-13 ",
                 !date && "text-muted-foreground",
               )}
             >

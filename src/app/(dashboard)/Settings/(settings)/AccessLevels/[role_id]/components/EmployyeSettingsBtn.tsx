@@ -18,7 +18,10 @@ export function EmployyeSettingsBtn({ employeeId }: { employeeId: string }) {
           name: "Reset User's Password",
           link: {
             pathname: pathname,
-            query: { employeeId: employeeId, popup: "" },
+            query: {
+              employeeId: employeeId,
+              popup: "RESET_EMPLOYEE_PASSWORD",
+            },
           },
         },
         {

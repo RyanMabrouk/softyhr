@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { Suspense, useState } from "react";
 import CustomSwiper from "@/app/_ui/swiper";
 import { FaArrowLeft } from "react-icons/fa";
 import { FaArrowRight } from "react-icons/fa";
@@ -18,6 +18,7 @@ import { useParams } from "next/navigation";
 import useEmployeeData from "@/hooks/useEmloyeeData";
 import useLeaveData from "@/hooks/TimeOff/useLeaveData";
 import { Player } from "@lottiefiles/react-lottie-player";
+import Loader from "@/app/_ui/Loader/Loader";
 interface formatted_policy_type {
   id: number;
   name: string;
@@ -37,9 +38,10 @@ export function PolyciesSwiper() {
     leave_categories: { data: leave_categories, isPending: isPending2 },
   } = useLeaveData();
   const {
-    leave_requests: { data: leave_requests, isPending: isPending4 },
-    leave_balance: { data: leave_balance, isPending: isPending5 },
-  } = useEmployeeData({ employeeId: employeeId });
+    leave_requests: { data: leave_requests, isPending: isPending3 },
+    leave_balance: { data: leave_balance, isPending: isPending4 },
+  } = useEmployeeData({ employeeId: String(employeeId) });
+  const isPending = isPending1 || isPending2 || isPending3 || isPending4;
   const user_policies_ids = leave_balance?.map(
     (e: database_profile_leave_balance_type) => e.policy_id,
   );
@@ -95,8 +97,9 @@ export function PolyciesSwiper() {
           )?.balance ?? 0,
       };
     });
+  if (isPending) return <Loader />;
   return (
-    <>
+    <Suspense fallback={<Loader />}>
       <section className="relative mx-auto block w-full max-w-[57.5vw] px-12 ">
         {policies && policies?.length > 0 ? (
           <>
@@ -137,6 +140,6 @@ export function PolyciesSwiper() {
           </div>
         )}
       </section>
-    </>
+    </Suspense>
   );
 }

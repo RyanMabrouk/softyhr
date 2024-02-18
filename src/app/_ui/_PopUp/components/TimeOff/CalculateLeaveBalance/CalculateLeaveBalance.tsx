@@ -39,7 +39,8 @@ export default function CalculateLeaveBalance() {
   const [chalendarDate, setCalendarDate] = React.useState<Date>(new Date());
   const {
     leave_balance: { data: leave_balance },
-  } = useEmployeeData({ employeeId: employeeId });
+    employee_profile: { data: employee_profile },
+  } = useEmployeeData({ employeeId: String(employeeId) });
   const current_policy_balance:
     | database_profile_leave_balance_type
     | undefined = leave_balance?.find(
@@ -53,9 +54,6 @@ export default function CalculateLeaveBalance() {
   const {
     leave_categories: { data: leave_categories },
   } = useLeaveData();
-  const {
-    employee_profile: { data: employee_profile },
-  } = useEmployeeData({ employeeId: employeeId });
   useEffect(() => {
     setBalance(
       (current_policy_balance?.balance ?? 0) +

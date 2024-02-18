@@ -41,7 +41,7 @@ export function FormInputs() {
   const {
     leave_requests: { data: leave_requests },
     leave_balance: { data: current_user_leave_balance },
-  } = useEmployeeData({ employeeId: employeeId });
+  } = useEmployeeData({ employeeId: String(employeeId) });
   // User Leave Balance
   const current_user_categories_ids = current_user_leave_balance?.map(
     (e: database_profile_leave_balance_type) => Number(e.categories_id),

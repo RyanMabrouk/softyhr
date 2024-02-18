@@ -764,6 +764,7 @@ export type Database = {
           Hiring: Json | null
           Job: Json | null
           "Job Information": Json[] | null
+          last_signed_in: string | null
           org_name: string
           picture: string | null
           "Social Links": Json | null
@@ -786,6 +787,7 @@ export type Database = {
           Hiring?: Json | null
           Job?: Json | null
           "Job Information"?: Json[] | null
+          last_signed_in?: string | null
           org_name: string
           picture?: string | null
           "Social Links"?: Json | null
@@ -808,6 +810,7 @@ export type Database = {
           Hiring?: Json | null
           Job?: Json | null
           "Job Information"?: Json[] | null
+          last_signed_in?: string | null
           org_name?: string
           picture?: string | null
           "Social Links"?: Json | null

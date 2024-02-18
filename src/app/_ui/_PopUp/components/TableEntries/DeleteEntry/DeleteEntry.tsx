@@ -29,7 +29,7 @@ function DeleteItem() {
   const { employeeId } = useParams();
   const {
     employee_profile: { data, isPending },
-  } = useEmployeeData({ employeeId });
+  } = useEmployeeData({ employeeId: String(employeeId) });
   const { settings } = useData();
   const { toast } = useToast();
 
@@ -42,7 +42,6 @@ function DeleteItem() {
     queryClient.invalidateQueries({ queryKey: ["profiles", employeeId] });
     router.push(pathname);
     queryClient.invalidateQueries({ queryKey: ["profiles", employeeId] });
-
   };
   return (
     <>

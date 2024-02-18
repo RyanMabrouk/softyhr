@@ -17,7 +17,7 @@ export function useAlreadyBooked(employeeId: string | string[]) {
     leave_requests: { data: user_leave_requests },
   }: {
     leave_requests: { data: database_leave_requests_type[] | undefined | null };
-  } = useEmployeeData({ employeeId: employeeId });
+  } = useEmployeeData({ employeeId: String(employeeId) });
   const searchParams = useSearchParams();
   const leave_request_id = Number(searchParams.get("leave_request_id"));
   // Leave Requests Data
