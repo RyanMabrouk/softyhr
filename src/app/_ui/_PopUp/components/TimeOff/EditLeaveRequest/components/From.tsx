@@ -35,7 +35,7 @@ export function From() {
   const { formError } = useContext<errorContextType>(errorContext);
   const {
     leave_requests: { data: leave_requests },
-  } = useEmployeeData({ employeeId: employeeId });
+  } = useEmployeeData({ employeeId: String(employeeId) });
   // Leave Requests Data
   const request_data: database_leave_requests_type = leave_requests?.find(
     (request: database_leave_requests_type) => request.id == leave_request_id,

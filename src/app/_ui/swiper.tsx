@@ -7,7 +7,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 export default function CustomSwiper(props: {
-  slides: any;
+  slides: any[];
   initialSlide?: number;
   slidesPerView?: number;
   spaceBetween?: number;

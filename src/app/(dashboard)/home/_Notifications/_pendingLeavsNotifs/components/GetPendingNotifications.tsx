@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect } from "react";
 import { usePendingLeaveRequestNotifications } from "../hooks/usePendingLeaveRequestNotifications";
 import { NotificationType } from "../../Notifications";
 export function GetPendingNotifications({

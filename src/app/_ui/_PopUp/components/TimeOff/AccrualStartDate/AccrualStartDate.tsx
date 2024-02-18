@@ -18,7 +18,7 @@ export default function AccrualStartDate() {
   const pathname = usePathname();
   const {
     employee_profile: { data: employee_profile },
-  } = useEmployeeData({ employeeId: employeeId });
+  } = useEmployeeData({ employeeId: String(employeeId) });
   // current employee full name
   const first_name: string =
     employee_profile?.["Basic Information"]?.["First name"];

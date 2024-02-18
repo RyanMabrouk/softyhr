@@ -33,7 +33,7 @@ export default function ChangeLeavePolicy() {
   } = useLeaveData();
   const {
     employee_profile: { data: employee_profile },
-  } = useEmployeeData({ employeeId: employeeId });
+  } = useEmployeeData({ employeeId: String(employeeId) });
   const { policy, category } = usePolicy({ policy_id: Number(policy_id) });
   const options = leave_policies
     ?.filter(

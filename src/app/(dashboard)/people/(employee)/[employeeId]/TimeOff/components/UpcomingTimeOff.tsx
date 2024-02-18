@@ -44,7 +44,7 @@ export function UpcomingTimeOff() {
   } = useLeaveData();
   const {
     leave_requests: { data: leave_requests, isPending: isPending2 },
-  } = useEmployeeData({ employeeId: employeeId });
+  } = useEmployeeData({ employeeId: String(employeeId) });
   const isPending = isPending2 || isPending3 || isPending4;
   // format leave requests data to upcoming leave requests only
   const upcoming_leave_requests_data:
@@ -94,9 +94,6 @@ export function UpcomingTimeOff() {
         note: e.note ?? "",
       };
     });
-  if (isPending) {
-    throw new Promise((resolve) => setTimeout(resolve, 1)); // Simulate loading delay
-  }
   return (
     <Suspense fallback={<Loader />}>
       <div className="flex flex-col">

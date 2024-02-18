@@ -42,7 +42,7 @@ const nextConfig = {
   },
   webpack: (config) => {
     config.externals = [...config.externals, { canvas: "canvas" }];
-    // Add the resolve configuration
+    // resolve configuration
     config.resolve = {
       ...config.resolve,
       alias: {
@@ -50,7 +50,6 @@ const nextConfig = {
         stream: "stream-browserify",
       },
     };
-
     return config;
   },
 };

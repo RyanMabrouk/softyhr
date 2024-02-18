@@ -15,7 +15,7 @@ export function Content() {
   const { employeeId } = useParams();
   const {
     employee_profile: { data: user },
-  } = useEmployeeData({ employeeId });
+  } = useEmployeeData({ employeeId: String(employeeId) });
   const pathname = usePathname();
   return (
     <div className="z-20 flex min-h-[13rem] justify-center bg-gradient-to-r from-color-primary-7  to-color-primary-9 transition-all duration-300 ">
@@ -25,6 +25,7 @@ export function Content() {
             <Image
               src={user?.picture ?? avatar}
               alt="user-name"
+              layout="responsive"
               priority
               width={208}
               height={208}

@@ -32,7 +32,7 @@ export default function AddTimeOffPolicy() {
   const {
     employee_profile: { data: employee_profile },
     leave_balance: { data: leave_balance },
-  } = useEmployeeData({ employeeId: employeeId });
+  } = useEmployeeData({ employeeId: String(employeeId) });
   // current employee full name
   const first_name: string =
     employee_profile?.["Basic Information"]?.["First name"];

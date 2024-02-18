@@ -23,7 +23,7 @@ export default function EditLeaveRequest() {
   const leave_request_id = Number(searchParams.get("leave_request_id"));
   const {
     employee_profile: { data: employee_profile },
-  } = useEmployeeData({ employeeId: employeeId });
+  } = useEmployeeData({ employeeId: String(employeeId) });
   // Current User Data
   const full_name: string =
     employee_profile?.["Basic Information"]?.["First name"] +
@@ -37,33 +37,31 @@ export default function EditLeaveRequest() {
     ) ?? [])?.[0]?.["Job Title"] ?? "";
 
   return (
-    <>
-      <PopUpSkeleton
-        className="flex w-[50rem] flex-col items-center px-8 py-6"
-        title={leave_request_id ? "Edit Time Off Request" : "Record Time Off"}
-      >
-        <header className="flex w-full flex-row items-center gap-2 bg-gray-14 px-4 py-3">
-          <Image
-            src={employee_profile?.avatar || default_avatar}
-            className="h-12 w-12 rounded-full"
-            alt=""
-            width={80}
-            height={80}
-          />
-          <div className="flex flex-col">
-            <div className="m-0 block text-[1.2rem] font-normal capitalize leading-[1.733rem] text-black">
-              {full_name}
-            </div>
-            <div className="text-sm leading-6 text-gray-21">{job_title}</div>
+    <PopUpSkeleton
+      className="flex w-[50rem] flex-col items-center px-8 py-6"
+      title={leave_request_id ? "Edit Time Off Request" : "Record Time Off"}
+    >
+      <header className="flex w-full flex-row items-center gap-2 bg-gray-14 px-4 py-3">
+        <Image
+          src={employee_profile?.avatar || default_avatar}
+          className="h-12 w-12 rounded-full"
+          alt=""
+          width={80}
+          height={80}
+        />
+        <div className="flex flex-col">
+          <div className="m-0 block text-[1.2rem] font-normal capitalize leading-[1.733rem] text-black">
+            {full_name}
           </div>
-        </header>
-        <Hr />
-        <ErrorContextProvider>
-          <DateRangeContextProvider>
-            <From />
-          </DateRangeContextProvider>
-        </ErrorContextProvider>
-      </PopUpSkeleton>
-    </>
+          <div className="text-sm leading-6 text-gray-21">{job_title}</div>
+        </div>
+      </header>
+      <Hr />
+      <ErrorContextProvider>
+        <DateRangeContextProvider>
+          <From />
+        </DateRangeContextProvider>
+      </ErrorContextProvider>
+    </PopUpSkeleton>
   );
 }

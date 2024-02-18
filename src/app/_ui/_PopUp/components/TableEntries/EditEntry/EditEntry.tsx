@@ -28,7 +28,7 @@ function EditEntry() {
   const { employeeId } = useParams();
   const {
     employee_profile: { data, isPending },
-  } = useEmployeeData({ employeeId });
+  } = useEmployeeData({ employeeId: String(employeeId) });
   const { settings } = useData();
   const { toast } = useToast();
 

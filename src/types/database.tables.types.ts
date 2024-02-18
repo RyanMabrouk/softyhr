@@ -112,8 +112,8 @@ export interface RowFieldType {
   accept?: string | undefined;
   allowFutureDates?: boolean | undefined;
   allowPreviousDates?: boolean | undefined;
-  endDateName?:string | undefined;
-  startDateName?:string | undefined;
+  endDateName?: string | undefined;
+  startDateName?: string | undefined;
 }
 export type RowType = {
   Row: RowFieldType[];

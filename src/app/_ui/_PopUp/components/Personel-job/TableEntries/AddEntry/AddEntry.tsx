@@ -27,7 +27,7 @@ function AddEntry() {
   const router = useRouter();
   const {
     employee_profile: { data, isPending },
-  } = useEmployeeData({ employeeId });
+  } = useEmployeeData({ employeeId: String(employeeId) });
   const { settings } = useData();
   const { toast } = useToast();
 

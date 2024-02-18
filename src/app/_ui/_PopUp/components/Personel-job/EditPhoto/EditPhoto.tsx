@@ -10,7 +10,7 @@ function EditPhoto() {
   const { employeeId } = useParams();
   const {
     employee_profile: { data, isPending },
-  } = useEmployeeData({ employeeId });
+  } = useEmployeeData({ employeeId: String(employeeId) });
   return (
     <>
       {isPending ? (

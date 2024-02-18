@@ -77,7 +77,7 @@ export function SelectGeneric({
                 ) : (
                   <MenuItem
                     value={option?.value}
-                    className={`peer !max-h-8 !px-2 !py-2 text-[0.95rem] capitalize text-gray-23 hover:!bg-fabric-700 hover:text-white ${
+                    className={`peer !max-h-8 !px-2 !py-2 text-[0.95rem] capitalize text-gray-23 transition-all ease-linear hover:!bg-fabric-700 hover:text-white ${
                       option?.disabled ? "opacity-50" : "opacity-90"
                     }`}
                     key={Number(option?.value) + i}
@@ -91,7 +91,7 @@ export function SelectGeneric({
                 return (
                   <MenuItem
                     value={option?.value}
-                    className="peer text-gray-23 first-letter:capitalize hover:!bg-fabric-700 hover:text-white "
+                    className="peer  text-gray-23 transition-all  ease-linear first-letter:capitalize hover:!bg-fabric-700 hover:text-white "
                     key={(name ?? inputLabel ?? label) + i}
                   >
                     {option?.label}

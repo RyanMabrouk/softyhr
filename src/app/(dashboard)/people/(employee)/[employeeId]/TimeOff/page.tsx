@@ -10,6 +10,7 @@ import { ChangeAccrualStartBtn } from "./components/Buttons/ChangeAccrualStartBt
 import { AddTimeOffPolicyBtn } from "./components/Buttons/AddTimeOffPolicyBtn";
 import { ToggleDateSortContextProvider } from "./context/toggleDateSortContext";
 import { LeaveDataHydration } from "../../../../../../provider/LeaveDataHydration";
+import RoleGuard from "@/app/_ui/RoleGuard";
 export default function Page({
   params,
   searchParams,
@@ -28,13 +29,15 @@ export default function Page({
                 Time off
               </div>
             </div>
-            <div className="flex flex-row items-center gap-2 leading-8 text-gray-25">
-              <span className=" max-h-[2rem] whitespace-nowrap">
-                Accrual Level Start Date:
-              </span>
-              <ChangeAccrualStartBtn />
-              <AddTimeOffPolicyBtn />
-            </div>
+            <RoleGuard permissions={["access:/Settings/TimeOff"]}>
+              <div className="flex flex-row items-center gap-2 leading-8 text-gray-25">
+                <span className=" max-h-[2rem] whitespace-nowrap">
+                  Accrual Level Start Date:
+                </span>
+                <ChangeAccrualStartBtn />
+                <AddTimeOffPolicyBtn />
+              </div>
+            </RoleGuard>
           </div>
         </header>
         <Hr />

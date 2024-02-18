@@ -7,10 +7,7 @@ import {
 } from "@tanstack/react-query";
 import useToast from "@/hooks/useToast";
 import acceptLeaveRequest from "@/actions/leave/acceptLeaveRequest";
-import {
-  database_leave_request_status_type,
-  database_profile_type,
-} from "@/types/database.tables.types";
+import { database_leave_request_status_type } from "@/types/database.tables.types";
 import { request_type } from "../types/types";
 
 interface UseAcceptLeaveRequestProps {
