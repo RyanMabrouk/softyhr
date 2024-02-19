@@ -30,6 +30,7 @@ RUN --mount=type=bind,source=package.json,target=package.json \
     npm ci
 # Copy the rest of the source files into the image.
 COPY . .
+COPY .env ./
 # Run the build script.
 ENV NODE_OPTIONS="--max-old-space-size=4096"
 RUN npm run build
