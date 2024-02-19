@@ -39,13 +39,13 @@ export default function Layout({
       path: "/Settings/Approvals",
       icon: <AiFillLike className="h-5 w-5" />,
       permissions: [],
-    },*/
+    },
     {
       label: "Access Levels",
       path: "/Settings/AccessLevels",
       icon: <FaLock className="h-4 w-4" />,
       permissions: ["access:/Settings/AccessLevels"],
-    },
+    },*/
   ];
   return (
     <>

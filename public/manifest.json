@@ -3,18 +3,24 @@
   "short_name": "Softyhr",
   "icons": [
     {
-      "src": "/src/app/icon.png",
-      "sizes": "192x192",
+      "src": "./icon.png",
+      "sizes": "128x128",
       "type": "image/png",
-      "purpose": "any maskable"
+      "prupuse": "any"
     },
     {
-      "src": "/src/app/icon.png",
+      "src": "./icon144x144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "prupuse": "any"
+    },
+    {
+      "src": "./icon384x384.png",
       "sizes": "384x384",
       "type": "image/png"
     },
     {
-      "src": "/src/app/icon.png",
+      "src": "./icon512x512.png",
       "sizes": "512x512",
       "type": "image/png"
     }

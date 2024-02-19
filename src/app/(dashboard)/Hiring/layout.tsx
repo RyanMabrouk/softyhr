@@ -8,7 +8,6 @@ import {
 } from "@/constants/Hiring/Hiring";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { CreateHiringJob } from "@/constants/Hiring/Hiring";
 import { v4 as uuidv4 } from "uuid";
 
 interface LayoutHiringProps {
@@ -20,7 +19,7 @@ export default function HiringLayout({ children }: LayoutHiringProps) {
   // console.log(ActiveRoute.split("/").length - 1);
   if (ActiveRoute.split("/").length - 1 > 2) return children;
   return (
-    <div className="flex w-full flex-col items-center justify-center bg-gray-14">
+    <div className="flex w-screen flex-col items-center justify-center bg-gray-14">
       <div className="mt-8 flex w-3/4 flex-col items-start justify-center gap-[0.5rem] text-black">
         <div className="flex items-center justify-center gap-[0.5rem] self-start">
           <TiClipboard fontSize="3rem" fill="#527A01" />
