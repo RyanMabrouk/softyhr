@@ -1,16 +1,22 @@
-import { createMiddlewareClient } from "@supabase/auth-helpers-nextjs";
 import { NextRequest, NextResponse } from "next/server";
-export async function middleware(req: NextRequest) {
-  const res = NextResponse.next();
-  const url = new URL(req.url);
-  const supabase = createMiddlewareClient({ req, res });
-  if (url.pathname === "/auth/callback") {
-    const code = url.searchParams.get("code");
-    if (code) {
-      await supabase.auth.exchangeCodeForSession(code);
-    }
-  } else {
-    await supabase.auth.getSession();
+import { getValidSubdomain } from "../api/getValidSubdomain";
+import getData from "../api/getData";
+import { getLogger } from "../logging/log-util";
+export const config = {
+  matcher: ["/", "/Home", "/NOT-FOUND", "/employees", "/employees/:employeeId"],
+};
+export default async function middleware(req: NextRequest) {
+  const logger = getLogger("*");
+  logger.info("middleware (valid org)");
+  const url = req.nextUrl;
+  const hostname = req.headers.get("host") || "";
+  const current_org = getValidSubdomain(hostname);
+  const { data: org } = await getData("organizations", {
+    column: "name",
+    match: { name: current_org },
+  });
+  if (org?.length === 0) {
+    return NextResponse.rewrite(new URL("/", req.url));
   }
-  return res;
+  return NextResponse.rewrite(url);
 }

@@ -2,7 +2,7 @@
 import React from "react";
 import PopUpSkeleton from "../../../PopUpSkeleton";
 import Image from "next/image";
-import default_avatar from "/public/default_avatar.jpeg";
+import default_avatar from "/public/default_avatar.png";
 import { SelectGeneric } from "@/app/_ui/SelectGeneric";
 import { SubmitBtn } from "@/app/_ui/SubmitBtn";
 import {

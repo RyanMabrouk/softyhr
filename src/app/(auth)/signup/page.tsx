@@ -45,7 +45,7 @@ export default async function Page() {
         />
       </main>
       <footer className="z-10 h-[10rem] w-full bg-gray-11 py-5 text-center text-white">
-        © 2023 Softy HR LLC. All Rights Reserved. SoftyHR® is a registered
+        © 2024 Softy HR LLC. All Rights Reserved. SoftyHR® is a registered
         trademark of Softylines LLC
       </footer>
     </div>
