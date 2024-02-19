@@ -31,7 +31,8 @@ RUN --mount=type=bind,source=package.json,target=package.json \
 # Copy the rest of the source files into the image.
 COPY . .
 # Run the build script.
-RUN node --max-old-space-size=4096 ./node_modules/.bin/next build
+ENV NODE_OPTIONS="--max-old-space-size=4096"
+RUN npm run build
 ################################################################################
 # Create a new stage to run the application with minimal runtime dependencies
 # where the necessary files are copied from the build stage.
