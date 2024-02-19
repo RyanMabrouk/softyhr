@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { useParams, useSearchParams } from "next/navigation";
 import React from "react";
-import default_avatar from "/public/default_avatar.jpeg";
+import default_avatar from "/public/default_avatar.png";
 import { Hr } from "@/app/(dashboard)/people/(employee)/[employeeId]/TimeOff/components/Hr";
 import ErrorContextProvider from "./context/errorContext";
 import { From } from "./components/From";

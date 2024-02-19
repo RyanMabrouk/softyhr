@@ -29,6 +29,9 @@ const schema = z.object({
     .min(2, { message: "Must be 2 or more characters long" })
     .regex(/^[a-zA-Z0-9\-]+$/, {
       message: "Invalid company name",
+    })
+    .refine((value) => value === value.toLowerCase(), {
+      message: "Company name must be in lowercase",
     }),
   tel: z
     .string({ invalid_type_error, required_error })

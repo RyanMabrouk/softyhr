@@ -7,7 +7,7 @@ import {
   useRouter,
   useSearchParams,
 } from "next/navigation";
-import default_avatar from "/public/default_avatar.jpeg";
+import default_avatar from "/public/default_avatar.png";
 import useEmployeeData from "@/hooks/useEmloyeeData";
 import Image from "next/image";
 import { v4 as uuidv4 } from "uuid";

@@ -14,7 +14,7 @@ import {
   useSearchParams,
 } from "next/navigation";
 import React from "react";
-import default_avatar from "/public/default_avatar.jpeg";
+import default_avatar from "/public/default_avatar.png";
 import default_user_avatar from "/public/default_avatar.png";
 import { formatTotalHoursToTimeUnit } from "@/helpers/leave.helpers";
 import { formatDateToMonDDYYYY } from "@/helpers/date.helpers";

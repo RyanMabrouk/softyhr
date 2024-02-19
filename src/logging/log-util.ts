@@ -1,4 +1,4 @@
-import { createPinoBrowserSend, createWriteStream } from "pino-logflare";
+import { createPinoBrowserSend } from "pino-logflare";
 import logLevelData from "./log-level";
 import pino, { Logger } from "pino";
 // create pino-logflare browser stream
@@ -11,15 +11,13 @@ export function getLogLevel(logger: string): string {
   return logLevels.get(logger) || logLevels.get("*") || "info";
 }
 export function getLogger(name: string): Logger {
-  return pino(
-    {
-      browser: {
-        transmit: {
-          send: send,
-        },
+  return pino({
+    browser: {
+      transmit: {
+        send: send,
       },
-      name,
-      level: getLogLevel(name),
     },
-  );
+    name,
+    level: getLogLevel(name),
+  });
 }
