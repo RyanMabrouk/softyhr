@@ -20,9 +20,9 @@ export default async function getData(
     match = undefined,
     column = "*",
   }: getDataParams = {
-    user: undefined,
+    user: false,
     match: undefined,
-    org: undefined,
+    org: false,
     column: "*",
   },
 ): Promise<{ data: any[] | null; error: PostgrestError | null }> {
