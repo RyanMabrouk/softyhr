@@ -50,7 +50,7 @@ export function PasswordInput({ error }: { error: string[] | undefined }) {
               aria-label="toggle password visibility"
               onClick={() => setShowPassword((show) => !show)}
               edge="end"
-              className="-ml-12"
+              className="!-ml-12"
             >
               {showPassword ? <VisibilityOff /> : <Visibility />}
             </IconButton>

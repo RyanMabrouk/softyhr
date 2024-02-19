@@ -6,6 +6,7 @@ import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 import { database_profile_type } from "@/types/database.tables.types";
 export async function GET(request: NextRequest) {
+  console.log("intercepted in caalback api route_enter");
   //const logger = getLogger("*");
   //logger.info("intercepted in caalback api route_enter");
   const requestUrl = new URL(request.url);
@@ -28,9 +29,9 @@ export async function GET(request: NextRequest) {
       if (!company) throw new Error("company is not defined");
       // URL to redirect to after sign in process completes
       //logger.info("intercepted in caalback api route_exit");
-      return NextResponse.redirect(
-        `${requestUrl.protocol}//${company}.${requestUrl.host}/home`,
-      );
+      const redirectUrl = `${requestUrl.protocol}//${company}.${requestUrl.host}/home`;
+      console.log("🚀 ~ GET ~ redirectUrl:", redirectUrl);
+      return NextResponse.redirect(redirectUrl);
     } else {
       const error = requestUrl.searchParams.get("error");
       const error_description =
