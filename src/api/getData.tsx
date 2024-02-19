@@ -36,6 +36,17 @@ export default async function getData(
       data: { session },
     } = await supabase.auth.getSession();
     const user_id = session?.user?.id;
+    if (!user_id) {
+      return {
+        data: null,
+        error: {
+          message: "User not found",
+          details: "User not found",
+          hint: "User not found",
+          code: "400",
+        },
+      };
+    }
     query = query.eq("user_id", user_id);
   }
   if (org) {
@@ -43,6 +54,17 @@ export default async function getData(
       data: { session },
     } = await supabase.auth.getSession();
     const org_name = session?.user.user_metadata.org_name;
+    if (!org_name) {
+      return {
+        data: null,
+        error: {
+          message: "Org not found",
+          details: "Org not found",
+          hint: "Org not found",
+          code: "400",
+        },
+      };
+    }
     query = query.eq("org_name", org_name);
   }
   const { data, error } = await query;
