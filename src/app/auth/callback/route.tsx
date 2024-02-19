@@ -26,10 +26,10 @@ export async function GET(request: NextRequest) {
     const company = profiles?.filter(
       (profile: database_profile_type) => profile.user_id === session?.user.id,
     )?.[0]?.org_name;
+    if (!company) throw new Error("company is not defined");
     if (error) throw new Error(error.message);
     const { error: signout_error } = await supabase.auth.signOut();
     if (signout_error) throw new Error(signout_error.message);
-    if (!company) throw new Error("company is not defined");
     const redirectUrl = `${requestUrl.protocol}//${company}.${requestUrl.host}/home`;
     console.log("🚀 ~ GET ~ redirectUrl:", redirectUrl);
     return NextResponse.redirect(redirectUrl);
