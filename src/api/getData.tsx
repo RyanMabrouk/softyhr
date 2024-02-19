@@ -26,6 +26,7 @@ export default async function getData(
     column: "*",
   },
 ): Promise<{ data: any[] | null; error: PostgrestError | null }> {
+  const logger = getLogger("*");
   const supabase = createServerComponentClient<Database>({ cookies });
   let query = supabase.from(table).select(column);
   if (match) {
@@ -37,6 +38,7 @@ export default async function getData(
     } = await supabase.auth.getSession();
     const user_id = session?.user?.id;
     if (!user_id) {
+      logger.error("no user_id found in user_metadata");
       return {
         data: null,
         error: {
@@ -55,6 +57,7 @@ export default async function getData(
     } = await supabase.auth.getSession();
     const org_name = session?.user.user_metadata.org_name;
     if (!org_name) {
+      logger.error("no org_name found in user_metadata");
       return {
         data: null,
         error: {
@@ -68,7 +71,6 @@ export default async function getData(
     query = query.eq("org_name", org_name);
   }
   const { data, error } = await query;
-  const logger = getLogger("*");
   if (error) {
     logger.error(error?.message);
   }
