@@ -4,6 +4,7 @@ import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 export async function GET(request: NextRequest) {
+  console.log("intercepted in caalback api route_enter");
   //const logger = getLogger("*");
   //logger.info("intercepted in forget password api route_enter");
   const requestUrl = new URL(request.url);
@@ -24,6 +25,8 @@ export async function GET(request: NextRequest) {
       return NextResponse.redirect(
         `${requestUrl.protocol}//${company}.${requestUrl.host}/change_password`,
       );
+    } else {
+      throw new Error("code is not defined");
     }
   } catch (error) {
     //logger.error(error);
