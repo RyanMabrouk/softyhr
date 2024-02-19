@@ -1,6 +1,6 @@
 import AddEntry from "@/app/_ui/_PopUp/components/TableEntries/AddEntry/AddEntry";
 import EditEntry from "@/app/_ui/_PopUp/components/TableEntries/EditEntry/EditEntry";
-import DeleteItem from "@/app/_ui/_PopUp/components/TableEntries/DeleteEntry/DeleteItem";
+import DeleteItem from "@/app/_ui/_PopUp/components/TableEntries/DeleteEntry/DeleteEntry";
 import EditPhoto from "@/app/_ui/_PopUp/components/Personel-job/EditPhoto/EditPhoto";
 import DeleteLeaveRequest from "@/app/_ui/_PopUp/components/TimeOff/DeleteLeaveRequest/DeleteLeaveRequest";
 import EditFields from "@/app/_ui/_PopUp/components/Personel-job/EditFields/EditFields";
