@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import useProfilesOrgChart from "@/hooks/useProfilesOrgChart";
+import useProfilesOrgChart from "@/hooks/files/useProfilesOrgChart";
 import LoaderFiles from "@/app/(dashboard)/Files/_ui/components/Loader/LoaderFiles";
 import OrgChartComponent from "../components/OrgChart/OrgChart";
 

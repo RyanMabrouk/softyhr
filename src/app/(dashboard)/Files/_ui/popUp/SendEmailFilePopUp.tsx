@@ -4,7 +4,7 @@ import ButtonPopUp from "../components/ButtonPopUp";
 import { SubmitHandler, useForm } from "react-hook-form";
 import Error from "../components/Error";
 import PopUpSkeleton from "@/app/_ui/_PopUp/PopUpSkeleton";
-import useFileData from "@/hooks/useFileData";
+import useFileData from "@/hooks/files/useFileData";
 import LoaderPopUp from "../components/Loader/LoaderPopUp/LoaderPopUp";
 import { FaRegFileImage, FaRegFilePdf } from "react-icons/fa6";
 import { formatDateFiles } from "@/helpers/date.helpers";

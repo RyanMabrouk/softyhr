@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import useToast from "@/hooks/useToast";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import deleteFile from "@/actions/files/deleteFile";
-import useFileData from "@/hooks/useFileData";
+import useFileData from "@/hooks/files/useFileData";
 import { formatDateFiles } from "@/helpers/date.helpers";
 import PopUpSkeleton from "@/app/_ui/_PopUp/PopUpSkeleton";
 import LoaderPopUp from "../components/Loader/LoaderPopUp/LoaderPopUp";

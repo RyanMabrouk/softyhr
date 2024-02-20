@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { CgClose } from "react-icons/cg";
 import ButtonPopUp from "../components/ButtonPopUp";
 import FilesCheckBox from "../components/FilesCheckBox";
-import useFolderData from "@/hooks/useFolderData";
+import useFolderData from "@/hooks/files/useFolderData";
 import LoaderPopUp from "../components/Loader/LoaderPopUp/LoaderPopUp";
 import { useQueryClient } from "@tanstack/react-query";
 

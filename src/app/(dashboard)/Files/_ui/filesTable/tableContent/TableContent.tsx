@@ -3,7 +3,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import FileBox from "./FileBox";
 import LoaderFiles from "../../components/Loader/LoaderFiles";
 import { useSearchParams } from "next/navigation";
-import useFolderData from "@/hooks/useFolderData";
+import useFolderData from "@/hooks/files/useFolderData";
 import FolderEmpty from "../../components/FolderEmpty";
 import { getFiles } from "@/actions/files/apiFIles";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
@@ -12,7 +12,7 @@ import GetFoldersByIDs from "@/actions/files/getFolders";
 import { equalsCheck } from "@/helpers/array.helpers";
 import { PAGE_SIZE } from "@/constants/filesConstants";
 import getData from "@/api/getData";
-import useFoldersIds from "@/hooks/useFoldersIds";
+import useFoldersIds from "@/hooks/files/useFoldersIds";
 import useUserRole from "@/hooks/useUserRole";
 
 export default function TableContent({ checkAll, setCheckAll }: any) {

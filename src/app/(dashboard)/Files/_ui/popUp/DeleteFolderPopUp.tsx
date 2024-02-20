@@ -7,7 +7,7 @@ import useToast from "@/hooks/useToast";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import PopUpSkeleton from "@/app/_ui/_PopUp/PopUpSkeleton";
-import useFolderData from "@/hooks/useFolderData";
+import useFolderData from "@/hooks/files/useFolderData";
 import LoaderPopUp from "../components/Loader/LoaderPopUp/LoaderPopUp";
 
 export default function DeleteFolderPopUp() {

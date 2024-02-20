@@ -1,5 +1,5 @@
 import { formatDateFiles } from "@/helpers/date.helpers";
-import useFileData from "@/hooks/useFileData";
+import useFileData from "@/hooks/files/useFileData";
 import React from "react";
 import { FaRegFileImage, FaRegFilePdf } from "react-icons/fa6";
 import LoaderPopUp from "./Loader/LoaderPopUp/LoaderPopUp";

@@ -2,10 +2,10 @@
 import React from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useSearchParams } from "next/navigation";
-import useFolderData from "@/hooks/useFolderData";
+import useFolderData from "@/hooks/files/useFolderData";
 import GetFoldersByIDs from "@/actions/files/getFolders";
 import getData from "@/api/getData";
-import useFoldersIds from "@/hooks/useFoldersIds";
+import useFoldersIds from "@/hooks/files/useFoldersIds";
 import useUserRole from "@/hooks/useUserRole";
 export default function AllFilesCheckBox({ checkAll, setCheckAll }: any) {
   const searchParams = useSearchParams();
