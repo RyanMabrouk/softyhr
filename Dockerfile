@@ -30,10 +30,9 @@ RUN --mount=type=bind,source=package.json,target=package.json \
     npm ci
 # Copy the rest of the source files into the image.
 COPY . .
-COPY .env ./
 # Run the build script.
 ENV NODE_OPTIONS="--max-old-space-size=4096"
-RUN npm run build
+RUN npm run build && npm prune --production
 ################################################################################
 # Create a new stage to run the application with minimal runtime dependencies
 # where the necessary files are copied from the build stage.
@@ -47,7 +46,7 @@ USER node
 COPY package.json .
 # Copy the production dependencies from the deps stage and also
 # the built application from the build stage into the image.
-COPY --from=deps /usr/src/app/node_modules ./node_modules
+# COPY --from=deps /usr/src/app/node_modules ./node_modules
 COPY --from=build /usr/src/app/. ./.
 # Expose the port that the application listens on.
 EXPOSE 3000
