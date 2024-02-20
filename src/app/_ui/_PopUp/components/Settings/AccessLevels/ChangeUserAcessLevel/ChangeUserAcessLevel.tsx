@@ -100,6 +100,7 @@ export default function ChangeUserAcessLevel() {
           <SelectGeneric
             label={`Add ${capitalizeFirstLetter(first_name)} to...`}
             name="role_id"
+            className="!w-[17.5rem]"
             defaultValue={{
               label: capitalizeFirstLetter(user_role_name ?? ""),
               value: Number(user_role_id),

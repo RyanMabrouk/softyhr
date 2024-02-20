@@ -1,6 +1,8 @@
 import React, { ReactNode } from "react";
 import { FormControl, MenuItem, Select } from "@mui/material";
 import { Label } from "./InputGeneric";
+import { getTawindColor } from "../../helpers/getTawindColor";
+const color = getTawindColor("fabric-700");
 export type Option = {
   group_name?: string; // add only the group name to create a group
   label: string | ReactNode;
@@ -32,6 +34,7 @@ export function SelectGeneric({
   inputLabel?: string | ReactNode;
   cursor?: "white" | "black" | string;
 }) {
+  const [open, setOpen] = React.useState(false);
   if (!options) return;
   return (
     <FormControl className="group flex w-fit flex-col gap-1">
@@ -44,11 +47,26 @@ export function SelectGeneric({
           data-placeholder-trigger="keydown"
           label={label}
           id={label}
-          className={` group peer h-9 w-[12.5rem] rounded-sm border  border-gray-18  py-1  text-gray-23 shadow-sm transition-all ease-linear first-letter:capitalize  placeholder:text-gray-14 hover:shadow-md [&_.Mui-selected]:!bg-fabric-700 [&_.MuiOutlinedInput-notchedOutline]:border-none ${className}`}
+          className={`group peer h-9 w-[12.5rem] border  border-gray-18  py-1  text-gray-23  transition-all ease-linear first-letter:capitalize  placeholder:text-gray-14  [&_.Mui-selected]:!bg-fabric-700 [&_.MuiOutlinedInput-notchedOutline]:border-none ${open ? "shadow-green rounded-b-none rounded-t-sm " : "rounded-sm shadow-sm hover:shadow-md"} ${className}`}
           name={name}
           defaultValue={defaultValue ? defaultValue.value : "none"}
           displayEmpty
           required={required}
+          onOpen={(e) => setOpen(true)}
+          onClose={(e) => setOpen(false)}
+          MenuProps={{
+            autoFocus: false,
+            className: " shadow-green",
+            PaperProps: {
+              style: {
+                borderTopLeftRadius: "0px",
+                borderTopRightRadius: "0px",
+                maxHeight: "20rem",
+                overflowY: "auto",
+                boxShadow: `0px 1px 4px 1px ${color}`,
+              },
+            },
+          }}
           onChange={(e) => setValueInParent && setValueInParent(e.target.value)}
           sx={{
             "& .MuiOutlinedInput-notchedOutline": {
@@ -66,7 +84,7 @@ export function SelectGeneric({
                     <hr className="m-0 h-[unset] !w-full shrink-0 border-solid border-[rgba(0,0,0,0.12)] bg-gray-14" />
                     <MenuItem
                       key={option?.group_name}
-                      className="group peer !max-h-7 !w-full  !border-y !border-black !px-2 !py-1 !text-center !text-[0.8rem] !text-gray-21 !opacity-100 first-letter:capitalize"
+                      className="group peer !max-h-7 !w-full  !border-y !border-black !px-2 !py-1 !text-center !text-[0.875rem] !text-gray-21 !opacity-100 first-letter:capitalize"
                       disabled
                       aria-readonly
                       value="none"
@@ -77,7 +95,7 @@ export function SelectGeneric({
                 ) : (
                   <MenuItem
                     value={option?.value}
-                    className={`peer !max-h-8 !px-2 !py-2 text-[0.95rem] capitalize text-gray-23 transition-all ease-linear hover:!bg-fabric-700 hover:text-white ${
+                    className={`peer !max-h-10 !px-2 !py-2 text-[0.95rem] capitalize text-gray-23 transition-all ease-linear hover:!bg-fabric-700 hover:text-white ${
                       option?.disabled ? "opacity-50" : "opacity-90"
                     }`}
                     key={Number(option?.value) + i}

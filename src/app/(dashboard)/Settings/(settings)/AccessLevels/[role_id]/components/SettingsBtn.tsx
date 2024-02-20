@@ -28,7 +28,7 @@ export function SettingsBtn() {
           link: {
             pathname: pathname,
             query: {
-              popup: "",
+              popup: "DELETE_ROLE",
             },
           },
         },

@@ -142,6 +142,7 @@ export default function AddTimeOffPolicy() {
           <SelectGeneric
             label={`Add ${capitalizeFirstLetter(first_name)} to...`}
             name="policy_id"
+            className="h-9 !w-[17.5rem]"
             defaultValue={{ label: "Policies", value: "none" }}
             required={true}
             group={true}
