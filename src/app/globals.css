@@ -43,6 +43,10 @@
     -moz-appearance: textfield;
     appearance: textfield;
   }
+  .redirect:hover {
+    text-decoration: underline;
+    color: #527a00 !important;
+  }
 }
 .rdp-vhidden {
   @apply hidden;
