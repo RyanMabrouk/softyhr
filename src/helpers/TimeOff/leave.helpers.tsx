@@ -3,7 +3,7 @@ import {
   databese_leave_categories_track_time_unit_type,
   databese_leave_categories_type,
 } from "@/types/database.tables.types";
-import { formatYYYYMMDD, sameDay } from "./date.helpers";
+import { formatYYYYMMDD, sameDay } from "../date.helpers";
 import { useSettings } from "@/hooks/Settings/useSettings";
 // generate Leave Categorie Icon
 export function generateLeaveCategorieIcon({

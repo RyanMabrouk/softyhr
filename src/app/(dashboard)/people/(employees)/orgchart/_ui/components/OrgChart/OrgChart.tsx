@@ -119,7 +119,7 @@ export default function OrgChartComponent({
       .nodeWidth(() => 180)
       .nodeHeight(() => 150)
       .compactMarginBetween(() => 10)
-      .siblingsMargin(() => 50)
+      .siblingsMargin(() => 30)
       .nodeContent((d) => {
         const borderColor =
           // @ts-ignore
