@@ -31,7 +31,6 @@ export default function OrgChartComponent({
   const chartContainerRef = useRef(null);
   const Router = useRouter();
   useEffect(() => {
-    let chart;
     if (data.length === 0) {
       return;
     }
@@ -114,7 +113,7 @@ export default function OrgChartComponent({
       };
     });
 
-    chart = new OrgChart()
+    const chart = new OrgChart()
       .container(chartContainerRef?.current ?? "")
       .data(mappedData)
       .nodeWidth(() => 180)
@@ -154,14 +153,22 @@ export default function OrgChartComponent({
         const highlighted =
           d.data._upToTheRootHighlighted || d.data._highlighted;
         const strokeColor =
-          highlighted === undefined ? "#E4E2E9" : highlighted ? color : "none";
+          highlighted === undefined
+            ? "#E4E2E9"
+            : highlighted
+              ? color
+              : "#E4E2E9";
         const strokeWidth = highlighted ? "5" : "1";
         // @ts-ignore
         d3.select(this)
           .attr("stroke", strokeColor)
           .attr("stroke-width", strokeWidth);
+        if (highlighted) {
+          // @ts-ignore
+          d3.select(this).raise();
+        }
       })
-      .initialZoom(0.6)
+      .initialZoom(1)
       .compact(false)
       .onNodeClick((d) => {
         // @ts-ignore
@@ -206,7 +213,8 @@ export default function OrgChartComponent({
     };
     const elements = document.querySelectorAll(".redirect");
     const redirectToProfile = (e: Event) => {
-      Router.push(`${(e.target as HTMLInputElement)?.id}/personnal`);
+      const id = (e.target as HTMLInputElement)?.id;
+      Router.push(`${id}/personnal`);
     };
     elements.forEach((element) => {
       element.addEventListener("click", redirectToProfile);
@@ -264,7 +272,7 @@ export default function OrgChartComponent({
         });
       }
     };
-  }, [data]);
+  }, [data, Router]);
   return (
     <div className="flex max-h-screen flex-col">
       <div className="mx-auto flex w-[85rem] items-center gap-2 ">
@@ -272,17 +280,17 @@ export default function OrgChartComponent({
           id="inputSearch"
           type="text"
           placeholder="Jump to an employee..."
-          className=" focus:shadow-green w-80 border border-gray-4 px-2 py-1 outline-1 transition-shadow duration-300 placeholder:text-sm placeholder:text-gray-6 focus:outline-none "
+          className=" focus:shadow-green w-80 rounded-sm border border-gray-4 px-2 py-1 outline-1 transition-shadow duration-300 placeholder:text-sm placeholder:text-gray-6 focus:outline-none "
         />
         <button
-          className="tooltip cursor-pointer  border border-color-primary-8 p-[0.3rem] opacity-80 hover:text-fabric-700"
+          className="tooltip cursor-pointer rounded-sm  border border-fabric-700 p-[0.3rem] opacity-80 transition-all ease-linear hover:text-fabric-700"
           id="expandButton"
           data-tip="Expand"
         >
           <FaExpandAlt className="text-xl" />
         </button>
         <button
-          className="tooltip cursor-pointer  border border-color-primary-8 p-[0.3rem] opacity-80 hover:text-fabric-700"
+          className="tooltip cursor-pointer rounded-sm  border border-fabric-700 p-[0.3rem] opacity-80 transition-all ease-linear hover:text-fabric-700"
           id="collapseButton"
           data-tip="collapse"
         >
@@ -291,7 +299,7 @@ export default function OrgChartComponent({
         <button
           id="download"
           data-tip="Export pdf"
-          className="tooltip cursor-pointer  border border-color-primary-8 p-[0.3rem] opacity-80 hover:text-fabric-700"
+          className="tooltip cursor-pointer rounded-sm  border border-fabric-700 p-[0.3rem] opacity-80 transition-all ease-linear hover:text-fabric-700"
         >
           <MdInstallDesktop className="text-xl" />
         </button>
