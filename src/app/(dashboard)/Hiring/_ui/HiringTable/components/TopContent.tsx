@@ -37,7 +37,13 @@ export default function TopContent({
         </span>
       </div>
       <div className="flex items-center justify-between gap-3">
-        <h1 className="text-normal font-medium ">
+        <h1
+          className="text-normal tooltip font-medium"
+          data-tip={`you have ${
+            Hiring?.filter((job: HiringTableType) => job?.status === "Open")
+              ?.length || 0
+          } of ${Hiring?.length || 0} jobs open`}
+        >
           {`${
             Hiring?.filter((job: HiringTableType) => job?.status === "Open")
               ?.length || 0

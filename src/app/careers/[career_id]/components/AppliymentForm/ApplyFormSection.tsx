@@ -37,7 +37,8 @@ function ApplyFormSection({
                   };
                 }
                 console.log(RowField);
-                const Component = Field[RowField?.type.toUpperCase()] || Input;
+                const Component =
+                  Field[(RowField?.type || "input").toUpperCase()] || Input;
                 return (
                   <Component
                     champ={champ || ""}

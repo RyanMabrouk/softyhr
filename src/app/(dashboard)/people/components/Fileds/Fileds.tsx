@@ -25,9 +25,10 @@ function FiledsChamps({
               className="flex items-end justify-center gap-[1rem]"
               key={uuidv4()}
             >
-              {Row?.map((RowField: insert_RowFieldType) => {
-                const Component =
-                  Field[RowField.type.toUpperCase() || "INPUT"] || Input;
+              {Row?.map((RowField: RowFieldType) => {
+                console.log(RowField);
+                const type = RowField?.type || "input"
+                const Component = Field[type.toUpperCase()] || Input;
                 return (
                   <Component
                     champ={champ || ""}

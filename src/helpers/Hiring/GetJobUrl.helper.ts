@@ -1,9 +1,9 @@
 "use server";
 import getCurrentorg from "@/api/getCurrentOrg";
 import { headers } from "next/headers";
-export async function GetJobUrl(JobId: string) {
+export async function GetJobUrl(JobId?: string) {
   const org = await getCurrentorg();
   const header_url = headers().get("host") || "";
-  const JobUrl = `${org?.name}.${header_url}/careers/${JobId}`;
+  const JobUrl = `${org?.name}.${header_url}/careers/${JobId || ""}`;
   return JobUrl;
 }

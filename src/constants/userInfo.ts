@@ -47,6 +47,7 @@ import SelectUsers from "@/app/(dashboard)/people/components/Fileds/SelectUsers/
 import { IoSearchSharp } from "react-icons/io5";
 import DateInputRange from "@/app/(dashboard)/people/components/Fileds/DateInputRange/DateInputRange";
 import { BsTwitterX } from "react-icons/bs";
+import CurrencyInput from "@/app/(dashboard)/people/components/Fileds/CurrencyInput/CurrencyInput";
 const Editor = dynamic(
   () => import("@/app/(dashboard)/people/components/Fileds/Editor/Editor"),
   { ssr: false },
@@ -60,12 +61,13 @@ export const Field: any = {
   NUMBER: Input,
   SELECT: SelectInput,
   DATE: DateInput,
-  DATE_RANGE:DateInputRange,
+  DATE_RANGE: DateInputRange,
   RADIO: RadioBox,
   TEXTAREA: textarea,
   EDITOR: Editor,
   FILE: InputFile,
   SELECT_USERS: SelectUsers,
+  TEXT_CURRENCY: CurrencyInput
 };
 
 export const sectionIcon: ObjectIconsType = {

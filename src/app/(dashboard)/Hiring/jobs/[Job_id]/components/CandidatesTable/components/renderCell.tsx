@@ -40,9 +40,9 @@ export const renderCell = (
             {user?.["Candidate Info"]}
           </Link>
           <h1 className="text-sm text-gray-15">
-            {Hiring?.job_information?.[
-              "Job Location"
-            ]?`${Hiring?.job_information?.["Job Location"] } - ${Hiring.job_information?.["Location"]}`:"Remote"}
+            {Hiring?.job_information?.["Job Location"]
+              ? `${Hiring?.job_information?.["Job Location"]} - ${Hiring.job_information?.["Location"]}`
+              : "Remote"}
           </h1>
         </div>
       );
@@ -75,12 +75,13 @@ export const renderCell = (
       );
     case "Last Email":
       const Component = user?.["Last Email"];
-      return (
-          <Component/>
-      );
+      return <Component />;
     case "actions":
       return (
-        <div className="relative flex items-center justify-end gap-2">
+        <div
+          data-tip="More actions"
+          className="tooltip relative flex  h-[2rem] w-[2rem] cursor-pointer items-center justify-center gap-2 duration-200 ease-in-out hover:border hover:border-gray-27 hover:bg-gray-22"
+        >
           <Dropdown className="border-1 border-default-200 flex items-center justify-center bg-background">
             <DropdownTrigger>
               <Button
@@ -107,7 +108,7 @@ export const renderCell = (
               </DropdownItem>
               <DropdownItem className="group hover:!bg-color-primary-8">
                 <div className="flex items-end justify-start gap-[0.5rem] duration-200 ease-linear">
-                  <MdDelete  className="text-xl text-color-primary-7 group-hover:!text-white" />
+                  <MdDelete className="text-xl text-color-primary-7 group-hover:!text-white" />
                   <Link
                     href={`?popup=DELETE_CANDIDATE&id=${user?.id}`}
                     className="text-black group-hover:!text-white"

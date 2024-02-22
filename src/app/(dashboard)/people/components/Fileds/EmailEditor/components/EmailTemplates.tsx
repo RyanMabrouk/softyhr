@@ -9,6 +9,7 @@ function EmailTemplates({ setValue }: any) {
       setSelectedKeys={setValue}
       RowField={{
         name: "Email Templates",
+        type:"select",
         options: [
           { label: "template 1", value: "<h1>template 1</h1>" },
           { label: "template 1", value: "<h1>template 1</h1>" },

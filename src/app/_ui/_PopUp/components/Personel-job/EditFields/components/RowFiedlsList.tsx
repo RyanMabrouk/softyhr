@@ -11,6 +11,8 @@ import {
 import { UpdateSettings } from "@/api/Settings/updateSettings";
 import { RowType, sectionType } from "@/types/database.tables.types";
 import RowFields from "./RowFields";
+import { Section } from "@/constants/userInfoSections";
+import TableChamps from "@/app/(dashboard)/people/components/Fileds/TableChamps";
 
 interface RowFieldsListPropstype {
   champ: string;
@@ -70,7 +72,7 @@ function RowFiedlsList({
     }),
   }));
 
-  if (typeof Fields?.[0] == "string") {
+  if (Section[champ] == TableChamps) {
     return (
       <div ref={drag}>
         <div

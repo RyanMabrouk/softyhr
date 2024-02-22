@@ -60,7 +60,8 @@ const LayoutComponent = memo(function LayoutComponent({
     "Application-Details": ApplicationDetails,
     "Job-Boards": JobBoards,
   };
-  console.log(data);
+
+
   //------create_new_job------------
   async function CreateNewJob() {
     if (ApplicationDetails?.done && InformationJob?.done) {
@@ -134,12 +135,12 @@ const LayoutComponent = memo(function LayoutComponent({
                   </h1>
                 )}
               </div>
-              <Link
-                href={HirinSections[0]?.path}
+              <div
+                onClick={() => setShow(true)}
                 className="text-color5-500 hover:underline"
               >
                 cancel
-              </Link>
+              </div>
             </div>
             <form
               action={submitForm}
@@ -154,17 +155,13 @@ const LayoutComponent = memo(function LayoutComponent({
                         href={path}
                         className={
                           "flex items-center justify-center gap-[1rem] py-2 " +
-                          ((pathname.includes(path) &&
-                            path == CreateHiringJob[0]) ||
-                          stepValidation?.[path]?.done
+                          (stepValidation?.[path]?.done
                             ? ""
-                            : " !cursor-not-allowed ")
+                            : " disabled !cursor-not-allowed")
                         }
                         key={index}
                       >
-                        {(pathname.includes(path) &&
-                          path == CreateHiringJob[0]) ||
-                        stepValidation?.[path]?.done ? (
+                        {stepValidation?.[path]?.done ? (
                           <RiCheckboxCircleFill className="text-3xl !text-color-primary-8" />
                         ) : (
                           <RiCheckboxCircleLine className="text-3xl !text-color-primary-8" />

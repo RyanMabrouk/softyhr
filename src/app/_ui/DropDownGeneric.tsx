@@ -15,13 +15,13 @@ interface DropDownGenericPropsTYpe {
 
 function DropDownGeneric({
   options,
-  DropDownButton,
+  DropDownButton
 }: DropDownGenericPropsTYpe) {
   return (
     <Dropdown className="flex flex-col items-center justify-center">
       <DropdownTrigger>
         <Button
-          className="flex h-full  items-center justify-start gap-2"
+          className={`flex h-full  items-center justify-start gap-2`}
           variant="bordered"
         >
           <DropDownButton />

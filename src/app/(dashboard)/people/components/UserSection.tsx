@@ -81,7 +81,7 @@ function UserSection({ section, employeeId }: UserSection) {
               Edit Fields
             </h1>
           </div>
-          <form className="Form-Profile" action={SubmitForm}>
+          <form className="" action={SubmitForm}>
             {data?.Champs?.sort(
               (a: ChampsType, b: ChampsType) => a.rang - b.rang,
             )?.map(
@@ -97,7 +97,7 @@ function UserSection({ section, employeeId }: UserSection) {
                       <Component className="text-fabric-700" />
                       {champ}
                     </h1>
-                    <div className="flex flex-col items-start justify-center gap-[1rem]">
+                    <div className="flex w-full flex-col items-start justify-center gap-[1rem]">
                       <ComponentChamps
                         employeeId={employeeId}
                         champ={champ}

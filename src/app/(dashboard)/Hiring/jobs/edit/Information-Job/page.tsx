@@ -21,7 +21,6 @@ function Page() {
   const params = useSearchParams();
   const id = params?.get("id");
   const QueryClient = useQueryClient();
-  const [touched, setTouched] = useState<boolean>(false);
   const router = useRouter();
   const [Show, setShow] = useState<boolean>(false);
   const {
@@ -72,7 +71,6 @@ function Page() {
             >
               <div className="flex flex-col items-start justify-start gap-[1rem]">
                 <FiledsChamps
-                  setTouched={setTouched}
                   FieldsArray={data?.["Fields"]}
                   champ={"hiring"}
                   user={{
@@ -89,7 +87,7 @@ function Page() {
                   Job_locationValue={Hiring_data[0]?.job_information?.Location}
                 />
               </div>
-              <ChangesSection setTouched={setTouched} />
+              <ChangesSection  />
             </form>
           </div>
         </div>

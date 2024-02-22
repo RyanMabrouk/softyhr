@@ -12,8 +12,8 @@ interface TableChampsPropsType {
 
 function TableChamps({ FieldsArray, user, champ }: TableChampsPropsType) {
   return (
-    <div className=" -mt-10 flex flex-col items-start justify-between gap-[1rem]">
-      <div className="flex cursor-pointer items-center justify-center gap-[0.3rem] self-end text-gray-15 hover:underline">
+    <div className=" -mt-10 w-full flex flex-col items-start justify-between gap-[1rem]">
+      <div className="flex w-full cursor-pointer items-center justify-end gap-[0.3rem] self-end text-gray-15 hover:underline">
         <IoMdAdd />
         <Link href={`?popup=add_entry&section=${champ}`} className="" >Add Entry</Link>
       </div>

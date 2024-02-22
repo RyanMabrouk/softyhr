@@ -39,6 +39,7 @@ function AdditionnalInputs({
     options: ["London", "USA", "Tunisian", "Canada"],
     name: "Job Location",
     required: true,
+    type:"select"
   };
 
   const [Location, setLocation] = useState<string>(Job_locationValue || "");

@@ -106,14 +106,15 @@ export interface RowFieldType {
   options?: string[] | Object[] | undefined;
   required?: boolean;
   placeHolder?: string | undefined;
-  type: "select" | "text" | "radio";
+  type: string;
   Icon?: string | undefined;
   ExtraTxt?: string | undefined;
   accept?: string | undefined;
   allowFutureDates?: boolean | undefined;
   allowPreviousDates?: boolean | undefined;
-  endDateName?:string | undefined;
-  startDateName?:string | undefined;
+  endDateName?: string | undefined;
+  startDateName?: string | undefined;
+  ExtraTxt_org?:string;
 }
 export type RowType = {
   Row: RowFieldType[];

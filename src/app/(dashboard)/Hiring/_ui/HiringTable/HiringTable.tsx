@@ -26,6 +26,7 @@ import { CiLink } from "react-icons/ci";
 import { GetJobUrl } from "@/helpers/Hiring/GetJobUrl.helper";
 import EditJobOpening from "./EditJobOpening/EditJobOpening";
 import useToast from "@/hooks/useToast";
+import CopieJobLink from "./components/CopieJobLink";
 
 const columns = [
   { name: "id", uid: "id" },
@@ -35,7 +36,8 @@ const columns = [
   { name: "Created On", uid: "CreatedOn", sortable: true },
   { name: "NewCandidates", uid: "NewCandidates" },
   { name: "Status", uid: "status", sortable: true },
-  { name: "", uid: "actions" },
+  { name: "actions", uid: "actions" },
+  { name: "", uid: "publish" },
 ];
 
 const statusOptions = [
@@ -56,6 +58,7 @@ const INITIAL_VISIBLE_COLUMNS = [
   "CreatedOn",
   "status",
   "actions",
+  "publish",
 ];
 interface HiringTablePropsType {
   Hiring: HiringTableType[];
@@ -88,6 +91,8 @@ export default function HiringTable({
   const renderCell = React.useCallback(
     (user: HiringTableType, columnKey: React.Key) => {
       const cellValue = user[columnKey as keyof HiringTableType];
+
+
       switch (columnKey) {
         case "Candiates":
           return (
@@ -154,31 +159,29 @@ export default function HiringTable({
           );
         case "actions":
           return (
-            <div className="ease flex items-center justify-end gap-2 opacity-0 duration-150 group-hover:!opacity-100">
+            <div className="ease flex items-center justify-start gap-2 duration-150 ">
               <EditJobOpening id={user?.id} />
               <Link
+                data-tip="delete job"
                 href={`?popup=DELETE_JOB&id=${user?.id}`}
-                className="flex h-[2rem] w-[2rem] cursor-pointer items-center justify-center duration-200 ease-in-out hover:border hover:border-gray-27 hover:bg-gray-22"
+                className="tooltip flex h-[2rem] w-[2rem] cursor-pointer items-center justify-center duration-200 ease-in-out hover:border hover:border-gray-27 hover:bg-gray-22"
               >
-                <FaTrash cursor={"pointer"} fill={"gray"} />
+                <FaTrash className="!text-gray-15 cursor-pointer" />
               </Link>
-              <div className="duration-250 flex h-[2rem] w-[2rem] cursor-pointer items-center justify-center ease-in-out hover:border hover:border-gray-27 hover:bg-gray-22">
-                <CiLink
-                  cursor={"pointer"}
-                  onClick={async () => {
-                    navigator.clipboard.writeText(await GetJobUrl(user?.id));
-                    toast.success("Job Link copied successfully !");
-                  }}
-                />
-              </div>
-              {user?.status != "Open" && <PublishButton id={user?.id} />}
+              <CopieJobLink id={user?.id}/>
+            </div>
+          );
+        case "publish":
+          return (
+            <div className="flex items-center justify-end">
+              <PublishButton id={user?.id} status={user?.status} />
             </div>
           );
         default:
           return cellValue;
       }
     },
-    [],
+    []
   );
   const classNames = React.useMemo(
     () => ({
@@ -258,7 +261,6 @@ export default function HiringTable({
       >
         {(item) => (
           <TableRow
-            className={item?.status != "Open" ? "group !opacity-50" : " group"}
             key={uuidv4()}
           >
             {(columnKey) => (

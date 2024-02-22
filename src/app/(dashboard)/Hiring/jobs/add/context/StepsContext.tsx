@@ -29,12 +29,10 @@ interface StepsAction {
   payload?: ObjectOfStrings;
 }
 
-
-
 export const initialState: StepsState = {
   ApplicationDetails: {
     done: false,
-    values: { Questions:{} },
+    values: { Questions: {} },
   },
   InformationJob: {
     done: false,

@@ -77,7 +77,7 @@ export default function FileBox({ file, pushFileId, removeFileId }: any) {
       const payload = {
         file_url,
         addedBy: user_id,
-        name: "duplicated " + name,
+        name: name + " - Copy",
         org_name,
         size,
         file_type,
@@ -161,7 +161,7 @@ export default function FileBox({ file, pushFileId, removeFileId }: any) {
     options.push({ value: "delete", label: "Delete" });
   }
   if (role?.permissions.includes("share:files")) {
-    options.push({ value: "share", label: "Share" });
+    options.unshift({ value: "share", label: "Share with employees" });
   }
   //
   const {

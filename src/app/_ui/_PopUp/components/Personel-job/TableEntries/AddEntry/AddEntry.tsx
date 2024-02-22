@@ -70,13 +70,15 @@ function AddEntry() {
                 {settings?.data[0]?.["personnal"]?.Champs?.filter(
                   (section: any) => section?.champ == section_name,
                 )[0]?.Fields?.map((RowField: any) => {
-                  const Component = Field[RowField?.type.toUpperCase()];
+                  const Component =
+                    Field[(RowField?.type || "input").toUpperCase()];
                   return <Component key={uuidv4()} RowField={RowField} />;
                 })}
                 {settings?.data[0]?.["job"]?.Champs?.filter(
                   (section: any) => section?.champ == section_name,
                 )[0]?.Fields?.map((RowField: any) => {
-                  const Component = Field[RowField?.type.toUpperCase()];
+                  const Component =
+                    Field[(RowField?.type || "input").toUpperCase()];
                   return <Component key={uuidv4()} RowField={RowField} />;
                 })}
                 <div className="h-[0.1rem] w-full bg-gradient-to-r from-color-primary-1 to-color-primary-3" />

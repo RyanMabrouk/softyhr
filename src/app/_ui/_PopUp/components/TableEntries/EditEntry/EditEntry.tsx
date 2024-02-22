@@ -71,7 +71,7 @@ function EditEntry() {
                 action={SubmitForm}
                 className="flex w-full flex-col items-start justify-center gap-[1rem]"
               >
-                {settings?.data[0]?.["personnal"]?.Champs?.filter( 
+                {settings?.data[0]?.["personnal"]?.Champs?.filter(
                   (section: any) => section?.champ == section_name,
                 )[0]?.Fields?.map((RowField: any) => {
                   const Component = Field[RowField?.type.toUpperCase()];
@@ -109,7 +109,7 @@ function EditEntry() {
                     type="submit"
                     className="text-bold mt-4 rounded bg-color-primary-8 p-2 px-5 text-white duration-300 ease-in-out hover:!bg-color-primary-3 "
                   >
-                    Edit item
+                    Save
                   </button>
                   <button
                     type="reset"

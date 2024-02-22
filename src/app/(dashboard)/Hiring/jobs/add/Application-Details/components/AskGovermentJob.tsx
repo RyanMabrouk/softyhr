@@ -38,11 +38,11 @@ function AskGovermentJob() {
       />
       {checked && (
         <SelectInput
-          minWidth="19rem"
           label="-Select-"
           defaultValue={ApplicationDetails?.values?.["Job Category"]}
           RowField={{
             name: "Job Category",
+            type : "select",
             options: GovermentJobCategory,
             required: true,
           }}

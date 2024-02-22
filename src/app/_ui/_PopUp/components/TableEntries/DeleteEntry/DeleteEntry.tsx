@@ -76,7 +76,7 @@ function DeleteItem() {
                     type="submit"
                     className="text-bold mt-4 rounded bg-color-primary-8 p-2 px-5 text-white duration-300 ease-in-out hover:!bg-color-primary-3 "
                   >
-                    Delete item
+                    Delete
                   </button>
                   <button
                     type="reset"
