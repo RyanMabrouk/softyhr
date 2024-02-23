@@ -5,7 +5,7 @@ import {
   database_leave_policies_policy_type,
   databese_leave_categories_track_time_unit_type,
 } from "@/types/database.tables.types";
-import { formatTotalHoursToTimeUnit } from "@/helpers/leave.helpers";
+import { formatTotalHoursToTimeUnit } from "@/helpers/TimeOff/leave.helpers";
 import { ChangePolicyMenuBtn } from "./Buttons/ChangePolicyMenuBtn";
 import { CalculatorBtn } from "./CalculatorBtn";
 import RoleGuard from "@/app/_ui/RoleGuard";

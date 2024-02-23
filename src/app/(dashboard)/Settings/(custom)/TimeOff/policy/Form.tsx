@@ -1,12 +1,12 @@
 "use client";
 import Link from "next/link";
 import React from "react";
-import { Stepper } from "./Stepper";
-import { PreviousStepBtn } from "./_ui/PreviousStepBtn";
-import { SubmitStepsBtn } from "./_ui/SubmitStepsBtn";
+import { Stepper } from "./components/Stepper";
+import { PreviousStepBtn } from "./components/PreviousStepBtn";
+import { SubmitStepsBtn } from "./components/SubmitStepsBtn";
 import { Setp1 } from "./_Step1/Setp1";
 import insertNewPolicy from "@/actions/settings/leave/insertNewPolicy";
-import { NextStepBtn } from "./_ui/NextStepBtn";
+import { NextStepBtn } from "./components/NextStepBtn";
 import { useSearchParams, useRouter } from "next/navigation";
 import { database_leave_policies_policy_type } from "@/types/database.tables.types";
 import { Setp2 } from "./_Step2/Setp2";
@@ -48,7 +48,13 @@ export function Form() {
       <hr className="m-0 h-[unset] w-full shrink-0 border-solid border-[rgba(0,0,0,0.12)] bg-gray-14" />
       {type === "traditional" && (
         <>
-          <Stepper />
+          <Stepper
+            labels={{
+              step1: "Basic Info",
+              step2: "Accural Step",
+              step3: "Summary",
+            }}
+          />
           <hr className="m-0 h-[unset] w-full shrink-0 border-solid border-[rgba(0,0,0,0.12)] bg-gray-14" />
         </>
       )}

@@ -16,7 +16,7 @@ import {
 import React from "react";
 import default_avatar from "/public/default_avatar.png";
 import default_user_avatar from "/public/default_avatar.png";
-import { formatTotalHoursToTimeUnit } from "@/helpers/leave.helpers";
+import { formatTotalHoursToTimeUnit } from "@/helpers/TimeOff/leave.helpers";
 import { formatDateToMonDDYYYY } from "@/helpers/date.helpers";
 import useEmployeeData from "@/hooks/useEmloyeeData";
 import PopUpSkeleton from "../../../PopUpSkeleton";

@@ -13,7 +13,7 @@ import {
 import {
   formatTotalHoursToTimeUnit,
   generateLeaveCategorieIcon,
-} from "@/helpers/leave.helpers";
+} from "@/helpers/TimeOff/leave.helpers";
 import { EditLeaveRequestBtn } from "./Buttons/EditLeaveRequestBtn";
 import { useParams } from "next/navigation";
 import { MdCancel } from "react-icons/md";

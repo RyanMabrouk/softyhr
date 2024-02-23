@@ -1,24 +1,37 @@
-import { FaAddressCard } from "react-icons/fa";
-
-export const EmployeeRoute = [
+export const EmployeeRoute: EmployeRoutesType[] = [
   {
     rang: 1,
     label: "Personal",
     path: (employeId: string) => `/people/${employeId}/personnal`,
     defaultPath: true,
-    icon: FaAddressCard,
+    RoleGuard: {
+      permissions: [],
+      strict: true,
+    },
   },
   {
     rang: 2,
     label: "Job",
     path: (employeId: string) => `/people/${employeId}/job`,
     defaultPath: true,
+    RoleGuard: {
+      permissions: [],
+      strict: true,
+    },
   },
   {
     rang: 3,
     label: "Time off",
     path: (employeId: string) => `/people/${employeId}/TimeOff`,
     defaultPath: true,
+    RoleGuard: {
+      permissions: [
+        "read:Employees policies",
+        "read:Employees upcoming time off",
+        "read:Employees history",
+      ],
+      strict: false,
+    },
   },
   /*{
     rang: 4,
@@ -57,4 +70,8 @@ export interface EmployeRoutesType {
   label: string;
   path: (arg: string) => string;
   defaultPath: boolean;
+  RoleGuard: {
+    permissions: string[];
+    strict: boolean;
+  };
 }

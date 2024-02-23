@@ -46,7 +46,7 @@ export default function NewFolderPopUp() {
               type="text"
               value={isTyping}
               onChange={(e) => setIsTyping(e.target.value)}
-              className=" focus:shadow-green w-80 border border-stone-400 px-2 py-1 outline-1 transition-shadow duration-300 focus:outline-none "
+              className=" focus:shadow-green w-80 rounded-sm border border-stone-400 px-2 py-1 outline-1 transition-shadow duration-300 focus:outline-none "
             />
 
             <hr className="mt-4 h-[3px] w-full bg-primary-gradient" />

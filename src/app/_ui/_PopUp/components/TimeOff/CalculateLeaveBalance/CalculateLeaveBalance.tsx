@@ -22,7 +22,7 @@ import usePolicy from "@/hooks/TimeOff/usePolicy";
 import {
   formatTotalHoursToTimeUnit,
   numberOfdaysInArrayOfDatesBeforeDay,
-} from "@/helpers/leave.helpers";
+} from "@/helpers/TimeOff/leave.helpers";
 import useData from "@/hooks/useData";
 export default function CalculateLeaveBalance() {
   const Router = useRouter();

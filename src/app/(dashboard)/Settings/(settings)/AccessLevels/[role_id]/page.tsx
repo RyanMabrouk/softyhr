@@ -43,7 +43,7 @@ export default function Page() {
         <span className=" text-[0.90rem] ">{role?.description ?? ""}</span>
       </div>
       <section className="flex-rox flex items-center justify-between">
-        <div className="flex flex-row gap-4 ">
+        <div className="flex flex-row items-center gap-4 ">
           <Link
             href={{
               pathname: pathname,
@@ -57,7 +57,6 @@ export default function Page() {
           <Link
             href={{
               pathname: pathname,
-              query: { popup: "" },
             }}
             className=" flex h-9 max-w-[11rem] flex-row items-center justify-center gap-1 rounded-md border border-gray-21 px-2 py-1 text-center text-[0.9rem] font-semibold text-gray-21 shadow-sm transition-all ease-linear hover:shadow-md"
           >

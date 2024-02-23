@@ -31,7 +31,6 @@ export async function GET(request: NextRequest) {
     const { error: signout_error } = await supabase.auth.signOut();
     if (signout_error) throw new Error(signout_error.message);
     const redirectUrl = `${requestUrl.protocol}//${company}.${requestUrl.host}/home`;
-    console.log("🚀 ~ GET ~ redirectUrl:", redirectUrl);
     return NextResponse.redirect(redirectUrl);
   } catch (error) {
     //logger.error(error);

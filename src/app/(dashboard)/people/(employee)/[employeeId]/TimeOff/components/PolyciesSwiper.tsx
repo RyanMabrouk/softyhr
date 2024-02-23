@@ -13,7 +13,7 @@ import {
   databese_leave_categories_track_time_unit_type,
   databese_leave_categories_type,
 } from "@/types/database.tables.types";
-import { generateLeaveCategorieIcon } from "@/helpers/leave.helpers";
+import { generateLeaveCategorieIcon } from "@/helpers/TimeOff/leave.helpers";
 import { useParams } from "next/navigation";
 import useEmployeeData from "@/hooks/useEmloyeeData";
 import useLeaveData from "@/hooks/TimeOff/useLeaveData";

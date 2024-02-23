@@ -1,7 +1,7 @@
 import React, { ReactNode } from "react";
 import { FormControl, MenuItem, Select } from "@mui/material";
 import { Label } from "./InputGeneric";
-import { getTawindColor } from "../../helpers/getTawindColor";
+import { getTawindColor } from "../../helpers/getTailwindColor";
 const color = getTawindColor("fabric-700");
 export type Option = {
   group_name?: string; // add only the group name to create a group

@@ -10,8 +10,8 @@ import {
 } from "@/components/ui/popover";
 import { useEffect, useState } from "react";
 import { formatYYYYMMDD } from "@/helpers/date.helpers";
-import { CalendarIcon } from "@radix-ui/react-icons";
 import { Label } from "./InputGeneric";
+import { FaCalendarDays } from "react-icons/fa6";
 export function CalendarGeneric({
   className,
   name,
@@ -72,8 +72,8 @@ export function CalendarGeneric({
                 !date && "text-muted-foreground",
               )}
             >
-              <CalendarIcon
-                className={`-ml-1 mr-2 h-5 w-5  ${error ? "!text-color9-500" : "group-focus-within:text-fabric-700"}`}
+              <FaCalendarDays
+                className={`-ml-1 mr-2 h-[1.15rem] w-[1.15rem]  text-fabric-700  ${error ? "!text-color9-500" : "group-focus-within:text-fabric-700"}`}
               />
               <div className={`${error ? "text-color9-500" : ""}`}>
                 {date ? format(date, "PPP") : <span>Pick a date</span>}

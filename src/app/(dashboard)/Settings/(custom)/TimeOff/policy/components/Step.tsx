@@ -27,14 +27,14 @@ export function Step({
         </div>
       ) : (
         <div
-          className={`z-10 flex items-center justify-center rounded-full px-2.5  py-[1px] text-center transition-[background-color] ease-linear ${active ? "bg-fabric-700" : "bg-gray-26"}`}
+          className={`z-10 flex items-center justify-center rounded-full px-2.5  py-[2px] text-center transition-[background-color] ease-linear ${active ? "bg-fabric-700" : "bg-gray-26"}`}
         >
-          <span className="text-lg text-gray-14">{step}</span>{" "}
+          <span className=" font-semibold text-gray-14">{step}</span>{" "}
         </div>
       )}
 
       <div
-        className={`z-10 text-lg transition-all ease-linear ${active ? "text-fabric-700" : "text-gray-26"}`}
+        className={`z-10 text-lg font-semibold transition-all ease-linear ${active ? "text-fabric-700" : "text-gray-26"}`}
       >
         {label}
       </div>

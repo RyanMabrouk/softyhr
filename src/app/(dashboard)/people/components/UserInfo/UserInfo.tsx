@@ -27,7 +27,7 @@ import {
   database_leave_requests_type,
   databese_leave_categories_type,
 } from "@/types/database.tables.types";
-import { generateLeaveCategorieIcon } from "@/helpers/leave.helpers";
+import { generateLeaveCategorieIcon } from "@/helpers/TimeOff/leave.helpers";
 import { UnderlinedLink } from "@/app/_ui/UnderlinedLink";
 import useLeaveData from "@/hooks/TimeOff/useLeaveData";
 import ManagerSection from "./components/managerSection";
