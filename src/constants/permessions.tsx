@@ -1,4 +1,3 @@
-import { red } from "@mui/material/colors";
 import { BsFillStopwatchFill, BsPeopleFill } from "react-icons/bs";
 import { FaAddressCard, FaBusinessTime, FaSuitcase } from "react-icons/fa";
 import { FaFileShield } from "react-icons/fa6";
