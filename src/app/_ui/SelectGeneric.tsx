@@ -49,7 +49,7 @@ export function SelectGeneric({
           id={label}
           className={`group peer h-9 w-[12.5rem] border  border-gray-18  py-1  text-gray-23  transition-all ease-linear first-letter:capitalize  placeholder:text-gray-14  [&_.Mui-selected]:!bg-fabric-700 [&_.MuiOutlinedInput-notchedOutline]:border-none ${open ? "shadow-green rounded-b-none rounded-t-sm " : "rounded-sm shadow-sm hover:shadow-md"} ${className}`}
           name={name}
-          defaultValue={defaultValue ? defaultValue.value : "none"}
+          defaultValue={defaultValue ? String(defaultValue.value) : "none"}
           displayEmpty
           required={required}
           onOpen={(e) => setOpen(true)}
