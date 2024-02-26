@@ -5,6 +5,7 @@ import { FaInbox } from "react-icons/fa6";
 import RoleGuard from "@/app/_ui/RoleGuard";
 import usePendingLeaveRequests from "@/hooks/TimeOff/usePendingLeaveRequests";
 import { RealTimeDataLeaveRequets } from "./realTimeHooks/RealTimeDataLeaveRequets";
+import useScrollPosition from "@/hooks/useScrollPosition";
 type notifs = {
   pending_leave_requests: number;
 };
@@ -27,8 +28,16 @@ export function Inbox() {
       realTimeHooks: <RealTimeDataLeaveRequets />,
     },
   ];
+  // toggle the view when the user scrolls
+  const scrollPosition = useScrollPosition();
+  useEffect(() => {
+    if (toggleView) {
+      setToggleView((old) => !old);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [scrollPosition]);
   return (
-    <div className="relative">
+    <>
       <div
         className="relative mr-1"
         role="button"
@@ -40,36 +49,42 @@ export function Inbox() {
         </div>
       </div>
       <div
-        className={`shadow-green absolute right-0 top-[135%] z-50 h-fit w-max min-w-[12.5rem] overflow-clip rounded-md bg-white ${toggleView ? "block" : "hidden"}`}
+        role="button"
+        onClick={() => setToggleView((old) => !old)}
+        className={`fixed left-0 top-0 z-40 flex h-full min-h-screen min-w-full grow items-start justify-end overflow-hidden  ${toggleView ? "block" : "hidden"}`}
       >
-        <Link
-          href={"/inbox"}
-          className="group flex cursor-pointer flex-row items-center gap-1 px-3 py-2 font-bold text-gray-27 transition-all ease-linear hover:bg-fabric-700 hover:text-white"
-          onClick={() => setToggleView((old) => !old)}
+        <div
+          className={`shadow-green z-20 mr-[8vw] mt-[4rem] h-fit w-max min-w-[12.5rem] overflow-clip rounded-md bg-white `}
         >
-          <FaInbox className="h-5 w-5 text-fabric-700 group-hover:text-white" />
-          <span>Inbox</span>
-        </Link>
-        <main
-          className="flex flex-col justify-center rounded-b-md text-sm text-gray-27 transition-all ease-linear"
-          role="button"
-        >
-          {links.map((link, index) => (
-            <RoleGuard
-              permissions={link.permissions}
-              key={"inbox_link" + index}
-            >
-              <InboxLink
-                {...link}
-                setNotifs={setNotifs}
-                setToggleView={setToggleView}
-              />
-              {link.realTimeHooks}
-            </RoleGuard>
-          ))}
-        </main>
+          <Link
+            href={"/inbox"}
+            className="group flex cursor-pointer flex-row items-center gap-1 px-3 py-2 font-bold text-gray-27 transition-all ease-linear hover:bg-fabric-700 hover:text-white"
+            onClick={() => setToggleView((old) => !old)}
+          >
+            <FaInbox className="h-5 w-5 text-fabric-700 group-hover:text-white" />
+            <span>Inbox</span>
+          </Link>
+          <main
+            className="flex flex-col justify-center rounded-b-md text-sm text-gray-27 transition-all ease-linear"
+            role="button"
+          >
+            {links.map((link, index) => (
+              <RoleGuard
+                permissions={link.permissions}
+                key={"inbox_link" + index}
+              >
+                <InboxLink
+                  {...link}
+                  setNotifs={setNotifs}
+                  setToggleView={setToggleView}
+                />
+                {link.realTimeHooks}
+              </RoleGuard>
+            ))}
+          </main>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 function InboxLink({

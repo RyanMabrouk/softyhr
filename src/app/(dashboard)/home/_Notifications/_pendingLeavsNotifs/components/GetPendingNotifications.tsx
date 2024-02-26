@@ -24,6 +24,7 @@ export function GetPendingNotifications({
       ]);
     }
     // @ts-ignore adding pendingNotifs to the dependency array will cause an infinite loop
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isPending1, setNotifications, isFetching]);
   useEffect(() => {
     setIsPending(isPending1);
