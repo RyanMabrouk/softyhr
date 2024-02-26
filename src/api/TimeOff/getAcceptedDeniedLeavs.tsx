@@ -30,14 +30,11 @@ export default async function getAcceptedDeniedLeavs({
   const org_name = session?.user.user_metadata.org_name;
   const start = page === 1 ? 0 : (page - 1) * cards_per_page;
   const end = page === 1 ? cards_per_page - 1 : start + cards_per_page - 1;
+  const filter = `(${status.reduce((acc, e, i) => acc + `"${e}"${i < status.length - 1 ? "," : ""}`, "")})`;
   const { data, error } = await supabase
     .from("leave_requests")
     .select("*")
-    .filter(
-      "status",
-      "in",
-      `(${status.reduce((acc, e) => acc + `"${e}",`, "")})`,
-    )
+    .filter("status", "in", filter)
     .match({ org_name: org_name })
     .order(sort, { ascending: false })
     .range(start, end);

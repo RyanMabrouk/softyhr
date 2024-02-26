@@ -27,7 +27,7 @@ export default function useAcceptedDeniedLeaves({
     queryKey: ["leave_requests", status, page, sort, filter],
     queryFn: () =>
       getAcceptedDeniedLeavs({
-        status: status,
+        status,
         page,
         sort,
       }),
