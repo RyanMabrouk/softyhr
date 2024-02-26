@@ -21,12 +21,13 @@ export default function useAcceptedDeniedLeaves({
     isPending: boolean;
   };
 } {
-  const status = filter === "all" ? ["approved", "rejected"] : [filter];
+  const status: database_leave_request_status_type[] =
+    filter === "all" ? ["approved", "rejected"] : [filter];
   const { data: accepted_denied_leaves, isPending } = useQuery({
     queryKey: ["leave_requests", status, page, sort, filter],
     queryFn: () =>
       getAcceptedDeniedLeavs({
-        status: status as database_leave_request_status_type[],
+        status: status,
         page,
         sort,
       }),

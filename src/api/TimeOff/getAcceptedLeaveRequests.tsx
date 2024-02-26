@@ -1,8 +1,12 @@
 "use server";
 import { getLogger } from "@/logging/log-util";
-import { database_leave_request_status_type } from "@/types/database.tables.types";
+import {
+  database_leave_request_status_type,
+  database_leave_requests_type,
+} from "@/types/database.tables.types";
 import { Database } from "@/types/database.types";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { PostgrestError } from "@supabase/supabase-js";
 import { cookies } from "next/headers";
 export default async function getAcceptedLeaveRequests({
   end_at,
@@ -10,7 +14,10 @@ export default async function getAcceptedLeaveRequests({
 }: {
   end_at: Date;
   start_at: Date;
-}) {
+}): Promise<{
+  data: database_leave_requests_type[] | null | undefined;
+  error: PostgrestError | null | undefined;
+}> {
   const supabase = createServerComponentClient<Database>({ cookies });
   const status: database_leave_request_status_type = "approved";
   const {
@@ -28,5 +35,5 @@ export default async function getAcceptedLeaveRequests({
   if (error) {
     logger.error(error?.message);
   }
-  return { data: data, error: error };
+  return { data: data as database_leave_requests_type[], error: error };
 }

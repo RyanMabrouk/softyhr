@@ -1,8 +1,12 @@
 "use server";
 import { getLogger } from "@/logging/log-util";
-import { database_leave_request_status_type } from "@/types/database.tables.types";
+import {
+  database_leave_request_status_type,
+  database_leave_requests_type,
+} from "@/types/database.tables.types";
 import { Database } from "@/types/database.types";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { PostgrestError } from "@supabase/supabase-js";
 import { cookies } from "next/headers";
 const cards_per_page = 9;
 export default async function getAcceptedDeniedLeavs({
@@ -13,7 +17,10 @@ export default async function getAcceptedDeniedLeavs({
   status: database_leave_request_status_type[];
   page: number;
   sort: "user_id" | "reviewed_at";
-}) {
+}): Promise<{
+  data: database_leave_requests_type[] | null | undefined;
+  error: PostgrestError | null | undefined;
+}> {
   const logger = getLogger("Inbox");
   logger.info("getAcceptedDeniedLeavs");
   const supabase = createServerComponentClient<Database>({ cookies });
@@ -37,5 +44,5 @@ export default async function getAcceptedDeniedLeavs({
   if (error) {
     logger.error(error?.message);
   }
-  return { data: data, error: error };
+  return { data: data as database_leave_requests_type[], error: error };
 }
