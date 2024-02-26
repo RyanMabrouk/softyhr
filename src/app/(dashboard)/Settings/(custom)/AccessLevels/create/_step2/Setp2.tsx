@@ -1,10 +1,12 @@
 "use client";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import StepContext, {
   StepContextContextType,
 } from "../../../TimeOff/policy/context/StepContext";
 import { permissions } from "@/constants/permessions";
 import { CheckBoxGeneric } from "@/app/_ui/CheckBoxGeneric";
+import { useSearchParams } from "next/navigation";
+import useRole from "@/hooks/useRole";
 
 export function Setp2() {
   type Permission = {
@@ -14,9 +16,61 @@ export function Setp2() {
     default?: boolean;
     category: string;
   };
+  // Duplicate and edit cases
+  const searchParams = useSearchParams();
+  const role_id = searchParams.get("role_id");
+  const {
+    role: { data: roleData },
+  } = useRole({ id: Number(String(role_id)) });
   const { step } = useContext<StepContextContextType>(StepContext);
   const [label, setLabel] = useState<string>(permissions[0].label);
   const [checkAll, setCheckAll] = useState(false);
+  const [checked, setChecked] = useState<string[]>(roleData?.permissions ?? []);
+  const allpermissions = permissions.reduce(
+    (acc: Permission[], e) => [
+      ...acc,
+      ...e.permissions.map((p) => ({ ...p, category: e.label })),
+    ],
+    [],
+  );
+  useEffect(() => {
+    setChecked((old) => [
+      ...new Set([
+        ...old,
+        ...allpermissions.filter((e) => e.default).map((e) => e.permession),
+        ...(roleData?.permissions ?? []),
+      ]),
+    ]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [roleData?.permissions.length]);
+  useEffect(() => {
+    if (
+      allpermissions.every((e) => checked.includes(e.permession)) &&
+      !checkAll
+    ) {
+      setCheckAll(true);
+    }
+    if (
+      !allpermissions.every((e) => checked.includes(e.permession)) &&
+      checkAll
+    ) {
+      setCheckAll(false);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [checked.length]);
+  const handleCheckBoxChange = (e: string, checked: boolean) => {
+    setChecked((old) =>
+      checked ? [...new Set([...old, e])] : old.filter((p) => p !== e),
+    );
+  };
+  const handleCheckAllChange = (e: string, checked: boolean) => {
+    if (checked) {
+      setChecked(allpermissions.map((e) => e.permession));
+    } else {
+      setChecked([]);
+    }
+  };
+
   return (
     <div
       className={`mt-10 flex w-full flex-col gap-6 px-6 ${step === 2 ? "flex" : "hidden"} `}
@@ -44,7 +98,11 @@ export function Setp2() {
           </nav>
           <section className="ml-9 flex flex-col gap-3">
             <div className="flex flex-col">
-              <CheckBoxGeneric setValueInParent={setCheckAll} name="check_all">
+              <CheckBoxGeneric
+                onChange={handleCheckAllChange}
+                defaultValue={checkAll}
+                name="check_all"
+              >
                 Access all permissions
               </CheckBoxGeneric>
               <span className="-mt-1 ml-8 text-sm text-gray-21">
@@ -52,31 +110,24 @@ export function Setp2() {
               </span>
             </div>
             <header className="mb-4 text-2xl font-semibold">{label}</header>
-            {permissions
-              .reduce(
-                (acc: Permission[], e) => [
-                  ...acc,
-                  ...e.permissions.map((p) => ({ ...p, category: e.label })),
-                ],
-                [],
-              )
-              .map((e, i) => (
-                <div
-                  key={"checkCheckBoxGenericbox" + i}
-                  className={`flex flex-col ${label === e.category ? "block" : "hidden"}`}
+            {allpermissions.map((e, i) => (
+              <div
+                key={"checkCheckBoxGenericbox" + i}
+                className={`flex flex-col ${label === e.category ? "block" : "hidden"}`}
+              >
+                <CheckBoxGeneric
+                  name="permessions"
+                  value={e.permession}
+                  setInputValueInParent={handleCheckBoxChange}
+                  defaultValue={checked.includes(e.permession)}
                 >
-                  <CheckBoxGeneric
-                    name="permessions"
-                    value={e.permession}
-                    defaultValue={e.default || checkAll ? true : false}
-                  >
-                    {e.label}
-                  </CheckBoxGeneric>
-                  <span className="-mt-1 ml-8 text-sm text-gray-21">
-                    {e.description ?? ""}
-                  </span>
-                </div>
-              ))}
+                  {e.label}
+                </CheckBoxGeneric>
+                <span className="-mt-1 ml-8 text-sm text-gray-21">
+                  {e.description ?? ""}
+                </span>
+              </div>
+            ))}
           </section>
         </main>
       </div>

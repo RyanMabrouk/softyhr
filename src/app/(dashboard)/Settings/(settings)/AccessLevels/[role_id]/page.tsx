@@ -56,7 +56,11 @@ export default function Page() {
           </Link>
           <Link
             href={{
-              pathname: pathname,
+              pathname: "/Settings/AccessLevels/create",
+              query: {
+                role_id: String(role_id),
+                edit: "true",
+              },
             }}
             className=" flex h-9 max-w-[11rem] flex-row items-center justify-center gap-1 rounded-md border border-gray-21 px-2 py-1 text-center text-[0.9rem] font-semibold text-gray-21 shadow-sm transition-all ease-linear hover:shadow-md"
           >

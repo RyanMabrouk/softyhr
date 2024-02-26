@@ -8,10 +8,10 @@ import { FaLock } from "react-icons/fa";
 import { Form } from "./Form";
 export default function Page() {
   return (
-    <RoleGuard permissions={["access:/Settings/TimeOff"]}>
+    <RoleGuard permissions={["access:/Settings/AccessLevels"]}>
       <div className="relative mx-[auto] flex h-full min-h-screen w-full max-w-[85rem] flex-col gap-4 pt-5">
         <Link
-          href={"/Settings/TimeOff"}
+          href={"/Settings/AccessLevels"}
           className="flex flex-row items-center gap-1 text-sm text-gray-21 hover:text-fabric-700 hover:underline"
         >
           <GoArrowLeft />

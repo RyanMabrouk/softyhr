@@ -6,8 +6,10 @@ const gray_color = getTawindColor("gray-27");
 export function CheckBoxGeneric({
   children,
   name,
-  defaultValue,
+  defaultValue = false,
   setValueInParent,
+  setInputValueInParent,
+  onChange,
   required,
   value,
 }: {
@@ -16,20 +18,25 @@ export function CheckBoxGeneric({
   defaultValue?: boolean;
   required?: boolean;
   value?: string;
+  onChange?: (e: string, checked: boolean) => void;
+  setInputValueInParent?: (e: string, checked: boolean) => void;
   setValueInParent?: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
-  const [checked, setChecked] = useState(defaultValue ? true : false);
+  const [checked, setChecked] = useState(defaultValue);
   useEffect(() => {
-    if (defaultValue !== checked) {
-      setChecked(defaultValue ? true : false);
-    }
-    // @ts-ignore don't add checked !!!
-  }, [defaultValue, setChecked]);
+    setChecked(defaultValue);
+  }, [setChecked, defaultValue]);
   useEffect(() => {
     if (setValueInParent) {
       setValueInParent(checked);
     }
   }, [checked, setValueInParent]);
+  useEffect(() => {
+    if (setInputValueInParent) {
+      setInputValueInParent(value ?? "", checked);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [checked]);
   return (
     <div className="col-span-2 -ml-2 flex h-6 flex-row items-center gap-1.5 text-left font-normal leading-[18px] text-gray-27 ">
       <Checkbox
@@ -44,7 +51,10 @@ export function CheckBoxGeneric({
           },
           "& .MuiSvgIcon-root": { fontSize: "1.35rem" },
         }}
-        onChange={() => setChecked((old) => !old)}
+        onChange={(e) => {
+          setChecked((old) => !old);
+          onChange && onChange(value ?? "", !checked);
+        }}
         checked={checked}
         required={required}
       />

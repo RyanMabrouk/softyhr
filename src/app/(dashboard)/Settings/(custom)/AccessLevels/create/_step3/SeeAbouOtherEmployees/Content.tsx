@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IoEye } from "react-icons/io5";
 import { FaLock } from "react-icons/fa";
 import panda from "/public/pudgy-space.png";
@@ -7,10 +7,26 @@ import Image from "next/image";
 import { feildsPermissions } from "@/constants/permessions";
 import { MdEdit } from "react-icons/md";
 import { SelectAllBtn } from "./SelectAllBtn";
+import { useSearchParams } from "next/navigation";
+import useRole from "@/hooks/useRole";
 
 export function Content() {
+  // Duplicate and edit cases
+  const searchParams = useSearchParams();
+  const role_id = searchParams.get("role_id");
+  const {
+    role: { data: roleData },
+  } = useRole({ id: Number(String(role_id)) });
   const [selected, setSelected] = useState(feildsPermissions[0].label);
-  const [permessions, setPermessions] = useState([] as string[]);
+  const [permessions, setPermessions] = useState(
+    roleData?.permissions ?? ([] as string[]),
+  );
+  useEffect(() => {
+    if (role_id && permessions.length === 0) {
+      setPermessions(roleData?.permissions ?? []);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [role_id]);
   const activeRoute = feildsPermissions.find((e) => e.label === selected);
   return (
     <>

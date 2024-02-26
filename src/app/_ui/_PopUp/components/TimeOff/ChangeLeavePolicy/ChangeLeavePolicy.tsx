@@ -66,9 +66,6 @@ export default function ChangeLeavePolicy() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ["leave_balance", employeeId],
-      });
-      queryClient.invalidateQueries({
         queryKey: ["leave_balance"],
       });
       Router.push(pathname);
@@ -98,7 +95,7 @@ export default function ChangeLeavePolicy() {
         <div className="flex w-full flex-col items-start justify-start gap-4 px-4 py-3">
           <div className="flex flex-col justify-center">
             <span className="relative w-fit text-sm text-gray-21">
-              Current Vacation Policy
+              Current {category?.name} Policy
             </span>
             <span className="capitalize">{policy?.name}</span>
           </div>

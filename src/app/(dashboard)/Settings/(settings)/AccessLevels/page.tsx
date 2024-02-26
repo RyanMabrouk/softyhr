@@ -43,7 +43,7 @@ export default function Page() {
         <HistoryTable
           emptyMessage="No employees with this Access Level yet."
           Headers={["Name", "Level", "Last login", " "]}
-          layout="grid-cols-[3fr,2fr,2fr,1fr]"
+          layout="grid-cols-[2fr,2fr,3fr,1fr]"
           data={role_users_data?.map((user) => ({
             Name: (
               <EmployeeProfileLink user_id={user.user_id}>

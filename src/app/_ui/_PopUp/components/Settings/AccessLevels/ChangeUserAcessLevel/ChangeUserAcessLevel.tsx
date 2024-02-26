@@ -1,3 +1,4 @@
+"use client";
 import PopUpSkeleton from "@/app/_ui/_PopUp/PopUpSkeleton";
 import useProfiles from "@/hooks/useProfiles";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
@@ -62,7 +63,7 @@ export default function ChangeUserAcessLevel() {
         toast.success(
           `${capitalizeFirstLetter(
             first_name,
-          )} has been added to the policy successfully`,
+          )} has been added to the role successfully`,
           "Success",
         );
       }

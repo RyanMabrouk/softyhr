@@ -8,10 +8,19 @@ import ErrorContext, {
 } from "../../../TimeOff/policy/context/errorContext";
 import { InputGeneric } from "@/app/_ui/InputGeneric";
 import { TextFeildGeneric } from "@/app/_ui/TextFeildGeneric";
+import { useSearchParams } from "next/navigation";
+import useRole from "@/hooks/useRole";
 
 export function Setp1() {
   const { step } = useContext<StepContextContextType>(StepContext);
   const { error } = useContext<ErrorContextContextType>(ErrorContext);
+  // Duplicate and edit cases
+  const searchParams = useSearchParams();
+  const role_id = searchParams.get("role_id");
+  const duplicate = searchParams.get("duplicate");
+  const {
+    role: { data: roleData },
+  } = useRole({ id: Number(String(role_id)) });
   return (
     <div
       className={`mt-6 flex w-full flex-col gap-6 ${step === 1 ? "flex" : "hidden"} `}
@@ -27,12 +36,16 @@ export function Setp1() {
           className=" !w-[16rem] max-w-[16rem]"
           name="role_name"
           label="Access Level Name"
+          defaultValue={
+            duplicate ? roleData?.name + "-duplicate" : roleData?.name ?? ""
+          }
           required
         />
         <TextFeildGeneric
           name="role_description"
           label="Description"
           className="max-h-[10rem] max-w-[30rem]"
+          defaultValue={roleData?.description ?? ""}
           error={error?.role_description?.[0]}
         />
       </div>
