@@ -21,7 +21,7 @@ export default function DeleteLeavePolicy() {
   const queryClient = useQueryClient();
   const {
     employee_profile: { data: employee_profile },
-  } = useEmployeeData({ employeeId: employeeId });
+  } = useEmployeeData({ employeeId: String(employeeId) });
   const { policy, category } = usePolicy({ policy_id: Number(policy_id) });
   // Mutation to delete Category
   const { mutate: deleteCat, isPending } = useMutation({
@@ -52,36 +52,36 @@ export default function DeleteLeavePolicy() {
   const last_name: string =
     employee_profile?.["Basic Information"]?.["Last name"];
   return (
-    <>
-      <PopUpSkeleton
-        className="flex max-w-[35rem] flex-col items-center gap-4 px-8 py-4"
-        title="Just Checking..."
+    <PopUpSkeleton
+      className="flex max-w-[35rem] flex-col items-center gap-4 px-8 py-4"
+      title="Just Checking..."
+    >
+      <IoWarning className="h-16 w-16 text-color9-500 " />
+      <div className=" max-w-[30rem] text-center text-[1.25rem] leading-6  text-gray-27">
+        <span>
+          {"Are you sure you want to remove "}
+          <strong>{first_name + " " + last_name}</strong>
+          {` from “${policy?.name}” ? `}
+        </span>
+      </div>
+      <div className=" max-w-[85%] text-center text-[15px] leading-[22px] text-gray-20">
+        {`${first_name} will lose access to their history for this policy and will no longer be able to request time off from the `}
+        <strong className="capitalize">{category?.name} </strong>
+        {` category.`}
+      </div>
+      <form
+        action={() => deleteCat()}
+        className="flex w-full flex-col gap-2 px-2 pt-3"
       >
-        <IoWarning className="h-16 w-16 text-color9-500 " />
-        <div className=" max-w-[30rem] text-center text-[1.25rem] leading-6  text-gray-27">
-          <span>
-            {"Are you sure you want to remove "}
-            <strong>{first_name + " " + last_name}</strong>
-            {` from “${policy?.name}” ? `}
-          </span>
+        <hr className="h-[3px] w-full bg-primary-gradient" />
+        <div className="flex flex-row gap-4 px-2 pt-3">
+          <SubmitBtn
+            className="!w-fit !max-w-[20rem] !px-2"
+            disabled={isPending}
+          >{`Yes, Remove ${first_name}`}</SubmitBtn>
+          <CancelBtnGeneric />
         </div>
-        <div className=" max-w-[85%] text-center text-[15px] leading-[22px] text-gray-20">
-          {`${first_name} will lose access to their history for this policy and will no longer be able to request time off from the ${category?.name} category.`}
-        </div>
-        <form
-          action={() => deleteCat()}
-          className="flex w-full flex-col gap-2 px-2 pt-3"
-        >
-          <hr className="h-[3px] w-full bg-primary-gradient" />
-          <div className="flex flex-row gap-4 px-2 pt-3">
-            <SubmitBtn
-              className="!w-fit !max-w-[20rem] !px-2"
-              disabled={isPending}
-            >{`Yes, Remove ${first_name}`}</SubmitBtn>
-            <CancelBtnGeneric />
-          </div>
-        </form>
-      </PopUpSkeleton>
-    </>
+      </form>
+    </PopUpSkeleton>
   );
 }

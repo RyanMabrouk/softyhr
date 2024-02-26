@@ -1,12 +1,12 @@
 "use client";
-import React, { memo, useContext, useEffect, useRef, useState } from "react";
+import React, { memo, useContext, } from "react";
 import FiledsChamps from "@/app/(dashboard)/people/components/Fileds/Fileds";
 import { StepsContext } from "../context/StepsContext";
 import useData from "@/hooks/useData";
 import AdditionnalInputs from "./components/AdditionnalInputs";
 
 function Page() {
-  const { InformationJob, Update_InformationJob } = useContext(StepsContext);
+  const { InformationJob } = useContext(StepsContext);
   const {
     settings: { data, isPending },
   } = useData();
@@ -17,7 +17,7 @@ function Page() {
       ) : (
         <div className="flex flex-col items-start justify-start gap-[1rem]">
           <FiledsChamps
-            FieldsArray={data[0]["Hiring"]["Fields"]}
+            FieldsArray={data?.[0]["Hiring"]["Fields"]}
             champ={"hiring"}
             user={{ hiring: { ...InformationJob?.values } }}
           ></FiledsChamps>

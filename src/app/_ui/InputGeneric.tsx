@@ -15,7 +15,7 @@ export function InputGeneric({
   defaultValue,
   shadow,
   error,
-  type,
+  type = "text",
   setValueInParent,
   ...props
 }: InputProps) {
@@ -35,7 +35,7 @@ export function InputGeneric({
           {...props}
           step=".01"
           type={type}
-          className={`w-full max-w-[10rem] rounded-md border border-gray-18 px-2 py-1 shadow-sm placeholder:text-gray-16 focus:outline-none ${shadow === "red" || error ? "focus:shadow-red !border-color9-500" : "focus:shadow-green"} ${props.className}`}
+          className={`w-full max-w-[10rem] rounded-md border px-2 py-1 shadow-sm placeholder:text-gray-16 focus:outline-none ${shadow === "red" || error ? "focus:shadow-red !border-color9-500" : "focus:shadow-green border-gray-18 "} ${props.className}`}
           name={name}
           id={name + "_id"}
           defaultValue={defaultValue}

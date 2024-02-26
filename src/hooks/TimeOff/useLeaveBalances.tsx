@@ -1,6 +1,7 @@
 "use client";
 import getData from "@/api/getData";
 import { database_profile_leave_balance_type } from "@/types/database.tables.types";
+import { PostgrestError } from "@supabase/supabase-js";
 import { useQuery } from "@tanstack/react-query";
 export default function useLeaveBalances({
   policy_id,
@@ -8,8 +9,8 @@ export default function useLeaveBalances({
   policy_id: number;
 }): {
   all_users_leave_balance: {
-    data: database_profile_leave_balance_type[] | undefined;
-    error: Error | null | undefined;
+    data: database_profile_leave_balance_type[] | undefined | null;
+    error: PostgrestError | null | undefined;
     isPending: boolean;
   };
 } {

@@ -3,9 +3,6 @@ const nextConfig = {
   compiler: {
     //removeConsole: process.env.NODE_ENV !== "development", // Remove console.log in production
   },
-  experimental: {
-    serverActions: { allowedOrigins: ["localhost:3001", "rh.ixamee.com"] },
-  },
   swcMinify: true,
   logging: {
     fetches: {
@@ -42,7 +39,7 @@ const nextConfig = {
   },
   webpack: (config) => {
     config.externals = [...config.externals, { canvas: "canvas" }];
-    // Add the resolve configuration
+    // resolve configuration
     config.resolve = {
       ...config.resolve,
       alias: {
@@ -50,7 +47,6 @@ const nextConfig = {
         stream: "stream-browserify",
       },
     };
-
     return config;
   },
 };
@@ -59,4 +55,4 @@ const withPWA = require("next-pwa")({
   dest: "public",
 });
 
-module.exports = nextConfig;
+module.exports = withPWA(nextConfig);

@@ -14,17 +14,17 @@ export type database_profile_leave_balance_type =
 // Leave Categories
 export type databese_leave_categories_type =
   Database["public"]["Tables"]["leave_categories"]["Row"];
-export type databese_leave_categories_track_time_unit_type = "days" | "hours";
+export type databese_leave_categories_track_time_unit_type =
+  Database["public"]["Tables"]["leave_categories"]["Row"]["track_time_unit"];
 // Leave Requests
-export type database_leave_requests_type =
-  Database["public"]["Tables"]["leave_requests"]["Row"];
-export type database_leave_requests_insert_type =
-  Database["public"]["Tables"]["leave_requests"]["Insert"];
+export type database_leave_requests_type = Omit<
+  Database["public"]["Tables"]["leave_requests"]["Row"],
+  "duration_used"
+> & {
+  duration_used: database_leave_request_duration_used_type[];
+};
 export type database_leave_request_status_type =
-  | "pending"
-  | "approved"
-  | "rejected"
-  | "canceled";
+  Database["public"]["Tables"]["leave_requests"]["Row"]["status"];
 export type database_leave_request_duration_used_type = {
   date: string;
   duration: number;
@@ -32,8 +32,6 @@ export type database_leave_request_duration_used_type = {
 // Leave Accrued
 export type database_leave_accrued_type =
   Database["public"]["Tables"]["leave_accrued"]["Row"];
-export type database_leave_accrued_insert_type =
-  Database["public"]["Tables"]["leave_accrued"]["Insert"];
 // Leave Policies
 export type database_leave_policies_policy_type =
   Database["public"]["Tables"]["leave_policies"]["Row"]["type"];
@@ -53,8 +51,7 @@ export type organizations_type =
 
 //-----------Depatment_types-------------
 
-export type Department_type =
-  Database["public"]["Tables"]["Department"]["Row"];
+export type Department_type = Database["public"]["Tables"]["Department"]["Row"];
 
 //------------Hiring_types---------------
 
@@ -72,7 +69,7 @@ export type Hiring_type<T extends Profile_Type = Profile_Type> = {
     [key: string]: string | Object[] | Object | null;
   } | null;
   org_name: string | null;
-  profiles?:T;
+  profiles?: T;
 };
 export type Application_Details_type = {
   Job_Category?: string;

@@ -7,13 +7,13 @@ interface EmployePropsType {
   params: { employeeId: string };
   children: ReactNode;
 }
-export default function Layout({
+export default async function Layout({
   params: { employeeId },
   children,
 }: EmployePropsType) {
   return (
     <EmplyoeeDataHydration employeeId={employeeId}>
-      <div className="flex h-full w-full flex-col">
+      <div className="flex h-full w-screen flex-col">
         <Content />
         <div className="flex h-fit w-full grow pl-[12%] pr-[15%]">
           <UserInfo employeeId={employeeId} />

@@ -5,9 +5,6 @@ import { Card } from "../components/Card";
 import Loader from "@/app/_ui/Loader/Loader";
 import { Player } from "@lottiefiles/react-lottie-player";
 import useAcceptedDeniedLeaves from "@/hooks/TimeOff/useAcceptedDeniedLeaves";
-import { useQueryClient } from "@tanstack/react-query";
-import { database_leave_request_status_type } from "@/types/database.tables.types";
-import getAcceptedDeniedLeavs from "@/api/TimeOff/getAcceptedDeniedLeavs";
 import { SelectGeneric } from "@/app/_ui/SelectGeneric";
 import { PaginationButtons } from "../components/PaginationButtons";
 export default function Page() {

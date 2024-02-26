@@ -11,7 +11,7 @@ import insertLeaveCategorie from "@/actions/settings/leave/insertLeaveCategorie"
 import useToast from "@/hooks/useToast";
 import updateLeaveCategory from "@/actions/settings/leave/updateLeaveCategory";
 import { capitalizeFirstLetter } from "@/helpers/string.helpers";
-import { CheckBoxGeneric } from "./CheckBoxGeneric";
+import { CheckBoxGeneric } from "../../../../../CheckBoxGeneric";
 import ItemsDropdownGeneric from "../../../../../ItemsDropdownGeneric";
 import useLeaveData from "@/hooks/TimeOff/useLeaveData";
 import CancelBtnGeneric from "@/app/_ui/CancelBtnGeneric";

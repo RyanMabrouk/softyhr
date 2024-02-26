@@ -9,7 +9,7 @@ import {
   useRouter,
   useSearchParams,
 } from "next/navigation";
-import default_avatar from "/public/default_avatar.jpeg";
+import default_avatar from "/public/default_avatar.png";
 import React, { useState } from "react";
 import Image from "next/image";
 import PopUpSkeleton from "../../../PopUpSkeleton";
@@ -28,7 +28,7 @@ export default function AdjustLeavePolicyBalance() {
   const {
     employee_profile: { data: employee_profile },
     leave_balance: { data: leave_balance },
-  } = useEmployeeData({ employeeId: employeeId });
+  } = useEmployeeData({ employeeId: String(employeeId) });
   // current policy balance
   const policy_balance = leave_balance?.find(
     (e: database_profile_leave_balance_type) =>

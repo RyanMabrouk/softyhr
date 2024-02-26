@@ -4,7 +4,7 @@ import updateData from "@/api/updateData";
 import { getDaysInBetween } from "@/helpers/date.helpers";
 import {
   database_leave_request_status_type,
-  database_leave_requests_insert_type,
+  database_leave_requests_type,
 } from "@/types/database.tables.types";
 import updateLeaveBalance from "./updateLeaveBalance";
 import { getPolicyType } from "./getPolicyType";
@@ -16,7 +16,7 @@ export default async function updateLeaveRequest({
 }: {
   formData: FormData;
   user_id: string | string[];
-  old_request: database_leave_requests_insert_type;
+  old_request: database_leave_requests_type;
 }) {
   const logger = getLogger("*");
   logger.info("updateLeaveRequest");
@@ -94,7 +94,7 @@ export default async function updateLeaveRequest({
     const { error: error1 } = await updateLeaveBalance({
       user_id: user_id,
       policy_id: policy_id,
-      categories_id: categories_id[0].categories_id,
+      categories_id: categories_id?.[0].categories_id,
       total_added_duration:
         type === "unlimited"
           ? 0 - (old_leave_request_total_duration - total_duration)

@@ -1,8 +1,8 @@
 "use client";
 import GetFoldersByIDs from "@/actions/files/getFolders";
-import useFoldersIds from "@/hooks/useFoldersIds";
+import useFoldersIds from "@/hooks/files/useFoldersIds";
 import getData from "@/api/getData";
-import useFolderData from "@/hooks/useFolderData";
+import useFolderData from "@/hooks/files/useFolderData";
 import useUserRole from "@/hooks/useUserRole";
 import { useQuery } from "@tanstack/react-query";
 import { useSearchParams } from "next/navigation";
@@ -18,7 +18,6 @@ export default function FolderTitle() {
     queryKey: ["folders", wantedFoldersIds],
     queryFn: async () => await GetFoldersByIDs(wantedFoldersIds),
     enabled: wantedFoldersIds.length > 0,
-
   });
   const allFilesIds = wantedFolders
     ?.map((fold: any) => fold.files)

@@ -1,7 +1,5 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import Visibility from "@mui/icons-material/Visibility";
-import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import {
   FormControl,
   FormHelperText,
@@ -10,6 +8,8 @@ import {
   InputLabel,
   OutlinedInput,
 } from "@mui/material";
+import { IoEyeOffSharp } from "react-icons/io5";
+import { MdRemoveRedEye } from "react-icons/md";
 
 export function PasswordInput({ error }: { error: string[] | undefined }) {
   const [showPassword, setShowPassword] = useState(false);
@@ -50,9 +50,9 @@ export function PasswordInput({ error }: { error: string[] | undefined }) {
               aria-label="toggle password visibility"
               onClick={() => setShowPassword((show) => !show)}
               edge="end"
-              className="-ml-12"
+              className="!-ml-12"
             >
-              {showPassword ? <VisibilityOff /> : <Visibility />}
+              {showPassword ? <IoEyeOffSharp /> : <MdRemoveRedEye />}
             </IconButton>
           </InputAdornment>
         }

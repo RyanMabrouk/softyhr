@@ -1,15 +1,5 @@
 import React, { ReactNode, SyntheticEvent, useState } from "react";
-import {
-  Autocomplete,
-  Box,
-  ListItemIcon,
-  ListItemText,
-  MenuItem,
-  Select,
-  SelectChangeEvent,
-  TextField,
-  makeStyles,
-} from "@mui/material";
+import { Autocomplete, Box, TextField } from "@mui/material";
 import useProfiles from "@/hooks/useProfiles";
 import Image from "next/image";
 import avatar from "/public/avatar.png";
@@ -146,13 +136,20 @@ function SelectUsers({ RowField, defaultValue }: SelectUsers) {
             }
           : undefined
       }
-      options={data?.map((user: Profile_Type) => {
-        return {
-          picture: user?.picture,
-          label: `${user?.["Basic Information"]?.["First name"]} ${user?.["Basic Information"]?.["Last name"]} `,
-          value: user?.user_id,
-        };
-      })}
+      options={
+        data?.map((user: Profile_Type) => {
+          return {
+            picture: user?.picture,
+            label: `${user?.["Basic Information"]?.["First name"]}     ${user?.["Basic Information"]?.["Last name"]} `,
+            value: user?.user_id,
+          };
+        }) ?? [
+          {
+            label: "",
+            value: "",
+          },
+        ]
+      }
     />
   );
 }

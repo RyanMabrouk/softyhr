@@ -6,7 +6,7 @@ import useToast from "@/hooks/useToast";
 import { useParams, usePathname, useRouter } from "next/navigation";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import useEmployeeData from "@/hooks/useEmloyeeData";
-import default_avatar from "/public/default_avatar.jpeg";
+import default_avatar from "/public/default_avatar.png";
 import { SelectGeneric } from "@/app/_ui/SelectGeneric";
 import {
   database_leave_policies_type,
@@ -32,7 +32,7 @@ export default function AddTimeOffPolicy() {
   const {
     employee_profile: { data: employee_profile },
     leave_balance: { data: leave_balance },
-  } = useEmployeeData({ employeeId: employeeId });
+  } = useEmployeeData({ employeeId: String(employeeId) });
   // current employee full name
   const first_name: string =
     employee_profile?.["Basic Information"]?.["First name"];
@@ -50,9 +50,10 @@ export default function AddTimeOffPolicy() {
     leave_categories
       ?.filter((c: databese_leave_categories_type) => !c.disabled)
       .reduce((acc: [], c: databese_leave_categories_type) => {
-        const category_policies = leave_policies?.filter(
-          (p: database_leave_policies_type) => p.categories_id === c.id,
-        );
+        const category_policies =
+          leave_policies?.filter(
+            (p: database_leave_policies_type) => p.categories_id === c.id,
+          ) ?? [];
         if (category_policies?.length === 0) {
           return acc;
         }
@@ -70,7 +71,7 @@ export default function AddTimeOffPolicy() {
   const { mutate: add, isPending } = useMutation({
     mutationFn: async (formData: FormData) => {
       const policy_id = formData.get("policy_id") as string;
-      const policy = leave_policies.find(
+      const policy = leave_policies?.find(
         (p: database_leave_policies_type) => p.id === Number(policy_id),
       );
       if (!policy) {
@@ -80,7 +81,7 @@ export default function AddTimeOffPolicy() {
       const categories_id = leave_categories?.find(
         (c: databese_leave_categories_type) => c.id === policy?.categories_id,
       )?.id;
-      const { error } = current_categories.includes(categories_id)
+      const { error } = current_categories?.includes(categories_id)
         ? await changePolicy({
             old_policy_id: leave_balance?.find(
               (e: database_profile_leave_balance_type) =>
@@ -95,7 +96,7 @@ export default function AddTimeOffPolicy() {
             user_id: employeeId,
           });
       if (error) {
-        return;
+        toast.error(error.type, error.message);
       } else {
         toast.success(
           `${capitalizeFirstLetter(
@@ -122,6 +123,7 @@ export default function AddTimeOffPolicy() {
     >
       <header className="flex w-full flex-row items-center gap-2 bg-gray-14 px-4 py-3">
         <Image
+          priority
           src={employee_profile?.picture ?? default_avatar}
           className="h-12 w-12 rounded-full"
           alt=""
@@ -140,6 +142,7 @@ export default function AddTimeOffPolicy() {
           <SelectGeneric
             label={`Add ${capitalizeFirstLetter(first_name)} to...`}
             name="policy_id"
+            className="h-9 !w-[17.5rem]"
             defaultValue={{ label: "Policies", value: "none" }}
             required={true}
             group={true}

@@ -24,7 +24,7 @@ export default function Nav() {
   const employeeId = paramsid ? paramsid : user?.user_id;
   return (
     <>
-      <nav className="flex h-20 flex-row items-center justify-between gap-[2rem] bg-gray-17 pl-14 pr-10">
+      <nav className="flex h-20 w-screen flex-row items-center justify-between gap-[2rem] bg-gray-17 pl-14 pr-10 max-xl:pl-6 max-xl:pr-6">
         <div className="flex min-h-full flex-row items-center gap-2">
           <Image
             className="cursor-pointer"
@@ -32,7 +32,7 @@ export default function Nav() {
             src={companyLogo}
             priority
           />
-          <div className="flex h-full items-center justify-center">
+          <div className="flex h-full items-center justify-center ">
             {LayoutRoute?.map(
               (
                 { label, pathFn, defaultPath }: LayoutRouteType,
@@ -42,7 +42,7 @@ export default function Nav() {
                 return (
                   <Link
                     key={index}
-                    className={`flex h-20 items-center justify-center px-6 capitalize text-gray-9 transition delay-75 ease-in-out hover:bg-gray-14 ${isActive ? "bg-gray-14 font-bold !text-fabric-700" : ""}`}
+                    className={`flex h-20 items-center justify-center px-6 capitalize max-xl:text-[0.75rem] max-xl:px-3 text-gray-9 transition delay-75 ease-in-out hover:bg-gray-14 ${isActive ? "bg-gray-14 font-bold !text-fabric-700" : ""}`}
                     href={defaultPath ? defaultPath(employeeId as string) : ""}
                   >
                     {label}
@@ -56,7 +56,7 @@ export default function Nav() {
           <SearchBar />
           <div className="flex flex-row items-center gap-3">
             <Inbox />
-            <BsFillQuestionCircleFill className="h-7 w-7 cursor-pointer font-bold text-gray-15  transition-all ease-linear hover:text-fabric-700" />
+            <BsFillQuestionCircleFill className="h-7 w-7 min-w-7 min-h-7 cursor-pointer font-bold text-gray-15  transition-all ease-linear hover:text-fabric-700" />
             <Link href={"/Settings"}>
               <IoMdSettings
                 className={`h-8 w-8 cursor-pointer font-bold  text-gray-15 transition-all ease-linear hover:text-fabric-700 ${currentPath.includes("/Settings") ? "text-fabric-700" : ""}`}
@@ -66,7 +66,7 @@ export default function Nav() {
           </div>
         </div>
       </nav>
-      <hr className="h-[3px] w-full bg-primary-gradient" />
+      <hr className="h-[3px] w-screen bg-primary-gradient" />
     </>
   );
 }

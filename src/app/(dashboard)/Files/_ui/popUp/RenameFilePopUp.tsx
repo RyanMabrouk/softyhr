@@ -18,6 +18,8 @@ export default function RenameFilePopUp() {
 
   const [isTyping, setIsTyping] = useState("");
   const id = searchParams.get("fileId");
+  const name = searchParams.get("fileName");
+  console.log("🚀 ~ RenameFilePopUp ~ name:", name);
 
   /////
   const { mutateAsync: renameFileApi } = useMutation({
@@ -54,8 +56,10 @@ export default function RenameFilePopUp() {
           <input
             type="text"
             value={isTyping}
+            placeholder={name ?? ""}
+            defaultValue={String(name) ?? ""}
             onChange={(e) => setIsTyping(e.target.value)}
-            className=" w-80 border border-stone-400 px-2 py-1 outline-1 transition-all duration-300 focus:outline-color1-300 "
+            className=" focus:shadow-green w-80 rounded-sm border border-stone-400 px-2 py-1 shadow-sm outline-1 transition-shadow duration-300 focus:outline-none  "
           />
 
           <hr className="mt-4 h-[3px] w-full bg-primary-gradient" />

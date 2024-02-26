@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import React from "react";
 import { AiFillLike } from "react-icons/ai";
 import { BsFillStopwatchFill } from "react-icons/bs";
-import { FaWrench } from "react-icons/fa";
+import { FaLock, FaWrench } from "react-icons/fa";
 import { IoMdSettings } from "react-icons/io";
 import { IoFileTrayFull } from "react-icons/io5";
 export default function Layout({
@@ -29,6 +29,12 @@ export default function Layout({
       permissions: ["access:/Settings/TimeOff"],
     },
     {
+      label: "Access Levels",
+      path: "/Settings/AccessLevels",
+      icon: <FaLock className="h-4 w-4" />,
+      permissions: ["access:/Settings/AccessLevels"],
+    },
+    /* {
       label: "Hiring",
       path: "/Settings/SettingsHiring",
       icon: <IoFileTrayFull className="h-5 w-5" />,
@@ -39,7 +45,7 @@ export default function Layout({
       path: "/Settings/Approvals",
       icon: <AiFillLike className="h-5 w-5" />,
       permissions: [],
-    },
+    },*/
   ];
   return (
     <>

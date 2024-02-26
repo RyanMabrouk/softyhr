@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import OrgChartComponent from "./components/OrgChart/OrgChart";
-import useProfilesOrgChart from "@/hooks/useProfilesOrgChart";
+import useProfilesOrgChart from "@/hooks/files/useProfilesOrgChart";
 import LoaderFiles from "@/app/(dashboard)/Files/_ui/components/Loader/LoaderFiles";
 
 const OrgChartContainer = () => {
@@ -11,7 +11,7 @@ const OrgChartContainer = () => {
 
   const allProfiles = !isPending ? profiles?.data : null;
   !isPending &&
-    allProfiles.forEach((prof: any) => {
+    allProfiles?.forEach((prof: any) => {
       wantedData.push({
         name:
           prof?.["Basic Information"]?.["First name"] +

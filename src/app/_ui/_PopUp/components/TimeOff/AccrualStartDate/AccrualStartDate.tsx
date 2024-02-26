@@ -1,6 +1,6 @@
 import React from "react";
 import PopUpSkeleton from "../../../PopUpSkeleton";
-import default_avatar from "/public/default_avatar.jpeg";
+import default_avatar from "/public/default_avatar.png";
 import { useParams, usePathname, useRouter } from "next/navigation";
 import useEmployeeData from "@/hooks/useEmloyeeData";
 import Image from "next/image";
@@ -18,7 +18,7 @@ export default function AccrualStartDate() {
   const pathname = usePathname();
   const {
     employee_profile: { data: employee_profile },
-  } = useEmployeeData({ employeeId: employeeId });
+  } = useEmployeeData({ employeeId: String(employeeId) });
   // current employee full name
   const first_name: string =
     employee_profile?.["Basic Information"]?.["First name"];

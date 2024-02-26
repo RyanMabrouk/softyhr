@@ -1,6 +1,12 @@
 "use client";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useEffect } from "react";
+type optionsType = {
+  event: "UPDATE" | "INSERT" | "DELETE" | "*";
+  schema: string;
+  table: string;
+  filter?: string;
+};
 export default function useRealTime({
   filters,
   table,
@@ -23,37 +29,31 @@ export default function useRealTime({
       `${e.column}=eq.${e.value}${i === filters?.length - 1 ? "" : " and "}`,
     "",
   );
+  let options: optionsType = {
+    event: event,
+    schema: "public",
+    table: table,
+  };
+  if (filterString) {
+    options = {
+      ...options,
+      filter: filterString,
+    };
+  }
   useEffect(() => {
-    const channel = filterString
-      ? supabase
-          .channel(channelName)
-          .on(
-            // @ts-ignore : works perfectly <3
-            "postgres_changes",
-            {
-              event: event,
-              schema: "public",
-              table: table,
-              filter: filterString,
-            },
-            onReceive,
-          )
-          .subscribe()
-      : supabase
-          .channel(channelName)
-          .on(
-            // @ts-ignore : also works perfectly <3
-            "postgres_changes",
-            {
-              event: event,
-              schema: "public",
-              table: table,
-            },
-            onReceive,
-          )
-          .subscribe();
+    const channel = supabase
+      .channel(channelName)
+      .on(
+        // @ts-ignore : works perfectly <3
+        "postgres_changes",
+        options,
+        onReceive,
+      )
+      .subscribe();
     return () => {
       supabase.removeChannel(channel);
     };
+    // dependencies are correctly set
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [table, event, filterString, onReceive, channelName, supabase]);
 }

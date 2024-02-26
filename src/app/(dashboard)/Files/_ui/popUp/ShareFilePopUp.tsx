@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { CgClose } from "react-icons/cg";
 import ButtonPopUp from "../components/ButtonPopUp";
 import FilesCheckBox from "../components/FilesCheckBox";
-import useFileData from "@/hooks/useFileData";
+import useFileData from "@/hooks/files/useFileData";
 import LoaderPopUp from "../components/Loader/LoaderPopUp/LoaderPopUp";
 import { useQueryClient } from "@tanstack/react-query";
 import useProfiles from "@/hooks/useProfiles";
@@ -59,7 +59,7 @@ export default function ShareFilePopUp() {
       await Promise.all(promises);
     } else if (isChecked) {
       profiles
-        .filter(
+        ?.filter(
           (user: any) =>
             user.role === "employee" && !user.files_ids.includes(Number(id)),
         )
@@ -90,9 +90,9 @@ export default function ShareFilePopUp() {
               <div className="flex flex-row justify-between">
                 <h1 className=" pb-2 text-2xl font-normal text-fabric-700">
                   {`Share ${
-                    file.data[0].name.length < 40
-                      ? file.data[0].name
-                      : `${file.data[0].name?.slice(0, 40)}...`
+                    file.data?.[0].name.length < 40
+                      ? file.data?.[0].name
+                      : `${file.data?.[0].name?.slice(0, 40)}...`
                   }`}
                 </h1>
                 <div

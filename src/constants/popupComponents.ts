@@ -41,6 +41,10 @@ import CreateComment from "@/app/_ui/_PopUp/components/Hiring/CreateComment/Crea
 import SendMail from "@/app/_ui/_PopUp/components/Hiring/SendMail/SendMail";
 import DeleteEducation from "@/app/_ui/_PopUp/components/Personel-job/Education/DeleteEducation/DeleteEducation";
 import DeleteCandidate from "@/app/_ui/_PopUp/components/Hiring/DeleteCandidate/DeleteCandidate";
+import AddEmployeesToRole from "@/app/_ui/_PopUp/components/Settings/AccessLevels/AddEmployeesToRole/AddEmployeesToRole";
+import ChangeUserAcessLevel from "@/app/_ui/_PopUp/components/Settings/AccessLevels/ChangeUserAcessLevel/ChangeUserAcessLevel";
+import ChangeEmployeePassword from "@/app/_ui/_PopUp/components/Settings/AccessLevels/ChangeEmployeePassword/ChangeEmployeePassword";
+import DeleteRole from "@/app/_ui/_PopUp/components/Settings/AccessLevels/DeleteRole/deleteRole";
 
 type PopupType = {
   [key: string]: () => React.JSX.Element;
@@ -88,5 +92,9 @@ export const popups: PopupType = {
   CREATE_COMMENT: CreateComment,
   CALCULATE_LEAVE_BALANCE: CalculateLeaveBalance,
   SEND_MAIL: SendMail,
-  DELETE_CANDIDATE:DeleteCandidate,
+  DELETE_CANDIDATE: DeleteCandidate,
+  ADD_EMMPLOYEES_TO_ROLE: AddEmployeesToRole,
+  ADD_EMMPLOYEE_TO_ROLE: ChangeUserAcessLevel,
+  RESET_EMPLOYEE_PASSWORD: ChangeEmployeePassword,
+  DELETE_ROLE: DeleteRole,
 };

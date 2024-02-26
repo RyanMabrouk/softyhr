@@ -1,5 +1,4 @@
 import { Button } from "@/app/_ui/Button";
-import useData from "@/hooks/useData";
 import {
   database_leave_policies_type,
   database_leave_request_duration_used_type,
@@ -15,14 +14,13 @@ import {
   useSearchParams,
 } from "next/navigation";
 import React from "react";
-import default_avatar from "/public/default_avatar.jpeg";
+import default_avatar from "/public/default_avatar.png";
 import default_user_avatar from "/public/default_avatar.png";
-import { formatTotalHoursToTimeUnit } from "@/helpers/leave.helpers";
+import { formatTotalHoursToTimeUnit } from "@/helpers/TimeOff/leave.helpers";
 import { formatDateToMonDDYYYY } from "@/helpers/date.helpers";
 import useEmployeeData from "@/hooks/useEmloyeeData";
 import PopUpSkeleton from "../../../PopUpSkeleton";
 import useLeaveData from "@/hooks/TimeOff/useLeaveData";
-import useProfilesData from "@/hooks/useProfilesData";
 import useProfiles from "@/hooks/useProfiles";
 function ViewLeaveRequestComment() {
   const Router = useRouter();
@@ -39,7 +37,7 @@ function ViewLeaveRequestComment() {
   const {
     leave_requests: { data: leave_requests },
     employee_profile: { data: employee_profile },
-  } = useEmployeeData({ employeeId: employeeId });
+  } = useEmployeeData({ employeeId: String(employeeId) });
   const leave_request_data = leave_requests?.find(
     (request: database_leave_requests_type) =>
       request.id === Number(leave_request_id),

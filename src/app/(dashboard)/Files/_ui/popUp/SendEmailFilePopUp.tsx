@@ -4,7 +4,7 @@ import ButtonPopUp from "../components/ButtonPopUp";
 import { SubmitHandler, useForm } from "react-hook-form";
 import Error from "../components/Error";
 import PopUpSkeleton from "@/app/_ui/_PopUp/PopUpSkeleton";
-import useFileData from "@/hooks/useFileData";
+import useFileData from "@/hooks/files/useFileData";
 import LoaderPopUp from "../components/Loader/LoaderPopUp/LoaderPopUp";
 import { FaRegFileImage, FaRegFilePdf } from "react-icons/fa6";
 import { formatDateFiles } from "@/helpers/date.helpers";
@@ -46,7 +46,7 @@ export default function SendEmailFilePopUp() {
         data.subject,
         `<div className='flex flex-col gap-1'>
         <p className='text-lg'>${data.message}</p>
-        <a href="${file.data[0].file_url}">${file.data[0].name}</a>
+        <a href="${file.data?.[0].file_url}">${file.data?.[0].name}</a>
         </div>`,
       );
       toast.success("Email Sent", "Success");
@@ -68,17 +68,17 @@ export default function SendEmailFilePopUp() {
           className="shadow-popup flex  min-w-[38rem] flex-col gap-2 rounded-sm bg-white p-8"
         >
           <div className="flex w-[28rem] flex-col p-2">
-            {(file.data[0].file_type === "application" && (
+            {(file.data?.[0].file_type === "application" && (
               <FaRegFilePdf fontSize="1.8rem" fill="#cc4373" />
             )) ||
-              (file.data[0].file_type === "image" && (
+              (file.data?.[0].file_type === "image" && (
                 <FaRegFileImage fontSize="1.8rem" fill="#777270" />
               ))}
-            <p className="text-lg text-gray-11">{file.data[0].name}</p>
+            <p className="text-lg text-gray-11">{file.data?.[0].name}</p>
             <p className=" text-sm text-gray-15">
-              {`Added ${formatDateFiles(file.data[0].created_at)} by ${
-                file.data[0].addedBy
-              } (${file.data[0].size}KB)`}
+              {`Added ${formatDateFiles(file.data?.[0].created_at)} by ${
+                file.data?.[0].addedBy
+              } (${file.data?.[0].size}KB)`}
             </p>
           </div>
           <form
@@ -111,7 +111,7 @@ export default function SendEmailFilePopUp() {
                   {...register("subject", {
                     required: "This field is required",
                   })}
-                  value={`Here is the file :  ${file.data[0].name}`}
+                  value={`Here is the file :  ${file.data?.[0].name}`}
                   className=" w-96 border border-stone-400 px-2 py-1 text-sm text-gray-12 outline-1 transition-all duration-300  focus:outline-color1-300 "
                 />
               </div>

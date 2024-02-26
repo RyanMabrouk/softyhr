@@ -1,18 +1,32 @@
 import React, { ReactNode } from "react";
 import { Hr } from "./Hr";
 
+interface ISorter<T> {
+  property: Extract<keyof T, string | number | Date>;
+  isDescending: boolean;
+}
+function genericSort<T>(objectA: T, objectB: T, sorter: ISorter<T>) {
+  const result = () => {
+    if (objectA[sorter.property] > objectB[sorter.property]) {
+      return 1;
+    } else if (objectA[sorter.property] < objectB[sorter.property]) {
+      return -1;
+    } else {
+      return 0;
+    }
+  };
+  return sorter.isDescending ? result() * -1 : result();
+}
 export function HistoryTable({
   Headers,
   data,
   layout,
   emptyMessage = "There is no Data History for the selected filters..",
-  setToggleSort,
 }: {
   data: { [key: string]: any }[] | undefined;
   Headers: ReactNode[];
   layout: string;
   emptyMessage?: string;
-  setToggleSort?: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   // Headers Must Match the Keys in the data
   return (
@@ -31,7 +45,7 @@ export function HistoryTable({
           ))}
         </div>
         {data && data?.length > 0 ? (
-          data?.map((row: { [key: string]: any }, index) => (
+          data.map((row: { [key: string]: any }, index) => (
             <div className="flex w-full flex-col " key={"row" + index}>
               <div
                 className={`group grid w-full  flex-row transition-all ease-linear hover:bg-gray-14 ${layout} `}

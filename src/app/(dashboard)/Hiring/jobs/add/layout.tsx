@@ -45,8 +45,6 @@ const LayoutComponent = memo(function LayoutComponent({
     settings: { data, isPending },
   } = useData();
   const [Show, setShow] = useState<boolean>(false);
-  const Router = useRouter();
-
   const Actions: any = {
     "Information-Job": Update_InformationJob,
     "Application-Details": Update_ApplicationDetails,

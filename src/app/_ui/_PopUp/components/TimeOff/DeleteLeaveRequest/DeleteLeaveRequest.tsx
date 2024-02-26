@@ -27,7 +27,7 @@ export default function DeleteLeaveRequest() {
   const {
     leave_requests: { data: leave_requests },
     employee_profile: { data: employee_profile },
-  } = useEmployeeData({ employeeId: employeeId });
+  } = useEmployeeData({ employeeId: String(employeeId) });
   // Current User Data
   const full_name: string =
     employee_profile?.["Basic Information"]?.["First name"] +
@@ -63,39 +63,35 @@ export default function DeleteLeaveRequest() {
     },
   });
   return (
-    <>
-      <PopUpSkeleton
-        className="flex min-w-[35rem] flex-col items-center gap-2 px-8 py-4"
-        title="Just Checking..."
+    <PopUpSkeleton
+      className="flex min-w-[35rem] flex-col items-center gap-2 px-4 py-4"
+      title="Just Checking..."
+    >
+      <CgTrash className="h-16 w-16 text-color9-500 " />
+      <div className=" max-w-[30rem] text-center text-[1.25rem] leading-6  text-gray-27">
+        Are you sure you want to remove this history item for
+        <strong className="ml-1 capitalize">{full_name}</strong>
+      </div>
+      <div className="mb-2 mt-1 flex flex-col items-center justify-center font-normal leading-6 text-gray-27 opacity-90 ">
+        <span>{current_leave_policy?.name}</span>
+        <span>{`${formatDateToMonDDYYYY(
+          new Date(current_leave_request?.start_at),
+        )} - ${formatDateToMonDDYYYY(
+          new Date(current_leave_request?.end_at),
+        )}`}</span>
+      </div>
+      <form
+        action={() => deleteReq()}
+        className="flex w-full flex-col gap-4 px-2 pt-3"
       >
-        <CgTrash className="h-16 w-16 text-color9-500 " />
-        <div className=" max-w-[30rem] text-center text-[1.25rem] leading-6  text-gray-27">
-          <span className="">
-            {`Are you sure you want to remove this history item for `}
-          </span>
-          <span className="capitalize">{full_name}</span>
+        <hr className="h-[3px] w-full bg-primary-gradient" />
+        <div className="flex flex-row gap-4 px-2 pt-3">
+          <SubmitBtn disabled={isPending} className="!w-fit">
+            Remove
+          </SubmitBtn>
+          <CancelBtnGeneric />
         </div>
-        <div className="mb-2 mt-1 flex flex-col items-center justify-center font-normal leading-6 text-gray-27 opacity-90 ">
-          <span>{current_leave_policy?.name}</span>
-          <span>{`${formatDateToMonDDYYYY(
-            new Date(current_leave_request?.start_at),
-          )} - ${formatDateToMonDDYYYY(
-            new Date(current_leave_request?.end_at),
-          )}`}</span>
-        </div>
-        <form
-          action={() => deleteReq()}
-          className="flex w-full flex-col gap-4 px-2 pt-3"
-        >
-          <hr className="h-[3px] w-full bg-primary-gradient" />
-          <div className="flex flex-row gap-4 px-2 pt-3">
-            <SubmitBtn disabled={isPending} className="!w-fit">
-              Remove
-            </SubmitBtn>
-            <CancelBtnGeneric />
-          </div>
-        </form>
-      </PopUpSkeleton>
-    </>
+      </form>
+    </PopUpSkeleton>
   );
 }

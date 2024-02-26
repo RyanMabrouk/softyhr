@@ -1,5 +1,5 @@
 "use client";
-import React, { Suspense } from "react";
+import React from "react";
 import { CiMail } from "react-icons/ci";
 import { BsSignpostFill, BsTwitterX } from "react-icons/bs";
 import { MdOutlineHomeWork, MdPhoneAndroid } from "react-icons/md";
@@ -27,27 +27,23 @@ import {
   database_leave_requests_type,
   databese_leave_categories_type,
 } from "@/types/database.tables.types";
-import useData from "@/hooks/useData";
-import { generateLeaveCategorieIcon } from "@/helpers/leave.helpers";
+import { generateLeaveCategorieIcon } from "@/helpers/TimeOff/leave.helpers";
 import { UnderlinedLink } from "@/app/_ui/UnderlinedLink";
 import useLeaveData from "@/hooks/TimeOff/useLeaveData";
-import useProfilesData from "@/hooks/useProfilesData";
 import ManagerSection from "./components/managerSection";
-import Link from "next/link";
 
 interface UserInfoPropsType {
   employeeId: string;
 }
 export default function UserInfo({ employeeId }: UserInfoPropsType) {
   const {
-    leave_categories: { data: leave_categories, isPending: isPending1 },
-    leave_policies: { data: leave_policies, isPending: isPending2 },
+    leave_categories: { data: leave_categories },
+    leave_policies: { data: leave_policies },
   } = useLeaveData();
   const {
-    employee_profile: { data: user, isPending: isPending3 },
-    leave_requests: { data: leave_requests, isPending: isPending4 },
+    employee_profile: { data: user },
+    leave_requests: { data: leave_requests },
   } = useEmployeeData({ employeeId: employeeId });
-  const isPending = isPending1 || isPending2 || isPending3 || isPending4;
   // chekck if the user is on vacation
   const current_vacation = leave_requests?.find(
     (request: database_leave_requests_type) =>
@@ -75,7 +71,7 @@ export default function UserInfo({ employeeId }: UserInfoPropsType) {
   });
 
   return (
-    <div className="mb-0 flex min-w-[14rem] grow flex-col items-start justify-center gap-[0.5rem] bg-gray-14 pt-4 ">
+    <div className="mb-0 flex min-w-[14rem] max-w-[14rem] grow flex-col items-start justify-center gap-[0.5rem] bg-gray-14 pt-4 ">
       {current_vacation && (
         <header className="-mb-5 flex w-full flex-row items-center justify-center gap-1 border-b-[10px] border-white px-6 pb-3 pt-7 leading-4">
           <div>{icon}</div>

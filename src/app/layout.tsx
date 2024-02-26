@@ -5,7 +5,6 @@ import Hydration from "@/provider/hydration";
 import Store from "@/provider/store";
 import PopUp from "./_ui/_PopUp/PopUp";
 import { ToastContainer, ToastProvider } from "@/hooks/useToast";
-import Head from "next/head";
 import dynamic from "next/dynamic";
 
 const lato = Lato({
@@ -37,16 +36,6 @@ export default async function RootLayout({
 }) {
   return (
     <html lang="en">
-      <Head>
-        <title>SoftyHr</title>
-        <link rel="manifest" href="/manifest.json" />
-        <link rel="apple-touch-icon" href="/icons/icon-128x128.png" />
-        <link rel="icon" href="/icons/icon-128x128.png" />
-        <meta
-          name="viewport"
-          content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover"
-        />
-      </Head>
       <body className={lato.className + " min-h-screen"}>
         <Store>
           <Hydration>

@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 export default function useEmployeeData({
   employeeId,
 }: {
-  employeeId: string | string[];
+  employeeId: string | null | undefined;
 }) {
   //--------------------Leave Requests--------------------
   const { data: leave_requests, isPending: isPending2 } = useQuery({

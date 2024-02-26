@@ -8,8 +8,8 @@ import { PostgrestError } from "@supabase/supabase-js";
 import { useQuery } from "@tanstack/react-query";
 export default function usePendingLeaveRequests(): {
   pending_leave_requests: {
-    data: database_leave_requests_type[];
-    error: PostgrestError | null;
+    data: database_leave_requests_type[] | undefined | null;
+    error: PostgrestError | null | undefined;
     isPending: boolean;
     isFetching: boolean;
   };

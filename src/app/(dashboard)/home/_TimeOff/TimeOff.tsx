@@ -1,6 +1,6 @@
 "use client";
 import CustomSwiper from "@/app/_ui/swiper";
-import { generateLeaveCategorieIcon } from "@/helpers/leave.helpers";
+import { generateLeaveCategorieIcon } from "@/helpers/TimeOff/leave.helpers";
 import useData from "@/hooks/useData";
 import useEmployeeData from "@/hooks/useEmloyeeData";
 import useLeaveData from "@/hooks/TimeOff/useLeaveData";
@@ -50,7 +50,7 @@ export function TimeOff() {
   const user_policies_ids = leave_balance?.map(
     (e: database_profile_leave_balance_type) => e.policy_id,
   );
-  const policies: formatted_policy_type[] = leave_policies
+  const policies: formatted_policy_type[] | undefined = leave_policies
     ?.filter(
       (policy: database_leave_policies_type) =>
         user_policies_ids?.includes(policy.id) &&
@@ -88,7 +88,8 @@ export function TimeOff() {
         name: policy.name,
         type: policy.type,
         title: categorie?.name,
-        category_time_unit: categorie?.track_time_unit,
+        category_time_unit:
+          categorie?.track_time_unit as databese_leave_categories_track_time_unit_type,
         icon: generateLeaveCategorieIcon({
           categorie: categorie,
           className: "h-8 w-8",
@@ -117,7 +118,7 @@ export function TimeOff() {
       </header>
       <div>
         <section className="relative mx-auto block w-full px-8 ">
-          {policies?.length > 0 ? (
+          {policies && policies?.length > 0 ? (
             <>
               <div
                 hidden={activeIndex === 0}
@@ -127,7 +128,7 @@ export function TimeOff() {
               </div>
               <div
                 className="btn_swiper_arrow_right absolute right-0 top-[40%] cursor-pointer rounded-md border border-gray-17 bg-gray-17 py-1"
-                hidden={activeIndex === policies?.length - 2}
+                hidden={policies && activeIndex === policies?.length - 2}
               >
                 <IoMdArrowDropright className="h-8 w-7  text-gray-25" />
               </div>

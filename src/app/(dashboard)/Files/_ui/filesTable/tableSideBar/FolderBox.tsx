@@ -8,7 +8,7 @@ import { IoFolderOpenSharp } from "react-icons/io5";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import FilesSelectArrowDown from "../../components/FilesSelectArrowDown";
 import { useQueryClient } from "@tanstack/react-query";
-import useFoldersIds from "@/hooks/useFoldersIds";
+import useFoldersIds from "@/hooks/files/useFoldersIds";
 import RoleGuard from "@/app/_ui/RoleGuard";
 import useUserRole from "@/hooks/useUserRole";
 
@@ -37,10 +37,10 @@ export default function FolderBox({ folder, setCheckAll }: any) {
       replace(`Files?popup=RENAME_FOLDER&id=${id}`);
       handleSelectedOption(null);
     }
-    // if (selectedOption === "share") {
-    //   replace(`Files?popup=SHARE_FOLDER&id=${id}`);
-    //   handleSelectedOption(null);
-    // }
+    if (selectedOption === "share") {
+      replace(`Files?popup=SHARE_FOLDER&id=${id}`);
+      handleSelectedOption(null);
+    }
     if (selectedOption === "delete") {
       replace(`Files?popup=DELETE_FOLDER&id=${id}`);
       handleSelectedOption(null);
@@ -85,7 +85,13 @@ export default function FolderBox({ folder, setCheckAll }: any) {
     }),
     [id],
   );
-
+  const options = [{ value: "rename", label: "Rename..." }];
+  if (role?.permissions.includes("share:files")) {
+    options.push({ value: "share", label: "Share Folder..." });
+  }
+  if (role?.permissions.includes("delete:files")) {
+    options.push({ value: "delete", label: "Delete..." });
+  }
   return (
     <div
       className={`flex h-12 w-11/12 cursor-pointer items-center justify-between rounded-md p-3 transition-all ${isHovered || isOver ? "bg-white [&>*:nth-child(2)]:block" : ""}  `}
@@ -109,11 +115,7 @@ export default function FolderBox({ folder, setCheckAll }: any) {
       )}
       <RoleGuard permissions={["delete:files"]}>
         <FilesSelectArrowDown
-          options={[
-            { value: "rename", label: "Rename..." },
-            // { value: "share", label: "Share Folder..." },
-            { value: "delete", label: "Delete..." },
-          ]}
+          options={options}
           onSelect={handleSelectedOption}
         />
       </RoleGuard>

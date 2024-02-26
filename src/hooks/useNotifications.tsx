@@ -5,8 +5,8 @@ import { PostgrestError } from "@supabase/supabase-js";
 import { useQuery } from "@tanstack/react-query";
 export default function useNotifications({ type }: { type: string }): {
   notifications: {
-    data: database_notifications_type[] | undefined;
-    error: PostgrestError | null;
+    data: database_notifications_type[] | undefined | null;
+    error: PostgrestError | null | undefined;
     isPending: boolean;
   };
 } {

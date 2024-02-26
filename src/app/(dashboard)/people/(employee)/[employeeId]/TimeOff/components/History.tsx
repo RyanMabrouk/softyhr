@@ -16,7 +16,7 @@ import {
   databese_leave_categories_track_time_unit_type,
   databese_leave_categories_type,
 } from "@/types/database.tables.types";
-import { formatTotalHoursToTimeUnit } from "@/helpers/leave.helpers";
+import { formatTotalHoursToTimeUnit } from "@/helpers/TimeOff/leave.helpers";
 import { useParams } from "next/navigation";
 import { EditLeaveRequestBtn } from "./Buttons/EditLeaveRequestBtn";
 import { DeleteLeaveRequestBtn } from "./Buttons/DeleteLeaveRequestBtn";
@@ -30,8 +30,8 @@ import RoleGuard from "@/app/_ui/RoleGuard";
 import useProfiles from "@/hooks/useProfiles";
 interface leave_data {
   user_id: string;
-  reviewed_by: string | "";
-  reviewed_at: string | "";
+  reviewed_by?: string | "";
+  reviewed_at?: string | "";
   status: database_leave_request_status_type | "";
   created_at: Date;
   name: string;
@@ -40,9 +40,9 @@ interface leave_data {
   start_at: Date;
   description: string;
   duration_used: number | "";
-  duration_accrued: number | "";
+  duration_accrued?: number | string;
   Balance: number;
-  reviewed_comment: string | "";
+  reviewed_comment?: string | "";
   track_time_unit: databese_leave_categories_track_time_unit_type;
 }
 export type leave_data_types = leave_data[] | undefined;
@@ -81,28 +81,29 @@ export function History() {
         (profile: database_profile_type) => profile.user_id === e.reviewed_by,
       )?.["Basic Information"];
       return {
-        reviewed_comment: e.reviewed_comment,
+        reviewed_comment: e.reviewed_comment ?? "",
         user_id: e.user_id,
         reviewed_by: reviewed_by_info
           ? reviewed_by_info?.["First name"] +
             " " +
             reviewed_by_info?.["Last name"]
           : "",
-        reviewed_at: e.reviewed_at,
-        status: e.status,
+        reviewed_at: e.reviewed_at as string,
+        status: e.status as database_leave_request_status_type,
         created_at: new Date(e.created_at),
         name: categorie?.name,
         id: e.id,
         end_at: new Date(e.end_at),
         start_at: new Date(e.start_at),
-        description: e.note,
+        description: e.note ?? "",
         duration_used: e.duration_used?.reduce(
           (acc: number, e: any) => acc + Number(e.duration),
           0,
         ),
         duration_accrued: "",
         Balance: e.balance,
-        track_time_unit: categorie?.track_time_unit,
+        track_time_unit:
+          categorie?.track_time_unit as databese_leave_categories_track_time_unit_type,
       };
     });
   // format leave accrued data
@@ -117,16 +118,18 @@ export function History() {
       );
       return {
         status: "",
+        user_id: e.user_id,
         created_at: new Date(e.created_at),
         name: categorie?.name,
         start_at: new Date(e.start_at),
         end_at: "",
         id: e.id,
-        description: e.note,
+        description: e.note ?? "",
         duration_used: "",
         duration_accrued: Number(e.duration),
         Balance: e.balance,
-        track_time_unit: categorie?.track_time_unit,
+        track_time_unit:
+          categorie?.track_time_unit as databese_leave_categories_track_time_unit_type,
       };
     },
   );
@@ -277,7 +280,7 @@ export function History() {
                     "Accrued (+)": e.duration_accrued ? (
                       <span className="pl-3">
                         {formatTotalHoursToTimeUnit(
-                          e.duration_accrued,
+                          Number(e.duration_accrued),
                           e.track_time_unit,
                         )}
                       </span>

@@ -2,7 +2,7 @@
 import CancelBtnGeneric from "@/app/_ui/CancelBtnGeneric";
 import { SubmitBtn } from "@/app/_ui/SubmitBtn";
 import PopUpSkeleton from "@/app/_ui/_PopUp/PopUpSkeleton";
-import { generateLeaveCategorieIcon } from "@/helpers/leave.helpers";
+import { generateLeaveCategorieIcon } from "@/helpers/TimeOff/leave.helpers";
 import usePolicy from "@/hooks/TimeOff/usePolicy";
 import useLeaveData from "@/hooks/TimeOff/useLeaveData";
 import {
@@ -13,27 +13,17 @@ import {
 import { useParams, usePathname, useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { TiWarning } from "react-icons/ti";
-import {
-  MdKeyboardDoubleArrowLeft,
-  MdKeyboardDoubleArrowRight,
-} from "react-icons/md";
-import { SearchContextProvider } from "./context/SearchContext";
-import { AvailableEmployees } from "./components/AvailableEmployees";
-import { SelectedEmployees } from "./components/SelectedEmployees";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import addEmployeesToPolicy from "@/actions/settings/leave/addEmployeesToPolicy";
 import useToast from "@/hooks/useToast";
-import useProfilesData from "@/hooks/useProfilesData";
-import { PiUploadSimple } from "react-icons/pi";
 import useLeaveBalances from "@/hooks/TimeOff/useLeaveBalances";
 import useAllLeaveBalances from "@/hooks/TimeOff/useAllLeaveBalances";
 import useProfiles from "@/hooks/useProfiles";
-export type usersWithoutCurrentPolicy = {
-  user_id: string;
-  name: string;
-  current_policy_name: string;
-  current_policy_id: number | null;
-};
+import {
+  SwitchEmployeesDragAndDrop,
+  usersWithoutCurrentId,
+} from "../components/SwitchEmployeesDragAndDrop/SwitchEmployeesDragAndDrop";
+
 export default function AddEmployeesToPolicy() {
   const { policy_id } = useParams();
   const pathname = usePathname();
@@ -55,85 +45,55 @@ export default function AddEmployeesToPolicy() {
     policy_id: Number(policy_id),
   });
   // current category policies
-  const current_category_policies: database_leave_policies_type[] =
+  const current_category_policies: database_leave_policies_type[] | undefined =
     leave_policies?.filter(
       (policy: database_leave_policies_type) =>
         policy?.categories_id === category?.id,
     );
   // users without current policy
-  const usersWithoutCurrentPolicy: usersWithoutCurrentPolicy[] =
-    all_profiles_basic_info
-      ?.filter((profile: database_profile_type) => {
-        const userAlreadyHasCurrentPolicy = policy_users_blances?.find(
-          (balance: database_profile_leave_balance_type) =>
-            balance.user_id === profile.user_id,
-        );
-        return !userAlreadyHasCurrentPolicy;
-      })
-      .map((profile: any) => {
-        const current_policy = current_category_policies?.find(
-          (policy: database_leave_policies_type) => {
-            const userHasPolicyInCurrentCategory =
-              all_users_leave_balance?.find(
-                (balance: database_profile_leave_balance_type) =>
-                  balance.user_id === profile.user_id &&
-                  balance.policy_id === policy.id,
-              ) !== undefined;
-            return userHasPolicyInCurrentCategory;
-          },
-        );
-        return {
-          user_id: profile.user_id,
-          name:
-            profile?.["Basic Information"]?.["First name"] +
-            " " +
-            profile?.["Basic Information"]?.["Last name"],
-          current_policy_name:
-            current_category_policies?.length > 1
-              ? current_policy?.name ?? ""
-              : "",
-          current_policy_id: current_policy?.id ?? null,
-        };
-      });
+  const usersWithoutCurrentPolicy = all_profiles_basic_info
+    ?.filter((profile: database_profile_type) => {
+      const userAlreadyHasCurrentPolicy = policy_users_blances?.find(
+        (balance: database_profile_leave_balance_type) =>
+          balance.user_id === profile.user_id,
+      );
+      return !userAlreadyHasCurrentPolicy;
+    })
+    .map((profile: any) => {
+      const current_policy = current_category_policies?.find(
+        (policy: database_leave_policies_type) => {
+          const userHasPolicyInCurrentCategory =
+            all_users_leave_balance?.find(
+              (balance: database_profile_leave_balance_type) =>
+                balance.user_id === profile.user_id &&
+                balance.policy_id === policy.id,
+            ) !== undefined;
+          return userHasPolicyInCurrentCategory;
+        },
+      );
+      return {
+        user_id: profile.user_id,
+        name:
+          profile?.["Basic Information"]?.["First name"] +
+          " " +
+          profile?.["Basic Information"]?.["Last name"],
+        current_name:
+          current_category_policies && current_category_policies?.length > 1
+            ? current_policy?.name ?? ""
+            : "",
+        current_id: current_policy?.id ?? null,
+      };
+    });
   //-------------------Drag and Drop--------------------------------
-  const [employees, setEmployees] = useState<usersWithoutCurrentPolicy[]>(
-    usersWithoutCurrentPolicy,
+  const [employees, setEmployees] = useState<usersWithoutCurrentId[]>(
+    usersWithoutCurrentPolicy ?? [],
   );
   if (usersWithoutCurrentPolicy && !employees) {
     setEmployees(usersWithoutCurrentPolicy);
   }
   const [selectedEmployees, setSelectedEmployees] = useState<
-    usersWithoutCurrentPolicy[]
+    usersWithoutCurrentId[]
   >([]);
-  // Handle Drag and Drop
-  function dropSelected(ev: React.DragEvent<HTMLElement>) {
-    ev.preventDefault();
-    if (ev.currentTarget.className.includes("dropzone")) {
-      const id = ev.dataTransfer.getData("text/plain");
-      setEmployees((prev) => {
-        const employee = selectedEmployees.find((e) => e.user_id === id);
-        if (employee) {
-          return [...prev, employee];
-        }
-        return prev;
-      });
-      setSelectedEmployees((prev) => prev.filter((e) => e.user_id !== id));
-    }
-  }
-  function dropNonSelected(ev: React.DragEvent<HTMLElement>) {
-    ev.preventDefault();
-    if (ev.currentTarget.className.includes("dropzone")) {
-      const id = ev.dataTransfer.getData("text/plain");
-      setSelectedEmployees((prev) => {
-        const employee = employees.find((e) => e.user_id === id);
-        if (employee) {
-          return [...prev, employee];
-        }
-        return prev;
-      });
-      setEmployees((prev) => prev.filter((e) => e.user_id !== id));
-    }
-  }
   // add employees to policy mutation
   const queryClient = useQueryClient();
   const { mutate: add, isPending } = useMutation({
@@ -173,43 +133,12 @@ export default function AddEmployeesToPolicy() {
         action={add}
         className="flex w-full flex-col items-center justify-center gap-5"
       >
-        <main className="flex h-full w-full flex-col gap-6">
-          <section className="flex h-full w-full flex-1 flex-row items-center justify-center gap-4">
-            <SearchContextProvider>
-              <AvailableEmployees
-                employees={employees}
-                dropSelected={dropSelected}
-              />
-            </SearchContextProvider>
-            <div className="flex min-h-full grow flex-col items-center justify-center gap-1">
-              <div
-                role="button"
-                onClick={() => {
-                  setSelectedEmployees([...employees, ...selectedEmployees]);
-                  setEmployees([]);
-                }}
-              >
-                <MdKeyboardDoubleArrowRight className="h-9 w-9 cursor-pointer rounded-md border border-gray-18 px-1 py-0.5 text-gray-21 shadow-sm transition-all ease-linear hover:bg-gray-22 hover:shadow-md" />
-              </div>
-              <div
-                role="button"
-                onClick={() => {
-                  setEmployees([...employees, ...selectedEmployees]);
-                  setSelectedEmployees([]);
-                }}
-              >
-                <MdKeyboardDoubleArrowLeft className="h-9 w-9 cursor-pointer rounded-md border border-gray-18 px-1 py-0.5 text-gray-21 shadow-sm transition-all ease-linear hover:bg-gray-22 hover:shadow-md" />
-              </div>
-            </div>
-            <SelectedEmployees
-              selectedEmployees={selectedEmployees}
-              dropNonSelected={dropNonSelected}
-            />
-          </section>
-          <p className="-mt-3 flex flex-row items-center gap-1.5 text-sm text-gray-26">
-            <PiUploadSimple />
-            <span>Drag and drop to select employees</span>
-          </p>
+        <SwitchEmployeesDragAndDrop
+          setEmployees={setEmployees}
+          setSelectedEmployees={setSelectedEmployees}
+          employees={employees}
+          selectedEmployees={selectedEmployees}
+        >
           {policy?.type === "unlimited" && (
             <section className="flex flex-row gap-1">
               <TiWarning className="h-6 w-6" />
@@ -223,10 +152,14 @@ export default function AddEmployeesToPolicy() {
               </div>
             </section>
           )}
-        </main>
+        </SwitchEmployeesDragAndDrop>
         <hr className="h-[3px] w-full bg-primary-gradient" />
         <div className="flex w-full flex-row items-center justify-start gap-4 px-2 pt-3">
-          <SubmitBtn className="!w-fit" disabled={isPending}>
+          <SubmitBtn
+            className="!w-fit"
+            disabled={isPending}
+            blocked={selectedEmployees.length === 0}
+          >
             Save
           </SubmitBtn>
           <CancelBtnGeneric />

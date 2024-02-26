@@ -1,14 +1,12 @@
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React, { useState } from "react";
-import { AiOutlineFileText } from "react-icons/ai";
-import { CgClose } from "react-icons/cg";
 import { FaRegFileImage, FaRegFilePdf, FaRegTrashCan } from "react-icons/fa6";
 import ButtonPopUp from "../components/ButtonPopUp";
 import { useForm } from "react-hook-form";
 import useToast from "@/hooks/useToast";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import deleteFile from "@/actions/files/deleteFile";
-import useFileData from "@/hooks/useFileData";
+import useFileData from "@/hooks/files/useFileData";
 import { formatDateFiles } from "@/helpers/date.helpers";
 import PopUpSkeleton from "@/app/_ui/_PopUp/PopUpSkeleton";
 import LoaderPopUp from "../components/Loader/LoaderPopUp/LoaderPopUp";
@@ -72,19 +70,21 @@ export default function DeleteFilePopUp() {
             <p className="text-lg ">
               Are you sure you want to delete this file?
             </p>
-            <div className="mt-4 flex max-h-96 rounded-sm w-11/12 flex-col items-center gap-4 overflow-y-auto bg-gray-14 px-6 py-8">
+            <div className="mt-4 flex max-h-96 w-11/12 flex-col items-center gap-4 overflow-y-auto rounded-sm bg-gray-14 px-6 py-8">
               <div className="flex  w-[28rem] flex-col items-center  gap-4 p-6">
-                {(file?.data[0]?.file_type === "application" && (
+                {(file?.data?.[0]?.file_type === "application" && (
                   <FaRegFilePdf fontSize="3rem" fill="#cc4373" />
                 )) ||
-                  (file?.data[0]?.file_type === "image" && (
+                  (file?.data?.[0]?.file_type === "image" && (
                     <FaRegFileImage fontSize="3rem" fill="#777270" />
                   ))}
                 <div>
-                  <p className="text-center text-xl ">{file?.data[0]?.name}</p>
+                  <p className="text-center text-xl ">
+                    {file?.data?.[0]?.name}
+                  </p>
                   <p className="text-center text-sm text-gray-15">
-                    Created {formatDateFiles(file?.data[0]?.created_at)} (
-                    {file?.data[0]?.size}KB)
+                    Created {formatDateFiles(file?.data?.[0]?.created_at)} (
+                    {file?.data?.[0]?.size}KB)
                   </p>
                 </div>
                 <p className="text-center text-sm text-color2-500">

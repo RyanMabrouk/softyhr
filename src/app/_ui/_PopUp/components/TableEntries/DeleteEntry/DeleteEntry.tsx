@@ -7,13 +7,10 @@ import {
   useRouter,
   useSearchParams,
 } from "next/navigation";
-import default_avatar from "/public/default_avatar.jpeg";
+import default_avatar from "/public/default_avatar.png";
 import useEmployeeData from "@/hooks/useEmloyeeData";
 import Image from "next/image";
 import useData from "@/hooks/useData";
-import FiledsChamps from "@/app/(dashboard)/people/components/Fileds/Fileds";
-import Input from "@/app/(dashboard)/people/components/Fileds/Input/Input";
-import DateInput from "@/app/(dashboard)/people/components/Fileds/DateInput/DateInput";
 import Loader from "@/app/(dashboard)/people/components/Loader/Loader";
 import { Delete_Entry } from "@/actions/personal-job/Entries/Delete_Entry";
 import { useQueryClient } from "@tanstack/react-query";
@@ -29,7 +26,7 @@ function DeleteItem() {
   const { employeeId } = useParams();
   const {
     employee_profile: { data, isPending },
-  } = useEmployeeData({ employeeId });
+  } = useEmployeeData({ employeeId: String(employeeId) });
   const { settings } = useData();
   const { toast } = useToast();
 
@@ -42,7 +39,6 @@ function DeleteItem() {
     queryClient.invalidateQueries({ queryKey: ["profiles", employeeId] });
     router.push(pathname);
     queryClient.invalidateQueries({ queryKey: ["profiles", employeeId] });
-
   };
   return (
     <>

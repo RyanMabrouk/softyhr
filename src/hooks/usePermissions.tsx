@@ -6,14 +6,14 @@ import { useQuery } from "@tanstack/react-query";
 export default function usePermissions(): {
   permission: {
     data: database_permissions_type | null;
-    error: PostgrestError | null;
+    error: PostgrestError | null | undefined;
     isPending: boolean;
   };
 } {
   const { data: permissions, isPending } = useQuery({
-    queryKey: ["permissions","user"],
+    queryKey: ["users_permissions", "user"],
     queryFn: () =>
-      getData("permissions", {
+      getData("users_permissions", {
         org: true,
         user: true,
       }),

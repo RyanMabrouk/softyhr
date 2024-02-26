@@ -9,7 +9,7 @@ import {
 } from "next/navigation";
 import { Button } from "@/app/_ui/Button";
 import useEmployeeData from "@/hooks/useEmloyeeData";
-import default_avatar from "/public/default_avatar.jpeg";
+import default_avatar from "/public/default_avatar.png";
 import Image from "next/image";
 import useLeaveData from "@/hooks/TimeOff/useLeaveData";
 import { SelectGeneric } from "@/app/_ui/SelectGeneric";
@@ -22,7 +22,7 @@ import usePolicy from "@/hooks/TimeOff/usePolicy";
 import {
   formatTotalHoursToTimeUnit,
   numberOfdaysInArrayOfDatesBeforeDay,
-} from "@/helpers/leave.helpers";
+} from "@/helpers/TimeOff/leave.helpers";
 import useData from "@/hooks/useData";
 export default function CalculateLeaveBalance() {
   const Router = useRouter();
@@ -39,7 +39,8 @@ export default function CalculateLeaveBalance() {
   const [chalendarDate, setCalendarDate] = React.useState<Date>(new Date());
   const {
     leave_balance: { data: leave_balance },
-  } = useEmployeeData({ employeeId: employeeId });
+    employee_profile: { data: employee_profile },
+  } = useEmployeeData({ employeeId: String(employeeId) });
   const current_policy_balance:
     | database_profile_leave_balance_type
     | undefined = leave_balance?.find(
@@ -53,9 +54,6 @@ export default function CalculateLeaveBalance() {
   const {
     leave_categories: { data: leave_categories },
   } = useLeaveData();
-  const {
-    employee_profile: { data: employee_profile },
-  } = useEmployeeData({ employeeId: employeeId });
   useEffect(() => {
     setBalance(
       (current_policy_balance?.balance ?? 0) +

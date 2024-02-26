@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { Suspense, useState } from "react";
 import CustomSwiper from "@/app/_ui/swiper";
 import { FaArrowLeft } from "react-icons/fa";
 import { FaArrowRight } from "react-icons/fa";
@@ -13,11 +13,12 @@ import {
   databese_leave_categories_track_time_unit_type,
   databese_leave_categories_type,
 } from "@/types/database.tables.types";
-import { generateLeaveCategorieIcon } from "@/helpers/leave.helpers";
+import { generateLeaveCategorieIcon } from "@/helpers/TimeOff/leave.helpers";
 import { useParams } from "next/navigation";
 import useEmployeeData from "@/hooks/useEmloyeeData";
 import useLeaveData from "@/hooks/TimeOff/useLeaveData";
 import { Player } from "@lottiefiles/react-lottie-player";
+import Loader from "@/app/_ui/Loader/Loader";
 interface formatted_policy_type {
   id: number;
   name: string;
@@ -37,14 +38,14 @@ export function PolyciesSwiper() {
     leave_categories: { data: leave_categories, isPending: isPending2 },
   } = useLeaveData();
   const {
-    leave_requests: { data: leave_requests, isPending: isPending4 },
-    leave_balance: { data: leave_balance, isPending: isPending5 },
-  } = useEmployeeData({ employeeId: employeeId });
-  const isPending = isPending1 || isPending2 || isPending4 || isPending5;
+    leave_requests: { data: leave_requests, isPending: isPending3 },
+    leave_balance: { data: leave_balance, isPending: isPending4 },
+  } = useEmployeeData({ employeeId: String(employeeId) });
+  const isPending = isPending1 || isPending2 || isPending3 || isPending4;
   const user_policies_ids = leave_balance?.map(
     (e: database_profile_leave_balance_type) => e.policy_id,
   );
-  const policies: formatted_policy_type[] = leave_policies
+  const policies: formatted_policy_type[] | undefined = leave_policies
     ?.filter(
       (policy: database_leave_policies_type) =>
         user_policies_ids?.includes(policy.id) &&
@@ -58,7 +59,7 @@ export function PolyciesSwiper() {
         (categorie: databese_leave_categories_type) =>
           categorie.id === policy?.categories_id,
       );
-      const hours_scheduled = leave_requests
+      const hours_scheduled: number = leave_requests
         ?.filter(
           (leave: database_leave_requests_type) =>
             new Date(leave.start_at) > new Date() &&
@@ -82,7 +83,8 @@ export function PolyciesSwiper() {
         name: policy.name,
         type: policy.type,
         title: categorie?.name,
-        category_time_unit: categorie?.track_time_unit,
+        category_time_unit:
+          categorie?.track_time_unit as databese_leave_categories_track_time_unit_type,
         icon: generateLeaveCategorieIcon({
           categorie: categorie,
           className: "h-9 w-9",
@@ -95,8 +97,9 @@ export function PolyciesSwiper() {
           )?.balance ?? 0,
       };
     });
+  if (isPending) return <Loader />;
   return (
-    <>
+    <Suspense fallback={<Loader />}>
       <section className="relative mx-auto block w-full max-w-[57.5vw] px-12 ">
         {policies && policies?.length > 0 ? (
           <>
@@ -137,6 +140,6 @@ export function PolyciesSwiper() {
           </div>
         )}
       </section>
-    </>
+    </Suspense>
   );
 }

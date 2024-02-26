@@ -27,7 +27,7 @@ function AddEntry() {
   const router = useRouter();
   const {
     employee_profile: { data, isPending },
-  } = useEmployeeData({ employeeId });
+  } = useEmployeeData({ employeeId: String(employeeId) });
   const { settings } = useData();
   const { toast } = useToast();
 
@@ -67,14 +67,14 @@ function AddEntry() {
                 action={SubmitForm}
                 className="flex w-full flex-col items-start justify-center gap-[1rem]"
               >
-                {settings?.data[0]?.["personnal"]?.Champs?.filter(
+                {settings?.data?.[0]?.["personnal"]?.Champs?.filter(
                   (section: any) => section?.champ == section_name,
                 )[0]?.Fields?.map((RowField: any) => {
                   const Component =
                     Field[(RowField?.type || "input").toUpperCase()];
                   return <Component key={uuidv4()} RowField={RowField} />;
                 })}
-                {settings?.data[0]?.["job"]?.Champs?.filter(
+                {settings?.data?.[0]?.["job"]?.Champs?.filter(
                   (section: any) => section?.champ == section_name,
                 )[0]?.Fields?.map((RowField: any) => {
                   const Component =

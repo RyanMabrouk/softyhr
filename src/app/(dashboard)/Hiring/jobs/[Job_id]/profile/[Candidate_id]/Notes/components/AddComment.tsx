@@ -6,8 +6,6 @@ import Image from "next/image";
 import React, { memo, useRef, useState } from "react";
 import { FaLink } from "react-icons/fa";
 import useToast from "@/hooks/useToast";
-import CommentCard from "./Comment";
-import ReplyComment from "./ReplyComment";
 import { useQueryClient } from "@tanstack/react-query";
 
 interface AddCommentPropsType {
@@ -36,7 +34,7 @@ function AddComment({
     setAdded(true);
     const response = await CreateNewComment(
       String(formdata?.get("newComment")),
-      data?.data[0]?.user_id,
+      data?.data?.[0]?.user_id,
       AssignTo,
       reply_id,
     );
@@ -59,11 +57,12 @@ function AddComment({
             icon={
               <Image
                 alt={
-                  data?.data[0]?.["Basic Infomration"]?.["First name"] || "user"
+                  data?.data?.[0]?.["Basic Infomration"]?.["First name"] ||
+                  "user"
                 }
                 width={100}
                 height={100}
-                src={data?.data[0]?.picture || avatar}
+                src={data?.data?.[0]?.picture || avatar}
               />
             }
           />

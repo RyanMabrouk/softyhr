@@ -4,7 +4,7 @@ import React from "react";
 import useEmployeeData from "@/hooks/useEmloyeeData";
 import usePolicy from "@/hooks/TimeOff/usePolicy";
 import { useTotalDurationContext } from "../context/TotalDurationContext";
-import { formatTotalHoursToTimeUnit } from "@/helpers/leave.helpers";
+import { formatTotalHoursToTimeUnit } from "@/helpers/TimeOff/leave.helpers";
 
 export function WarningIfUserDoesntHaveEnoughBalance({
   employeeId,

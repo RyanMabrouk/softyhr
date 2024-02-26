@@ -4,26 +4,27 @@ import useEmployeeData from "@/hooks/useEmloyeeData";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React from "react";
-import { CgClose } from "react-icons/cg";
 import { useParams } from "next/navigation";
 import { FaRegTrashAlt } from "react-icons/fa";
 import PopUpSkeleton from "../../../../PopUpSkeleton";
 import useToast from "@/hooks/useToast";
 import CancelBtnGeneric from "@/app/_ui/CancelBtnGeneric";
+import { SubmitBtn } from "@/app/_ui/SubmitBtn";
 
 interface DeleteEducationFnType {
   id: string | null;
   data: any;
   user_id: string;
 }
-
-function DeleteEducation() {
+export default function DeleteEducation() {
   const Router = useRouter();
   const pathname = usePathname();
   const queryClient = useQueryClient();
   const { toast } = useToast();
   const { employeeId } = useParams();
-  const { employee_profile: data } = useEmployeeData({ employeeId });
+  const { employee_profile: data } = useEmployeeData({
+    employeeId: String(employeeId),
+  });
   const params = useSearchParams();
   const id = params?.get("id");
 
@@ -53,44 +54,35 @@ function DeleteEducation() {
         <div className="flex flex-col items-center justify-center gap-[2rem]">
           <FaRegTrashAlt className="text-6xl text-color9-500" />
           <div className="flex flex-col items-center justify-center gap-[0.3rem]">
-            <h1 className="whitespace-nowrap text-lg text-gray-15">
+            <h1 className="whitespace-nowrap text-lg text-gray-27">
               Are you sure you want to{" "}
-              <strong className="text-black">
+              <strong className="text-black first-letter:capitalize">
                 delete this education record?
               </strong>
             </h1>
-            <h1 className="w-10/12 text-center text-xl text-gray-15">
+            <h1 className="w-10/12 text-center text-xl text-gray-27">
               Don't worry, doing so won't actually make the employee any less
               educated
             </h1>
           </div>
         </div>
-        <div className="h-[0.1rem] w-full bg-color-primary-8" />
-        <div className="flex items-center justify-start gap-[1rem] self-start ">
-          <button
-            onClick={() => {
-              mutateAsync({
-                id: id,
-                data: data?.data["Education"],
-                user_id: data?.data?.user_id,
-              });
-            }}
-            className="rounded-sm bg-color-primary-9 p-2 capitalize text-white duration-150 ease-in-out hover:bg-color-primary-10"
-          >
-            {isPending ? (
-              <div className="flex items-center justify-center gap-[0.3rem]">
-                <span className="box-border inline-block h-5 w-5 animate-[spin_1s_linear_infinite] rounded-[50%] border-[3px] border-solid border-white border-b-transparent"></span>
-                Deleting...
-              </div>
-            ) : (
-              "yes, delete education"
-            )}
-          </button>
+        <hr className="h-[3px] w-full bg-primary-gradient" />
+        <form
+          action={() => {
+            mutateAsync({
+              id: id,
+              data: data?.data["Education"],
+              user_id: data?.data?.user_id,
+            });
+          }}
+          className="flex items-center justify-start gap-[1rem] self-start "
+        >
+          <SubmitBtn className="px-3" disabled={isPending}>
+            yes, delete education
+          </SubmitBtn>
           <CancelBtnGeneric />
-        </div>
+        </form>
       </PopUpSkeleton>
     </>
   );
 }
-
-export default DeleteEducation;

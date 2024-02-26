@@ -12,13 +12,12 @@ import {
 } from "@/helpers/date.helpers";
 import useEmployeeData from "@/hooks/useEmloyeeData";
 import { useSearchParams } from "next/navigation";
-
 export function useAlreadyBooked(employeeId: string | string[]) {
   const {
     leave_requests: { data: user_leave_requests },
   }: {
-    leave_requests: { data: database_leave_requests_type[] };
-  } = useEmployeeData({ employeeId: employeeId });
+    leave_requests: { data: database_leave_requests_type[] | undefined | null };
+  } = useEmployeeData({ employeeId: String(employeeId) });
   const searchParams = useSearchParams();
   const leave_request_id = Number(searchParams.get("leave_request_id"));
   // Leave Requests Data

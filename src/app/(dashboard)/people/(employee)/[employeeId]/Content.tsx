@@ -10,12 +10,13 @@ import { MdEdit } from "react-icons/md";
 import avatar from "/public/default_avatar.png";
 import { SelectGeneric } from "@/app/_ui/SelectGeneric";
 import { IoMdSettings } from "react-icons/io";
+import RoleGuard from "@/app/_ui/RoleGuard";
 
 export function Content() {
   const { employeeId } = useParams();
   const {
     employee_profile: { data: user },
-  } = useEmployeeData({ employeeId });
+  } = useEmployeeData({ employeeId: String(employeeId) });
   const pathname = usePathname();
   return (
     <div className="z-20 flex min-h-[13rem] justify-center bg-gradient-to-r from-color-primary-7  to-color-primary-9 transition-all duration-300 ">
@@ -25,6 +26,7 @@ export function Content() {
             <Image
               src={user?.picture ?? avatar}
               alt="user-name"
+              layout="responsive"
               priority
               width={208}
               height={208}
@@ -63,20 +65,31 @@ export function Content() {
             {EmployeeRoute?.filter((route) => route?.defaultPath == true)
               ?.sort((a, b) => a.rang - b.rang)
               ?.map(
-                ({ rang, label, path, defaultPath }: EmployeRoutesType) =>
+                ({
+                  rang,
+                  label,
+                  path,
+                  defaultPath,
+                  RoleGuard: { strict, permissions },
+                }: EmployeRoutesType) =>
                   defaultPath && (
-                    <Link
+                    <RoleGuard
                       key={rang}
-                      href={path(employeeId as string)}
-                      className={
-                        "flex items-center justify-center overflow-hidden rounded-t-md p-3 px-6 font-bold text-white transition ease-in-out first-letter:capitalize " +
-                        (pathname.includes(path(employeeId as string))
-                          ? `bg-white !text-color-primary-9 `
-                          : ` hover:bg-gray-24`)
-                      }
+                      permissions={permissions}
+                      strict={strict}
                     >
-                      {label}
-                    </Link>
+                      <Link
+                        href={path(employeeId as string)}
+                        className={
+                          "flex items-center justify-center overflow-hidden rounded-t-md p-3 px-6 font-bold text-white transition ease-in-out first-letter:capitalize " +
+                          (pathname.includes(path(employeeId as string))
+                            ? `bg-white !text-color-primary-9 `
+                            : ` hover:bg-gray-24`)
+                        }
+                      >
+                        {label}
+                      </Link>
+                    </RoleGuard>
                   ),
               )}
           </div>

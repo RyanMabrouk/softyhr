@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { CgClose } from "react-icons/cg";
 import ButtonPopUp from "../components/ButtonPopUp";
 import FilesCheckBox from "../components/FilesCheckBox";
-import useFolderData from "@/hooks/useFolderData";
+import useFolderData from "@/hooks/files/useFolderData";
 import LoaderPopUp from "../components/Loader/LoaderPopUp/LoaderPopUp";
 import { useQueryClient } from "@tanstack/react-query";
 
@@ -28,7 +28,7 @@ export default function ShareFolderPopUp() {
             <div className="z-50 flex flex-col gap-2">
               <div className="flex flex-row justify-between">
                 <h1 className=" pb-2 text-2xl font-normal text-fabric-700">
-                  {`Share ${folder.data[0].name} Folder`}
+                  {`Share ${folder.data?.[0].name} Folder`}
                 </h1>
                 <div
                   onClick={() => {

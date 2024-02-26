@@ -6,7 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 export default function useLeaveRequest({ id }: { id: number }): {
   leave_request: {
     data: database_leave_requests_type;
-    error: PostgrestError | null;
+    error: PostgrestError | null | undefined;
     isPending: boolean;
   };
 } {

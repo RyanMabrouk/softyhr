@@ -77,7 +77,10 @@ export default function FileBox({ file, pushFileId, removeFileId }: any) {
       const payload = {
         file_url,
         addedBy: user_id,
-        name: name + " - Copy",
+        name:
+          name.substring(0, name.lastIndexOf(".")) +
+          " - Copy" +
+          name.substring(name.lastIndexOf("."), name.length),
         org_name,
         size,
         file_type,
@@ -95,7 +98,7 @@ export default function FileBox({ file, pushFileId, removeFileId }: any) {
   }
   useEffect(() => {
     if (selectedOption === "rename") {
-      replace(`Files?popup=RENAME_FILE&fileId=${id}`);
+      replace(`Files?popup=RENAME_FILE&fileId=${id}&fileName=${name}`);
       handleSelectedOption(null);
     }
     if (selectedOption === "delete") {

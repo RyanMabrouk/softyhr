@@ -2,7 +2,6 @@
 import React, { Suspense } from "react";
 import { Hr } from "./Hr";
 import { formatDateMMDD } from "@/helpers/date.helpers";
-import useData from "@/hooks/useData";
 import { FaCheckCircle } from "react-icons/fa";
 import {
   database_leave_policies_type,
@@ -14,7 +13,7 @@ import {
 import {
   formatTotalHoursToTimeUnit,
   generateLeaveCategorieIcon,
-} from "@/helpers/leave.helpers";
+} from "@/helpers/TimeOff/leave.helpers";
 import { EditLeaveRequestBtn } from "./Buttons/EditLeaveRequestBtn";
 import { useParams } from "next/navigation";
 import { MdCancel } from "react-icons/md";
@@ -45,7 +44,7 @@ export function UpcomingTimeOff() {
   } = useLeaveData();
   const {
     leave_requests: { data: leave_requests, isPending: isPending2 },
-  } = useEmployeeData({ employeeId: employeeId });
+  } = useEmployeeData({ employeeId: String(employeeId) });
   const isPending = isPending2 || isPending3 || isPending4;
   // format leave requests data to upcoming leave requests only
   const upcoming_leave_requests_data:
@@ -77,6 +76,7 @@ export function UpcomingTimeOff() {
         0,
       );
       return {
+        ...e,
         start_at: new Date(e.start_at),
         end_at: new Date(e.end_at),
         policy_title: categorie?.name || "",
@@ -88,17 +88,12 @@ export function UpcomingTimeOff() {
           duration_used,
           categorie?.track_time_unit,
         ),
-        policy_id: e.policy_id,
-        id: e.id,
-        user_id: e.user_id,
-        duration_used: e.duration_used,
-        status: e.status,
-        note: e.note,
+        duration_used:
+          e.duration_used as database_leave_request_duration_used_type[],
+        status: e.status as database_leave_request_status_type,
+        note: e.note ?? "",
       };
     });
-  if (isPending) {
-    throw new Promise((resolve) => setTimeout(resolve, 1)); // Simulate loading delay
-  }
   return (
     <Suspense fallback={<Loader />}>
       <div className="flex flex-col">

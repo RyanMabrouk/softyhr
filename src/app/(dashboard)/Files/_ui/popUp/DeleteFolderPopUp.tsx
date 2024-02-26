@@ -1,7 +1,5 @@
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React, { useState } from "react";
-import { AiOutlineFileText } from "react-icons/ai";
-import { CgClose } from "react-icons/cg";
 import { FaRegTrashCan } from "react-icons/fa6";
 import ButtonPopUp from "../components/ButtonPopUp";
 import deleteFolder from "@/actions/files/deleteFolder";
@@ -9,7 +7,7 @@ import useToast from "@/hooks/useToast";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import PopUpSkeleton from "@/app/_ui/_PopUp/PopUpSkeleton";
-import useFolderData from "@/hooks/useFolderData";
+import useFolderData from "@/hooks/files/useFolderData";
 import LoaderPopUp from "../components/Loader/LoaderPopUp/LoaderPopUp";
 
 export default function DeleteFolderPopUp() {
@@ -61,10 +59,10 @@ export default function DeleteFolderPopUp() {
 
             <p className="mt-4 w-[28rem] text-center text-lg ">
               {`Are you sure you want to delete the folder "${
-                folder?.data[0]?.name
+                folder?.data?.[0]?.name
               }" 
               ${
-                folder?.data[0]?.files?.length
+                folder?.data?.[0]?.files?.length
                   ? `and all of its  ${folder?.data[0]?.files?.length} 
               files?`
                   : ""

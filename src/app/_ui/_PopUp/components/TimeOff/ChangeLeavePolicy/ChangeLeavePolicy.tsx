@@ -2,7 +2,7 @@
 import React from "react";
 import PopUpSkeleton from "../../../PopUpSkeleton";
 import Image from "next/image";
-import default_avatar from "/public/default_avatar.jpeg";
+import default_avatar from "/public/default_avatar.png";
 import { SelectGeneric } from "@/app/_ui/SelectGeneric";
 import { SubmitBtn } from "@/app/_ui/SubmitBtn";
 import {
@@ -33,7 +33,7 @@ export default function ChangeLeavePolicy() {
   } = useLeaveData();
   const {
     employee_profile: { data: employee_profile },
-  } = useEmployeeData({ employeeId: employeeId });
+  } = useEmployeeData({ employeeId: String(employeeId) });
   const { policy, category } = usePolicy({ policy_id: Number(policy_id) });
   const options = leave_policies
     ?.filter(
@@ -66,9 +66,6 @@ export default function ChangeLeavePolicy() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ["leave_balance", employeeId],
-      });
-      queryClient.invalidateQueries({
         queryKey: ["leave_balance"],
       });
       Router.push(pathname);
@@ -98,7 +95,7 @@ export default function ChangeLeavePolicy() {
         <div className="flex w-full flex-col items-start justify-start gap-4 px-4 py-3">
           <div className="flex flex-col justify-center">
             <span className="relative w-fit text-sm text-gray-21">
-              Current Vacation Policy
+              Current {category?.name} Policy
             </span>
             <span className="capitalize">{policy?.name}</span>
           </div>
