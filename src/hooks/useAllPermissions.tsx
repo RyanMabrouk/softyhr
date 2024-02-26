@@ -10,9 +10,9 @@ export default function useAllPermissions(): {
   };
 } {
   const { data: permissions, isPending } = useQuery({
-    queryKey: ["permissions", "all"],
+    queryKey: ["users_permissions", "all"],
     queryFn: () =>
-      getData("permissions", {
+      getData("users_permissions", {
         org: true,
         column: "role_id,user_id",
       }),

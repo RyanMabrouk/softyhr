@@ -7,7 +7,7 @@ interface EmployePropsType {
   params: { employeeId: string };
   children: ReactNode;
 }
-export default function Layout({
+export default async function Layout({
   params: { employeeId },
   children,
 }: EmployePropsType) {
