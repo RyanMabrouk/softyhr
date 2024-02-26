@@ -13,17 +13,17 @@ export type database_profile_leave_balance_type =
 // Leave Categories
 export type databese_leave_categories_type =
   Database["public"]["Tables"]["leave_categories"]["Row"];
-export type databese_leave_categories_track_time_unit_type = "days" | "hours";
+export type databese_leave_categories_track_time_unit_type =
+  Database["public"]["Tables"]["leave_categories"]["Row"]["track_time_unit"];
 // Leave Requests
-export type database_leave_requests_type =
-  Database["public"]["Tables"]["leave_requests"]["Row"];
-export type database_leave_requests_insert_type =
-  Database["public"]["Tables"]["leave_requests"]["Insert"];
+export type database_leave_requests_type = Omit<
+  Database["public"]["Tables"]["leave_requests"]["Row"],
+  "duration_used"
+> & {
+  duration_used: database_leave_request_duration_used_type[];
+};
 export type database_leave_request_status_type =
-  | "pending"
-  | "approved"
-  | "rejected"
-  | "canceled";
+  Database["public"]["Tables"]["leave_requests"]["Row"]["status"];
 export type database_leave_request_duration_used_type = {
   date: string;
   duration: number;
@@ -31,8 +31,6 @@ export type database_leave_request_duration_used_type = {
 // Leave Accrued
 export type database_leave_accrued_type =
   Database["public"]["Tables"]["leave_accrued"]["Row"];
-export type database_leave_accrued_insert_type =
-  Database["public"]["Tables"]["leave_accrued"]["Insert"];
 // Leave Policies
 export type database_leave_policies_policy_type =
   Database["public"]["Tables"]["leave_policies"]["Row"]["type"];
@@ -56,7 +54,7 @@ export type Hiring_type = {
   Application_Details: Application_Details_type | null;
   candidates?: [] | null;
   created_at?: string;
-  Questions?:object;
+  Questions?: object;
   id?: number;
   "Job Status": string;
   job_information: {

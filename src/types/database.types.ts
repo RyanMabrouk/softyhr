@@ -179,34 +179,52 @@ export type Database = {
           }
         ]
       }
-      divisions: {
+      Department: {
         Row: {
           created_at: string
           id: number
-          name: string
-          org_name: string
+          name: string | null
+          org_name: string | null
         }
         Insert: {
           created_at?: string
           id?: number
-          name: string
-          org_name: string
+          name?: string | null
+          org_name?: string | null
         }
         Update: {
           created_at?: string
           id?: number
-          name?: string
-          org_name?: string
+          name?: string | null
+          org_name?: string | null
         }
         Relationships: [
           {
-            foreignKeyName: "divisions_org_name_fkey"
+            foreignKeyName: "public_Department_org_name_fkey"
             columns: ["org_name"]
             isOneToOne: false
             referencedRelation: "organizations"
             referencedColumns: ["name"]
           }
         ]
+      }
+      Division: {
+        Row: {
+          created_at: string
+          id: number
+          name: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+          name?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          name?: string | null
+        }
+        Relationships: []
       }
       files: {
         Row: {
@@ -300,6 +318,7 @@ export type Database = {
           Application_Details: Json | null
           created_at: string
           Form: Json | null
+          Hiring_Leader: string | null
           id: number
           "Job Status": string | null
           job_Boards: Json | null
@@ -311,6 +330,7 @@ export type Database = {
           Application_Details?: Json | null
           created_at?: string
           Form?: Json | null
+          Hiring_Leader?: string | null
           id?: number
           "Job Status"?: string | null
           job_Boards?: Json | null
@@ -322,6 +342,7 @@ export type Database = {
           Application_Details?: Json | null
           created_at?: string
           Form?: Json | null
+          Hiring_Leader?: string | null
           id?: number
           "Job Status"?: string | null
           job_Boards?: Json | null
@@ -336,6 +357,13 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "organizations"
             referencedColumns: ["name"]
+          },
+          {
+            foreignKeyName: "public_Hiring_Hiring_Leader_fkey"
+            columns: ["Hiring_Leader"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["user_id"]
           }
         ]
       }
@@ -466,7 +494,7 @@ export type Database = {
           name: string
           org_name: string
           paid: boolean
-          track_time_unit: string
+          track_time_unit: Database["public"]["Enums"]["leave_categories_track_time_unit_type"]
         }
         Insert: {
           color?: string
@@ -477,7 +505,7 @@ export type Database = {
           name: string
           org_name: string
           paid?: boolean
-          track_time_unit?: string
+          track_time_unit?: Database["public"]["Enums"]["leave_categories_track_time_unit_type"]
         }
         Update: {
           color?: string
@@ -488,7 +516,7 @@ export type Database = {
           name?: string
           org_name?: string
           paid?: boolean
-          track_time_unit?: string
+          track_time_unit?: Database["public"]["Enums"]["leave_categories_track_time_unit_type"]
         }
         Relationships: [
           {
@@ -562,7 +590,7 @@ export type Database = {
           reviewed_by: string | null
           reviewed_comment: string | null
           start_at: string
-          status: string
+          status: Database["public"]["Enums"]["leave_request_status_type"]
           user_id: string
         }
         Insert: {
@@ -578,7 +606,7 @@ export type Database = {
           reviewed_by?: string | null
           reviewed_comment?: string | null
           start_at: string
-          status?: string
+          status?: Database["public"]["Enums"]["leave_request_status_type"]
           user_id: string
         }
         Update: {
@@ -594,7 +622,7 @@ export type Database = {
           reviewed_by?: string | null
           reviewed_comment?: string | null
           start_at?: string
-          status?: string
+          status?: Database["public"]["Enums"]["leave_request_status_type"]
           user_id?: string
         }
         Relationships: [
@@ -884,6 +912,7 @@ export type Database = {
           default_hours_per_day: number[]
           Hiring: Json | null
           job: Json | null
+          New_Employee: Json | null
           org_name: string
           personnal: Json | null
         }
@@ -892,6 +921,7 @@ export type Database = {
           default_hours_per_day?: number[]
           Hiring?: Json | null
           job?: Json | null
+          New_Employee?: Json | null
           org_name: string
           personnal?: Json | null
         }
@@ -900,6 +930,7 @@ export type Database = {
           default_hours_per_day?: number[]
           Hiring?: Json | null
           job?: Json | null
+          New_Employee?: Json | null
           org_name?: string
           personnal?: Json | null
         }
@@ -993,6 +1024,7 @@ export type Database = {
         | "manual"
         | "traditional"
         | "unlimited"
+      leave_categories_track_time_unit_type: "days" | "hours"
       leave_request_status_type:
         | "pending"
         | "approved"

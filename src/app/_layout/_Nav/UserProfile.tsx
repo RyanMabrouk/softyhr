@@ -11,8 +11,6 @@ export function UserProfile() {
   const [toggleView, setToggleView] = React.useState(false);
   const {
     user_profile: { data: user },
-  }: {
-    user_profile: { data: any | undefined };
   } = useData();
   const full_name =
     user?.["Basic Information"]?.["First name"] +
