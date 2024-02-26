@@ -51,7 +51,6 @@ function Form() {
         supervisor_id: candidate_data[0]?.["Hiring Lead"] || "",
       },
     });
-    console.log("new data", candidate_data);
     //----create_new_user--and--submit_profile_data
     const response = await CreateNewEmployee(
       NewData,

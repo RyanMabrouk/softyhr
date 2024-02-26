@@ -1,5 +1,5 @@
 "use client";
-import Currency from "./Curreny.json";
+import Currency from "../CurrencyInputPerPeriode/Curreny.json";
 import React, { memo, useEffect, useState } from "react";
 import SelectInput from "../select/Select";
 import {
@@ -19,11 +19,8 @@ const CurrencyInput = ({
   setTouched,
   defaultValue,
 }: InputPropsType) => {
-  const { currency, Pay, period } = extractCurrencyValueAndPeriod(
+  const { currency, Pay } = extractCurrencyValueAndPeriod(
     defaultValue || "",
-  );
-  const [PayPeriod, setPayPeriod] = useState<string | null>(
-    period || "",
   );
   const [CurrentCurrency, setCurrentCurency] = useState<string | null>(
     currency || "USD",
@@ -32,21 +29,23 @@ const CurrencyInput = ({
 
   console.log(RowField);
   useEffect(() => {
-    console.log(`${CurrentCurrency} ${value} /${PayPeriod}`);
-  }, [CurrentCurrency, PayPeriod]);
+    console.log(`${CurrentCurrency} ${value}`);
+  }, [CurrentCurrency]);
 
   return (
     <div className="flex items-end justify-center gap-[1rem]">
       <div className="flex flex-col items-start justify-center">
-        <h1
+        <label
           className={
             "text-[14px] text-gray-29 " +
-            (RowField?.required ? " after:text-red after:content-['*']" : "")
+            (RowField?.required
+              ? " after:text-color-primary-8 after:content-['*']"
+              : "")
           }
         >
           {RowField?.name}
-        </h1>
-        <div className="group overflow-hidden rounded-sm  relative flex flex-row-reverse items-center justify-start border border-gray-19">
+        </label>
+        <div className="group relative flex  flex-row-reverse items-center justify-start overflow-hidden rounded-sm border border-gray-19">
           <div className="absolute top-0  h-[1.8rem] w-[4rem]">
             <div className="absolute -right-[1rem] top-0 overflow-hidden border-l  text-[1rem]">
               <SelectInput
@@ -55,7 +54,7 @@ const CurrencyInput = ({
                 }
                 RowField={{
                   name: "",
-                  type:"select",
+                  type: "select",
                   options: formattedData(Currency),
                 }}
                 dropDownDisplay={false}
@@ -82,7 +81,7 @@ const CurrencyInput = ({
             required={RowField?.required}
             type="text"
             className="absolute bottom-0 left-10 h-[1px] w-[1px] opacity-0"
-            value={`${CurrentCurrency} ${value} / ${PayPeriod}`}
+            value={`${CurrentCurrency} ${value}`}
             readOnly
             name={RowField?.name}
             hidden
@@ -90,45 +89,6 @@ const CurrencyInput = ({
           />
         </div>
       </div>
-      <h1 className="text-sm text-gray-29">Per</h1>
-      <SelectInput
-        RowField={{
-          name: "",
-          type:"select",
-          options: [
-            {
-              label: "Day",
-              value: "Day",
-            },
-            {
-              label: "Week",
-              value: "Week",
-            },
-            {
-              label: "Month",
-              value: "Month",
-            },
-            {
-              label: "Quarter",
-              value: "Quarter",
-            },
-            {
-              label: "Year",
-              value: "Year",
-            },
-            {
-              label: "Pay Period",
-              value: "Pay Period",
-            },
-            {
-              label: "Piece",
-              value: "Piece",
-            },
-          ],
-        }}
-        setSelectedKeys={setPayPeriod}
-        defaultValue={PayPeriod}
-      />
     </div>
   );
 };

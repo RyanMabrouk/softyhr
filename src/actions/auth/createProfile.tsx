@@ -1,6 +1,5 @@
 "use server";
 import postData from "@/api/postData";
-
 export async function createProfile({
   user_id,
   company,
@@ -11,6 +10,10 @@ export async function createProfile({
   job,
   supervisor_id = null,
   role_id,
+  Division = "",
+  Department = "",
+  Location = "",
+  custom_fields,
 }: {
   user_id: string;
   company: string;
@@ -21,6 +24,10 @@ export async function createProfile({
   job: string;
   role_id: number | undefined;
   supervisor_id?: string | null;
+  Division?: string;
+  Department?: string;
+  Location?: string;
+  custom_fields?: { [key: string]: { [key: string]: string | number }[] }[];
 }) {
   if (!role_id) throw new Error("role_id is not defined");
   const { error } = await postData("profiles", [
@@ -33,48 +40,31 @@ export async function createProfile({
         "Hire Date": new Date(),
       },
       "Basic Information": {
-        Age: "",
-        NIN: "",
-        SIN: "",
-        SSN: "XXX-XX-XXXX",
-        Gender: "",
-        Status: "Active",
-        Employee: "",
-        Allergies: "Peanuts",
+        ...custom_fields?.find((e) =>
+          Object.keys(e).includes("Job Information"),
+        ),
         "Last name": last_name,
-        "Birth Date": "",
-        Birthplace: "",
         "First name": first_name,
-        "Shirt Size": "",
-        "Shirt size": "",
-        Citizenship: "",
-        "Jacket Size": "",
-        "Middle name": " ",
-        "National ID": "",
-        Nationality: "",
-        "T-Shirt Size": "",
-        "Marital Status": "",
-        "Preferred name": "",
-        "Tax File Number": "",
-        "Secondary Language": "",
-        "Dietary Restrictions": "",
       },
       Contact: {
-        "Work Phone": "",
-        Ext: "",
+        ...custom_fields?.find((e) => Object.keys(e).includes("Contact")),
         "Mobile Phone": tel,
-        "Home Phone": "",
         "Work Email": email,
-        "Home Email": "",
       },
       "Job Information": [
         {
-          Location: "",
-          Division: "",
-          Department: "",
+          Location: Location,
+          Division: Division,
+          Department: Department,
           "Job Title": job,
         },
       ],
+      ...custom_fields?.filter(
+        (e) =>
+          !Object.keys(e).includes("Job Information") &&
+          !Object.keys(e).includes("Contact") &&
+          !Object.keys(e).includes("Basic Information"),
+      ),
     },
   ]);
   if (error)
@@ -88,8 +78,13 @@ export async function createProfile({
       org_name: company,
       files_ids: [],
     });
+    if (permissions_error) {
+      return {
+        error: permissions_error,
+      };
+    }
     return {
-      error: permissions_error,
+      error: null,
     };
   }
 }

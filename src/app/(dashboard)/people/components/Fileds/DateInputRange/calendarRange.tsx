@@ -11,8 +11,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { useParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { InvalidDate, formatYYYYMMDD } from "@/helpers/date.helpers";
 interface CalendarProps {
   endDateName: string;
@@ -55,18 +54,20 @@ export function CalendarRange({
     <div className="flex flex-col gap-1">
       <label
         htmlFor="date_range"
-        className={`relative w-fit text-sm 
-        text-gray-21
-        `}
+        className={
+          "text-[14px] text-gray-29 " +
+          (required
+            ? " after:text-color-primary-8 after:content-['*']"
+            : "")
+        }
       >
         {label}
-        {required && <span className="absolute -right-2 top-0 text-sm">*</span>}
       </label>
       <div
         className={cn(
-          `group grid w-fit gap-2 rounded-sm border  
-                focus-within:shadow-green border-gray-18"
-          }`,
+          `focus-within:shadow-green border-gray-18" } group grid w-fit  
+                gap-2 rounded-sm
+          border`,
           className,
         )}
       >
@@ -91,7 +92,6 @@ export function CalendarRange({
         <Popover>
           <PopoverTrigger asChild>
             <Button
-              id="date"
               variant={"outline"}
               className={cn(
                 "w-[15rem] justify-start border border-transparent text-center !text-[0.95rem] !font-normal !text-gray-13 ",
@@ -119,7 +119,6 @@ export function CalendarRange({
           </PopoverTrigger>
           <PopoverContent className="w-auto p-0" align="start">
             <Calendar
-              id="date_range"
               initialFocus
               onDayClick={setAction}
               mode="range"

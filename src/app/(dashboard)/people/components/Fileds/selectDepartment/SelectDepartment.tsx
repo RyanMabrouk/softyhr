@@ -46,7 +46,9 @@ function SelectGeneric({
           <label
             className={
               "relative w-fit text-sm text-gray-21 " +
-              (required ? " after:text-red-500 after:content-['*']" : "")
+              (required
+                ? " after:text-color-primary-8 after:content-['*']"
+                : "")
             }
           >
             {label}
@@ -120,7 +122,7 @@ interface SelectUsers {
 function SelectDepartment({ RowField, defaultValue }: SelectUsers) {
   const {
     Department: { data, isPending },
-  } = useDepartment();
+  } = useDepartment({});
   if (isPending) return;
   return (
     <SelectGeneric

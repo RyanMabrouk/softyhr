@@ -1,5 +1,6 @@
 "use client";
 import {
+  Box,
   FormControl,
   InputAdornment,
   MenuItem,
@@ -21,6 +22,8 @@ interface SelectInputPropsType {
   dropDownDisplay?: boolean | undefined;
   className?: string | undefined;
 }
+
+
 
 function SelectInput({
   RowField,
@@ -47,19 +50,22 @@ function SelectInput({
 
   return (
     <div className="flex items-end justify-center gap-[1rem]">
-      <div className="relative flex flex-col items-start justify-center">
-        <h1
+      <div className={"relative flex  flex-col items-start justify-center"}>
+        <label
           className={
             "text-[14px] text-gray-29 " +
-            (RowField?.required ? " after:text-red after:content-['*']" : "")
+            (RowField?.required
+              ? " after:text-color-primary-8 after:content-['*']"
+              : "")
           }
         >
           {RowField?.name}
-        </h1>
+        </label>
         <Select
           labelId={"select-label"}
           required={RowField?.required}
           id={"select"}
+          MenuProps={{ PaperProps: { style: { maxHeight: "15rem" } } }}
           sx={{
             border: "1px solid #D9D9D9",
             color: "black",

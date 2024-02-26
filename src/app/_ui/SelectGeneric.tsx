@@ -4,7 +4,7 @@ import { Label } from "./InputGeneric";
 export type Option = {
   group_name?: string; // add only the group name to create a group
   label: string | ReactNode;
-  value: string | number;
+  value: string | undefined;
   disabled?: boolean;
 };
 export function SelectGeneric({
@@ -46,7 +46,7 @@ export function SelectGeneric({
           id={label}
           className={` group peer h-9 w-[12.5rem] rounded-sm  border  border-gray-18  py-1 text-gray-23 shadow-sm transition-all ease-linear first-letter:capitalize placeholder:text-gray-14 hover:shadow-md [&_.Mui-selected]:!bg-fabric-700 [&_.MuiOutlinedInput-notchedOutline]:border-none ${className}`}
           name={name}
-          defaultValue={defaultValue ? defaultValue.value : "none"}
+          defaultValue={defaultValue ? defaultValue?.value : "none"}
           displayEmpty
           required={required}
           onChange={(e) => setValueInParent && setValueInParent(e.target.value)}

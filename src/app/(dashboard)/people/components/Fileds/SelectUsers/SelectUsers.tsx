@@ -16,8 +16,8 @@ import avatar from "/public/avatar.png";
 import { Profile_Type, RowFieldType } from "@/types/database.tables.types";
 
 interface SelectValueType {
-  label:string;
-  value:string;
+  label: string;
+  value: string;
 }
 function SelectGeneric({
   label,
@@ -38,7 +38,9 @@ function SelectGeneric({
   required?: boolean;
   inputLabel?: string | ReactNode;
 }) {
-  const [value, setValue] = useState<SelectValueType | null>(defaultValue || {value:"",label:""});
+  const [value, setValue] = useState<SelectValueType | null>(
+    defaultValue || { value: "", label: "" },
+  );
   const [ValueInput, setValueInput] = useState<string | null>();
   return (
     <>
@@ -47,7 +49,9 @@ function SelectGeneric({
           <label
             className={
               "relative w-fit text-sm text-gray-21 " +
-              (required ? " after:text-red-500 after:content-['*']" : "")
+              (required
+                ? " after:text-color-primary-8 after:content-['*']"
+                : "")
             }
           >
             {label}
@@ -74,7 +78,10 @@ function SelectGeneric({
           onInputChange={(event, newInputValue: string | null) => {
             setValueInput(newInputValue);
           }}
-          onChange={(event: SyntheticEvent<Element, Event>, value: SelectValueType | null,) => {
+          onChange={(
+            event: SyntheticEvent<Element, Event>,
+            value: SelectValueType | null,
+          ) => {
             setValue(value);
           }}
           value={value}
@@ -93,7 +100,7 @@ function SelectGeneric({
                 alt=""
                 src={option?.picture || avatar}
               />
-              {option?.label}
+              {option?.label?.replace(/  +/g, " ")}
             </Box>
           )}
           renderInput={(params) => <TextField className="!p-0" {...params} />}
@@ -119,7 +126,7 @@ function SelectGeneric({
 
 interface SelectUsers {
   RowField: RowFieldType;
-  defaultValue:string | null;
+  defaultValue: string | null;
 }
 
 function SelectUsers({ RowField, defaultValue }: SelectUsers) {
@@ -135,14 +142,14 @@ function SelectUsers({ RowField, defaultValue }: SelectUsers) {
         defaultValue
           ? {
               value: defaultValue,
-              label: `${data?.find((user: Profile_Type) => user?.user_id == defaultValue)?.["Basic Information"]?.["First name"]}     ${data?.find((user: Profile_Type) => user?.user_id == defaultValue)?.["Basic Information"]?.["Last name"]} `,
+              label: `${data?.find((user: Profile_Type) => user?.user_id == defaultValue)?.["Basic Information"]?.["First name"]} ${data?.find((user: Profile_Type) => user?.user_id == defaultValue)?.["Basic Information"]?.["Last name"]} `,
             }
           : undefined
       }
       options={data?.map((user: Profile_Type) => {
         return {
           picture: user?.picture,
-          label: `${user?.["Basic Information"]?.["First name"]}     ${user?.["Basic Information"]?.["Last name"]} `,
+          label: `${user?.["Basic Information"]?.["First name"]} ${user?.["Basic Information"]?.["Last name"]} `,
           value: user?.user_id,
         };
       })}

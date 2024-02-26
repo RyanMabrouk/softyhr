@@ -12,7 +12,9 @@ function InputFile({ RowField, defaultValue }: InputFilePropsType) {
       <label
         className={
           "text-[14px] text-gray-29 " +
-          (RowField?.required ? " after:text-red after:content-['*']" : "")
+          (RowField?.required
+            ? " after:text-color-primary-8 after:content-['*']"
+            : "")
         }
       >
         {RowField?.name} file

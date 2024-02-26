@@ -29,6 +29,7 @@ function DateInput({
     <div className="flex items-end justify-start gap-[1rem]">
       <CalendarGeneric
         name={RowField?.name}
+        required={RowField?.required}
         label={RowField?.name}
         allowFutureDates={RowField?.allowFutureDates}
         allowPreviousDates={RowField?.allowPreviousDates}

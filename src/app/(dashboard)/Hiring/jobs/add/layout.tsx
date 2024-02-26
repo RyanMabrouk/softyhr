@@ -118,7 +118,7 @@ const LayoutComponent = memo(function LayoutComponent({
           <div className="mt-12 flex w-11/12 flex-col items-start justify-center gap-[1rem]">
             <button
               onClick={() => setShow(true)}
-              className="flex items-center justify-center gap-[0.5rem] text-sm text-gray-11"
+              className="flex items-center justify-center gap-[0.5rem] text-sm text-gray-11 duration-200 ease-linear hover:text-color-primary-8"
             >
               <FaArrowLeftLong fontSize="0.7rem" />
               <h1 className="hover:underline">Job Opening</h1>
@@ -180,7 +180,12 @@ const LayoutComponent = memo(function LayoutComponent({
                     );
                   })}
                 </div>
-                <SubmitFormBtn />
+                <div className="flex w-full flex-col items-center justify-center gap-[1rem]">
+                  <SubmitFormBtn />
+                  <h1 className="cursor-pointer text-sm text-gray-11 duration-200 ease-linear hover:text-color-primary-8 hover:underline">
+                    Save & Finish Later
+                  </h1>
+                </div>
               </div>
               {children}
             </form>

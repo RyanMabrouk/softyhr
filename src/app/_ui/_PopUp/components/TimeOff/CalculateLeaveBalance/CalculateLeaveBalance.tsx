@@ -95,9 +95,9 @@ export default function CalculateLeaveBalance() {
             label="Time Odd Category"
             defaultValue={{
               label: initial_category?.name,
-              value: Number(initial_category?.id),
+              value: String(initial_category?.id),
             }}
-            setValueInParent={(value) => setPolicyId(value)}
+            setValueInParent={(value:any) => setPolicyId(value)}
             options={leave_balance?.map(
               (balance: database_profile_leave_balance_type) => ({
                 label: leave_categories?.find(

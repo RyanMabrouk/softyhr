@@ -17,6 +17,7 @@ function DateInputRange({ RowField, setTouched, data }: DateInputPropsType) {
         label={RowField?.name}
         DataType="text"
         numberOfMonths={null}
+        required={RowField?.required}
         endDateName={RowField?.endDateName || "End Date"}
         startDateName={RowField?.startDateName || "Start Date"}
         setAction={() => setTouched && setTouched(true)}
