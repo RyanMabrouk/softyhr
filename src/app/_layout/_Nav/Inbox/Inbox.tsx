@@ -54,7 +54,7 @@ export function Inbox() {
         className={`fixed left-0 top-0 z-40 flex h-full min-h-screen min-w-full grow items-start justify-end overflow-hidden  ${toggleView ? "block" : "hidden"}`}
       >
         <div
-          className={`shadow-green z-20 mr-[8vw] mt-[4rem] h-fit w-max min-w-[12.5rem] overflow-clip rounded-md bg-white `}
+          className={`shadow-green z-50 mr-[8vw] mt-[4rem] h-fit w-max min-w-[12.5rem] overflow-clip rounded-md bg-white `}
         >
           <Link
             href={"/inbox"}
