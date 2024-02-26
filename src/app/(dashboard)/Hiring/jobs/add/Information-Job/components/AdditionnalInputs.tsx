@@ -64,16 +64,19 @@ function AdditionnalInputs({
                   Icon={Icon}
                 />
               );
-            }
+            },
           )}
-          <input readOnly autoFocus hidden name={"Location"} value={Location} />
+          <input
+            readOnly
+            autoFocus
+            hidden
+            name={"Location"}
+            value={Location=="" ?"Remote":Location}
+          />
         </div>
       </div>
       {Show && (
-        <SelectInput
-          defaultValue={LocationValue}
-          RowField={SelectLocation}
-        />
+        <SelectInput defaultValue={LocationValue} RowField={SelectLocation} />
       )}
     </div>
   );

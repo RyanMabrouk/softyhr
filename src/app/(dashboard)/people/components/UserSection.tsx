@@ -37,7 +37,6 @@ function UserSection({ section, employeeId }: UserSection) {
 
   const { mutateAsync } = useMutation({
     mutationFn: async (NewData: Profile_Type) => {
-      console.log(NewData);
       return await updateData("profiles", NewData, {
         user_id: NewData.user_id,
       });

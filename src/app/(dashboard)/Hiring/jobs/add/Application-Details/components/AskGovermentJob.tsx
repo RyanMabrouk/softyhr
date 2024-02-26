@@ -14,7 +14,7 @@ function AskGovermentJob() {
     ApplicationDetails?.values?.["Job Category"] ? true : false,
   );
   return (
-    <div>
+    <div className="flex items-center justify-start">
       <FormControlLabel
         className="!text-gray-11"
         control={

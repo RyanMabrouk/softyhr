@@ -2,18 +2,13 @@ import React, { ReactNode, SyntheticEvent, useState } from "react";
 import {
   Autocomplete,
   Box,
-  ListItemIcon,
-  ListItemText,
-  MenuItem,
-  Select,
-  SelectChangeEvent,
   TextField,
-  makeStyles,
 } from "@mui/material";
 import useProfiles from "@/hooks/useProfiles";
 import Image from "next/image";
 import avatar from "/public/avatar.png";
-import { Profile_Type, RowFieldType } from "@/types/database.tables.types";
+import { Department_type, Profile_Type, RowFieldType } from "@/types/database.tables.types";
+import useDepartment from "@/hooks/useDepartment";
 
 interface SelectValueType {
   label:string;
@@ -38,7 +33,11 @@ function SelectGeneric({
   required?: boolean;
   inputLabel?: string | ReactNode;
 }) {
-  const [value, setValue] = useState<SelectValueType | null>(defaultValue || {value:"",label:""});
+  const [value, setValue] = useState<SelectValueType | null>( defaultValue || {
+      value: "",
+      label: "",
+    },
+  );
   const [ValueInput, setValueInput] = useState<string | null>();
   return (
     <>
@@ -74,7 +73,10 @@ function SelectGeneric({
           onInputChange={(event, newInputValue: string | null) => {
             setValueInput(newInputValue);
           }}
-          onChange={(event: SyntheticEvent<Element, Event>, value: SelectValueType | null,) => {
+          onChange={(
+            event: SyntheticEvent<Element, Event>,
+            value: SelectValueType | null,
+          ) => {
             setValue(value);
           }}
           value={value}
@@ -86,13 +88,6 @@ function SelectGeneric({
               {...props}
               key={option.key}
             >
-              <Image
-                height={100}
-                width={100}
-                className="h-[1.5rem] w-[1.5rem] rounded-full object-cover"
-                alt=""
-                src={option?.picture || avatar}
-              />
               {option?.label}
             </Box>
           )}
@@ -122,32 +117,34 @@ interface SelectUsers {
   defaultValue:string | null;
 }
 
-function SelectUsers({ RowField, defaultValue }: SelectUsers) {
+function SelectDepartment({ RowField, defaultValue }: SelectUsers) {
   const {
-    profiles: { data, isPending },
-  } = useProfiles();
+    Department: { data, isPending },
+  } = useDepartment();
   if (isPending) return;
   return (
     <SelectGeneric
       label={RowField?.name}
-      required={RowField?.required}
       defaultValue={
         defaultValue
           ? {
               value: defaultValue,
-              label: `${data?.find((user: Profile_Type) => user?.user_id == defaultValue)?.["Basic Information"]?.["First name"]}     ${data?.find((user: Profile_Type) => user?.user_id == defaultValue)?.["Basic Information"]?.["Last name"]} `,
+              label:
+                data?.find((Department: any) => Department?.id == defaultValue)
+                  ?.name ?? "",
             }
           : undefined
       }
-      options={data?.map((user: Profile_Type) => {
-        return {
-          picture: user?.picture,
-          label: `${user?.["Basic Information"]?.["First name"]}     ${user?.["Basic Information"]?.["Last name"]} `,
-          value: user?.user_id,
-        };
-      })}
+      options={
+        data?.map((Department: any) => {
+          return {
+            label: Department?.name,
+            value: Department?.id,
+          };
+        }) || []
+      }
     />
   );
 }
 
-export default SelectUsers;
+export default SelectDepartment;

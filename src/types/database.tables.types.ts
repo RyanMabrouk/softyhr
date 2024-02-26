@@ -1,3 +1,4 @@
+import { IconType } from "react-icons";
 import { Database } from "./database.types";
 // Notifications
 export type database_notifications_type =
@@ -50,13 +51,18 @@ export type database_profile_type_insert =
 export type organizations_type =
   Database["public"]["Tables"]["organizations"]["Row"];
 
+//-----------Depatment_types-------------
+
+export type Department_type =
+  Database["public"]["Tables"]["Department"]["Row"];
+
 //------------Hiring_types---------------
 
-export type Hiring_type = {
+export type Hiring_type<T extends Profile_Type = Profile_Type> = {
   Application_Details: Application_Details_type | null;
   candidates?: [] | null;
   created_at?: string;
-  Questions?:object;
+  Questions?: object;
   id?: number;
   "Job Status": string;
   job_information: {
@@ -66,6 +72,7 @@ export type Hiring_type = {
     [key: string]: string | Object[] | Object | null;
   } | null;
   org_name: string | null;
+  profiles?:T;
 };
 export type Application_Details_type = {
   Job_Category?: string;
@@ -114,7 +121,7 @@ export interface RowFieldType {
   allowPreviousDates?: boolean | undefined;
   endDateName?: string | undefined;
   startDateName?: string | undefined;
-  ExtraTxt_org?:string;
+  ExtraTxt_org?: string;
 }
 export type RowType = {
   Row: RowFieldType[];

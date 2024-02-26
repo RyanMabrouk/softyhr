@@ -14,8 +14,7 @@ interface ExtraTxtpropsType {
 function ExtraTxt({ RowField }: ExtraTxtpropsType) {
     const [careerUrl, setcareerUrl] = useState("");
     useEffect(()=>{
-        console.log((async () => await GetJobUrl())());
-        setcareerUrl(String((async () => await GetJobUrl())()));
+        setcareerUrl(String((async () => await GetJobUrl().then())()));
     },[])
   return (
     <div className="flex items-center justify-start gap-[1rem]">

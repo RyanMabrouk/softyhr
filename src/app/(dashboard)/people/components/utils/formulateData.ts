@@ -36,7 +36,7 @@ export default function formulateData(formdata: FormData, user: userType) {
         }
       });
     }
-    data["Education"] = NewEducation;
+    data["Education"] = NewEducation || [];
   });
   return { ...user?.data, ...data };
 }

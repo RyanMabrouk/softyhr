@@ -11,14 +11,14 @@ function AccessSection() {
       label: "Allow Access to BambooHR",
       show: true,
       description:
-        "They will be able to login to BambooHR using the access level you choose.",
+        "They will be able to login to SoftyHR using the access level you choose.",
       Icon: IoCheckmarkDoneCircle,
     },
     {
       label: "No Access",
       show: true,
       description:
-        "They won't have access and will not be able to login to BambooHR.",
+        "They won't have access and will not be able to login to SoftyHR.",
       Icon: ImBlocked,
     },
   ];

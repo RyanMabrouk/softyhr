@@ -87,7 +87,7 @@ function Page() {
                   Job_locationValue={Hiring_data[0]?.job_information?.Location}
                 />
               </div>
-              <ChangesSection  />
+              <ChangesSection OnCancelLink="/Hiring/jobs" />
             </form>
           </div>
         </div>

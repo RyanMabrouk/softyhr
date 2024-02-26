@@ -61,7 +61,6 @@ const LayoutComponent = memo(function LayoutComponent({
     "Job-Boards": JobBoards,
   };
 
-
   //------create_new_job------------
   async function CreateNewJob() {
     if (ApplicationDetails?.done && InformationJob?.done) {
@@ -74,6 +73,7 @@ const LayoutComponent = memo(function LayoutComponent({
         org_name: user?.org_name,
         ...data?.[0]?.["AppliementForm"],
         ["Job Status"]: InformationJob?.values?.["Job Status"],
+        Hiring_Leader: InformationJob?.values?.["Hiring Lead"],
       };
       const response = await CreateJobOpening(
         NewJob,

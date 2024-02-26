@@ -1,6 +1,6 @@
 "use client";
 import React, { useContext } from "react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useParams, usePathname, useRouter, useSearchParams } from "next/navigation";
 import Loader from "@/app/_ui/Loader/Loader";
 import useCandidateFullName from "@/hooks/Hiring/useCandidateFullName";
 import { GrSend } from "react-icons/gr";
@@ -18,9 +18,11 @@ import MailProvider, {
 import { useQueryClient } from "@tanstack/react-query";
 
 function Component() {
-  const params = useSearchParams();
-  const id = params.get("id");
+  const Searchparams = useSearchParams();
+  const id = Searchparams.get("id");
   const pathname = usePathname();
+  const params = useParams();
+  const { Candidate_id, Job_id } = params;
   const Router = useRouter();
   const { toast } = useToast();
   const { FullName, isPending, data } = useCandidateFullName(id);
@@ -79,6 +81,7 @@ function Component() {
               <Emaileditor />
             </div>
             <ChangesSection
+              OnCancelLink={`/Hiring/jobs/${Job_id}/profile/${Candidate_id}/Emails`}
               PendingSubmitTxt="Sending..."
               SubmitTxt="Send Email"
             />

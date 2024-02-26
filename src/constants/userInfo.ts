@@ -18,19 +18,22 @@ export const Settings = []; /* [
 
 import {
   FaFacebookSquare,
+  FaGripLines,
   FaHome,
   FaInstagram,
   FaLinkedin,
+  FaListUl,
   FaPinterest,
   FaTwitter,
 } from "react-icons/fa";
-import { IoIosChatbubbles } from "react-icons/io";
+import { IoIosChatbubbles, IoMdCheckmark } from "react-icons/io";
 import { ImProfile } from "react-icons/im";
 import {
   MdOutlineCastForEducation,
   MdOutlineHomeWork,
   MdOutlineSmartphone,
   MdPhoneAndroid,
+  MdUpload,
 } from "react-icons/md";
 import Input from "@/app/(dashboard)/people/components/Fileds/Input/Input";
 import SelectInput from "@/app/(dashboard)/people/components/Fileds/select/Select";
@@ -48,6 +51,7 @@ import { IoSearchSharp } from "react-icons/io5";
 import DateInputRange from "@/app/(dashboard)/people/components/Fileds/DateInputRange/DateInputRange";
 import { BsTwitterX } from "react-icons/bs";
 import CurrencyInput from "@/app/(dashboard)/people/components/Fileds/CurrencyInput/CurrencyInput";
+import SelectDepartment from "@/app/(dashboard)/people/components/Fileds/selectDepartment/SelectDepartment";
 const Editor = dynamic(
   () => import("@/app/(dashboard)/people/components/Fileds/Editor/Editor"),
   { ssr: false },
@@ -67,7 +71,8 @@ export const Field: any = {
   EDITOR: Editor,
   FILE: InputFile,
   SELECT_USERS: SelectUsers,
-  TEXT_CURRENCY: CurrencyInput
+  TEXT_CURRENCY: CurrencyInput,
+  SELECT_DEPARTMENT: SelectDepartment
 };
 
 export const sectionIcon: ObjectIconsType = {
@@ -76,16 +81,13 @@ export const sectionIcon: ObjectIconsType = {
   MDOUTLINESMARTPHONE: MdOutlineSmartphone,
   MDOUTLINECASTFOREDUCATION: MdOutlineCastForEducation,
   IOIOSCHATBUBBLES: IoIosChatbubbles,
+  FAGRIPLINES: FaGripLines,
+  MDUPLOAD: MdUpload,
+  FALISTUL: FaListUl,
+  IOMDCHECKMARK: IoMdCheckmark,
 };
 
-export const NewEmployeeSections = [
-  "EDUCATION",
-  "EMPLOYMENT STATUS",
-  "BASIC INFORMATION",
-  "ADDRESS",
-  "SOCIAL LINKS",
-  "CONTACT",
-];
+
 
 interface ObjectIconsType {
   [key: string]: IconType;

@@ -1,6 +1,4 @@
 "use client";
-import getCurrentorg from "@/api/getCurrentOrg";
-import ChangesSection from "@/app/(dashboard)/people/components/ChangesSection/ChangesSection";
 import { HiringInfos, HiringInfosType } from "@/constants/Hiring/Hiring";
 import { GetJobUrl } from "@/helpers/Hiring/GetJobUrl.helper";
 import { Hiring_type } from "@/types/database.tables.types";

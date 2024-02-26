@@ -66,7 +66,7 @@ function ProfileLayout({ children }: { children: ReactNode }) {
                           }
                         />*/}
                         <Avatar
-                          size={20}
+                          size={100}
                           icon={
                             <Image
                               /*      className={

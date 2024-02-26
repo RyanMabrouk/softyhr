@@ -67,6 +67,7 @@ export default function BasicTable({
                     new Date(a?.Date || a?.["Effective Date"]).getTime(),
                 )
                 ?.map((row: any) => {
+                  console.log(row);
                   const last_changes = SortByDate(data);
                   return (
                     <>

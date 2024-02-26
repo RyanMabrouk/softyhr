@@ -41,6 +41,7 @@ export const HiringInfos: HiringInfosType[] = [
   { label: "Employment Type", name: "Employment Type" },
   { label: "Minimum Experience", name: "Minimum Experience" },
 ];
+
 export type HiringInfosType = {
   label: string;
   name: string;
@@ -72,7 +73,7 @@ export const ApplicationDefaultQuestions: ApplicationDefaultQuestionsType[] = [
     name: "Resume",
   },
   { required: false, AddToAppliement: false, type: "text", name: "Adress" },
-  { required: false, AddToAppliement: false, type: "text", name: "Linked URL" },
+  { required: false, AddToAppliement: false, type: "text", name: "LinkedIn URL" },
   {
     required: false,
     AddToAppliement: false,
@@ -138,11 +139,11 @@ export const ApplicationIniTialQuestions: any = {
     type: "text",
     name: "Adress",
   },
-  "Linked URL": {
+  "LinkedIn URL": {
     required: false,
     AddToAppliement: false,
     type: "text",
-    name: "Linked URL",
+    name: "LinkedIn URL",
   },
   "Date available": {
     required: false,

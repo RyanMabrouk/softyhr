@@ -10,12 +10,14 @@ interface ChangesSectionPropsType {
   touched?: boolean;
   setTouched?: (arg: boolean) => void;
   SubmitTxt?: string | undefined;
+  OnCancelLink?:string | undefined;
   PendingSubmitTxt?: string | undefined;
 }
 
 function ChangesSection({
   setTouched,
   PendingSubmitTxt,
+  OnCancelLink,
   SubmitTxt,
 }: ChangesSectionPropsType) {
   const { pending } = useFormStatus();
@@ -48,7 +50,7 @@ function ChangesSection({
             onClick={() => {
               queryClient.invalidateQueries({ queryKey: ["profiles"] });
               setTouched && setTouched(false);
-              router.refresh();
+              OnCancelLink ? router.push(OnCancelLink) : router.refresh()
             }}
           >
             Cancel

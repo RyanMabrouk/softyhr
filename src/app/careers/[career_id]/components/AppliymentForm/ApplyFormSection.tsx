@@ -18,6 +18,7 @@ function ApplyFormSection({
   champ,
   FieldsCheck,
 }: FiledsChampsPropsType): ReactNode {
+  console.log(FieldsCheck);
   return (
     <>
       {FieldsArray?.sort((a: any, b: any) => a.rang - b.rang)?.map(

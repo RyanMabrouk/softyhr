@@ -8,7 +8,7 @@ export const CreateNewEmployee = async (
   NewEmployeData: Profile_Type,
   email: string,
 ) => {
-  const logger = getLogger("*"); 
+  const logger = getLogger("*");
   logger.info("CreateNewEmployee_enter");
   const supbaseAdmin = createClient(
     process.env.SUPABASE_URL || "",
@@ -32,41 +32,39 @@ export const CreateNewEmployee = async (
       };
     }
 
-    const { error: profile_error } = await supbaseAdmin 
-      .from("profiles") 
-      .insert([  
-        { 
-          ...NewEmployeData, 
-          org_name: org?.name, 
+    const { error: profile_error } = await supbaseAdmin
+      .from("profiles")
+      .insert([
+        {
+          ...NewEmployeData,
+          org_name: org?.name,
           user_id: user?.user?.id,
-          role: "employee",  
-          role_id: 2, 
-          files_ids: [],
         },
       ]);
-   
-      if (profile_error) { 
+
+    if (profile_error) {
+      console.log(profile_error);
       logger.error(profile_error.message);
-      return { 
+      return {
         Submitted: false,
         Error: profile_error,
         Message: "Error Creating User Profile",
       };
-    } 
-    const { error } = await addFolder( 
-      NewEmployeData?.["Basic Information"]?.["First name"] + 
-        " " + 
-        NewEmployeData?.["Basic Information"]?.["Last name"],  
-    ); 
+    }
+    const { error } = await addFolder(
+      NewEmployeData?.["Basic Information"]?.["First name"] +
+        " " +
+        NewEmployeData?.["Basic Information"]?.["Last name"],
+    );
     if (error) {
       logger.error(error.message);
-      return { 
+      return {
         Submitted: false,
         Error: profile_error,
-        Message: "Error Creating User Profile", 
+        Message: "Error Creating User Profile",
       };
     }
-  logger.info("CreateNewEmployee_exit");
+    logger.info("CreateNewEmployee_exit");
     return {
       Submitted: true,
       Error: null,

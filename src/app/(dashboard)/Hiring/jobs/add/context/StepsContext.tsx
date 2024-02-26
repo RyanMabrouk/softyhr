@@ -32,7 +32,7 @@ interface StepsAction {
 export const initialState: StepsState = {
   ApplicationDetails: {
     done: false,
-    values: { Questions: {} },
+    values: { Questions: {}, ...ApplicationIniTialQuestions },
   },
   InformationJob: {
     done: false,
@@ -47,7 +47,6 @@ export const StepsContext = createContext({
   Update_InformationJob: (payload: ObjectOfStrings) => {},
   Update_JobBoards: (payload: ObjectOfStrings) => {},
 });
-
 export const reducer = (state: StepsState, action: StepsAction): StepsState => {
   const { type, payload } = action;
 
@@ -109,6 +108,8 @@ function StepsProvider({ children }: StepsProviderTypeProps) {
       payload,
     });
   };
+console.log(state);
+
   return (
     <StepsContext.Provider
       value={{

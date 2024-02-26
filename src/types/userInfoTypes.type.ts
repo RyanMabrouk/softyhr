@@ -31,7 +31,7 @@ export interface ChampsType {
   Icon: string;
   rang: number;
   champ: string;
-  Fields: RowFieldType[];
+  Fields: RowType[];
 }
 
 export interface RowType {

@@ -1,3 +1,5 @@
+import { Profile_Type } from "@/types/database.tables.types";
+
 export interface HiringTableType {
   id: string;
   Candiates: number;
@@ -8,8 +10,7 @@ export interface HiringTableType {
   department: string;
   Location: string;
   status: string;
-} 
-
+}
 
 export interface HiringPropsType {
   Hiring: HiringTableType[];

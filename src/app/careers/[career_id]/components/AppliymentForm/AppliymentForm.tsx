@@ -26,7 +26,7 @@ function AppliymentForm({
   SuccessMessage,
   SubmittingButtonText,
 }: AppliymentFormPropsType) {
-  const { toastContainer, toast } = useToast();
+  const { toast } = useToast();
   const {
     Hiring: { data, isPending },
   } = useHiringGuest(
@@ -112,7 +112,7 @@ function AppliymentForm({
               (FieldsArray: any, index: number) => {
                 return (
                   <div
-                    className="mt-4 flex w-full flex-col place-items-start justify-center gap-[2rem] border-b border-gray-18 pb-8"
+                    className="mt-4 flex w-full flex-col place-items-start justify-center gap-[2rem border-gray-18 pb-8"
                     key={index}
                   >
                     <div className="flex flex-col items-start justify-center gap-[1rem]">

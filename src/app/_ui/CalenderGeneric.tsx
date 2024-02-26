@@ -86,7 +86,7 @@ export function CalendarGeneric({
               mode="single"
               defaultMonth={date}
               selected={date}
-              fromYear={1960}
+              fromYear={1980}
               toYear={2060}
               onSelect={setDate}
               captionLayout="dropdown-buttons"
