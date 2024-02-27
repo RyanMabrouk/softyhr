@@ -55,7 +55,7 @@ function MenuListGeneric({
                 <MenuItem
                   key={index}
                   onClick={action}
-                  className="group flex !w-full cursor-pointer items-center justify-center !border-y !border-black !px-2 !py-2 !text-center !text-[0.8rem] !capitalize !text-gray-21 !opacity-100"
+                  className="group flex !w-full cursor-pointer items-center justify-center !border-y !border-black !text-center !text-[0.8rem] !capitalize !text-gray-21 !opacity-100"
                   value={String(index)}
                 >
                   <ListItemIcon className="h-[2rem] w-[2rem]">

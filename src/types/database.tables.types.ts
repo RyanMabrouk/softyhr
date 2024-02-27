@@ -71,6 +71,7 @@ export type Hiring_type<T extends Profile_Type = Profile_Type> = {
   } | null;
   org_name: string | null;
   profiles?: T;
+  Department?: Department_type;
 };
 export type Application_Details_type = {
   Job_Category?: string;
@@ -238,3 +239,5 @@ export type Driver_license_Type = {
   Classification?: string;
   "DMV Violations"?: string;
 };
+
+

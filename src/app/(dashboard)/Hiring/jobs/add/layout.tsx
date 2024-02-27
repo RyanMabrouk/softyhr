@@ -67,6 +67,7 @@ const LayoutComponent = memo(function LayoutComponent({
         Application_Details: {
           ...ApplicationDetails?.values,
         },
+        Department:InformationJob?.values?.Department,
         job_Boards: { ...JobBoards?.values },
         org_name: user?.org_name,
         ...data?.[0]?.["AppliementForm"],

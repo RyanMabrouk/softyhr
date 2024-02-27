@@ -22,7 +22,13 @@ function Page() {
   const queryClient = useQueryClient();
   const {
     Hiring: { data, isPending, meta, isPlaceholderData },
-  } = useHiring({}, '*,profiles("Basic Information")', page, 6, filter);
+  } = useHiring(
+    {},
+    '*,profiles("Basic Information"),Department(name)',
+    page,
+    6,
+    filter,
+  );
 
   React.useEffect(() => {
     queryClient.invalidateQueries({
@@ -42,7 +48,6 @@ function Page() {
       });
     }
   }, [page, filter, meta?.totalPages, isPlaceholderData, queryClient]);
-  
   const HiringDataTable: HiringTableType[] = data?.map(
     (Hiring: Hiring_type<Profile_Type>) => {
       return {
@@ -54,7 +59,7 @@ function Page() {
           `${Hiring?.profiles?.["Basic Information"]?.["First name"]} ${Hiring?.profiles?.["Basic Information"]?.["Last name"]}` ||
           "",
         CreatedOn: new Date(Hiring?.created_at || "").toDateString() || "",
-        department: Hiring?.job_information?.["Departement"] || "",
+        department: Hiring?.Department?.name || "",
         Location: Hiring?.job_information?.["Job Location"] || "",
         status: Hiring?.["Job Status"] || "",
       };
