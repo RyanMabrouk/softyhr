@@ -3,7 +3,6 @@ import DropDownGeneric from "@/app/_ui/DropDownGeneric";
 import { MenuLinksGeneric } from "@/app/_ui/MenuLinksGeneric";
 import { usePathname } from "next/navigation";
 import React, { useState } from "react";
-import { IconType } from "react-icons";
 import { BsBriefcaseFill } from "react-icons/bs";
 import { FaRegEdit } from "react-icons/fa";
 import {
