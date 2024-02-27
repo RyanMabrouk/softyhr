@@ -134,7 +134,7 @@ function Form() {
                     <div className="flex flex-col items-start justify-center gap-[1rem]">
                       <FiledsChamps
                         champ={champ}
-                        // user={user?.data}
+                      //user={user?.data}
                         setTouched={setTouched}
                         key={rang || uuidv4()}
                         user={{ [champ]: candidate_data?.[0] }}

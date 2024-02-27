@@ -5,7 +5,7 @@
 ESLINT_NO_DEV_ERRORS=true npm run format
 
 # Run npm run build before each commit
-npm run build
+RUN npm run build
 
 # Check if the build was successful
 if [ $? -ne 0 ]; then
