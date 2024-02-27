@@ -30,6 +30,7 @@ interface CalendarProps {
     | undefined;
   DataType?: string | undefined;
   numberOfMonths?: number | null;
+  error?: string;
 }
 export function CalendarRange({
   className,
@@ -43,6 +44,7 @@ export function CalendarRange({
   setAction,
   DataType = "date",
   numberOfMonths,
+  error,
 }: CalendarProps) {
   const [date, setDate] = useState<DateRange | undefined>(defaultValue);
   // Sync the default value with the date
