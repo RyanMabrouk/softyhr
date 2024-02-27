@@ -91,7 +91,7 @@ function AppliymentForm({
             {data[0]?.Form?.map((FieldsArray: any, index: number) => {
               return (
                 <div
-                  className="mt-4 flex w-full flex-col place-items-start justify-center gap-[2rem] border-b border-gray-18 pb-8"
+                  className="mt-4 flex w-full flex-col place-items-start justify-center gap-[2rem]"
                   key={index}
                 >
                   <div className="flex flex-col items-start justify-center gap-[1rem]">
