@@ -95,8 +95,7 @@ export default function CalculateLeaveBalance() {
               label: initial_category?.name,
               value: String(initial_category?.id),
             }}
-            setValueInParent={(value:any) => setPolicyId(value)}
-            //@ts-ignore
+            setValueInParent={(value: any) => setPolicyId(value)}
             options={leave_balance?.map(
               (balance: database_profile_leave_balance_type) => ({
                 label: leave_categories?.find(

@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/popover";
 import { useState } from "react";
 import { InvalidDate, formatYYYYMMDD } from "@/helpers/date.helpers";
-import { CalendarIcon } from "lucide-react";
+import { FaCalendarDays } from "react-icons/fa6";
 interface CalendarProps {
   endDateName: string;
   startDateName: string;
@@ -96,7 +96,7 @@ export function CalendarRange({
                 !date && "text-muted-foreground",
               )}
             >
-              <CalendarIcon
+              <FaCalendarDays
                 className={`-ml-1 mr-2 h-5 w-5 group-focus-within:text-fabric-700 `}
               />
               <div className="">
