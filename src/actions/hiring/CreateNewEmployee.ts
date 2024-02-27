@@ -68,7 +68,7 @@ export const CreateNewEmployee = async (
     return {
       Submitted: true,
       Error: null,
-      Message: `${NewEmployeData?.["Basic Information"]?.["First name"]} Added to employees list`,
+      Message: `${NewEmployeData?.["Basic Information"]?.["First name"]} ${NewEmployeData?.["Basic Information"]?.["Last name"]} Added to employees list`,
     };
   } catch (error) {
     logger.error(error);

@@ -1,7 +1,7 @@
 import { TiClipboard } from "react-icons/ti";
 import { RxAvatar } from "react-icons/rx";
 import { RiUserStarFill } from "react-icons/ri";
-import { IconType } from "react-icons";
+import { IconType } from "react-icons/lib";
 import { FaCircleUser } from "react-icons/fa6";
 
 export const HirinSections = [
@@ -73,7 +73,12 @@ export const ApplicationDefaultQuestions: ApplicationDefaultQuestionsType[] = [
     name: "Resume",
   },
   { required: false, AddToAppliement: false, type: "text", name: "Adress" },
-  { required: false, AddToAppliement: false, type: "text", name: "LinkedIn URL" },
+  {
+    required: false,
+    AddToAppliement: false,
+    type: "text",
+    name: "LinkedIn URL",
+  },
   {
     required: false,
     AddToAppliement: false,

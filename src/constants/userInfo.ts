@@ -40,7 +40,7 @@ import SelectInput from "@/app/(dashboard)/people/components/Fileds/select/Selec
 import RadioBox from "@/app/(dashboard)/people/components/Fileds/RadioBox/RadioBox";
 import DateInput from "@/app/(dashboard)/people/components/Fileds/DateInput/DateInput";
 import { CiMail } from "react-icons/ci";
-import { IconType } from "react-icons";
+import { IconType } from "react-icons/lib";
 import { ReactNode } from "react";
 import textarea from "@/app/(dashboard)/people/components/Fileds/textarea/textarea";
 
@@ -88,8 +88,6 @@ export const sectionIcon: ObjectIconsType = {
   FALISTUL: FaListUl,
   IOMDCHECKMARK: IoMdCheckmark,
 };
-
-
 
 interface ObjectIconsType {
   [key: string]: IconType;

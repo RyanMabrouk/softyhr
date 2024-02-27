@@ -7,7 +7,7 @@ import LocationCard from "./LocationCard";
 import { FaBuilding } from "react-icons/fa6";
 import { BiSolidBuildingHouse } from "react-icons/bi";
 import { RiComputerLine } from "react-icons/ri";
-import { IconType } from "react-icons";
+import { IconType } from "react-icons/lib";
 import SelectInput from "@/app/(dashboard)/people/components/Fileds/select/Select";
 
 interface AdditionnalInputsType {
@@ -17,7 +17,7 @@ interface AdditionnalInputsType {
 export interface Job_locationElementType {
   label: string;
   Icon: IconType;
-  description?:string;
+  description?: string;
   show?: boolean;
 }
 interface AdditionnalInputsTypeProps {
@@ -39,7 +39,7 @@ function AdditionnalInputs({
     options: ["London", "USA", "Tunisian", "Canada"],
     name: "Job Location",
     required: true,
-    type:"select"
+    type: "select",
   };
 
   const [Location, setLocation] = useState<string>(Job_locationValue || "");
@@ -66,13 +66,7 @@ function AdditionnalInputs({
               );
             },
           )}
-          <input
-            readOnly
-            autoFocus
-            hidden
-            name={"Location"}
-            value={Location}
-          />
+          <input readOnly autoFocus hidden name={"Location"} value={Location} />
         </div>
       </div>
       {Show && (

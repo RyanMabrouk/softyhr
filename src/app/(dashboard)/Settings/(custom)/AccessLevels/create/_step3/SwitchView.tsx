@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useMemo } from "react";
-import { IconBaseProps } from "react-icons";
+import { IconBaseProps } from "react-icons/lib";
 import { BsPeopleFill } from "react-icons/bs";
 import { FaUserLarge } from "react-icons/fa6";
 import { IoHomeSharp } from "react-icons/io5";

@@ -1,5 +1,5 @@
 import React from "react";
-import { IconType } from "react-icons";
+import { IconType } from "react-icons/lib";
 export type ViewProps = {
   label: string;
   Icon: IconType;

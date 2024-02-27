@@ -1,4 +1,4 @@
-import { IconType } from "react-icons";
+import { IconType } from "react-icons/lib";
 import { Database } from "./database.types";
 // Notifications
 export type database_notifications_type =

@@ -1,18 +1,14 @@
 "use client";
 import DropDownGeneric from "@/app/_ui/DropDownGeneric";
-import { MenuLinksGeneric } from "@/app/_ui/MenuLinksGeneric";
 import { usePathname } from "next/navigation";
 import React, { useState } from "react";
-import { IconType } from "react-icons";
 import { BsBriefcaseFill } from "react-icons/bs";
-import { FaRegEdit } from "react-icons/fa";
 import {
   MdEventNote,
   MdModeEditOutline,
   MdOutlineEventNote,
 } from "react-icons/md";
-import { PiCertificateFill, PiCertificateLight } from "react-icons/pi";
-import { VscTriangleDown } from "react-icons/vsc";
+import { PiCertificateFill } from "react-icons/pi";
 
 interface EditJobOpeningPropsType {
   text?: string;

@@ -2,15 +2,14 @@
 import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { getLogger } from "@/logging/log-util";
+import updateData from "@/api/updateData";
 export const EditCandidateStatus = async (id: string, NewStatus: string) => {
 
   const logger = getLogger("hiring");
   logger.info("EditCandidateStatus_enter"); 
   const supabase = createServerActionClient({ cookies }); 
-  const { error } = await supabase 
-    .from("candidates") 
-    .update({ status: NewStatus })    
-    .eq("id", id);     
+  const { error } = await updateData("candidates", { status: NewStatus },{id});
+
   if (error) {   
     logger.error(error.message); 
     return {   

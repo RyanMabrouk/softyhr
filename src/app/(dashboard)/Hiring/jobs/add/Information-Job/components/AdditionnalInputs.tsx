@@ -6,9 +6,9 @@ import LocationCard from "./LocationCard";
 import { FaBuilding } from "react-icons/fa6";
 import { BiSolidBuildingHouse } from "react-icons/bi";
 import { RiComputerLine } from "react-icons/ri";
-import { IconType } from "react-icons";
 import SelectInput from "@/app/(dashboard)/people/components/Fileds/select/Select";
 import { RowFieldType } from "@/types/userInfoTypes.type";
+import { IconType } from "react-icons/lib";
 
 interface AdditionnalInputsType {
   RowField: RowFieldType;

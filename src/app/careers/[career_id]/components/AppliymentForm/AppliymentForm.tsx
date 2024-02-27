@@ -107,7 +107,7 @@ function AppliymentForm({
             {data[0]?.Questions?.map((FieldsArray: any, index: number) => {
               return (
                 <div
-                  className="gap-[2rem mt-4 flex w-full flex-col place-items-start justify-center border-gray-18 pb-8"
+                  className="gap-[2rem mt-4 flex w-full flex-col place-items-start justify-center "
                   key={index}
                 >
                   <div className="flex flex-col items-start justify-center gap-[1rem]">
@@ -120,7 +120,8 @@ function AppliymentForm({
                 </div>
               );
             })}
-            <div className="-mt-4 flex items-center justify-center gap-[2rem]">
+            <div className="border-gray-18 pb-8 w-full" />
+            <div className="-mt-4 flex border items-center justify-center gap-[2rem]">
               <SubmitButton
                 textSubmitting={SubmittingButtonText}
                 text={ButtonText}

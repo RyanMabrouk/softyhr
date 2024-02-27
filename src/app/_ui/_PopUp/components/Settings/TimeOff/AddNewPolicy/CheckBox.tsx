@@ -1,5 +1,5 @@
 import React from "react";
-import { IconType } from "react-icons";
+import { IconType } from "react-icons/lib";
 import { IoIosCheckbox } from "react-icons/io";
 interface CheckBoxPropsType {
   label: string;

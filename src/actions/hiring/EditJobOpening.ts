@@ -2,6 +2,7 @@
 import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { getLogger } from "@/logging/log-util";
+import updateData from "@/api/updateData";
 interface EntryType {
   [key: string]: FormDataEntryValue | string;
 }
@@ -19,13 +20,14 @@ export const Edit_JobOpening = async (
   });
   const supabase = createServerActionClient({ cookies });
   let status = formdata.has("Job Status");
-  const { error } = await supabase
-    .from("Hiring")
-    .update({
+  const { error } = await updateData(
+    "Hiring",
+    {
       [champ]: Newdata,
       ["Job Status"]: status ? formdata.get("Job Status") : JobStatus,
-    })
-    .eq("id", id);
+    },
+    { id },
+  );
   if (error) {
     logger.error(error.message);
     return { error: { Message: `Error Updating ${champ}`, Type: error } };
