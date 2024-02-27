@@ -37,7 +37,6 @@ export default async function getData(
     pagination = undefined,
   }: getDataParams = {
     user: false,
-    match: undefined,
     org: false,
     column: "*",
   },
