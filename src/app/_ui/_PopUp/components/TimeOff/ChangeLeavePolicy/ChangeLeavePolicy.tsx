@@ -102,8 +102,10 @@ export default function ChangeLeavePolicy() {
           <SelectGeneric
             label="New Vacation Policy"
             name="policy_id"
+            //@ts-ignore
             options={options}
             defaultValue={{
+              //@ts-ignore
               value: Number(policy?.id),
               label: policy?.name,
             }}

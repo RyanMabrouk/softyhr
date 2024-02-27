@@ -171,43 +171,72 @@ export type Database = {
             referencedColumns: ["id"];
           },
           {
-            foreignKeyName: "candidates_org_name_fkey"
-            columns: ["org_name"]
-            isOneToOne: false
-            referencedRelation: "organizations"
-            referencedColumns: ["name"]
-          }
-        ]
-      }
-      divisions: {
+            foreignKeyName: "candidates_org_name_fkey";
+            columns: ["org_name"];
+            isOneToOne: false;
+            referencedRelation: "organizations";
+            referencedColumns: ["name"];
+          },
+        ];
+      };
+      Department: {
         Row: {
-          created_at: string
-          id: number
-          name: string
-          org_name: string
-        }
+          created_at: string;
+          id: number;
+          name: string | null;
+          org_name: string | null;
+        };
         Insert: {
-          created_at?: string
-          id?: number
-          name: string
-          org_name: string
-        }
+          created_at?: string;
+          id?: number;
+          name?: string | null;
+          org_name?: string | null;
+        };
         Update: {
-          created_at?: string
-          id?: number
-          name?: string
-          org_name?: string
-        }
+          created_at?: string;
+          id?: number;
+          name?: string | null;
+          org_name?: string | null;
+        };
         Relationships: [
           {
-            foreignKeyName: "divisions_org_name_fkey"
-            columns: ["org_name"]
-            isOneToOne: false
-            referencedRelation: "organizations"
-            referencedColumns: ["name"]
-          }
-        ]
-      }
+            foreignKeyName: "public_Department_org_name_fkey";
+            columns: ["org_name"];
+            isOneToOne: false;
+            referencedRelation: "organizations";
+            referencedColumns: ["name"];
+          },
+        ];
+      };
+      divisions: {
+        Row: {
+          created_at: string;
+          id: number;
+          name: string;
+          org_name: string;
+        };
+        Insert: {
+          created_at?: string;
+          id?: number;
+          name: string;
+          org_name: string;
+        };
+        Update: {
+          created_at?: string;
+          id?: number;
+          name?: string;
+          org_name?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "divisions_org_name_fkey";
+            columns: ["org_name"];
+            isOneToOne: false;
+            referencedRelation: "organizations";
+            referencedColumns: ["name"];
+          },
+        ];
+      };
       files: {
         Row: {
           addedBy: string | null;
@@ -297,42 +326,48 @@ export type Database = {
       };
       Hiring: {
         Row: {
-          Application_Details: Json | null
-          created_at: string
-          id: number
-          "Job Status": string | null
-          job_Boards: Json | null
-          job_information: Json | null
-          org_name: string | null
-        }
+          Application_Details: Json | null;
+          created_at: string;
+          Form: Json | null;
+          id: number;
+          "Job Status": string | null;
+          job_Boards: Json | null;
+          job_information: Json | null;
+          org_name: string | null;
+          Questions: Json | null;
+        };
         Insert: {
-          Application_Details?: Json | null
-          created_at?: string
-          id?: number
-          "Job Status"?: string | null
-          job_Boards?: Json | null
-          job_information?: Json | null
-          org_name?: string | null
-        }
+          Application_Details?: Json | null;
+          created_at?: string;
+          Form?: Json | null;
+          id?: number;
+          "Job Status"?: string | null;
+          job_Boards?: Json | null;
+          job_information?: Json | null;
+          org_name?: string | null;
+          Questions?: Json | null;
+        };
         Update: {
-          Application_Details?: Json | null
-          created_at?: string
-          id?: number
-          "Job Status"?: string | null
-          job_Boards?: Json | null
-          job_information?: Json | null
-          org_name?: string | null
-        }
+          Application_Details?: Json | null;
+          created_at?: string;
+          Form?: Json | null;
+          id?: number;
+          "Job Status"?: string | null;
+          job_Boards?: Json | null;
+          job_information?: Json | null;
+          org_name?: string | null;
+          Questions?: Json | null;
+        };
         Relationships: [
           {
-            foreignKeyName: "Hiring_org_name_fkey"
-            columns: ["org_name"]
-            isOneToOne: false
-            referencedRelation: "organizations"
-            referencedColumns: ["name"]
-          }
-        ]
-      }
+            foreignKeyName: "Hiring_org_name_fkey";
+            columns: ["org_name"];
+            isOneToOne: false;
+            referencedRelation: "organizations";
+            referencedColumns: ["name"];
+          },
+        ];
+      };
       leave_accrued: {
         Row: {
           balance: number;
@@ -452,38 +487,38 @@ export type Database = {
       };
       leave_categories: {
         Row: {
-          color: string
-          created_at: string
-          disabled: boolean
-          icon: string
-          id: number
-          name: string
-          org_name: string
-          paid: boolean
-          track_time_unit: string
-        }
+          color: string;
+          created_at: string;
+          disabled: boolean;
+          icon: string;
+          id: number;
+          name: string;
+          org_name: string;
+          paid: boolean;
+          track_time_unit: string;
+        };
         Insert: {
-          color?: string
-          created_at?: string
-          disabled?: boolean
-          icon: string
-          id?: number
-          name: string
-          org_name: string
-          paid?: boolean
-          track_time_unit?: string
-        }
+          color?: string;
+          created_at?: string;
+          disabled?: boolean;
+          icon: string;
+          id?: number;
+          name: string;
+          org_name: string;
+          paid?: boolean;
+          track_time_unit?: string;
+        };
         Update: {
-          color?: string
-          created_at?: string
-          disabled?: boolean
-          icon?: string
-          id?: number
-          name?: string
-          org_name?: string
-          paid?: boolean
-          track_time_unit?: string
-        }
+          color?: string;
+          created_at?: string;
+          disabled?: boolean;
+          icon?: string;
+          id?: number;
+          name?: string;
+          org_name?: string;
+          paid?: boolean;
+          track_time_unit?: string;
+        };
         Relationships: [
           {
             foreignKeyName: "leave_categories_org_name_fkey";
@@ -544,53 +579,53 @@ export type Database = {
       };
       leave_requests: {
         Row: {
-          balance: number
-          created_at: string
-          duration_used: Json[]
-          end_at: string
-          id: number
-          note: string | null
-          org_name: string | null
-          policy_id: number
-          reviewed_at: string | null
-          reviewed_by: string | null
-          reviewed_comment: string | null
-          start_at: string
-          status: string
-          user_id: string
-        }
+          balance: number;
+          created_at: string;
+          duration_used: Json[];
+          end_at: string;
+          id: number;
+          note: string | null;
+          org_name: string | null;
+          policy_id: number;
+          reviewed_at: string | null;
+          reviewed_by: string | null;
+          reviewed_comment: string | null;
+          start_at: string;
+          status: string;
+          user_id: string;
+        };
         Insert: {
-          balance: number
-          created_at?: string
-          duration_used: Json[]
-          end_at: string
-          id?: number
-          note?: string | null
-          org_name?: string | null
-          policy_id: number
-          reviewed_at?: string | null
-          reviewed_by?: string | null
-          reviewed_comment?: string | null
-          start_at: string
-          status?: string
-          user_id: string
-        }
+          balance: number;
+          created_at?: string;
+          duration_used: Json[];
+          end_at: string;
+          id?: number;
+          note?: string | null;
+          org_name?: string | null;
+          policy_id: number;
+          reviewed_at?: string | null;
+          reviewed_by?: string | null;
+          reviewed_comment?: string | null;
+          start_at: string;
+          status?: string;
+          user_id: string;
+        };
         Update: {
-          balance?: number
-          created_at?: string
-          duration_used?: Json[]
-          end_at?: string
-          id?: number
-          note?: string | null
-          org_name?: string | null
-          policy_id?: number
-          reviewed_at?: string | null
-          reviewed_by?: string | null
-          reviewed_comment?: string | null
-          start_at?: string
-          status?: string
-          user_id?: string
-        }
+          balance?: number;
+          created_at?: string;
+          duration_used?: Json[];
+          end_at?: string;
+          id?: number;
+          note?: string | null;
+          org_name?: string | null;
+          policy_id?: number;
+          reviewed_at?: string | null;
+          reviewed_by?: string | null;
+          reviewed_comment?: string | null;
+          start_at?: string;
+          status?: string;
+          user_id?: string;
+        };
         Relationships: [
           {
             foreignKeyName: "leave_requests_org_name_fkey";
@@ -745,71 +780,74 @@ export type Database = {
       };
       profiles: {
         Row: {
-          accrual_start_date: string | null
-          Address: Json | null
-          "Basic Information": Json | null
-          Bonus: Json[] | null
-          Commission: Json[] | null
-          Compensation: Json[] | null
-          Contact: Json | null
-          "Driver License": Json[] | null
-          Education: Json[] | null
-          "Employment Status": Json[] | null
-          Hiring: Json | null
-          Job: Json | null
-          "Job Information": Json[] | null
-          org_name: string
-          picture: string | null
-          "Social Links": Json | null
-          "Stock Options": Json[] | null
-          supervisor_id: string | null
-          user_id: string
-          "Visa Information": Json[] | null
-        }
+          accrual_start_date: string | null;
+          Address: Json | null;
+          "Basic Information": Json | null;
+          Bonus: Json[] | null;
+          Commission: Json[] | null;
+          Compensation: Json[] | null;
+          Contact: Json | null;
+          "Driver License": Json[] | null;
+          Education: Json[] | null;
+          "Employment Status": Json[] | null;
+          Hiring: Json | null;
+          Job: Json | null;
+          "Job Information": Json[] | null;
+          last_signed_in: string | null;
+          org_name: string;
+          picture: string | null;
+          "Social Links": Json | null;
+          "Stock Options": Json[] | null;
+          supervisor_id: string | null;
+          user_id: string;
+          "Visa Information": Json[] | null;
+        };
         Insert: {
-          accrual_start_date?: string | null
-          Address?: Json | null
-          "Basic Information"?: Json | null
-          Bonus?: Json[] | null
-          Commission?: Json[] | null
-          Compensation?: Json[] | null
-          Contact?: Json | null
-          "Driver License"?: Json[] | null
-          Education?: Json[] | null
-          "Employment Status"?: Json[] | null
-          Hiring?: Json | null
-          Job?: Json | null
-          "Job Information"?: Json[] | null
-          org_name: string
-          picture?: string | null
-          "Social Links"?: Json | null
-          "Stock Options"?: Json[] | null
-          supervisor_id?: string | null
-          user_id: string
-          "Visa Information"?: Json[] | null
-        }
+          accrual_start_date?: string | null;
+          Address?: Json | null;
+          "Basic Information"?: Json | null;
+          Bonus?: Json[] | null;
+          Commission?: Json[] | null;
+          Compensation?: Json[] | null;
+          Contact?: Json | null;
+          "Driver License"?: Json[] | null;
+          Education?: Json[] | null;
+          "Employment Status"?: Json[] | null;
+          Hiring?: Json | null;
+          Job?: Json | null;
+          "Job Information"?: Json[] | null;
+          last_signed_in?: string | null;
+          org_name: string;
+          picture?: string | null;
+          "Social Links"?: Json | null;
+          "Stock Options"?: Json[] | null;
+          supervisor_id?: string | null;
+          user_id: string;
+          "Visa Information"?: Json[] | null;
+        };
         Update: {
-          accrual_start_date?: string | null
-          Address?: Json | null
-          "Basic Information"?: Json | null
-          Bonus?: Json[] | null
-          Commission?: Json[] | null
-          Compensation?: Json[] | null
-          Contact?: Json | null
-          "Driver License"?: Json[] | null
-          Education?: Json[] | null
-          "Employment Status"?: Json[] | null
-          Hiring?: Json | null
-          Job?: Json | null
-          "Job Information"?: Json[] | null
-          org_name?: string
-          picture?: string | null
-          "Social Links"?: Json | null
-          "Stock Options"?: Json[] | null
-          supervisor_id?: string | null
-          user_id?: string
-          "Visa Information"?: Json[] | null
-        }
+          accrual_start_date?: string | null;
+          Address?: Json | null;
+          "Basic Information"?: Json | null;
+          Bonus?: Json[] | null;
+          Commission?: Json[] | null;
+          Compensation?: Json[] | null;
+          Contact?: Json | null;
+          "Driver License"?: Json[] | null;
+          Education?: Json[] | null;
+          "Employment Status"?: Json[] | null;
+          Hiring?: Json | null;
+          Job?: Json | null;
+          "Job Information"?: Json[] | null;
+          last_signed_in?: string | null;
+          org_name?: string;
+          picture?: string | null;
+          "Social Links"?: Json | null;
+          "Stock Options"?: Json[] | null;
+          supervisor_id?: string | null;
+          user_id?: string;
+          "Visa Information"?: Json[] | null;
+        };
         Relationships: [
           {
             foreignKeyName: "profiles_org_name_fkey";
@@ -836,26 +874,29 @@ export type Database = {
       };
       roles: {
         Row: {
-          created_at: string
-          id: number
-          name: string
-          org_name: string
-          permissions: string[]
-        }
+          created_at: string;
+          description: string | null;
+          id: number;
+          name: string;
+          org_name: string;
+          permissions: string[];
+        };
         Insert: {
-          created_at?: string
-          id?: number
-          name?: string
-          org_name: string
-          permissions: string[]
-        }
+          created_at?: string;
+          description?: string | null;
+          id?: number;
+          name?: string;
+          org_name: string;
+          permissions: string[];
+        };
         Update: {
-          created_at?: string
-          id?: number
-          name?: string
-          org_name?: string
-          permissions?: string[]
-        }
+          created_at?: string;
+          description?: string | null;
+          id?: number;
+          name?: string;
+          org_name?: string;
+          permissions?: string[];
+        };
         Relationships: [
           {
             foreignKeyName: "roles_org_name_fkey";
@@ -868,29 +909,32 @@ export type Database = {
       };
       settings: {
         Row: {
-          AppliementForm: Json | null
-          default_hours_per_day: number[]
-          Hiring: Json | null
-          job: Json | null
-          org_name: string
-          personnal: Json | null
-        }
+          AppliementForm: Json | null;
+          default_hours_per_day: number[];
+          Hiring: Json | null;
+          job: Json | null;
+          New_Employee: Json | null;
+          org_name: string;
+          personnal: Json | null;
+        };
         Insert: {
-          AppliementForm?: Json | null
-          default_hours_per_day?: number[]
-          Hiring?: Json | null
-          job?: Json | null
-          org_name: string
-          personnal?: Json | null
-        }
+          AppliementForm?: Json | null;
+          default_hours_per_day?: number[];
+          Hiring?: Json | null;
+          job?: Json | null;
+          New_Employee?: Json | null;
+          org_name: string;
+          personnal?: Json | null;
+        };
         Update: {
-          AppliementForm?: Json | null
-          default_hours_per_day?: number[]
-          Hiring?: Json | null
-          job?: Json | null
-          org_name?: string
-          personnal?: Json | null
-        }
+          AppliementForm?: Json | null;
+          default_hours_per_day?: number[];
+          Hiring?: Json | null;
+          job?: Json | null;
+          New_Employee?: Json | null;
+          org_name?: string;
+          personnal?: Json | null;
+        };
         Relationships: [
           {
             foreignKeyName: "settings_org_name_fkey";
@@ -928,11 +972,11 @@ export type Database = {
         };
         Relationships: [
           {
-            foreignKeyName: "public_user_emails_admin_receiver_fkey"
-            columns: ["admin_receiver"]
-            isOneToOne: false
-            referencedRelation: "profiles"
-            referencedColumns: ["user_id"]
+            foreignKeyName: "user_emails_admin_receiver_fkey";
+            columns: ["admin_receiver"];
+            isOneToOne: false;
+            referencedRelation: "profiles";
+            referencedColumns: ["user_id"];
           },
           {
             foreignKeyName: "user_emails_candidate_sender_fkey";
@@ -980,7 +1024,7 @@ export type Database = {
       database_leave_policies_policy_type:
         | "manual"
         | "traditional"
-        | "unlimited"
+        | "unlimited";
       leave_request_status_type:
         | "pending"
         | "approved"
