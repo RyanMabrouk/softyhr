@@ -140,7 +140,7 @@ function SelectUsers({ RowField, defaultValue }: SelectUsers) {
         data?.map((user: Profile_Type) => {
           return {
             picture: user?.picture,
-            label: `${user?.["Basic Information"]?.["First name"]}     ${user?.["Basic Information"]?.["Last name"]} `,
+            label: `${user?.["Basic Information"]?.["First name"]} ${user?.["Basic Information"]?.["Last name"]} `,
             value: user?.user_id,
           };
         }) ?? [

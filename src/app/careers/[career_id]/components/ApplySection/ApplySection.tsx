@@ -1,6 +1,6 @@
 "use client";
+import { GetJobUrl } from "@/app/careers/helpers/GetJobUrl.helper";
 import { HiringInfos, HiringInfosType } from "@/constants/Hiring/Hiring";
-import { GetJobUrl } from "@/helpers/Hiring/GetJobUrl.helper";
 import { Hiring_type } from "@/types/database.tables.types";
 import React, { useEffect, useState } from "react";
 import { FaFacebookSquare } from "react-icons/fa";

@@ -15,7 +15,6 @@ interface LayoutHiringProps {
 }
 
 export default function HiringLayout({ children }: LayoutHiringProps) {
-
   const ActiveRoute = usePathname();
   if (ActiveRoute.split("/").length - 1 > 2) return children;
   return (
@@ -58,7 +57,10 @@ export default function HiringLayout({ children }: LayoutHiringProps) {
             })}
           </div>
           <div className="flex items-center justify-center gap-[0.5rem]">
-            <Link href="" className="text-sm text-gray-15 hover:underline ">
+            <Link
+              href="/careers"
+              className="text-sm text-gray-15 hover:underline "
+            >
               View Careers Website
             </Link>
             <span className="text-sm text-gray-15 "> . </span>

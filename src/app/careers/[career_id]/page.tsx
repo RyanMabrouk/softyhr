@@ -10,12 +10,11 @@ import ApplySectionSkeleton from "./components/ApplySection/ApplySectionSkeleton
 import DescriptionSkeleton from "./components/Description/DescriptionSkeleton";
 import Description from "./components/Description/Description";
 import ApplySection from "./components/ApplySection/ApplySection";
-import useHiring from "@/hooks/Hiring/useHiring";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import AppliymentForm from "./components/AppliymentForm/AppliymentForm";
-import useHiringGuest from "@/hooks/Hiring/useHiringGuest";
+import useHiringGuest from "../hooks/useHiringGuest";
 
 function Page({ params: { career_id } }: { params: { career_id: string } }) {
   const {

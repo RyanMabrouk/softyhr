@@ -41,7 +41,7 @@ function Page() {
       <div className="flex h-full w-10/12 flex-col items-center justify-center gap-2 overflow-hidden rounded-lg bg-gray-14 p-4 px-6">
         {isPending ? (
           <CommentsListSkeleton />
-        ) : data.length > 0 ? (
+        ) : data?.length > 0 ? (
           <>
             <AddComment
               isFirstReply={true}
@@ -49,7 +49,7 @@ function Page() {
               AssignTo={String(Candidate_id)}
             />
             {data
-              ?.sort((a: any, b: any) => b.id - a.id)
+              ?.sort((a: any, b: any) => b?.id - a?.id)
               ?.map((comment: any) => {
                 return (
                   <>

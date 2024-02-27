@@ -42,7 +42,7 @@ const Input = ({
               style={{
                 fontSize: "1rem",
                 position: "absolute",
-                left: "0.4rem",
+                left: "0.35rem",
                 top: "25%",
               }}
             />

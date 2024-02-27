@@ -4,17 +4,17 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { FaPlusCircle } from "react-icons/fa";
-import HiringTable from "../_ui/HiringTable/HiringTable";
+import HiringTable from "../components/HiringTable/HiringTable";
 import useData from "@/hooks/useData";
-import { NewCandidates } from "@/helpers/Hiring/CountNewCandidates";
 import { Hiring_type, Profile_Type } from "@/types/database.tables.types";
-import { HiringTableType } from "../_ui/HiringTable/Hiringtable.types";
+import { HiringTableType } from "../components/HiringTable/Hiringtable.types";
 import useHiring from "@/hooks/Hiring/useHiring";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { GetJobOpening } from "@/actions/hiring/GetJobOpening";
 import getHiring from "@/api/Hiring/getHiring";
 import useCandidate from "@/hooks/Hiring/useCandidate";
-import TableSkeleton from "../_ui/HiringTable/components/TableSkeleton";
+import TableSkeleton from "../components/HiringTable/components/TableSkeleton";
+import { NewCandidates } from "../components/HiringTable/helpers/CountNewCandidates";
 
 function Page() {
   const [filter, setFilter] = useState<string | null>("All");
@@ -42,7 +42,7 @@ function Page() {
       });
     }
   }, [page, filter, meta?.totalPages, isPlaceholderData, queryClient]);
-  console.log(data);
+  
   const HiringDataTable: HiringTableType[] = data?.map(
     (Hiring: Hiring_type<Profile_Type>) => {
       return {

@@ -1,5 +1,5 @@
 import React from "react";
-import EmptyIcon from "../assets/imgs/NotFound.png";
+import EmptyIcon from "/public/NotFound.png";
 import Image from "next/image";
 
 function Empty() {

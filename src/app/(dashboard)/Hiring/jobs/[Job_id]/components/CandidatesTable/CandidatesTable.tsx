@@ -101,7 +101,7 @@ export default function CandiatesTable({
         "cursor-pointer",
         "py-2",
         "!bg-gray-17",
-        "hover:!bg-gray-14",
+        "hover:!bg-gray-18",
         "text-gray-11",
         "border-b",
         "border-divider",

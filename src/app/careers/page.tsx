@@ -10,7 +10,7 @@ function Page() {
   return (
     <div className="flex h-screen w-screen items-center justify-center bg-gray-14">
       {data?.data ? (
-        <div className="flex  h-full w-full flex-col items-center justify-start bg-gray-14 pt-2">
+        <div className="flex  h-full w-full flex-col items-center justify-start bg-gray-14 pt-4">
           <JobopeningList data={data?.data} />
         </div>
       ) : (

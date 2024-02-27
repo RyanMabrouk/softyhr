@@ -2,7 +2,7 @@ import React, { ReactNode, memo } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { Field } from "@/constants/userInfo";
 import { RowFieldType, RowType, insert_RowFieldType } from "@/types/userInfoTypes.type";
-import Input from "./Input/Input";
+import Input from "../Fileds/Input/Input";
 interface FiledsChampsPropsType {
   FieldsArray: RowType[];
   setTouched?: React.Dispatch<React.SetStateAction<boolean>>;

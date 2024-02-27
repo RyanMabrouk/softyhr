@@ -5,8 +5,8 @@ import { FaMessage } from "react-icons/fa6";
 import HireStatus from "../../components/CandidatesTable/components/HireStatus";
 import useCandidate from "@/hooks/Hiring/useCandidate";
 import useHiring from "@/hooks/Hiring/useHiring";
-import Settings from "../../components/CandidatesTable/components/Settings/Settings";
 import { MdEmail } from "react-icons/md";
+import Settings from "../[Candidate_id]/Candidate-info/Components/Settings/Settings";
 
 function RatingSection() {
   const Params = useParams();
@@ -18,7 +18,7 @@ function RatingSection() {
     Hiring: { data: Hiring_data, isPending: Hiring_isPending },
   } = useHiring({ id: Job_id });
   return (
-    <div className="absolute left-[1rem] top-[4rem] flex flex-col items-start justify-center gap-3 rounded-md border-4 border-gray-36 bg-white p-4 px-8 shadow-lg">
+    <div className="absolute left-[1rem] top-[4rem] flex max-w-[25rem] flex-col items-start justify-center gap-3 rounded-md border-4 border-gray-36 bg-white p-4 px-8 shadow-lg">
       {Hiring_isPending || candidates_isPending ? (
         <h1>Loading...</h1>
       ) : (
@@ -41,7 +41,7 @@ function RatingSection() {
             </div>
             <Settings />
           </div>
-          <h1 className="">{`Set by Maja Andev 22 days ago:`}</h1>
+          <h1 className="">{`under construction`}</h1>
           <HireStatus Hiring={Hiring_data[0]} candidate={candidates_data[0]} />
         </>
       )}

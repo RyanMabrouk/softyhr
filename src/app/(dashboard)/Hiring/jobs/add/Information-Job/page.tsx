@@ -1,9 +1,9 @@
 "use client";
 import React, { memo, useContext, } from "react";
-import FiledsChamps from "@/app/(dashboard)/people/components/Fileds/Fileds";
 import { StepsContext } from "../context/StepsContext";
 import useData from "@/hooks/useData";
 import AdditionnalInputs from "./components/AdditionnalInputs";
+import FiledsChamps from "@/app/(dashboard)/people/components/sections/FiledsChamps";
 
 function Page() {
   const { InformationJob } = useContext(StepsContext);

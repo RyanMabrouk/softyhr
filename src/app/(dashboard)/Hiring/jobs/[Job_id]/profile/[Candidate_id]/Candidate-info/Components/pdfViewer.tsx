@@ -8,7 +8,7 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   import.meta.url,
 ).toString();
 interface PdfViewerPropsType {
-  url: string | null;
+  url: string | null | undefined;
 }
 
 function PdfViewer({ url }: PdfViewerPropsType) {

@@ -14,7 +14,7 @@ function AdditionalQuestions() {
 
   return (
     <div className="flex w-full flex-col items-start justify-center gap-[1rem]">
-      <NewQuestionsList additionalQuestionsForm={additionalQuestionsForm} />
+      {/* <NewQuestionsList additionalQuestionsForm={additionalQuestionsForm} /> */}
       <MenuListGeneric
         options={[
           {
@@ -71,6 +71,7 @@ function AdditionalQuestions() {
           },
         ]}
       />
+      <p>under construction</p>
     </div>
   );
 }

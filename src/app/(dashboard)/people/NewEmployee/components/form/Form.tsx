@@ -6,7 +6,6 @@ import { sectionIcon } from "@/constants/userInfo";
 import { ChampsType } from "@/types/userInfoTypes.type";
 import { useRouter, useSearchParams } from "next/navigation";
 import useToast from "@/hooks/useToast";
-import FiledsChamps from "@/app/(dashboard)/people/components/Fileds/Fileds";
 import ChangesSection from "../../../components/ChangesSection/ChangesSection";
 import EmployementStatus from "../EmployementStatus";
 import AccessSection from "../AccessSection";
@@ -14,6 +13,8 @@ import { CreateNewEmployee } from "@/actions/hiring/CreateNewEmployee";
 import useCandidate from "@/hooks/Hiring/useCandidate";
 import formulateDataNewemployee from "../../utils/formulateData";
 import useUserProfile from "@/hooks/useUserProfile";
+import FiledsChamps from "../../../components/sections/FiledsChamps";
+import Loader from "@/app/_ui/Loader/Loader";
 
 function Form() {
   const {
@@ -110,7 +111,7 @@ function Form() {
     <>
       {isPending || candidate_isPending || profile_pending ? (
         <div className="flex h-[20rem] w-full items-center justify-center ">
-          <h1>Loading...</h1>
+          <Loader/>
         </div>
       ) : (
         <div className="flex h-full w-full flex-col items-start justify-start pl-8">

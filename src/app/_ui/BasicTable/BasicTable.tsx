@@ -123,7 +123,7 @@ export default function BasicTable({
                             <div className=" flex items-center justify-end gap-2 opacity-0 duration-200 ease-in-out group-hover:opacity-100">
                               <Link
                                 href={`?popup=EDIT_ENTRY&section=${champ}&id=${row?.id}`}
-                                className="flex h-[2rem] w-[2rem] cursor-pointer items-center justify-center duration-200 ease-in-out hover:border hover:border-gray-27 hover:bg-gray-14"
+                                className="flex h-[2rem] w-[2rem] cursor-pointer items-center justify-center rounded-sm duration-200 ease-in-out hover:border hover:border-gray-27 hover:bg-gray-14"
                               >
                                 <MdModeEditOutline
                                   className="rounded-sm text-lg"
@@ -133,7 +133,7 @@ export default function BasicTable({
                               </Link>
                               <Link
                                 href={`?popup=DELETE_ENTRY&section=${champ}&id=${row?.id}`}
-                                className="flex h-[2rem] w-[2rem] cursor-pointer items-center justify-center duration-200 ease-in-out hover:border hover:border-gray-27 hover:!bg-gray-14"
+                                className="flex h-[2rem] w-[2rem] cursor-pointer items-center justify-center rounded-sm duration-200 ease-in-out hover:border hover:border-gray-27 hover:!bg-gray-14"
                               >
                                 <FaTrash
                                   className="rounded-sm"

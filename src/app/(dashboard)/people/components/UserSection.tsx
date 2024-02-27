@@ -1,6 +1,5 @@
 "use client";
 import React, { memo, useState } from "react";
-import FiledsChamps from "../components/Fileds/Fileds";
 import { FaAddressCard } from "react-icons/fa";
 import ChangesSection from "../components/ChangesSection/ChangesSection";
 import { useSettings } from "@/hooks/Settings/useSettings";
@@ -16,6 +15,7 @@ import useToast from "@/hooks/useToast";
 import { Profile_Type, RowType } from "@/types/database.tables.types";
 import useEmployeeData from "@/hooks/useEmloyeeData";
 import Loader from "@/app/_ui/Loader/Loader";
+import FiledsChamps from "./sections/FiledsChamps";
 
 interface UserSection {
   section: string;

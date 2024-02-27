@@ -37,7 +37,6 @@ function ApplyFormSection({
                     ...FieldsCheck?.[RowField?.name],
                   };
                 }
-                console.log(RowField);
                 const Component =
                   Field[(RowField?.type || "input").toUpperCase()] || Input;
                 return (

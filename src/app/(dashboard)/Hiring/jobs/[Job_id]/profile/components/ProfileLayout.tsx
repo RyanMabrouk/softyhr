@@ -54,24 +54,12 @@ function ProfileLayout({ children }: { children: ReactNode }) {
                   >
                     <div className="flex items-center justify-start gap-[1rem]">
                       <div className="z-10 h-[6rem] w-[6rem] rounded-full border-color-primary-2 ">
-            {     /*
-                        <Image
-                          src={candidates_data?.data?.picture || avatar}
-                          alt="user-name"
-                          priority
-                          width={208}
-                          height={208}
-                          className={
-                            "h-full  w-full cursor-pointer rounded-full border-4 border-white bg-gray-6 object-cover"
-                          }
-                        />*/}
                         <Avatar
                           size={100}
                           icon={
-                            <Image
-                              /*      className={
+                            <Image className={
                                 "h-full  w-full cursor-pointer rounded-full border-4 border-white bg-gray-6 object-cover"
-                              }*/
+                              }
                               alt={
                                 candidates_data[0]?.["First Name"] +
                                   " " +

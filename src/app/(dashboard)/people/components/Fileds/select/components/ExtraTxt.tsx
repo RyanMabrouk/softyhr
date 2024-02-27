@@ -4,8 +4,8 @@ import { RowFieldType } from "@/types/database.tables.types";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { headers } from "next/headers";
-import { GetJobUrl } from "@/helpers/Hiring/GetJobUrl.helper";
 import { UnderlinedLink } from "@/app/_ui/UnderlinedLink";
+import { GetJobUrl } from "@/app/careers/helpers/GetJobUrl.helper";
 
 interface ExtraTxtpropsType {
   RowField: RowFieldType;
@@ -13,9 +13,13 @@ interface ExtraTxtpropsType {
 
 function ExtraTxt({ RowField }: ExtraTxtpropsType) {
     const [careerUrl, setcareerUrl] = useState("");
-    useEffect(()=>{
-        setcareerUrl(String((async () => await GetJobUrl().then())()));
-    },[])
+   useEffect(() => {
+     (async () => {
+       const url = await GetJobUrl();
+       setcareerUrl(url);
+     })();
+   }, []);
+
   return (
     <div className="flex items-center justify-start gap-[1rem]">
       {RowField?.ExtraTxt_org && (

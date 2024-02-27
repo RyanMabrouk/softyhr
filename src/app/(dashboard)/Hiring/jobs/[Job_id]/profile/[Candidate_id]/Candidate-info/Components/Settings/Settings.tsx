@@ -1,10 +1,10 @@
 import { MenuLinksGeneric } from "@/app/_ui/MenuLinksGeneric";
 import React from "react";
 import { VscTriangleDown } from "react-icons/vsc";
-import { IoIosMail, IoMdSettings } from "react-icons/io";
+import { IoMdSettings } from "react-icons/io";
 import { usePathname } from "next/navigation";
 
-function Mail() {
+function Settings() {
   const pathname = usePathname();
   return (
     <MenuLinksGeneric
@@ -15,7 +15,7 @@ function Mail() {
           link: {
             pathname: pathname,
             query: {
-              popup: "CHANGE_DEFAULT_HOURS_PER_DAY",
+              //  popup: "",
             },
           },
         },
@@ -24,7 +24,7 @@ function Mail() {
           link: {
             pathname: pathname,
             query: {
-              popup: "CHANGE_DEFAULT_HOURS_PER_DAY",
+              //  popup: "",
             },
           },
         },
@@ -33,21 +33,21 @@ function Mail() {
           link: {
             pathname: pathname,
             query: {
-              popup: "CHANGE_DEFAULT_HOURS_PER_DAY",
+              //  popup: "",
             },
           },
         },
       ]}
     >
       <div
-        id="timeoff_settings"
-        className="flex cursor-pointer flex-row items-center justify-center gap-1 border border-gray-25 px-2 py-1.5 shadow-sm transition-all ease-linear hover:shadow-md"
+        id="settings"
+        className="flex cursor-pointer items-center justify-center rounded-md border border-gray-15 p-2 px-3 shadow-md duration-200 ease-linear hover:!shadow-xl"
       >
-        <IoIosMail className="h-5 w-5 text-gray-25" />
+        <IoMdSettings className="h-6 w-6 text-gray-25" />
         <VscTriangleDown className="h-3 w-3 text-gray-25" />
       </div>
     </MenuLinksGeneric>
   );
 }
 
-export default Mail;
+export default Settings;

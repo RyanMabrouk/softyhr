@@ -36,7 +36,7 @@ function AdditionnalInputs({
   ];
 
   const SelectLocation = {
-    options: ["London", "USA", "Tunisian", "Canada"],
+    options: ["London, UK", "New York, USA", "Sousse, TN", "Montreal, Canada"],
     name: "Job Location",
     required: true,
     type:"select"

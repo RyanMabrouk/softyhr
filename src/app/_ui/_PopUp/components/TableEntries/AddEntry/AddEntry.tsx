@@ -54,6 +54,7 @@ function AddEntry() {
             <div className="flex h-[4rem] w-full min-w-[30rem] items-center gap-[1rem] border-b border-gray-15 bg-gray-14 p-8">
               <Image
                 alt="profile image"
+                className="h-[3rem] w-[3rem] rounded-full border border-gray-15"
                 src={data?.profile_image || default_avatar}
               />
               <h1>

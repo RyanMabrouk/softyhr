@@ -53,6 +53,7 @@ function EditEntry() {
               <Image
                 alt="profile image"
                 src={data?.profile_image || default_avatar}
+                className="h-[3rem] w-[3rem] rounded-full"
               />
               <h1>
                 {data?.["Basic Information"]?.["First name"] +
@@ -74,7 +75,6 @@ function EditEntry() {
                   const section = data[section_name]?.filter(
                     (item: any) => item?.id == item_id,
                   );
-                  //console.log(data[section_name]?.filter((item:any)=>item?.id == item_id)[0]?.[RowField?.name],RowField?.name);
                   return (
                     <Component
                       defaultValue={section[0]?.[RowField?.name] || ""}

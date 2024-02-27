@@ -12,7 +12,7 @@ import { UpdateSettings } from "@/api/Settings/updateSettings";
 import { RowType, sectionType } from "@/types/database.tables.types";
 import RowFields from "./RowFields";
 import { Section } from "@/constants/userInfoSections";
-import TableChamps from "@/app/(dashboard)/people/components/Fileds/TableChamps";
+import TableChamps from "@/app/(dashboard)/people/components/sections/TableChamps";
 
 interface RowFieldsListPropstype {
   champ: string;

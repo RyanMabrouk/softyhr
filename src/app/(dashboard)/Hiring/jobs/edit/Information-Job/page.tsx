@@ -1,6 +1,5 @@
 "use client";
 import React, { memo, useContext, useEffect, useRef, useState } from "react";
-import FiledsChamps from "@/app/(dashboard)/people/components/Fileds/Fileds";
 import useData from "@/hooks/useData";
 import AdditionnalInputs from "./components/AdditionnalInputs";
 import useHiring from "@/hooks/Hiring/useHiring";
@@ -16,6 +15,7 @@ import { FaArrowLeftLong } from "react-icons/fa6";
 import UnsavedChanges from "@/app/_ui/_PopUp/components/Hiring/UnsavedChanges/UnsavedChanges";
 import Loader from "@/app/_ui/Loader/Loader";
 import { useSettings } from "@/hooks/Settings/useSettings";
+import FiledsChamps from "@/app/(dashboard)/people/components/sections/FiledsChamps";
 
 function Page() {
   const params = useSearchParams();

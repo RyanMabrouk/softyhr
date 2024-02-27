@@ -6,6 +6,7 @@ import ApplicationQuestions from "./Components/ApplicationQuestions";
 import useCandidate from "@/hooks/Hiring/useCandidate";
 import { useParams } from "next/navigation";
 import PdfViewer from "./Components/pdfViewer";
+import Loader from "@/app/_ui/Loader/Loader";
 
 function Page() {
   const params = useParams();
@@ -15,25 +16,34 @@ function Page() {
   } = useCandidate({ id: Candidate_id });
 
   return (
-    <div className="flex h-full w-full flex-col items-center justify-start">
-      <div className="flex w-3/5 flex-col items-start justify-center gap-[2rem]">
-        <TabsPannelGeneric
-          TabsPannel={[
-            {
-              label: "Resume",
-              Component: () => <PdfViewer url={data?.[0]?.metadata?.Resume} />,
-            },
-            {
-              label: "Cover Letter",
-              Component: () => (
-                <PdfViewer url={data?.[0]?.metadata?.["Cover Letter"]} />
-              ),
-            },
-          ]}
-        />
-        <ApplicationQuestions candidate={data[0]} />
-      </div>
-    </div>
+    <>
+      {isPending ? (
+        <Loader />
+      ) : (
+        <div className="flex h-full w-full flex-col items-center justify-start">
+          <div className="flex w-3/5 flex-col items-start justify-center gap-[2rem]">
+          { data?.[0]?.metadata?.["Cover Letter"] && data?.[0]?.metadata?.["Cover Letter"]
+          && <TabsPannelGeneric
+              TabsPannel={[
+                {
+                  label: "Resume",
+                  Component: () => (
+                   data?.[0]?.metadata?.Resume && <PdfViewer url={data?.[0]?.metadata?.Resume} />
+                  ),
+                },
+                {
+                  label: "Cover Letter",
+                  Component: () => (
+                   data?.[0]?.metadata?.["Cover Letter"] && <PdfViewer url={data?.[0]?.metadata?.["Cover Letter"]} />
+                  ),
+                },
+              ]}
+            />}
+            <ApplicationQuestions candidate={data?.[0]} />
+          </div>
+        </div>
+      )}
+    </>
   );
 }
 

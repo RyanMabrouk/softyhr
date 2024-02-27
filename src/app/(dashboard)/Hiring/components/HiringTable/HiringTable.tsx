@@ -23,8 +23,7 @@ import PublishButton from "./components/PublishButton";
 import EditCard from "./components/EditCard";
 import { formatCustomDate, monthsAgo } from "@/helpers/date.helpers";
 import { CiLink } from "react-icons/ci";
-import { GetJobUrl } from "@/helpers/Hiring/GetJobUrl.helper";
-import EditJobOpening from "./EditJobOpening/EditJobOpening";
+import EditJobOpening from "../EditJobOpening/EditJobOpening";
 import useToast from "@/hooks/useToast";
 import CopieJobLink from "./components/CopieJobLink";
 
@@ -191,7 +190,7 @@ export default function HiringTable({
         "cursor-pointer",
         "py-2",
         "!bg-gray-17",
-        "hover:!bg-gray-14",
+        "hover:!bg-gray-18",
         "text-gray-11",
         "border-b",
         "border-divider",

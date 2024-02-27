@@ -15,7 +15,7 @@ function Settings() {
           link: {
             pathname: pathname,
             query: {
-              popup: "",
+              //  popup: "",
             },
           },
         },
@@ -24,7 +24,7 @@ function Settings() {
           link: {
             pathname: pathname,
             query: {
-              popup: "",
+              //  popup: "",
             },
           },
         },
@@ -33,7 +33,7 @@ function Settings() {
           link: {
             pathname: pathname,
             query: {
-              popup: "",
+              //  popup: "",
             },
           },
         },
@@ -41,7 +41,7 @@ function Settings() {
     >
       <div
         id="settings"
-        className="flex cursor-pointer items-center justify-center rounded-md border border-gray-15 p-2 px-3 shadow-md duration-200 ease-linear hover:!shadow-xl"
+        className="flex cursor-pointer flex-row items-center justify-center gap-1 border border-gray-25 px-2 py-1.5 shadow-sm transition-all ease-linear hover:shadow-md"
       >
         <IoMdSettings className="h-6 w-6 text-gray-25" />
         <VscTriangleDown className="h-3 w-3 text-gray-25" />
