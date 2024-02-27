@@ -41,13 +41,13 @@ export function CalendarRange({
   DataType = "date",
   numberOfMonths,
 }: CalendarProps) {
-    console.log(
-      "calendar_range",
-      endDateName,
-      startDateName,
-      label,
-      defaultValue,
-    );
+  console.log(
+    "calendar_range",
+    endDateName,
+    startDateName,
+    label,
+    defaultValue,
+  );
   const [date, setDate] = useState<DateRange | undefined>(defaultValue);
   if (defaultValue && !date?.from && !date?.to) setDate(defaultValue);
   return (
@@ -56,15 +56,14 @@ export function CalendarRange({
         htmlFor="date_range"
         className={
           "text-[14px] text-gray-29 " +
-          (required
-            ? " after:text-color-primary-8 after:content-['*']"
-            : "")
+          (required ? " after:text-color-primary-8 after:content-['*']" : "")
         }
       >
         {label}
       </label>
       <div
-        className={cn(`focus-within:shadow-green border-gray-18" } group grid w-fit  
+        className={cn(
+          `focus-within:shadow-green border-gray-18" } group grid w-fit  
          gap-2 rounded-sm
           border`,
           className,
@@ -126,6 +125,7 @@ export function CalendarRange({
               defaultMonth={date?.from ?? defaultValue?.from ?? new Date()}
               selected={date}
               onSelect={setDate}
+              captionLayout="dropdown-buttons"
               {...(numberOfMonths != null ? { numberOfMonths: 2 } : {})}
             />
           </PopoverContent>

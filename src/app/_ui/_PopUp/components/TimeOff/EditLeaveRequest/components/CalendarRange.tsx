@@ -43,7 +43,6 @@ export function CalendarRange({
   required,
   setAction,
   DataType = "date",
-  numberOfMonths,
 }: CalendarProps) {
   const [date, setDate] = useState<DateRange | undefined>(defaultValue);
   // Sync the default value with the date
