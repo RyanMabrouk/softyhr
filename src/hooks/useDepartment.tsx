@@ -33,8 +33,8 @@ export default function useDepartment({
 
   return {
     Department: {
-      data: Department?.data,
-      error: Department?.error,
+      data: Department?.data || null,
+      error: Department?.error || null,
       isPending: isPending,
     },
   };

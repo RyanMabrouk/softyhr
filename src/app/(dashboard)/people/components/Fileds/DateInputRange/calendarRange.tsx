@@ -1,5 +1,4 @@
 "use client";
-import { CalendarIcon } from "@radix-ui/react-icons";
 import { format } from "date-fns";
 import React from "react";
 import { DateRange } from "react-day-picker";
@@ -13,6 +12,7 @@ import {
 } from "@/components/ui/popover";
 import { useState } from "react";
 import { InvalidDate, formatYYYYMMDD } from "@/helpers/date.helpers";
+import { CalendarIcon } from "lucide-react";
 interface CalendarProps {
   endDateName: string;
   startDateName: string;
@@ -64,9 +64,8 @@ export function CalendarRange({
         {label}
       </label>
       <div
-        className={cn(
-          `focus-within:shadow-green border-gray-18" } group grid w-fit  
-                gap-2 rounded-sm
+        className={cn(`focus-within:shadow-green border-gray-18" } group grid w-fit  
+         gap-2 rounded-sm
           border`,
           className,
         )}

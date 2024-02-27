@@ -119,7 +119,7 @@ export function CalendarRange({
                       {format(date?.to, "LLL dd, y")}
                     </>
                   ) : (
-                    format(date.from, "LLL dd, y")  
+                    format(date.from, "LLL dd, y")
                   )
                 ) : (
                   <span>Pick a date</span>

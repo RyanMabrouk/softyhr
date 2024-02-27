@@ -104,11 +104,13 @@ export default function ChangeUserAcessLevel() {
             className="!w-[17.5rem]"
             defaultValue={{
               label: capitalizeFirstLetter(user_role_name ?? ""),
+              //@ts-ignore
               value: Number(user_role_id),
             }}
             required={true}
             group={true}
             inputLabel="-Select role-"
+            //@ts-ignore
             options={options}
           />
         </div>
