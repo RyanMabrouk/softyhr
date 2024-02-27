@@ -88,40 +88,41 @@ function AppliymentForm({
             className="flex flex-col items-start justify-center gap-[1rem]"
             action={SubmitForm}
           >
-            {data[0]?.Form?.map((FieldsArray: any, index: number) => {
-              return (
-                <div
-                  className="mt-4 flex w-full flex-col place-items-start justify-center gap-[2rem]"
-                  key={index}
-                >
-                  <div className="flex flex-col items-start justify-center gap-[1rem]">
-                    <ApplyFormSection
-                      key={uuidv4()}
-                      FieldsCheck={job?.Application_Details}
-                      FieldsArray={FieldsArray}
-                    />
+            <div className=" w-full border-b border-gray-18 pb-8">
+              {data[0]?.Form?.map((FieldsArray: any, index: number) => {
+                return (
+                  <div
+                    className="mt-4 flex w-full flex-col place-items-start justify-center gap-[2rem]"
+                    key={index}
+                  >
+                    <div className="flex flex-col items-start justify-center gap-[1rem]">
+                      <ApplyFormSection
+                        key={uuidv4()}
+                        FieldsCheck={job?.Application_Details}
+                        FieldsArray={FieldsArray}
+                      />
+                    </div>
                   </div>
-                </div>
-              );
-            })}
-            {data[0]?.Questions?.map((FieldsArray: any, index: number) => {
-              return (
-                <div
-                  className="gap-[2rem mt-4 flex w-full flex-col place-items-start justify-center "
-                  key={index}
-                >
-                  <div className="flex flex-col items-start justify-center gap-[1rem]">
-                    <ApplyFormSection
-                      key={uuidv4()}
-                      FieldsCheck={job?.Application_Details}
-                      FieldsArray={FieldsArray}
-                    />
+                );
+              })}
+              {data[0]?.Questions?.map((FieldsArray: any, index: number) => {
+                return (
+                  <div
+                    className="gap-[2rem mt-4 flex w-full flex-col place-items-start justify-center "
+                    key={index}
+                  >
+                    <div className="flex flex-col items-start justify-center gap-[1rem]">
+                      <ApplyFormSection
+                        key={uuidv4()}
+                        FieldsCheck={job?.Application_Details}
+                        FieldsArray={FieldsArray}
+                      />
+                    </div>
                   </div>
-                </div>
-              );
-            })}
-            <div className="border-gray-18 pb-8 w-full" />
-            <div className="-mt-4 flex border items-center justify-center gap-[2rem]">
+                );
+              })}
+            </div>
+            <div className="-mt-4 flex items-center justify-center gap-[2rem]">
               <SubmitButton
                 textSubmitting={SubmittingButtonText}
                 text={ButtonText}

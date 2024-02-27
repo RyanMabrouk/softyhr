@@ -30,7 +30,7 @@ function ApplicationQuestions({ candidate }: ApplicationQuestionsPropsType) {
           })}
         </div>
       ) : (
-        <div className="flex min-h-full w-full items-center justify-center rounded-md bg-gray-14 pt-4">
+        <div className="flex min-h-full w-full items-center justify-center rounded-md bg-gray-14 py-8 pt-4">
           <Empty description="No Questions Available." />
         </div>
       )}

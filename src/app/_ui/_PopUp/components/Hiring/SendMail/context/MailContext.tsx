@@ -2,14 +2,14 @@ import React, { ReactNode, createContext, useState } from 'react'
 
 export const MailContext = createContext({});
 
-export interface Mail {
+export interface MailType {
   email_object: string | null;
   email_html: string | null;
 }
 
  export type MailContextType = Partial<{
-   Mail: Mail | null;
-   setMail: React.Dispatch<React.SetStateAction<Mail>>;
+   Mail: MailType | null;
+   setMail: React.Dispatch<React.SetStateAction<MailType>>;
  }>;
  
  interface MailProviderPropsType {
@@ -17,7 +17,7 @@ export interface Mail {
  }
 
 function MailProvider({children}:MailProviderPropsType) {
-    const [Mail, setMail] = useState<Mail>();
+    const [Mail, setMail] = useState<MailType>();
 
   return (
     <MailContext.Provider value={{Mail, setMail}}>{children}</MailContext.Provider>

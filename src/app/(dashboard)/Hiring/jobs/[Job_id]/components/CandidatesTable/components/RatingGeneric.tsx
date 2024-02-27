@@ -4,6 +4,7 @@ import React, { ChangeEvent, SyntheticEvent, useState } from "react";
 import useToast from "@/hooks/useToast";
 import updateData from "@/api/updateData";
 import { useQueryClient } from "@tanstack/react-query";
+import { useParams, useRouter } from "next/navigation";
 
 interface RatingGenericPropsType {
   DefaultValue: number;
@@ -22,13 +23,13 @@ function RatingGeneric({
 }: RatingGenericPropsType) {
   const { toast } = useToast();
   const queryClient = useQueryClient();
-  const [value, setValue] = useState<number>(DefaultValue);
+  const [value, setValue] = useState<number | null>(DefaultValue);
   return (
     <Rating
       name="simple-controlled"
       precision={0.5}
       size={size || "medium"}
-      value={value}
+      value={DefaultValue}
       sx={sx}
       onChange={async (
         event: SyntheticEvent<Element, Event>,
@@ -39,8 +40,8 @@ function RatingGeneric({
           { Ratings: newValue },
           { id },
         );
-        if (response?.error) toast.error("something went wrong !");
-        else setValue(newValue || DefaultValue);
+        /*if (response?.error) toast.error("something went wrong !");
+        else setValue(newValue);*/
         queryClient.invalidateQueries({ queryKey: ["Candidates"] });
       }}
     />

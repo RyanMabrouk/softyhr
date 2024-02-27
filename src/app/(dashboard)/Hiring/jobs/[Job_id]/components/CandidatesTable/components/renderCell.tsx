@@ -1,7 +1,6 @@
-import { DaysAgo, formatCustomDate } from "@/helpers/date.helpers";
+import { formatCustomDate } from "@/helpers/date.helpers";
 import RatingGeneric from "./RatingGeneric";
 import HireStatus from "./HireStatus";
-import Hiring from "@/app/(dashboard)/Settings/(settings)/SettingsHiring/page";
 import {
   Button,
   Dropdown,
@@ -12,7 +11,6 @@ import {
 import { PiDotsThreeOutlineVerticalFill } from "react-icons/pi";
 import { BiCommentAdd } from "react-icons/bi";
 import Link from "next/link";
-import { FaEdit } from "react-icons/fa";
 import { TableCandidateType } from "./config";
 import { Hiring_type } from "@/types/database.tables.types";
 import { MdDelete } from "react-icons/md";
@@ -24,12 +22,7 @@ export const renderCell = (
 ) => {
   const cellValue = user[columnKey as keyof TableCandidateType];
   switch (columnKey) {
-    case "id":
-      return (
-        <h1 className="cursor-pointer text-color5-500 hover:text-color-primary-8 hover:underline">
-          {user?.id}
-        </h1>
-      );
+
     case "Candidate Info":
       return (
         <div className="flex flex-col items-start justify-center gap-2">

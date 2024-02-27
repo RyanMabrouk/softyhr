@@ -29,7 +29,10 @@ function Component() {
   const {
     profiles: { data: user_data, error },
   } = useUserProfile();
+
   const { Mail } = useContext<MailContextType>(MailContext);
+    console.log(Mail);
+
   const queryClient = useQueryClient();
   const SendMailHandler = async () => {
     const response = await sendMail(
@@ -37,6 +40,11 @@ function Component() {
       Mail?.email_object,
       Mail?.email_html,
     );
+    if (response?.Status == "failed"){
+      toast.error(response?.message || "Something Went Wrong");
+      Router.push(pathname);
+      return;
+      }
     const { error } = await postData("candidate_emails", [
       {
         email: data?.Email,

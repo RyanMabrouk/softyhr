@@ -6,6 +6,7 @@ import Input from "../../Input/Input";
 import {
   MailContext,
   MailContextType,
+  MailType,
 } from "@/app/_ui/_PopUp/components/Hiring/SendMail/context/MailContext";
 
 function EmailForm() {
@@ -18,9 +19,11 @@ function EmailForm() {
           editor.topLevelBlocks,
         );
         setMail &&
-          setMail({
-            email_object: Mail?.email_object || "",
-            email_html: String(html) || "",
+          setMail((old: MailType) => {
+            return {
+              email_object: old?.email_object || "",
+              email_html: String(html) || "",
+            };
           });
       };
       saveBlocksAsHTML();
@@ -29,10 +32,13 @@ function EmailForm() {
   const handleSetSelectedKeys: React.Dispatch<React.SetStateAction<string>> = (
     value,
   ) => {
+    console.log(value, "handleSetSelectedKeys");
     setMail &&
-      setMail({
-        email_html: Mail?.email_html || "",
-        email_object: String(value) || "",
+      setMail((old: MailType) => {
+        return {
+          email_html: old?.email_html || "",
+          email_object: String(value) || "",
+        };
       });
   };
   return (

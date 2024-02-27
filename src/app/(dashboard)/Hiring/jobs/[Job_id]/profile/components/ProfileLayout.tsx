@@ -16,7 +16,7 @@ import CandidatesInfos from "./CandidatesInfos";
 import Loader from "@/app/_ui/Loader/Loader";
 import { Avatar } from "antd";
 
-function ProfileLayout({ children }: { children: ReactNode }) {
+function  ProfileLayout({ children }: { children: ReactNode }) {
   const params = useParams();
   const { Candidate_id, Job_id } = params;
   const {

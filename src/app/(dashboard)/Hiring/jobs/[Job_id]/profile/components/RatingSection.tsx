@@ -28,7 +28,7 @@ function RatingSection() {
             sx={{
               fontSize: "3rem",
             }}
-            DefaultValue={4}
+            DefaultValue={candidates_data?.[0]?.Ratings}
             id={String(Candidate_id)}
             tableName="candidates"
           />
