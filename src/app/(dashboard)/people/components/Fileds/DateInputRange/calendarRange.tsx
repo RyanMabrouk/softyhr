@@ -29,6 +29,7 @@ interface CalendarProps {
     | undefined;
   DataType?: string | undefined;
   numberOfMonths?: number | null;
+  error?: string;
 }
 export function CalendarRange({
   className,
@@ -40,14 +41,8 @@ export function CalendarRange({
   setAction,
   DataType = "date",
   numberOfMonths,
+  error,
 }: CalendarProps) {
-  console.log(
-    "calendar_range",
-    endDateName,
-    startDateName,
-    label,
-    defaultValue,
-  );
   const [date, setDate] = useState<DateRange | undefined>(defaultValue);
   if (defaultValue && !date?.from && !date?.to) setDate(defaultValue);
   return (
@@ -92,12 +87,12 @@ export function CalendarRange({
             <Button
               variant={"outline"}
               className={cn(
-                "w-[15rem] justify-start border border-transparent text-center !text-[0.95rem] !font-normal !text-gray-13 ",
+                "w-[15rem] justify-start border border-transparent text-center !text-[0.95rem] !font-normal text-gray-13 ",
                 !date && "text-muted-foreground",
               )}
             >
               <FaCalendarDays
-                className={`-ml-1 mr-2 h-5 w-5 group-focus-within:text-fabric-700 `}
+                className={`-ml-1 mr-2 h-[1.15rem] w-[1.15rem] !text-fabric-700 ${error ? "!text-color9-500" : "group-focus-within:text-fabric-700"}`}
               />
               <div className="">
                 {date?.from && !InvalidDate(date?.from) ? (
