@@ -30,7 +30,7 @@ interface CalendarProps {
     | React.Dispatch<React.SetStateAction<Date | null>>
     | undefined;
   DataType?: string | undefined;
-  numberOfMonths?:number | null;
+  numberOfMonths?: number | null;
 }
 export function CalendarRange({
   className,
@@ -43,7 +43,7 @@ export function CalendarRange({
   required,
   setAction,
   DataType = "date",
-  numberOfMonths ,
+  numberOfMonths,
 }: CalendarProps) {
   const [date, setDate] = useState<DateRange | undefined>(defaultValue);
   // Sync the default value with the date
@@ -104,7 +104,7 @@ export function CalendarRange({
               id="date"
               variant={"outline"}
               className={cn(
-                "h-9 w-60 justify-start border border-transparent text-center font-normal  text-[0.95rem] text-gray-13 ",
+                "h-9 w-60 justify-start border border-transparent text-center text-[0.95rem]  font-normal text-gray-13 ",
                 !date && "text-muted-foreground",
               )}
             >

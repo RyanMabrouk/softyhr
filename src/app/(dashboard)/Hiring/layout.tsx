@@ -16,7 +16,6 @@ interface LayoutHiringProps {
 
 export default function HiringLayout({ children }: LayoutHiringProps) {
   const ActiveRoute = usePathname();
-  // console.log(ActiveRoute.split("/").length - 1);
   if (ActiveRoute.split("/").length - 1 > 2) return children;
   return (
     <div className="flex w-screen flex-col items-center justify-center bg-gray-14">

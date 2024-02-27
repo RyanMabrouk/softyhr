@@ -29,13 +29,10 @@ function AppliymentForm({
   const { toastContainer, toast } = useToast();
   const {
     Hiring: { data, isPending },
-  } = useHiringGuest(
-    { id: job?.id, "Job Status": "Open" }
-  );
+  } = useHiringGuest({ id: job?.id, "Job Status": "Open" });
   const QueryClient = useQueryClient();
   const router = useRouter();
   const pathname = usePathname();
-  console.log(data);
   const Base_url =
     "https://ybwqmrrlvmpdikvmkqra.supabase.co/storage/v1/object/public/hiring/";
   const SubmitForm = async (formdata: FormData) => {
@@ -90,42 +87,38 @@ function AppliymentForm({
             className="flex flex-col items-start justify-center gap-[1rem]"
             action={SubmitForm}
           >
-            {data[0]?.Form?.map(
-              (FieldsArray: any, index: number) => {
-                return (
-                  <div
-                    className="mt-4 flex w-full flex-col place-items-start justify-center gap-[2rem] border-b border-gray-18 pb-8"
-                    key={index}
-                  >
-                    <div className="flex flex-col items-start justify-center gap-[1rem]">
-                      <ApplyFormSection
-                        key={uuidv4()}
-                        FieldsCheck={job?.Application_Details}
-                        FieldsArray={FieldsArray}
-                      />
-                    </div>
+            {data[0]?.Form?.map((FieldsArray: any, index: number) => {
+              return (
+                <div
+                  className="mt-4 flex w-full flex-col place-items-start justify-center gap-[2rem] border-b border-gray-18 pb-8"
+                  key={index}
+                >
+                  <div className="flex flex-col items-start justify-center gap-[1rem]">
+                    <ApplyFormSection
+                      key={uuidv4()}
+                      FieldsCheck={job?.Application_Details}
+                      FieldsArray={FieldsArray}
+                    />
                   </div>
-                );
-              },
-            )}
-            {data[0]?.Questions?.map(
-              (FieldsArray: any, index: number) => {
-                return (
-                  <div
-                    className="mt-4 flex w-full flex-col place-items-start justify-center gap-[2rem] border-b border-gray-18 pb-8"
-                    key={index}
-                  >
-                    <div className="flex flex-col items-start justify-center gap-[1rem]">
-                      <ApplyFormSection
-                        key={uuidv4()}
-                        FieldsCheck={job?.Application_Details}
-                        FieldsArray={FieldsArray}
-                      />
-                    </div>
+                </div>
+              );
+            })}
+            {data[0]?.Questions?.map((FieldsArray: any, index: number) => {
+              return (
+                <div
+                  className="mt-4 flex w-full flex-col place-items-start justify-center gap-[2rem] border-b border-gray-18 pb-8"
+                  key={index}
+                >
+                  <div className="flex flex-col items-start justify-center gap-[1rem]">
+                    <ApplyFormSection
+                      key={uuidv4()}
+                      FieldsCheck={job?.Application_Details}
+                      FieldsArray={FieldsArray}
+                    />
                   </div>
-                );
-              },
-            )}
+                </div>
+              );
+            })}
             <div className="-mt-4 flex items-center justify-center gap-[2rem]">
               <SubmitButton
                 textSubmitting={SubmittingButtonText}

@@ -58,7 +58,6 @@ function Form() {
     else toast.error(response?.Message);
     setTouched(false);
   };
-console.log(candidate_data?.[0]);
   return (
     <>
       {isPending || candidate_isPending ? (
@@ -89,7 +88,7 @@ console.log(candidate_data?.[0]);
                         // user={user?.data}
                         setTouched={setTouched}
                         key={rang || uuidv4()}
-                        user={{[champ]:candidate_data?.[0]}}
+                        user={{ [champ]: candidate_data?.[0] }}
                         FieldsArray={Fields?.sort(
                           (a: any, b: any) => a?.rang - b?.rang,
                         )}

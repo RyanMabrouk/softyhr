@@ -58,7 +58,6 @@ const LayoutComponent = memo(function LayoutComponent({
     "Application-Details": ApplicationDetails,
     "Job-Boards": JobBoards,
   };
-  console.log(data);
   //------create_new_job------------
   async function CreateNewJob() {
     if (ApplicationDetails?.done && InformationJob?.done) {

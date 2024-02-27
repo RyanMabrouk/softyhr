@@ -10,7 +10,6 @@ interface DateInputPropsType {
   data?: any;
 }
 function DateInputRange({ RowField, setTouched, data }: DateInputPropsType) {
-  console.log(data, RowField);
   return (
     <div className="flex items-end justify-start gap-[1rem]">
       <CalendarRange

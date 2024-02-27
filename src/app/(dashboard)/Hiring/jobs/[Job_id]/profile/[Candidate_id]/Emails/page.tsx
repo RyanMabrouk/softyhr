@@ -24,8 +24,8 @@ function Page() {
     '*,candidate_emails(created_at,email_object,profiles("Basic Information",picture),candidates("First Name","Last Name")),user_emails(created_at,email_object,candidate_sender,profiles("Basic Information",picture),candidates("First Name","Last Name"))',
     
     );
-    console.log(data);
-  return (
+
+    return (
     <div className="flex h-full w-full items-start justify-center">
       <div className="flex w-8/12 flex-col items-start justify-start py-4">
         {isPending ? (

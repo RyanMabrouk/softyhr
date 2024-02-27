@@ -94,7 +94,6 @@ export function Form() {
         const valid =
           validateForm(formData) &&
           validatePassword(formData.get("password") as string);
-        console.log("🚀 ~ action={ ~ valid:", valid);
         if (valid) {
           const { error } = await signup(formData);
           if (error) toast.error(error.message, error.type);

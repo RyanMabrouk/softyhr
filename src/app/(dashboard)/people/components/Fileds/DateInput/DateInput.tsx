@@ -12,6 +12,7 @@ import {
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
+
 interface DateInputPropsType {
   RowField: RowFieldType;
   setTouched?: React.Dispatch<React.SetStateAction<boolean>> | undefined;
@@ -24,7 +25,7 @@ function DateInput({
   defaultValue = "",
   setSelectedKeys,
 }: DateInputPropsType) {
-    const [date, setDate] = React.useState<Date>();
+  const [date, setDate] = React.useState<Date>();
   return (
     <div className="flex items-end justify-start gap-[1rem]">
       <CalendarGeneric
@@ -40,7 +41,6 @@ function DateInput({
           {`${RowField?.ExtraTxt} ${RowField?.name == "Birth Date" && ": " + calculateYearDiff(defaultValue)}`}
         </h1>
       )}
-     
     </div>
   );
 }

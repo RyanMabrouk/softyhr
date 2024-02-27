@@ -27,6 +27,7 @@ function Component() {
   const {
     profiles: { data: user_data, error },
   } = useUserProfile();
+
   const { Mail } = useContext<MailContextType>(MailContext);
   const queryClient = useQueryClient();
   const SendMailHandler = async () => {

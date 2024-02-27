@@ -10,18 +10,7 @@ export function NewCandidates(array: any) {
       new Date(candidate?.created_at).getDate() >
         new Date(current_date).getDate() - 3
     ) {
-      console.log(
-        new Date(candidate?.created_at).getMonth(),
-        new Date(current_date).getMonth(),
-      );
-      console.log(
-        new Date(candidate?.created_at).getFullYear(),
-        new Date(current_date).getFullYear(),
-      );
-      console.log(
-        new Date(candidate?.created_at).getDate(),
-        new Date(current_date).getDate(),
-      );
+     
       return candidate;
     }
   });

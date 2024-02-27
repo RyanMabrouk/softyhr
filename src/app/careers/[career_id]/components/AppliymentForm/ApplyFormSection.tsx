@@ -36,7 +36,6 @@ function ApplyFormSection({
                     ...FieldsCheck?.[RowField?.name],
                   };
                 }
-                console.log(RowField);
                 const Component = Field[RowField?.type.toUpperCase()] || Input;
                 return (
                   <Component
@@ -56,4 +55,4 @@ function ApplyFormSection({
     </>
   );
 }
-export default memo(ApplyFormSection)
+export default memo(ApplyFormSection);

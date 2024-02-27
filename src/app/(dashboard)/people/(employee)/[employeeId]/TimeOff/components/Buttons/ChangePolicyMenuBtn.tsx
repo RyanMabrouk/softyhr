@@ -37,7 +37,7 @@ export function ChangePolicyMenuBtn({ id }: { id: number }) {
       >
         <div className="flex h-full w-full flex-row-reverse items-center justify-center gap-1">
           <span className="peer cursor-pointer text-sm hover:text-fabric-700">
-            chnage policy
+            change policy
           </span>
           <IoMdSettings className="order-0 h-4 w-4 peer-hover:text-fabric-700" />
         </div>
