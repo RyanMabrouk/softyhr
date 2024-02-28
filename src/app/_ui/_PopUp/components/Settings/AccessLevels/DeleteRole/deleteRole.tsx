@@ -38,7 +38,7 @@ export default function DeleteRole() {
         toast.error(error.message, error.type);
         throw error;
       } else {
-        toast.success("Employees added to policy successfully", "Success");
+        toast.success("Role deleted successfully", "Success");
       }
     },
     onSuccess: () => {
