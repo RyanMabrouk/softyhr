@@ -28,7 +28,7 @@ export async function createProfile({
   Department?: string;
   Location?: string;
   custom_fields?: {
-    Job: { [key: string]: string | number };
+    Hiring: { [key: string]: string | number };
     "Basic Information": { [key: string]: string | number };
     Contact: { [key: string]: string | number };
     "Job Information": { [key: string]: string | number }[];
@@ -55,12 +55,9 @@ export async function createProfile({
       org_name: company,
       supervisor_id: supervisor_id,
       accrual_start_date: new Date(),
-      Job: {
-        ...custom_fields?.["Job"],
-        "Hire Date":
-          custom_fields?.["Job"]?.["Hire Date"] === ""
-            ? new Date()
-            : custom_fields?.["Job"]?.["Hire Date"],
+      Hiring: {
+        ...custom_fields?.["Hiring"],
+        "Hire Date": new Date(),
       },
       "Basic Information": {
         ...custom_fields?.["Basic Information"],
@@ -74,7 +71,7 @@ export async function createProfile({
       },
       "Job Information": [
         {
-          ...custom_fields?.["Job Information"][0],
+          ...custom_fields?.["Job Information"],
           Location: Location,
           Division: Division,
           Department: Department,
