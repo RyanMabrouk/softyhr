@@ -11,7 +11,7 @@ export default async function addEmployeeToRole({
   const logger = getLogger("settings");
   logger.info("addEmployeeToRole");
   const { error } = await updateData(
-    "permissions",
+    "users_permissions",
     {
       role_id: role_id,
     },

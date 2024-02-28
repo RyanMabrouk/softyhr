@@ -72,7 +72,7 @@ export async function createProfile({
       error,
     };
   else {
-    const { error: permissions_error } = await postData("permissions", {
+    const { error: permissions_error } = await postData("users_permissions", {
       user_id: user_id,
       role_id: role_id,
       org_name: company,
