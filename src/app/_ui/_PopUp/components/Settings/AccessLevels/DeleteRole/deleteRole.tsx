@@ -50,7 +50,7 @@ export default function DeleteRole() {
   const isPending = isPending1 || isPending2 || isPending3;
   return (
     <PopUpSkeleton
-      className="flex max-w-[35rem] flex-col items-center gap-4 px-8 py-4"
+      className="flex w-[35rem] flex-col items-center gap-4 px-4 py-4"
       title="Delete Access Level"
     >
       <IoWarning className="h-16 w-16 text-color9-500 " />
