@@ -12,6 +12,8 @@ import { sameDay } from "@/helpers/date.helpers";
 import { SettingsBtn } from "./components/SettingsBtn";
 import { EmployyeSettingsBtn } from "./components/EmployyeSettingsBtn";
 import { EmployeeProfileLink } from "./components/EmployeeProfileLink";
+import getData from "@/api/getData";
+import { useQueryClient } from "@tanstack/react-query";
 export default function Page() {
   const { role_id } = useParams();
   const pathname = usePathname();
@@ -31,6 +33,16 @@ export default function Page() {
   const role_users_data = profiles?.filter((p) =>
     role_users?.includes(p.user_id),
   );
+  // prefecth role data
+  const queryClient = useQueryClient();
+  queryClient.prefetchQuery({
+    queryKey: ["roles", role_id],
+    queryFn: () =>
+      getData("roles", {
+        org: true,
+        match: { id: role_id },
+      }),
+  });
   return (
     <div className="flex h-full min-w-full flex-col gap-4 px-6 py-4">
       <div className="flex flex-col gap-2">
