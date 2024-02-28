@@ -27,7 +27,7 @@ export async function createProfile({
   Division?: string;
   Department?: string;
   Location?: string;
-  custom_fields?: { [key: string]: { [key: string]: string | number }[] }[];
+  custom_fields?: { [key: string]: { [key: string]: string | number } }[];
 }) {
   if (!role_id) throw new Error("role_id is not defined");
   const { error } = await postData("profiles", [
@@ -41,18 +41,23 @@ export async function createProfile({
       },
       "Basic Information": {
         ...custom_fields?.find((e) =>
-          Object.keys(e).includes("Job Information"),
-        ),
+          Object.keys(e).includes("Basic Information"),
+        )?.["Basic Information"],
         "Last name": last_name,
         "First name": first_name,
       },
       Contact: {
-        ...custom_fields?.find((e) => Object.keys(e).includes("Contact")),
+        ...custom_fields?.find((e) => Object.keys(e).includes("Contact"))?.[
+          "Contact"
+        ],
         "Mobile Phone": tel,
         "Work Email": email,
       },
       "Job Information": [
         {
+          ...custom_fields?.find((e) =>
+            Object.keys(e).includes("Job Information"),
+          )?.["Job Information"],
           Location: Location,
           Division: Division,
           Department: Department,
