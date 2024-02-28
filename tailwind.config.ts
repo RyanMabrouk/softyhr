@@ -251,6 +251,7 @@ const config: Config = {
         "gray-39": "#aaa",
         "gray-40": "#F9F9F9",
         "gray-41": "#cbcbcb",
+        "gray-42": "#DCDCDC",
 
         "color-teal-2": "#284D59",
 
