@@ -42,7 +42,7 @@ export default function DeleteRole() {
       }
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["permissions"] });
+      queryClient.invalidateQueries({ queryKey: ["users_permissions"] });
       queryClient.invalidateQueries({ queryKey: ["roles"] });
       Router.push(pathname);
     },

@@ -69,7 +69,7 @@ export default function AddEmployeesToRole() {
       }
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["permissions"] });
+      queryClient.invalidateQueries({ queryKey: ["users_permissions"] });
       Router.push(pathname);
     },
   });
