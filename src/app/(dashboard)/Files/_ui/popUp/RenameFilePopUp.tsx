@@ -7,6 +7,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { renameFile } from "@/actions/files/renameFile";
 import PopUpSkeleton from "@/app/_ui/_PopUp/PopUpSkeleton";
+import { InputGeneric } from "@/app/_ui/InputGeneric";
 
 export default function RenameFilePopUp() {
   const { toast } = useToast();
@@ -19,7 +20,6 @@ export default function RenameFilePopUp() {
   const [isTyping, setIsTyping] = useState("");
   const id = searchParams.get("fileId");
   const name = searchParams.get("fileName");
-  console.log("🚀 ~ RenameFilePopUp ~ name:", name);
 
   /////
   const { mutateAsync: renameFileApi } = useMutation({
@@ -50,16 +50,17 @@ export default function RenameFilePopUp() {
       >
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="flex w-full flex-col gap-4 px-2 pt-3"
+          className="flex w-full flex-col gap-2 px-2 pt-3"
         >
-          <label htmlFor="input">Enter a new name for this file</label>
-          <input
+          <InputGeneric
+            label="Enter a new name for this file"
+            name="input"
             type="text"
             value={isTyping}
             placeholder={name ?? ""}
-            defaultValue={String(name) ?? ""}
-            onChange={(e) => setIsTyping(e.target.value)}
-            className=" focus:shadow-green w-80 rounded-sm border border-stone-400 px-2 py-1 shadow-sm outline-1 transition-shadow duration-300 focus:outline-none  "
+            defaultValue={name ?? ""}
+            setValueInParent={setIsTyping}
+            className=" !h-9 !min-w-[17.5rem]"
           />
 
           <hr className="mt-4 h-[3px] w-full bg-primary-gradient" />

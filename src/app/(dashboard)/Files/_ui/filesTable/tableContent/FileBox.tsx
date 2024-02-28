@@ -73,14 +73,17 @@ export default function FileBox({ file, pushFileId, removeFileId }: any) {
       const { file_url, name, org_name, size, file_type, folderId } = file;
       const session = await getSession();
       const user_id = session?.user?.id;
-
+      // index of the last dot
+      const index = name.lastIndexOf(".");
       const payload = {
         file_url,
         addedBy: user_id,
         name:
-          name.substring(0, name.lastIndexOf(".")) +
-          " - Copy" +
-          name.substring(name.lastIndexOf("."), name.length),
+          index !== -1
+            ? name.substring(0, index) +
+              " - Copy" +
+              name.substring(index, name.length)
+            : name + " - Copy",
         org_name,
         size,
         file_type,
