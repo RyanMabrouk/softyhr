@@ -152,14 +152,14 @@ export function monthsAgo(inputDate: string) {
     currentDate.getMonth() -
     date.getMonth();
 
-  if (monthsDifference === 0) { 
-    return "This month"; 
-  } else if (monthsDifference === 1) { 
-    return "1 month ago"; 
-  } else if (monthsDifference > 1) { 
-    return `${monthsDifference} months ago`; 
-  } else { 
-    return "Invalid date"; 
+  if (monthsDifference === 0) {
+    return "This month";
+  } else if (monthsDifference === 1) {
+    return "1 month ago";
+  } else if (monthsDifference > 1) {
+    return `${monthsDifference} months ago`;
+  } else {
+    return "Invalid date";
   }
 }
 export function DaysAgo(inputDate: string) {
@@ -186,7 +186,7 @@ export function DaysAgo(inputDate: string) {
     return "yesterday";
   } else if (differenceInDays >= 2 && differenceInDays <= 7) {
     return `${differenceInDays} days ago`;
-  } else { 
+  } else {
     // If it's more than 7 days ago, return the actual date
     const options: any = { year: "numeric", month: "numeric", day: "numeric" };
     return date.toLocaleDateString(undefined, options);
@@ -215,18 +215,19 @@ export function getSunday(date: Date) {
 }
 
 //calculate the years difference between date and current date
-export function calculateYearDiff(dateString:string) {
-    var birthday = new Date(dateString);
-    var today = new Date();
+export function calculateYearDiff(dateString: string) {
+  var birthday = new Date(dateString);
+  var today = new Date();
 
-    var age = today.getFullYear() - birthday.getFullYear();
-    var monthDiff = today.getMonth() - birthday.getMonth();
-    
-    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthday.getDate())) {
-        age--;
-    }
-    
-    return age;
+  var age = today.getFullYear() - birthday.getFullYear();
+  var monthDiff = today.getMonth() - birthday.getMonth();
+
+  if (
+    monthDiff < 0 ||
+    (monthDiff === 0 && today.getDate() < birthday.getDate())
+  ) {
+    age--;
+  }
+
+  return age;
 }
-
-

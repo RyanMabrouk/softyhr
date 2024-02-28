@@ -6,7 +6,7 @@ export type database_notifications_type =
 // Permesssions
 
 export type database_permissions_type =
-  Database["public"]["Tables"]["permissions"]["Row"];
+  Database["public"]["Tables"]["users_permissions"]["Row"];
 // Roles
 export type database_roles_type = Database["public"]["Tables"]["roles"]["Row"];
 // leave balance
@@ -239,5 +239,3 @@ export type Driver_license_Type = {
   Classification?: string;
   "DMV Violations"?: string;
 };
-
-
