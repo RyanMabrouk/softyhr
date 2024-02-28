@@ -29,7 +29,13 @@ export async function createProfile({
   Location?: string;
   custom_fields?: { [key: string]: { [key: string]: string | number } }[];
 }) {
-  if (!role_id) throw new Error("role_id is not defined");
+  if (!role_id)
+    return {
+      error: {
+        message: "Failed to get role data. Please try again later.",
+        type: "Server Error",
+      },
+    };
   const { error } = await postData("profiles", [
     {
       user_id: user_id,
