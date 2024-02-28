@@ -1,0 +1,189 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@layer utilities {
+  .shadow-green {
+    --tw-shadow: 0px 0px 4px 1px #84bf41 !important;
+    --tw-shadow-colored: 0px 0px 4px 1px var(--tw-shadow-color) !important;
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
+      var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow) !important;
+  }
+  .shadow-green-b {
+    --tw-shadow: 0px -1px 4px 1px #84bf41 !important;
+    --tw-shadow-colored: 0px 0px 4px 1px var(--tw-shadow-color) !important;
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
+      var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow) !important;
+  }
+  .shadow-red {
+    --tw-shadow: 0px 0px 3px 1px rgba(217, 52, 52, 0.842) !important;
+    --tw-shadow-colored: 0px 0px 3px 1px var(--tw-shadow-color) !important;
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
+      var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow) !important;
+  }
+  .shadow-popup {
+    --tw-shadow: 0 8px 14px 3px #0000000d;
+    --tw-shadow-colored: 0 8px 14px 3px var(--tw-shadow-color);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
+      var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  }
+}
+@layer base {
+  body {
+    -webkit-font-smoothing: antialiased;
+  }
+  /* Remove default number input arrows style */
+  /* Chrome, Safari, Edge, Opera */
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  /* Firefox */
+  input[type="number"] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+  }
+  .redirect:hover {
+    text-decoration: underline;
+    color: #527a00 !important;
+  }
+}
+.rdp-vhidden {
+  @apply hidden;
+}
+/* Reset Mui Select Componant selected bg color */
+.Mui-selected {
+  --tw-bg-opacity: 1 !important;
+  --tw-text-opacity: 1 !important;
+  color: white !important;
+  background: #527a01 !important;
+}
+.ant-switch-checked {
+  background: #527a01 !important;
+}
+.MuiMenu-list {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+.scrollBar-green::-webkit-scrollbar {
+  width: 0.5rem;
+  border-radius: 0.6rem;
+}
+.scrollBar-green::-webkit-scrollbar-thumb {
+  background-color: #eef3e5;
+  border-radius: 0.5rem;
+}
+.scrollBar-green::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+.scrollBar-green::-webkit-scrollbar-track-piece {
+  background-color: transparent;
+}
+.scrollBar-green::-webkit-scrollbar-corner {
+  background-color: transparent;
+}
+.MuiOutlinedInput-root {
+  padding: 0 !important;
+}
+.MuiAutocomplete-input {
+  padding-top: 0.3rem !important;
+  padding-left: 0.5rem !important;
+}
+/* Daisyui */
+@layer base {
+  :root {
+    color-scheme: only light;
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+
+    --primary: 0 0% 9%;
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 9%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 0 0% 3.9%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 9%;
+
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 0 0% 83.1%;
+  }
+}
+.scrollBar-green::-webkit-scrollbar {
+  width: 0.5rem;
+  border-radius: 0.6rem;
+}
+.scrollBar-green::-webkit-scrollbar-thumb {
+  background-color: #eef3e5;
+  border-radius: 0.5rem;
+}
+.scrollBar-green::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+.scrollBar-green::-webkit-scrollbar-track-piece {
+  background-color: transparent;
+}
+.scrollBar-green::-webkit-scrollbar-corner {
+  background-color: transparent;
+}
+.MuiOutlinedInput-root {
+  padding: 0 !important;
+}
+.MuiAutocomplete-input {
+  padding-top: 0.3rem !important;
+  padding-left: 0.5rem !important;
+}
+.blockbuilder-branding {
+  display: none !important;
+}
+
+.shadow-black-top {
+  box-shadow: -1px -4px 11px -4px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: -1px -4px 11px -4px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: -1px -4px 11px -4px rgba(0, 0, 0, 0.1);
+}
