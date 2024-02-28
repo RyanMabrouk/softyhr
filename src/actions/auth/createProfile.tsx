@@ -39,6 +39,8 @@ export async function createProfile({
       | number;
   };
 }) {
+  console.log("🚀 ~ custom_fields:", custom_fields);
+  console.log("🚀 ~ user_id:", user_id);
   if (!role_id)
     return {
       error: {
