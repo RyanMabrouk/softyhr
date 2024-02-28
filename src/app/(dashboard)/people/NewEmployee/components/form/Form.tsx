@@ -12,15 +12,15 @@ import AccessSection from "../AccessSection";
 import { CreateNewEmployee } from "@/actions/hiring/CreateNewEmployee";
 import useCandidate from "@/hooks/Hiring/useCandidate";
 import formulateDataNewemployee from "../../utils/formulateData";
-import useUserProfile from "@/hooks/useUserProfile";
 import FiledsChamps from "../../../components/sections/FiledsChamps";
 import Loader from "@/app/_ui/Loader/Loader";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import useData from "@/hooks/useData";
 
 function Form() {
   const {
-    profiles: { data: profile_data, isPending: profile_pending },
-  } = useUserProfile("user_id");
+    user_profile: { data: profile_data, isPending: profile_pending },
+  } = useData();
   const queryClient = useQueryClient();
   const { data, isPending } = useSettings("New_Employee");
   const { toast } = useToast();
@@ -79,7 +79,7 @@ function Form() {
       data: {
         ...result,
         Job: { "Hire Date": new Date() },
-        supervisor_id: profile_data?.data?.[0]?.user_id || "",
+        supervisor_id: profile_data?.user_id || "",
       },
     });
     console.log("news data :", NewData);

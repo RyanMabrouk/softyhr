@@ -1,6 +1,11 @@
 "use client";
 import React, { useContext } from "react";
-import { useParams, usePathname, useRouter, useSearchParams } from "next/navigation";
+import {
+  useParams,
+  usePathname,
+  useRouter,
+  useSearchParams,
+} from "next/navigation";
 import Loader from "@/app/_ui/Loader/Loader";
 import useCandidateFullName from "@/hooks/Hiring/useCandidateFullName";
 import { GrSend } from "react-icons/gr";
@@ -10,12 +15,12 @@ import { sendMail } from "@/api/sendEmail";
 import useToast from "@/hooks/useToast";
 import Emaileditor from "@/app/(dashboard)/people/components/Fileds/EmailEditor/EmailEditor";
 import postData from "@/api/postData";
-import useUserProfile from "@/hooks/useUserProfile";
 import MailProvider, {
   MailContext,
   MailContextType,
 } from "./context/MailContext";
 import { useQueryClient } from "@tanstack/react-query";
+import useData from "@/hooks/useData";
 
 function Component() {
   const Searchparams = useSearchParams();
@@ -27,11 +32,11 @@ function Component() {
   const { toast } = useToast();
   const { FullName, isPending, data } = useCandidateFullName(id);
   const {
-    profiles: { data: user_data, error },
-  } = useUserProfile();
+    user_profile: { data: user_data },
+  } = useData();
 
   const { Mail } = useContext<MailContextType>(MailContext);
-    console.log(Mail);
+  console.log(Mail);
 
   const queryClient = useQueryClient();
   const SendMailHandler = async () => {
@@ -40,16 +45,16 @@ function Component() {
       Mail?.email_object,
       Mail?.email_html,
     );
-    if (response?.Status == "failed"){
+    if (response?.Status == "failed") {
       toast.error(response?.message || "Something Went Wrong");
       Router.push(pathname);
       return;
-      }
+    }
     const { error } = await postData("candidate_emails", [
       {
         email: data?.Email,
         email_object: Mail?.email_object,
-        user_sender: user_data?.data?.[0]?.user_id,
+        user_sender: user_data?.user_id,
         candidate_receiver: id,
       },
     ]);
