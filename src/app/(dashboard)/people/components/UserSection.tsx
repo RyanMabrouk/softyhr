@@ -2,7 +2,7 @@
 import React, { memo, useState } from "react";
 import { FaAddressCard } from "react-icons/fa";
 import ChangesSection from "../components/ChangesSection/ChangesSection";
-import { useSettings } from "@/hooks/Settings/useSettings";
+import { useSettings } from "@/hooks/useSettings";
 import { v4 as uuidv4 } from "uuid";
 import { sectionIcon } from "@/constants/userInfo";
 import { ChampsType } from "@/types/userInfoTypes.type";
@@ -64,7 +64,7 @@ function UserSection({ section, employeeId }: UserSection) {
     <>
       {isPending || user?.isPending ? (
         <div className="flex h-full w-full items-center justify-center ">
-          <Loader/>
+          <Loader />
         </div>
       ) : (
         <div className="flex h-full w-full flex-col items-start justify-start pb-10 pl-8">

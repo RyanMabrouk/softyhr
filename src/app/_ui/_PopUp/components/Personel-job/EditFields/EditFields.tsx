@@ -1,5 +1,5 @@
 "use client";
-import { useSettings } from "@/hooks/Settings/useSettings";
+import { useSettings } from "@/hooks/useSettings";
 import React, { useState } from "react";
 import { RowFieldType } from "@/types/userInfoTypes.type";
 import { usePathname, useRouter } from "next/navigation";

@@ -1,20 +1,17 @@
 "use client";
 import React, { memo, useContext, useEffect, useRef, useState } from "react";
-import useData from "@/hooks/useData";
 import AdditionnalInputs from "./components/AdditionnalInputs";
 import useHiring from "@/hooks/Hiring/useHiring";
 import { useRouter, useSearchParams } from "next/navigation";
-import SubmitButton from "@/app/careers/[career_id]/components/AppliymentForm/SubmitButton";
 import { CgNotes } from "react-icons/cg";
 import { Edit_JobOpening } from "@/actions/hiring/EditJobOpening";
-import useToast, { ToastContainer } from "@/hooks/useToast";
-import { TiClipboard } from "react-icons/ti";
+import useToast from "@/hooks/useToast";
 import { useQueryClient } from "@tanstack/react-query";
 import ChangesSection from "@/app/(dashboard)/people/components/ChangesSection/ChangesSection";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import UnsavedChanges from "@/app/_ui/_PopUp/components/Hiring/UnsavedChanges/UnsavedChanges";
 import Loader from "@/app/_ui/Loader/Loader";
-import { useSettings } from "@/hooks/Settings/useSettings";
+import { useSettings } from "@/hooks/useSettings";
 import FiledsChamps from "@/app/(dashboard)/people/components/sections/FiledsChamps";
 
 function Page() {
