@@ -110,7 +110,7 @@ export default function HiringTable({
                   fontSize="1rem"
                   className="border border-color-primary-8 text-color-primary-8"
                 />
-                <h1>{user.Candiates}</h1>
+                <h1>{user?.Candiates}</h1>
               </div>
             </User>
           );
@@ -121,11 +121,11 @@ export default function HiringTable({
                 href={`/Hiring/jobs/${user?.id}`}
                 className="cursor-pointer text-color5-500 hover:text-color-primary-8 hover:underline"
               >
-                {user.job_opening}
+                {user?.job_opening}
               </Link>
               <div className="flex items-center justify-center text-sm font-normal text-gray-11">
-                <p>{user.department} - </p>
-                <p>{user.Location}</p>
+                <p>{user?.department} - </p>
+                <p>{user?.Location || "Remote"}</p>
               </div>
             </div>
           );
@@ -133,7 +133,7 @@ export default function HiringTable({
           return (
             <div className="flex flex-col">
               <p className="text-normal font-normal capitalize text-gray-11">
-                {user.hiring_lead}
+                {user?.hiring_lead}
               </p>
             </div>
           );
@@ -141,10 +141,10 @@ export default function HiringTable({
           return (
             <p className="text-gra-14 gap-1 border-none capitalize">
               <h1 className="text-normal font-medium capitalize text-gray-11">
-                {formatCustomDate(user.CreatedOn)}
+                {formatCustomDate(user?.CreatedOn)}
               </h1>
               <h1 className="text-normal font-normal text-gray-15">
-                {monthsAgo(user.CreatedOn)}
+                {monthsAgo(user?.CreatedOn)}
               </h1>
             </p>
           );
@@ -152,7 +152,7 @@ export default function HiringTable({
           return (
             <div className="flex flex-col">
               <p className="text-normal font-normal capitalize text-gray-11">
-                {user.status}
+                {user?.status}
               </p>
             </div>
           );
