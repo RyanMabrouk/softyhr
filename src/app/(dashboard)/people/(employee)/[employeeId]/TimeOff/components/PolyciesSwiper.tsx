@@ -121,6 +121,14 @@ export function PolyciesSwiper() {
                 nextEl: ".btn_swiper_arrow_right",
               }}
               slidesPerView={3}
+              breakpoints={{
+                0: {
+                  slidesPerView: 2,
+                },
+                1400: {
+                  slidesPerView: 3,
+                },
+              }}
               slides={policies?.map((policy, i: number) => (
                 <Policy key={policy.name + i} {...policy} />
               ))}

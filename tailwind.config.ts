@@ -55,6 +55,12 @@ const config: Config = {
         "2xl": "1400px",
       },
     },
+    screens: {
+      "1840": "1840px",
+      "1860": "1860px",
+      "1660": "1660px",
+      "1400": "1400px",
+    },
     extend: {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",

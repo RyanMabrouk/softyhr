@@ -38,7 +38,7 @@ export function HistoryTable({
           {Headers.map((key, index) => (
             <header
               key={"header" + key + index}
-              className="relative box-border h-12 w-full cursor-pointer border-transparent bg-gray-17 pb-[11px] pl-4 pr-7 pt-3 text-left align-top font-semibold text-gray-25 transition-[background-color] duration-150 ease-linear hover:bg-gray-19"
+              className="max-1860:text-sm max-1860:pr-2 relative  box-border h-12 w-full cursor-pointer border-transparent bg-gray-17 pb-[11px] pl-4 pr-7 pt-3 text-left align-top font-semibold text-gray-25 transition-[background-color] duration-150 ease-linear hover:bg-gray-19"
             >
               {key}
             </header>

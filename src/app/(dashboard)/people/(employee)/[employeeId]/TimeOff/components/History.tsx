@@ -192,7 +192,7 @@ export function History() {
                     formatDDMMYYYY(new Date(e.end_at)),
                   Description: (
                     <div className="flex flex-col capitalize">
-                      <span>{e.name}</span>
+                      <span className="line-clamp-1">{e.name}</span>
                       <Link
                         href={{
                           pathname: `/people/${employeeId}/TimeOff`,
@@ -260,25 +260,31 @@ export function History() {
                     Date: formatDDMMYYYY(new Date(e.start_at)),
                     Description: (
                       <>
-                        <span className="capitalize">{e.name}</span>
+                        <span className="max-1860:text-sm capitalize">
+                          {e.name}
+                        </span>
                         {e.description && (
                           <>
-                            <span> - </span>
-                            <span className="caption-top text-sm leading-6 text-gray-21">
+                            <span className="max-1860:text-sm"> - </span>
+                            <span className="max-1860:text-[0.8rem] caption-top text-sm  leading-6 text-gray-21">
                               {e.description}
                             </span>
                           </>
                         )}
                       </>
                     ),
-                    "Used (-)": e.duration_used
-                      ? formatTotalHoursToTimeUnit(
+                    "Used (-)": e.duration_used ? (
+                      <span className="max-1860:text-sm">
+                        {formatTotalHoursToTimeUnit(
                           e.duration_used,
                           e.track_time_unit,
-                        )
-                      : "",
+                        )}
+                      </span>
+                    ) : (
+                      <></>
+                    ),
                     "Accrued (+)": e.duration_accrued ? (
-                      <span className="pl-3">
+                      <span className="max-1860:text-sm ">
                         {formatTotalHoursToTimeUnit(
                           Number(e.duration_accrued),
                           e.track_time_unit,
@@ -288,7 +294,7 @@ export function History() {
                       ""
                     ),
                     Balance: (
-                      <span className="pl-4">
+                      <span className="max-1860:text-sm">
                         {e.track_time_unit === "days"
                           ? formatTotalHoursToTimeUnit(
                               e.Balance,
