@@ -2,7 +2,7 @@
 import Image from "next/image";
 import React from "react";
 import Link from "next/link";
-import { EmployeRoutesType, EmployeeRoute } from "@/constants/employeeRoute";
+import { EmployeRoutesType, useEmployeeRoute } from "@/constants/employeeRoute";
 import { useParams, usePathname } from "next/navigation";
 import { Settings, changementRequest } from "@/constants/userInfo";
 import useEmployeeData from "@/hooks/useEmloyeeData";
@@ -20,6 +20,7 @@ export function Content() {
   } = useEmployeeData({ employeeId: String(employeeId) });
   const pathname = usePathname();
   const { lang } = useTranslation();
+  const EmployeeRoute = useEmployeeRoute();
   return (
     <div className="z-20 flex min-h-[13rem] justify-center bg-gradient-to-r from-color-primary-7  to-color-primary-9 transition-all duration-300 ">
       <div className={"flex w-9/12 items-end justify-start gap-[4rem] "}>
@@ -49,7 +50,7 @@ export function Content() {
             <div className={"flex h-10 gap-[1rem] "}>
               <SelectGeneric
                 name="changementRequest"
-                inputLabel={lang?.["Request a change"]}
+                inputLabel={lang?.["Personal"]?.["Request a change"] as string}
                 options={changementRequest}
                 className=" !border-[1px] !border-white !text-white"
                 cursor="white"

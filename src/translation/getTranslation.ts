@@ -18,7 +18,7 @@ export default async function getTranslation() {
   });
   const dict = await dictionaries?.[lang?.[0]?.preffered_lang ?? "en-us"]?.();
   return {
-    lang: dict as { [key: string]: string | { [key: string]: string } },
+    lang: dict as any,
     error,
   };
 }

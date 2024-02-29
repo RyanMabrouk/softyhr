@@ -1,6 +1,10 @@
 {
   "Time Off": {
-    "Time Off": "Temps de repos",
+    "Time Off": "Temps de repos"
+  },
+  "Personal": {
+    "Personnel": "Personnel",
     "Request a change": "Demander un changement"
-  }
+  },
+  "Job": { "Job": "Emploi" }
 }
