@@ -6,6 +6,7 @@ import {
 import getData from "@/api/getData";
 import React from "react";
 import getSession from "@/api/getSession";
+import getTranslation from "@/translation/getTranslation";
 export default async function Hydration({
   children,
 }: {
@@ -49,6 +50,10 @@ export default async function Hydration({
           error,
         };
       },
+    }),
+    queryClient.prefetchQuery({
+      queryKey: ["profiles", "preffered_lang"],
+      queryFn: () => getTranslation(),
     }),
   ]);
   return (
