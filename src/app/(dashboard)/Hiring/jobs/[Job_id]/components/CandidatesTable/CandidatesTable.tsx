@@ -94,7 +94,7 @@ export default function CandiatesTable({
       wrapper: ["max-h-[382px]", "max-w-3xl"],
       tr: [
         "border-b border-gray-14",
-        "hover:!bg-color-primary-12",
+        "hover:!bg-gray-14",
         "ease-linear duration-200 ",
       ],
       th: [

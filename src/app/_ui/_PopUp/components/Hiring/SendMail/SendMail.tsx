@@ -32,7 +32,7 @@ function Component() {
 
   const { Mail } = useContext<MailContextType>(MailContext);
     console.log(Mail);
-
+  console.log(data);
   const queryClient = useQueryClient();
   const SendMailHandler = async () => {
     const response = await sendMail(

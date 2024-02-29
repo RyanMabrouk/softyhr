@@ -11,6 +11,13 @@ export async function sendMail(toWho: any, subject: any, content: any) {
       to: toWho,
       subject: subject,
       html: content,
+      attachments: [
+        {
+          filename: "text1.txt",
+          content:
+            "https://ybwqmrrlvmpdikvmkqra.supabase.co/storage/v1/object/public/hiring/Resumed6979abb-e059-4495-bbb2-01f27c907032",
+        },
+      ],
     };
     transporter.sendMail(mailOptions, function (err, info) {
       if (err) {
@@ -28,7 +35,7 @@ export async function sendMail(toWho: any, subject: any, content: any) {
         };
       }
     });
-   logger.info("sendMail_exit");
+    logger.info("sendMail_exit");
     return {
       Error: null,
       Status: "success",
@@ -42,7 +49,6 @@ export async function sendMail(toWho: any, subject: any, content: any) {
       message: "Something Went Wrong",
     };
   }
-
 }
 
 const GMAIL_USERNAME = "softyhr@gmail.com";

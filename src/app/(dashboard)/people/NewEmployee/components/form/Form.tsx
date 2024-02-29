@@ -57,6 +57,7 @@ function Form() {
       NewData,
       NewData?.Contact?.["Work Email"] || "",
     );
+    console.log(response);
     if (response?.Submitted) {
       toast.success(response?.Message);
       router.push("/people/list");

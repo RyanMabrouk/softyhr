@@ -14,7 +14,7 @@ function useFoldersIds() {
   const { isLoading, data: { data: wantedFiles } = {} } = useQuery({
     queryKey: [filesIds],
     queryFn: async () => await GetFilesByIDs(filesIds),
-    enabled: !isPending_user && filesIds.legnth > 0,
+    enabled: !isPending_user && filesIds?.length > 0,
   });
   const duplicatedFoldersIds: any = isLoading
     ? []

@@ -7,6 +7,7 @@ function RenderCellUser({ id }: { id: string }) {
   const {
     profiles: { data, isPending },
   } = useProfilesData({ match: { user_id: id } });
+  console.log(data);
   return (
     <>
       {isPending ? (

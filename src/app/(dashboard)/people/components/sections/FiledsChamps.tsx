@@ -25,7 +25,6 @@ function FiledsChamps({
               key={uuidv4()}
             >
               {Row?.map((RowField: RowFieldType) => {
-                console.log(RowField);
                 const type = RowField?.type || "input"
                 const Component = Field[type.toUpperCase()] || Input;
                 return (

@@ -12,6 +12,10 @@ interface GetCandidateParamsType {
   StartPage?: number;
   EndPage?: number;
   filter?: string | null;
+  textSearch?: {
+    column: string;
+    query:string;
+  };
 }
 
 interface metaType {
@@ -26,6 +30,7 @@ export default async function getCandidate(
     StartPage,
     filter = "*",
     EndPage,
+    textSearch,
   }: GetCandidateParamsType,
 ): Promise<{ data: any; error: any; meta: any }> {
   const logger = getLogger("Hiring");
@@ -36,51 +41,30 @@ export default async function getCandidate(
     data: { session },
   } = await supabase.auth.getSession();
   const org_name = session?.user.user_metadata.org_name;
-  const data = match
+  const query = supabase
+    .from(table)
+    .select(column, { count: "exact" })
+    .order("id")
+    .eq("org_name", org_name);
+
+  match
     ? StartPage != undefined && EndPage != undefined
       ? filter != "All"
-        ? await supabase
-            .from(table)
-            .select(column, { count: "exact" })
-            .match(match)
-            .order("id")
-            .eq("org_name", org_name)
-            .eq("status", filter)
-            .range(StartPage, EndPage)
-        : await supabase
-            .from(table)
-            .select(column, { count: "exact" })
-            .match(match)
-            .order("id")
-            .eq("org_name", org_name)
-            .range(StartPage, EndPage)
-      : await supabase
-          .from(table)
-          .select(column, { count: "exact" })
-          .match(match)
-          .order("id")
-          .eq("org_name", org_name)
+        ? query.eq("status", filter).range(StartPage, EndPage)
+        : query.range(StartPage, EndPage)
+      : null
     : StartPage && EndPage
       ? filter
-        ? await supabase
-            .from(table)
-            .select(column, { count: "exact" })
-            .order("id")
-            .eq("org_name", org_name)
-            .eq("status", filter)
-            .range(StartPage, EndPage)
-        : await supabase
-            .from(table)
-            .select(column, { count: "exact" })
-            .order("id")
-            .eq("org_name", org_name)
-            .range(StartPage, EndPage)
-      : await supabase
-          .from(table)
-          .select(column, { count: "exact" })
-          .order("id")
-          .eq("org_name", org_name);
-          
+        ? query.eq("status", filter).range(StartPage, EndPage)
+        : query.range(StartPage, EndPage)
+      : null;
+  textSearch &&
+    query.textSearch(textSearch?.column,textSearch?.query, {
+      type: "websearch",
+      config: "english",
+    });
+  const data = await query;
+
   logger.info("getCandidate_exit");
   if (data?.error) {
     logger.error(data?.error?.message);

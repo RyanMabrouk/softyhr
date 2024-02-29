@@ -109,7 +109,7 @@ export default function FileBox({ file, pushFileId, removeFileId }: any) {
       handleDuplicate();
       handleSelectedOption(null);
     }
-    if (selectedOption === "emailAtt") {
+    if (selectedOption === "Email attachment") {
       replace(`Files?popup=SEND_EMAIL_FILE&fileId=${id}`);
       handleSelectedOption(null);
     }

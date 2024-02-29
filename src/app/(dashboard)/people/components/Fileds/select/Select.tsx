@@ -68,7 +68,6 @@ function SelectInput({
           MenuProps={{ PaperProps: { style: { maxHeight: "15rem" } } }}
           sx={{
             border: "1px solid #D9D9D9",
-            color: "black",
             ".MuiSvgIcon-root ": {
               fill: "#686868 !important",
               backgroundColor: "#F4F4F4",
@@ -78,6 +77,9 @@ function SelectInput({
               right: 0,
               top: 0,
               display: dropDownDisplay ? "block" : "none",
+            },
+            ".MuiInputBase-inputAdornedEnd ":{
+              paddingRight:'55px'
             },
             height: "2rem",
             borderRadius: "0.2rem !important",

@@ -51,6 +51,7 @@ function DeleteItem() {
               <Image
                 alt="profile image"
                 src={data?.profile_image || default_avatar}
+                className="h-[3rem] w-[3rem] rounded-full"
               />
               <h1>
                 {data?.["Basic Information"]?.["First name"] +

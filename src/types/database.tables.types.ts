@@ -47,8 +47,7 @@ export type database_profile_type_insert =
 
 //---------organizations_types----------
 
-export type organizations_type =
-  Database["public"]["Tables"]["organizations"]["Row"];
+export type organizations_type = Database["public"]["Tables"]["organizations"]["Row"];
 
 //-----------Depatment_types-------------
 
@@ -141,7 +140,7 @@ export type Profile_Type = {
   Job?: ObjectOfStrings | null;
   "Job Information"?: job_information_Type[] | null;
   leave_balance?: leave_balance_Type[] | null;
-  org_name: string;
+  org_name: string ;
   role: string;
   "Social Links"?: ObjectOfStrings | null;
   "Stock Options"?: StockOptions_Type[] | null;

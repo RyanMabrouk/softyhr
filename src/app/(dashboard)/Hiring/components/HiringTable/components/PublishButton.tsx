@@ -25,7 +25,7 @@ function PublishButton({ id, status }: PublishButtonPropsType) {
   return (
     <form action={PublishOrKeepJob}>
       <SubmitBtn
-        className={` ${status == "Open" ? "!bg-color-primary-8" : "!bg-color-primary-7"} z-20 me-2 rounded-lg  px-2 py-1 text-sm font-medium text-white hover:bg-green-800 focus:outline-none dark:bg-green-700 dark:hover:bg-green-800`}
+        className={` ${status == "Open" ? "!bg-gray-33" : "!bg-gray-32"} z-20 me-2 rounded-lg  px-2 py-1 text-sm font-semibold text-black  focus:outline-none`}
       >
         {status != "Open" ? "Publish" : "UnPublish"}
       </SubmitBtn>

@@ -20,18 +20,25 @@ export async function createProfile({
   first_name: string;
   last_name: string;
   email: string;
-  tel: string;
-  job: string;
+  tel?: string;
+  job?: string;
   role_id: number | undefined;
   supervisor_id?: string | null;
   Division?: string;
   Department?: string;
   Location?: string;
-  custom_fields?: { [key: string]: { [key: string]: string | number }[] }[];
+  custom_fields?: any;
 }) {
-  if (!role_id) throw new Error("role_id is not defined");
-  const { error } = await postData("profiles", [
+  if (!role_id)
+    return {
+      error: {
+        message: "Failed to get role data. Please try again later.",
+        type: "Server Error",
+      },
+    };
+  const payload = [
     {
+      ...custom_fields,
       user_id: user_id,
       org_name: company,
       supervisor_id: supervisor_id,
@@ -40,39 +47,34 @@ export async function createProfile({
         "Hire Date": new Date(),
       },
       "Basic Information": {
-        ...custom_fields?.find((e) =>
-          Object.keys(e).includes("Job Information"),
-        ),
+        ...custom_fields?.["Basic Information"],
         "Last name": last_name,
         "First name": first_name,
       },
       Contact: {
-        ...custom_fields?.find((e) => Object.keys(e).includes("Contact")),
+        ...custom_fields?.["Contact"],
         "Mobile Phone": tel,
         "Work Email": email,
       },
       "Job Information": [
         {
-          Location: Location,
-          Division: Division,
-          Department: Department,
-          "Job Title": job,
+          ...custom_fields?.["Job Information"],
+            Location: Location,
+            Division: Division,
+            Department: Department,
+            "Job Title": job,
         },
       ],
-      ...custom_fields?.filter(
-        (e) =>
-          !Object.keys(e).includes("Job Information") &&
-          !Object.keys(e).includes("Contact") &&
-          !Object.keys(e).includes("Basic Information"),
-      ),
     },
-  ]);
+  ];
+  console.log("🚀 ~ payload:", payload);
+  const { error } = await postData("profiles", payload);
   if (error)
     return {
       error,
     };
   else {
-    const { error: permissions_error } = await postData("permissions", {
+    const { error: permissions_error } = await postData("users_permissions", {
       user_id: user_id,
       role_id: role_id,
       org_name: company,

@@ -21,7 +21,6 @@ const Input = ({
   const [value, setValue] = useState<string>(String(defaultValue || ""));
   const Component = InputIcons[RowField?.Icon?.toUpperCase() || ""];
 
-
   return (
     <div className="flex flex-col items-start justify-center">
       <label
@@ -54,7 +53,7 @@ const Input = ({
             (RowField?.Icon ? "pl-8 " : "")
           }
           type={RowField?.type}
-          value={value}
+          value={value?.trim()}
           id={RowField?.name}
           name={RowField?.name}
           onChange={(e) => {

@@ -11,7 +11,6 @@ export default function useUserProfile(column?: string) {
         column,
       }),
   });
-  console.log(user_profile?.error);
   return {
     profiles: {
       data: user_profile,

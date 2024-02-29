@@ -4,6 +4,7 @@ import { Profile_Type } from "@/types/database.tables.types";
 import { createClient } from "@supabase/supabase-js";
 import { addFolder } from "../files/addFolder";
 import { getLogger } from "@/logging/log-util";
+import { createProfile } from "../auth/createProfile";
 export const CreateNewEmployee = async (
   NewEmployeData: Profile_Type,
   email: string,
@@ -32,7 +33,7 @@ export const CreateNewEmployee = async (
       };
     }
 
-    const { error: profile_error } = await supbaseAdmin
+   /* const { error: profile_error } = await supbaseAdmin
       .from("profiles")
       .insert([
         {
@@ -40,8 +41,20 @@ export const CreateNewEmployee = async (
           org_name: org?.name,
           user_id: user?.user?.id,
         },
-      ]);
-
+      ]);*/
+      
+      const { error: profile_error } = await createProfile({
+        user_id: user?.user?.id,
+        company: org?.name || "",
+        first_name:
+          NewEmployeData?.["Basic Information"]?.["First name"] || "user",
+        last_name:
+          NewEmployeData?.["Basic Information"]?.["Last name"] || "user",
+        email: NewEmployeData?.["Contact"]?.["Work Email"] || "",
+        custom_fields:NewEmployeData,
+        role_id:2
+      });
+        ;
     if (profile_error) {
       console.log(profile_error);
       logger.error(profile_error.message);
