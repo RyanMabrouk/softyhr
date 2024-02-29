@@ -30,7 +30,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "src/app/(dashboard)/Files/_ui/filesTable/tableSideBar/TableSideBarFolderBox.tsx",
-    "src/components/ui/Pagination.tsx",
+    "src/shadcn/ui/Pagination.tsx",
     "src/app/(dashboard)/people/(employees)/orgchart/_ui/components/OrgChart/OrgChartBody.tsx",
     "src/app/(dashboard)/people/(employees)/orgchart/_ui/components/OrgChart/prevversion.jsx",
     "src/app/(dashboard)/Files/context/CheckBoxesContext.js",

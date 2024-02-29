@@ -1,13 +1,9 @@
 "use client";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
-import { Calendar } from "@/components/ui/calendar";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
+import { Button } from "@/shadcn/ui/button";
+import { Calendar } from "@/shadcn/ui/calendar";
+import { Popover, PopoverContent, PopoverTrigger } from "@/shadcn/ui/popover";
 import { useEffect, useState } from "react";
 import { formatYYYYMMDD } from "@/helpers/date.helpers";
 import { Label } from "./InputGeneric";

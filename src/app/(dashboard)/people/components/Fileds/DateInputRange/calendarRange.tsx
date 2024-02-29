@@ -3,13 +3,9 @@ import { format } from "date-fns";
 import React from "react";
 import { DateRange } from "react-day-picker";
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
-import { Calendar } from "@/components/ui/calendar";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
+import { Button } from "@/shadcn/ui/button";
+import { Calendar } from "@/shadcn/ui/calendar";
+import { Popover, PopoverContent, PopoverTrigger } from "@/shadcn/ui/popover";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { InvalidDate, formatYYYYMMDD } from "@/helpers/date.helpers";
