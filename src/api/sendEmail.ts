@@ -10,7 +10,7 @@ export async function sendMail(
   toWho: any,
   subject: any,
   content: any,
-  attachments: attachmentsType[]) {
+  attachments?: attachmentsType[]) {
   const logger = getLogger("*");
   logger.info("sendMailq_enter");
   try {
