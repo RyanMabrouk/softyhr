@@ -2,7 +2,15 @@
 import { getLogger } from "@/logging/log-util";
 import { createTransport } from "nodemailer";
 require("dotenv").config();
-export async function sendMail(toWho: any, subject: any, content: any) {
+interface attachmentsType{
+  filename:string;
+  content:string;
+}
+export async function sendMail(
+  toWho: any,
+  subject: any,
+  content: any,
+  attachments: attachmentsType[]) {
   const logger = getLogger("*");
   logger.info("sendMailq_enter");
   try {
@@ -11,13 +19,7 @@ export async function sendMail(toWho: any, subject: any, content: any) {
       to: toWho,
       subject: subject,
       html: content,
-      attachments: [
-        {
-          filename: "text1.txt",
-          content:
-            "https://ybwqmrrlvmpdikvmkqra.supabase.co/storage/v1/object/public/hiring/Resumed6979abb-e059-4495-bbb2-01f27c907032",
-        },
-      ],
+      attachments,
     };
     transporter.sendMail(mailOptions, function (err, info) {
       if (err) {
