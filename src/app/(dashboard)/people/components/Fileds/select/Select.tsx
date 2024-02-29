@@ -9,7 +9,6 @@ import {
 } from "@mui/material";
 import React, { memo, useEffect, useState } from "react";
 import { MdOutlineClose } from "react-icons/md";
-import getCurrentorg from "@/api/getCurrentOrg";
 import ExtraTxt from "./components/ExtraTxt";
 import { RowFieldType } from "@/types/database.tables.types";
 interface SelectInputPropsType {
