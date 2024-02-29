@@ -1,4 +1,3 @@
-import { useCallback } from "react";
 export default function createNewPathname({
   currentPathname,
   currentSearchParams,

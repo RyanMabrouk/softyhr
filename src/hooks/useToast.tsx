@@ -27,7 +27,6 @@ function createToast() {
           <span className="my-2 ml-2 text-[1.05rem]">{description}</span>
         </>
       ),
-      //className: "p-0 m-0",
     });
   };
 
