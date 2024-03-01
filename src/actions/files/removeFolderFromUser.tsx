@@ -2,9 +2,11 @@
 import updateData from "@/api/updateData";
 import { getLogger } from "@/logging/log-util";
 import getData from "@/api/getData";
-export async function removeFileFromUser(userId: any, fileId: any) {
+export async function removeFolderFromUser(userId: string, fileIds: number[]) {
+  console.log("🚀 ~ removeFolderFromUser ~ userId:", userId)
+  console.log("🚀 ~ removeFolderFromUser ~ fileIds:", fileIds)
   const logger = getLogger("files");
-  logger.info("removeFileFromUser");
+  logger.info("removeFolderFromUser");
   const { data } = await getData("users_permissions", {
     match: {
       user_id: userId,
@@ -12,9 +14,11 @@ export async function removeFileFromUser(userId: any, fileId: any) {
     column: "files_ids",
   });
   const oldFilesIds: any = data?.[0].files_ids;
+  console.log("🚀 ~ removeFolderFromUser ~ oldFilesIds:", oldFilesIds)
   const newFilesIds = oldFilesIds.filter(
-    (id: any) => String(id) != String(fileId),
+    (id: number | string) => !fileIds.includes(Number(id)),
   );
+  console.log("🚀 ~ removeFolderFromUser ~ newFilesIds:", newFilesIds)
   const { error } = await updateData(
     "users_permissions",
     {

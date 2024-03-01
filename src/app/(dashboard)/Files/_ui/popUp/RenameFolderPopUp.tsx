@@ -9,6 +9,8 @@ import useToast from "@/hooks/useToast";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import updateData from "@/api/updateData";
 import PopUpSkeleton from "@/app/_ui/_PopUp/PopUpSkeleton";
+import { InputGeneric } from "@/app/_ui/InputGeneric";
+import CancelBtnGeneric from "@/app/_ui/CancelBtnGeneric";
 
 export default function RenameFolderPopUp() {
   const Router = useRouter();
@@ -53,28 +55,26 @@ export default function RenameFolderPopUp() {
           onSubmit={handleSubmit(onSubmit)}
           className="flex w-full flex-col gap-4 px-2 pt-3"
         >
-          <label htmlFor="input">Enter a new name for this folder</label>
-          <input
+          <InputGeneric
+            name="folderName"
+            label="Enter a new name for this folder"
             type="text"
-            placeholder={folderName ? folderName : ""}
+            className=" !h-9 !min-w-[17.5rem]"
+            defaultValue={folderName ?? ""}
+            placeholder={folderName ?? ""}
             value={isTyping}
-            onChange={(e) => setIsTyping(e.target.value)}
-            className=" w-80 border border-stone-400 px-2 py-1 outline-1 transition-all duration-300 focus:outline-color1-300 "
+            setValueInParent={setIsTyping}
           />
 
           <hr className="mt-4 h-[3px] w-full bg-primary-gradient" />
           <div className="flex flex-row gap-4 px-2 pt-3">
             <ButtonPopUp check={isTyping === ""}>Save</ButtonPopUp>
-            <button
-              className="cursor-pointer text-color5-500 hover:underline "
-              type="button"
+            <CancelBtnGeneric
               onClick={() => {
                 queryClient.setQueryData(["fileIds"], []);
                 Router.push(pathname);
               }}
-            >
-              Cancel
-            </button>
+            />
           </div>
         </form>
       </PopUpSkeleton>

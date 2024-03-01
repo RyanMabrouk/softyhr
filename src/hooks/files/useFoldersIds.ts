@@ -1,5 +1,4 @@
 "use client";
-import useData from "@/hooks/useData";
 import { useQuery } from "@tanstack/react-query";
 import GetFilesByIDs from "../../actions/files/getFiles";
 import usePermissions from "@/hooks/usePermissions";

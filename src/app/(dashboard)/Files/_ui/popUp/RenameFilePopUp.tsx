@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 import { renameFile } from "@/actions/files/renameFile";
 import PopUpSkeleton from "@/app/_ui/_PopUp/PopUpSkeleton";
 import { InputGeneric } from "@/app/_ui/InputGeneric";
+import CancelBtnGeneric from "@/app/_ui/CancelBtnGeneric";
 
 export default function RenameFilePopUp() {
   const { toast } = useToast();
@@ -66,16 +67,12 @@ export default function RenameFilePopUp() {
           <hr className="mt-4 h-[3px] w-full bg-primary-gradient" />
           <div className="flex flex-row gap-4 px-2 pt-3">
             <ButtonPopUp check={isTyping === ""}>Save</ButtonPopUp>
-            <button
-              className="cursor-pointer text-color5-500 hover:underline "
-              type="button"
+            <CancelBtnGeneric
               onClick={() => {
                 queryClient.setQueryData(["fileIds"], []);
                 Router.push(pathname);
               }}
-            >
-              Cancel
-            </button>
+            />
           </div>
         </form>
       </PopUpSkeleton>
