@@ -3,9 +3,13 @@ import { format } from "date-fns";
 import React from "react";
 import { DateRange } from "react-day-picker";
 import { cn } from "@/lib/utils";
-import { Button } from "@/shadcn/ui/button";
-import { Calendar } from "@/shadcn/ui/calendar";
-import { Popover, PopoverContent, PopoverTrigger } from "@/shadcn/ui/popover";
+import { Button } from "@/components/ui/button";
+import { Calendar } from "@/components/ui/calendar";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import { useParams } from "next/navigation";
 import { useAlreadyBooked } from "../hooks/useAlreadyBooked";
 import { useEffect, useState } from "react";
@@ -122,7 +126,7 @@ export function CalendarRange({
               </div>
             </Button>
           </PopoverTrigger>
-          <PopoverContent className="w-auto p-0" align="start">
+          <PopoverContent className="w-[auto] p-0" align="start">
             <Calendar
               id="date_range"
               initialFocus

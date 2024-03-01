@@ -2,7 +2,8 @@ import React, { ReactNode } from "react";
 import { FormControl, MenuItem, Select } from "@mui/material";
 import { Label } from "./InputGeneric";
 import { getTawindColor } from "../../helpers/getTailwindColor";
-const color = getTawindColor("fabric-700");
+import { VscTriangleDown } from "react-icons/vsc";
+const color = getTawindColor("color-primary-10");
 export type Option = {
   group_name?: string; // add only the group name to create a group
   label: string | ReactNode;
@@ -16,7 +17,7 @@ export function SelectGeneric({
   name = "select",
   defaultValue,
   options,
-  group, // if true, options should be an array of objects with the following structure: {group_name: string, options: Option[]}
+  group, // if true, every option with a group_name will be a group_name label
   required,
   setValueInParent,
   inputLabel,
@@ -35,6 +36,10 @@ export function SelectGeneric({
   cursor?: "white" | "black" | string;
 }) {
   const [open, setOpen] = React.useState(false);
+  const cursor_type =
+    cursor === "white"
+      ? "text-white h-full min-w-3 mr-2"
+      : "text-gray-21 rounded-br-sm rounded-tr-sm bg-gray-14 px-2 pl-2 h-full w-9 ";
   if (!options) return;
   return (
     <FormControl className="group flex w-fit flex-col gap-1">
@@ -54,6 +59,11 @@ export function SelectGeneric({
           required={required}
           onOpen={(e) => setOpen(true)}
           onClose={(e) => setOpen(false)}
+          IconComponent={() => (
+            <VscTriangleDown
+              className={`cursor-pointer transition-all ease-linear ${cursor_type} ${open ? "rotate-180" : ""} `}
+            />
+          )}
           MenuProps={{
             autoFocus: false,
             className: " shadow-green",
@@ -63,7 +73,7 @@ export function SelectGeneric({
                 borderTopRightRadius: "0px",
                 maxHeight: "20rem",
                 overflowY: "auto",
-                boxShadow: `0px 1px 4px 1px ${color}`,
+                boxShadow: `0px 1px 4px 2px ${color}`,
               },
             },
           }}

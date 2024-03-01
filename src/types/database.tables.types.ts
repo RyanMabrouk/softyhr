@@ -44,7 +44,10 @@ export type database_profile_type =
 
 export type database_profile_type_insert =
   Database["public"]["Tables"]["profiles"]["Insert"];
-
+// files types
+export type database_files_type = Database["public"]["Tables"]["files"]["Row"];
+export type database_folder_type =
+  Database["public"]["Tables"]["folders"]["Row"];
 //---------organizations_types----------
 
 export type organizations_type =

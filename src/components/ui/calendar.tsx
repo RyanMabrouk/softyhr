@@ -5,7 +5,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { DayPicker, DropdownProps } from "react-day-picker";
 
 import { cn } from "@/lib/utils";
-import { buttonVariants } from "@/shadcn/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import {
   Button,
   Dropdown,
@@ -28,7 +28,8 @@ function Calendar({
       showOutsideDays={showOutsideDays}
       className={cn("p-3", className)}
       classNames={{
-        months: "flex flex-col sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0",
+        months:
+          "flex flex-row items-start sm:flex-row space-x-4  sm:space-x-4 ",
         month: "space-y-4",
         caption: "flex justify-center pt-1 relative items-center",
         caption_label: "text-sm font-medium",
@@ -85,7 +86,7 @@ function Calendar({
                   <FaSortDown fill="gray" className="-mt-1" />
                 </Button>
               </DropdownTrigger>
-              <DropdownMenu className="!max-h-[20rem] overflow-auto rounded-lg !bg-white shadow-lg">
+              <DropdownMenu className=" flex !max-h-[20rem] flex-row overflow-auto rounded-lg !bg-white shadow-lg">
                 {options.map((option, id: number) => (
                   <DropdownItem
                     onClick={() =>

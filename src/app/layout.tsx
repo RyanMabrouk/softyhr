@@ -13,7 +13,7 @@ const lato = Lato({
   style: ["normal"],
 });
 
-const GrafanaWithoutSSR = dynamic(() => import("./Grafana"), { ssr: false });
+//const GrafanaWithoutSSR = dynamic(() => import("./Grafana"), { ssr: false });
 
 export const metadata: Metadata = {
   title: "SoftyHr",
@@ -40,7 +40,6 @@ export default async function RootLayout({
         <Store>
           <Hydration>
             <ToastProvider>
-              <GrafanaWithoutSSR />
               <ToastContainer />
               <PopUp />
               {children}

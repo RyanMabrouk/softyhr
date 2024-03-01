@@ -10,7 +10,7 @@ export function ChangeAccrualStartBtn() {
   const { employeeId } = useParams();
   const pathname = usePathname();
   const {
-    employee_profile: { data: user, isPending: isPending },
+    employee_profile: { data: user },
   }: {
     employee_profile: { data: database_profile_type; isPending: boolean };
   } = useEmployeeData({

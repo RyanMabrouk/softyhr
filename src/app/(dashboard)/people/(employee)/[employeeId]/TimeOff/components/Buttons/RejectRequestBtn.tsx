@@ -1,18 +1,21 @@
+"use client";
 import React from "react";
 import { CgClose } from "react-icons/cg";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import useTranslation from "@/hooks/useTranslation";
 export function RejectRequestBtn({
   leave_request_id,
 }: {
   leave_request_id: number;
 }) {
   const pathname = usePathname();
+  const { lang } = useTranslation();
   return (
     <>
       <Link
         className="tooltip flex flex-row items-center justify-center"
-        data-tip="Deny"
+        data-tip={lang?.["Time Off"].Deny}
         href={{
           pathname: pathname,
           query: {

@@ -14,9 +14,8 @@ const OrgChartBody = () => {
         prof?.["Basic Information"]?.["First name"] +
         prof?.["Basic Information"]?.["Last name"],
       imageUrl: `${
-        prof?.picture
-          ? prof?.picture
-          : "https://raw.githubusercontent.com/bumbeishvili/Assets/master/Projects/D3/Organization%20Chart/general.jpg"
+        prof?.picture ??
+        "https://raw.githubusercontent.com/bumbeishvili/Assets/master/Projects/D3/Organization%20Chart/general.jpg"
       }`,
       profileUrl: "http://facebook.com",
       office: prof?.["Job Information"]?.[0]?.["Department"],

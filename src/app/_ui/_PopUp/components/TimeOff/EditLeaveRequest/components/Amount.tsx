@@ -128,7 +128,7 @@ export function Amount({
                             ...old,
                           ]);
                           if (
-                            Number(e.target.value) > 24 ||
+                            Number(e.target.value) > 16 ||
                             Number(e.target.value) < 0
                           ) {
                             setFormError &&
@@ -137,11 +137,11 @@ export function Amount({
                                   ? {
                                       ...old,
                                       ["duration_date" + i]:
-                                        "Duration must be between 0 and 24 hours",
+                                        "Duration must be between 0 and 16 hours",
                                     }
                                   : {
                                       ["duration_date" + i]:
-                                        "Duration must be between 0 and 24 hours",
+                                        "Duration must be between 0 and 16 hours",
                                     },
                               );
                           } else {

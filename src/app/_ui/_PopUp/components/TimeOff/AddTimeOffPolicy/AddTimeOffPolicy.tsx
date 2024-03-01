@@ -19,12 +19,14 @@ import addLeavePolicy from "@/actions/leave/addLeavePolicy";
 import changePolicy from "@/actions/leave/changePolicy";
 import useLeaveData from "@/hooks/TimeOff/useLeaveData";
 import CancelBtnGeneric from "@/app/_ui/CancelBtnGeneric";
+import useTranslation from "@/hooks/useTranslation";
 export default function AddTimeOffPolicy() {
   const { toast } = useToast();
   const Router = useRouter();
   const { employeeId } = useParams();
   const pathname = usePathname();
   const queryClient = useQueryClient();
+  const { lang } = useTranslation();
   const {
     leave_policies: { data: leave_policies },
     leave_categories: { data: leave_categories },
@@ -75,7 +77,10 @@ export default function AddTimeOffPolicy() {
         (p: database_leave_policies_type) => p.id === Number(policy_id),
       );
       if (!policy) {
-        toast.error("Please choose a policy", "Error");
+        toast.error(
+          lang?.["Time Off"]["Please choose a policy"] ?? "",
+          lang?.["Time Off"]["Error"],
+        );
         return;
       }
       const categories_id = leave_categories?.find(
@@ -101,8 +106,8 @@ export default function AddTimeOffPolicy() {
         toast.success(
           `${capitalizeFirstLetter(
             first_name,
-          )} has been added to the policy successfully`,
-          "Success",
+          )} ${lang?.["Time Off"]["has been added to the policy successfully"]}`,
+          lang?.["Time Off"]["Success"],
         );
       }
     },
@@ -118,7 +123,7 @@ export default function AddTimeOffPolicy() {
   });
   return (
     <PopUpSkeleton
-      title="Add Time Off Policy"
+      title={lang?.["Time Off"]["Add Time Off Policy"]}
       className="flex w-full min-w-[50rem] flex-col gap-4 px-8 py-6"
     >
       <header className="flex w-full flex-row items-center gap-2 bg-gray-14 px-4 py-3">
@@ -140,20 +145,20 @@ export default function AddTimeOffPolicy() {
       >
         <div className="mb-2 ml-4">
           <SelectGeneric
-            label={`Add ${capitalizeFirstLetter(first_name)} to...`}
+            label={`${lang?.["Time Off"]["Add"]} ${capitalizeFirstLetter(first_name)} ${lang?.["Time Off"]["to"]}...`}
             name="policy_id"
             className="h-9 !w-[17.5rem]"
             defaultValue={{ label: "Policies", value: "none" }}
             required={true}
             group={true}
-            inputLabel="-Select policies-"
+            inputLabel={lang?.["Time Off"]["-Select policies-"]}
             options={options}
           />
         </div>
         <hr className="h-[3px] w-full bg-primary-gradient" />
         <div className="flex w-full flex-row items-center justify-start gap-4 px-2 pt-3">
           <SubmitBtn disabled={isPending} className="!w-fit">
-            Save
+            {lang?.["Time Off"]["Save"] ?? ""}
           </SubmitBtn>
           <CancelBtnGeneric />
         </div>

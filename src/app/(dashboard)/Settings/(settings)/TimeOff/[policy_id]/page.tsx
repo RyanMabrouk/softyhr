@@ -1,5 +1,5 @@
 "use client";
-import { HistoryTable } from "@/app/(dashboard)/people/(employee)/[employeeId]/TimeOff/components/HistoryTable";
+import { HistoryTable } from "@/app/(dashboard)/people/(employee)/[employeeId]/TimeOff/components/History/HistoryTable";
 import { generateLeaveCategorieIcon } from "@/helpers/TimeOff/leave.helpers";
 import {
   database_profile_leave_balance_type,

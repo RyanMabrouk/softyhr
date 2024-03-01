@@ -5,6 +5,7 @@ import {
 } from "@/types/database.tables.types";
 import { formatYYYYMMDD, sameDay } from "../date.helpers";
 import { useSettings } from "@/hooks/useSettings";
+import getTranslation from "@/translation/getTranslation";
 // generate Leave Categorie Icon
 export function generateLeaveCategorieIcon({
   categorie,
@@ -28,7 +29,13 @@ export function generateLeaveCategorieIcon({
 export function formatTotalHoursToTimeUnit(
   total_hours: number,
   time_unit: databese_leave_categories_track_time_unit_type | string,
-  { remove_time_unit }: { remove_time_unit?: boolean } = {
+  {
+    remove_time_unit,
+    translated_unit,
+  }: {
+    remove_time_unit?: boolean;
+    translated_unit?: string;
+  } = {
     remove_time_unit: false,
   },
 ): string {
@@ -36,8 +43,10 @@ export function formatTotalHoursToTimeUnit(
     return remove_time_unit ? "0" : `0 ${time_unit}`;
   }
   const total_time =
-    time_unit === "days" ? (total_hours / 24).toFixed(2) : total_hours;
-  return remove_time_unit ? `${total_time}` : `${total_time} ${time_unit}`;
+    time_unit === "days" ? (total_hours / 8).toFixed(2) : total_hours;
+  return remove_time_unit
+    ? `${total_time}`
+    : `${total_time} ${translated_unit ?? time_unit}`;
 }
 // array Of Working Days
 export function useArrayOfWorkingDays(

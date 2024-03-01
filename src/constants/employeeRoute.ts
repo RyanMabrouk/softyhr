@@ -25,7 +25,7 @@ export function useEmployeeRoute(): EmployeRoutesType[] {
     },
     {
       rang: 3,
-      label: lang?.["Time off"]?.["Time off"] as string,
+      label: lang?.["Time Off"]["Time Off"] as string,
       path: (employeId: string) => `/people/${employeId}/TimeOff`,
       defaultPath: true,
       RoleGuard: {

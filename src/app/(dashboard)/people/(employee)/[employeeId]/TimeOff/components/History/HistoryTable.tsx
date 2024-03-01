@@ -1,5 +1,7 @@
+"use client";
 import React, { ReactNode } from "react";
-import { Hr } from "./Hr";
+import { Hr } from "../Hr";
+import useTranslation from "@/hooks/useTranslation";
 
 interface ISorter<T> {
   property: Extract<keyof T, string | number | Date>;
@@ -21,13 +23,14 @@ export function HistoryTable({
   Headers,
   data,
   layout,
-  emptyMessage = "There is no Data History for the selected filters..",
+  emptyMessage,
 }: {
   data: { [key: string]: any }[] | undefined;
   Headers: ReactNode[];
   layout: string;
   emptyMessage?: string;
 }) {
+  const { lang } = useTranslation();
   // Headers Must Match the Keys in the data
   return (
     <section className="flex flex-row">
@@ -38,7 +41,7 @@ export function HistoryTable({
           {Headers.map((key, index) => (
             <header
               key={"header" + key + index}
-              className="max-1860:text-sm max-1860:pr-2 relative  box-border h-12 w-full cursor-pointer border-transparent bg-gray-17 pb-[11px] pl-4 pr-7 pt-3 text-left align-top font-semibold text-gray-25 transition-[background-color] duration-150 ease-linear hover:bg-gray-19"
+              className="relative box-border h-12 w-full  cursor-pointer border-transparent bg-gray-17 pb-[11px] pl-4 pr-7 pt-3 text-left align-top font-semibold text-gray-25 transition-[background-color] duration-150 ease-linear first-letter:capitalize hover:bg-gray-19 max-1860:pr-2 max-1860:text-sm"
             >
               {key}
             </header>
@@ -61,7 +64,7 @@ export function HistoryTable({
                   ) : (
                     <div
                       key={"row_el" + key + index2}
-                      className="relative box-border line-clamp-2 h-[4.25rem] w-full  max-w-[25rem]  overflow-hidden  text-ellipsis px-4 pt-3 text-left align-top text-gray-27  "
+                      className="relative box-border line-clamp-2 h-[4.25rem] w-full max-w-[25rem]  overflow-hidden  text-ellipsis  px-4 pt-3 text-left align-top text-gray-27 max-1690:h-20 max-1690:px-2  max-1690:pt-1"
                     >
                       {row[key]}
                     </div>
@@ -74,7 +77,10 @@ export function HistoryTable({
         ) : (
           <>
             <div className=" relative box-border line-clamp-2  h-[3.25rem] w-max  max-w-[25rem]  overflow-hidden text-ellipsis px-4 pt-3 text-left align-top text-gray-27  ">
-              {emptyMessage}
+              {emptyMessage ??
+                lang?.["Time Off"][
+                  "There is no Data History for the selected filters.."
+                ]}
             </div>
             <Hr />
           </>

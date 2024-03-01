@@ -1,5 +1,5 @@
 "use client";
-import { HistoryTable } from "@/app/(dashboard)/people/(employee)/[employeeId]/TimeOff/components/HistoryTable";
+import { HistoryTable } from "@/app/(dashboard)/people/(employee)/[employeeId]/TimeOff/components/History/HistoryTable";
 import useRoles from "@/hooks/useRoles";
 import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
