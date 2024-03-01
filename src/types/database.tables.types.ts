@@ -112,10 +112,12 @@ export interface RowFieldType {
   required?: boolean;
   placeHolder?: string | undefined;
   type: string;
+  minWidth?: string | undefined ;
   Icon?: string | undefined;
   ExtraTxt?: string | undefined;
   accept?: string | undefined;
   allowFutureDates?: boolean | undefined;
+  addItem?:boolean | undefined;
   allowPreviousDates?: boolean | undefined;
   endDateName?: string | undefined;
   startDateName?: string | undefined;

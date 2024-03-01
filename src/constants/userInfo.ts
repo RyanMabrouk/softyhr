@@ -1,12 +1,12 @@
 //profile header
 
-export const changementRequest = []; /*[
+export const changementRequest = []; [
   { label: "Asset request...", value: "" },
   { label: "Compensation...", value: "" },
   { label: "Emplyoment Status...", value: "" },
   { label: "Job Information...", value: "" },
   { label: "Promotion...", value: "" },
-];*/
+];
 export const Settings = []; /* [
   { label: "Demande de signature", value: "" },
   { label: "Telechargement de formulaire", value: "" },

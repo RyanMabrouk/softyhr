@@ -10,7 +10,7 @@ export const changementRequest = [
 export const Settings = [
   { label: "Demande de signature", action: () => "" },
   { label: "Telechargement de formulaire", action: () => "" },
-  { label: "Niveau d'accés BambooHR", description: "", action: () => "" },
+  { label: "Niveau d'accés SoftyHR", description: "", action: () => "" },
   { label: "Réinitialiser le mot de passe de l'utilisateur", action: () => "" },
 ];
 import Education from "@/app/(dashboard)/people/components/Fileds/Education/Education";

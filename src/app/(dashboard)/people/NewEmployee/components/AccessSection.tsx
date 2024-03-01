@@ -8,7 +8,7 @@ import { TbLockCog } from "react-icons/tb";
 function AccessSection() {
   const Access: Job_locationElementType[] = [
     {
-      label: "Allow Access to BambooHR",
+      label: "Allow Access to SoftyHR",
       show: true,
       description:
         "They will be able to login to SoftyHR using the access level you choose.",

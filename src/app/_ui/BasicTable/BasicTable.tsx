@@ -94,7 +94,7 @@ export default function BasicTable({
                           {TableRows?.map((RowField: RowFieldType) => {
                             if (RowField?.type?.toUpperCase() == "SELECT_USERS")
                               return (
-                                <RenderCellUser id={row[RowField?.name]} />
+                                <RenderCellUser id={row?.[RowField?.name]} />
                               );
                             if (
                               RowField?.type?.toUpperCase() ==
@@ -102,7 +102,7 @@ export default function BasicTable({
                             )
                               return (
                                 <RenderCellDepartment
-                                  id={row[RowField?.name]}
+                                  id={row?.[RowField?.name]}
                                 />
                               );
                             return (
@@ -122,8 +122,9 @@ export default function BasicTable({
                           >
                             <div className=" flex items-center justify-end gap-2 opacity-0 duration-200 ease-in-out group-hover:opacity-100">
                               <Link
+                                data-tip="Edit"
                                 href={`?popup=EDIT_ENTRY&section=${champ}&id=${row?.id}`}
-                                className="flex h-[2rem] w-[2rem] cursor-pointer items-center justify-center rounded-sm duration-200 ease-in-out hover:border hover:border-gray-27 hover:bg-gray-14"
+                                className="tooltip flex h-[2rem] w-[2rem] cursor-pointer items-center justify-center rounded-sm duration-200 ease-in-out hover:border hover:border-gray-27 hover:bg-gray-14"
                               >
                                 <MdModeEditOutline
                                   className="rounded-sm text-lg"
@@ -132,8 +133,9 @@ export default function BasicTable({
                                 />
                               </Link>
                               <Link
+                                data-tip="Delete"
                                 href={`?popup=DELETE_ENTRY&section=${champ}&id=${row?.id}`}
-                                className="flex h-[2rem] w-[2rem] cursor-pointer items-center justify-center rounded-sm duration-200 ease-in-out hover:border hover:border-gray-27 hover:!bg-gray-14"
+                                className="tooltip flex h-[2rem] w-[2rem] cursor-pointer items-center justify-center rounded-sm duration-200 ease-in-out hover:border hover:border-gray-27 hover:!bg-gray-14"
                               >
                                 <FaTrash
                                   className="rounded-sm"

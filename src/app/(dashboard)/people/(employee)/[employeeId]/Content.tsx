@@ -4,13 +4,14 @@ import React from "react";
 import Link from "next/link";
 import { EmployeRoutesType, EmployeeRoute } from "@/constants/employeeRoute";
 import { useParams, usePathname } from "next/navigation";
-import { Settings, changementRequest } from "@/constants/userInfo";
+import { Settings } from "@/constants/userInfo";
 import useEmployeeData from "@/hooks/useEmloyeeData";
 import { MdEdit } from "react-icons/md";
 import avatar from "/public/default_avatar.png";
 import { SelectGeneric } from "@/app/_ui/SelectGeneric";
 import { IoMdSettings } from "react-icons/io";
 import RoleGuard from "@/app/_ui/RoleGuard";
+import DropDownGeneric from "@/app/_ui/DropDownGeneric";
 
 export function Content() {
   const { employeeId } = useParams();
@@ -18,6 +19,7 @@ export function Content() {
     employee_profile: { data: user },
   } = useEmployeeData({ employeeId: String(employeeId) });
   const pathname = usePathname();
+  
   return (
     <div className="z-20 flex min-h-[13rem] justify-center bg-gradient-to-r from-color-primary-7  to-color-primary-9 transition-all duration-300 ">
       <div className={"flex w-9/12 items-end justify-start gap-[4rem] "}>
@@ -45,12 +47,11 @@ export function Content() {
                 user?.["Basic Information"]?.["Last name"]}
             </h1>
             <div className={"flex h-10 gap-[1rem] "}>
-              <SelectGeneric
-                name="changementRequest"
-                inputLabel="Request a change"
-                options={changementRequest}
-                className=" !border-[1px] !border-white !text-white"
-                cursor="white"
+              <DropDownGeneric
+                options={[]}
+                DropDownButton={()=>{
+                  
+                }}
               />
               <SelectGeneric
                 name="settings"

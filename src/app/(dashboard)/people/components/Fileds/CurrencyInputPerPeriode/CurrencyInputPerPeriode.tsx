@@ -19,7 +19,6 @@ const CurrencyInputPerPeriode = ({
   setTouched,
   defaultValue,
 }: InputPropsType) => {
-  
   const { currency, Pay, period } = extractCurrencyValueAndPeriod(
     defaultValue || "",
   );
@@ -52,15 +51,16 @@ const CurrencyInputPerPeriode = ({
             <div className="absolute -right-[1rem] top-0 overflow-hidden border-l  text-[1rem]">
               <SelectInput
                 className={
-                  "-mt-0.2 !h-[2rem] !min-w-[4rem] rounded-sm border !border-none border-gray-18 bg-gray-14 !pr-[1rem]"
+                  "-mt-0.2 !h-[2rem] !min-w-[4rem] rounded-sm border !border-none border-gray-18 bg-white !pr-[1rem]"
                 }
                 RowField={{
                   name: "",
                   type: "select",
                   options: formattedData(Currency),
                 }}
+                renderOptionclassName="!pr-[0px]"
                 dropDownDisplay={false}
-                defaultValue={CurrentCurrency}
+                defaultValue={CurrentCurrency || "USD"}
                 setSelectedKeys={setCurrentCurency}
               />
             </div>
@@ -130,6 +130,9 @@ const CurrencyInputPerPeriode = ({
         setSelectedKeys={setPayPeriod}
         defaultValue={PayPeriod}
       />
+      {"Year" == PayPeriod && (
+        <h1 className="mb-[7px] text-[14px] text-gray-29">0% change</h1>
+      )}
     </div>
   );
 };

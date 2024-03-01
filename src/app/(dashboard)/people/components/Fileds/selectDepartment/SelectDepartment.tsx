@@ -1,27 +1,29 @@
 import React, { ReactNode, SyntheticEvent, useState } from "react";
-import {
-  Autocomplete,
-  Box,
-  TextField,
-} from "@mui/material";
+import { Autocomplete, Box, CircularProgress, TextField } from "@mui/material";
 import useProfiles from "@/hooks/useProfiles";
 import Image from "next/image";
 import avatar from "/public/avatar.png";
-import { Department_type, Profile_Type, RowFieldType } from "@/types/database.tables.types";
+import {
+  Department_type,
+  Profile_Type,
+  RowFieldType,
+} from "@/types/database.tables.types";
 import useDepartment from "@/hooks/useDepartment";
 
 interface SelectValueType {
-  label:string;
-  value:string;
+  label: string;
+  value: string;
 }
 function SelectGeneric({
   label,
   defaultValue,
   options,
+  isPending,
   required,
 }: {
   label?: string;
   name?: string;
+  isPending: boolean;
   defaultValue?: {
     value: string;
     label: string;
@@ -33,7 +35,8 @@ function SelectGeneric({
   required?: boolean;
   inputLabel?: string | ReactNode;
 }) {
-  const [value, setValue] = useState<SelectValueType | null>( defaultValue || {
+  const [value, setValue] = useState<SelectValueType | null>(
+    defaultValue || {
       value: "",
       label: "",
     },
@@ -45,7 +48,7 @@ function SelectGeneric({
         {label && (
           <label
             className={
-              "relative w-fit text-sm text-gray-21 " +
+              "relative w-fit text-sm text-gray-29 " +
               (required
                 ? " after:text-color-primary-8 after:content-['*']"
                 : "")
@@ -66,7 +69,7 @@ function SelectGeneric({
               fill: "#D9D9D9 !important",
             },
             height: "2rem",
-            minWidth: "15rem",
+            minWidth: "16rem",
             borderRadius: "0.1rem !important",
             fontWeight: "300",
             fontSize: "1rem",
@@ -83,15 +86,18 @@ function SelectGeneric({
           }}
           value={value}
           options={options}
+          loadingText="Loading..."
+          loading={isPending}
           renderOption={(props, option: any) => (
-            <Box
-              component="li"
-              sx={{ "& > img": { mr: 2, flexShrink: 0 } }}
-              {...props}
-              key={option.key}
-            >
-              {option?.label}
-            </Box>
+           
+                <Box
+                  component="li"
+                  sx={{ "& > img": { mr: 2, flexShrink: 0 } }}
+                  {...props}
+                  key={option.key}
+                >
+                  {option?.label}
+                </Box>            
           )}
           renderInput={(params) => <TextField className="!p-0" {...params} />}
         />
@@ -116,17 +122,17 @@ function SelectGeneric({
 
 interface SelectUsers {
   RowField: RowFieldType;
-  defaultValue:string | null;
+  defaultValue: string | null;
 }
 
 function SelectDepartment({ RowField, defaultValue }: SelectUsers) {
   const {
     Department: { data, isPending },
   } = useDepartment({});
-  if (isPending) return;
   return (
     <SelectGeneric
       label={RowField?.name}
+      isPending={isPending}
       defaultValue={
         defaultValue
           ? {
@@ -135,7 +141,7 @@ function SelectDepartment({ RowField, defaultValue }: SelectUsers) {
                 data?.find((Department: any) => Department?.id == defaultValue)
                   ?.name ?? "",
             }
-          : undefined
+          : { value: "", label: "" }
       }
       options={
         data?.map((Department: any) => {
@@ -143,7 +149,7 @@ function SelectDepartment({ RowField, defaultValue }: SelectUsers) {
             label: Department?.name,
             value: Department?.id,
           };
-        }) || []
+        }) ?? []
       }
     />
   );

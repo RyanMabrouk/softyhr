@@ -33,16 +33,6 @@ export const CreateNewEmployee = async (
       };
     }
 
-   /* const { error: profile_error } = await supbaseAdmin
-      .from("profiles")
-      .insert([
-        {
-          ...NewEmployeData,
-          org_name: org?.name,
-          user_id: user?.user?.id,
-        },
-      ]);*/
-      
       const { error: profile_error } = await createProfile({
         user_id: user?.user?.id,
         company: org?.name || "",

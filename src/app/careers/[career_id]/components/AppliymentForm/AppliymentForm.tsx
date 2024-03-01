@@ -12,6 +12,7 @@ import { usePathname, useRouter } from "next/navigation";
 import useHiringGuest from "@/app/careers/hooks/useHiringGuest";
 import { FormulateFormData } from "@/app/(dashboard)/Hiring/components/HiringTable/helpers/CountNewCandidates";
 import { GetQuestions } from "@/helpers/Hiring/GetQuestions";
+import getSession from "@/api/getSession";
 
 interface AppliymentFormPropsType {
   job: Hiring_type;
@@ -29,7 +30,7 @@ function AppliymentForm({
   const { toast } = useToast();
   const {
     Hiring: { data, isPending },
-  } = useHiringGuest({ id: job?.id });
+  } = useHiringGuest({ id: job?.id , "Job Status":"Open" });
   const QueryClient = useQueryClient();
   const router = useRouter();
   const pathname = usePathname();

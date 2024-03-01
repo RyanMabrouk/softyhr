@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import {
   Dropdown,
   DropdownTrigger,
@@ -8,8 +8,13 @@ import {
 } from "@nextui-org/react";
 import Link from "next/link";
 
+interface DropDownGenericOption {
+  link?: any;
+  actions?:()=>void;
+  Component: () => React.JSX.Element;
+}
 interface DropDownGenericPropsTYpe {
-  options: any[];
+  options: DropDownGenericOption[];
   DropDownButton: any;
 }
 

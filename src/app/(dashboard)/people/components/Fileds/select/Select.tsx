@@ -20,9 +20,8 @@ interface SelectInputPropsType {
   setSelectedKeys?: React.Dispatch<React.SetStateAction<string | null>>;
   dropDownDisplay?: boolean | undefined;
   className?: string | undefined;
+  renderOptionclassName?: string | undefined;
 }
-
-
 
 function SelectInput({
   RowField,
@@ -33,6 +32,7 @@ function SelectInput({
   setSelectedKeys,
   dropDownDisplay = true,
   className = "",
+  renderOptionclassName = "",
 }: SelectInputPropsType) {
   const [value, setValue] = useState<string>(String(defaultValue) || "");
 
@@ -46,7 +46,7 @@ function SelectInput({
     setValue(e.target.value);
     setSelectedKeys && setSelectedKeys(e.target.value);
   };
-
+  console.log(RowField);
   return (
     <div className="flex items-end justify-center gap-[1rem]">
       <div className={"relative flex  flex-col items-start justify-center"}>
@@ -61,12 +61,16 @@ function SelectInput({
           {RowField?.name}
         </label>
         <Select
+          color="success"
+          placeholder="- select -"
+          variant="outlined"
           labelId={"select-label"}
           required={RowField?.required}
           id={"select"}
           MenuProps={{ PaperProps: { style: { maxHeight: "15rem" } } }}
           sx={{
             border: "1px solid #D9D9D9",
+            minWidth: `${RowField?.minWidth} !important ` || "9rem",
             ".MuiSvgIcon-root ": {
               fill: "#686868 !important",
               backgroundColor: "#F4F4F4",
@@ -77,8 +81,8 @@ function SelectInput({
               top: 0,
               display: dropDownDisplay ? "block" : "none",
             },
-            ".MuiInputBase-inputAdornedEnd ":{
-              paddingRight:'55px'
+            ".MuiInputBase-inputAdornedEnd ": {
+              paddingRight: "55px",
             },
             height: "2rem",
             borderRadius: "0.2rem !important",
@@ -104,13 +108,17 @@ function SelectInput({
                 </h1>
               );
             }
-            return selected;
+            return (
+              <h1 className={`pr-[55px] ${renderOptionclassName}`}>
+                {selected}
+              </h1>
+            );
           }}
           displayEmpty
           defaultValue={defaultValue || ""}
           inputProps={{ "aria-label": "Without label" }}
           onChange={HandleChange}
-          className={` relative z-10 min-w-[9rem] text-[0.95rem] !font-normal !text-gray-13 ${minWidth ? `min-w-${minWidth}` : ""} [&_.MuiOutlinedInput-notchedOutline]:border-none ${className}`}
+          className={` relative z-10 min-w-[9rem]  text-[0.95rem] !font-normal !text-gray-13 ${minWidth ? `min-w-${minWidth}` : ""} [&_.MuiOutlinedInput-notchedOutline]:border-none ${className}`}
         >
           {RowField?.options?.map((element: any, index: number) => {
             return (
@@ -121,12 +129,20 @@ function SelectInput({
                 className="p-1 !text-gray-13"
                 key={index}
               >
-                <h1 className="text-[0.95rem] !font-normal !text-gray-13">
+                <h1 className="text-[0.95rem] !font-normal">
                   {element?.label || element?.name || element}
                 </h1>
               </MenuItem>
             );
           })}
+          {RowField?.addItem && (
+            <MenuItem
+              className="p-1 pr-4 !text-color5-500"
+              onClick={() => console.log("add item")}
+            >
+              + Add item
+            </MenuItem>
+          )}
         </Select>
         <input
           required={RowField?.required}

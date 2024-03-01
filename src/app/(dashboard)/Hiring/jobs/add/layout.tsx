@@ -67,7 +67,7 @@ const LayoutComponent = memo(function LayoutComponent({
         Application_Details: {
           ...ApplicationDetails?.values,
         },
-        Department:InformationJob?.values?.Department,
+        Department_id: Number(InformationJob?.values?.Department),
         job_Boards: { ...JobBoards?.values },
         org_name: user?.org_name,
         ...data?.[0]?.["AppliementForm"],
@@ -151,12 +151,13 @@ const LayoutComponent = memo(function LayoutComponent({
                     return (
                       <Link
                         aria-disabled={!stepValidation?.[path]?.done}
+                        tabIndex={!stepValidation?.[path]?.done ? -1 : undefined}
                         href={path}
                         className={
                           "flex items-center justify-center gap-[1rem] py-2 " +
                           (stepValidation?.[path]?.done
                             ? ""
-                            : " disabled !cursor-not-allowed")
+                            : " disabled !cursor-not-allowed ")
                         }
                         key={index}
                       >
