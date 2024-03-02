@@ -52,7 +52,7 @@ export default function UserInfo({ employeeId }: UserInfoPropsType) {
       request.status === "approved",
   );
   // get the policy of the current vacation
-  const policy: database_leave_policies_type = current_vacation
+  const policy = current_vacation
     ? leave_policies?.find(
         (p: database_leave_policies_type) =>
           p.id === current_vacation?.policy_id,
@@ -62,7 +62,7 @@ export default function UserInfo({ employeeId }: UserInfoPropsType) {
   const category = current_vacation
     ? leave_categories?.find(
         (c: databese_leave_categories_type) => c.id == policy?.categories_id,
-      )
+      ) ?? null
     : null;
   // generate the icon of the current vacation
   const icon = generateLeaveCategorieIcon({

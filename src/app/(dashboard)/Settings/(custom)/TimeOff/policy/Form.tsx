@@ -21,9 +21,10 @@ export function Form() {
     "type",
   ) as database_leave_policies_policy_type;
   const categories_id = useSearchParams().get("categories_id");
-  const track_time_unit = useCategorieTimeUnit({
-    categories_id: Number(categories_id),
-  });
+  const track_time_unit =
+    useCategorieTimeUnit({
+      categories_id: Number(categories_id),
+    }) ?? "hours";
   const queryClient = useQueryClient();
   const { mutate: insert, isPending } = useMutation({
     mutationFn: async (formData: FormData) => {

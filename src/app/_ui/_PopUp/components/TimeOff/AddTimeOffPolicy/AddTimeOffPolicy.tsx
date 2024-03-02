@@ -51,7 +51,8 @@ export default function AddTimeOffPolicy() {
   const options =
     leave_categories
       ?.filter((c: databese_leave_categories_type) => !c.disabled)
-      .reduce((acc: [], c: databese_leave_categories_type) => {
+      // @ts-ignore
+      .reduce((acc, c) => {
         const category_policies =
           leave_policies?.filter(
             (p: database_leave_policies_type) => p.categories_id === c.id,
@@ -62,7 +63,7 @@ export default function AddTimeOffPolicy() {
         return [
           ...acc,
           { group_name: c.name },
-          ...category_policies?.map((p: database_leave_policies_type) => ({
+          ...category_policies?.map((p) => ({
             label: p.name,
             value: p.id,
             disabled: current_policies?.includes(p.id),
@@ -86,7 +87,7 @@ export default function AddTimeOffPolicy() {
       const categories_id = leave_categories?.find(
         (c: databese_leave_categories_type) => c.id === policy?.categories_id,
       )?.id;
-      const { error } = current_categories?.includes(categories_id)
+      const { error } = current_categories?.includes(Number(categories_id))
         ? await changePolicy({
             old_policy_id: leave_balance?.find(
               (e: database_profile_leave_balance_type) =>
@@ -96,7 +97,7 @@ export default function AddTimeOffPolicy() {
             user_id: employeeId,
           })
         : await addLeavePolicy({
-            categories_id: categories_id,
+            categories_id: Number(categories_id),
             policy_id: policy_id,
             user_id: employeeId,
           });
@@ -152,6 +153,7 @@ export default function AddTimeOffPolicy() {
             required={true}
             group={true}
             inputLabel={lang?.["Time Off"]["-Select policies-"]}
+            // @ts-ignore
             options={options}
           />
         </div>

@@ -24,10 +24,9 @@ export default function EditLeaveCategory() {
   const {
     leave_categories: { data: leave_categories },
   } = useLeaveData();
-  const categories_data: databese_leave_categories_type =
-    leave_categories?.find(
-      (c: databese_leave_categories_type) => c.id === Number(categories_id),
-    );
+  const categories_data = leave_categories?.find(
+    (c: databese_leave_categories_type) => c.id === Number(categories_id),
+  );
   function turnIconsObjectToArray(object: any) {
     return Object.entries(object).map(([key, icon]: any) => ({
       value: key,
@@ -76,7 +75,7 @@ export default function EditLeaveCategory() {
       className="flex max-w-[50rem] flex-col gap-4 px-12 py-8"
       title={
         categories_id
-          ? `Edit ${capitalizeFirstLetter(categories_data?.name)}`
+          ? `Edit ${capitalizeFirstLetter(categories_data?.name ?? "")}`
           : "Add Time Off Category"
       }
     >

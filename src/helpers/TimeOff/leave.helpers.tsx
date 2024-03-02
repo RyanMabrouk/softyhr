@@ -12,7 +12,7 @@ export function generateLeaveCategorieIcon({
   className,
   iconName,
 }: {
-  categorie?: databese_leave_categories_type | undefined;
+  categorie?: databese_leave_categories_type | undefined | null;
   className: string;
   iconName?: string;
 }) {
@@ -29,6 +29,7 @@ export function generateLeaveCategorieIcon({
 export function formatTotalHoursToTimeUnit(
   total_hours: number,
   time_unit: databese_leave_categories_track_time_unit_type | string,
+
   {
     remove_time_unit,
     translated_unit,
