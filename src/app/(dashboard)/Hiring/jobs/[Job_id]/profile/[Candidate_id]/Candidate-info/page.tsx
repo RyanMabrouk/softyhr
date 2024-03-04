@@ -15,7 +15,7 @@ function Page() {
   const {
     candidates: { data, isPending },
   } = useCandidate({ id: Candidate_id });
-console.log(data?.[0]?.metadata?.Resume);
+console.log(data);
   return (
     <>
       {isPending ? (
@@ -23,8 +23,7 @@ console.log(data?.[0]?.metadata?.Resume);
       ) : (
         <div className="flex h-full w-full flex-col items-center justify-start">
           <div className="flex w-3/5 flex-col items-start justify-center gap-[2rem]">
-            {data?.[0]?.metadata?.Resume ||
-            data?.[0]?.metadata?.["Cover Letter"] ? (
+            
               <TabsPannelGeneric
                 TabsPannel={[
                   {
@@ -53,9 +52,6 @@ console.log(data?.[0]?.metadata?.Resume);
                   },
                 ]}
               />
-            ) : (
-              <></>
-            )}
             <ApplicationQuestions candidate={data?.[0]} />
           </div>
         </div>
