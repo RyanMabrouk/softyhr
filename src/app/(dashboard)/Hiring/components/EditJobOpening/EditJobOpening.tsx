@@ -59,9 +59,9 @@ function EditJobOpening({ text, id }: EditJobOpeningPropsType) {
               </div>
             ),
             link: {
-              pathname: pathname,
+              pathname: "/Hiring/jobs/edit/Application-Details",
               query: {
-                popup: "EDIT_APPLICATION_DETAILS",
+                id: String(id),
               },
             },
           },
@@ -73,9 +73,9 @@ function EditJobOpening({ text, id }: EditJobOpeningPropsType) {
               </div>
             ),
             link: {
-              pathname: pathname,
+              pathname: "/Hiring/jobs/edit/Job-Boards",
               query: {
-                popup: "EDIT_JOB_BOARDS",
+                id: String(id),
               },
             },
           },

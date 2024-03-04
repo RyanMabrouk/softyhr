@@ -64,7 +64,7 @@ function UserSection({ section, employeeId }: UserSection) {
     <>
       {isPending || user?.isPending ? (
         <div className="flex h-full w-full items-center justify-center ">
-          <Loader />
+          <Loader/>
         </div>
       ) : (
         <div className="flex h-full w-full flex-col items-start justify-start pb-10 pl-8">

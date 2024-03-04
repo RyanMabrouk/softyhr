@@ -113,7 +113,7 @@ function Form() {
     <>
       {isPending || candidate_isPending || profile_pending ? (
         <div className="flex h-[20rem] w-full items-center justify-center ">
-          <Loader />
+          <Loader/>
         </div>
       ) : (
         <div className="flex h-full w-full flex-col items-start justify-start pl-8">
@@ -136,7 +136,7 @@ function Form() {
                     <div className="flex flex-col items-start justify-center gap-[1rem]">
                       <FiledsChamps
                         champ={champ}
-                        //user={user?.data}
+                      //user={user?.data}
                         setTouched={setTouched}
                         key={rang || uuidv4()}
                         user={{ [champ]: candidate_data?.[0] }}

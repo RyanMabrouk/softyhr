@@ -1,5 +1,4 @@
-import getData from "@/api/getData";
-import getHiring from "@/api/Hiring/getHiring";
+import getHiringGuest from "@/api/Hiring/getHiringGuest";
 import { useQuery } from "@tanstack/react-query";
 
 export type MultipleValue =
@@ -24,7 +23,7 @@ export default function useHiringGuest(
   const queryKey: any = ["Hiring", page, filter, match].filter(
     Boolean,
   ) as QueryKeyType;
-  console.log(column);
+  console.log(match);
   const {
     data: Hiring,
     isPlaceholderData,
@@ -33,14 +32,14 @@ export default function useHiringGuest(
     queryKey: queryKey,
     queryFn: () =>
       page != undefined && rowsPerPage != undefined
-        ? getHiring("Hiring", {
+        ? getHiringGuest("Hiring", {
             match,
             StartPage: (page - 1) * rowsPerPage,
             EndPage: page * rowsPerPage,
             column: `${column || "*"},candidates(id,created_at)`,
             filter,
           })
-        : getHiring("Hiring", {
+        : getHiringGuest("Hiring", {
             match,
             filter,
             column,

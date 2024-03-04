@@ -115,28 +115,91 @@ export type Database = {
       }
       candidate_filter: {
         Row: {
+          application_date:
+            | Database["public"]["CompositeTypes"]["application_date"]
+            | null
           candidate_status:
             | Database["public"]["CompositeTypes"]["candidate_status"][]
             | null
           created_at: string
+          hiring_manager: string[] | null
           id: number
+          job_location: string[] | null
+          job_opportunity: string[] | null
+          job_status: string[] | null
           rating: Database["public"]["CompositeTypes"]["filter_range"] | null
+          source: string[] | null
         }
         Insert: {
+          application_date?:
+            | Database["public"]["CompositeTypes"]["application_date"]
+            | null
           candidate_status?:
             | Database["public"]["CompositeTypes"]["candidate_status"][]
             | null
           created_at?: string
+          hiring_manager?: string[] | null
           id?: number
+          job_location?: string[] | null
+          job_opportunity?: string[] | null
+          job_status?: string[] | null
           rating?: Database["public"]["CompositeTypes"]["filter_range"] | null
+          source?: string[] | null
         }
         Update: {
+          application_date?:
+            | Database["public"]["CompositeTypes"]["application_date"]
+            | null
           candidate_status?:
             | Database["public"]["CompositeTypes"]["candidate_status"][]
             | null
           created_at?: string
+          hiring_manager?: string[] | null
           id?: number
+          job_location?: string[] | null
+          job_opportunity?: string[] | null
+          job_status?: string[] | null
           rating?: Database["public"]["CompositeTypes"]["filter_range"] | null
+          source?: string[] | null
+        }
+        Relationships: []
+      }
+      candidate_sources: {
+        Row: {
+          created_at: string
+          id: number
+          name: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+          name?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          name?: string | null
+        }
+        Relationships: []
+      }
+      candidate_statuses: {
+        Row: {
+          created_at: string
+          group_name: string | null
+          id: number
+          name: string | null
+        }
+        Insert: {
+          created_at?: string
+          group_name?: string | null
+          id?: number
+          name?: string | null
+        }
+        Update: {
+          created_at?: string
+          group_name?: string | null
+          id?: number
+          name?: string | null
         }
         Relationships: []
       }
@@ -146,6 +209,7 @@ export type Database = {
           Email: string | null
           email_history: Json[] | null
           "First Name": string | null
+          full_name: string | null
           "Hiring Lead": string | null
           id: number
           job_id: number | null
@@ -162,6 +226,7 @@ export type Database = {
           Email?: string | null
           email_history?: Json[] | null
           "First Name"?: string | null
+          full_name?: string | null
           "Hiring Lead"?: string | null
           id?: number
           job_id?: number | null
@@ -178,6 +243,7 @@ export type Database = {
           Email?: string | null
           email_history?: Json[] | null
           "First Name"?: string | null
+          full_name?: string | null
           "Hiring Lead"?: string | null
           id?: number
           job_id?: number | null
@@ -203,6 +269,41 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "organizations"
             referencedColumns: ["name"]
+          }
+        ]
+      }
+      changes_pending: {
+        Row: {
+          comment_approval: string | null
+          created_at: string
+          id: number
+          NewData: Json | null
+          table_name: string | null
+          user_id: string | null
+        }
+        Insert: {
+          comment_approval?: string | null
+          created_at?: string
+          id?: number
+          NewData?: Json | null
+          table_name?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          comment_approval?: string | null
+          created_at?: string
+          id?: number
+          NewData?: Json | null
+          table_name?: string | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "public_Changes_pending_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["user_id"]
           }
         ]
       }
@@ -393,8 +494,9 @@ export type Database = {
           Hiring_Leader: string | null
           id: number
           "Job Status": string | null
-          job_Boards: Json | null
+          job_Boards: string | null
           job_information: Json | null
+          name: string | null
           org_name: string | null
           Questions: Json | null
         }
@@ -406,8 +508,9 @@ export type Database = {
           Hiring_Leader?: string | null
           id?: number
           "Job Status"?: string | null
-          job_Boards?: Json | null
+          job_Boards?: string | null
           job_information?: Json | null
+          name?: string | null
           org_name?: string | null
           Questions?: Json | null
         }
@@ -419,8 +522,9 @@ export type Database = {
           Hiring_Leader?: string | null
           id?: number
           "Job Status"?: string | null
-          job_Boards?: Json | null
+          job_Boards?: string | null
           job_information?: Json | null
+          name?: string | null
           org_name?: string | null
           Questions?: Json | null
         }
@@ -1116,6 +1220,10 @@ export type Database = {
         | "canceled"
     }
     CompositeTypes: {
+      application_date: {
+        startdate: string
+        enddate: string
+      }
       candidate_status: {
         name: string
         substatus: unknown

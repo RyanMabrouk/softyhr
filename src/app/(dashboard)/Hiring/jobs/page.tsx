@@ -60,7 +60,7 @@ function Page() {
           "",
         CreatedOn: new Date(Hiring?.created_at || "").toDateString() || "",
         department: Hiring?.Department?.name || "",
-        Location: Hiring?.job_information?.["Job Location"] || "",
+        Location: Hiring?.job_information?.["Job Location"] || "Remote",
         status: Hiring?.["Job Status"] || "",
       };
     },

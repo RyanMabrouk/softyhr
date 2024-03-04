@@ -4,9 +4,10 @@ import Loader from "../_ui/Loader/Loader";
 import JobopeningList from "./components/JobopeningList";
 import useHiring from "@/hooks/Hiring/useHiring";
 import Empty from "./components/Empty";
+import useHiringGuest from "./hooks/useHiringGuest";
 
 function Page() {
-  const { Hiring: data } = useHiring({ "Job Status": "Open" });
+  const { Hiring: data } = useHiringGuest({ "Job Status": "Open" });
   return (
     <div className="flex h-screen w-screen items-center justify-center bg-gray-14">
       {data?.data ? (

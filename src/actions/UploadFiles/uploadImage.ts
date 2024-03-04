@@ -10,7 +10,7 @@ export async function UploadImage(
   const logger = getLogger("*");
   logger.info("UploadImage_enter");
   const file = formdata.get(NameFormdata || "file");
-  const { error } = await UploadToBucket({
+  const { data, error } = await UploadToBucket({
     file,
     fileName: FileName,
     BucketName: Bucketname,

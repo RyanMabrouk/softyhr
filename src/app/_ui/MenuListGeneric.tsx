@@ -37,7 +37,7 @@ function MenuListGeneric({
           variant="outlined"
           data-placeholder-trigger="keydown"
           id={label}
-          className={` group peer h-9 w-[12.5rem] rounded-sm  border  border-gray-18  py-1 text-gray-23 shadow-sm transition-all ease-linear first-letter:capitalize placeholder:text-gray-14 hover:shadow-md [&_.Mui-selected]:!bg-fabric-700 [&_.MuiOutlinedInput-notchedOutline]:border-none ${className}`}
+          className={` group flex items-center justify-center peer h-9 w-[12.5rem] rounded-sm  border  border-gray-18  py-1 text-gray-23 shadow-sm transition-all ease-linear first-letter:capitalize placeholder:text-gray-14 hover:shadow-md [&_.Mui-selected]:!bg-fabric-700 [&_.MuiOutlinedInput-notchedOutline]:border-none ${className}`}
           displayEmpty
           required={required}
           sx={{
@@ -48,6 +48,8 @@ function MenuListGeneric({
               color: cursor,
             },
           }}
+          renderValue={(props)=>{console.log(props);
+            return"test"}}
         >
           {options?.map(
             ({ label, Icon, action }: Option, index: number): JSX.Element => {

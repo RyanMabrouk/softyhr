@@ -30,10 +30,7 @@ import RenamePolicy from "@/app/_ui/_PopUp/components/Settings/TimeOff/RenamePol
 import DeleteLeavePolicyData from "@/app/_ui/_PopUp/components/Settings/TimeOff/DeleteLeavePolicy/DeleteLeavePolicyData";
 import AddNewPolicy from "@/app/_ui/_PopUp/components/Settings/TimeOff/AddNewPolicy/AddNewPolicy";
 import AddEmployeesToPolicy from "@/app/_ui/_PopUp/components/Settings/TimeOff/AddEmployeesToPolicy/AddEmployeesToPolicy";
-import EditApplicationDetails from "@/app/_ui/_PopUp/components/Hiring/EditApplicationDetails/EditApplicationDetails";
-import EditJobInformation from "@/app/_ui/_PopUp/components/Hiring/EditJobInformation/EditJobInformation";
 import DeleteJob from "@/app/_ui/_PopUp/components/Hiring/DeleteJob/DeleteJob";
-import EditJobBoard from "@/app/_ui/_PopUp/components/Hiring/EditJobBoard/EditJobBoard";
 import HireCandidate from "@/app/_ui/_PopUp/components/Hiring/HireCandidate/HireCandidate";
 import DeleteFilesPopUp from "@/app/(dashboard)/Files/_ui/popUp/DeleteFilesPopUp";
 import CalculateLeaveBalance from "@/app/_ui/_PopUp/components/TimeOff/CalculateLeaveBalance/CalculateLeaveBalance";
@@ -76,9 +73,6 @@ export const popups: PopupType = {
   ADD_TIME_OFF_POLICY: AddTimeOffPolicy,
   CHANGE_ACCURAL_START_DATE: AccrualStartDate,
   DELETE_JOB: DeleteJob,
-  EDIT_JOB_INFORMATION: EditJobInformation,
-  EDIT_APPLICATION_DETAILS: EditApplicationDetails,
-  EDIT_JOB_BOARDS: EditJobBoard,
   HIRE_CANDIDATE: HireCandidate,
   CHANGE_DEFAULT_HOURS_PER_DAY: ChangeDefaultHoursPerDay,
   EDIT_LEAVE_CATEGORY: EditLeaveCategory,

@@ -58,18 +58,21 @@ export function CalendarRange({
       setEndValueInParent(date?.to ? new Date(date?.to) : null);
     }
   }, [date, setStartValueInParent, setEndValueInParent]);
+
   return (
     <div className="flex flex-col gap-1">
       <label
         htmlFor="date_range"
-        className={`text-gray-21" relative w-fit text-sm`}
+        className={`relative w-fit text-sm text-gray-21"`}
       >
         {label}
         {required && <span className="absolute -right-2 top-0 text-sm">*</span>}
       </label>
       <div
         className={cn(
-          `group grid w-fit gap-2 rounded-sm border  ${" focus-within:shadow-green border-gray-18"}`,
+          `group grid w-fit gap-2 rounded-sm border  ${
+             " focus-within:shadow-green border-gray-18"
+          }`,
           className,
         )}
       >
@@ -108,8 +111,8 @@ export function CalendarRange({
                 {date?.from && !InvalidDate(date?.from) ? (
                   date?.to && !InvalidDate(date?.to) ? (
                     <>
-                      {format(date.from, "LLL dd, y")} -{" "}
-                      {format(date.to, "LLL dd, y")}
+                      {format(date?.from, "LLL dd, y")} -{" "}
+                      {format(date?.to, "LLL dd, y")}
                     </>
                   ) : (
                     format(date.from, "LLL dd, y")

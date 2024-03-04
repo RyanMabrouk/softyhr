@@ -21,15 +21,23 @@ export default function useHiring(
   rowsPerPage?: number,
   filter?: string | null,
 ) {
-  const queryKey: any = ["Hiring", page, filter, match].filter(
-    Boolean,
-  ) as QueryKeyType;
+ 
+const querykey: any = ["Hiring"] as QueryKeyType;
+if (match && match?.id) {
+  querykey.push(match?.id);
+}
+if (page != undefined) {
+  querykey.push(page);
+}
+if (filter) {
+  querykey.push(filter);
+}
   const {
     data: Hiring,
     isPlaceholderData,
     isPending,
   } = useQuery({
-    queryKey: queryKey,
+    queryKey: querykey,
     queryFn: () =>
       page != undefined && rowsPerPage != undefined
         ? getHiring("Hiring", {

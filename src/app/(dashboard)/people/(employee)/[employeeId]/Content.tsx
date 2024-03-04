@@ -11,6 +11,7 @@ import avatar from "/public/default_avatar.png";
 import { SelectGeneric } from "@/app/_ui/SelectGeneric";
 import { IoMdSettings } from "react-icons/io";
 import RoleGuard from "@/app/_ui/RoleGuard";
+import DropDownGeneric from "@/app/_ui/DropDownGeneric";
 import useTranslation from "@/hooks/useTranslation";
 
 export function Content() {
@@ -48,12 +49,11 @@ export function Content() {
                 user?.["Basic Information"]?.["Last name"]}
             </h1>
             <div className={"flex h-10 gap-[1rem] "}>
-              <SelectGeneric
-                name="changementRequest"
-                inputLabel={lang?.["Personal"]?.["Request a change"] as string}
-                options={changementRequest}
-                className=" !border-[1px] !border-white !text-white"
-                cursor="white"
+              <DropDownGeneric
+                options={[]}
+                DropDownButton={()=>{
+                  
+                }}
               />
               <SelectGeneric
                 name="settings"

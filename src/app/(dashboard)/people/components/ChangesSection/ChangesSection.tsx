@@ -1,4 +1,5 @@
 "use client";
+import { useQueryClient } from "@tanstack/react-query";
 import Image from "next/image";
 import React from "react";
 import { useFormStatus } from "react-dom";
@@ -9,7 +10,7 @@ interface ChangesSectionPropsType {
   touched?: boolean;
   setTouched?: (arg: boolean) => void;
   SubmitTxt?: string | undefined;
-  OnCancelLink?: string | undefined;
+  OnCancelLink?:string | undefined;
   PendingSubmitTxt?: string | undefined;
 }
 
@@ -20,7 +21,7 @@ function ChangesSection({
   SubmitTxt,
 }: ChangesSectionPropsType) {
   const { pending } = useFormStatus();
-  //const queryClient = useQueryClient();
+  const queryClient = useQueryClient();
   const router = useRouter();
   return (
     <div className="fixed bottom-0 left-0 z-30 flex h-[5rem] w-full items-center justify-end  gap-[2rem] overflow-hidden border-t border-gray-19 bg-gray-14 px-10 delay-200 ease-in-out  ">
@@ -29,7 +30,7 @@ function ChangesSection({
           <button
             disabled={pending}
             className={
-              " cursor-pointer rounded-sm bg-fabric-700 px-2 py-2 font-semibold  text-white  transition-all ease-linear hover:!bg-fabric-600" +
+              " rounded-sm bg-fabric-700 px-2 py-2 font-semibold  text-white  transition-all ease-linear hover:!bg-fabric-600" +
               (pending ? "  animate-pulse " : "")
             }
             type="submit"
@@ -47,9 +48,9 @@ function ChangesSection({
             type="reset"
             className="cursor-pointer text-cyan-600 hover:underline"
             onClick={() => {
-              /*queryClient.invalidateQueries({ queryKey: ["profiles"] });*/
+              queryClient.invalidateQueries({ queryKey: ["profiles"] });
               setTouched && setTouched(false);
-              OnCancelLink ? router.push(OnCancelLink) : router.refresh();
+              OnCancelLink ? router.push(OnCancelLink) : router.refresh()
             }}
           >
             Cancel

@@ -2,6 +2,7 @@
 import getCurrentorg from "@/api/getCurrentOrg";
 import { Profile_Type } from "@/types/database.tables.types";
 import { createClient } from "@supabase/supabase-js";
+import { addFolder } from "../files/addFolder";
 import { getLogger } from "@/logging/log-util";
 import { createProfile } from "../auth/createProfile";
 export const CreateNewEmployee = async (
@@ -56,7 +57,7 @@ export const CreateNewEmployee = async (
         Message: "Error Creating User Profile",
       };
     }
-    /*const { error } = await addFolder(
+    const { error } = await addFolder(
       NewEmployeData?.["Basic Information"]?.["First name"] +
         " " +
         NewEmployeData?.["Basic Information"]?.["Last name"],
@@ -68,7 +69,7 @@ export const CreateNewEmployee = async (
         Error: profile_error,
         Message: "Error Creating User Profile",
       };
-    }*/
+    }
     logger.info("CreateNewEmployee_exit");
     return {
       Submitted: true,

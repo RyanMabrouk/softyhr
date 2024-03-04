@@ -23,6 +23,7 @@ function EmailForm() {
             return {
               email_object: old?.email_object || "",
               email_html: String(html) || "",
+              attachment: old?.attachment,
             };
           });
       };
@@ -38,6 +39,7 @@ function EmailForm() {
         return {
           email_html: old?.email_html || "",
           email_object: String(value) || "",
+          attachment:old?.attachment,
         };
       });
   };

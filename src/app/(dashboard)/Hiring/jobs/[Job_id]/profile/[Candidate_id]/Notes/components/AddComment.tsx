@@ -1,12 +1,12 @@
 import { CreateNewComment } from "@/actions/hiring/Comment/CreateNewComment";
-import avatar from "/public/default_avatar.png";
+import avatar from "/public/avatar.png";
+import useUserProfile from "@/hooks/useUserProfile";
 import { Avatar } from "antd";
 import Image from "next/image";
 import React, { memo, useRef, useState } from "react";
 import { FaLink } from "react-icons/fa";
 import useToast from "@/hooks/useToast";
 import { useQueryClient } from "@tanstack/react-query";
-import useData from "@/hooks/useData";
 
 interface AddCommentPropsType {
   AssignTo: string;
@@ -23,8 +23,8 @@ function AddComment({
   main = false,
 }: AddCommentPropsType) {
   const {
-    user_profile: { data, isPending },
-  } = useData();
+    profiles: { data, isPending },
+  } = useUserProfile();
   const { toast } = useToast();
   const formRef = useRef<HTMLFormElement>(null);
 
@@ -34,7 +34,7 @@ function AddComment({
     setAdded(true);
     const response = await CreateNewComment(
       String(formdata?.get("newComment")),
-      data?.user_id,
+      data?.data?.[0]?.user_id,
       AssignTo,
       reply_id,
     );
@@ -56,11 +56,13 @@ function AddComment({
             size={40}
             icon={
               <Image
-                alt={data?.["Basic Infomration"]?.["First name"] || "user"}
+                alt={
+                  data?.data?.[0]?.["Basic Infomration"]?.["First name"] ||
+                  "user"
+                }
                 width={100}
                 height={100}
-                className="rounded-full"
-                src={data?.picture || avatar}
+                src={data?.data?.[0]?.picture || avatar}
               />
             }
           />

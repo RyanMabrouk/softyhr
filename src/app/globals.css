@@ -186,3 +186,9 @@
 .blockbuilder-branding {
   display: none !important;
 }
+
+.shadow-black-top {
+  box-shadow: -1px -4px 11px -4px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: -1px -4px 11px -4px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: -1px -4px 11px -4px rgba(0, 0, 0, 0.1);
+}

@@ -3,6 +3,9 @@ import React, { useState } from "react";
 import { FaUserCircle } from "react-icons/fa";
 import HirePacket from "./components/HirePacket";
 import Form from "./components/form/Form";
+import AccessSection from "./components/AccessSection";
+import EmployementStatus from "./components/EmployementStatus";
+
 function Page() {
   const [checked, setChecked] = useState<boolean>(false);
 
