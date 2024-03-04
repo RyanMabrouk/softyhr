@@ -4,12 +4,11 @@ import RoleGuard from "@/app/_ui/RoleGuard";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
-import { AiFillLike } from "react-icons/ai";
 import { BsFillStopwatchFill } from "react-icons/bs";
 import { CgNotes } from "react-icons/cg";
 import { FaLock, FaWrench } from "react-icons/fa";
 import { IoMdSettings } from "react-icons/io";
-import { IoFileTrayFull } from "react-icons/io5";
+
 export default function Layout({
   children,
 }: {

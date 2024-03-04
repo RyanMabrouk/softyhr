@@ -25,13 +25,6 @@ function Layout({ children }: { children: React.ReactNode }) {
         <>
           <header className="mb-6 text-xl text-black opacity-85">Hiring</header>
           {JobSettingsRoutes?.map((Route, index) => {
-            console.log(
-              pathname?.includes(Route?.path) ||
-                (pathname == "/Settings/Jobs" &&
-                  Route?.label == JobSettingsRoutes[0]?.label),
-              Route,
-              pathname,
-            );
             return (
               <div key={"categories" + index} className="flex flex-col">
                 <Link

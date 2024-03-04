@@ -42,6 +42,7 @@ import AddEmployeesToRole from "@/app/_ui/_PopUp/components/Settings/AccessLevel
 import ChangeUserAcessLevel from "@/app/_ui/_PopUp/components/Settings/AccessLevels/ChangeUserAcessLevel/ChangeUserAcessLevel";
 import ChangeEmployeePassword from "@/app/_ui/_PopUp/components/Settings/AccessLevels/ChangeEmployeePassword/ChangeEmployeePassword";
 import DeleteRole from "@/app/_ui/_PopUp/components/Settings/AccessLevels/DeleteRole/deleteRole";
+import DeleteCandidateStatus from "@/app/_ui/_PopUp/components/Settings/Hiring/DeleteStatus/DeleteStatus";
 
 type PopupType = {
   [key: string]: () => React.JSX.Element;
@@ -91,4 +92,5 @@ export const popups: PopupType = {
   ADD_EMMPLOYEE_TO_ROLE: ChangeUserAcessLevel,
   RESET_EMPLOYEE_PASSWORD: ChangeEmployeePassword,
   DELETE_ROLE: DeleteRole,
+  DELETE_CANDIDATE_STATUS:DeleteCandidateStatus
 };
