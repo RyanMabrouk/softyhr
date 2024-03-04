@@ -116,12 +116,10 @@ export interface RowFieldType {
   required?: boolean;
   placeHolder?: string | undefined;
   type: string;
-  minWidth?: string | undefined ;
   Icon?: string | undefined;
   ExtraTxt?: string | undefined;
   accept?: string | undefined;
   allowFutureDates?: boolean | undefined;
-  addItem?:boolean | undefined;
   allowPreviousDates?: boolean | undefined;
   endDateName?: string | undefined;
   startDateName?: string | undefined;
@@ -146,7 +144,7 @@ export type Profile_Type = {
   Job?: ObjectOfStrings | null;
   "Job Information"?: job_information_Type[] | null;
   leave_balance?: leave_balance_Type[] | null;
-  org_name: string ;
+  org_name: string;
   role: string;
   "Social Links"?: ObjectOfStrings | null;
   "Stock Options"?: StockOptions_Type[] | null;
@@ -244,5 +242,3 @@ export type Driver_license_Type = {
   Classification?: string;
   "DMV Violations"?: string;
 };
-
-
