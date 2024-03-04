@@ -20,7 +20,7 @@ export default function FolderTitle() {
     enabled: wantedFoldersIds.length > 0,
   });
   const allFilesIds = wantedFolders
-    ?.map((fold: any) => fold.files)
+    ?.map((fold) => fold.files)
     .flat(2)
     .map((file) => file.id)
     .filter((id) => filesIds.includes(id));
@@ -36,13 +36,13 @@ export default function FolderTitle() {
   let isInAllFilesFolder = !searchParams.has("id");
 
   let wantedId = searchParams.get("id");
-  const { folder: wantedFolder }: any = useFolderData(wantedId);
+  const { folder: wantedFolder } = useFolderData(wantedId);
   const isPending = wantedFolder.isPending;
 
   const folderName = isInAllFilesFolder
     ? "All Files"
     : !isPending
-      ? wantedFolder?.data[0]?.name
+      ? wantedFolder?.data?.[0]?.name
       : null;
   // active user role
   const {
@@ -54,9 +54,9 @@ export default function FolderTitle() {
       : `(${allFilesIds?.length})`
     : role?.permissions.includes("read:files")
       ? !isPending &&
-        `(${wantedFolder?.data[0]?.files?.map((file: any) => file.id)?.length})`
+        `(${wantedFolder?.data?.[0]?.files?.map((file) => file.id)?.length})`
       : !isPending &&
-        `(${wantedFolder?.data[0]?.files?.map((file: any) => file.id).filter((id: any) => filesIds.includes(id))?.length})`;
+        `(${wantedFolder?.data?.[0]?.files?.map((file) => file.id).filter((id) => filesIds.includes(id))?.length})`;
 
   return (
     <p className="text-xl  text-color-primary-8">

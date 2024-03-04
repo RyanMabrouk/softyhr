@@ -1,7 +1,22 @@
+"use client";
 import getData from "@/api/getData";
+import {
+  database_files_type,
+  database_folder_type,
+} from "@/types/database.tables.types";
+import { PostgrestError } from "@supabase/supabase-js";
 import { useQuery } from "@tanstack/react-query";
 
-export default function useFolderData(folderId: any) {
+export default function useFolderData(folderId: any): {
+  folder: {
+    data:
+      | (database_folder_type & { files: database_files_type[] })[]
+      | null
+      | undefined;
+    error: PostgrestError | null | undefined;
+    isPending: boolean;
+  };
+} {
   //--------------------Folders--------------------
   const { data: folder, isPending } = useQuery({
     queryKey: ["folders", folderId],

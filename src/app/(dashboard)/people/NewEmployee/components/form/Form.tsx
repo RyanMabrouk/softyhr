@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { useSettings } from "@/hooks/Settings/useSettings";
+import { useSettings } from "@/hooks/useSettings";
 import { v4 as uuidv4 } from "uuid";
 import { sectionIcon } from "@/constants/userInfo";
 import { ChampsType } from "@/types/userInfoTypes.type";
@@ -12,14 +12,16 @@ import AccessSection from "../AccessSection";
 import { CreateNewEmployee } from "@/actions/hiring/CreateNewEmployee";
 import useCandidate from "@/hooks/Hiring/useCandidate";
 import formulateDataNewemployee from "../../utils/formulateData";
-import useUserProfile from "@/hooks/useUserProfile";
 import FiledsChamps from "../../../components/sections/FiledsChamps";
 import Loader from "@/app/_ui/Loader/Loader";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import useData from "@/hooks/useData";
 
 function Form() {
   const {
-    profiles: { data: profile_data, isPending: profile_pending },
-  } = useUserProfile("user_id");
+    user_profile: { data: profile_data, isPending: profile_pending },
+  } = useData();
+  const queryClient = useQueryClient();
   const { data, isPending } = useSettings("New_Employee");
   const { toast } = useToast();
   const [touched, setTouched] = useState<boolean>(true);
@@ -53,21 +55,8 @@ function Form() {
       },
     });
     //----create_new_user--and--submit_profile_data
-    const response = await CreateNewEmployee(
-      NewData,
-      NewData?.Contact?.["Work Email"] || "",
-    );
-    console.log(response);
-    if (response?.Submitted) {
-      toast.success(response?.Message);
-      router.push("/people/list");
-    } else toast.error(response?.Message);
-    setTouched(false);
+    CreateEmployeeMut(NewData);
   };
-
-
-
-
 
   //----------add_new_emplyee------
   const SubmitForm = async (formdata: FormData) => {
@@ -90,24 +79,36 @@ function Form() {
       data: {
         ...result,
         Job: { "Hire Date": new Date() },
-        supervisor_id: profile_data?.data?.[0]?.user_id || "",
+        supervisor_id: profile_data?.user_id || "",
       },
     });
     console.log("news data :", NewData);
 
     //----create_new_user--and--submit_profile_data
-    const response = await CreateNewEmployee(
-      NewData,
-      NewData?.Contact?.["Work Email"] || "",
-    );
-    if (response?.Submitted) {
-      toast.success(response?.Message);
-      router.push("/people/list");
-    } else toast.error(response?.Message);
-    setTouched(false);
+    CreateEmployeeMut(NewData);
   };
-
-  
+  const { mutate: CreateEmployeeMut, isPending: isCreatingEmployee } =
+    useMutation({
+      mutationFn: async (NewData: any) => {
+        const response = await CreateNewEmployee(
+          NewData,
+          NewData?.Contact?.["Work Email"] || "",
+        );
+        setTouched(false);
+        if (response?.Submitted) {
+          toast.success(response?.Message);
+          router.push("/people/list");
+        } else {
+          toast.error(response?.Message);
+          throw new Error(response?.Message);
+        }
+      },
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ["profiles"] });
+        queryClient.invalidateQueries({ queryKey: ["users_permissions"] });
+        router.push("/people/list");
+      },
+    });
   return (
     <>
       {isPending || candidate_isPending || profile_pending ? (

@@ -1,107 +1,96 @@
 "use client";
-
 import useProfiles from "@/hooks/useProfiles";
 import React, { useState, useEffect, useRef } from "react";
+import default_avatar from "/public/default_avatar.png";
+import { InputGeneric } from "@/app/_ui/InputGeneric";
+import {
+  database_files_type,
+  database_profile_type,
+} from "@/types/database.tables.types";
+import Image from "next/image";
 
-const SelectSharedUsers = ({ disabled, onSelect, selectedShared }: any) => {
+export default function SelectSharedUsers({
+  disabled,
+  onSelect,
+  selectedShared,
+}: {
+  selectedShared: database_profile_type[];
+  disabled: boolean;
+  onSelect: (user: database_profile_type) => void;
+}) {
   const {
     profiles: { data, isPending },
   } = useProfiles();
-
   const [isTyping, setIsTyping] = useState("");
-
-  const [selectedOption, setSelectedOption] = useState("");
-
   const [isDropdownOpen, setDropdownOpen] = useState(false);
-
-  const dropdownRef = useRef<HTMLDivElement>(null);
-
+  const handleOptionClick = (user: database_profile_type) => {
+    //setDropdownOpen(false);
+    //setIsTyping("");
+    if (
+      !selectedShared.some(
+        (e: database_profile_type) => e.user_id === user.user_id,
+      )
+    ) {
+      onSelect(user);
+    }
+  };
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target as Node)
-      ) {
-        setDropdownOpen(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
-
-  const handleOptionClick = (option: any) => {
-    setDropdownOpen(false);
-    setIsTyping("");
-    if (!selectedShared.includes(option)) onSelect?.(option);
-  };
-
-  const handleDropdownToggle = () => {
-    if (isTyping !== "") setDropdownOpen(true);
-  };
+    if (isTyping !== "" && !isDropdownOpen) setDropdownOpen(true);
+    else if (isTyping === "" && isDropdownOpen) setDropdownOpen(false);
+  }, [isTyping, isDropdownOpen]);
 
   return (
-    <div className={`relative inline-block  `}>
+    <div className={`relative inline-block `}>
       <div className="flex cursor-pointer items-center justify-between rounded-sm">
-        <input
-          type="text"
-          value={isTyping}
-          onChange={(e) => {
-            setIsTyping(e.target.value);
-            handleDropdownToggle();
-          }}
+        <InputGeneric
+          className=" !min-w-[15rem]"
+          name="search"
+          setValueInParent={setIsTyping}
           disabled={!disabled}
-          className="w-80 border border-stone-400 px-2 py-1 outline-1 transition-all duration-300 focus:outline-color1-300 "
-        ></input>
+        />
       </div>
       {isDropdownOpen && !isPending && (
         <div className="shadow-green absolute  z-50 mt-[0.1rem]  w-80 origin-top-right rounded-sm bg-white shadow-lg ring-1 ring-black ring-opacity-5">
           <div
-            ref={dropdownRef}
             className="h-52 overflow-y-scroll py-1"
             role="menu"
             aria-orientation="vertical"
             aria-labelledby="options-menu"
           >
             {data
-              // ?.filter(
-              //   (user: any) => !user.files_ids.includes(selectedShared.user_id),
-              // )
-              ?.filter((user: any) =>
-                user?.["Basic Information"]?.["First name"]
-                  .toUpperCase()
-                  .includes(isTyping.toUpperCase()),
+              ?.filter(
+                (user: any) =>
+                  user?.["Basic Information"]?.["First name"]
+                    .toUpperCase()
+                    .includes(isTyping.toUpperCase()) &&
+                  !selectedShared.some((e: any) => e.user_id === user.user_id),
               )
               .map((user: any) => (
                 <div
                   key={user.user_id}
-                  onClick={(e) => {
-                    e.preventDefault();
+                  onClick={() => {
                     handleOptionClick(user);
                   }}
-                  className={` flex cursor-pointer items-center gap-4 px-4 py-2 text-sm text-gray-700 transition-all duration-150 hover:bg-color-primary-8 hover:text-white ${
-                    selectedOption === user.user_id
-                      ? "bg-color-primary-8 text-white"
-                      : ""
-                  }`}
+                  className={`flex cursor-pointer items-center gap-2 px-4 py-2 text-sm text-gray-700 transition-all duration-150 ease-linear hover:bg-color-primary-8 hover:text-white `}
                   role="menuitem"
                 >
-                  {
+                  {user.picture ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
-                      src={
-                        user?.picture
-                          ? user?.picture
-                          : "https://raw.githubusercontent.com/bumbeishvili/Assets/master/Projects/D3/Organization%20Chart/general.jpg"
-                      }
-                      alt="user picture"
-                      className="h-8 w-8 rounded-full object-cover "
+                      src={user.picture}
+                      alt=""
+                      className="h-9 w-9 rounded-full  "
                     />
-                  }
-                  {`${user?.["Basic Information"]?.["First name"]}     ${user?.["Basic Information"]?.["Last name"]} `}
+                  ) : (
+                    <Image
+                      src={default_avatar}
+                      alt=""
+                      className="h-9 w-9 rounded-full  "
+                    />
+                  )}
+                  <span className="font-semibold">
+                    {`${user?.["Basic Information"]?.["First name"]}     ${user?.["Basic Information"]?.["Last name"]} `}
+                  </span>{" "}
                 </div>
               ))}
           </div>
@@ -109,6 +98,4 @@ const SelectSharedUsers = ({ disabled, onSelect, selectedShared }: any) => {
       )}
     </div>
   );
-};
-
-export default SelectSharedUsers;
+}

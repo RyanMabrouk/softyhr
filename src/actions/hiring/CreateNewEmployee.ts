@@ -33,18 +33,21 @@ export const CreateNewEmployee = async (
       };
     }
 
-      const { error: profile_error } = await createProfile({
-        user_id: user?.user?.id,
-        company: org?.name || "",
-        first_name:
-          NewEmployeData?.["Basic Information"]?.["First name"] || "user",
-        last_name:
-          NewEmployeData?.["Basic Information"]?.["Last name"] || "user",
-        email: NewEmployeData?.["Contact"]?.["Work Email"] || "",
-        custom_fields:NewEmployeData,
-        role_id:2
-      });
-        ;
+    const { error: profile_error } = await createProfile({
+      user_id: user?.user?.id,
+      company: org?.name || "",
+      first_name: NewEmployeData?.["Basic Information"]?.["First name"] || "",
+      last_name: NewEmployeData?.["Basic Information"]?.["Last name"] || "",
+      email: email,
+      tel: NewEmployeData?.["Contact"]?.["Mobile Phone"] || "",
+      job: NewEmployeData?.["Job Information"]?.[0]?.["Job Title"] || "",
+      role_id: 1, // must be changed
+      supervisor_id: NewEmployeData?.supervisor_id || null,
+      Division: NewEmployeData?.["Job Information"]?.[0]?.Division || "",
+      Department: NewEmployeData?.["Job Information"]?.[0]?.Department || "",
+      Location: NewEmployeData?.["Job Information"]?.[0]?.Location || "",
+      custom_fields: NewEmployeData as any,
+    });
     if (profile_error) {
       console.log(profile_error);
       logger.error(profile_error.message);

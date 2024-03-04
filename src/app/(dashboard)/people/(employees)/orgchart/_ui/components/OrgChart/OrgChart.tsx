@@ -88,7 +88,10 @@ export default function OrgChartComponent({
           icon: "https://to.ly/1yZnX",
           size: 30,
         },
-        template: `<div style="display: flex; justify-content: center; flex-direction: column; width: 100%; align-items: center; padding-top: 2px; margin-top: 40px;">
+        template: `<div style="display: flex;
+         justify-content: center; flex-direction: column;
+          width: 100%; align-items: center; padding-top: 2px;
+           margin-top: 40px;">
                 <button class="redirect" id=${d.id} style="
                             margin-top:15px;
                             font-size:16px;
@@ -97,9 +100,14 @@ export default function OrgChartComponent({
                        ">${d.name} </button>
                <div style="
                             margin-top:0px;
-                            font-size:11px;
+                            font-size:14px;
                             color:#858585;
-                       ">${d.positionName || ""} </div>              
+                       ">${d.positionName || ""} </div>  
+                       <div style="
+                       margin-top:0px;
+                       font-size:14px;
+                       color:#858585;
+                  ">${d.office || ""}</div>            
             </div>`,
         connectorLineColor: {
           red: 0,
@@ -119,7 +127,7 @@ export default function OrgChartComponent({
       .nodeWidth(() => 180)
       .nodeHeight(() => 150)
       .compactMarginBetween(() => 10)
-      .siblingsMargin(() => 30)
+      .siblingsMargin(() => 10)
       .nodeContent((d) => {
         const borderColor =
           // @ts-ignore

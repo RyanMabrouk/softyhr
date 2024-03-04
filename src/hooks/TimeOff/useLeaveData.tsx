@@ -1,7 +1,23 @@
 "use client";
 import getData from "@/api/getData";
+import {
+  database_leave_policies_type,
+  databese_leave_categories_type,
+} from "@/types/database.tables.types";
+import { PostgrestError } from "@supabase/supabase-js";
 import { useQuery } from "@tanstack/react-query";
-export default function useLeaveData() {
+export default function useLeaveData(): {
+  leave_policies: {
+    data: database_leave_policies_type[] | null | undefined;
+    error: PostgrestError | null | undefined;
+    isPending: boolean;
+  };
+  leave_categories: {
+    data: databese_leave_categories_type[] | null | undefined;
+    error: PostgrestError | null | undefined;
+    isPending: boolean;
+  };
+} {
   //----------------- Leave Policies--------------------
   const { data: leave_policies, isPending: isPending3 } = useQuery({
     queryKey: ["leave_policies"],

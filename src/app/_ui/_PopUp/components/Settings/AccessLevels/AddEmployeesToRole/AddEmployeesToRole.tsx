@@ -65,11 +65,11 @@ export default function AddEmployeesToRole() {
       if (error) {
         toast.error(error.message, error.type);
       } else {
-        toast.success("Employees added to policy successfully", "Success");
+        toast.success("Employees added to role successfully", "Success");
       }
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["permissions"] });
+      queryClient.invalidateQueries({ queryKey: ["users_permissions"] });
       Router.push(pathname);
     },
   });

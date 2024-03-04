@@ -14,10 +14,11 @@ import { PAGE_SIZE } from "@/constants/filesConstants";
 import getData from "@/api/getData";
 import useFoldersIds from "@/hooks/files/useFoldersIds";
 import useUserRole from "@/hooks/useUserRole";
+import { database_files_type } from "@/types/database.tables.types";
 
-export default function TableContent({ checkAll, setCheckAll }: any) {
-  const searchParams = useSearchParams();
-
+function useAllFiles(): {
+  data: database_files_type[] | undefined | null;
+} {
   const { data: allFilesAdmin } = useQuery({
     queryKey: ["files"],
     queryFn: () =>
@@ -25,7 +26,20 @@ export default function TableContent({ checkAll, setCheckAll }: any) {
         org: true,
       }),
   });
-  const allFilesIdsAdmin = allFilesAdmin?.data?.map((file: any) => file.id);
+  return {
+    data: allFilesAdmin?.data,
+  };
+}
+export default function TableContent({
+  checkAll,
+  setCheckAll,
+}: {
+  checkAll: boolean;
+  setCheckAll: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
+  const searchParams = useSearchParams();
+  const { data: allFilesAdmin } = useAllFiles();
+  const allFilesIdsAdmin = allFilesAdmin?.map((file) => file.id);
 
   const { wantedFoldersIds, filesIds } = useFoldersIds();
 
@@ -49,13 +63,11 @@ export default function TableContent({ checkAll, setCheckAll }: any) {
   let wantedId = searchParams.get("id");
 
   const queryClient = useQueryClient();
-  let filesIdArr: any = queryClient.getQueryData(["fileIds"])
-    ? queryClient.getQueryData(["fileIds"])
-    : [];
+  let filesIdArr: number[] | string[] =
+    queryClient.getQueryData(["fileIds"]) ?? [];
 
-  const { folder }: any = useFolderData(wantedId);
+  const { folder } = useFolderData(wantedId);
   const isPending = folder.isPending;
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   // active user role
   const {
     role: { data: role },
@@ -64,12 +76,10 @@ export default function TableContent({ checkAll, setCheckAll }: any) {
     () =>
       !isPending && wantedId
         ? role?.permissions.includes("read:files")
-          ? folder?.data[0]?.files &&
-            folder?.data[0]?.files.map((file: any) => file.id)
-          : folder?.data[0]?.files &&
-            folder?.data[0]?.files
-              .map((file: any) => file.id)
-              .filter((id: any) => filesIds.includes(id))
+          ? folder?.data?.[0]?.files.map((file) => file.id)
+          : folder?.data?.[0]?.files
+              .map((file) => file.id)
+              .filter((id) => filesIds.includes(id))
         : []
           ? role?.permissions.includes("read:files")
             ? allFilesIdsAdmin
@@ -85,16 +95,16 @@ export default function TableContent({ checkAll, setCheckAll }: any) {
       wantedId,
     ],
   );
-
-  function pushFileId(id: any) {
+  function pushFileId(id: number) {
+    // @ts-ignore
     filesIdArr.push(id);
     queryClient.setQueryData(["fileIds"], filesIdArr);
-    if (filesIdArr?.length === fileIds?.length) setCheckAll(true);
+    if (filesIdArr.length === fileIds?.length) setCheckAll(true);
   }
 
   function removeFileId(id: number) {
     filesIdArr = filesIdArr
-      .map((id: any) => +id)
+      .map((id) => +id)
       .filter((fileId: number) => fileId !== id);
     queryClient.setQueryData(["fileIds"], filesIdArr);
     if (checkAll) setCheckAll(false);
@@ -124,11 +134,7 @@ export default function TableContent({ checkAll, setCheckAll }: any) {
   const sortBy = { field, direction };
   const ids = fileIds;
 
-  const {
-    isLoading,
-    data: { data: files, count } = {},
-    error,
-  } = useQuery({
+  const { isLoading, data: { data: files, count } = {} } = useQuery({
     queryKey: ["files", sortBy, ids, wantedId, page],
     queryFn: () => getFiles({ sortBy, ids, page }),
   });
@@ -150,23 +156,25 @@ export default function TableContent({ checkAll, setCheckAll }: any) {
     <div className="relative mb-0 w-full">
       {isLoading ? (
         <LoaderFiles />
-      ) : filesArray?.length && fileIds.length ? (
-        filesArray.map((file: any) => {
-          return (
-            <FileBox
-              key={file.id}
-              file={file}
-              checkAll={checkAll}
-              setCheckAll={setCheckAll}
-              pushFileId={pushFileId}
-              removeFileId={removeFileId}
-            />
-          );
-        })
+      ) : filesArray?.length && fileIds?.length ? (
+        filesArray
+          .sort((a, b) => a.name.localeCompare(b.name))
+          .map((file) => {
+            return (
+              <FileBox
+                key={file.id}
+                file={file}
+                checkAll={checkAll}
+                setCheckAll={setCheckAll}
+                pushFileId={pushFileId}
+                removeFileId={removeFileId}
+              />
+            );
+          })
       ) : (
         <FolderEmpty />
       )}
-      {filesArray?.length && fileIds.length ? (
+      {filesArray?.length && fileIds?.length ? (
         <Pagination count={Number(count)} page={page} handlePage={handlePage} />
       ) : null}
     </div>

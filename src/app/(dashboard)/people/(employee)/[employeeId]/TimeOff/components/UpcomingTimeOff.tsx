@@ -23,6 +23,7 @@ import useEmployeeData from "@/hooks/useEmloyeeData";
 import useLeaveData from "@/hooks/TimeOff/useLeaveData";
 import Loader from "@/app/_ui/Loader/Loader";
 import RoleGuard from "@/app/_ui/RoleGuard";
+import useTranslation from "@/hooks/useTranslation";
 type upcoming_leave_requests_data_type = {
   id: number;
   start_at: Date;
@@ -38,14 +39,14 @@ type upcoming_leave_requests_data_type = {
 };
 export function UpcomingTimeOff() {
   const { employeeId } = useParams();
+  const { lang } = useTranslation();
   const {
-    leave_categories: { data: leave_categories, isPending: isPending3 },
-    leave_policies: { data: leave_policies, isPending: isPending4 },
+    leave_categories: { data: leave_categories },
+    leave_policies: { data: leave_policies },
   } = useLeaveData();
   const {
-    leave_requests: { data: leave_requests, isPending: isPending2 },
+    leave_requests: { data: leave_requests },
   } = useEmployeeData({ employeeId: String(employeeId) });
-  const isPending = isPending2 || isPending3 || isPending4;
   // format leave requests data to upcoming leave requests only
   const upcoming_leave_requests_data:
     | upcoming_leave_requests_data_type[]
@@ -67,7 +68,7 @@ export function UpcomingTimeOff() {
       const policy = leave_policies?.find(
         (p: database_leave_policies_type) => p.id === e.policy_id,
       );
-      const categorie: databese_leave_categories_type = leave_categories?.find(
+      const categorie = leave_categories?.find(
         (categorie: databese_leave_categories_type) =>
           categorie.id === policy?.categories_id,
       );
@@ -86,7 +87,11 @@ export function UpcomingTimeOff() {
         }),
         duration: formatTotalHoursToTimeUnit(
           duration_used,
-          categorie?.track_time_unit,
+          categorie?.track_time_unit ?? "hours",
+          {
+            translated_unit:
+              lang?.["Time Off"]?.[categorie?.track_time_unit ?? "hours"],
+          },
         ),
         duration_used:
           e.duration_used as database_leave_request_duration_used_type[],
@@ -172,7 +177,7 @@ export function UpcomingTimeOff() {
           ))
         ) : (
           <div className=" relative box-border line-clamp-2  h-[3.25rem] w-max  max-w-[25rem]  overflow-hidden text-ellipsis px-4 pt-3 text-left align-top text-gray-27  ">
-            There is no Upcoming Time offs..
+            {lang?.["Time Off"]["There is no Upcoming Time offs.."]}
           </div>
         )}
       </div>

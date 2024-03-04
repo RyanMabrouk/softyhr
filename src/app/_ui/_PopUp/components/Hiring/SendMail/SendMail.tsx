@@ -28,13 +28,13 @@ function Component() {
   const [show, setShow] = useState<boolean>(false);
   const { toast } = useToast();
   const { FullName, isPending, data } = useCandidateFullName(id);
-  const {
-    profiles: { data: user_data, error },
-  } = useUserProfile();
 
   const { Mail } = useContext<MailContextType>(MailContext);
-    console.log(Mail);
-  console.log(data);
+  const {
+    user_profile: { data: user_data },
+  } = useData();
+
+
   const queryClient = useQueryClient();
   const SendMailHandler = async () => {
     const response = await sendMail(
@@ -51,7 +51,7 @@ function Component() {
       {
         email: data?.Email,
         email_object: Mail?.email_object,
-        user_sender: user_data?.data?.[0]?.user_id,
+        user_sender: user_data?.user_id,
         candidate_receiver: id,
       },
     ]);

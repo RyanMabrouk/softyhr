@@ -114,8 +114,8 @@ export function CalendarRange({
                 {date?.from && !InvalidDate(date?.from) ? (
                   date?.to && !InvalidDate(date?.to) ? (
                     <>
-                      {format(date?.from, "LLL dd, y")} -{" "}
-                      {format(date?.to, "LLL dd, y")}
+                      {format(date.from, "LLL dd, y")} -{" "}
+                      {format(date.to, "LLL dd, y")}
                     </>
                   ) : (
                     format(date.from, "LLL dd, y")
@@ -126,7 +126,7 @@ export function CalendarRange({
               </div>
             </Button>
           </PopoverTrigger>
-          <PopoverContent className="w-auto p-0" align="start">
+          <PopoverContent className="w-[auto] p-0" align="start">
             <Calendar
               id="date_range"
               initialFocus

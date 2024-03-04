@@ -46,7 +46,6 @@ import DeleteRole from "@/app/_ui/_PopUp/components/Settings/AccessLevels/Delete
 type PopupType = {
   [key: string]: () => React.JSX.Element;
 };
-
 export const popups: PopupType = {
   EDIT_FIELD: EditFields,
   EDIT_LEAVE_REQUEST: EditLeaveRequest,

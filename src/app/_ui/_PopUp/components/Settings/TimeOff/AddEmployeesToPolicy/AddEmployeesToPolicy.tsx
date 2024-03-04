@@ -84,6 +84,7 @@ export default function AddEmployeesToPolicy() {
         current_id: current_policy?.id ?? null,
       };
     });
+  
   //-------------------Drag and Drop--------------------------------
   const [employees, setEmployees] = useState<usersWithoutCurrentId[]>(
     usersWithoutCurrentPolicy ?? [],

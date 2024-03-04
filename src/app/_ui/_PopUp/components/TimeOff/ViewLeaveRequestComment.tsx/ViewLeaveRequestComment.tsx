@@ -93,7 +93,7 @@ function ViewLeaveRequestComment() {
                     acc + Number(e.duration),
                   0,
                 ),
-                leave_category_data?.track_time_unit,
+                leave_category_data?.track_time_unit ?? "hours",
               )} of ${leave_category_data?.name}`}
             </div>
           </div>

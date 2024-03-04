@@ -20,6 +20,10 @@ import SelectSharedUsers from "../components/SelectSharedUsers";
 import { IoMdCloseCircleOutline } from "react-icons/io";
 import useProfiles from "@/hooks/useProfiles";
 import { addFiletoUser } from "@/actions/files/addFiletoUser";
+import Image from "next/image";
+import default_avatar from "/public/default_avatar.png";
+import CancelBtnGeneric from "@/app/_ui/CancelBtnGeneric";
+
 interface FileObject {
   size: number;
   name: string;
@@ -219,13 +223,8 @@ export default function UploadFilePopUp() {
                   `}
                 >
                   {
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img
-                      src={
-                        user?.picture
-                          ? user?.picture
-                          : "https://raw.githubusercontent.com/bumbeishvili/Assets/master/Projects/D3/Organization%20Chart/general.jpg"
-                      }
+                    <Image
+                      src={user?.picture ?? default_avatar}
                       alt="user picture"
                       className="h-8 w-8 rounded-full object-cover "
                     />
@@ -255,16 +254,12 @@ export default function UploadFilePopUp() {
             <ButtonPopUp check={!isThereFile} disabled={isAddingFile}>
               Upload
             </ButtonPopUp>
-            <button
-              className="cursor-pointer text-color5-500 hover:underline "
-              type="button"
+            <CancelBtnGeneric
               onClick={() => {
                 queryClient.setQueryData(["fileIds"], []);
                 Router.push(pathname);
               }}
-            >
-              Cancel
-            </button>
+            />
           </div>
         </form>
       </PopUpSkeleton>

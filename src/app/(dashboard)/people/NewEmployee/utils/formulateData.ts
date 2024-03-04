@@ -20,7 +20,7 @@ export default function formulateDataNewemployee(formdata: FormData, user: userT
       });
     }
   });
- /* data["Job Information"] = [{...data["Job Information"], id: uuidv4()}];
-  data["Compensation"] = [{...data["Compensation"], id: uuidv4()}];*/
+  data["Job Information"] = [{...data["Job Information"], id: uuidv4()}];
+  data["Compensation"] = [{...data["Compensation"], id: uuidv4()}];
   return { ...user?.data, ...data };
 }

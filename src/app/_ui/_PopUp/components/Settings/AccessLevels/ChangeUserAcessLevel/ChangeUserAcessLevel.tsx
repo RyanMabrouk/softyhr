@@ -70,7 +70,7 @@ export default function ChangeUserAcessLevel() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ["permissions"],
+        queryKey: ["users_permissions"],
       });
       Router.push(pathname);
     },

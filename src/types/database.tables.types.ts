@@ -6,7 +6,7 @@ export type database_notifications_type =
 // Permesssions
 
 export type database_permissions_type =
-  Database["public"]["Tables"]["permissions"]["Row"];
+  Database["public"]["Tables"]["users_permissions"]["Row"];
 // Roles
 export type database_roles_type = Database["public"]["Tables"]["roles"]["Row"];
 // leave balance
@@ -44,10 +44,14 @@ export type database_profile_type =
 
 export type database_profile_type_insert =
   Database["public"]["Tables"]["profiles"]["Insert"];
-
+// files types
+export type database_files_type = Database["public"]["Tables"]["files"]["Row"];
+export type database_folder_type =
+  Database["public"]["Tables"]["folders"]["Row"];
 //---------organizations_types----------
 
-export type organizations_type = Database["public"]["Tables"]["organizations"]["Row"];
+export type organizations_type =
+  Database["public"]["Tables"]["organizations"]["Row"];
 
 //-----------Depatment_types-------------
 

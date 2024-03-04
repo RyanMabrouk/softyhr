@@ -2,13 +2,15 @@ import React from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { TbPlusMinus } from "react-icons/tb";
+import useTranslation from "@/hooks/useTranslation";
 
 export function AdjustLeavePolicyBalanceBtn({ id }: { id: number }) {
   const pathname = usePathname();
+  const { lang } = useTranslation();
   return (
     <Link
       className="tooltip tooltip-bottom "
-      data-tip="Adjust balance"
+      data-tip={lang?.["Time Off"]["Adjust balance"]}
       href={{
         pathname: pathname,
         query: { leave_policy_id: id, popup: "ADJUST_LEAVE_POLICY_BALANCE" },

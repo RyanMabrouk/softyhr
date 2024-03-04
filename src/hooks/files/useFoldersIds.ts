@@ -1,5 +1,4 @@
 "use client";
-import useData from "@/hooks/useData";
 import { useQuery } from "@tanstack/react-query";
 import GetFilesByIDs from "../../actions/files/getFiles";
 import usePermissions from "@/hooks/usePermissions";
@@ -14,7 +13,7 @@ function useFoldersIds() {
   const { isLoading, data: { data: wantedFiles } = {} } = useQuery({
     queryKey: [filesIds],
     queryFn: async () => await GetFilesByIDs(filesIds),
-    enabled: !isPending_user && filesIds?.length > 0,
+    enabled: !isPending_user && filesIds.legnth > 0,
   });
   const duplicatedFoldersIds: any = isLoading
     ? []

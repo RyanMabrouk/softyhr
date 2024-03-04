@@ -5,7 +5,11 @@ import React, { MouseEvent, useState } from "react";
 
 import { BiSolidCabinet } from "react-icons/bi";
 
-export default function AllFilesFolderBox({ setCheckAll }: any) {
+export default function AllFilesFolderBox({
+  setCheckAll,
+}: {
+  setCheckAll: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
   const [isHovered, setIsHovered] = useState(false);
 
   const searchParams = useSearchParams();

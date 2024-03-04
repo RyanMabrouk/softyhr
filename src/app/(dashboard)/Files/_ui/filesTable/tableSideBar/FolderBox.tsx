@@ -11,8 +11,18 @@ import { useQueryClient } from "@tanstack/react-query";
 import useFoldersIds from "@/hooks/files/useFoldersIds";
 import RoleGuard from "@/app/_ui/RoleGuard";
 import useUserRole from "@/hooks/useUserRole";
+import {
+  database_files_type,
+  database_folder_type,
+} from "@/types/database.tables.types";
 
-export default function FolderBox({ folder, setCheckAll }: any) {
+export default function FolderBox({
+  folder,
+  setCheckAll,
+}: {
+  folder: database_folder_type & { files: database_files_type[] };
+  setCheckAll: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
   let { id, name, files } = folder;
   const { filesIds } = useFoldersIds();
   // active user role
@@ -20,21 +30,20 @@ export default function FolderBox({ folder, setCheckAll }: any) {
     role: { data: role },
   } = useUserRole();
   const numFiles = role?.permissions.includes("read:files")
-    ? files?.map((file: any) => file.id)?.length
-    : files
-        ?.map((file: any) => file.id)
-        .filter((id: any) => filesIds.includes(id))?.length;
+    ? files?.map((file) => file.id)?.length
+    : files?.map((file) => file.id).filter((id) => filesIds.includes(id))
+        ?.length;
 
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
 
   const [isHovered, setIsHovered] = useState(false);
-  const [selectedOption, setSelectOption] = useState(null);
+  const [selectedOption, setSelectOption] = useState<string | null>(null);
 
   useEffect(() => {
     if (selectedOption === "rename") {
-      replace(`Files?popup=RENAME_FOLDER&id=${id}`);
+      replace(`Files?popup=RENAME_FOLDER&id=${id}&folderName=${name}`);
       handleSelectedOption(null);
     }
     if (selectedOption === "share") {
@@ -47,7 +56,7 @@ export default function FolderBox({ folder, setCheckAll }: any) {
     }
   }, [selectedOption, replace, name, id]);
 
-  function handleSelectedOption(option: any) {
+  function handleSelectedOption(option: string | null) {
     setSelectOption(option);
   }
 
@@ -60,13 +69,13 @@ export default function FolderBox({ folder, setCheckAll }: any) {
 
   const queryClient = useQueryClient();
 
-  function handleClick(term: any) {
+  function handleClick(term: number) {
     setCheckAll(false);
     queryClient.setQueryData(["fileIds"], []);
     const params = new URLSearchParams(searchParams);
     params.delete("folderName");
     if (term) {
-      params.set("id", term);
+      params.set("id", String(term));
     } else {
       params.delete("id");
     }
@@ -100,19 +109,16 @@ export default function FolderBox({ folder, setCheckAll }: any) {
       onClick={() => handleClick(folder.id)}
       ref={drop}
     >
-      {isHovered || isOver ? (
-        <button className=" flex w-full items-center  gap-3 text-base  text-stone-500 transition-all  duration-300 hover:text-color-primary-8">
+      <button className="  flex w-full flex-row items-center gap-3  text-left text-base  text-stone-500 transition-all  duration-300 hover:text-color-primary-8">
+        {isHovered || isOver ? (
           <IoFolderOpenSharp fontSize="1.3rem" fill="#527A01" />
-          {name}
-          <span className="text-sm text-stone-400"> ({numFiles})</span>
-        </button>
-      ) : (
-        <button className="flex w-full items-center   gap-3 text-base  text-stone-500 transition-all  duration-300 hover:text-color-primary-8">
+        ) : (
           <FaFolder fontSize="1.3rem" fill="#777" />
-          {name}
-          <span className="text-sm text-stone-400"> ({numFiles})</span>
-        </button>
-      )}
+        )}
+        <span className="line-clamp-1">{name}</span>
+        <span className="text-sm text-stone-400"> ({numFiles})</span>
+      </button>
+
       <RoleGuard permissions={["delete:files"]}>
         <FilesSelectArrowDown
           options={options}

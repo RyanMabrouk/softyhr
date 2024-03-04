@@ -58,9 +58,6 @@ export function CalendarRange({
       setEndValueInParent(date?.to ? new Date(date?.to) : null);
     }
   }, [date, setStartValueInParent, setEndValueInParent]);
-                
-                  console.log(date);
-                
 
   return (
     <div className="flex flex-col gap-1">

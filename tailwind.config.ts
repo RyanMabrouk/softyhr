@@ -55,6 +55,14 @@ const config: Config = {
         "2xl": "1400px",
       },
     },
+    screens: {
+      "1880": "1880px",
+      "1860": "1860px",
+      "1840": "1840px",
+      "1690": "1690px",
+      "1660": "1660px",
+      "1400": "1400px",
+    },
     extend: {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -251,6 +259,7 @@ const config: Config = {
         "gray-39": "#aaa",
         "gray-40": "#F9F9F9",
         "gray-41": "#cbcbcb",
+        "gray-42": "#DCDCDC",
 
         "color-teal-2": "#284D59",
 
