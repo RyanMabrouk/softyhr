@@ -3,7 +3,7 @@ import React from "react";
 import { FaCheck } from "react-icons/fa6";
 import { useAcceptLeaveRequest } from "../../hooks/useAcceptLeaveRequest";
 import { request_type } from "../../types/types";
-import useTranslation from "@/hooks/useTranslation";
+import useTranslation from "@/translation/useTranslation";
 export function AcceptRequestBtn({ request }: { request: request_type }) {
   const { accept } = useAcceptLeaveRequest({
     request: request,

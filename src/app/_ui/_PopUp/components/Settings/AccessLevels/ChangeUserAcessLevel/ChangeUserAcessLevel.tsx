@@ -9,11 +9,11 @@ import { capitalizeFirstLetter } from "@/helpers/string.helpers";
 import { SelectGeneric } from "@/app/_ui/SelectGeneric";
 import { SubmitBtn } from "@/app/_ui/SubmitBtn";
 import CancelBtnGeneric from "@/app/_ui/CancelBtnGeneric";
-import useRoles from "@/hooks/useRoles";
+import useRoles from "@/hooks/Roles/useRoles";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import useToast from "@/hooks/useToast";
 import addEmployeeToRole from "@/actions/settings/AccessLevels/addEmployeeToRole";
-import useAllPermissions from "@/hooks/useAllPermissions";
+import useAllPermissions from "@/hooks/Roles/useAllPermissions";
 export default function ChangeUserAcessLevel() {
   const searchParams = useSearchParams();
   const pathname = usePathname();

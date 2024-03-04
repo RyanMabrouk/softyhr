@@ -1,7 +1,7 @@
 "use client";
 import React, { ReactNode } from "react";
 import { Hr } from "../Hr";
-import useTranslation from "@/hooks/useTranslation";
+import useTranslation from "@/translation/useTranslation";
 
 interface ISorter<T> {
   property: Extract<keyof T, string | number | Date>;

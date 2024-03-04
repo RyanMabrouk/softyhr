@@ -1,7 +1,7 @@
 import PopUpSkeleton from "@/app/_ui/_PopUp/PopUpSkeleton";
-import useAllPermissions from "@/hooks/useAllPermissions";
+import useAllPermissions from "@/hooks/Roles/useAllPermissions";
 import useProfiles from "@/hooks/useProfiles";
-import useRoles from "@/hooks/useRoles";
+import useRoles from "@/hooks/Roles/useRoles";
 import { useParams, usePathname, useRouter } from "next/navigation";
 import React from "react";
 import { MdPerson } from "react-icons/md";

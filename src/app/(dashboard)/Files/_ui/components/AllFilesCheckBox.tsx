@@ -6,7 +6,7 @@ import useFolderData from "@/hooks/files/useFolderData";
 import GetFoldersByIDs from "@/actions/files/getFolders";
 import getData from "@/api/getData";
 import useFoldersIds from "@/hooks/files/useFoldersIds";
-import useUserRole from "@/hooks/useUserRole";
+import useUserRole from "@/hooks/Roles/useUserRole";
 export default function AllFilesCheckBox({
   checkAll,
   setCheckAll,

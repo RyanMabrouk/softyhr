@@ -1,7 +1,7 @@
 "use client";
 import { useQuery } from "@tanstack/react-query";
 import GetFilesByIDs from "../../actions/files/getFiles";
-import usePermissions from "@/hooks/usePermissions";
+import usePermissions from "@/hooks/Roles/usePermissions";
 
 function useFoldersIds() {
   const {

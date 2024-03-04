@@ -1,39 +1,43 @@
-export const EmployeeRoute: EmployeRoutesType[] = [
-  {
-    rang: 1,
-    label: "Personal",
-    path: (employeId: string) => `/people/${employeId}/personnal`,
-    defaultPath: true,
-    RoleGuard: {
-      permissions: [],
-      strict: true,
+import useTranslation from "@/translation/useTranslation";
+
+export function useEmployeeRoute(): EmployeRoutesType[] {
+  const { lang } = useTranslation();
+  return [
+    {
+      rang: 1,
+      label: lang?.["Personal"]?.["Personal"] as string,
+      path: (employeId: string) => `/people/${employeId}/personnal`,
+      defaultPath: true,
+      RoleGuard: {
+        permissions: [],
+        strict: true,
+      },
     },
-  },
-  {
-    rang: 2,
-    label: "Job",
-    path: (employeId: string) => `/people/${employeId}/job`,
-    defaultPath: true,
-    RoleGuard: {
-      permissions: [],
-      strict: true,
+    {
+      rang: 2,
+      label: lang?.["Job"]?.["Job"] as string,
+      path: (employeId: string) => `/people/${employeId}/job`,
+      defaultPath: true,
+      RoleGuard: {
+        permissions: [],
+        strict: true,
+      },
     },
-  },
-  {
-    rang: 3,
-    label: "Time off",
-    path: (employeId: string) => `/people/${employeId}/TimeOff`,
-    defaultPath: true,
-    RoleGuard: {
-      permissions: [
-        "read:Employees policies",
-        "read:Employees upcoming time off",
-        "read:Employees history",
-      ],
-      strict: false,
+    {
+      rang: 3,
+      label: lang?.["Time Off"]["Time Off"] as string,
+      path: (employeId: string) => `/people/${employeId}/TimeOff`,
+      defaultPath: true,
+      RoleGuard: {
+        permissions: [
+          "read:Employees policies",
+          "read:Employees upcoming time off",
+          "read:Employees history",
+        ],
+        strict: false,
+      },
     },
-  },
-  /*{
+    /*{
     rang: 4,
     label: "Performance",
     path: (employeId: string) => `/people/${employeId}/Performance`,
@@ -63,7 +67,8 @@ export const EmployeeRoute: EmployeRoutesType[] = [
     path: (employeId: string) => `/people/${employeId}/COVID-19`,
     defaultPath: true,
   },*/
-];
+  ];
+}
 
 export interface EmployeRoutesType {
   rang: number;

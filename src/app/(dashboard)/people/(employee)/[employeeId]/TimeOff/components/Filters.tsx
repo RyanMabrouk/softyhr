@@ -5,7 +5,7 @@ import { historyTableFiltersContextType } from "../context/historyTableFilters";
 import { leave_data_types } from "./History/History";
 import { capitalizeFirstLetter } from "@/helpers/string.helpers";
 import { SelectGeneric } from "@/app/_ui/SelectGeneric";
-import useTranslation from "@/hooks/useTranslation";
+import useTranslation from "@/translation/useTranslation";
 interface FiltersProps {
   data: leave_data_types;
 }

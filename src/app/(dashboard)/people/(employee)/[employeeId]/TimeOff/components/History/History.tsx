@@ -15,7 +15,7 @@ import { useParams } from "next/navigation";
 import useEmployeeData from "@/hooks/useEmloyeeData";
 import useLeaveData from "@/hooks/TimeOff/useLeaveData";
 import useProfiles from "@/hooks/useProfiles";
-import useTranslation from "@/hooks/useTranslation";
+import useTranslation from "@/translation/useTranslation";
 import { TablesToggle } from "./TablesToggle";
 export interface leave_data {
   user_id: string;
@@ -130,7 +130,6 @@ export function History() {
           <TablesToggle
             leave_requests_data={leave_requests_data}
             leave_accrued_data={leave_accrued_data}
-            leave_categories={leave_categories}
           />
         </>
       ) : (

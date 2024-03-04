@@ -1,5 +1,5 @@
 "use client";
-import useUserRole from "@/hooks/useUserRole";
+import useUserRole from "@/hooks/Roles/useUserRole";
 import React from "react";
 export default function RoleGuard({
   children,

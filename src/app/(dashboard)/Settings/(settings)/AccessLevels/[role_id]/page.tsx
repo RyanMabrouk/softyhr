@@ -1,13 +1,13 @@
 "use client";
 import { HistoryTable } from "@/app/(dashboard)/people/(employee)/[employeeId]/TimeOff/components/History/HistoryTable";
-import useRoles from "@/hooks/useRoles";
+import useRoles from "@/hooks/Roles/useRoles";
 import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
 import React from "react";
 import { FaLock, FaPen } from "react-icons/fa";
 import { MdOutlineAddCircle } from "react-icons/md";
 import useProfiles from "@/hooks/useProfiles";
-import useAllPermissions from "@/hooks/useAllPermissions";
+import useAllPermissions from "@/hooks/Roles/useAllPermissions";
 import { sameDay } from "@/helpers/date.helpers";
 import { SettingsBtn } from "./components/SettingsBtn";
 import { EmployyeSettingsBtn } from "./components/EmployyeSettingsBtn";

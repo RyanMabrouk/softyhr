@@ -10,7 +10,7 @@ import { formatTotalHoursToTimeUnit } from "@/helpers/TimeOff/leave.helpers";
 import { ChangePolicyMenuBtn } from "./Buttons/ChangePolicyMenuBtn";
 import { CalculatorBtn } from "./Buttons/CalculatorBtn";
 import RoleGuard from "@/app/_ui/RoleGuard";
-import useTranslation from "@/hooks/useTranslation";
+import useTranslation from "@/translation/useTranslation";
 export function Policy({
   id,
   icon,

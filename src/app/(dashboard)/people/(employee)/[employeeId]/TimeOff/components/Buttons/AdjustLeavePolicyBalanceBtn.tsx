@@ -2,7 +2,7 @@ import React from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { TbPlusMinus } from "react-icons/tb";
-import useTranslation from "@/hooks/useTranslation";
+import useTranslation from "@/translation/useTranslation";
 
 export function AdjustLeavePolicyBalanceBtn({ id }: { id: number }) {
   const pathname = usePathname();

@@ -19,7 +19,7 @@ import useEmployeeData from "@/hooks/useEmloyeeData";
 import useLeaveData from "@/hooks/TimeOff/useLeaveData";
 import { Player } from "@lottiefiles/react-lottie-player";
 import Loader from "@/app/_ui/Loader/Loader";
-import useTranslation from "@/hooks/useTranslation";
+import useTranslation from "@/translation/useTranslation";
 interface formatted_policy_type {
   id: number;
   name: string;

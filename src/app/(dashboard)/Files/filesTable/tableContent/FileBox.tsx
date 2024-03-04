@@ -14,7 +14,7 @@ import useToast from "@/hooks/useToast";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { addFile } from "@/actions/files/addFile";
 import getSession from "@/api/getSession";
-import useUserRole from "@/hooks/useUserRole";
+import useUserRole from "@/hooks/Roles/useUserRole";
 import useProfiles from "@/hooks/useProfiles";
 import { database_profile_type } from "@/types/database.tables.types";
 export default function FileBox({ file, pushFileId, removeFileId }: any) {

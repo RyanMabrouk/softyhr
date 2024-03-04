@@ -23,7 +23,7 @@ import useEmployeeData from "@/hooks/useEmloyeeData";
 import useLeaveData from "@/hooks/TimeOff/useLeaveData";
 import Loader from "@/app/_ui/Loader/Loader";
 import RoleGuard from "@/app/_ui/RoleGuard";
-import useTranslation from "@/hooks/useTranslation";
+import useTranslation from "@/translation/useTranslation";
 type upcoming_leave_requests_data_type = {
   id: number;
   start_at: Date;

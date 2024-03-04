@@ -8,7 +8,7 @@ import { feildsPermissions } from "@/constants/permessions";
 import { MdEdit } from "react-icons/md";
 import { SelectAllBtn } from "./SelectAllBtn";
 import { useSearchParams } from "next/navigation";
-import useRole from "@/hooks/useRole";
+import useRole from "@/hooks/Roles/useRole";
 
 export function Content() {
   // Duplicate and edit cases

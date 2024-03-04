@@ -10,7 +10,7 @@ import editAccrualStartDate from "@/actions/leave/editAccrualStartDate";
 import useToast from "@/hooks/useToast";
 import { CalendarGeneric } from "@/app/_ui/CalenderGeneric";
 import CancelBtnGeneric from "@/app/_ui/CancelBtnGeneric";
-import useTranslation from "@/hooks/useTranslation";
+import useTranslation from "@/translation/useTranslation";
 export default function AccrualStartDate() {
   const { toast } = useToast();
   const Router = useRouter();

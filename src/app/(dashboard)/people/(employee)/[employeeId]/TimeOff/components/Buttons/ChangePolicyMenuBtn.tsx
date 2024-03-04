@@ -3,7 +3,7 @@ import React from "react";
 import { IoMdSettings } from "react-icons/io";
 import { usePathname } from "next/navigation";
 import { MenuLinksGeneric } from "../../../../../../../_ui/MenuLinksGeneric";
-import useTranslation from "@/hooks/useTranslation";
+import useTranslation from "@/translation/useTranslation";
 export function ChangePolicyMenuBtn({ id }: { id: number }) {
   const pathname = usePathname();
   const [open, setOpen] = React.useState(false);

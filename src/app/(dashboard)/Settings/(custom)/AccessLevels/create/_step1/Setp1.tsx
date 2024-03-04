@@ -9,7 +9,7 @@ import ErrorContext, {
 import { InputGeneric } from "@/app/_ui/InputGeneric";
 import { TextFeildGeneric } from "@/app/_ui/TextFeildGeneric";
 import { useSearchParams } from "next/navigation";
-import useRole from "@/hooks/useRole";
+import useRole from "@/hooks/Roles/useRole";
 
 export function Setp1() {
   const { step } = useContext<StepContextContextType>(StepContext);

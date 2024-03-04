@@ -12,7 +12,7 @@ import { SelectGeneric } from "@/app/_ui/SelectGeneric";
 import { IoMdSettings } from "react-icons/io";
 import RoleGuard from "@/app/_ui/RoleGuard";
 import DropDownGeneric from "@/app/_ui/DropDownGeneric";
-import useTranslation from "@/hooks/useTranslation";
+import useTranslation from "@/translation/useTranslation";
 
 export function Content() {
   const { employeeId } = useParams();
@@ -49,12 +49,7 @@ export function Content() {
                 user?.["Basic Information"]?.["Last name"]}
             </h1>
             <div className={"flex h-10 gap-[1rem] "}>
-              <DropDownGeneric
-                options={[]}
-                DropDownButton={()=>{
-                  
-                }}
-              />
+              <DropDownGeneric options={[]} DropDownButton={() => {}} />
               <SelectGeneric
                 name="settings"
                 inputLabel={<IoMdSettings className="h-6 w-6 text-white" />}

@@ -1,10 +1,10 @@
 "use client";
 import { HistoryTable } from "@/app/(dashboard)/people/(employee)/[employeeId]/TimeOff/components/History/HistoryTable";
-import useRoles from "@/hooks/useRoles";
+import useRoles from "@/hooks/Roles/useRoles";
 import React from "react";
 import { FaLock } from "react-icons/fa";
 import useProfiles from "@/hooks/useProfiles";
-import useAllPermissions from "@/hooks/useAllPermissions";
+import useAllPermissions from "@/hooks/Roles/useAllPermissions";
 import { sameDay } from "@/helpers/date.helpers";
 import { EmployeeProfileLink } from "./[role_id]/components/EmployeeProfileLink";
 import { EmployyeSettingsBtn } from "./[role_id]/components/EmployyeSettingsBtn";

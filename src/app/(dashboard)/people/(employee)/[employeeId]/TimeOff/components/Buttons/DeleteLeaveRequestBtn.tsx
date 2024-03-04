@@ -1,5 +1,5 @@
 "use client";
-import useTranslation from "@/hooks/useTranslation";
+import useTranslation from "@/translation/useTranslation";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";

@@ -19,7 +19,7 @@ import addLeavePolicy from "@/actions/leave/addLeavePolicy";
 import changePolicy from "@/actions/leave/changePolicy";
 import useLeaveData from "@/hooks/TimeOff/useLeaveData";
 import CancelBtnGeneric from "@/app/_ui/CancelBtnGeneric";
-import useTranslation from "@/hooks/useTranslation";
+import useTranslation from "@/translation/useTranslation";
 export default function AddTimeOffPolicy() {
   const { toast } = useToast();
   const Router = useRouter();

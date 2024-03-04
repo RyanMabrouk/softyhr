@@ -6,16 +6,18 @@ import { databese_leave_categories_type } from "@/types/database.tables.types";
 import { RequestsTable } from "./RequestsTable";
 import { BalanceTable } from "./BalanceTable";
 import { leave_data } from "./History";
+import useLeaveData from "@/hooks/TimeOff/useLeaveData";
 
 export function TablesToggle({
   leave_requests_data,
   leave_accrued_data,
-  leave_categories,
 }: {
   leave_requests_data: leave_data[];
   leave_accrued_data: leave_data[];
-  leave_categories: databese_leave_categories_type[] | undefined | null;
 }) {
+  const {
+    leave_categories: { data: leave_categories, isPending: isPending5 },
+  } = useLeaveData();
   const { type, toggleView } =
     useContext<historyTableFiltersContextType>(historyTableFilters);
   // active filter category

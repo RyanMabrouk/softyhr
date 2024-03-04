@@ -3,7 +3,7 @@ import React from "react";
 import { FaCalculator } from "react-icons/fa6";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import useTranslation from "@/hooks/useTranslation";
+import useTranslation from "@/translation/useTranslation";
 
 export function CalculatorBtn({ id }: { id: number }) {
   const pathname = usePathname();

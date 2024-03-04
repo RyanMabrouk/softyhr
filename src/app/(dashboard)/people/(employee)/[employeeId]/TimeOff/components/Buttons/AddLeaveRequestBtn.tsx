@@ -2,7 +2,7 @@ import React from "react";
 import { TbClockEdit } from "react-icons/tb";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import useTranslation from "@/hooks/useTranslation";
+import useTranslation from "@/translation/useTranslation";
 
 export function AddLeaveRequestBtn({ id }: { id: number }) {
   const pathname = usePathname();

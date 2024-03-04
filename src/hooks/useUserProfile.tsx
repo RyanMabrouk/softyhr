@@ -1,21 +1,13 @@
-"use client"
-import { useQuery } from "@tanstack/react-query";
-import getData from "@/api/getData";
+"use client";
+import useData from "./useData";
 export default function useUserProfile(column?: string) {
   // ------------------get current user--------------------
-  const { data: user_profile, isPending } = useQuery({
-    queryKey: ["user_profile"],
-    queryFn: () =>
-      getData("profiles", {
-        user: true,
-        column,
-      }),
-  });
+  const { user_profile } = useData();
   return {
     profiles: {
-      data: user_profile,
+      data: user_profile.data,
       error: user_profile?.error,
-      isPending,
+      isPending: user_profile?.isPending,
     },
   };
 }

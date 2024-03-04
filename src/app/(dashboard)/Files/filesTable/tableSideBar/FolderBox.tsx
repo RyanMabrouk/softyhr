@@ -10,7 +10,7 @@ import FilesSelectArrowDown from "../../_ui/components/FilesSelectArrowDown";
 import { useQueryClient } from "@tanstack/react-query";
 import useFoldersIds from "@/hooks/files/useFoldersIds";
 import RoleGuard from "@/app/_ui/RoleGuard";
-import useUserRole from "@/hooks/useUserRole";
+import useUserRole from "@/hooks/Roles/useUserRole";
 import {
   database_files_type,
   database_folder_type,

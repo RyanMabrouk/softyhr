@@ -3,7 +3,7 @@ import GetFoldersByIDs from "@/actions/files/getFolders";
 import useFoldersIds from "@/hooks/files/useFoldersIds";
 import getData from "@/api/getData";
 import useFolderData from "@/hooks/files/useFolderData";
-import useUserRole from "@/hooks/useUserRole";
+import useUserRole from "@/hooks/Roles/useUserRole";
 import { useQuery } from "@tanstack/react-query";
 import { useParams, useSearchParams } from "next/navigation";
 import React from "react";

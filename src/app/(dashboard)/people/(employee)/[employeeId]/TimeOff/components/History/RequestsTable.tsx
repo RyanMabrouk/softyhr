@@ -11,7 +11,7 @@ import Link from "next/link";
 import toggleDateSortContext, {
   toggleDateSortContextType,
 } from "../../context/toggleDateSortContext";
-import useTranslation from "@/hooks/useTranslation";
+import useTranslation from "@/translation/useTranslation";
 import { leave_data_types } from "./History";
 import { DateHeader } from "./DateHeader";
 

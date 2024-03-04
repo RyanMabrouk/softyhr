@@ -2,10 +2,10 @@
 import React from "react";
 import SettingsLayoutSkeleton from "../SettingsLayoutSkeleton";
 import Link from "next/link";
-import useRoles from "@/hooks/useRoles";
+import useRoles from "@/hooks/Roles/useRoles";
 import { usePathname } from "next/navigation";
 import useProfiles from "@/hooks/useProfiles";
-import useAllPermissions from "@/hooks/useAllPermissions";
+import useAllPermissions from "@/hooks/Roles/useAllPermissions";
 import { RiAddCircleFill } from "react-icons/ri";
 
 export default function Layout({ children }: { children: React.ReactNode }) {

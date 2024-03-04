@@ -6,7 +6,7 @@ import StepContext, {
 import { permissions } from "@/constants/permessions";
 import { CheckBoxGeneric } from "@/app/_ui/CheckBoxGeneric";
 import { useSearchParams } from "next/navigation";
-import useRole from "@/hooks/useRole";
+import useRole from "@/hooks/Roles/useRole";
 
 export function Setp2() {
   type Permission = {

@@ -13,7 +13,7 @@ import SelectSharedUsers from "../components/SelectSharedUsers";
 import UploadFileCheckBox from "../components/UploadFileCheckBox";
 import useToast from "@/hooks/useToast";
 import default_avatar from "/public/default_avatar.png";
-import useAllPermissions from "@/hooks/useAllPermissions";
+import useAllPermissions from "@/hooks/Roles/useAllPermissions";
 import CancelBtnGeneric from "@/app/_ui/CancelBtnGeneric";
 import { PostgrestError } from "@supabase/supabase-js";
 import {

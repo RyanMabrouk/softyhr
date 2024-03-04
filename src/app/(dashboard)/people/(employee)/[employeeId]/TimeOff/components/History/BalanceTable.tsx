@@ -12,7 +12,7 @@ import toggleDateSortContext, {
   toggleDateSortContextType,
 } from "../../context/toggleDateSortContext";
 import RoleGuard from "@/app/_ui/RoleGuard";
-import useTranslation from "@/hooks/useTranslation";
+import useTranslation from "@/translation/useTranslation";
 import { leave_data_types } from "./History";
 import { DateHeader } from "./DateHeader";
 

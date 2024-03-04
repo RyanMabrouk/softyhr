@@ -12,7 +12,7 @@ import GetFoldersByIDs from "@/actions/files/getFolders";
 import { equalsCheck } from "@/helpers/array.helpers";
 import { PAGE_SIZE } from "@/constants/filesConstants";
 import useFoldersIds from "@/hooks/files/useFoldersIds";
-import useUserRole from "@/hooks/useUserRole";
+import useUserRole from "@/hooks/Roles/useUserRole";
 import { useAllFiles } from "../../../../../hooks/files/useAllFiles";
 
 export default function TableContent({
