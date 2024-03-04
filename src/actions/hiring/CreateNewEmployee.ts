@@ -57,19 +57,6 @@ export const CreateNewEmployee = async (
         Message: "Error Creating User Profile",
       };
     }
-    const { error } = await addFolder(
-      NewEmployeData?.["Basic Information"]?.["First name"] +
-        " " +
-        NewEmployeData?.["Basic Information"]?.["Last name"],
-    );
-    if (error) {
-      logger.error(error.message);
-      return {
-        Submitted: false,
-        Error: profile_error,
-        Message: "Error Creating User Profile",
-      };
-    }
     logger.info("CreateNewEmployee_exit");
     return {
       Submitted: true,
@@ -78,6 +65,7 @@ export const CreateNewEmployee = async (
     };
   } catch (error) {
     logger.error(error);
+    logger.info("CreateNewEmployee_exit");
     return {
       Submitted: false,
       Error: null,
