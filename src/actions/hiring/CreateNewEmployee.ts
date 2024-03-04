@@ -2,7 +2,6 @@
 import getCurrentorg from "@/api/getCurrentOrg";
 import { Profile_Type } from "@/types/database.tables.types";
 import { createClient } from "@supabase/supabase-js";
-import { addFolder } from "../files/addFolder";
 import { getLogger } from "@/logging/log-util";
 import { createProfile } from "../auth/createProfile";
 export const CreateNewEmployee = async (
@@ -65,7 +64,6 @@ export const CreateNewEmployee = async (
     };
   } catch (error) {
     logger.error(error);
-    logger.info("CreateNewEmployee_exit");
     return {
       Submitted: false,
       Error: null,
