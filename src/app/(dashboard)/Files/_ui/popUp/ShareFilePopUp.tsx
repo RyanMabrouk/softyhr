@@ -21,8 +21,6 @@ import {
   database_profile_type,
 } from "@/types/database.tables.types";
 import Image from "next/image";
-import { error } from "console";
-import { shareFilestoUsers } from "@/actions/files/shareFilestoUsers";
 import { PiUsersThreeFill } from "react-icons/pi";
 import { addFiletoUsers } from "@/actions/files/addFiletoUsers";
 
@@ -183,7 +181,7 @@ export default function ShareFilePopUp() {
           <div className="shadow-popup flex min-w-[38rem] max-w-[38rem] flex-col  rounded-sm bg-white px-8 py-4">
             <h2 className="mb-6 text-xl">Who has Access</h2>
             <hr />
-            <div className=" flex h-44 w-full  flex-row flex-wrap items-start justify-start gap-y-2 overflow-y-auto py-2">
+            <div className=" flex h-44 w-full  flex-col flex-wrap items-start justify-start gap-y-2 overflow-y-auto py-2">
               {useres_who_have_access?.map((user) => (
                 <div
                   key={"user" + user.user_id}
@@ -218,7 +216,7 @@ export default function ShareFilePopUp() {
             </div>
             <hr className="mb-4" />
             <hr />
-            <div className=" flex h-44 w-full flex-row flex-wrap items-start justify-start gap-y-2 overflow-y-auto py-2">
+            <div className=" flex h-44 w-full flex-col flex-wrap items-start justify-start gap-y-2 overflow-y-auto py-2">
               {selectedShared?.map((user: any) => (
                 <div
                   key={"user" + user.user_id}

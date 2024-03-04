@@ -15,7 +15,7 @@ export default function FilesDownloadButton() {
       const fileIds: any = queryClient.getQueryData(["fileIds"]);
       if (fileIds?.length) {
         const files = await GetFilesByIDs(fileIds);
-        const fileNameUrlArr: { name: any; url: any }[] = [];
+        const fileNameUrlArr: { name: string; url: string }[] = [];
         files.data.map((file) =>
           fileNameUrlArr.push({ name: file.name, url: file.file_url }),
         );

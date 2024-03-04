@@ -1,43 +1,29 @@
 "use client";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { use, useEffect, useMemo, useState } from "react";
 import FileBox from "./FileBox";
-import LoaderFiles from "../../components/Loader/LoaderFiles";
-import { useSearchParams } from "next/navigation";
+import LoaderFiles from "../../_ui/components/Loader/LoaderFiles";
+import { useParams, useSearchParams } from "next/navigation";
 import useFolderData from "@/hooks/files/useFolderData";
-import FolderEmpty from "../../components/FolderEmpty";
+import FolderEmpty from "../../_ui/components/FolderEmpty";
 import { getFiles } from "@/actions/files/apiFIles";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import Pagination from "@/components/ui/Pagination";
 import GetFoldersByIDs from "@/actions/files/getFolders";
 import { equalsCheck } from "@/helpers/array.helpers";
 import { PAGE_SIZE } from "@/constants/filesConstants";
-import getData from "@/api/getData";
 import useFoldersIds from "@/hooks/files/useFoldersIds";
 import useUserRole from "@/hooks/useUserRole";
-import { database_files_type } from "@/types/database.tables.types";
+import { useAllFiles } from "../../../../../hooks/files/useAllFiles";
 
-function useAllFiles(): {
-  data: database_files_type[] | undefined | null;
-} {
-  const { data: allFilesAdmin } = useQuery({
-    queryKey: ["files"],
-    queryFn: () =>
-      getData("files", {
-        org: true,
-      }),
-  });
-  return {
-    data: allFilesAdmin?.data,
-  };
-}
 export default function TableContent({
   checkAll,
   setCheckAll,
 }: {
-  checkAll: boolean;
-  setCheckAll: React.Dispatch<React.SetStateAction<boolean>>;
+  checkAll: boolean | undefined;
+  setCheckAll: React.Dispatch<React.SetStateAction<boolean>> | undefined;
 }) {
   const searchParams = useSearchParams();
+  const params = useParams();
   const { data: allFilesAdmin } = useAllFiles();
   const allFilesIdsAdmin = allFilesAdmin?.map((file) => file.id);
 
@@ -60,13 +46,14 @@ export default function TableContent({
     setPage(num);
   }
 
-  let wantedId = searchParams.get("id");
+  const folderId = params.folderId;
+  console.log("🚀 ~ folderId:", folderId);
 
   const queryClient = useQueryClient();
   let filesIdArr: number[] | string[] =
     queryClient.getQueryData(["fileIds"]) ?? [];
 
-  const { folder } = useFolderData(wantedId);
+  const { folder } = useFolderData(Number(folderId));
   const isPending = folder.isPending;
   // active user role
   const {
@@ -74,7 +61,7 @@ export default function TableContent({
   } = useUserRole();
   const fileIds = useMemo(
     () =>
-      !isPending && wantedId
+      !isPending && folderId
         ? role?.permissions.includes("read:files")
           ? folder?.data?.[0]?.files.map((file) => file.id)
           : folder?.data?.[0]?.files
@@ -92,14 +79,14 @@ export default function TableContent({
       folder?.data,
       isPending,
       role?.permissions,
-      wantedId,
+      folderId,
     ],
   );
   function pushFileId(id: number) {
     // @ts-ignore
     filesIdArr.push(id);
     queryClient.setQueryData(["fileIds"], filesIdArr);
-    if (filesIdArr.length === fileIds?.length) setCheckAll(true);
+    if (filesIdArr.length === fileIds?.length && setCheckAll) setCheckAll(true);
   }
 
   function removeFileId(id: number) {
@@ -107,15 +94,17 @@ export default function TableContent({
       .map((id) => +id)
       .filter((fileId: number) => fileId !== id);
     queryClient.setQueryData(["fileIds"], filesIdArr);
-    if (checkAll) setCheckAll(false);
+    if (checkAll && setCheckAll) setCheckAll(false);
   }
 
   useEffect(
     function () {
       if (equalsCheck(fileIds, allFilesIds)) {
-        if (filesIdArr?.length !== allFilesIds?.length) setCheckAll(false);
+        if (filesIdArr?.length !== allFilesIds?.length && setCheckAll)
+          setCheckAll(false);
       } else {
-        if (filesIdArr?.length !== fileIds?.length) setCheckAll(false);
+        if (filesIdArr?.length !== fileIds?.length && setCheckAll)
+          setCheckAll(false);
       }
     },
     [
@@ -135,7 +124,7 @@ export default function TableContent({
   const ids = fileIds;
 
   const { isLoading, data: { data: files, count } = {} } = useQuery({
-    queryKey: ["files", sortBy, ids, wantedId, page],
+    queryKey: ["files", sortBy, ids, folderId, page],
     queryFn: () => getFiles({ sortBy, ids, page }),
   });
 
@@ -144,7 +133,7 @@ export default function TableContent({
     const pageCount = Math.ceil(count / PAGE_SIZE);
     if (page < pageCount) {
       queryClient.prefetchQuery({
-        queryKey: ["files", sortBy, ids, wantedId, page + 1],
+        queryKey: ["files", sortBy, ids, folderId, page + 1],
         queryFn: () => getFiles({ sortBy, ids, page: page + 1 }),
       });
     }

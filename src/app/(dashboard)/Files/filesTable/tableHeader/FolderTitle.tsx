@@ -5,15 +5,15 @@ import getData from "@/api/getData";
 import useFolderData from "@/hooks/files/useFolderData";
 import useUserRole from "@/hooks/useUserRole";
 import { useQuery } from "@tanstack/react-query";
-import { useSearchParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 import React from "react";
 
 export default function FolderTitle() {
-  const searchParams = useSearchParams();
   const { filesIds } = useFoldersIds();
-
+  const params = useParams();
+  let wantedId = Number(params.folderId);
+  let isInAllFilesFolder = wantedId === undefined;
   const { wantedFoldersIds } = useFoldersIds();
-
   const { data: { data: wantedFolders } = {} } = useQuery({
     queryKey: ["folders", wantedFoldersIds],
     queryFn: async () => await GetFoldersByIDs(wantedFoldersIds),
@@ -33,9 +33,6 @@ export default function FolderTitle() {
       }),
   });
 
-  let isInAllFilesFolder = !searchParams.has("id");
-
-  let wantedId = searchParams.get("id");
   const { folder: wantedFolder } = useFolderData(wantedId);
   const isPending = wantedFolder.isPending;
 

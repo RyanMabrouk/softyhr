@@ -1,7 +1,7 @@
 import React from "react";
-import FilesDownloadButton from "../../components/FilesDownloadButton";
-import FilesTrashButton from "../../components/FilesTrashButton";
-import FilesSelectComponent from "../../components/FilesSelectComponent";
+import FilesDownloadButton from "../../_ui/components/FilesDownloadButton";
+import FilesTrashButton from "../../_ui/components/FilesTrashButton";
+import FilesSelectComponent from "../../_ui/components/FilesSelectComponent";
 
 export default function SortAndDownloadBox() {
   return (

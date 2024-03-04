@@ -7,7 +7,7 @@ import {
 import { PostgrestError } from "@supabase/supabase-js";
 import { useQuery } from "@tanstack/react-query";
 
-export default function useFolderData(folderId: any): {
+export default function useFolderData(folderId: number): {
   folder: {
     data:
       | (database_folder_type & { files: database_files_type[] })[]

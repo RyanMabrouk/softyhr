@@ -1,4 +1,9 @@
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import {
+  useParams,
+  usePathname,
+  useRouter,
+  useSearchParams,
+} from "next/navigation";
 import React, { useState } from "react";
 import { CgClose } from "react-icons/cg";
 import ButtonPopUp from "../components/ButtonPopUp";
@@ -21,7 +26,7 @@ export default function RenameFolderPopUp() {
   const { handleSubmit } = useForm();
 
   const folderName = searchParams.get("folderName");
-  const folderId = searchParams.get("id");
+  const folderId = useParams().folderId;
   const [isTyping, setIsTyping] = useState("");
 
   /////
@@ -38,13 +43,9 @@ export default function RenameFolderPopUp() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["folders"] });
+      Router.push(pathname);
     },
   });
-
-  function onSubmit() {
-    const { error }: any = renameFold({ folderId, isTyping });
-  }
-
   return (
     <>
       <PopUpSkeleton
@@ -52,7 +53,7 @@ export default function RenameFolderPopUp() {
         className="shadow-popup px-auto flex min-w-[35rem] flex-col items-center gap-2 rounded-sm bg-white px-8 py-4"
       >
         <form
-          onSubmit={handleSubmit(onSubmit)}
+          onSubmit={handleSubmit(() => renameFold({ folderId, isTyping }))}
           className="flex w-full flex-col gap-4 px-2 pt-3"
         >
           <InputGeneric

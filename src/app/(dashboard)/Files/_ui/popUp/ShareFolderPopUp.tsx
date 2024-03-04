@@ -1,5 +1,10 @@
 "use client";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import {
+  useParams,
+  usePathname,
+  useRouter,
+  useSearchParams,
+} from "next/navigation";
 import React, { useState } from "react";
 import { CgClose } from "react-icons/cg";
 import ButtonPopUp from "../components/ButtonPopUp";
@@ -7,7 +12,6 @@ import LoaderPopUp from "../components/Loader/LoaderPopUp/LoaderPopUp";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import useProfiles from "@/hooks/useProfiles";
 import { IoMdCloseCircleOutline } from "react-icons/io";
-import { removeFileFromUser } from "@/actions/files/removeFileFromUser";
 import SelectSharedUsers from "../components/SelectSharedUsers";
 import UploadFileCheckBox from "../components/UploadFileCheckBox";
 import useToast from "@/hooks/useToast";
@@ -30,8 +34,7 @@ export default function ShareFolderPopUp() {
   const Router = useRouter();
   const pathname = usePathname();
   const { toast } = useToast();
-  const searchParams = useSearchParams();
-  const id = searchParams.get("id");
+  const id = useParams().folderId;
   const queryClient = useQueryClient();
   const {
     folder_files_ids: { data: folder_files_ids },
@@ -193,7 +196,7 @@ export default function ShareFolderPopUp() {
           <div className="shadow-popup flex min-w-[38rem] max-w-[38rem] flex-col  rounded-sm bg-white px-8 py-4">
             <h2 className="mb-6 text-xl">Who has Access</h2>
             <hr />
-            <div className=" flex h-44 w-full  flex-row flex-wrap items-start justify-start gap-y-2 overflow-y-auto py-2">
+            <div className=" flex h-44 w-full  flex-col flex-wrap items-start justify-start gap-y-2 overflow-y-auto py-2">
               {useres_who_have_access?.map((user) => (
                 <div
                   key={"user" + user.user_id}
@@ -228,7 +231,7 @@ export default function ShareFolderPopUp() {
             </div>
             <hr className="mb-4" />
             <hr />
-            <div className=" flex h-44 w-full flex-row flex-wrap items-start justify-start gap-y-2 overflow-y-auto py-2">
+            <div className=" flex h-44 w-full flex-col flex-wrap items-start justify-start gap-y-2 overflow-y-auto py-2">
               {selectedShared?.map((user: any) => (
                 <div
                   key={"user" + user.user_id}

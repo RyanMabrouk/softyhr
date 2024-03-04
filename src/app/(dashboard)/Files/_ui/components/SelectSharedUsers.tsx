@@ -1,12 +1,9 @@
 "use client";
 import useProfiles from "@/hooks/useProfiles";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import default_avatar from "/public/default_avatar.png";
 import { InputGeneric } from "@/app/_ui/InputGeneric";
-import {
-  database_files_type,
-  database_profile_type,
-} from "@/types/database.tables.types";
+import { database_profile_type } from "@/types/database.tables.types";
 import Image from "next/image";
 
 export default function SelectSharedUsers({
@@ -75,6 +72,7 @@ export default function SelectSharedUsers({
                   role="menuitem"
                 >
                   {user.picture ? (
+                    // dont switch to next/image here !!
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
                       src={user.picture}

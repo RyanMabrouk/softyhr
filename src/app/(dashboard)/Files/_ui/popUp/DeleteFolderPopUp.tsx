@@ -1,4 +1,4 @@
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useParams, usePathname, useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { FaRegTrashCan } from "react-icons/fa6";
 import ButtonPopUp from "../components/ButtonPopUp";
@@ -14,19 +14,19 @@ import { InputGeneric } from "@/app/_ui/InputGeneric";
 export default function DeleteFolderPopUp() {
   const { toast } = useToast();
   const queryClient = useQueryClient();
-  const searchParams = useSearchParams();
+  const params = useParams();
   const Router = useRouter();
   const pathname = usePathname();
   const { handleSubmit } = useForm();
 
   const [isTypingDelete, setIsTypingDelete] = useState("");
-  const id = searchParams.get("id");
+  const id = Number(params.folderId);
 
   const { folder } = useFolderData(id);
   const isPending = folder.isPending;
 
   const { mutateAsync: deleteFold } = useMutation({
-    mutationFn: async (folderId: any) => {
+    mutationFn: async (folderId: number) => {
       const { error } = await deleteFolder(folderId);
       if (error) {
         toast.error("Folder isn't deleted please try again");
@@ -37,12 +37,9 @@ export default function DeleteFolderPopUp() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["folders"] });
+      Router.push(pathname);
     },
   });
-
-  function onSubmit() {
-    const { error }: any = deleteFold(id);
-  }
 
   return (
     <>
@@ -53,7 +50,7 @@ export default function DeleteFolderPopUp() {
       ) : (
         <PopUpSkeleton title={"Just Checking ..."}>
           <form
-            onSubmit={handleSubmit(onSubmit)}
+            onSubmit={handleSubmit(() => deleteFold(Number(id)))}
             className=" shadow-popup px-auto flex min-w-[40rem] flex-col items-center gap-2 rounded-sm bg-white px-12 py-8"
           >
             <FaRegTrashCan fontSize="3.6rem" fill="#C20C0C" />

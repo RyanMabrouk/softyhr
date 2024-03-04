@@ -1,24 +1,21 @@
 "use client";
 import React from "react";
 import FolderBox from "./FolderBox";
-import MiniLoader from "../../components/Loader/miniLoader/MiniLoader";
+import MiniLoader from "../../_ui/components/Loader/miniLoader/MiniLoader";
 import { v4 as uuidv4 } from "uuid";
 import GetFoldersByIDs from "@/actions/files/getFolders";
 import { useQuery } from "@tanstack/react-query";
-import getData from "@/api/getData";
 import useFoldersIds from "@/hooks/files/useFoldersIds";
 import RoleGuard from "@/app/_ui/RoleGuard";
+import { useAllFolders } from "../../../../../hooks/files/useAllFolders";
 
-export default function TableSideBarFolderBox({ setCheckAll }: any) {
-  const { data: allFolders, isPending: isPending } = useQuery({
-    queryKey: ["folders"],
-    queryFn: () =>
-      getData("folders", {
-        org: true,
-        column: "*,files(*)",
-      }),
-  });
+export default function TableSideBarFolderBox({
+  setCheckAll,
+}: {
+  setCheckAll: React.Dispatch<React.SetStateAction<boolean>> | undefined;
+}) {
   const { wantedFoldersIds } = useFoldersIds();
+  const { data: allFolders, isPending: isPending } = useAllFolders();
   const { data: { data: wantedFolders } = {} } = useQuery({
     queryKey: ["folders", wantedFoldersIds],
     queryFn: async () => await GetFoldersByIDs(wantedFoldersIds),
@@ -39,8 +36,8 @@ export default function TableSideBarFolderBox({ setCheckAll }: any) {
             <MiniLoader />
           ) : (
             allFolders?.data
-              ?.sort((a: any, b: any) => a?.id - b?.id)
-              .map((fold: any) => (
+              ?.sort((a, b) => a?.id - b?.id)
+              .map((fold) => (
                 <FolderBox
                   key={uuidv4()}
                   setCheckAll={setCheckAll}
@@ -53,8 +50,8 @@ export default function TableSideBarFolderBox({ setCheckAll }: any) {
       <RoleGuard permissions={["upload:files", "access:employee_files"]}>
         <div className="flex flex-col gap-1 ">
           {wantedFolders
-            ?.sort((a: any, b: any) => a?.id - b?.id)
-            .map((fold: any) => (
+            ?.sort((a, b) => a?.id - b?.id)
+            .map((fold) => (
               <FolderBox
                 key={uuidv4()}
                 setCheckAll={setCheckAll}

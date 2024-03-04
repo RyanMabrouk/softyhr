@@ -1,12 +1,12 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useDrag } from "react-dnd";
-import FilesCheckBox from "../../components/FilesCheckBox";
+import FilesCheckBox from "../../_ui/components/FilesCheckBox";
 import { FaRegFileImage } from "react-icons/fa6";
 import { FaRegFilePdf } from "react-icons/fa";
-import FileDownloadButton from "../../components/FileDownloadButton";
-import FilesSelectSettingsArrowDown from "../../components/FilesSelectSettingsArrowDown";
-import { useRouter } from "next/navigation";
+import FileDownloadButton from "../../_ui/components/FileDownloadButton";
+import FilesSelectSettingsArrowDown from "../../_ui/components/FilesSelectSettingsArrowDown";
+import { usePathname, useRouter } from "next/navigation";
 import { formatDateFiles } from "@/helpers/date.helpers";
 import { ItemTypes } from "@/constants/filesConstants";
 import { moveFile } from "@/actions/files/moveFile";
@@ -29,7 +29,8 @@ export default function FileBox({ file, pushFileId, removeFileId }: any) {
   } = file;
 
   const { toast } = useToast();
-  const { replace } = useRouter();
+  const Router = useRouter();
+  const pathname = usePathname();
   const queryClient = useQueryClient();
   const [selectedOption, setSelectOption] = useState(null);
   const data: any = queryClient.getQueryData(["fileIds"]);
@@ -101,11 +102,13 @@ export default function FileBox({ file, pushFileId, removeFileId }: any) {
   }
   useEffect(() => {
     if (selectedOption === "rename") {
-      replace(`Files?popup=RENAME_FILE&fileId=${id}&fileName=${name}`);
+      Router.push(
+        `${pathname}?popup=RENAME_FILE&fileId=${id}&fileName=${name}`,
+      );
       handleSelectedOption(null);
     }
     if (selectedOption === "delete") {
-      replace(`Files?popup=DELETE_FILE&fileId=${id}`);
+      Router.push(`${pathname}?popup=DELETE_FILE&fileId=${id}`);
       handleSelectedOption(null);
     }
     if (selectedOption === "duplicate") {
@@ -113,15 +116,15 @@ export default function FileBox({ file, pushFileId, removeFileId }: any) {
       handleSelectedOption(null);
     }
     if (selectedOption === "emailAtt") {
-      replace(`Files?popup=SEND_EMAIL_FILE&fileId=${id}`);
+      Router.push(`${pathname}?popup=SEND_EMAIL_FILE&fileId=${id}`);
       handleSelectedOption(null);
     }
     if (selectedOption === "share") {
-      replace(`Files?popup=SHARE_FILE&fileId=${id}`);
+      Router.push(`${pathname}?popup=SHARE_FILE&fileId=${id}`);
       handleSelectedOption(null);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedOption, replace, id]);
+  }, [selectedOption, id]);
 
   ///////////////////////////////////////
   //DRAG AND DROP

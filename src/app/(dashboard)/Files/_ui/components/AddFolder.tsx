@@ -1,12 +1,13 @@
 "use client";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import React from "react";
 import { TbFolderPlus } from "react-icons/tb";
 
 export default function AddFolder() {
   const Router = useRouter();
+  const pathname = usePathname();
   function handleClick() {
-    Router.replace("Files?popup=ADD_FOLDER");
+    Router.push(`${pathname}?popup=ADD_FOLDER`);
   }
   return (
     <button
