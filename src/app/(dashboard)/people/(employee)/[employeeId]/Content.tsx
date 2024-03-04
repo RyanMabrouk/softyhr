@@ -12,7 +12,6 @@ import { SelectGeneric } from "@/app/_ui/SelectGeneric";
 import { IoMdSettings } from "react-icons/io";
 import RoleGuard from "@/app/_ui/RoleGuard";
 import DropDownGeneric from "@/app/_ui/DropDownGeneric";
-import useTranslation from "@/translation/useTranslation";
 
 export function Content() {
   const { employeeId } = useParams();
@@ -20,7 +19,6 @@ export function Content() {
     employee_profile: { data: user },
   } = useEmployeeData({ employeeId: String(employeeId) });
   const pathname = usePathname();
-  const { lang } = useTranslation();
   const EmployeeRoute = useEmployeeRoute();
   return (
     <div className="z-20 flex min-h-[13rem] justify-center bg-gradient-to-r from-color-primary-7  to-color-primary-9 transition-all duration-300 ">

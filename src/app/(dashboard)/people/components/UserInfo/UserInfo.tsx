@@ -18,69 +18,23 @@ import { CgProfile } from "react-icons/cg";
 import {
   YearsAndDaysSinceDate,
   formatCustomDate,
-  formatDateToDayMonDD,
   updateTime,
 } from "@/helpers/date.helpers";
 import useEmployeeData from "@/hooks/useEmloyeeData";
-import {
-  database_leave_policies_type,
-  database_leave_requests_type,
-  databese_leave_categories_type,
-} from "@/types/database.tables.types";
-import { generateLeaveCategorieIcon } from "@/helpers/TimeOff/leave.helpers";
 import { UnderlinedLink } from "@/app/_ui/UnderlinedLink";
-import useLeaveData from "@/hooks/TimeOff/useLeaveData";
 import ManagerSection from "./components/managerSection";
+import { VacationStatus } from "./VacationStatus";
 
 interface UserInfoPropsType {
   employeeId: string;
 }
 export default function UserInfo({ employeeId }: UserInfoPropsType) {
   const {
-    leave_categories: { data: leave_categories },
-    leave_policies: { data: leave_policies },
-  } = useLeaveData();
-  const {
     employee_profile: { data: user },
-    leave_requests: { data: leave_requests },
   } = useEmployeeData({ employeeId: employeeId });
-  // chekck if the user is on vacation
-  const current_vacation = leave_requests?.find(
-    (request: database_leave_requests_type) =>
-      new Date(request.start_at) < new Date() &&
-      new Date(request.end_at) > new Date() &&
-      request.status === "approved",
-  );
-  // get the policy of the current vacation
-  const policy: database_leave_policies_type = current_vacation
-    ? leave_policies?.find(
-        (p: database_leave_policies_type) =>
-          p.id === current_vacation?.policy_id,
-      )
-    : null;
-  // get the category of the current vacation
-  const category = current_vacation
-    ? leave_categories?.find(
-        (c: databese_leave_categories_type) => c.id == policy?.categories_id,
-      )
-    : null;
-  // generate the icon of the current vacation
-  const icon = generateLeaveCategorieIcon({
-    categorie: category,
-    className: "w-14 h-14 -mt-1",
-  });
-
   return (
     <div className="mb-0 flex min-w-[14rem] max-w-[14rem] grow flex-col items-start justify-center gap-[0.5rem] bg-gray-14 pt-4 ">
-      {current_vacation && (
-        <header className="-mb-5 flex w-full flex-row items-center justify-center gap-1 border-b-[10px] border-white px-6 pb-3 pt-7 leading-4">
-          <div>{icon}</div>
-          <div className="flex flex-col justify-center text-lg leading-5">
-            <div>{`Out Until ${formatDateToDayMonDD(new Date(current_vacation?.start_at))}`}</div>
-            <div className="text-[0.8rem] opacity-65">{category?.name}</div>
-          </div>
-        </header>
-      )}
+      <VacationStatus employeeId={employeeId} />
       <div className="mt-10 flex flex-col gap-[1rem] px-5">
         <div className=" flex flex-col items-start  justify-center gap-3">
           <div className="flex items-center justify-start gap-2 whitespace-nowrap text-sm text-gray-15">
