@@ -35,6 +35,9 @@ function AppliymentForm({
   const router = useRouter();
   const pathname = usePathname();
   const Base_url = "https://ybwqmrrlvmpdikvmkqra.supabase.co/storage/v1/object/public/hiring/";
+
+
+  
   const SubmitForm = async (formdata: FormData) => {
 
     const identifient = uuidv4();

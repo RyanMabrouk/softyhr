@@ -23,7 +23,6 @@ function RatingGeneric({
 }: RatingGenericPropsType) {
   const { toast } = useToast();
   const queryClient = useQueryClient();
-  const [value, setValue] = useState<number | null>(DefaultValue);
   return (
     <Rating
       name="simple-controlled"
