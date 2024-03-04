@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { useSearchParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 import useFolderData from "@/hooks/files/useFolderData";
 import GetFoldersByIDs from "@/actions/files/getFolders";
 import getData from "@/api/getData";
@@ -11,12 +11,12 @@ export default function AllFilesCheckBox({
   checkAll,
   setCheckAll,
 }: {
-  checkAll: boolean;
-  setCheckAll: React.Dispatch<React.SetStateAction<boolean>>;
+  checkAll: boolean | undefined;
+  setCheckAll: React.Dispatch<React.SetStateAction<boolean>> | undefined;
 }) {
-  const searchParams = useSearchParams();
   const queryClient = useQueryClient();
-  let wantedId = searchParams.get("id");
+  const params = useParams();
+  let wantedId = Number(params.folderId);
   const { wantedFoldersIds, filesIds } = useFoldersIds();
   const { data: { data: wantedFolders } = {} } = useQuery({
     queryKey: ["folders", wantedFoldersIds],
@@ -59,7 +59,7 @@ export default function AllFilesCheckBox({
         : [];
 
   function handleChange() {
-    setCheckAll(!checkAll);
+    setCheckAll && setCheckAll(!checkAll);
     if (!checkAll) {
       queryClient.setQueryData(["fileIds"], fileIds);
     } else {

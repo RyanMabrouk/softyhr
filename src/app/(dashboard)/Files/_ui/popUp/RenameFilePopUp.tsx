@@ -1,6 +1,5 @@
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React, { useState } from "react";
-import { CgClose } from "react-icons/cg";
 import ButtonPopUp from "../components/ButtonPopUp";
 import useToast from "@/hooks/useToast";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -36,12 +35,9 @@ export default function RenameFilePopUp() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["files"] });
+      Router.push(pathname);
     },
   });
-
-  function onSubmit() {
-    const { error }: any = renameFileApi({ id, isTyping });
-  }
 
   return (
     <>
@@ -50,14 +46,13 @@ export default function RenameFilePopUp() {
         className="shadow-popup px-auto flex min-w-[35rem] flex-col items-center gap-2 rounded-sm bg-white px-8 py-4"
       >
         <form
-          onSubmit={handleSubmit(onSubmit)}
+          onSubmit={handleSubmit(() => renameFileApi({ id, isTyping }))}
           className="flex w-full flex-col gap-2 px-2 pt-3"
         >
           <InputGeneric
             label="Enter a new name for this file"
             name="input"
             type="text"
-            value={isTyping}
             placeholder={name ?? ""}
             defaultValue={name ?? ""}
             setValueInParent={setIsTyping}

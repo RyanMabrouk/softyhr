@@ -26,18 +26,15 @@ export default function NewFolderPopUp() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["folders"] });
+      Router.push(pathname);
     },
   });
-
-  async function onSubmit() {
-    const { error }: any = addFold(isTyping);
-  }
 
   return (
     <>
       <PopUpSkeleton title={"Add Folder"}>
         <form
-          onSubmit={handleSubmit(onSubmit)}
+          onSubmit={handleSubmit(() => addFold(isTyping))}
           className="shadow-popup px-auto flex min-w-[35rem] flex-col items-center gap-2 rounded-sm bg-white px-8 py-4"
         >
           <div className="flex w-full flex-col gap-4 px-2 pt-3">

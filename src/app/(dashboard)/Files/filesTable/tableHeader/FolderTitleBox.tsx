@@ -1,9 +1,15 @@
 import React from "react";
 import { IoFolderOpenSharp } from "react-icons/io5";
 import FolderTitle from "./FolderTitle";
-import AllFilesCheckBox from "../../components/AllFilesCheckBox";
+import AllFilesCheckBox from "../../_ui/components/AllFilesCheckBox";
 
-export default function FolderTitleBox({ checkAll, setCheckAll }: any) {
+export default function FolderTitleBox({
+  checkAll,
+  setCheckAll,
+}: {
+  checkAll: boolean | undefined;
+  setCheckAll: React.Dispatch<React.SetStateAction<boolean>> | undefined;
+}) {
   return (
     <div className="mt-4 flex items-center gap-2">
       <div className="  mt-1 border-r-2 border-stone-200 px-1  ">
