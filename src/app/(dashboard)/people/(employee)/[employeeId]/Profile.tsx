@@ -4,7 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { EmployeRoutesType, useEmployeeRoute } from "@/constants/employeeRoute";
 import { useParams, usePathname } from "next/navigation";
-import { Settings, changementRequest } from "@/constants/userInfo";
+import { Settings } from "@/constants/userInfo";
 import useEmployeeData from "@/hooks/useEmloyeeData";
 import { MdEdit } from "react-icons/md";
 import avatar from "/public/default_avatar.png";
@@ -13,7 +13,7 @@ import { IoMdSettings } from "react-icons/io";
 import RoleGuard from "@/app/_ui/RoleGuard";
 import DropDownGeneric from "@/app/_ui/DropDownGeneric";
 
-export function Content() {
+export function Profile() {
   const { employeeId } = useParams();
   const {
     employee_profile: { data: user },
