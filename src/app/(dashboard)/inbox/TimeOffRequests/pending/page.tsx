@@ -20,6 +20,7 @@ export default function Page() {
     <div className="mb-10 ml-5 flex min-h-full w-full flex-col">
       {pendingData && pendingData.length > 0 ? (
         pendingData?.map((e) => (
+          //@ts-ignore
           <Card
             {...e}
             duration_used={e.duration_used.map((d: any) => ({

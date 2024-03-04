@@ -117,6 +117,8 @@ export interface RowFieldType {
   placeHolder?: string | undefined;
   type: string;
   Icon?: string | undefined;
+  addItem?: boolean | undefined;
+  minWidth?: string | undefined;
   ExtraTxt?: string | undefined;
   accept?: string | undefined;
   allowFutureDates?: boolean | undefined;

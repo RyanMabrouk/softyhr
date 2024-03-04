@@ -2,7 +2,7 @@ import React, { ReactNode } from "react";
 import { Footer } from "@/app/_ui/Footer";
 import UserInfo from "../../components/UserInfo/UserInfo";
 import { EmplyoeeDataHydration } from "@/provider/EmplyoeeDataHydration";
-import { Content } from "./Content";
+import Content from "@/app/(dashboard)/home/Content";
 interface EmployePropsType {
   params: { employeeId: string };
   children: ReactNode;

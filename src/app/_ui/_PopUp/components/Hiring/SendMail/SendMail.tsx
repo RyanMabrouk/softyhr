@@ -17,6 +17,7 @@ import MailProvider, {
 } from "./context/MailContext";
 import { useQueryClient } from "@tanstack/react-query";
 import AddAttachments from "./components/AddAtachments";
+import useData from "@/hooks/useData";
 
 function Component() {
   const Searchparams = useSearchParams();

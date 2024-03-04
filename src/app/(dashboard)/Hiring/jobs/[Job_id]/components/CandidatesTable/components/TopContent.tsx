@@ -92,7 +92,7 @@ function TopContent({ Hiring, totalPages, filter, setFilter }:any) {
           </div>
           <AddCollaborate />
           <CandidateReports />
-          <div className="flex cursor-pointer flex-row items-center justify-center gap-1 border border-gray-25 px-2  py-[0.3rem] shadow-sm transition-all ease-linear hover:shadow-md"><p className="font-semibold text-gray-29">Preview Job Listing</p></div>
+          <div className="flex cursor-pointer rounded-sm flex-row items-center justify-center gap-1 border border-gray-25 px-2  py-[0.3rem] shadow-sm transition-all ease-linear hover:shadow-md"><p className="font-semibold text-gray-29">Preview Job Listing</p></div>
         </div>
         <HiringInfos Hiring={Hiring} />
       </div>

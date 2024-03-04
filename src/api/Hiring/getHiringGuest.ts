@@ -38,9 +38,7 @@ export default async function getHiringGuest(
     logger.info("getHiringGuest_enter"); 
   const session = await getSession();
   console.log(session);
-  console.log(match);
   session && delete match?.["Job Status"];
-  console.log(match);
   const supabase = createClient<Database>(
     process.env.SUPABASE_URL || "",
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "",
