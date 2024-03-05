@@ -96,6 +96,7 @@ function  ProfileLayout({ children }: { children: ReactNode }) {
                           <Link
                             key={label}
                             href={path(String(Job_id), String(Candidate_id))}
+                            prefetch={false}
                             className={
                               "flex items-center justify-center gap-2 overflow-hidden rounded-t-md p-3 px-6 capitalize text-white transition ease-in-out " +
                               (ActiveRoute == Pathname

@@ -7,7 +7,7 @@ import {
   Select,
   SelectChangeEvent,
 } from "@mui/material";
-import React, { memo, useEffect, useState } from "react";
+import React, { memo, useState } from "react";
 import { MdOutlineClose } from "react-icons/md";
 import ExtraTxt from "./components/ExtraTxt";
 import { RowFieldType } from "@/types/database.tables.types";
@@ -27,7 +27,6 @@ function SelectInput({
   RowField,
   setTouched,
   defaultValue = "",
-  label,
   minWidth = undefined,
   setSelectedKeys,
   dropDownDisplay = true,
@@ -35,6 +34,7 @@ function SelectInput({
   renderOptionclassName = "",
 }: SelectInputPropsType) {
   const [value, setValue] = useState<string>(String(defaultValue) || "");
+  const [open, setOpen] = React.useState(false);
 
   const ClearSelectHandler = () => {
     setValue("");
@@ -48,7 +48,7 @@ function SelectInput({
   };
   console.log(RowField);
   return (
-    <div className="flex items-end justify-center gap-[1rem]">
+    <div  className="flex items-end justify-center gap-[1rem]">
       <div className={"relative flex  flex-col items-start justify-center"}>
         <label
           className={
@@ -67,7 +67,21 @@ function SelectInput({
           labelId={"select-label"}
           required={RowField?.required}
           id={"select"}
-          MenuProps={{ PaperProps: { style: { maxHeight: "15rem" } } }}
+          MenuProps={{
+            autoFocus: false,
+            className: " shadow-green",
+            PaperProps: {
+              style: {
+                borderTopLeftRadius: "0px",
+                borderTopRightRadius: "0px",
+                overflowY: "auto",
+                boxShadow: `0px 1px 4px 2px #84bf41`,
+                maxHeight: "15rem",
+              },
+            },
+          }}
+          onOpen={(e) => setOpen(true)}
+          onClose={(e) => setOpen(false)}
           sx={{
             border: "1px solid #D9D9D9",
             minWidth: `${RowField?.minWidth} !important ` || "9rem",
@@ -118,7 +132,7 @@ function SelectInput({
           defaultValue={defaultValue || ""}
           inputProps={{ "aria-label": "Without label" }}
           onChange={HandleChange}
-          className={` relative z-10 min-w-[9rem]  text-[0.95rem] !font-normal !text-gray-13 ${minWidth ? `min-w-${minWidth}` : ""} [&_.MuiOutlinedInput-notchedOutline]:border-none ${className}`}
+          className={`  relative z-10 min-w-[9rem]  text-[0.95rem] !font-normal !text-gray-13 ${minWidth ? `min-w-${minWidth}` : ""} ${open ? "shadow-green rounded-b-none rounded-t-sm " : "rounded-sm shadow-sm hover:shadow-md"} [&_.MuiOutlinedInput-notchedOutline]:border-none ${className}`}
         >
           {RowField?.options?.map((element: any, index: number) => {
             return (
@@ -155,7 +169,7 @@ function SelectInput({
         />
       </div>
       {RowField?.ExtraTxt_org && <ExtraTxt RowField={RowField} />}
-    </div>
+    </div >
   );
 }
 
