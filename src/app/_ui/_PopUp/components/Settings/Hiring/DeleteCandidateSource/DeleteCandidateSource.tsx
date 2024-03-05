@@ -1,20 +1,14 @@
 "use client";
-import { deleteEducation } from "@/actions/personal-job/education/deleteEducation";
-import useEmployeeData from "@/hooks/useEmloyeeData";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React from "react";
-import { useParams } from "next/navigation";
 import { FaRegTrashAlt } from "react-icons/fa";
 import PopUpSkeleton from "../../../../PopUpSkeleton";
 import useToast from "@/hooks/useToast";
 import CancelBtnGeneric from "@/app/_ui/CancelBtnGeneric";
 import { SubmitBtn } from "@/app/_ui/SubmitBtn";
-import { Hr } from "@/app/(dashboard)/people/(employee)/[employeeId]/TimeOff/components/Hr";
-import useCandidateStatus from "@/hooks/Hiring/useCandidateStatus";
 import Loader from "@/app/_ui/Loader/Loader";
 import { GrNotes } from "react-icons/gr";
-import { deleteCandidateStatus } from "@/actions/settings/Hiring/deleteCandidateStatus";
 import { deleteCandidateSource } from "@/actions/settings/Hiring/deleteCandidateSource";
 import useCandidateSources from "@/hooks/Hiring/useCandidateSources";
 
