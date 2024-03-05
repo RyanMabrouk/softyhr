@@ -1,23 +1,35 @@
 import React, { useState } from "react";
 import { FaTrash } from "react-icons/fa6";
-import { statusType } from "../../types/status.types";
 import Link from "next/link";
 import { MdModeEditOutline } from "react-icons/md";
 import { editCandidateStatus } from "@/actions/settings/Hiring/editCandidateStatus";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import useToast from "@/hooks/useToast";
+import { createCandidateStatus } from "@/actions/settings/Hiring/createCandidateStatus";
+import { InsertStatusType, statusType } from "../types/status.types";
 
 function StatusCard({ id, name, group_name }: statusType) {
   const [isEditting, setEditting] = useState<boolean>(false);
   const [value, setValue] = useState<string>(name || "");
   const [Error, setError] = useState<string | null>(null);
+  const { toast } = useToast();
+  const QueryClient = useQueryClient();
 
-  const EditStatus = (formdata: FormData) => {
-    if (String(formdata.get("status")) == ""){ 
-        setError("required !");
-        return;
-    }
-      editCandidateStatus(String(formdata.get("status")), id);
-  };
-  const Addstatus = () => {};
+  const { mutateAsync: EditStatus, isPending } = useMutation({
+    mutationFn: (formData: FormData) => {
+      if (String(formData.get("status"))?.trim() === "") {
+        setError("Status is required!");
+      }
+      return editCandidateStatus(String(formData.get("status"))?.trim(), id);
+    },
+    onSuccess: () => {
+      setEditting(false);
+      QueryClient.invalidateQueries({ queryKey: ["candidate_statuses"] });
+    },
+    onError: () => {
+      toast.error("something went wrong", "Server Error");
+    },
+  });
 
   return (
     <div>
@@ -31,14 +43,14 @@ function StatusCard({ id, name, group_name }: statusType) {
             <div
               data-tip="edit status"
               onClick={() => setEditting(true)}
-              className="tooltip flex h-[2rem] w-[2rem] cursor-pointer items-center justify-center self-end duration-200 ease-in-out hover:border hover:border-gray-27 hover:bg-gray-22"
+              className="tooltip flex h-[2rem] w-[2rem] cursor-pointer items-center justify-center self-end rounded-sm duration-200 ease-in-out hover:border hover:border-gray-27 hover:bg-gray-22"
             >
               <MdModeEditOutline className="cursor-pointer !text-gray-15" />
             </div>
             <Link
               data-tip="delete status"
               href={`?popup=DELETE_CANDIDATE_STATUS&id=${id}`}
-              className="tooltip flex h-[2rem] w-[2rem] cursor-pointer items-center justify-center duration-200 ease-in-out hover:border hover:border-gray-27 hover:bg-gray-22"
+              className="tooltip flex h-[2rem] w-[2rem] cursor-pointer items-center justify-center rounded-sm duration-200 ease-in-out hover:border hover:border-gray-27 hover:bg-gray-22"
             >
               <FaTrash className="cursor-pointer !text-gray-15" />
             </Link>
@@ -46,7 +58,7 @@ function StatusCard({ id, name, group_name }: statusType) {
         </div>
       ) : (
         <form
-          action={id ? EditStatus : Addstatus}
+          action={EditStatus}
           className="flex min-h-[3.5rem] w-full items-start justify-between gap-[1rem] rounded-sm border-b border-gray-18 bg-white px-4 pt-4"
         >
           <div className="flex w-full flex-col items-start justify-center">
@@ -54,7 +66,6 @@ function StatusCard({ id, name, group_name }: statusType) {
               <input
                 name={"status"}
                 value={value}
-                required
                 type="text"
                 onChange={(e) => {
                   setValue(e.target.value);
@@ -68,14 +79,16 @@ function StatusCard({ id, name, group_name }: statusType) {
               {Error || "ERROR"}
             </p>
           </div>
-          <div className="flex items-center justify-center  gap-[1rem]">
+          <div className="mt-[0.2rem] flex items-center justify-center  gap-[1rem]">
             <button
               className="col-span-2 w-full min-w-[9rem] space-x-8 rounded-md border bg-color-primary-8 px-2 py-1 font-semibold capitalize text-white shadow-sm transition-all ease-linear first-letter:capitalize hover:bg-fabric-600   hover:shadow-md "
               type="submit"
             >
-              Save
+              {isPending ? "Saving..." : "Save"}
             </button>
-            <button type="button">Cancel</button>
+            <button onClick={() => setEditting(false)} type="button">
+              Cancel
+            </button>
           </div>
         </form>
       )}
@@ -85,7 +98,7 @@ function StatusCard({ id, name, group_name }: statusType) {
 
 export default StatusCard;
 
-/*
+/*jnjhn
  {!idEditting ? (
         <div className="flex h-[2.5rem] w-full items-start justify-between rounded-sm border border-gray-18 bg-white px-4 py-1">
           <RxDragHandleDots2 className="!pl-4 !text-gray-15" />

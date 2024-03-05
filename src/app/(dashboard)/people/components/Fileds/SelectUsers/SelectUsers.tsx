@@ -59,10 +59,16 @@ function SelectGeneric({
             color: "black",
             ".MuiSvgIcon-root ": {
               fill: "#686868 !important",
+              backgroundColor: "#F4F4F4",
+              width: "1.5rem",
+              height: "100%",
+              position: "absolute",
+              right: 0,
+              top: 0,
             },
             height: "2rem",
             minWidth: "16rem",
-            borderRadius: "0.1rem !important",
+            borderRadius: "0.2rem !important",
             fontWeight: "300",
             fontSize: "1rem",
           }}
@@ -81,22 +87,21 @@ function SelectGeneric({
           value={value}
           options={options}
           renderOption={(props, option: any) => (
-            
-                <Box
-                  component="li"
-                  sx={{ "& > img": { mr: 2, flexShrink: 0 } }}
-                  {...props}
-                  key={option.key}
-                >
-                  <Image
-                    height={100}
-                    width={100}
-                    className="h-[1.5rem] w-[1.5rem] rounded-full object-cover"
-                    alt=""
-                    src={option?.picture || avatar}
-                  />
-                  {option?.label?.replace(/  +/g, " ")}
-                </Box>
+            <Box
+              component="li"
+              sx={{ "& > img": { mr: 2, flexShrink: 0 } }}
+              {...props}
+              key={option.key}
+            >
+              <Image
+                height={100}
+                width={100}
+                className="h-[1.5rem] w-[1.5rem] rounded-full object-cover"
+                alt=""
+                src={option?.picture || avatar}
+              />
+              {option?.label?.replace(/  +/g, " ")}
+            </Box>
           )}
           renderInput={(params) => {
             isPending || options?.length == 0

@@ -6,7 +6,8 @@ import Loader from "@/app/_ui/Loader/Loader";
 import useCandidateStatus from "@/hooks/Hiring/useCandidateStatus";
 import Link from "next/link";
 import { FaTrash } from "react-icons/fa6";
-import StatusCard from "./components/StatusCard/StatusCard";
+import StatusCard from "./components/StatusCard";
+import AddStatus from "./components/AddStatus";
 
 function CandidateStatuses() {
   const { data, isPending } = useCandidateStatus();
@@ -32,11 +33,7 @@ function CandidateStatuses() {
               ?.map((status: statusType) => {
                 return <StatusCard {...status} key={"status" + status?.id} />;
               })}
-            <div className="-b px- flex w-full items-center justify-start border-b border-gray-18 px-2 py-3">
-              <p className="cursor-pointer text-color5-500 duration-200 ease-linear hover:text-color-primary-8">
-                + Add Status
-              </p>
-            </div>
+            <AddStatus group_name="Actif"/>
           </>
         ) : (
           <Loader />
@@ -56,15 +53,9 @@ function CandidateStatuses() {
                 (status: statusType) => status?.group_name == "Disqualified",
               )
               ?.map((status: statusType) => {
-                return (
-                 <StatusCard {...status} key={"status" + status?.id} />
-                );
+                return <StatusCard {...status} key={"status" + status?.id} />;
               })}
-            <div className="-b px- flex w-full items-center justify-start border-b border-gray-18 px-2">
-              <p className="cursor-pointer py-3 text-color5-500 duration-200 ease-linear hover:text-color-primary-8">
-                + Add Status
-              </p>
-            </div>
+            <AddStatus group_name="Disqualified" />
           </>
         ) : (
           <Loader />
