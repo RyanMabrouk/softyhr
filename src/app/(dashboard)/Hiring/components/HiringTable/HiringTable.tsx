@@ -170,12 +170,12 @@ export default function HiringTable({
               <CopieJobLink id={user?.id}/>
             </div>
           );
-        case "publish":
+    /*    case "publish":
           return (
             <div className="flex items-center justify-end">
               <PublishButton id={user?.id} status={user?.status} />
             </div>
-          );
+          );*/
         default:
           return cellValue;
       }
