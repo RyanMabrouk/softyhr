@@ -28,11 +28,6 @@ const CurrencyInputPerPeriode = ({
   );
   const [value, setValue] = useState<string>(String(Pay));
 
-  console.log(RowField);
-  useEffect(() => {
-    console.log(`${CurrentCurrency} ${value} /${PayPeriod}`);
-  }, [CurrentCurrency, PayPeriod]);
-
   return (
     <div className="flex items-end justify-center gap-[1rem]">
       <div className="flex flex-col items-start justify-center">

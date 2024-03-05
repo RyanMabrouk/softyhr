@@ -16,10 +16,14 @@ import { FaArrowLeftLong } from "react-icons/fa6";
 import { EditApplicationDetails } from "@/actions/hiring/EditApplicationDetails";
 import { Application_Details_type } from "@/types/database.tables.types";
 import { useQueryClient } from "@tanstack/react-query";
-import EditApplicationProvider, { EditApplicationContext } from "./context/EditApplicationDetailsContext";
+import EditApplicationProvider, {
+  EditApplicationContext,
+} from "./context/EditApplicationDetailsContext";
 
 function ApplicationDetails() {
-  const { ApplicationDetails, Update_ApplicationDetails } = useContext( EditApplicationContext);
+  const { ApplicationDetails, Update_ApplicationDetails } = useContext(
+    EditApplicationContext,
+  );
   const router = useRouter();
   const params = useSearchParams();
   const id = params?.get("id");
@@ -34,26 +38,26 @@ function ApplicationDetails() {
     if (!Hiring_isPending && Hiring_data?.[0]?.Application_Details) {
       Update_ApplicationDetails({ values: Hiring_data[0].Application_Details });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [Hiring_data, Hiring_isPending]);
 
-
-    async function EditApplicationDetailsHandler(formdata:FormData) {
-       console.log("submis",ApplicationDetails);
-      const response = await EditApplicationDetails(
-        {
-          ...ApplicationDetails?.values,
-          "Job Category": formdata?.get("Job Category"),
-        },
-        id,
-      );
-      if (response?.error) toast.error(response?.error?.Message);
-      else toast.success("Application details Updated Successfully");
-      QueryClient.invalidateQueries({ queryKey: ["Hiring"] });
-      QueryClient.invalidateQueries({ queryKey: ["Hiring",id] });
-      router.push("/Hiring/jobs");
-      QueryClient.invalidateQueries({ queryKey: ["Hiring"] });
-      QueryClient.invalidateQueries({ queryKey: ["Hiring", id] });
-    }
+  async function EditApplicationDetailsHandler(formdata: FormData) {
+    console.log("submis", ApplicationDetails);
+    const response = await EditApplicationDetails(
+      {
+        ...ApplicationDetails?.values,
+        "Job Category": formdata?.get("Job Category"),
+      },
+      id,
+    );
+    if (response?.error) toast.error(response?.error?.Message);
+    else toast.success("Application details Updated Successfully");
+    QueryClient.invalidateQueries({ queryKey: ["Hiring"] });
+    QueryClient.invalidateQueries({ queryKey: ["Hiring", id] });
+    router.push("/Hiring/jobs");
+    QueryClient.invalidateQueries({ queryKey: ["Hiring"] });
+    QueryClient.invalidateQueries({ queryKey: ["Hiring", id] });
+  }
   return (
     <>
       {Hiring_isPending ? (
