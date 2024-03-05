@@ -76,7 +76,7 @@ export function HistoryTable({
           ))
         ) : (
           <>
-            <div className=" relative box-border line-clamp-2  h-[3.25rem] w-max  max-w-[25rem]  overflow-hidden text-ellipsis px-4 pt-3 text-left align-top text-gray-27  ">
+            <div className=" relative box-border line-clamp-2  h-[3.25rem] w-max   overflow-hidden text-ellipsis px-4 pt-3 text-left align-top text-gray-27  ">
               {emptyMessage ??
                 lang?.["Time Off"][
                   "There is no Data History for the selected filters.."

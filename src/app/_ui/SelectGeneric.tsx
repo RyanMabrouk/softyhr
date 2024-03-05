@@ -59,6 +59,7 @@ export function SelectGeneric({
           required={required}
           onOpen={(e) => setOpen(true)}
           onClose={(e) => setOpen(false)}
+          onChange={(e) => setValueInParent && setValueInParent(e.target.value)}
           IconComponent={() => (
             <VscTriangleDown
               className={`cursor-pointer transition-all ease-linear ${cursor_type} ${open ? "rotate-180" : ""} `}
@@ -77,7 +78,6 @@ export function SelectGeneric({
               },
             },
           }}
-          onChange={(e) => setValueInParent && setValueInParent(e.target.value)}
           sx={{
             "& .MuiOutlinedInput-notchedOutline": {
               borderColor: cursor,
