@@ -18,7 +18,7 @@ interface LayoutHiringProps {
 export default function HiringLayout({ children }: LayoutHiringProps) {
   const ActiveRoute = usePathname();
   if (ActiveRoute.split("/").length - 1 > 2)
-    return <RoleGuard permissions={["access:Hiring"]}>children</RoleGuard>;
+    return <RoleGuard permissions={["access:Hiring"]}>{children}</RoleGuard>;
   return (
     <RoleGuard permissions={["access:Hiring"]}>
       <div className="flex w-full flex-col items-center justify-center bg-gray-14">
