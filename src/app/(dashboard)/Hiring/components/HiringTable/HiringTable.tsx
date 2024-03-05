@@ -57,7 +57,7 @@ const INITIAL_VISIBLE_COLUMNS = [
   "CreatedOn",
   "status",
   "actions",
-  "publish",
+ // "publish",
 ];
 interface HiringTablePropsType {
   Hiring: HiringTableType[];
