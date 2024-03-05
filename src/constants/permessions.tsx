@@ -64,7 +64,7 @@ export const permissions = [
   },
   {
     icon: <MdAddHomeWork className=" h-5 w-5" />,
-    lanel: "Hiring",
+    label: "Hiring",
     permissions: [{ permession: "access:Hiring", label: "Access Hiring" }],
   },
 ];
