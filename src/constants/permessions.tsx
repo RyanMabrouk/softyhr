@@ -48,6 +48,7 @@ export const permissions = [
         label: "Manage Access Levels",
       },
       { permession: "access:/Settings/TimeOff", label: "Time off" },
+      { permession: "access:/Settings/Jobs", label: "Hiring" },
     ],
   },
   {

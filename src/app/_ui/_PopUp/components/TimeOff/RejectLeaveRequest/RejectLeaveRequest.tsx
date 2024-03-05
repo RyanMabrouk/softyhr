@@ -2,7 +2,6 @@ import rejectLeaveRequest from "@/actions/leave/rejectLeaveRequest";
 import { SubmitBtn } from "@/app/_ui/SubmitBtn";
 import useData from "@/hooks/useData";
 import useToast from "@/hooks/useToast";
-import { database_profile_type } from "@/types/database.tables.types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import {
   useParams,

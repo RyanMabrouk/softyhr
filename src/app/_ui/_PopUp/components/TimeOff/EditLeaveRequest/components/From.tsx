@@ -147,7 +147,7 @@ export function From() {
       <hr className="h-[3px] w-full bg-primary-gradient" />
       <div className="flex flex-row gap-4 px-2 pt-3">
         <SubmitBtn disabled={isCanceling} className="!w-fit">
-          {leave_request_id ? "Save" : "Send request"}
+          Save
         </SubmitBtn>
         {user_profile?.user_id === request_data?.user_id && (
           <button

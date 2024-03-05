@@ -78,19 +78,14 @@ export function UserProfile() {
               >
                 Account settings
               </Link>
-              <form
-                action={() => {
-                  setToggleView((old) => !old);
+              <button
+                className="w-full cursor-pointer border-t bg-white px-3 py-2 text-left text-base transition-all ease-linear hover:bg-fabric-700 hover:text-white"
+                onClick={() => {
                   signout();
                 }}
               >
-                <button
-                  className="w-full cursor-pointer border-t bg-white px-3 py-2 text-left text-base transition-all ease-linear hover:bg-fabric-700 hover:text-white"
-                  type="submit"
-                >
-                  Log out
-                </button>
-              </form>
+                Log out
+              </button>
             </main>
           </div>
         </div>
