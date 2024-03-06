@@ -38,7 +38,7 @@ const FilesSelectArrowDown = ({ onSelect, options }: any) => {
 
   return (
     <div
-      className={`relative inline-block  ${
+      className={`relative inline-block rounded-sm  ${
         isDropdownOpen ? "shadow-green  " : ""
       }`}
     >
@@ -51,7 +51,7 @@ const FilesSelectArrowDown = ({ onSelect, options }: any) => {
             event.stopPropagation();
             handleDropdownToggle();
           }}
-          className=" border border-transparent  p-1 transition-all ease-linear hover:border-stone-400 "
+          className=" rounded-sm border  border-transparent p-1 transition-all ease-linear hover:border-stone-400"
         >
           <TiArrowSortedDown className="text-gray-29" />
         </button>

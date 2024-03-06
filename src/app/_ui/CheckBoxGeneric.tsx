@@ -58,7 +58,9 @@ export function CheckBoxGeneric({
         checked={checked}
         required={required}
       />
-      <p className={`transition-all ease-linear ${checked ? "font-bold" : ""}`}>
+      <p
+        className={`transition-all ease-linear ${checked ? " font-bold " : ""}`}
+      >
         {children}
       </p>
     </div>
