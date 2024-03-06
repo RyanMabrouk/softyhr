@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { FaHistory } from "react-icons/fa";
-import { Filters } from "../Filters";
+import { Filters } from "./Filters";
 import {
   database_leave_accrued_type,
   database_leave_policies_type,

@@ -41,7 +41,7 @@ export function SelectGeneric({
   const cursor_type =
     cursor === "white"
       ? "text-white h-full min-w-3 mr-2"
-      : "text-gray-21 rounded-br-sm rounded-tr-sm bg-gray-14 px-2 pl-2 h-full w-9 ";
+      : "text-gray-21 rounded-br-sm !min-w-8 rounded-tr-sm bg-gray-14 px-2.5 h-full ";
   if (!options) return;
   return (
     <FormControl className="group flex w-fit flex-col gap-1">
@@ -56,6 +56,7 @@ export function SelectGeneric({
           id={label}
           className={`group peer h-9 w-[12.5rem] border  border-gray-18  py-1  text-gray-23  transition-all ease-linear first-letter:capitalize  placeholder:text-gray-14  [&_.Mui-selected]:!bg-fabric-700 [&_.MuiOutlinedInput-notchedOutline]:border-none ${open ? "shadow-green rounded-b-none rounded-t-sm " : "rounded-sm shadow-sm hover:shadow-md"} ${className}`}
           name={name}
+          open={open}
           defaultValue={defaultValue ? String(defaultValue.value) : "none"}
           displayEmpty
           required={required}
@@ -65,6 +66,7 @@ export function SelectGeneric({
           IconComponent={() => (
             <VscTriangleDown
               className={`cursor-pointer transition-all ease-linear ${cursor_type} ${open ? "rotate-180" : ""} `}
+              onClick={() => setOpen((old) => !old)}
             />
           )}
           MenuProps={{

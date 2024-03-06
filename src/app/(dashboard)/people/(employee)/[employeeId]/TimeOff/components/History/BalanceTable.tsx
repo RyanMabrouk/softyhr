@@ -4,7 +4,6 @@ import { HistoryTable } from "./HistoryTable";
 import historyTableFilters from "../../context/historyTableFilters";
 import { historyTableFiltersContextType } from "../../context/historyTableFilters";
 import { formatDDMMYYYY } from "@/helpers/date.helpers";
-import { databese_leave_categories_track_time_unit_type } from "@/types/database.tables.types";
 import { formatTotalHoursToTimeUnit } from "@/helpers/TimeOff/leave.helpers";
 import { EditLeaveRequestBtn } from "../Buttons/EditLeaveRequestBtn";
 import { DeleteLeaveRequestBtn } from "../Buttons/DeleteLeaveRequestBtn";
@@ -15,22 +14,22 @@ import RoleGuard from "@/app/_ui/RoleGuard";
 import useTranslation from "@/translation/useTranslation";
 import { leave_data_types } from "./History";
 import { DateHeader } from "./DateHeader";
+import useLeaveData from "@/hooks/TimeOff/useLeaveData";
 
-export function BalanceTable({
-  data,
-  active_track_time_unit,
-}: {
-  data: leave_data_types;
-  active_track_time_unit:
-    | databese_leave_categories_track_time_unit_type
-    | undefined;
-}) {
+export function BalanceTable({ data }: { data: leave_data_types }) {
   const { year, type } =
     useContext<historyTableFiltersContextType>(historyTableFilters);
   const { toggleSort } = useContext<toggleDateSortContextType>(
     toggleDateSortContext,
   );
   const { lang } = useTranslation();
+  // active filter category
+  const {
+    leave_categories: { data: leave_categories, isPending: isPending5 },
+  } = useLeaveData();
+  const active_track_time_unit = leave_categories?.find(
+    (e) => e.name === type,
+  )?.track_time_unit;
   // headers
   const used_hours_header = `${active_track_time_unit ? lang?.["Time Off"]?.[active_track_time_unit] + " " : ""}${lang?.["Time Off"].Used} (-)`;
   const accrued_hours_header = `${active_track_time_unit ? lang?.["Time Off"]?.[active_track_time_unit] + " " : ""}${lang?.["Time Off"].Accrued} (+)`;

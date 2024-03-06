@@ -1,11 +1,12 @@
 "use client";
 import React, { useContext } from "react";
-import historyTableFilters from "../context/historyTableFilters";
-import { historyTableFiltersContextType } from "../context/historyTableFilters";
-import { leave_data_types } from "./History/History";
+import historyTableFilters from "../../context/historyTableFilters";
+import { historyTableFiltersContextType } from "../../context/historyTableFilters";
+import { leave_data_types } from "./History";
 import { capitalizeFirstLetter } from "@/helpers/string.helpers";
 import { SelectGeneric } from "@/app/_ui/SelectGeneric";
 import useTranslation from "@/translation/useTranslation";
+import { database_leave_request_status_type } from "@/types/database.tables.types";
 interface FiltersProps {
   data: leave_data_types;
 }
@@ -19,6 +20,7 @@ export function Filters({ data }: FiltersProps) {
         <SelectGeneric
           inputLabel={lang?.["Time Off"].Category}
           setValueInParent={setType}
+          className=" !w-[17.5rem]"
           options={[
             { label: lang?.["Time Off"].All, value: "" },
             ...(data
@@ -33,6 +35,7 @@ export function Filters({ data }: FiltersProps) {
         <SelectGeneric
           inputLabel={lang?.["Time Off"].Year}
           setValueInParent={setYear}
+          className=" !w-[8.5rem]"
           options={[
             { label: lang?.["Time Off"].All, value: "" },
             ...(data
@@ -51,13 +54,17 @@ export function Filters({ data }: FiltersProps) {
             options={[
               { label: lang?.["Time Off"].All, value: "" },
               ...(data
-                ?.map((e: any) => e.status)
+                ?.map((e) => e.status)
                 .filter(
                   (value, index, array) =>
                     array.indexOf(value) === index && value !== "",
                 )
                 .map((status) => ({
-                  label: capitalizeFirstLetter(status),
+                  label: capitalizeFirstLetter(
+                    lang?.["Time Off"][
+                      status as database_leave_request_status_type
+                    ] ?? "",
+                  ),
                   value: status,
                 })) || []),
             ]}
