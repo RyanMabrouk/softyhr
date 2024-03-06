@@ -41,6 +41,7 @@ RUN --mount=type=bind,source=package.json,target=package.json \
 # Copy the rest of the source files into the image.
 COPY . .
 # Run the build script.
+ENV NODE_ENV production
 RUN NODE_OPTIONS="--max-old-space-size=4096" npm run build && rm -rf node_modules
 
 ################################################################################
