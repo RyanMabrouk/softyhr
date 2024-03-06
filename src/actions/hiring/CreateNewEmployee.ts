@@ -4,10 +4,16 @@ import { Profile_Type } from "@/types/database.tables.types";
 import { createClient } from "@supabase/supabase-js";
 import { getLogger } from "@/logging/log-util";
 import { createProfile } from "../auth/createProfile";
-export const CreateNewEmployee = async (
-  NewEmployeData: Profile_Type,
-  email: string,
-) => {
+
+export const CreateNewEmployee = async ({
+  NewEmployeData,
+  email,
+  role_id,
+}: {
+  NewEmployeData: Profile_Type;
+  email: string;
+  role_id: string;
+}) => {
   const logger = getLogger("*");
   logger.info("CreateNewEmployee_enter");
   const supbaseAdmin = createClient(
@@ -40,7 +46,7 @@ export const CreateNewEmployee = async (
       email: email,
       tel: NewEmployeData?.["Contact"]?.["Mobile Phone"] || "",
       job: NewEmployeData?.["Job Information"]?.[0]?.["Job Title"] || "",
-      role_id: 1, // must be changed
+      role_id: Number(role_id),
       supervisor_id: NewEmployeData?.supervisor_id || null,
       Division: NewEmployeData?.["Job Information"]?.[0]?.Division || "",
       Department: NewEmployeData?.["Job Information"]?.[0]?.Department || "",

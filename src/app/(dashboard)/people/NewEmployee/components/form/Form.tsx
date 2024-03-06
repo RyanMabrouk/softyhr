@@ -35,7 +35,6 @@ function Form() {
   //----------add_candiate_as_new_emplyee------
   const SubmitFormCandidate = async (formdata: FormData) => {
     console.log("form candidate");
-
     //-----formulate_data-------
     let result: any = {};
     data?.Champs.forEach((champ: any) => {
@@ -55,13 +54,12 @@ function Form() {
       },
     });
     //----create_new_user--and--submit_profile_data
-    CreateEmployeeMut(NewData);
+    CreateEmployeeMut({ NewData, formData: formdata });
   };
 
   //----------add_new_emplyee------
   const SubmitForm = async (formdata: FormData) => {
     //-----formulate_data-------
-    console.log(data?.Champ);
     let result: any = {};
     data?.Champs?.forEach((champ: any) => {
       let Champ: any = {};
@@ -70,7 +68,6 @@ function Form() {
           (fieldRow: any) => (Champ = { ...Champ, [fieldRow.name]: "" }),
         );
       });
-      console.log(champ, "exit");
       result = { ...result, [champ?.champ]: { ...Champ } };
     });
     console.log("first map exit", result);
@@ -82,18 +79,28 @@ function Form() {
         supervisor_id: profile_data?.user_id || "",
       },
     });
-    console.log("news data :", NewData);
-
     //----create_new_user--and--submit_profile_data
-    CreateEmployeeMut(NewData);
+    CreateEmployeeMut({ NewData, formData: formdata });
   };
   const { mutate: CreateEmployeeMut, isPending: isCreatingEmployee } =
     useMutation({
-      mutationFn: async (NewData: any) => {
-        const response = await CreateNewEmployee(
-          NewData,
-          NewData?.Contact?.["Work Email"] || "",
-        );
+      mutationFn: async ({
+        NewData,
+        formData,
+      }: {
+        NewData: any;
+        formData: FormData;
+      }) => {
+        const role_id = formData.get("role_id") as string;
+        if (role_id === "none") {
+          toast.error("Please select a role for the new employee");
+          throw new Error("Invalid Role in add new employee form");
+        }
+        const response = await CreateNewEmployee({
+          NewEmployeData: NewData,
+          email: NewData?.Contact?.["Work Email"] || "",
+          role_id: role_id,
+        });
         setTouched(false);
         if (response?.Submitted) {
           toast.success(response?.Message);
@@ -113,7 +120,7 @@ function Form() {
     <>
       {isPending || candidate_isPending || profile_pending ? (
         <div className="flex h-[20rem] w-full items-center justify-center ">
-          <Loader/>
+          <Loader />
         </div>
       ) : (
         <div className="flex h-full w-full flex-col items-start justify-start pl-8">
@@ -136,7 +143,7 @@ function Form() {
                     <div className="flex flex-col items-start justify-center gap-[1rem]">
                       <FiledsChamps
                         champ={champ}
-                      //user={user?.data}
+                        //user={user?.data}
                         setTouched={setTouched}
                         key={rang || uuidv4()}
                         user={{ [champ]: candidate_data?.[0] }}
