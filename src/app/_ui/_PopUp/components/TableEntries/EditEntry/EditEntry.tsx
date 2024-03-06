@@ -49,7 +49,7 @@ function EditEntry() {
       ) : (
         <PopUpSkeleton
           className=""
-          title={`update
+          title={`Update
  ${section_name} item`}
         >
           <div className="flex flex-col items-start justify-center gap-[1rem] p-4 px-8">

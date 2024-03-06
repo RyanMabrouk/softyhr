@@ -49,7 +49,7 @@ function AddEntry() {
       {settings?.isPending || isPending ? (
         <Loader />
       ) : (
-        <PopUpSkeleton className="" title={`add ${section_name} item`}>
+        <PopUpSkeleton className="" title={`Add ${section_name} item`}>
           <div className="flex flex-col items-start justify-center gap-[1rem] p-4 px-8">
             <div className="flex h-[4rem] w-full min-w-[30rem] items-center gap-[1rem] border-b border-gray-15 bg-gray-14 p-8">
               <Image
