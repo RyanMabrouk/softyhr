@@ -311,12 +311,7 @@ const config: Config = {
       },
     },
   },
-  plugins: [
-    Myclass,
-    require("tailwindcss-animate"),
-    require("daisyui"),
-    require("@tailwindcss/typography"),
-  ],
+  plugins: [Myclass, require("tailwindcss-animate"), require("daisyui")],
   daisyui: {
     themes: ["light"],
   },

@@ -28,8 +28,6 @@ function Editor({
     },
   });
 
- 
-
   return (
     <div className="w-full pt-2">
       <h1 className="text-[14px] text-gray-29">{RowField?.name}</h1>

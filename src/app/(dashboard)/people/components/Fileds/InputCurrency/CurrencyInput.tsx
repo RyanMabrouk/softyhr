@@ -19,18 +19,11 @@ const CurrencyInput = ({
   setTouched,
   defaultValue,
 }: InputPropsType) => {
-  const { currency, Pay } = extractCurrencyValueAndPeriod(
-    defaultValue || "",
-  );
+  const { currency, Pay } = extractCurrencyValueAndPeriod(defaultValue || "");
   const [CurrentCurrency, setCurrentCurency] = useState<string | null>(
     currency || "USD",
   );
   const [value, setValue] = useState<string>(String(Pay));
-
-  console.log(RowField);
-  useEffect(() => {
-    console.log(`${CurrentCurrency} ${value}`);
-  }, [CurrentCurrency]);
 
   return (
     <div className="flex items-end justify-center gap-[1rem]">

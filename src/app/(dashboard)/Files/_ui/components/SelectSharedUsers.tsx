@@ -5,6 +5,7 @@ import default_avatar from "/public/default_avatar.png";
 import { InputGeneric } from "@/app/_ui/InputGeneric";
 import { database_profile_type } from "@/types/database.tables.types";
 import Image from "next/image";
+import { IoMdCloseCircleOutline } from "react-icons/io";
 
 export default function SelectSharedUsers({
   disabled,
@@ -37,15 +38,27 @@ export default function SelectSharedUsers({
   }, [isTyping, isDropdownOpen]);
 
   return (
-    <div className={`relative inline-block `}>
-      <div className="flex cursor-pointer items-center justify-between rounded-sm">
+    <div className="relative w-full">
+      <div className="relative w-fit">
         <InputGeneric
-          className=" !min-w-[15rem]"
+          className=" !w-[30rem] !max-w-[30rem] disabled:cursor-not-allowed disabled:bg-white"
           name="search"
+          placeholder="Enter names here.."
           setValueInParent={setIsTyping}
+          value={isTyping}
           disabled={!disabled}
         />
+        {isDropdownOpen && !isPending && (
+          <button
+            className="absolute inset-y-0 right-2 hover:opacity-70"
+            type="button"
+            onClick={() => setIsTyping("")}
+          >
+            <IoMdCloseCircleOutline className={"text-lg"} />
+          </button>
+        )}
       </div>
+
       {isDropdownOpen && !isPending && (
         <div className="shadow-green absolute  z-50 mt-[0.1rem]  w-80 origin-top-right rounded-sm bg-white shadow-lg ring-1 ring-black ring-opacity-5">
           <div

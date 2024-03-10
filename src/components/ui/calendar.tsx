@@ -1,7 +1,5 @@
 "use client";
-
-import * as React from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import React from "react";
 import { DayPicker, DropdownProps } from "react-day-picker";
 
 import { cn } from "@/lib/utils";
@@ -14,6 +12,8 @@ import {
   DropdownTrigger,
 } from "@nextui-org/react";
 import { FaSortDown } from "react-icons/fa";
+import { FaArrowRight } from "react-icons/fa";
+import { MdKeyboardArrowRight } from "react-icons/md";
 
 export type CalendarProps = React.ComponentProps<typeof DayPicker>;
 
@@ -102,8 +102,12 @@ function Calendar({
             </Dropdown>
           );
         },
-        IconLeft: ({ ...props }) => <ChevronLeft className="h-4 w-4" />,
-        IconRight: ({ ...props }) => <ChevronRight className="h-4 w-4" />,
+        IconLeft: ({ ...props }) => (
+          <MdKeyboardArrowRight className="h-5 w-5 rotate-180" />
+        ),
+        IconRight: ({ ...props }) => (
+          <MdKeyboardArrowRight className="h-5 w-5" />
+        ),
       }}
       {...props}
     />

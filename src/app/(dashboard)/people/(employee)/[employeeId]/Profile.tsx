@@ -28,7 +28,6 @@ export function Profile() {
             <Image
               src={user?.picture ?? avatar}
               alt="user-name"
-              layout="responsive"
               priority
               width={208}
               height={208}

@@ -98,28 +98,24 @@ export default function FolderBox({
   }
   return (
     <div
-      className={`flex h-12 w-11/12 cursor-pointer items-center justify-between rounded-md p-3 transition-all ${isHovered || isOver ? "bg-white [&>*:nth-child(2)]:block" : ""}  `}
+      className={`flex h-10 w-11/12 cursor-pointer items-center gap-1 rounded-md px-3 py-4 transition-all ${isHovered || isOver ? "bg-white [&>*:nth-child(2)]:block" : ""}  `}
       onMouseEnter={handleHover}
       onMouseLeave={handleLeave}
       onClick={() => handleClick()}
       ref={drop}
     >
-      <button className="  flex w-full flex-row items-center gap-3  text-left text-base  text-stone-500 transition-all  duration-300 hover:text-color-primary-8">
-        {isHovered || isOver ? (
-          <IoFolderOpenSharp fontSize="1.3rem" fill={primary} />
-        ) : (
-          <FaFolder fontSize="1.3rem" fill={grey} />
-        )}
-        <span className="line-clamp-1">{name}</span>
-        <span className="text-sm text-stone-400"> ({numFiles})</span>
+      <button className="  flex w-full flex-row items-center justify-between text-left text-base  text-gray-30 transition-all  duration-300 hover:text-fabric-700">
+        <div className="flex flex-row items-center gap-1.5">
+          {isHovered || isOver ? (
+            <IoFolderOpenSharp fontSize="1.3rem" fill={primary} />
+          ) : (
+            <FaFolder fontSize="1.3rem" fill={grey} />
+          )}
+          <span className="line-clamp-1">{name}</span>
+        </div>
+        <span className="text-sm "> ({numFiles})</span>
       </button>
-
-      <RoleGuard permissions={["delete:files"]}>
-        <FilesSelectArrowDown
-          options={options}
-          onSelect={handleSelectedOption}
-        />
-      </RoleGuard>
+      <FilesSelectArrowDown options={options} onSelect={handleSelectedOption} />
     </div>
   );
 }

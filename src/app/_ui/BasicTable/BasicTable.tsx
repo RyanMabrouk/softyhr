@@ -94,7 +94,10 @@ export default function BasicTable({
                           {TableRows?.map((RowField: RowFieldType) => {
                             if (RowField?.type?.toUpperCase() == "SELECT_USERS")
                               return (
-                                <RenderCellUser id={row?.[RowField?.name]} />
+                                <RenderCellUser
+                                  key={row?.[RowField?.name]}
+                                  id={row?.[RowField?.name]}
+                                />
                               );
                             if (
                               RowField?.type?.toUpperCase() ==
@@ -102,6 +105,7 @@ export default function BasicTable({
                             )
                               return (
                                 <RenderCellDepartment
+                                  key={row?.[RowField?.name]}
                                   id={row?.[RowField?.name]}
                                 />
                               );

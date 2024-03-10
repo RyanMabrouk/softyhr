@@ -2,6 +2,7 @@ import { BsFillStopwatchFill, BsPeopleFill } from "react-icons/bs";
 import { FaAddressCard, FaBusinessTime, FaSuitcase } from "react-icons/fa";
 import { FaFileShield } from "react-icons/fa6";
 import { IoSettings } from "react-icons/io5";
+import { MdAddHomeWork } from "react-icons/md";
 
 export const permissions = [
   {
@@ -60,6 +61,11 @@ export const permissions = [
         label: "Add New Employees",
       },
     ],
+  },
+  {
+    icon: <MdAddHomeWork className=" h-5 w-5" />,
+    label: "Hiring",
+    permissions: [{ permession: "access:Hiring", label: "Access Hiring" }],
   },
 ];
 // permissions of the Profile
