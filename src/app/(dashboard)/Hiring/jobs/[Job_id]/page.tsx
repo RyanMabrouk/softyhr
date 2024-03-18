@@ -20,6 +20,7 @@ function Page({ params: { Job_id } }: { params: { Job_id: string } }) {
   const {
     candidates: { data, isPending, meta, isPlaceholderData },
   } = useCandidate(
+    "",
     { job_id: Job_id },
     page,
     6,
@@ -50,7 +51,7 @@ function Page({ params: { Job_id } }: { params: { Job_id: string } }) {
     return {
       id: candidate?.id,
       "Candidate Info":
-      candidate?.["First Name"] + " " + candidate?.["Last Name"],
+        candidate?.["First Name"] + " " + candidate?.["Last Name"],
       status: candidate?.status,
       Status_update: "Updated Just Now",
       Rating: candidate?.Ratings,
@@ -93,6 +94,8 @@ function Page({ params: { Job_id } }: { params: { Job_id: string } }) {
                 Job_id={Job_id}
                 page={page}
                 totalPages={meta?.totalPages}
+                isTableCandidate={false}
+                hasNoSelectedItemsInPagination={false}
               />
             </div>
           )}

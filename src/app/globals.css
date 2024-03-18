@@ -177,3 +177,41 @@
   -webkit-box-shadow: -1px -4px 11px -4px rgba(0, 0, 0, 0.1);
   -moz-box-shadow: -1px -4px 11px -4px rgba(0, 0, 0, 0.1);
 }
+
+.input-range {
+  margin-left: 10px;
+  min-height: 50px;
+  max-width: calc(100% - 15px);
+}
+.input-range > .input-range__label {
+  display: none;
+}
+
+.input-range > .input-range__track {
+  background: #cccccc;
+  height: 6px;
+}
+
+.input-range > .input-range__track > .input-range__track--active {
+  background: #c0e94e;
+  height: 8px;
+}
+
+.input-range .input-range__slider {
+  background: #527a00;
+  border: 1px solid #527a00;
+  margin-top: -0.9rem;
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+.input-range .input-range__label--value {
+  position: absolute;
+  bottom: -1.6rem;
+  top: unset;
+  color: green;
+}
+
+/* .input-range .input-range__label--value .input-range__label-container {
+  display: none;
+} */

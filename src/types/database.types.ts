@@ -113,12 +113,120 @@ export type Database = {
           }
         ]
       }
+      candidate_filter: {
+        Row: {
+          application_date:
+            | Database["public"]["CompositeTypes"]["application_date"]
+            | null
+          candidate_status:
+            | Database["public"]["CompositeTypes"]["candidate_status"][]
+            | null
+          created_at: string
+          hiring_manager: string[] | null
+          id: number
+          job_location: string[] | null
+          job_opportunity: string[] | null
+          job_status: string[] | null
+          rating: Database["public"]["CompositeTypes"]["filter_range"] | null
+          source: string[] | null
+        }
+        Insert: {
+          application_date?:
+            | Database["public"]["CompositeTypes"]["application_date"]
+            | null
+          candidate_status?:
+            | Database["public"]["CompositeTypes"]["candidate_status"][]
+            | null
+          created_at?: string
+          hiring_manager?: string[] | null
+          id?: number
+          job_location?: string[] | null
+          job_opportunity?: string[] | null
+          job_status?: string[] | null
+          rating?: Database["public"]["CompositeTypes"]["filter_range"] | null
+          source?: string[] | null
+        }
+        Update: {
+          application_date?:
+            | Database["public"]["CompositeTypes"]["application_date"]
+            | null
+          candidate_status?:
+            | Database["public"]["CompositeTypes"]["candidate_status"][]
+            | null
+          created_at?: string
+          hiring_manager?: string[] | null
+          id?: number
+          job_location?: string[] | null
+          job_opportunity?: string[] | null
+          job_status?: string[] | null
+          rating?: Database["public"]["CompositeTypes"]["filter_range"] | null
+          source?: string[] | null
+        }
+        Relationships: []
+      }
+      candidate_sources: {
+        Row: {
+          created_at: string
+          id: number
+          isDefault: boolean | null
+          name: string | null
+          org_name: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+          isDefault?: boolean | null
+          name?: string | null
+          org_name?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          isDefault?: boolean | null
+          name?: string | null
+          org_name?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "public_candidate_sources_org_name_fkey"
+            columns: ["org_name"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["name"]
+          }
+        ]
+      }
+      candidate_statuses: {
+        Row: {
+          created_at: string
+          group_name: string | null
+          id: number
+          name: string | null
+          org_name: string | null
+        }
+        Insert: {
+          created_at?: string
+          group_name?: string | null
+          id?: number
+          name?: string | null
+          org_name?: string | null
+        }
+        Update: {
+          created_at?: string
+          group_name?: string | null
+          id?: number
+          name?: string | null
+          org_name?: string | null
+        }
+        Relationships: []
+      }
       candidates: {
         Row: {
           created_at: string
           Email: string | null
           email_history: Json[] | null
           "First Name": string | null
+          full_name: string | null
           "Hiring Lead": string | null
           id: number
           job_id: number | null
@@ -135,6 +243,7 @@ export type Database = {
           Email?: string | null
           email_history?: Json[] | null
           "First Name"?: string | null
+          full_name?: string | null
           "Hiring Lead"?: string | null
           id?: number
           job_id?: number | null
@@ -151,6 +260,7 @@ export type Database = {
           Email?: string | null
           email_history?: Json[] | null
           "First Name"?: string | null
+          full_name?: string | null
           "Hiring Lead"?: string | null
           id?: number
           job_id?: number | null
@@ -179,28 +289,125 @@ export type Database = {
           }
         ]
       }
-      divisions: {
+      changes_pending: {
+        Row: {
+          comment_approval: string | null
+          created_at: string
+          id: number
+          NewData: Json | null
+          table_name: string | null
+          user_id: string | null
+        }
+        Insert: {
+          comment_approval?: string | null
+          created_at?: string
+          id?: number
+          NewData?: Json | null
+          table_name?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          comment_approval?: string | null
+          created_at?: string
+          id?: number
+          NewData?: Json | null
+          table_name?: string | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "public_Changes_pending_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["user_id"]
+          }
+        ]
+      }
+      Department: {
         Row: {
           created_at: string
           id: number
-          name: string
-          org_name: string
+          name: string | null
+          org_name: string | null
         }
         Insert: {
           created_at?: string
           id?: number
-          name: string
-          org_name: string
+          name?: string | null
+          org_name?: string | null
         }
         Update: {
           created_at?: string
           id?: number
-          name?: string
-          org_name?: string
+          name?: string | null
+          org_name?: string | null
         }
         Relationships: [
           {
-            foreignKeyName: "divisions_org_name_fkey"
+            foreignKeyName: "public_Department_org_name_fkey"
+            columns: ["org_name"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["name"]
+          }
+        ]
+      }
+      Division: {
+        Row: {
+          created_at: string
+          id: number
+          name: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+          name?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          name?: string | null
+        }
+        Relationships: []
+      }
+      employees: {
+        Row: {
+          created_at: string
+          email: string | null
+          employment_status: string | null
+          first_name: string | null
+          id: number
+          job_title: string | null
+          last_name: string | null
+          org_name: string | null
+          rapport_to: string | null
+        }
+        Insert: {
+          created_at?: string
+          email?: string | null
+          employment_status?: string | null
+          first_name?: string | null
+          id?: number
+          job_title?: string | null
+          last_name?: string | null
+          org_name?: string | null
+          rapport_to?: string | null
+        }
+        Update: {
+          created_at?: string
+          email?: string | null
+          employment_status?: string | null
+          first_name?: string | null
+          id?: number
+          job_title?: string | null
+          last_name?: string | null
+          org_name?: string | null
+          rapport_to?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "public_employees_org_name_fkey"
             columns: ["org_name"]
             isOneToOne: false
             referencedRelation: "organizations"
@@ -299,33 +506,42 @@ export type Database = {
         Row: {
           Application_Details: Json | null
           created_at: string
+          Department_id: number | null
           Form: Json | null
+          Hiring_Leader: string | null
           id: number
           "Job Status": string | null
-          job_Boards: Json | null
+          job_Boards: string | null
           job_information: Json | null
+          name: string | null
           org_name: string | null
           Questions: Json | null
         }
         Insert: {
           Application_Details?: Json | null
           created_at?: string
+          Department_id?: number | null
           Form?: Json | null
+          Hiring_Leader?: string | null
           id?: number
           "Job Status"?: string | null
-          job_Boards?: Json | null
+          job_Boards?: string | null
           job_information?: Json | null
+          name?: string | null
           org_name?: string | null
           Questions?: Json | null
         }
         Update: {
           Application_Details?: Json | null
           created_at?: string
+          Department_id?: number | null
           Form?: Json | null
+          Hiring_Leader?: string | null
           id?: number
           "Job Status"?: string | null
-          job_Boards?: Json | null
+          job_Boards?: string | null
           job_information?: Json | null
+          name?: string | null
           org_name?: string | null
           Questions?: Json | null
         }
@@ -336,6 +552,20 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "organizations"
             referencedColumns: ["name"]
+          },
+          {
+            foreignKeyName: "public_Hiring_Department_id_fkey"
+            columns: ["Department_id"]
+            isOneToOne: false
+            referencedRelation: "Department"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "public_Hiring_Hiring_Leader_fkey"
+            columns: ["Hiring_Leader"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["user_id"]
           }
         ]
       }
@@ -466,7 +696,7 @@ export type Database = {
           name: string
           org_name: string
           paid: boolean
-          track_time_unit: string
+          track_time_unit: Database["public"]["Enums"]["leave_categories_track_time_unit_type"]
         }
         Insert: {
           color?: string
@@ -477,7 +707,7 @@ export type Database = {
           name: string
           org_name: string
           paid?: boolean
-          track_time_unit?: string
+          track_time_unit?: Database["public"]["Enums"]["leave_categories_track_time_unit_type"]
         }
         Update: {
           color?: string
@@ -488,7 +718,7 @@ export type Database = {
           name?: string
           org_name?: string
           paid?: boolean
-          track_time_unit?: string
+          track_time_unit?: Database["public"]["Enums"]["leave_categories_track_time_unit_type"]
         }
         Relationships: [
           {
@@ -562,7 +792,7 @@ export type Database = {
           reviewed_by: string | null
           reviewed_comment: string | null
           start_at: string
-          status: string
+          status: Database["public"]["Enums"]["leave_request_status_type"]
           user_id: string
         }
         Insert: {
@@ -578,7 +808,7 @@ export type Database = {
           reviewed_by?: string | null
           reviewed_comment?: string | null
           start_at: string
-          status?: string
+          status?: Database["public"]["Enums"]["leave_request_status_type"]
           user_id: string
         }
         Update: {
@@ -594,7 +824,7 @@ export type Database = {
           reviewed_by?: string | null
           reviewed_comment?: string | null
           start_at?: string
-          status?: string
+          status?: Database["public"]["Enums"]["leave_request_status_type"]
           user_id?: string
         }
         Relationships: [
@@ -703,52 +933,6 @@ export type Database = {
         }
         Relationships: []
       }
-      permissions: {
-        Row: {
-          created_at: string
-          files_ids: number[] | null
-          org_name: string
-          role_id: number
-          user_id: string
-        }
-        Insert: {
-          created_at?: string
-          files_ids?: number[] | null
-          org_name: string
-          role_id: number
-          user_id: string
-        }
-        Update: {
-          created_at?: string
-          files_ids?: number[] | null
-          org_name?: string
-          role_id?: number
-          user_id?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "permissions_org_name_fkey"
-            columns: ["org_name"]
-            isOneToOne: false
-            referencedRelation: "organizations"
-            referencedColumns: ["name"]
-          },
-          {
-            foreignKeyName: "permissions_role_id_fkey"
-            columns: ["role_id"]
-            isOneToOne: false
-            referencedRelation: "roles"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "permissions_user_id_fkey"
-            columns: ["user_id"]
-            isOneToOne: false
-            referencedRelation: "users"
-            referencedColumns: ["id"]
-          }
-        ]
-      }
       profiles: {
         Row: {
           accrual_start_date: string | null
@@ -767,6 +951,7 @@ export type Database = {
           last_signed_in: string | null
           org_name: string
           picture: string | null
+          preffered_lang: string
           "Social Links": Json | null
           "Stock Options": Json[] | null
           supervisor_id: string | null
@@ -790,6 +975,7 @@ export type Database = {
           last_signed_in?: string | null
           org_name: string
           picture?: string | null
+          preffered_lang?: string
           "Social Links"?: Json | null
           "Stock Options"?: Json[] | null
           supervisor_id?: string | null
@@ -813,6 +999,7 @@ export type Database = {
           last_signed_in?: string | null
           org_name?: string
           picture?: string | null
+          preffered_lang?: string
           "Social Links"?: Json | null
           "Stock Options"?: Json[] | null
           supervisor_id?: string | null
@@ -884,6 +1071,7 @@ export type Database = {
           default_hours_per_day: number[]
           Hiring: Json | null
           job: Json | null
+          New_Employee: Json | null
           org_name: string
           personnal: Json | null
         }
@@ -892,6 +1080,7 @@ export type Database = {
           default_hours_per_day?: number[]
           Hiring?: Json | null
           job?: Json | null
+          New_Employee?: Json | null
           org_name: string
           personnal?: Json | null
         }
@@ -900,6 +1089,7 @@ export type Database = {
           default_hours_per_day?: number[]
           Hiring?: Json | null
           job?: Json | null
+          New_Employee?: Json | null
           org_name?: string
           personnal?: Json | null
         }
@@ -955,6 +1145,52 @@ export type Database = {
           }
         ]
       }
+      users_permissions: {
+        Row: {
+          created_at: string
+          files_ids: number[] | null
+          org_name: string
+          role_id: number
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          files_ids?: number[] | null
+          org_name: string
+          role_id: number
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          files_ids?: number[] | null
+          org_name?: string
+          role_id?: number
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "permissions_org_name_fkey"
+            columns: ["org_name"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["name"]
+          },
+          {
+            foreignKeyName: "permissions_role_id_fkey"
+            columns: ["role_id"]
+            isOneToOne: false
+            referencedRelation: "roles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "permissions_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
     }
     Views: {
       [_ in never]: never
@@ -993,6 +1229,7 @@ export type Database = {
         | "manual"
         | "traditional"
         | "unlimited"
+      leave_categories_track_time_unit_type: "days" | "hours"
       leave_request_status_type:
         | "pending"
         | "approved"
@@ -1000,6 +1237,18 @@ export type Database = {
         | "canceled"
     }
     CompositeTypes: {
+      application_date: {
+        startdate: string
+        enddate: string
+      }
+      candidate_status: {
+        name: string
+        substatus: unknown
+      }
+      filter_range: {
+        min: number
+        max: number
+      }
       job_details: {
         job_status: string
         department: string

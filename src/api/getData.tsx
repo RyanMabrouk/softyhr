@@ -11,6 +11,19 @@ type getDataParams = {
     [key: string]: string | number | boolean | null | string[] | undefined;
   };
   column?: string;
+  sort?: {
+    column: string;
+    ascending: boolean;
+  };
+  filter?: {
+    column: string;
+    operator: string;
+    value: string | number;
+  };
+  pagination?: {
+    items_per_page: number;
+    page: number;
+  };
 };
 export default async function getData(
   table: string,
@@ -19,9 +32,11 @@ export default async function getData(
     org = undefined,
     match = undefined,
     column = "*",
+    sort = undefined,
+    filter = undefined,
+    pagination = undefined,
   }: getDataParams = {
     user: false,
-    match: undefined,
     org: false,
     column: "*",
   },
@@ -69,6 +84,23 @@ export default async function getData(
       };
     }
     query = query.eq("org_name", org_name);
+  }
+  if (filter) {
+    query = query.filter(filter.column, filter.operator, filter.value);
+  }
+  if (sort) {
+    query = query.order(sort.column, { ascending: sort.ascending });
+  }
+  if (pagination) {
+    const start =
+      pagination.page === 1
+        ? 0
+        : (pagination.page - 1) * pagination.items_per_page;
+    const end =
+      pagination.page === 1
+        ? pagination.items_per_page - 1
+        : start + pagination.items_per_page - 1;
+    query = query.range(start, end);
   }
   const { data, error } = await query;
   if (error) {

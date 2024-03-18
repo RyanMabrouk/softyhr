@@ -4,6 +4,7 @@ import React, { ReactNode } from "react";
 const columns = [
   { name: "ID", uid: "id", sortable: true },
   { name: "Candidate Info", uid: "Candidate Info", sortable: true },
+  { name: "Job Opportunity", uid: "Job Opportunity", sortable: true },
   { name: "Status", uid: "status", sortable: true },
   { name: "Rating", uid: "Rating", sortable: true },
   { name: "Applied", uid: "Applied" },
@@ -25,10 +26,15 @@ const CandidateStatusOptions = [
 ];
 
 export const candidateStatusGeneric: string[] = [
- "Not Qualified","Declined Offer" , "Interviwed" , "Put On Hold" ,"NEW" ,"Hired" , "Not a Fit" 
+  "Not Qualified",
+  "Declined Offer",
+  "Interviwed",
+  "Put On Hold",
+  "NEW",
+  "Hired",
+  "Not a Fit",
 ];
 export { columns, CandidateStatusOptions };
-
 
 export interface TableCandidateType {
   id: string;
@@ -38,4 +44,12 @@ export interface TableCandidateType {
   Rating: number;
   Applied: string;
   "Last Email": any;
-};
+  Hiring: any;
+  job_opportunity?: string;
+  metadata: ObjectOfString;
+  Phone: string;
+}
+
+interface ObjectOfString {
+  [key: string]: string;
+}

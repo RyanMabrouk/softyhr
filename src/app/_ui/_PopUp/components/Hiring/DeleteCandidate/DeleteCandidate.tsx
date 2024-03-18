@@ -23,7 +23,7 @@ function DeleteCandidate() {
   const id = Number(params?.get("id")) || 0;
   const {
     candidates: { data, isPending },
-  } = useCandidate({id});
+  } = useCandidate("", { id });
 
   async function delete_candidate() {
     const response = await deleteCandidate(id);

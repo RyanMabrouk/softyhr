@@ -1,19 +1,25 @@
-import DropDownGeneric from '@/app/_ui/DropDownGeneric';
-import React from 'react'
-import { FaRegEdit, FaSortDown, FaUserCircle } from 'react-icons/fa';
-import AddCollaborate from './AddCollaborate';
-import CandidateReports from './CandidateReports';
-import HiringInfos from './HiringInfos';
-import AddCandidate from './AddCandidate';
-import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@nextui-org/react';
-import Mail from './Mail/Mail';
-import { CandidateStatusOptions } from './config';
-import Settings from './Settings/Settings';
-import { PiCertificateFill } from 'react-icons/pi';
-import { MdEventNote } from 'react-icons/md';
-import { usePathname } from 'next/navigation';
-import { BsBriefcaseFill } from 'react-icons/bs';
-import { Hiring_type } from '@/types/database.tables.types';
+import DropDownGeneric from "@/app/_ui/DropDownGeneric";
+import React from "react";
+import { FaRegEdit, FaSortDown, FaUserCircle } from "react-icons/fa";
+import AddCollaborate from "./AddCollaborate";
+import CandidateReports from "./CandidateReports";
+import HiringInfos from "./HiringInfos";
+import AddCandidate from "./AddCandidate";
+import {
+  Button,
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownTrigger,
+} from "@nextui-org/react";
+import Mail from "./Mail/Mail";
+import { CandidateStatusOptions } from "./config";
+import Settings from "./Settings/Settings";
+import { PiCertificateFill } from "react-icons/pi";
+import { MdEventNote } from "react-icons/md";
+import { usePathname } from "next/navigation";
+import { BsBriefcaseFill } from "react-icons/bs";
+import { Hiring_type } from "@/types/database.tables.types";
 
 interface TopContent {
   Hiring: Hiring_type;
@@ -22,7 +28,7 @@ interface TopContent {
   setFilter: React.Dispatch<React.SetStateAction<string>>;
 }
 
-function TopContent({ Hiring, totalPages, filter, setFilter }:any) {
+function TopContent({ Hiring, totalPages, filter, setFilter }: any) {
   const pathname = usePathname();
   return (
     <div className="flex w-full flex-col gap-4 pt-4">
@@ -51,7 +57,7 @@ function TopContent({ Hiring, totalPages, filter, setFilter }:any) {
                   link: {
                     pathname: `/Hiring/jobs/edit/Information-Job`,
                     query: {
-                      id: String(Hiring?.id)
+                      id: String(Hiring?.id),
                     },
                   },
                 },
@@ -121,6 +127,7 @@ function TopContent({ Hiring, totalPages, filter, setFilter }:any) {
                 selectedKeys={filter}
                 selectionMode="multiple"
                 onSelectionChange={(selected: any) => {
+
                   setFilter(selected?.anchorKey);
                 }}
               >
@@ -143,4 +150,4 @@ function TopContent({ Hiring, totalPages, filter, setFilter }:any) {
   );
 }
 
-export default TopContent
+export default TopContent;

@@ -21,7 +21,7 @@ function ProfileLayout({ children }: { children: ReactNode }) {
   const { Candidate_id, Job_id } = params;
   const {
     candidates: { data: candidates_data, isPending: candidates_isPending },
-  } = useCandidate({ id: Candidate_id });
+  } = useCandidate("", { id: Candidate_id });
   const {
     Hiring: { data: Hiring_data, isPending: Hiring_isPending },
   } = useHiring({ id: Job_id });
@@ -54,7 +54,7 @@ function ProfileLayout({ children }: { children: ReactNode }) {
                   >
                     <div className="flex items-center justify-start gap-[1rem]">
                       <div className="z-10 h-[6rem] w-[6rem] rounded-full border-color-primary-2 ">
-            {     /*
+                        {/*
                         <Image
                           src={candidates_data?.data?.picture || avatar}
                           alt="user-name"
@@ -89,7 +89,8 @@ function ProfileLayout({ children }: { children: ReactNode }) {
                         <h1 className="text-2xl font-bold text-white">
                           {candidates_data[0]?.["First Name"] +
                             " " +
-                            candidates_data[0]?.["Last Name"] || "candidate name"}
+                            candidates_data[0]?.["Last Name"] ||
+                            "candidate name"}
                         </h1>
                         <h1 className="text-xl font-medium text-white">
                           {`Added on ${formatCustomDate(candidates_data[0]?.created_at)} (in ${monthsAgo(candidates_data[0]?.created_at)})`}

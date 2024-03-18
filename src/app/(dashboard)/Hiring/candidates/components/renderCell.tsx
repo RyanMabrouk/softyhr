@@ -1,6 +1,4 @@
 import { DaysAgo, formatCustomDate } from "@/helpers/date.helpers";
-import RatingGeneric from "./RatingGeneric";
-import HireStatus from "./HireStatus";
 import Hiring from "@/app/(dashboard)/Settings/(settings)/Jobs/page";
 import {
   Button,
@@ -11,18 +9,19 @@ import {
 } from "@nextui-org/react";
 import { PiDotsThreeOutlineVerticalFill } from "react-icons/pi";
 import { BiCommentAdd } from "react-icons/bi";
+import { MdReadMore } from "react-icons/md";
 import Link from "next/link";
-import { FaEdit } from "react-icons/fa";
-import { TableCandidateType } from "./config";
-import { Hiring_type } from "@/types/database.tables.types";
 import { MdDelete } from "react-icons/md";
+import { TableCandidateType } from "../../jobs/[Job_id]/components/CandidatesTable/components/config";
+import RatingGeneric from "../../jobs/[Job_id]/components/CandidatesTable/components/RatingGeneric";
+import HireStatus from "../../jobs/[Job_id]/components/CandidatesTable/components/HireStatus";
 
-export const renderCell = (
-  Hiring: Hiring_type,
+export const renderCellTableCandidate = (
   user: TableCandidateType,
   columnKey: React.Key,
 ) => {
   const cellValue = user[columnKey as keyof TableCandidateType];
+
   switch (columnKey) {
     case "id":
       return (
@@ -30,27 +29,37 @@ export const renderCell = (
           {user?.id}
         </h1>
       );
+    case "Job Opportunity":
+      return (
+        <Link
+          href={`/Hiring/jobs/${user?.Hiring?.id}/profile/${user?.id}/Candidate-info`}
+          className="cursor-pointer text-color5-500 hover:text-color-primary-8 hover:underline"
+        >
+          {user?.job_opportunity}
+        </Link>
+      );
     case "Candidate Info":
       return (
         <div className="flex flex-col items-start justify-center gap-2">
           <Link
-            href={`/Hiring/jobs/${Hiring?.id}/profile/${user?.id}/Candidate-info`}
+            href={`/Hiring/jobs/${user?.Hiring?.id}/profile/${user?.id}/Candidate-info`}
             className="cursor-pointer text-color5-500 hover:text-color-primary-8 hover:underline"
           >
             {user?.["Candidate Info"]}
           </Link>
-          <h1 className="text-sm text-gray-15">
-            {Hiring?.job_information?.["Job Location"]
-              ? `${Hiring?.job_information?.["Job Location"]} - ${Hiring.job_information?.["Location"]}`
-              : "Remote"}
-          </h1>
+          <p className="text-sm leading-3 text-gray-15">
+            {`${user?.metadata?.Country ? user?.metadata?.Country : ""}${user?.metadata?.City ? `, ${user?.metadata?.City}` : ""} `}
+          </p>
+          <p className="text-sm leading-3 text-gray-15">
+            {user?.Phone ? user?.Phone : ""}
+          </p>
         </div>
       );
     case "Status":
       return (
         <div className="flex flex-col">
           <p className="text-bold text-small capitalize">{user.status}</p>
-          <p className="text-sm text-gray-15">{user.Status_update}</p>
+          <p className="text-sm  text-gray-15">{user.Status_update}</p>
         </div>
       );
     case "Rating":
@@ -70,7 +79,7 @@ export const renderCell = (
     case "Changes Status":
       return (
         <div className=" z-10 flex items-start justify-start gap-2">
-          <HireStatus Hiring={Hiring} candidate={user} />
+          <HireStatus Hiring={user?.Hiring} candidate={user} />
         </div>
       );
     case "Last Email":
@@ -92,6 +101,17 @@ export const renderCell = (
               </Button>
             </DropdownTrigger>
             <DropdownMenu className="shadow-green">
+              <DropdownItem className="group hover:!bg-color-primary-8">
+                <div className="flex items-end justify-start gap-[0.5rem] duration-200 ease-linear">
+                  <MdReadMore className="text-xl text-color-primary-7 group-hover:!text-white" />
+                  <Link
+                    href={`/Hiring/jobs/${user?.Hiring?.id}/profile/${user?.id}/Candidate-info`}
+                    className="text-black group-hover:!text-white"
+                  >
+                    View More
+                  </Link>
+                </div>
+              </DropdownItem>
               <DropdownItem className="group hover:!bg-color-primary-8">
                 <div className="flex items-end justify-start gap-[0.5rem] duration-200 ease-linear">
                   <BiCommentAdd className="text-xl text-color-primary-7 group-hover:!text-white" />

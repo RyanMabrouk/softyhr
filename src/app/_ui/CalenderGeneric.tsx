@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import { formatYYYYMMDD } from "@/helpers/date.helpers";
 import { CalendarIcon } from "@radix-ui/react-icons";
 import { Label } from "./InputGeneric";
+
 export function CalendarGeneric({
   className,
   name,

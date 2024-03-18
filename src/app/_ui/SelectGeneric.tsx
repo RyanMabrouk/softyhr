@@ -38,7 +38,7 @@ export function SelectGeneric({
       <Label name={name} required={required} error={error}>
         {label}
       </Label>
-      <div className="relative flex w-fit flex-row items-center justify-center gap-1.5">
+      <div className="relative flex flex-row items-center justify-center gap-1.5">
         <Select
           variant="outlined"
           data-placeholder-trigger="keydown"

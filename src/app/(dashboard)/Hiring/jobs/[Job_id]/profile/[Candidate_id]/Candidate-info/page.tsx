@@ -12,7 +12,7 @@ function Page() {
   const { Candidate_id } = params;
   const {
     candidates: { data, isPending },
-  } = useCandidate({ id: Candidate_id });
+  } = useCandidate("", { id: Candidate_id });
 
   return (
     <div className="flex h-full w-full flex-col items-center justify-start">

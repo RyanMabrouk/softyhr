@@ -27,7 +27,7 @@ function Form() {
   const Candidate = params.get("Candidate");
   const {
     candidates: { data: candidate_data, isPending: candidate_isPending },
-  }: any = useCandidate({ id: Candidate });
+  }: any = useCandidate("", { id: Candidate });
   const SubmitForm = async (formdata: FormData) => {
     //-----formulate_data-------
     let result: any = {};
