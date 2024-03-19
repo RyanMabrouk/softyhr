@@ -18,8 +18,6 @@ import TopContent from "./components/TopContent";
 import { renderCellTableCandidate } from "@/app/(dashboard)/Hiring/candidates/components/renderCell";
 
 const INITIAL_VISIBLE_COLUMNS = [
-  "id",
-  "Job Opportunity",
   "Candidate Info",
   "Status",
   "Rating",
@@ -41,6 +39,7 @@ export interface CandidateTablePropsType {
   topContent?: React.ReactNode;
   isTableCandidate: boolean;
   hasNoSelectedItemsInPagination: boolean;
+  initialVisibleColumns?: string[];
 }
 
 export default function CandiatesTable({
@@ -54,12 +53,13 @@ export default function CandiatesTable({
   topContent,
   isTableCandidate,
   hasNoSelectedItemsInPagination,
+  initialVisibleColumns,
 }: CandidateTablePropsType) {
   const [selectedKeys, setSelectedKeys] = React.useState<Selection>(
     new Set([]),
   );
   const [visibleColumns, setVisibleColumns] = React.useState<Selection>(
-    new Set(INITIAL_VISIBLE_COLUMNS),
+    new Set(initialVisibleColumns || INITIAL_VISIBLE_COLUMNS),
   );
 
   const headerColumns = React.useMemo(() => {
@@ -99,14 +99,14 @@ export default function CandiatesTable({
       wrapper: ["max-h-[382px]", "max-w-3xl"],
       tr: [
         "border-b border-gray-14",
-        "hover:!bg-color-primary-12",
+        "hover:!bg-gray-14",
         "ease-linear duration-200 ",
       ],
       th: [
         "cursor-pointer",
         "py-2",
         "!bg-gray-17",
-        "hover:!bg-gray-14",
+        "hover:!bg-gray-18",
         "text-gray-11",
         "border-b",
         "border-divider",

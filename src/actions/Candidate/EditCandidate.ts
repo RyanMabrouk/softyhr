@@ -2,6 +2,7 @@
 import postData from "@/api/postData";
 import updateData from "@/api/updateData";
 import { getLogger } from "@/logging/log-util";
+
 export default async function EditCandidate(
   status: string,
   comment: string,

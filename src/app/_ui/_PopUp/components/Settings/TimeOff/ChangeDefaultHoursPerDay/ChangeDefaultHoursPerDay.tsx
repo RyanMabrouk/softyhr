@@ -2,7 +2,7 @@
 import chnageDefaultHours from "@/actions/settings/leave/chnageDefaultHours";
 import { SubmitBtn } from "@/app/_ui/SubmitBtn";
 import PopUpSkeleton from "@/app/_ui/_PopUp/PopUpSkeleton";
-import { useSettings } from "@/hooks/Settings/useSettings";
+import { useSettings } from "@/hooks/useSettings";
 import useToast from "@/hooks/useToast";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { usePathname, useRouter } from "next/navigation";

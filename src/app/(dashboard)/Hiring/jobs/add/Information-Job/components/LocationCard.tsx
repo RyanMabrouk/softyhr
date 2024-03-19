@@ -1,7 +1,7 @@
 import React from "react";
 import { Job_locationElementType } from "./AdditionnalInputs";
 import { IoIosCheckbox } from "react-icons/io";
-import { IconType } from "react-icons";
+import { IconType } from "react-icons/lib";
 
 interface LocationCardPropsType {
   label: string;

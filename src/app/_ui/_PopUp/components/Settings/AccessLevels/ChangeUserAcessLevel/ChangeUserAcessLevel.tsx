@@ -1,3 +1,4 @@
+"use client";
 import PopUpSkeleton from "@/app/_ui/_PopUp/PopUpSkeleton";
 import useProfiles from "@/hooks/useProfiles";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
@@ -8,11 +9,11 @@ import { capitalizeFirstLetter } from "@/helpers/string.helpers";
 import { SelectGeneric } from "@/app/_ui/SelectGeneric";
 import { SubmitBtn } from "@/app/_ui/SubmitBtn";
 import CancelBtnGeneric from "@/app/_ui/CancelBtnGeneric";
-import useRoles from "@/hooks/useRoles";
+import useRoles from "@/hooks/Roles/useRoles";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import useToast from "@/hooks/useToast";
 import addEmployeeToRole from "@/actions/settings/AccessLevels/addEmployeeToRole";
-import useAllPermissions from "@/hooks/useAllPermissions";
+import useAllPermissions from "@/hooks/Roles/useAllPermissions";
 export default function ChangeUserAcessLevel() {
   const searchParams = useSearchParams();
   const pathname = usePathname();
@@ -62,14 +63,14 @@ export default function ChangeUserAcessLevel() {
         toast.success(
           `${capitalizeFirstLetter(
             first_name,
-          )} has been added to the policy successfully`,
+          )} has been added to the role successfully`,
           "Success",
         );
       }
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ["permissions"],
+        queryKey: ["users_permissions"],
       });
       Router.push(pathname);
     },
@@ -100,6 +101,7 @@ export default function ChangeUserAcessLevel() {
           <SelectGeneric
             label={`Add ${capitalizeFirstLetter(first_name)} to...`}
             name="role_id"
+            className="!w-[17.5rem]"
             defaultValue={{
               label: capitalizeFirstLetter(user_role_name ?? ""),
               value: Number(user_role_id),

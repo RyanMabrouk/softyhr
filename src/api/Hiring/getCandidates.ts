@@ -48,25 +48,27 @@ export default async function getCandidate(
   if (search) {
     query = query.or(search);
   }
-
-  genericFilter.map((filter: any) => {
-    return query.or(filter.FilterQuery, {
-      referencedTable: filter.TableName,
+  genericFilter.length > 0 &&
+    genericFilter.map((filter: any) => {
+      return query.or(filter.FilterQuery, {
+        referencedTable: filter.TableName,
+      });
     });
-  });
 
-  if (range.ratings.min !== 0) {
-    query = query.gte("Ratings", range.ratings.min);
-  }
-  if (range.ratings.max !== 5) {
-    query = query.lte("Ratings", range.ratings.max);
-  }
+  if (range) {
+    if (range?.ratings?.min !== 0) {
+      query = query.gte("Ratings", range.ratings.min);
+    }
+    if (range?.ratings?.max !== 5) {
+      query = query.lte("Ratings", range.ratings.max);
+    }
 
-  if (range.dates.min !== "") {
-    query = query.gte("created_at", range.dates.min);
-  }
-  if (range.dates.max !== "") {
-    query = query.lte("created_at", range.dates.max);
+    if (range.dates.min !== "") {
+      query = query.gte("created_at", range.dates.min);
+    }
+    if (range.dates.max !== "") {
+      query = query.lte("created_at", `${range.dates.max}, 23:59:59`);
+    }
   }
 
   query.order("id");

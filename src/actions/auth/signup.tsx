@@ -74,7 +74,7 @@ export default async function signup(formData: FormData) {
         email,
         tel,
         job,
-        role_id: roles?.find((role) => role.name === "admin")?.id,
+        role_id: roles?.find((role) => role.name === "Full Admin")?.id,
       });
       if (profiles_error) {
         logger.error(profiles_error.message);

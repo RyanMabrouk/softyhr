@@ -1,5 +1,4 @@
 import getCandidate from "@/api/Hiring/getCandidates";
-import getData from "@/api/getData";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 
 export default function useCandidate(

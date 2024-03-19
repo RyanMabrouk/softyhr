@@ -8,6 +8,12 @@
     box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
       var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow) !important;
   }
+  .shadow-green-b {
+    --tw-shadow: 0px -1px 4px 1px #84bf41 !important;
+    --tw-shadow-colored: 0px 0px 4px 1px var(--tw-shadow-color) !important;
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
+      var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow) !important;
+  }
   .shadow-red {
     --tw-shadow: 0px 0px 3px 1px rgba(217, 52, 52, 0.842) !important;
     --tw-shadow-colored: 0px 0px 3px 1px var(--tw-shadow-color) !important;
@@ -37,6 +43,15 @@
     -moz-appearance: textfield;
     appearance: textfield;
   }
+  .redirect:hover {
+    text-decoration: underline;
+    color: #527a00 !important;
+  }
+  .shadow-black-top {
+    box-shadow: -1px -4px 11px -4px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: -1px -4px 11px -4px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: -1px -4px 11px -4px rgba(0, 0, 0, 0.1);
+  }
 }
 .rdp-vhidden {
   @apply hidden;
@@ -45,7 +60,7 @@
 .Mui-selected {
   --tw-bg-opacity: 1 !important;
   --tw-text-opacity: 1 !important;
-  color: rgb(255 255 255 / var(--tw-text-opacity)) !important;
+  color: white !important;
   background: #527a01 !important;
 }
 .ant-switch-checked {

@@ -33,7 +33,9 @@ function DeleteJob() {
   return (
     <PopUpSkeleton title="Just Checking...">
       {isPending ? (
-        <Loader />
+        <div className="flex min-w-[35rem] flex-col items-center justify-center gap-[1rem] px-5 py-6">
+          <Loader />
+        </div>
       ) : (
         <form
           action={delete_job}

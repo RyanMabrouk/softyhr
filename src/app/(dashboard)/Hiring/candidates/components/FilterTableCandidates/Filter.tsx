@@ -2,11 +2,9 @@ import React, { useEffect, useState } from "react";
 import DropDownSelectFilter from "./DropDownSelectFilter";
 import { IconButton } from "@mui/material";
 import StarIcon from "@mui/icons-material/Star";
-import { jobStatusOptions } from "../config";
 import { GlobalFilterState, GlobalRangeState } from "../types";
 import useHiring from "@/hooks/Hiring/useHiring";
-import useCandidateSources from "@/hooks/Hiring/useCandidateSources";
-import useCandidateStatus from "@/hooks/Hiring/useCandidateStatus";
+
 import { removeEmptyAndDuplicates } from "../../helpers/removeEmptyAndDuplicates";
 import CollapseCheckboxFilter from "./CollapseCheckboxFilter";
 import CollapseRatingFilter from "./CollapseRatingFilter";
@@ -83,7 +81,6 @@ function Filter({
       <DropDownSelectFilter
         filter={selectedFilter}
         setFilter={setSelectedFilter}
-        disabled={true}
       />
       <div className=" my-5 bg-gray-17 pb-4">
         <div className="flex items-center justify-between bg-gray-10 pl-2 text-white">

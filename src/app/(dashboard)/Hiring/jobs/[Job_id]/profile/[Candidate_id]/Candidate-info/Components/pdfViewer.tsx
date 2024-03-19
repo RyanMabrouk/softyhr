@@ -1,5 +1,5 @@
 import { Pagination } from "@nextui-org/react";
-import React, { useState } from "react";
+import React, { memo, useState } from "react";
 import { pdfjs, Document, Page } from "react-pdf";
 import "react-pdf/dist/esm/Page/AnnotationLayer.css";
 import "react-pdf/dist/esm/Page/TextLayer.css";
@@ -9,7 +9,7 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   import.meta.url,
 ).toString();
 interface PdfViewerPropsType {
-  url: string | null;
+  url: string | null | undefined;
 }
 
 function PdfViewer({ url }: PdfViewerPropsType) {
@@ -40,4 +40,4 @@ function PdfViewer({ url }: PdfViewerPropsType) {
   );
 }
 
-export default PdfViewer;
+export default memo(PdfViewer);

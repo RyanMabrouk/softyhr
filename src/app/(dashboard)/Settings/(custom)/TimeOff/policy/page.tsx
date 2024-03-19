@@ -9,7 +9,14 @@ import { Form } from "./Form";
 import RoleGuard from "@/app/_ui/RoleGuard";
 export default function Page() {
   return (
-    <RoleGuard permissions={["access:/Settings/TimeOff"]}>
+    <RoleGuard
+      strict={false}
+      permissions={[
+        "read:Employees policies",
+        "read:Employees upcoming time off",
+        "read:Employees history",
+      ]}
+    >
       <div className="relative mx-[auto] flex h-full min-h-screen w-full max-w-[85rem] flex-col gap-4 pt-5">
         <Link
           href={"/Settings/TimeOff"}

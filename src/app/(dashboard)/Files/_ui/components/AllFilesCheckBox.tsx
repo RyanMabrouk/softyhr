@@ -1,16 +1,22 @@
 "use client";
 import React from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { useSearchParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 import useFolderData from "@/hooks/files/useFolderData";
 import GetFoldersByIDs from "@/actions/files/getFolders";
 import getData from "@/api/getData";
 import useFoldersIds from "@/hooks/files/useFoldersIds";
-import useUserRole from "@/hooks/useUserRole";
-export default function AllFilesCheckBox({ checkAll, setCheckAll }: any) {
-  const searchParams = useSearchParams();
+import useUserRole from "@/hooks/Roles/useUserRole";
+export default function AllFilesCheckBox({
+  checkAll,
+  setCheckAll,
+}: {
+  checkAll: boolean | undefined;
+  setCheckAll: React.Dispatch<React.SetStateAction<boolean>> | undefined;
+}) {
   const queryClient = useQueryClient();
-  let wantedId = searchParams.get("id");
+  const params = useParams();
+  let wantedId = Number(params.folderId);
   const { wantedFoldersIds, filesIds } = useFoldersIds();
   const { data: { data: wantedFolders } = {} } = useQuery({
     queryKey: ["folders", wantedFoldersIds],
@@ -22,7 +28,7 @@ export default function AllFilesCheckBox({ checkAll, setCheckAll }: any) {
     .flat(2)
     .map((file) => file.id)
     .filter((id) => filesIds.includes(id));
-  const { data: allFilesAdmin, isPending: isPending2 } = useQuery({
+  const { data: allFilesAdmin } = useQuery({
     queryKey: ["files"],
     queryFn: () =>
       getData("files", {
@@ -30,9 +36,7 @@ export default function AllFilesCheckBox({ checkAll, setCheckAll }: any) {
         column: "*",
       }),
   });
-  const allFilesIdsAdmin = allFilesAdmin?.data?.map(
-    (file: { id: any }) => file.id,
-  );
+  const allFilesIdsAdmin = allFilesAdmin?.data?.map((file) => file.id);
   const { folder } = useFolderData(wantedId);
   // active user role
   const {
@@ -43,11 +47,11 @@ export default function AllFilesCheckBox({ checkAll, setCheckAll }: any) {
     !isPending && wantedId
       ? role?.permissions.includes("read:files")
         ? folder?.data?.[0]?.files &&
-          folder?.data[0]?.files.map((file: any) => file.id)
+          folder?.data[0]?.files.map((file) => file.id)
         : folder?.data?.[0]?.files &&
           folder?.data[0]?.files
-            .map((file: any) => file.id)
-            .filter((id: any) => filesIds.includes(id))
+            .map((file) => file.id)
+            .filter((id) => filesIds.includes(id))
       : []
         ? role?.permissions.includes("read:files")
           ? allFilesIdsAdmin
@@ -55,7 +59,7 @@ export default function AllFilesCheckBox({ checkAll, setCheckAll }: any) {
         : [];
 
   function handleChange() {
-    setCheckAll(!checkAll);
+    setCheckAll && setCheckAll(!checkAll);
     if (!checkAll) {
       queryClient.setQueryData(["fileIds"], fileIds);
     } else {

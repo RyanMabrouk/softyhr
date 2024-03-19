@@ -2,7 +2,15 @@
 import { getLogger } from "@/logging/log-util";
 import { createTransport } from "nodemailer";
 require("dotenv").config();
-export async function sendMail(toWho: any, subject: any, content: any) {
+interface attachmentsType{
+  filename:string;
+  content:string;
+}
+export async function sendMail(
+  toWho: any,
+  subject: any,
+  content: any,
+  attachments?: attachmentsType[]) {
   const logger = getLogger("*");
   logger.info("sendMailq_enter");
   try {
@@ -11,6 +19,7 @@ export async function sendMail(toWho: any, subject: any, content: any) {
       to: toWho,
       subject: subject,
       html: content,
+      attachments,
     };
     transporter.sendMail(mailOptions, function (err, info) {
       if (err) {
@@ -28,7 +37,7 @@ export async function sendMail(toWho: any, subject: any, content: any) {
         };
       }
     });
-   logger.info("sendMail_exit");
+    logger.info("sendMail_exit");
     return {
       Error: null,
       Status: "success",
@@ -42,7 +51,6 @@ export async function sendMail(toWho: any, subject: any, content: any) {
       message: "Something Went Wrong",
     };
   }
-
 }
 
 const GMAIL_USERNAME = "softyhr@gmail.com";

@@ -80,7 +80,7 @@ export default function AdjustLeavePolicyBalance() {
       >
         <header className="flex w-full flex-row items-center gap-2 bg-gray-14 px-4 py-3">
           <Image
-            src={default_avatar}
+            src={employee_profile?.picture ?? default_avatar}
             className="h-12 w-12 rounded-full"
             alt=""
             width={80}

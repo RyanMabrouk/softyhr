@@ -1,4 +1,8 @@
+"use client";
 import React from "react";
-export default async function Page() {
-  return <div className="gao-2 flex flex-col p-4 text-black">files</div>;
+import TableContent from "./filesTable/tableContent/TableContent";
+import useCheckAllContext from "./context/checkedContext";
+export default function Page() {
+  const { checkAll, setCheckAll } = useCheckAllContext();
+  return <TableContent checkAll={checkAll} setCheckAll={setCheckAll} />;
 }

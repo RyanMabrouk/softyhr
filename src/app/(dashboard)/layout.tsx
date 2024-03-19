@@ -10,7 +10,7 @@ export default async function Layout({
   const session = await getSession();
   if (!session) redirect("/login");
   return (
-    <div className="flex h-full min-h-screen w-full flex-col">
+    <div className="flex h-full min-h-screen flex-col overflow-x-hidden">
       <Nav />
       <main className="h-full min-h-screen w-full ">{children}</main>
     </div>

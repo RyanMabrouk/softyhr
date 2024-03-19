@@ -1,5 +1,4 @@
 "use client";
-import { CalendarIcon } from "@radix-ui/react-icons";
 import { format } from "date-fns";
 import React from "react";
 import { DateRange } from "react-day-picker";
@@ -15,6 +14,7 @@ import { useParams } from "next/navigation";
 import { useAlreadyBooked } from "../hooks/useAlreadyBooked";
 import { useEffect, useState } from "react";
 import { InvalidDate, formatYYYYMMDD } from "@/helpers/date.helpers";
+import { FaCalendarDays } from "react-icons/fa6";
 interface CalendarProps {
   endDateName: string;
   startDateName: string;
@@ -43,7 +43,6 @@ export function CalendarRange({
   required,
   setAction,
   DataType = "date",
-  numberOfMonths,
 }: CalendarProps) {
   const [date, setDate] = useState<DateRange | undefined>(defaultValue);
   // Sync the default value with the date
@@ -58,7 +57,7 @@ export function CalendarRange({
     }
   }, [date, setStartValueInParent, setEndValueInParent]);
   const { employeeId } = useParams();
-  const already_booked = useAlreadyBooked(employeeId);
+  const already_booked = useAlreadyBooked(employeeId ?? "");
   return (
     <div className="flex flex-col gap-1">
       <label
@@ -108,15 +107,15 @@ export function CalendarRange({
                 !date && "text-muted-foreground",
               )}
             >
-              <CalendarIcon
-                className={`-ml-1 mr-2 h-5 w-5  ${already_booked ? "!text-color9-500" : "group-focus-within:text-fabric-700"}`}
+              <FaCalendarDays
+                className={`-ml-1 mr-2 h-[1.15rem] w-[1.15rem] text-fabric-700 ${already_booked ? "!text-color9-500" : "group-focus-within:text-fabric-700"}`}
               />
               <div className={`${already_booked ? "text-color9-500" : ""}`}>
                 {date?.from && !InvalidDate(date?.from) ? (
                   date?.to && !InvalidDate(date?.to) ? (
                     <>
-                      {format(date?.from, "LLL dd, y")} -{" "}
-                      {format(date?.to, "LLL dd, y")}
+                      {format(date.from, "LLL dd, y")} -{" "}
+                      {format(date.to, "LLL dd, y")}
                     </>
                   ) : (
                     format(date.from, "LLL dd, y")
@@ -127,7 +126,7 @@ export function CalendarRange({
               </div>
             </Button>
           </PopoverTrigger>
-          <PopoverContent className="w-auto p-0" align="start">
+          <PopoverContent className="w-[auto] p-0" align="start">
             <Calendar
               id="date_range"
               initialFocus
@@ -135,10 +134,11 @@ export function CalendarRange({
               mode="range"
               fromYear={1960}
               toYear={2060}
+              captionLayout="dropdown-buttons"
               defaultMonth={date?.from ?? defaultValue?.from ?? new Date()}
               selected={date}
               onSelect={setDate}
-              {...(numberOfMonths != null ? { numberOfMonths: 2 } : {})}
+              numberOfMonths={2}
             />
           </PopoverContent>
         </Popover>

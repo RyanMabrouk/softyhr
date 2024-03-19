@@ -1,8 +1,8 @@
 import React from 'react'
 
-function CommentSkeleton() {
+function CommentSkeleton({className}:{className?: string}) {
   return (
-    <div className="w-[400px] rounded bg-white p-4 shadow">
+    <div className={`w-full rounded bg-white p-4 shadow ${className}`}>
       <div className="flex animate-pulse space-x-4">
         <div className="h-12 w-12 rounded-full bg-gray-300"></div>
         <div className="flex-1 space-y-4 py-1">

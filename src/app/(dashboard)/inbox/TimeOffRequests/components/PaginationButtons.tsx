@@ -14,6 +14,9 @@ export function PaginationButtons({
   cards_per_page_in_client,
   nextPageLength,
 }: PaginationButtonsProps) {
+  if (dataLength === 0) {
+    return false;
+  }
   return (
     <div className="flex w-full flex-row items-center justify-center">
       <div
@@ -28,7 +31,7 @@ export function PaginationButtons({
           <span>Prev</span>
         </button>
         <div
-          className={`flex w-fit flex-row items-center justify-items-center gap-1.5 self-center justify-self-center text-gray-21 ${page === 1 && dataLength === cards_per_page_in_client &&  !(nextPageLength === 0 )? "ml-auto" : ""}`}
+          className={`flex w-fit flex-row items-center justify-items-center gap-1.5 self-center justify-self-center text-gray-21 ${page === 1 && dataLength === cards_per_page_in_client && !(nextPageLength === 0) ? "ml-auto" : ""}`}
         >
           <button
             disabled={page === 1}

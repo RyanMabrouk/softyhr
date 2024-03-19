@@ -14,14 +14,16 @@ const Textarea = ({ RowField, setTouched, defaultValue }: InputPropsType) => {
   const Component = InputIcons[RowField?.Icon?.toUpperCase() || ""];
   return (
     <div className="flex w-full flex-col items-start justify-center">
-      <h1
+      <label
         className={
           "text-[14px] text-gray-29 " +
-          (RowField?.required ? " after:text-red after:content-['*']" : "")
+          (RowField?.required
+            ? " after:text-color-primary-8 after:content-['*']"
+            : "")
         }
       >
         {RowField?.name}
-      </h1>
+      </label>
       <div className="group flex w-full items-center justify-start">
         {RowField?.Icon && (
           <span className="absolute ml-[1px]  h-[1.9rem] w-[1.8rem] bg-gray-14">

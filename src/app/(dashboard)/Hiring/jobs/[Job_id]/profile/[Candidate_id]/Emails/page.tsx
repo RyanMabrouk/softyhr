@@ -22,16 +22,14 @@ function Page() {
     1,
     "All",
     '*,candidate_emails(created_at,email_object,profiles("Basic Information",picture),candidates("First Name","Last Name")),user_emails(created_at,email_object,candidate_sender,profiles("Basic Information",picture),candidates("First Name","Last Name"))',
-    
-    );
-
-    return (
+  );
+  return (
     <div className="flex h-full w-full items-start justify-center">
       <div className="flex w-8/12 flex-col items-start justify-start py-4">
         {isPending ? (
           <Loader />
         ) : (
-          <div className="flex h-full w-full flex-col items-start justify-start">
+          <div className="flex h-full w-full flex-col items-start justify-start gap-[2rem]">
             <Link
               href={{
                 pathname: pathname,
@@ -46,14 +44,14 @@ function Page() {
               New Mail
             </Link>
             {data?.length > 0 &&
-            (data[0]?.candidate_emails?.length > 0 ||
-              data[0]?.user_emails?.length > 0) ? (
+            (data?.[0]?.candidate_emails?.length > 0 ||
+              data?.[0]?.user_emails?.length > 0) ? (
               <div className="flex w-full flex-col items-start justify-center gap-[1rem] py-4">
-                {[...data[0]?.candidate_emails, ...data[0]?.user_emails]
+                {[...data?.[0]?.candidate_emails, ...data[0]?.user_emails]
                   ?.sort(
                     (a: any, b: any) =>
-                      new Date(b.created_at).getTime() -
-                      new Date(a.created_at).getTime(),
+                      new Date(b?.created_at)?.getTime() -
+                      new Date(a?.created_at)?.getTime(),
                   )
                   ?.map((email: any) => {
                     if (email?.candidate_sender)
@@ -73,7 +71,7 @@ function Page() {
                   })}
               </div>
             ) : (
-              <div className="w-full flex self-center items-center justify-center">
+              <div className="flex h-full  w-full flex-col items-center justify-center gap-2 rounded-lg bg-gray-14 p-4 px-2">
                 <Empty description="No Emails Sent Yet." />
               </div>
             )}

@@ -8,7 +8,7 @@ export const deleteCandidate = async (id: Number) => {
   const logger = getLogger("hiring");
   logger.info("deleteCandidate_enter");
   const supabase = createServerActionClient({ cookies });
-  const { error } = await supabase.from("candidates").delete().eq("id", id);
+  const { error } = await deleteData("candidates", {match: {id}});
   if (error) {
     logger.error(error.message);
     return {

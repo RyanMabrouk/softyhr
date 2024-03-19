@@ -1,4 +1,5 @@
 "use client";
+import useTranslation from "@/translation/useTranslation";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
@@ -7,6 +8,7 @@ type CancelBtnGenericProps = {
 };
 export default function CancelBtnGeneric({ onClick }: CancelBtnGenericProps) {
   const pathname = usePathname();
+  const { lang } = useTranslation();
   return (
     <Link
       className="flex flex-row items-center justify-center"
@@ -18,7 +20,7 @@ export default function CancelBtnGeneric({ onClick }: CancelBtnGenericProps) {
         type="button"
         onClick={onClick}
       >
-        Cancel
+        {lang?.["Time Off"]["Cancel"]}
       </button>
     </Link>
   );

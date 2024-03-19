@@ -1,9 +1,8 @@
 "use client";
 import React, { memo, useState } from "react";
-import FiledsChamps from "../components/Fileds/Fileds";
 import { FaAddressCard } from "react-icons/fa";
 import ChangesSection from "../components/ChangesSection/ChangesSection";
-import { useSettings } from "@/hooks/Settings/useSettings";
+import { useSettings } from "@/hooks/useSettings";
 import { v4 as uuidv4 } from "uuid";
 import { sectionIcon } from "@/constants/userInfo";
 import { ChampsType } from "@/types/userInfoTypes.type";
@@ -16,6 +15,7 @@ import useToast from "@/hooks/useToast";
 import { Profile_Type, RowType } from "@/types/database.tables.types";
 import useEmployeeData from "@/hooks/useEmloyeeData";
 import Loader from "@/app/_ui/Loader/Loader";
+import FiledsChamps from "./sections/FiledsChamps";
 
 interface UserSection {
   section: string;
@@ -80,7 +80,7 @@ function UserSection({ section, employeeId }: UserSection) {
               Edit Fields
             </h1>
           </div>
-          <form className="Form-Profile" action={SubmitForm}>
+          <form className="" action={SubmitForm}>
             {data?.Champs?.sort(
               (a: ChampsType, b: ChampsType) => a.rang - b.rang,
             )?.map(
@@ -96,7 +96,7 @@ function UserSection({ section, employeeId }: UserSection) {
                       <Component className="text-fabric-700" />
                       {champ}
                     </h1>
-                    <div className="flex flex-col items-start justify-center gap-[1rem]">
+                    <div className="flex w-full flex-col items-start justify-center gap-[1rem]">
                       <ComponentChamps
                         employeeId={employeeId}
                         champ={champ}

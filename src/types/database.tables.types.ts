@@ -1,10 +1,12 @@
+import { IconType } from "react-icons/lib";
 import { Database } from "./database.types";
 // Notifications
 export type database_notifications_type =
   Database["public"]["Tables"]["notifications"]["Row"];
 // Permesssions
+
 export type database_permissions_type =
-  Database["public"]["Tables"]["permissions"]["Row"];
+  Database["public"]["Tables"]["users_permissions"]["Row"];
 // Roles
 export type database_roles_type = Database["public"]["Tables"]["roles"]["Row"];
 // leave balance
@@ -13,17 +15,17 @@ export type database_profile_leave_balance_type =
 // Leave Categories
 export type databese_leave_categories_type =
   Database["public"]["Tables"]["leave_categories"]["Row"];
-export type databese_leave_categories_track_time_unit_type = "days" | "hours";
+export type databese_leave_categories_track_time_unit_type =
+  Database["public"]["Tables"]["leave_categories"]["Row"]["track_time_unit"];
 // Leave Requests
-export type database_leave_requests_type =
-  Database["public"]["Tables"]["leave_requests"]["Row"];
-export type database_leave_requests_insert_type =
-  Database["public"]["Tables"]["leave_requests"]["Insert"];
+export type database_leave_requests_type = Omit<
+  Database["public"]["Tables"]["leave_requests"]["Row"],
+  "duration_used"
+> & {
+  duration_used: database_leave_request_duration_used_type[];
+};
 export type database_leave_request_status_type =
-  | "pending"
-  | "approved"
-  | "rejected"
-  | "canceled";
+  Database["public"]["Tables"]["leave_requests"]["Row"]["status"];
 export type database_leave_request_duration_used_type = {
   date: string;
   duration: number;
@@ -31,8 +33,6 @@ export type database_leave_request_duration_used_type = {
 // Leave Accrued
 export type database_leave_accrued_type =
   Database["public"]["Tables"]["leave_accrued"]["Row"];
-export type database_leave_accrued_insert_type =
-  Database["public"]["Tables"]["leave_accrued"]["Insert"];
 // Leave Policies
 export type database_leave_policies_policy_type =
   Database["public"]["Tables"]["leave_policies"]["Row"]["type"];
@@ -44,19 +44,26 @@ export type database_profile_type =
 
 export type database_profile_type_insert =
   Database["public"]["Tables"]["profiles"]["Insert"];
-
+// files types
+export type database_files_type = Database["public"]["Tables"]["files"]["Row"];
+export type database_folder_type =
+  Database["public"]["Tables"]["folders"]["Row"];
 //---------organizations_types----------
 
 export type organizations_type =
   Database["public"]["Tables"]["organizations"]["Row"];
 
+//-----------Depatment_types-------------
+
+export type Department_type = Database["public"]["Tables"]["Department"]["Row"];
+
 //------------Hiring_types---------------
 
-export type Hiring_type = {
+export type Hiring_type<T extends Profile_Type = Profile_Type> = {
   Application_Details: Application_Details_type | null;
   candidates?: [] | null;
   created_at?: string;
-  Questions?:object;
+  Questions?: object;
   id?: number;
   "Job Status": string;
   job_information: {
@@ -66,6 +73,8 @@ export type Hiring_type = {
     [key: string]: string | Object[] | Object | null;
   } | null;
   org_name: string | null;
+  profiles?: T;
+  Department?: Department_type;
 };
 export type Application_Details_type = {
   Job_Category?: string;
@@ -106,14 +115,17 @@ export interface RowFieldType {
   options?: string[] | Object[] | undefined;
   required?: boolean;
   placeHolder?: string | undefined;
-  type: "select" | "text" | "radio";
+  type: string;
   Icon?: string | undefined;
+  addItem?: boolean | undefined;
+  minWidth?: string | undefined;
   ExtraTxt?: string | undefined;
   accept?: string | undefined;
   allowFutureDates?: boolean | undefined;
   allowPreviousDates?: boolean | undefined;
   endDateName?: string | undefined;
   startDateName?: string | undefined;
+  ExtraTxt_org?: string;
 }
 export type RowType = {
   Row: RowFieldType[];

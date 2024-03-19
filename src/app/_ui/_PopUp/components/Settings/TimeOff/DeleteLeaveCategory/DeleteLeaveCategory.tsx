@@ -19,7 +19,7 @@ export default function DeleteLeaveCategory() {
     leave_categories: { data: leave_categories },
   } = useLeaveData();
   const Router = useRouter();
-  const category_data: databese_leave_categories_type = leave_categories?.find(
+  const category_data = leave_categories?.find(
     (e: databese_leave_categories_type) => e.id === Number(categories_id),
   );
   // delete category mutation

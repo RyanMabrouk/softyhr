@@ -6,12 +6,12 @@ import { CandidateType } from "@/types/candidate.types";
 import CandiatesTable from "../jobs/[Job_id]/components/CandidatesTable/CandidatesTable";
 import { useQueryClient } from "@tanstack/react-query";
 import getCandidate from "@/api/Hiring/getCandidates";
-import TableSkeleton from "../_ui/HiringTable/components/TableSkeleton";
 import TopContentTableCandidate from "./components/TopContentTableCandidate";
 import Search from "./components/Search";
 import Filter from "./components/FilterTableCandidates/Filter";
 import { GlobalFilterState, GlobalRangeState } from "./components/types";
 import { generateFilterArray } from "./helpers/generateFilterArray";
+import TableSkeleton from "../components/HiringTable/components/TableSkeleton";
 
 function Page() {
   const [selectedFilter, setSelectedFilter] = useState<string>("");
@@ -126,6 +126,16 @@ function Page() {
               totalPages={meta?.totalPages}
               hasNoSelectedItemsInPagination={true}
               isTableCandidate={true}
+              initialVisibleColumns={[
+                "Job Opportunity",
+                "Candidate Info",
+                "Status",
+                "Rating",
+                "Applied",
+                "Changes Status",
+                "Last Email",
+                "actions",
+              ]}
               topContent={
                 <TopContentTableCandidate totalPages={meta?.totalPages} />
               }

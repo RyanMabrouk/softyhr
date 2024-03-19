@@ -1,17 +1,19 @@
 "use client";
-import { HistoryTable } from "@/app/(dashboard)/people/(employee)/[employeeId]/TimeOff/components/HistoryTable";
-import useRoles from "@/hooks/useRoles";
+import { HistoryTable } from "@/app/(dashboard)/people/(employee)/[employeeId]/TimeOff/components/History/HistoryTable";
+import useRoles from "@/hooks/Roles/useRoles";
 import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
 import React from "react";
 import { FaLock, FaPen } from "react-icons/fa";
 import { MdOutlineAddCircle } from "react-icons/md";
 import useProfiles from "@/hooks/useProfiles";
-import useAllPermissions from "@/hooks/useAllPermissions";
+import useAllPermissions from "@/hooks/Roles/useAllPermissions";
 import { sameDay } from "@/helpers/date.helpers";
 import { SettingsBtn } from "./components/SettingsBtn";
 import { EmployyeSettingsBtn } from "./components/EmployyeSettingsBtn";
 import { EmployeeProfileLink } from "./components/EmployeeProfileLink";
+import getData from "@/api/getData";
+import { useQueryClient } from "@tanstack/react-query";
 export default function Page() {
   const { role_id } = useParams();
   const pathname = usePathname();
@@ -31,6 +33,16 @@ export default function Page() {
   const role_users_data = profiles?.filter((p) =>
     role_users?.includes(p.user_id),
   );
+  // prefecth role data
+  const queryClient = useQueryClient();
+  queryClient.prefetchQuery({
+    queryKey: ["roles", role_id],
+    queryFn: () =>
+      getData("roles", {
+        org: true,
+        match: { id: role_id },
+      }),
+  });
   return (
     <div className="flex h-full min-w-full flex-col gap-4 px-6 py-4">
       <div className="flex flex-col gap-2">
@@ -43,7 +55,7 @@ export default function Page() {
         <span className=" text-[0.90rem] ">{role?.description ?? ""}</span>
       </div>
       <section className="flex-rox flex items-center justify-between">
-        <div className="flex flex-row gap-4 ">
+        <div className="flex flex-row items-center gap-4 ">
           <Link
             href={{
               pathname: pathname,
@@ -56,8 +68,11 @@ export default function Page() {
           </Link>
           <Link
             href={{
-              pathname: pathname,
-              query: { popup: "" },
+              pathname: "/Settings/AccessLevels/create",
+              query: {
+                role_id: String(role_id),
+                edit: "true",
+              },
             }}
             className=" flex h-9 max-w-[11rem] flex-row items-center justify-center gap-1 rounded-md border border-gray-21 px-2 py-1 text-center text-[0.9rem] font-semibold text-gray-21 shadow-sm transition-all ease-linear hover:shadow-md"
           >

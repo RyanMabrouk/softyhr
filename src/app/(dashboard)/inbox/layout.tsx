@@ -2,6 +2,7 @@
 import { Footer } from "@/app/_ui/Footer";
 import RoleGuard from "@/app/_ui/RoleGuard";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import React from "react";
 import { AiFillLike } from "react-icons/ai";
 import { FaCheckCircle } from "react-icons/fa";
@@ -9,11 +10,11 @@ import { FaInbox } from "react-icons/fa6";
 import { HiInboxArrowDown } from "react-icons/hi2";
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [toggle, setToggle] = React.useState<string>("Inbox");
+  const pathname = usePathname();
   const Links = [
     {
       label: "Inbox",
       icon: <HiInboxArrowDown className="h-5 w-5" />,
-      permessions: [],
       options: [
         {
           icon: <AiFillLike />,
@@ -61,7 +62,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             {Links.map((e) => (
               <div className="flex w-full flex-col" key={e.label}>
                 <main
-                  className="flex flex-row items-center gap-2 rounded-sm px-3 py-2 text-lg text-gray-21 transition-all ease-linear hover:bg-white hover:text-fabric-700"
+                  className={`flex flex-row items-center gap-2 rounded-sm px-3 py-2 text-lg transition-all ease-linear  ${toggle === e.label ? "text-fabric-700" : "text-gray-21 hover:bg-white hover:text-fabric-700"}`}
                   role="button"
                   onClick={() => setToggle(e.label)}
                 >
@@ -74,7 +75,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                       <RoleGuard key={o.path} permissions={o.permessions}>
                         <Link
                           href={o.path}
-                          className={`ml-9 flex w-fit flex-row items-center gap-1 py-1.5 text-gray-21 transition-all ease-linear hover:text-fabric-700 hover:underline`}
+                          className={`ml-9 flex w-fit flex-row items-center gap-1 py-1.5  transition-all ease-linear ${pathname.includes(o.path) ? "text-fabric-700" : "text-gray-21 hover:text-fabric-700 hover:underline "}`}
                         >
                           {o.icon}
                           <span>{o.label}</span>

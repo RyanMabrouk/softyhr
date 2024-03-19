@@ -1,7 +1,7 @@
 import React from "react";
-import { IconType } from "react-icons";
+import { IconType } from "react-icons/lib";
 import { IoIosCheckbox } from "react-icons/io";
-interface CardPropsType {
+interface CheckBoxPropsType {
   label: string;
   Icon: IconType;
   value: string | number;
@@ -18,7 +18,7 @@ export function CheckBox({
   setValueInParent,
   valueInParent,
   className,
-}: CardPropsType) {
+}: CheckBoxPropsType) {
   const selected = valueInParent == value;
   return (
     <div

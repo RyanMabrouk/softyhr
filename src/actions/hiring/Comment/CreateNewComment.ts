@@ -3,6 +3,7 @@ import { cookies } from "next/headers";
 import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
 import getCurrentorg from "@/api/getCurrentOrg";
 import { getLogger } from "@/logging/log-util";
+import postData from "@/api/postData";
 export const CreateNewComment = async (
   NewComment: string,
   comment_Author: string,
@@ -11,19 +12,18 @@ export const CreateNewComment = async (
 ) => {
   const logger = getLogger("hiring");
   logger.info("CreateNewComment_enter");
-  const supabase = createServerActionClient({ cookies });
   const org = await getCurrentorg();
-  const { error } = await supabase.from("candidate_comments").insert([ 
-    { 
-      comment_content: NewComment, 
-      org_name: org?.name, 
-      reply_id,   
-      comment_Author, 
-      candidate_id, 
-    }, 
-  ]); 
+  const   { error }  = await postData("candidate_comments", [
+    {
+      comment_content: NewComment,
+      org_name: org?.name,
+      reply_id,
+      comment_Author,
+      candidate_id,
+    }
+  ]);
   if (error) { 
-    logger.error(error.message);
+    logger.error(error?.message);
     return {
       Submitted: false,
       Error: error, 

@@ -58,6 +58,7 @@ const LayoutComponent = memo(function LayoutComponent({
     "Application-Details": ApplicationDetails,
     "Job-Boards": JobBoards,
   };
+
   //------create_new_job------------
   async function CreateNewJob() {
     if (ApplicationDetails?.done && InformationJob?.done) {
@@ -66,10 +67,12 @@ const LayoutComponent = memo(function LayoutComponent({
         Application_Details: {
           ...ApplicationDetails?.values,
         },
+        Department_id: Number(InformationJob?.values?.Department),
         job_Boards: { ...JobBoards?.values },
         org_name: user?.org_name,
         ...data?.[0]?.["AppliementForm"],
         ["Job Status"]: InformationJob?.values?.["Job Status"],
+        Hiring_Leader: InformationJob?.values?.["Hiring Lead"],
       };
       const response = await CreateJobOpening(
         NewJob,
@@ -114,7 +117,7 @@ const LayoutComponent = memo(function LayoutComponent({
           <div className="mt-12 flex w-11/12 flex-col items-start justify-center gap-[1rem]">
             <button
               onClick={() => setShow(true)}
-              className="flex items-center justify-center gap-[0.5rem] text-sm text-gray-11"
+              className="flex items-center justify-center gap-[0.5rem] text-sm text-gray-11 duration-200 ease-linear hover:text-color-primary-8"
             >
               <FaArrowLeftLong fontSize="0.7rem" />
               <h1 className="hover:underline">Job Opening</h1>
@@ -131,12 +134,12 @@ const LayoutComponent = memo(function LayoutComponent({
                   </h1>
                 )}
               </div>
-              <Link
-                href={HirinSections[0]?.path}
+              <div
+                onClick={() => setShow(true)}
                 className="text-color5-500 hover:underline"
               >
                 cancel
-              </Link>
+              </div>
             </div>
             <form
               action={submitForm}
@@ -148,20 +151,19 @@ const LayoutComponent = memo(function LayoutComponent({
                     return (
                       <Link
                         aria-disabled={!stepValidation?.[path]?.done}
+                        tabIndex={
+                          !stepValidation?.[path]?.done ? -1 : undefined
+                        }
                         href={path}
                         className={
                           "flex items-center justify-center gap-[1rem] py-2 " +
-                          ((pathname.includes(path) &&
-                            path == CreateHiringJob[0]) ||
-                          stepValidation?.[path]?.done
+                          (stepValidation?.[path]?.done
                             ? ""
-                            : " !cursor-not-allowed ")
+                            : " disabled !cursor-not-allowed ")
                         }
                         key={index}
                       >
-                        {(pathname.includes(path) &&
-                          path == CreateHiringJob[0]) ||
-                        stepValidation?.[path]?.done ? (
+                        {stepValidation?.[path]?.done ? (
                           <RiCheckboxCircleFill className="text-3xl !text-color-primary-8" />
                         ) : (
                           <RiCheckboxCircleLine className="text-3xl !text-color-primary-8" />
@@ -180,7 +182,12 @@ const LayoutComponent = memo(function LayoutComponent({
                     );
                   })}
                 </div>
-                <SubmitFormBtn />
+                <div className="flex w-full flex-col items-center justify-center gap-[1rem]">
+                  <SubmitFormBtn />
+                  <h1 className="cursor-pointer text-sm text-gray-11 duration-200 ease-linear hover:text-color-primary-8 hover:underline">
+                    Save & Finish Later
+                  </h1>
+                </div>
               </div>
               {children}
             </form>

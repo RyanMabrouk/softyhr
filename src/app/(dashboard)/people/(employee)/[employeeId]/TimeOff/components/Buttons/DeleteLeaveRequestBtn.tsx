@@ -1,3 +1,5 @@
+"use client";
+import useTranslation from "@/translation/useTranslation";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
@@ -11,10 +13,11 @@ export function DeleteLeaveRequestBtn({
   leave_request_id: number;
 }) {
   const pathname = usePathname();
+  const { lang } = useTranslation();
   return (
     <Link
       className="tooltip  flex flex-row items-center justify-center"
-      data-tip="Delete"
+      data-tip={lang?.["Time Off"].Delete}
       href={{
         pathname: pathname,
         query: {
@@ -23,7 +26,7 @@ export function DeleteLeaveRequestBtn({
         },
       }}
     >
-      <MdDelete aria-label="Delete" className={className} />
+      <MdDelete className={className} />
     </Link>
   );
 }

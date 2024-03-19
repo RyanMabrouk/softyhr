@@ -19,7 +19,7 @@ export const LayoutRoute: LayoutRouteType[] = [
   },
   {
     label: "Hiring",
-    pathFn: (currentPath) => currentPath.includes("/Hiring"),
+    pathFn: (currentPath) => currentPath.includes("/Hiring/Jobs"),
     defaultPath: () => "/Hiring/jobs",
   },
   {

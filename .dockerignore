@@ -13,6 +13,7 @@
 **/.toolstarget
 **/.vs
 **/.vscode
+**/.next
 
 **/.cache
 **/*.*proj.user

@@ -1,5 +1,5 @@
 "use client";
-import { usePathname } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 import React from "react";
 import { MenuLinksGeneric } from "@/app/_ui/MenuLinksGeneric";
 import { useState } from "react";
@@ -8,6 +8,7 @@ import { VscTriangleDown } from "react-icons/vsc";
 
 export function SettingsBtn() {
   const [open, setOpen] = useState(false);
+  const { role_id } = useParams();
   const pathname = usePathname();
   return (
     <MenuLinksGeneric
@@ -17,9 +18,10 @@ export function SettingsBtn() {
         {
           name: "Duplicate Access Level",
           link: {
-            pathname: pathname,
+            pathname: "/Settings/AccessLevels/create",
             query: {
-              popup: "",
+              role_id: String(role_id),
+              duplicate: "true",
             },
           },
         },
@@ -28,7 +30,7 @@ export function SettingsBtn() {
           link: {
             pathname: pathname,
             query: {
-              popup: "",
+              popup: "DELETE_ROLE",
             },
           },
         },

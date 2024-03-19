@@ -3,7 +3,6 @@ import { BsExclamationCircleFill } from "react-icons/bs";
 type InputProps = InputHTMLAttributes<HTMLInputElement> & {
   name: string;
   label?: string;
-  defaultValue?: string;
   shadow?: "red";
   error?: string;
   type?: "text" | "number";
@@ -12,15 +11,14 @@ type InputProps = InputHTMLAttributes<HTMLInputElement> & {
 export function InputGeneric({
   name,
   label,
-  defaultValue,
   shadow,
   error,
-  type,
+  type = "text",
   setValueInParent,
   ...props
 }: InputProps) {
   return (
-    <div className="flex flex-col gap-1">
+    <div className="flex w-full flex-col gap-1">
       {label && (
         <Label
           error={error ? true : false}
@@ -35,10 +33,9 @@ export function InputGeneric({
           {...props}
           step=".01"
           type={type}
-          className={`w-full max-w-[10rem] rounded-md border border-gray-18 px-2 py-1 shadow-sm placeholder:text-gray-16 focus:outline-none ${shadow === "red" || error ? "focus:shadow-red !border-color9-500" : "focus:shadow-green"} ${props.className}`}
+          className={`w-full max-w-[10rem] rounded-md border px-2 py-1 shadow-sm transition-shadow ease-linear placeholder:text-gray-16 focus:outline-none ${shadow === "red" || error ? "focus:shadow-red !border-color9-500" : "focus:shadow-green border-gray-18 "} ${props.className}`}
           name={name}
           id={name + "_id"}
-          defaultValue={defaultValue}
           onChange={(e) => {
             setValueInParent && setValueInParent(e.target.value);
           }}

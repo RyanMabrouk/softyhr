@@ -13,9 +13,8 @@ export function useCategorieTimeUnit({
   const {
     leave_categories: { data: leaveCategories },
   } = useLeaveData();
-  const track_time_unit: databese_leave_categories_track_time_unit_type =
-    leaveCategories?.find(
-      (c: databese_leave_categories_type) => c.id === Number(categories_id),
-    )?.track_time_unit;
+  const track_time_unit = leaveCategories?.find(
+    (c: databese_leave_categories_type) => c.id === Number(categories_id),
+  )?.track_time_unit;
   return track_time_unit;
 }

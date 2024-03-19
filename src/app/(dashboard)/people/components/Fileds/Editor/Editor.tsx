@@ -28,41 +28,6 @@ function Editor({
     },
   });
 
-  const lightgreenTheme = {
-    colors: {
-      editor: {
-        text: "#222222",
-        background: "#ffffff",
-      },
-      menu: {
-        // text: "#ffffff",
-        background: "#ffff",
-      },
-      tooltip: {
-        text: "#ffffff",
-        background: "#527A01",
-      },
-      disabled: {
-        text: "#EEF3E5",
-        background: "#496D00",
-      },
-      sideMenu: "#bababa",
-    },
-    borderRadius: 4,
-    fontFamily: "Helvetica Neue, sans-serif",
-  } satisfies Theme;
-  const darkRedTheme = {
-    ...lightgreenTheme,
-    colors: {
-      ...lightgreenTheme.colors,
-    },
-  } satisfies Theme;
-
-  const redTheme = {
-    light: lightgreenTheme,
-    dark: darkRedTheme,
-  };
-
   return (
     <div className="w-full pt-2">
       <h1 className="text-[14px] text-gray-29">{RowField?.name}</h1>
@@ -72,7 +37,7 @@ function Editor({
           (editable ? " w-[70rem] rounded-md border border-gray-19 p-2 " : "")
         }
       >
-        <BlockNoteView theme={redTheme} editor={editor} />
+        <BlockNoteView editor={editor} />
         <input
           readOnly
           autoFocus

@@ -3,7 +3,13 @@ import React from "react";
 
 import { IoMdDownload } from "react-icons/io";
 
-export default function FileDownloadButton({ fileUrl, fileName }: any) {
+export default function FileDownloadButton({
+  fileUrl,
+  fileName,
+}: {
+  fileUrl: string;
+  fileName: string;
+}) {
   return (
     <button
       onClick={() => downloadFile(fileUrl, fileName)}

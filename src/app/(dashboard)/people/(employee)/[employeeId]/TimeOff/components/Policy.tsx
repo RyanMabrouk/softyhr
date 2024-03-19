@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { AddLeaveRequestBtn } from "./Buttons/AddLeaveRequestBtn";
 import { AdjustLeavePolicyBalanceBtn } from "./Buttons/AdjustLeavePolicyBalanceBtn";
@@ -5,10 +6,11 @@ import {
   database_leave_policies_policy_type,
   databese_leave_categories_track_time_unit_type,
 } from "@/types/database.tables.types";
-import { formatTotalHoursToTimeUnit } from "@/helpers/leave.helpers";
+import { formatTotalHoursToTimeUnit } from "@/helpers/TimeOff/leave.helpers";
 import { ChangePolicyMenuBtn } from "./Buttons/ChangePolicyMenuBtn";
-import { CalculatorBtn } from "./CalculatorBtn";
+import { CalculatorBtn } from "./Buttons/CalculatorBtn";
 import RoleGuard from "@/app/_ui/RoleGuard";
+import useTranslation from "@/translation/useTranslation";
 export function Policy({
   id,
   icon,
@@ -28,12 +30,13 @@ export function Policy({
   category_time_unit: databese_leave_categories_track_time_unit_type;
   type: database_leave_policies_policy_type;
 }) {
+  const { lang } = useTranslation();
   return (
     <div
       className="group relative flex h-fit w-fit  flex-col items-center justify-between gap-1 pt-6 "
       suppressHydrationWarning
     >
-      <div className="flex min-w-[20rem] flex-col items-center justify-center gap-1 rounded-md  bg-gray-14 px-[auto] py-3 group-hover:rounded-b-none  group-hover:bg-gray-17">
+      <div className="flex min-w-[20rem] flex-col items-center justify-center gap-1 rounded-md bg-gray-14 px-[auto]  py-3 group-hover:rounded-b-none group-hover:bg-gray-17 max-1840:min-w-[18rem] max-1660:min-w-[15rem]  max-1400:min-w-[20rem]">
         <span className="mb-1 max-w-full overflow-hidden text-ellipsis whitespace-nowrap text-center text-base font-bold capitalize leading-[1.467rem] text-gray-27">
           {title}
         </span>
@@ -42,17 +45,17 @@ export function Policy({
           <span className="m-0 max-w-full overflow-hidden text-ellipsis whitespace-nowrap text-center text-[2.266rem] font-bold leading-[2.8rem]  text-fabric-700 ">
             {formatTotalHoursToTimeUnit(hours_available, category_time_unit, {
               remove_time_unit: true,
+              translated_unit: lang?.["Time Off"]?.[category_time_unit],
             })}
           </span>
         </div>
         <span className="m-0 max-w-full overflow-hidden text-ellipsis whitespace-nowrap text-center text-base font-bold capitalize leading-[1.467rem] text-fabric-700">
-          {`${category_time_unit} ${type === "unlimited" ? "Used" : "Available"}`}
+          {`${lang?.["Time Off"]?.[category_time_unit]} ${type === "unlimited" ? lang?.["Time Off"].Used : lang?.["Time Off"].Available}`}
         </span>
         <span className="m-0 max-w-full overflow-hidden text-ellipsis whitespace-nowrap text-base font-normal leading-[1.467rem] text-gray-21">
-          {`${formatTotalHoursToTimeUnit(
-            hours_scheduled,
-            category_time_unit,
-          )} scheduled`}
+          {`${formatTotalHoursToTimeUnit(hours_scheduled, category_time_unit, {
+            translated_unit: lang?.["Time Off"]?.[category_time_unit],
+          })} ${lang?.["Time Off"].scheduled}`}
         </span>
       </div>
       <span className="m-0 max-w-full overflow-hidden text-ellipsis whitespace-nowrap pb-4 pt-1  text-sm font-normal leading-[1.467rem] text-gray-21">

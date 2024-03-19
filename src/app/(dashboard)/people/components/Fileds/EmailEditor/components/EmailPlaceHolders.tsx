@@ -55,7 +55,7 @@ function EmailPlaceHolders() {
                     <Link
                       target="_blank"
                       href={Object[1]}
-                      className="flex w-full cursor-pointer flex-row items-center gap-2 truncate pr-2 text-sm font-light  text-color5-600 hover:text-fabric-700 hover:underline"
+                      className="flex w-full cursor-pointer flex-row items-center gap-2 truncate pr-2 text-sm font-semibold  text-color5-600 hover:text-fabric-700 hover:underline"
                     >
                       {Object[1] || "---"}
                     </Link>
@@ -68,7 +68,7 @@ function EmailPlaceHolders() {
                     <h1 className="text-base capitalize text-gray-13">
                       {Object[0]}
                     </h1>
-                    <h1 className="w-full truncate pr-2 text-sm font-light text-gray-15">
+                    <h1 className="font-semibase w-full truncate pr-2 text-sm text-gray-15">
                       {Object[1] || "---"}
                     </h1>
                   </div>

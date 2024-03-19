@@ -51,6 +51,7 @@ function DeleteItem() {
               <Image
                 alt="profile image"
                 src={data?.profile_image || default_avatar}
+                className="h-[3rem] w-[3rem] rounded-full"
               />
               <h1>
                 {data?.["Basic Information"]?.["First name"] +
@@ -72,7 +73,7 @@ function DeleteItem() {
                     type="submit"
                     className="text-bold mt-4 rounded bg-color-primary-8 p-2 px-5 text-white duration-300 ease-in-out hover:!bg-color-primary-3 "
                   >
-                    Delete item
+                    Delete
                   </button>
                   <button
                     type="reset"

@@ -4,7 +4,7 @@ import useToast from "@/hooks/useToast";
 import { usePathname, useRouter } from "next/navigation";
 import { useQueryClient } from "@tanstack/react-query";
 import { CreateNewComment } from "@/actions/hiring/Comment/CreateNewComment";
-import useUserProfile from "@/hooks/useUserProfile";
+import useData from "@/hooks/useData";
 
 function CreateCommentForm({ id }: { id: string | null }) {
   const { toast } = useToast();
@@ -14,13 +14,13 @@ function CreateCommentForm({ id }: { id: string | null }) {
   const QueryClient = useQueryClient();
 
   const {
-    profiles: { data, isPending },
-  } = useUserProfile();
+    user_profile: { data, isPending },
+  } = useData();
 
   async function CreateNewCommentHandler(formdata: FormData) {
     const response = await CreateNewComment(
       String(formdata?.get("newComment")),
-      data?.data?.[0]?.user_id,
+      data?.user_id,
       id || "",
     );
     if (response?.Submitted) {

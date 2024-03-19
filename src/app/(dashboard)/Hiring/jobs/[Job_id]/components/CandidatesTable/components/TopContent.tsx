@@ -39,7 +39,7 @@ function TopContent({ Hiring, totalPages, filter, setFilter }: any) {
               DropDownButton={() => (
                 <div className="flex cursor-pointer flex-row items-start justify-start gap-1 rounded-sm border border-color-primary-8 px-2 py-1.5 transition-all ease-linear hover:shadow-md">
                   <FaRegEdit className="text-2xl text-color-primary-8 " />
-                  <h1 className="font-semibold text-color-primary-8">
+                  <h1 className=" ">
                     Edit Job Opening
                   </h1>
                 </div>
@@ -98,6 +98,7 @@ function TopContent({ Hiring, totalPages, filter, setFilter }: any) {
           </div>
           <AddCollaborate />
           <CandidateReports />
+          <div className="flex cursor-pointer rounded-sm flex-row items-center justify-center gap-1 border border-gray-25 px-2  py-[0.3rem] shadow-sm transition-all ease-linear hover:shadow-md"><p className="font-semibold text-gray-29">Preview Job Listing</p></div>
         </div>
         <HiringInfos Hiring={Hiring} />
       </div>

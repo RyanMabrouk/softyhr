@@ -1,4 +1,4 @@
-import { IconType } from "react-icons";
+import { IconType } from "react-icons/lib";
 import { FaCommentAlt, FaInfoCircle } from "react-icons/fa";
 import { IoIosMail } from "react-icons/io";
 import { LuMail } from "react-icons/lu";
@@ -40,5 +40,5 @@ export const VisibleDetailsCandidate = [
   "Desired Pay",
   "LinkedIn URL",
   "Date available",
-  "Email"
+  "Email",
 ];

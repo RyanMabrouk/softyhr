@@ -4,7 +4,7 @@ import { formatDateToDayMonDD, formatYYYYMMDD } from "@/helpers/date.helpers";
 import {
   formatTotalHoursToTimeUnit,
   useArrayOfWorkingDays,
-} from "@/helpers/leave.helpers";
+} from "@/helpers/TimeOff/leave.helpers";
 import {
   dateRangeContext,
   dateRangeContextType,
@@ -128,7 +128,7 @@ export function Amount({
                             ...old,
                           ]);
                           if (
-                            Number(e.target.value) > 24 ||
+                            Number(e.target.value) > 16 ||
                             Number(e.target.value) < 0
                           ) {
                             setFormError &&
@@ -137,11 +137,11 @@ export function Amount({
                                   ? {
                                       ...old,
                                       ["duration_date" + i]:
-                                        "Duration must be between 0 and 24 hours",
+                                        "Duration must be between 0 and 16 hours",
                                     }
                                   : {
                                       ["duration_date" + i]:
-                                        "Duration must be between 0 and 24 hours",
+                                        "Duration must be between 0 and 16 hours",
                                     },
                               );
                           } else {
@@ -172,7 +172,7 @@ export function Amount({
                 disabled
                 type="number"
                 name={"duration_date"}
-                className={`focus:shadow-green rounded-sm flex h-8 w-12 items-center justify-center border border-gray-18 p-2 px-3 text-gray-27 transition-all ease-linear focus:outline-none `}
+                className={`focus:shadow-green flex h-8 w-12 items-center justify-center rounded-sm border border-gray-18 p-2 px-3 text-gray-27 transition-all ease-linear focus:outline-none `}
               />
               <span className="text-[0.90rem]">Hours</span>
             </div>

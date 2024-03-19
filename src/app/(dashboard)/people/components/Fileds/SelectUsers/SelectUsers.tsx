@@ -1,5 +1,5 @@
 import React, { ReactNode, SyntheticEvent, useState } from "react";
-import { Autocomplete, Box, TextField } from "@mui/material";
+import { Autocomplete, Box, CircularProgress, TextField } from "@mui/material";
 import useProfiles from "@/hooks/useProfiles";
 import Image from "next/image";
 import avatar from "/public/avatar.png";
@@ -12,11 +12,13 @@ interface SelectValueType {
 function SelectGeneric({
   label,
   defaultValue,
+  isPending,
   options,
   required,
 }: {
   label?: string;
   name?: string;
+  isPending: boolean;
   defaultValue?: {
     value: string;
     label: string;
@@ -39,7 +41,9 @@ function SelectGeneric({
           <label
             className={
               "relative w-fit text-sm text-gray-21 " +
-              (required ? " after:text-red-500 after:content-['*']" : "")
+              (required
+                ? " after:text-color-primary-8 after:content-['*']"
+                : "")
             }
           >
             {label}
@@ -54,14 +58,22 @@ function SelectGeneric({
             border: "1px solid #D9D9D9",
             color: "black",
             ".MuiSvgIcon-root ": {
-              fill: "#D9D9D9 !important",
+              fill: "#686868 !important",
+              backgroundColor: "#F4F4F4",
+              width: "1.5rem",
+              height: "100%",
+              position: "absolute",
+              right: 0,
+              top: 0,
             },
             height: "2rem",
-            minWidth: "15rem",
-            borderRadius: "0.1rem !important",
+            minWidth: "16rem",
+            borderRadius: "0.2rem !important",
             fontWeight: "300",
             fontSize: "1rem",
           }}
+          loadingText="Loading..."
+          loading={isPending}
           inputValue={ValueInput || ""}
           onInputChange={(event, newInputValue: string | null) => {
             setValueInput(newInputValue);
@@ -88,10 +100,15 @@ function SelectGeneric({
                 alt=""
                 src={option?.picture || avatar}
               />
-              {option?.label}
+              {option?.label?.replace(/  +/g, " ")}
             </Box>
           )}
-          renderInput={(params) => <TextField className="!p-0" {...params} />}
+          renderInput={(params) => {
+            isPending || options?.length == 0
+              ? (params.inputProps.value = "")
+              : null;
+            return <TextField className="!p-0" {...params} />;
+          }}
         />
         <input
           required={required}
@@ -121,23 +138,24 @@ function SelectUsers({ RowField, defaultValue }: SelectUsers) {
   const {
     profiles: { data, isPending },
   } = useProfiles();
-  if (isPending) return;
   return (
     <SelectGeneric
+      isPending={isPending}
       label={RowField?.name}
+      required={RowField?.required}
       defaultValue={
         defaultValue
           ? {
               value: defaultValue,
-              label: `${data?.find((user: Profile_Type) => user?.user_id == defaultValue)?.["Basic Information"]?.["First name"]}     ${data?.find((user: Profile_Type) => user?.user_id == defaultValue)?.["Basic Information"]?.["Last name"]} `,
+              label: `${data?.find((user: Profile_Type) => user?.user_id == defaultValue)?.["Basic Information"]?.["First name"]} ${data?.find((user: Profile_Type) => user?.user_id == defaultValue)?.["Basic Information"]?.["Last name"]} `,
             }
-          : undefined
+          : { value: "", label: "" }
       }
       options={
         data?.map((user: Profile_Type) => {
           return {
             picture: user?.picture,
-            label: `${user?.["Basic Information"]?.["First name"]}     ${user?.["Basic Information"]?.["Last name"]} `,
+            label: `${user?.["Basic Information"]?.["First name"]} ${user?.["Basic Information"]?.["Last name"]} `,
             value: user?.user_id,
           };
         }) ?? [

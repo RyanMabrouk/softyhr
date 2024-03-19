@@ -1,23 +1,20 @@
 "use server";
 import { getLogger } from "@/logging/log-util";
-import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
-import { cookies } from "next/headers";
-
+import { UploadToBucket } from "../../api/UploadToBucket";
 export async function UploadImage(
   formdata: any,
   FileName: string,
   Bucketname: string,
   NameFormdata?: string,
 ) {
-  const logger = getLogger("*"); 
-  logger.info("UploadImage_enter"); 
-  const supabase = createServerActionClient({ cookies }); 
-  const { data, error } = await supabase.storage 
-    .from(Bucketname) 
-    .upload(FileName, formdata.get(NameFormdata || "file"), {
-      cacheControl: "3600",
-      upsert: false,
-    });
+  const logger = getLogger("*");
+  logger.info("UploadImage_enter");
+  const file = formdata.get(NameFormdata || "file");
+  const { data, error } = await UploadToBucket({
+    file,
+    fileName: FileName,
+    BucketName: Bucketname,
+  });
   if (error) {
     logger.error(error.message);
     return {
@@ -26,6 +23,6 @@ export async function UploadImage(
       Type: error?.message,
     };
   }
-  logger.info("UploadImage_exit"); 
+  logger.info("UploadImage_exit");
   return { uploaded: true, Message: "file uploaded successfully" };
 }

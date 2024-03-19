@@ -13,11 +13,6 @@ export default function Page() {
   const { done } = InformationJob;
   if (!done) router.push("/Hiring/jobs/add/Information-Job");
   else {
-    const modules = {
-      toolbar: {
-        container: "#toolbar",
-      },
-    };
 
     return (
       <div className="flex w-full flex-col items-start justify-center gap-[2rem] ">
