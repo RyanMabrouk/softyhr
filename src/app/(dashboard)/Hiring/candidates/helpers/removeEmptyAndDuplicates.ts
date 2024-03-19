@@ -8,9 +8,9 @@ export const removeEmptyAndDuplicates = (options: Option[]): Option[] => {
   const filteredOptions: Option[] = [];
 
   options?.forEach((option) => {
-    if (option.label && !uniqueValues.has(option.value)) {
+    if (option.label && !uniqueValues.has(option.label)) {
       filteredOptions.push(option);
-      uniqueValues.add(option.value);
+      uniqueValues.add(option.label);
     }
   });
 

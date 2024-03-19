@@ -7,10 +7,12 @@ export type GlobalFilterState = {
   jobStatus: string[];
   jobName: string[];
   jobSourse: string[];
+  jobLocation: string[];
   hiringLeader: string[];
 };
 export type GlobalRangeState = {
   ratings: rangeType;
+  dates: rangeType;
 };
 
 export type rangeType = {

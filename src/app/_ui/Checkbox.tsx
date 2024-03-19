@@ -24,7 +24,7 @@ function Checkbox({ label, name, checked, onChange }: CheckboxType) {
       />
       <label
         htmlFor={`checked-checkbox-${name}`}
-        className="cursor-pointer text-sm text-gray-11"
+        className="cursor-pointer text-sm capitalize text-gray-11"
       >
         {label}
       </label>

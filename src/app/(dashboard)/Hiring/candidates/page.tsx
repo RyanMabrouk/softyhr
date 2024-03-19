@@ -11,7 +11,6 @@ import TopContentTableCandidate from "./components/TopContentTableCandidate";
 import Search from "./components/Search";
 import Filter from "./components/FilterTableCandidates/Filter";
 import { GlobalFilterState, GlobalRangeState } from "./components/types";
-import { generateFilterString } from "./helpers/generateFilterString.helpers";
 import { generateFilterArray } from "./helpers/generateFilterArray";
 
 function Page() {
@@ -25,8 +24,10 @@ function Page() {
     jobStatusTable: "Hiring",
     jobName: "id",
     jobNameTable: "Hiring",
-    jobSourse: "Job Sourse",
-    jobSourseTable: "candidates",
+    jobLocation: "id",
+    jobLocationTable: "Hiring",
+    jobSourse: "job_Boards",
+    jobSourseTable: "Hiring",
     hiringLeader: "leader",
     hiringLeaderTable: "profiles",
   };
@@ -35,10 +36,12 @@ function Page() {
     jobStatus: [],
     jobName: [],
     jobSourse: [],
+    jobLocation: [],
     hiringLeader: [],
   });
   const [range, setRange] = useState<GlobalRangeState>({
     ratings: { min: 0, max: 5 },
+    dates: { min: "", max: "" },
   });
   const {
     candidates: { data, isPending, meta, isPlaceholderData },

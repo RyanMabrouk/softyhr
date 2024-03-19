@@ -181,7 +181,7 @@
 .input-range {
   margin-left: 10px;
   min-height: 50px;
-  max-width: calc(100% - 15px);
+  max-width: calc(100% - 21px);
 }
 .input-range > .input-range__label {
   display: none;

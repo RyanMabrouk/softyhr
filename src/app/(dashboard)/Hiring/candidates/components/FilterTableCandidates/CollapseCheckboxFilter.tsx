@@ -25,6 +25,10 @@ function CollapseCheckboxFilter({ options, title, setFilter }: Optionsprops) {
     }
   };
 
+  const onResetFilter = () => {
+    setCheckedStatuses([]);
+  };
+
   useEffect(() => {
     const formattedCheckedStatuses = checkedStatuses.map(
       (status) => status.value,
@@ -35,7 +39,12 @@ function CollapseCheckboxFilter({ options, title, setFilter }: Optionsprops) {
 
   return (
     <div className="">
-      <CustomCollapse collapseTitle={title} className="mt-2">
+      <CustomCollapse
+        collapseTitle={`${checkedStatuses.length > 0 ? checkedStatuses.length : ""} ${title}`}
+        className="mt-2"
+        hasSelectedItems={checkedStatuses.length > 0}
+        onResetHandler={onResetFilter}
+      >
         {options?.map((status) => (
           <Checkbox
             key={status.value}

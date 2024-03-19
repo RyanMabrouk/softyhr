@@ -7,21 +7,24 @@ import { VscTriangleDown } from "react-icons/vsc";
 type DropDownSelectFilterProps = {
   filter: string;
   setFilter: (filter: string) => void;
+  disabled?: boolean;
 };
 
 function DropDownSelectFilter({
   filter,
   setFilter,
+  disabled,
 }: DropDownSelectFilterProps) {
   return (
     <SelectGeneric
-      name="policy_id"
-      defaultValue={{ label: "Policies", value: "none" }}
+      name="filter"
+      defaultValue={{ label: "Filtrer", value: "none" }}
       required={true}
       group={false}
-      inputLabel="-Select policies-"
+      inputLabel="Filtrer"
       className="min-w-[250px]"
       setValueInParent={setFilter}
+      disabled={disabled}
       options={[
         {
           label: "string 12",

@@ -62,6 +62,13 @@ export default async function getCandidate(
     query = query.lte("Ratings", range.ratings.max);
   }
 
+  if (range.dates.min !== "") {
+    query = query.gte("created_at", range.dates.min);
+  }
+  if (range.dates.max !== "") {
+    query = query.lte("created_at", range.dates.max);
+  }
+
   query.order("id");
   query.eq("org_name", org_name);
   match

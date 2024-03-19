@@ -7,6 +7,7 @@ import getCandidate from "@/api/Hiring/getCandidates";
 import { CandidateType } from "@/types/candidate.types";
 import _debounce from "lodash/debounce";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { log } from "util";
 
 type searchProps = {
   search: string | null;
@@ -19,6 +20,7 @@ function Search({ search, setSearch }: searchProps) {
 
   const handleChange = (newValue: string[]) => {
     setSearchArray(newValue);
+
     newValue.length > 0
       ? setSearch(
           "or" +
@@ -37,11 +39,16 @@ function Search({ search, setSearch }: searchProps) {
       : setSearch("");
   };
   const supabse = createClientComponentClient();
+
   const debouncedSearch = _debounce(async (searchValue) => {
+    const querySearch =
+      searchValue.length > 0
+        ? `or(Email.ilike.%${searchValue}%),or(status.ilike.%${searchValue}%),or(Phone.ilike.%${searchValue}%),or(full_name.ilike.%${searchValue}%)`
+        : "";
     const result = await supabse
       .from("candidates")
       .select("*")
-      .or(search ?? "");
+      .or(querySearch ?? "");
 
     setOption(
       result?.data?.map((candidate: CandidateType) => {
@@ -65,7 +72,9 @@ function Search({ search, setSearch }: searchProps) {
         renderInput={(params) => (
           <TextField
             {...params}
-            onChange={debouncedSearch}
+            onChange={(e) => {
+              debouncedSearch(e.target.value);
+            }}
             variant="standard"
             placeholder="Search"
             InputProps={{

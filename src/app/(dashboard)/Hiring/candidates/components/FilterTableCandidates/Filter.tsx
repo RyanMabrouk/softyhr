@@ -33,18 +33,38 @@ function Filter({
     Hiring: { data: hiringData, isPending, meta, isPlaceholderData },
   } = useHiring(
     {},
-    'id, job_information, Hiring_Leader("Basic Information","user_id")',
+    'id, job_information, job_Boards,"Job Status", Hiring_Leader("Basic Information","user_id")',
   );
-  const { data: data_sources, isPending: pending_sources } =
-    useCandidateSources();
-  const { data: data_status, isPending: pending_status } = useCandidateStatus();
-
 
   const jobOpportunityOptions = hiringData?.map(
     (item: { [x: string]: { [x: string]: { [x: string]: any } } }) => {
       return {
         label: item?.["job_information"]?.["Posting Title"],
         value: item?.id,
+      };
+    },
+  );
+  const jobLocationOptions = hiringData?.map(
+    (item: { [x: string]: { [x: string]: { [x: string]: any } } }) => {
+      return {
+        label: item?.["job_information"]?.["Location"],
+        value: item?.id,
+      };
+    },
+  );
+  const jobSourceOptions = hiringData?.map(
+    (item: { [x: string]: { [x: string]: { [x: string]: any } } }) => {
+      return {
+        label: item?.["job_Boards"],
+        value: item?.["job_Boards"],
+      };
+    },
+  );
+  const jobStatusOptions = hiringData?.map(
+    (item: { [x: string]: { [x: string]: { [x: string]: any } } }) => {
+      return {
+        label: item?.["Job Status"],
+        value: item?.["Job Status"],
       };
     },
   );
@@ -57,18 +77,13 @@ function Filter({
       };
     },
   );
-  const dataSourceOptions = data_sources?.map((item) => {
-    return {
-      label: item?.name || "",
-      value: item?.name || "",
-    };
-  });
 
   return (
     <div>
       <DropDownSelectFilter
         filter={selectedFilter}
         setFilter={setSelectedFilter}
+        disabled={true}
       />
       <div className=" my-5 bg-gray-17 pb-4">
         <div className="flex items-center justify-between bg-gray-10 pl-2 text-white">
@@ -79,7 +94,7 @@ function Filter({
         </div>
         <div className="px-3">
           <CollapseCheckboxFilter
-            options={jobStatusOptions}
+            options={removeEmptyAndDuplicates(jobStatusOptions)}
             title="Job Status"
             filter={filter?.jobStatus}
             setFilter={(newFilter) =>
@@ -113,13 +128,24 @@ function Filter({
           />
 
           <CollapseCheckboxFilter
-            options={dataSourceOptions}
+            options={removeEmptyAndDuplicates(jobSourceOptions)}
             title="Source"
             filter={filter.jobSourse}
             setFilter={(newFilter) =>
               setFilter((prevFilter: any) => ({
                 ...prevFilter,
                 jobSourse: newFilter,
+              }))
+            }
+          />
+          <CollapseCheckboxFilter
+            options={removeEmptyAndDuplicates(jobLocationOptions)}
+            title="Location"
+            filter={filter.jobLocation}
+            setFilter={(newFilter) =>
+              setFilter((prevFilter: any) => ({
+                ...prevFilter,
+                jobLocation: newFilter,
               }))
             }
           />
@@ -135,11 +161,11 @@ function Filter({
           />
           <CollapseDatesFilter
             title="Application Dates"
-            range={range.ratings}
+            range={range.dates}
             setRange={(newFilter) => {
               setRange((prevFilter: any) => ({
                 ...prevFilter,
-                ratings: newFilter,
+                dates: newFilter,
               }));
             }}
           />

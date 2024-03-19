@@ -19,6 +19,7 @@ export function SelectGeneric({
   setValueInParent,
   inputLabel,
   cursor = "black",
+  disabled,
 }: {
   className?: string;
   label?: string;
@@ -31,6 +32,7 @@ export function SelectGeneric({
   setValueInParent?: React.Dispatch<React.SetStateAction<any>> | undefined;
   inputLabel?: string | ReactNode;
   cursor?: "white" | "black" | string;
+  disabled?: boolean;
 }) {
   if (!options) return;
   return (
@@ -58,6 +60,7 @@ export function SelectGeneric({
               color: cursor,
             },
           }}
+          disabled={disabled}
         >
           {group
             ? options?.map((option: Option, i: number): JSX.Element => {
