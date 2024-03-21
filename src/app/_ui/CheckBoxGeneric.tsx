@@ -1,8 +1,8 @@
 import React, { ReactNode, useEffect, useState } from "react";
 import Checkbox from "@mui/material/Checkbox";
-import { getTawindColor } from "@/helpers/getTailwindColor";
-const color = getTawindColor("fabric-700");
-const gray_color = getTawindColor("gray-27");
+import { getTailwindColor } from "@/helpers/getTailwindColor";
+const color = getTailwindColor("fabric-700");
+const gray_color = getTailwindColor("gray-27");
 export function CheckBoxGeneric({
   children,
   name,

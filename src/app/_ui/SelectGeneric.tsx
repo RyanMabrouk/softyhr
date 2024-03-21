@@ -1,13 +1,14 @@
 import React, { ReactNode } from "react";
 import { FormControl, MenuItem, Select } from "@mui/material";
 import { Label } from "./InputGeneric";
-import { getTawindColor } from "../../helpers/getTailwindColor";
+import { getTailwindColor } from "../../helpers/getTailwindColor";
 import { VscTriangleDown } from "react-icons/vsc";
-const color = getTawindColor("color-primary-10");
+const color = getTailwindColor("color-primary-10");
 export type Option = {
   group_name?: string; // add only the group name to create a group
   label: string | ReactNode;
   value: string | number;
+  disabled?: boolean;
 };
 export function SelectGeneric({
   className,

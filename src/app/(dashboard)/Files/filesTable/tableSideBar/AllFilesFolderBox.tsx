@@ -1,13 +1,13 @@
 "use client";
-import { getTawindColor } from "@/helpers/getTailwindColor";
+import { getTailwindColor } from "@/helpers/getTailwindColor";
 import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import React, { MouseEvent, useState } from "react";
 
 import { BiSolidCabinet } from "react-icons/bi";
 
-const primary = getTawindColor("fabric-700");
-const grey = getTawindColor("gray-30");
+const primary = getTailwindColor("fabric-700");
+const grey = getTailwindColor("gray-30");
 export default function AllFilesFolderBox({
   setCheckAll,
 }: {

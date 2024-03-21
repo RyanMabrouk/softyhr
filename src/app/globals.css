@@ -54,7 +54,7 @@
   }
 }
 .rdp-vhidden {
-  @apply hidden;
+  display: none;
 }
 /* Reset Mui Select Componant selected bg color */
 .Mui-selected {
