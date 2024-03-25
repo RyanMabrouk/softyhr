@@ -8,6 +8,7 @@ export type Option = {
   group_name?: string; // add only the group name to create a group
   label: string | ReactNode;
   value: string | number;
+  disabled?: boolean;
 };
 export function SelectGeneric({
   className,
