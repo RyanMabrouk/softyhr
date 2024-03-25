@@ -10,7 +10,12 @@ type Optionsprops = {
   setFilter: React.Dispatch<React.SetStateAction<string[]>>;
 };
 
-function CollapseCheckboxFilter({ options, title, setFilter }: Optionsprops) {
+function CollapseCheckboxFilter({
+  options,
+  title,
+  setFilter,
+  filter,
+}: Optionsprops) {
   const [checkedStatuses, setCheckedStatuses] = useState<Array<CheckedStatus>>(
     [],
   );
@@ -34,8 +39,10 @@ function CollapseCheckboxFilter({ options, title, setFilter }: Optionsprops) {
       (status) => status.value,
     );
 
-    setFilter(formattedCheckedStatuses);
-  }, [checkedStatuses, setFilter]);
+    if (JSON.stringify(formattedCheckedStatuses) !== JSON.stringify(filter)) {
+      setFilter(formattedCheckedStatuses);
+    }
+  }, [checkedStatuses, filter, setFilter]);
 
   return (
     <div className="">

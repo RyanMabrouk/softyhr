@@ -56,7 +56,7 @@ function Page() {
     range,
   );
 
-  const CandidateTableData: any = data?.map((candidate: CandidateType) => {
+  const CandidateTableData = data?.map((candidate: CandidateType) => {
     return {
       id: candidate.id,
       "Candidate Info":
