@@ -3,7 +3,7 @@ import CancelBtnGeneric from "@/app/_ui/CancelBtnGeneric";
 import { InputGeneric } from "@/app/_ui/InputGeneric";
 import { SubmitBtn } from "@/app/_ui/SubmitBtn";
 import PopUpSkeleton from "@/app/_ui/_PopUp/PopUpSkeleton";
-import { generateLeaveCategorieIcon } from "@/helpers/leave.helpers";
+import { generateLeaveCategorieIcon } from "@/helpers/TimeOff/leave.helpers";
 import { capitalizeFirstLetter } from "@/helpers/string.helpers";
 import usePolicy from "@/hooks/TimeOff/usePolicy";
 import useToast from "@/hooks/useToast";

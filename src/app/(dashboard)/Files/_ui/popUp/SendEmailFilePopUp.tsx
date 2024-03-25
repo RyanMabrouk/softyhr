@@ -11,6 +11,7 @@ import { formatDateFiles } from "@/helpers/date.helpers";
 import { useQueryClient } from "@tanstack/react-query";
 import { sendMail } from "@/api/sendEmail";
 import useToast from "@/hooks/useToast";
+import CancelBtnGeneric from "@/app/_ui/CancelBtnGeneric";
 
 export default function SendEmailFilePopUp() {
   const Router = useRouter();
@@ -34,7 +35,7 @@ export default function SendEmailFilePopUp() {
   };
 
   const id = searchParams.get("fileId");
-  const { file } = useFileData(id);
+  const { file } = useFileData(Number(id));
   const isPending = file.isPending;
 
   function onError(errors: any) {}
@@ -46,7 +47,7 @@ export default function SendEmailFilePopUp() {
         data.subject,
         `<div className='flex flex-col gap-1'>
         <p className='text-lg'>${data.message}</p>
-        <a href="${file.data?.[0].file_url}">${file.data?.[0].name}</a>
+        <a href="${file.data?.file_url}">${file.data?.name}</a>
         </div>`,
       );
       toast.success("Email Sent", "Success");
@@ -68,17 +69,17 @@ export default function SendEmailFilePopUp() {
           className="shadow-popup flex  min-w-[38rem] flex-col gap-2 rounded-sm bg-white p-8"
         >
           <div className="flex w-[28rem] flex-col p-2">
-            {(file.data?.[0].file_type === "application" && (
+            {(file.data?.file_type === "application" && (
               <FaRegFilePdf fontSize="1.8rem" fill="#cc4373" />
             )) ||
-              (file.data?.[0].file_type === "image" && (
+              (file.data?.file_type === "image" && (
                 <FaRegFileImage fontSize="1.8rem" fill="#777270" />
               ))}
-            <p className="text-lg text-gray-11">{file.data?.[0].name}</p>
+            <p className="text-lg text-gray-11">{file.data?.name}</p>
             <p className=" text-sm text-gray-15">
-              {`Added ${formatDateFiles(file.data?.[0].created_at)} by ${
-                file.data?.[0].addedBy
-              } (${file.data?.[0].size}KB)`}
+              {`Added ${formatDateFiles(file.data?.created_at)} by ${
+                file.data?.addedBy
+              } (${file.data?.size}KB)`}
             </p>
           </div>
           <form
@@ -111,7 +112,7 @@ export default function SendEmailFilePopUp() {
                   {...register("subject", {
                     required: "This field is required",
                   })}
-                  value={`Here is the file :  ${file.data?.[0].name}`}
+                  value={`Here is the file :  ${file.data?.name}`}
                   className=" w-96 border border-stone-400 px-2 py-1 text-sm text-gray-12 outline-1 transition-all duration-300  focus:outline-color1-300 "
                 />
               </div>
@@ -136,16 +137,12 @@ export default function SendEmailFilePopUp() {
             <hr className="mt-4 h-[3px] w-full bg-primary-gradient" />
             <div className="flex flex-row gap-4 px-2 pt-3">
               <ButtonPopUp check={false}>Save</ButtonPopUp>
-              <button
-                className="cursor-pointer text-color5-500 hover:underline "
-                type="reset"
+              <CancelBtnGeneric
                 onClick={() => {
                   queryClient.setQueryData(["fileIds"], []);
                   Router.push(pathname);
                 }}
-              >
-                Cancel
-              </button>
+              />
             </div>
           </form>
         </PopUpSkeleton>

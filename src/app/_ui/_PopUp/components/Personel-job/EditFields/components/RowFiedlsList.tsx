@@ -11,6 +11,8 @@ import {
 import { UpdateSettings } from "@/api/Settings/updateSettings";
 import { RowType, sectionType } from "@/types/database.tables.types";
 import RowFields from "./RowFields";
+import { Section } from "@/constants/userInfoSections";
+import TableChamps from "@/app/(dashboard)/people/components/sections/TableChamps";
 
 interface RowFieldsListPropstype {
   champ: string;
@@ -50,11 +52,7 @@ function RowFiedlsList({
     accept: "champ",
     drop: (item: DropItemType, monitor: any) => {
       const dropResult = monitor.internalMonitor.registry.dropTargets;
-      /*console.log(
-        item.champ,
-        " dropped on ",
-        dropResult.get(monitor.targetId).spec.data,
-      );*/
+
       if (item?.rang == dropResult.get(monitor.targetId).spec.data?.rang)
         return;
       const NewSettings = ReorderChamps(
@@ -70,7 +68,7 @@ function RowFiedlsList({
     }),
   }));
 
-  if (typeof Fields?.[0] == "string") {
+  if (Section[champ] == TableChamps) {
     return (
       <div ref={drag}>
         <div

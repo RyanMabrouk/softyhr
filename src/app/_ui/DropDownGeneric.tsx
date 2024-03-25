@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import {
   Dropdown,
   DropdownTrigger,
@@ -8,8 +8,13 @@ import {
 } from "@nextui-org/react";
 import Link from "next/link";
 
+interface DropDownGenericOption {
+  link?: any;
+  actions?: () => void;
+  Component: () => React.JSX.Element;
+}
 interface DropDownGenericPropsTYpe {
-  options: any[];
+  options: DropDownGenericOption[];
   DropDownButton: any;
 }
 
@@ -21,7 +26,7 @@ function DropDownGeneric({
     <Dropdown className="flex flex-col items-center justify-center">
       <DropdownTrigger>
         <Button
-          className="flex h-full  items-center justify-start gap-2"
+          className={`flex h-full  items-center justify-start gap-2`}
           variant="bordered"
         >
           <DropDownButton />
@@ -49,7 +54,7 @@ function DropDownGeneric({
 
           return (
             <DropdownItem
-              className="duration-250 w-fill group flex ease-linear hover:bg-color-primary-8"
+              className="duration-250 group flex w-full ease-linear hover:bg-color-primary-8"
               key={index}
               onClick={action && action}
             >

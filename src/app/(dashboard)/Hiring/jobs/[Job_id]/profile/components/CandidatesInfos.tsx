@@ -23,13 +23,13 @@ function CandidatesInfos({
             } || {},
           )?.map((object,index:number) => {
             return (
-              VisibleDetailsCandidate.includes(object[0]) && (
+              VisibleDetailsCandidate?.includes(object?.[0]) && (
                 <DetailsCard
                   key={index}
-                  label={object[0]}
+                  label={object?.[0]}
                   className="border-b border-gray-18"
                   Component={
-                    <h1 className="font-base">{object[1] || "---"}</h1>
+                    <h1 className="font-base">{object?.[1] || "---"}</h1>
                   }
                 />
               )

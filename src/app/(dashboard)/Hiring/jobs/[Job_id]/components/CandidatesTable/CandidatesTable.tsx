@@ -8,19 +8,16 @@ import {
   TableRow,
   TableCell,
   Pagination,
-  Selection
+  Selection,
 } from "@nextui-org/react";
-import {
-  columns,
-  TableCandidateType,
-} from "./components/config";
+import { columns, TableCandidateType } from "./components/config";
 import { renderCell } from "./components/renderCell";
 import { usePathname } from "next/navigation";
 import { Hiring_type } from "@/types/database.tables.types";
 import TopContent from "./components/TopContent";
+import { renderCellTableCandidate } from "@/app/(dashboard)/Hiring/candidates/components/renderCell";
 
 const INITIAL_VISIBLE_COLUMNS = [
-  "id",
   "Candidate Info",
   "Status",
   "Rating",
@@ -32,32 +29,39 @@ const INITIAL_VISIBLE_COLUMNS = [
 
 export interface CandidateTablePropsType {
   data: TableCandidateType[];
-  Job_id: string;
+  Job_id?: string;
   setpage: React.Dispatch<React.SetStateAction<number>>;
   page: number;
-  Hiring: Hiring_type;
-  filter: string;
-  setFilter: React.Dispatch<React.SetStateAction<string>>;
+  Hiring?: Hiring_type;
+  filter?: string;
+  setFilter?: React.Dispatch<React.SetStateAction<string>>;
   totalPages: number;
+  topContent?: React.ReactNode;
+  isTableCandidate: boolean;
+  hasNoSelectedItemsInPagination: boolean;
+  initialVisibleColumns?: string[];
 }
 
 export default function CandiatesTable({
   data,
-  Job_id,
   setpage,
   page,
   Hiring,
   filter,
   setFilter,
   totalPages,
+  topContent,
+  isTableCandidate,
+  hasNoSelectedItemsInPagination,
+  initialVisibleColumns,
 }: CandidateTablePropsType) {
   const [selectedKeys, setSelectedKeys] = React.useState<Selection>(
     new Set([]),
   );
-  const pathname = usePathname();
   const [visibleColumns, setVisibleColumns] = React.useState<Selection>(
-    new Set(INITIAL_VISIBLE_COLUMNS),
+    new Set(initialVisibleColumns || INITIAL_VISIBLE_COLUMNS),
   );
+
   const headerColumns = React.useMemo(() => {
     if (visibleColumns === "all") return columns;
     return columns.filter((column) =>
@@ -65,7 +69,6 @@ export default function CandiatesTable({
     );
   }, [visibleColumns]);
 
-  
   const bottomContent = React.useMemo(() => {
     return (
       <div className="flex items-center justify-between px-2 py-2">
@@ -80,28 +83,30 @@ export default function CandiatesTable({
           className=""
           onChange={setpage}
         />
-        <span className="text-small text-default-400">
-          {selectedKeys === "all"
-            ? "All items selected"
-            : `${selectedKeys.size} of ${totalPages} selected`}
-        </span>
+        {!hasNoSelectedItemsInPagination && (
+          <span className="text-small text-default-400">
+            {selectedKeys === "all"
+              ? "All items selected"
+              : `${selectedKeys.size} of ${totalPages} selected`}
+          </span>
+        )}
       </div>
     );
-  }, [selectedKeys, totalPages, page, setpage]);
+  }, [selectedKeys, hasNoSelectedItemsInPagination, totalPages, page, setpage]);
 
   const classNames = React.useMemo(
     () => ({
       wrapper: ["max-h-[382px]", "max-w-3xl"],
       tr: [
         "border-b border-gray-14",
-        "hover:!bg-color-primary-12",
+        "hover:!bg-gray-14",
         "ease-linear duration-200 ",
       ],
       th: [
         "cursor-pointer",
         "py-2",
         "!bg-gray-17",
-        "hover:!bg-gray-14",
+        "hover:!bg-gray-18",
         "text-gray-11",
         "border-b",
         "border-divider",
@@ -143,12 +148,16 @@ export default function CandiatesTable({
       selectionMode="single"
       showSelectionCheckboxes={true}
       topContent={
-        <TopContent
-          Hiring={Hiring}
-          totalPages={totalPages}
-          filter={filter}
-          setFilter={setFilter}
-        />
+        topContent ? (
+          topContent
+        ) : (
+          <TopContent
+            Hiring={Hiring}
+            totalPages={totalPages}
+            filter={filter}
+            setFilter={setFilter}
+          />
+        )
       }
       topContentPlacement="outside"
       onSelectionChange={setSelectedKeys}
@@ -168,7 +177,11 @@ export default function CandiatesTable({
         {(item: TableCandidateType) => (
           <TableRow key={item?.id}>
             {(columnKey) => (
-              <TableCell>{renderCell(Hiring, item, columnKey)}</TableCell>
+              <TableCell>
+                {isTableCandidate
+                  ? renderCellTableCandidate(item, columnKey)
+                  : renderCell(Hiring!, item, columnKey)}
+              </TableCell>
             )}
           </TableRow>
         )}
@@ -176,4 +189,3 @@ export default function CandiatesTable({
     </Table>
   );
 }
-

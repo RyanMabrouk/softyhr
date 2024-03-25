@@ -1,4 +1,4 @@
-import { formatTotalHoursToTimeUnit } from "@/helpers/leave.helpers";
+import { formatTotalHoursToTimeUnit } from "@/helpers/TimeOff/leave.helpers";
 import {
   database_leave_policies_policy_type,
   databese_leave_categories_track_time_unit_type,

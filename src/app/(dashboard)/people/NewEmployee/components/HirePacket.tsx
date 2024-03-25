@@ -34,7 +34,7 @@ function HirePacket({ checked, setChecked }: HirePacketPropsType) {
             }}
             color="success"
           />
-          <h1 className="text-gray- font-medium text-gray-29">
+          <h1 className="font-medium text-gray-29">
             Send this new employee a new hire packet
           </h1>
         </div>

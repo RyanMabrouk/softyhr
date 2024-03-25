@@ -4,7 +4,7 @@ import updateData from "@/api/updateData";
 import { getDaysInBetween } from "@/helpers/date.helpers";
 import {
   database_leave_request_status_type,
-  database_leave_requests_insert_type,
+  database_leave_requests_type,
 } from "@/types/database.tables.types";
 import updateLeaveBalance from "./updateLeaveBalance";
 import { getPolicyType } from "./getPolicyType";
@@ -16,7 +16,7 @@ export default async function updateLeaveRequest({
 }: {
   formData: FormData;
   user_id: string | string[];
-  old_request: database_leave_requests_insert_type;
+  old_request: database_leave_requests_type;
 }) {
   const logger = getLogger("*");
   logger.info("updateLeaveRequest");

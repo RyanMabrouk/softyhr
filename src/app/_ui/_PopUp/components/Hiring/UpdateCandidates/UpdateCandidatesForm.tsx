@@ -31,6 +31,7 @@ function UpdateCandidatesForm({ id }: { id: string | null }) {
     >
       <SelectInput
         RowField={{
+          type:"select",
           name: "status",
           required: true,
           options: CandidateStatusOptions.filter((e) => e?.name != "All"),

@@ -40,6 +40,7 @@ const Myclass = plugin(function ({ addUtilities }: any) {
 });
 const config: Config = {
   darkMode: ["class"],
+  mode: "jit",
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -53,6 +54,14 @@ const config: Config = {
       screens: {
         "2xl": "1400px",
       },
+    },
+    screens: {
+      "1880": "1880px",
+      "1860": "1860px",
+      "1840": "1840px",
+      "1690": "1690px",
+      "1660": "1660px",
+      "1400": "1400px",
     },
     extend: {
       animation: {
@@ -250,6 +259,7 @@ const config: Config = {
         "gray-39": "#aaa",
         "gray-40": "#F9F9F9",
         "gray-41": "#cbcbcb",
+        "gray-42": "#DCDCDC",
 
         "color-teal-2": "#284D59",
 
@@ -301,12 +311,7 @@ const config: Config = {
       },
     },
   },
-  plugins: [
-    Myclass,
-    require("tailwindcss-animate"),
-    require("daisyui"),
-    require("@tailwindcss/typography"),
-  ],
+  plugins: [Myclass, require("tailwindcss-animate"), require("daisyui")],
   daisyui: {
     themes: ["light"],
   },

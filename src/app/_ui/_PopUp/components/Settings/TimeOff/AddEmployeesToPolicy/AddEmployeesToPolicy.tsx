@@ -2,7 +2,7 @@
 import CancelBtnGeneric from "@/app/_ui/CancelBtnGeneric";
 import { SubmitBtn } from "@/app/_ui/SubmitBtn";
 import PopUpSkeleton from "@/app/_ui/_PopUp/PopUpSkeleton";
-import { generateLeaveCategorieIcon } from "@/helpers/leave.helpers";
+import { generateLeaveCategorieIcon } from "@/helpers/TimeOff/leave.helpers";
 import usePolicy from "@/hooks/TimeOff/usePolicy";
 import useLeaveData from "@/hooks/TimeOff/useLeaveData";
 import {
@@ -84,6 +84,7 @@ export default function AddEmployeesToPolicy() {
         current_id: current_policy?.id ?? null,
       };
     });
+  
   //-------------------Drag and Drop--------------------------------
   const [employees, setEmployees] = useState<usersWithoutCurrentId[]>(
     usersWithoutCurrentPolicy ?? [],

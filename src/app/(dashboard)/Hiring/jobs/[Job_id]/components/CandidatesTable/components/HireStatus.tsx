@@ -37,7 +37,7 @@ function HireStatus({ Hiring, candidate }: HiringStatusPropsType) {
   return (
     <DropDownGeneric
       DropDownButton={() => (
-        <div className="flex cursor-pointer flex-row items-center justify-between gap-3 overflow-hidden rounded-sm border border-gray-15 shadow-sm transition-all ease-linear hover:shadow-md">
+        <div className="flex w-fit cursor-pointer flex-row items-center justify-between gap-3 overflow-hidden rounded-sm border border-gray-15 shadow-sm transition-all ease-linear   hover:shadow-md">
           <h1 className="px-[1rem] text-base text-gray-29">
             {candidate?.status}
           </h1>

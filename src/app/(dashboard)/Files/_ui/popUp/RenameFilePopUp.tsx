@@ -1,12 +1,13 @@
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React, { useState } from "react";
-import { CgClose } from "react-icons/cg";
 import ButtonPopUp from "../components/ButtonPopUp";
 import useToast from "@/hooks/useToast";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { renameFile } from "@/actions/files/renameFile";
 import PopUpSkeleton from "@/app/_ui/_PopUp/PopUpSkeleton";
+import { InputGeneric } from "@/app/_ui/InputGeneric";
+import CancelBtnGeneric from "@/app/_ui/CancelBtnGeneric";
 
 export default function RenameFilePopUp() {
   const { toast } = useToast();
@@ -18,6 +19,7 @@ export default function RenameFilePopUp() {
 
   const [isTyping, setIsTyping] = useState("");
   const id = searchParams.get("fileId");
+  const name = searchParams.get("fileName");
 
   /////
   const { mutateAsync: renameFileApi } = useMutation({
@@ -33,12 +35,9 @@ export default function RenameFilePopUp() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["files"] });
+      Router.push(pathname);
     },
   });
-
-  function onSubmit() {
-    const { error }: any = renameFileApi({ id, isTyping });
-  }
 
   return (
     <>
@@ -47,30 +46,28 @@ export default function RenameFilePopUp() {
         className="shadow-popup px-auto flex min-w-[35rem] flex-col items-center gap-2 rounded-sm bg-white px-8 py-4"
       >
         <form
-          onSubmit={handleSubmit(onSubmit)}
-          className="flex w-full flex-col gap-4 px-2 pt-3"
+          onSubmit={handleSubmit(() => renameFileApi({ id, isTyping }))}
+          className="flex w-full flex-col gap-2 px-2 pt-3"
         >
-          <label htmlFor="input">Enter a new name for this file</label>
-          <input
+          <InputGeneric
+            label="Enter a new name for this file"
+            name="input"
             type="text"
-            value={isTyping}
-            onChange={(e) => setIsTyping(e.target.value)}
-            className=" w-80 border border-stone-400 px-2 py-1 outline-1 transition-all duration-300 focus:outline-color1-300 "
+            placeholder={name ?? ""}
+            defaultValue={name ?? ""}
+            setValueInParent={setIsTyping}
+            className=" !h-9 !min-w-[17.5rem]"
           />
 
           <hr className="mt-4 h-[3px] w-full bg-primary-gradient" />
           <div className="flex flex-row gap-4 px-2 pt-3">
             <ButtonPopUp check={isTyping === ""}>Save</ButtonPopUp>
-            <button
-              className="cursor-pointer text-color5-500 hover:underline "
-              type="button"
+            <CancelBtnGeneric
               onClick={() => {
                 queryClient.setQueryData(["fileIds"], []);
                 Router.push(pathname);
               }}
-            >
-              Cancel
-            </button>
+            />
           </div>
         </form>
       </PopUpSkeleton>

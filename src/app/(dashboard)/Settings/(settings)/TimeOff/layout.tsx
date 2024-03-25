@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
 import React from "react";
 import useCategoriesData from "./hooks/useCategoriesData";
-import { generateLeaveCategorieIcon } from "@/helpers/leave.helpers";
+import { generateLeaveCategorieIcon } from "@/helpers/TimeOff/leave.helpers";
 import SettingsLayoutSkeleton from "../SettingsLayoutSkeleton";
 export default function Layout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();

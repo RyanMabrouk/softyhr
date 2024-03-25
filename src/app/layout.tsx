@@ -5,7 +5,6 @@ import Hydration from "@/provider/hydration";
 import Store from "@/provider/store";
 import PopUp from "./_ui/_PopUp/PopUp";
 import { ToastContainer, ToastProvider } from "@/hooks/useToast";
-import dynamic from "next/dynamic";
 
 const lato = Lato({
   weight: ["100", "300", "400", "700", "900"],
@@ -13,14 +12,26 @@ const lato = Lato({
   style: ["normal"],
 });
 
-const GrafanaWithoutSSR = dynamic(() => import("./Grafana"), { ssr: false });
-
 export const metadata: Metadata = {
   title: "SoftyHr",
   description: "Manage your employees with ease",
   generator: "Next.js",
   manifest: "/manifest.json",
-  keywords: ["management", "softy hr", "company", "company management"],
+  keywords: [
+    "management",
+    "softy hr",
+    "company",
+    "company management",
+    "softyhr",
+    "hr",
+    "hr management",
+    "employee",
+    "human resources",
+    "human resources management",
+    "employee management",
+    "employee hr",
+    "softy",
+  ],
   authors: [
     {
       name: "Softylines",
@@ -40,7 +51,6 @@ export default async function RootLayout({
         <Store>
           <Hydration>
             <ToastProvider>
-              <GrafanaWithoutSSR />
               <ToastContainer />
               <PopUp />
               {children}

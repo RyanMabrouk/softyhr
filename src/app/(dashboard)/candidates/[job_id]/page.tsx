@@ -39,7 +39,7 @@ function Page({ params: { job_id } }: { params: { job_id: string } }) {
           SuccessMessage="Candidate Added successfuly !"
           SubmittingButtonText="Adding Candidate..."
           ButtonText="Add Candidate"
-          job={data[0]}
+          job={data?.[0]}
         />
       </div>
     </div>

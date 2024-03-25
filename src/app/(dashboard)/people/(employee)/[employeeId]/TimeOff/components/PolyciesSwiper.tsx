@@ -13,12 +13,13 @@ import {
   databese_leave_categories_track_time_unit_type,
   databese_leave_categories_type,
 } from "@/types/database.tables.types";
-import { generateLeaveCategorieIcon } from "@/helpers/leave.helpers";
+import { generateLeaveCategorieIcon } from "@/helpers/TimeOff/leave.helpers";
 import { useParams } from "next/navigation";
 import useEmployeeData from "@/hooks/useEmloyeeData";
 import useLeaveData from "@/hooks/TimeOff/useLeaveData";
 import { Player } from "@lottiefiles/react-lottie-player";
 import Loader from "@/app/_ui/Loader/Loader";
+import useTranslation from "@/translation/useTranslation";
 interface formatted_policy_type {
   id: number;
   name: string;
@@ -33,6 +34,7 @@ export function PolyciesSwiper() {
   const [activeIndex, setActiveIndex] = useState(0);
   const params = useParams();
   const { employeeId } = params;
+  const { lang } = useTranslation();
   const {
     leave_policies: { data: leave_policies, isPending: isPending1 },
     leave_categories: { data: leave_categories, isPending: isPending2 },
@@ -55,7 +57,7 @@ export function PolyciesSwiper() {
         )?.disabled,
     )
     ?.map((policy: database_leave_policies_type) => {
-      const categorie: databese_leave_categories_type = leave_categories?.find(
+      const categorie = leave_categories?.find(
         (categorie: databese_leave_categories_type) =>
           categorie.id === policy?.categories_id,
       );
@@ -82,9 +84,8 @@ export function PolyciesSwiper() {
         id: policy.id,
         name: policy.name,
         type: policy.type,
-        title: categorie?.name,
-        category_time_unit:
-          categorie?.track_time_unit as databese_leave_categories_track_time_unit_type,
+        title: categorie?.name ?? "",
+        category_time_unit: categorie?.track_time_unit ?? "hours",
         icon: generateLeaveCategorieIcon({
           categorie: categorie,
           className: "h-9 w-9",
@@ -121,6 +122,14 @@ export function PolyciesSwiper() {
                 nextEl: ".btn_swiper_arrow_right",
               }}
               slidesPerView={3}
+              breakpoints={{
+                0: {
+                  slidesPerView: 2,
+                },
+                1400: {
+                  slidesPerView: 3,
+                },
+              }}
               slides={policies?.map((policy, i: number) => (
                 <Policy key={policy.name + i} {...policy} />
               ))}
@@ -135,7 +144,11 @@ export function PolyciesSwiper() {
               autoplay
             />
             <span className="-mt-6 text-gray-34">
-              This user has no active policies
+              {
+                lang?.["Time Off"][
+                  "There is no Data History for the selected filters.."
+                ]
+              }
             </span>
           </div>
         )}

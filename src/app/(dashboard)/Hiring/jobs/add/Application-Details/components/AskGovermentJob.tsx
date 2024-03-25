@@ -14,7 +14,7 @@ function AskGovermentJob() {
     ApplicationDetails?.values?.["Job Category"] ? true : false,
   );
   return (
-    <div>
+    <div className="flex flex-col items-start justify-start">
       <FormControlLabel
         className="!text-gray-11"
         control={
@@ -38,11 +38,11 @@ function AskGovermentJob() {
       />
       {checked && (
         <SelectInput
-          minWidth="19rem"
           label="-Select-"
           defaultValue={ApplicationDetails?.values?.["Job Category"]}
           RowField={{
             name: "Job Category",
+            type: "select",
             options: GovermentJobCategory,
             required: true,
           }}

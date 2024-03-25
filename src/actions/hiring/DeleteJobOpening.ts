@@ -8,7 +8,7 @@ export const deleteJobOpening = async (id: Number) => {
   const logger = getLogger("hiring");
   logger.info("deleteJobOpening_enter");
   const supabase = createServerActionClient({ cookies });
-  const { error } = await supabase.from("Hiring").delete().eq("id", id);
+  const { error } = await deleteData("Hiring", { match: { id } });
   if (error) {
     logger.error(error.message);
     return {

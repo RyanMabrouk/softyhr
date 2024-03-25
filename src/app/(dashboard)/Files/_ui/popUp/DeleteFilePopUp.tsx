@@ -23,7 +23,7 @@ export default function DeleteFilePopUp() {
   const [isTypingDelete, setIsTypingDelete] = useState("");
   const id = searchParams.get("fileId");
 
-  const { file } = useFileData(id);
+  const { file } = useFileData(Number(id));
   const isPending = file.isPending;
 
   const { mutateAsync: deleteFileApi } = useMutation({
@@ -70,21 +70,21 @@ export default function DeleteFilePopUp() {
             <p className="text-lg ">
               Are you sure you want to delete this file?
             </p>
-            <div className="mt-4 flex max-h-96 w-11/12 flex-col items-center gap-4 overflow-y-auto rounded-sm bg-gray-14 px-6 py-8">
+            <div className="mt-4 flex max-h-96 w-11/12 flex-col items-center gap-4 overflow-hidden rounded-sm bg-gray-14 px-6 py-8">
               <div className="flex  w-[28rem] flex-col items-center  gap-4 p-6">
-                {(file?.data?.[0]?.file_type === "application" && (
+                {(file?.data?.file_type === "application" && (
                   <FaRegFilePdf fontSize="3rem" fill="#cc4373" />
                 )) ||
-                  (file?.data?.[0]?.file_type === "image" && (
+                  (file?.data?.file_type === "image" && (
                     <FaRegFileImage fontSize="3rem" fill="#777270" />
                   ))}
-                <div>
-                  <p className="text-center text-xl ">
-                    {file?.data?.[0]?.name}
+                <div className="flex flex-col items-center">
+                  <p className="line-clamp-1 w-[70%] px-12 text-center text-xl ">
+                    {file?.data?.name}
                   </p>
                   <p className="text-center text-sm text-gray-15">
-                    Created {formatDateFiles(file?.data?.[0]?.created_at)} (
-                    {file?.data?.[0]?.size}KB)
+                    Created {formatDateFiles(file?.data?.created_at)} (
+                    {file?.data?.size}KB)
                   </p>
                 </div>
                 <p className="text-center text-sm text-color2-500">

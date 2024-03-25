@@ -4,17 +4,17 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { FaPlusCircle } from "react-icons/fa";
-import HiringTable from "../_ui/HiringTable/HiringTable";
+import HiringTable from "../components/HiringTable/HiringTable";
 import useData from "@/hooks/useData";
-import { NewCandidates } from "@/helpers/Hiring/CountNewCandidates";
-import { Hiring_type } from "@/types/database.tables.types";
-import { HiringTableType } from "../_ui/HiringTable/Hiringtable.types";
+import { Hiring_type, Profile_Type } from "@/types/database.tables.types";
+import { HiringTableType } from "../components/HiringTable/Hiringtable.types";
 import useHiring from "@/hooks/Hiring/useHiring";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { GetJobOpening } from "@/actions/hiring/GetJobOpening";
 import getHiring from "@/api/Hiring/getHiring";
 import useCandidate from "@/hooks/Hiring/useCandidate";
-import TableSkeleton from "../_ui/HiringTable/components/TableSkeleton";
+import TableSkeleton from "../components/HiringTable/components/TableSkeleton";
+import { NewCandidates } from "../components/HiringTable/helpers/CountNewCandidates";
 
 function Page() {
   const [filter, setFilter] = useState<string | null>("All");
@@ -22,7 +22,13 @@ function Page() {
   const queryClient = useQueryClient();
   const {
     Hiring: { data, isPending, meta, isPlaceholderData },
-  } = useHiring({}, "*", page, 6, filter);
+  } = useHiring(
+    {},
+    '*,profiles("Basic Information"),Department(name)',
+    page,
+    6,
+    filter,
+  );
 
   React.useEffect(() => {
     queryClient.invalidateQueries({
@@ -34,6 +40,7 @@ function Page() {
         queryFn: () =>
           getHiring("Hiring", {
             match: {},
+            column: '*,profiles("Basic Information")',
             StartPage: (page + 1) * 6,
             EndPage: (page + 2) * 6,
             filter,
@@ -41,18 +48,19 @@ function Page() {
       });
     }
   }, [page, filter, meta?.totalPages, isPlaceholderData, queryClient]);
-
   const HiringDataTable: HiringTableType[] = data?.map(
-    (Hiring: Hiring_type) => {
+    (Hiring: Hiring_type<Profile_Type>) => {
       return {
         id: Hiring?.id,
         Candiates: Hiring?.candidates?.length || 0,
         NewCandidates: NewCandidates(Hiring?.candidates || []),
         job_opening: Hiring?.job_information?.["Posting Title"] || "",
-        hiring_lead: Hiring?.job_information?.["name"] || "",
+        hiring_lead:
+          `${Hiring?.profiles?.["Basic Information"]?.["First name"]} ${Hiring?.profiles?.["Basic Information"]?.["Last name"]}` ||
+          "",
         CreatedOn: new Date(Hiring?.created_at || "").toDateString() || "",
-        department: Hiring?.job_information?.["Departement"] || "",
-        Location: Hiring?.job_information?.["Job Location"] || "",
+        department: Hiring?.Department?.name || "",
+        Location: Hiring?.job_information?.["Job Location"] || "Remote",
         status: Hiring?.["Job Status"] || "",
       };
     },

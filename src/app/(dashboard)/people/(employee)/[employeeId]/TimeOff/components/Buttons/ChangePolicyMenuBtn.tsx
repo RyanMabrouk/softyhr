@@ -1,21 +1,24 @@
+"use client";
 import React from "react";
 import { IoMdSettings } from "react-icons/io";
 import { usePathname } from "next/navigation";
 import { MenuLinksGeneric } from "../../../../../../../_ui/MenuLinksGeneric";
+import useTranslation from "@/translation/useTranslation";
 export function ChangePolicyMenuBtn({ id }: { id: number }) {
   const pathname = usePathname();
   const [open, setOpen] = React.useState(false);
+  const { lang } = useTranslation();
   /*--------------------------------*/
   const options = [
     {
-      name: "Move To Another Policy",
+      name: lang?.["Time Off"]["Move To Another Policy"],
       link: {
         pathname: pathname,
         query: { policy_id: id, popup: "CHANGE_LEAVE_POLICY" },
       },
     },
     {
-      name: "Remove From This Policy",
+      name: lang?.["Time Off"]["Remove From This Policy"],
       link: {
         pathname: pathname,
         query: { policy_id: id, popup: "DELETE_LEAVE_POLICY" },
@@ -37,7 +40,7 @@ export function ChangePolicyMenuBtn({ id }: { id: number }) {
       >
         <div className="flex h-full w-full flex-row-reverse items-center justify-center gap-1">
           <span className="peer cursor-pointer text-sm hover:text-fabric-700">
-            chnage policy
+            {lang?.["Time Off"]["change policy"]}
           </span>
           <IoMdSettings className="order-0 h-4 w-4 peer-hover:text-fabric-700" />
         </div>

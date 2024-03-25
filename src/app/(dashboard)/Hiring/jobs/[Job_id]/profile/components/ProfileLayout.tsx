@@ -21,7 +21,7 @@ function ProfileLayout({ children }: { children: ReactNode }) {
   const { Candidate_id, Job_id } = params;
   const {
     candidates: { data: candidates_data, isPending: candidates_isPending },
-  } = useCandidate({ id: Candidate_id });
+  } = useCandidate("", { id: Candidate_id });
   const {
     Hiring: { data: Hiring_data, isPending: Hiring_isPending },
   } = useHiring({ id: Job_id });
@@ -54,24 +54,13 @@ function ProfileLayout({ children }: { children: ReactNode }) {
                   >
                     <div className="flex items-center justify-start gap-[1rem]">
                       <div className="z-10 h-[6rem] w-[6rem] rounded-full border-color-primary-2 ">
-            {     /*
-                        <Image
-                          src={candidates_data?.data?.picture || avatar}
-                          alt="user-name"
-                          priority
-                          width={208}
-                          height={208}
-                          className={
-                            "h-full  w-full cursor-pointer rounded-full border-4 border-white bg-gray-6 object-cover"
-                          }
-                        />*/}
                         <Avatar
-                          size={20}
+                          size={100}
                           icon={
                             <Image
-                              /*      className={
+                              className={
                                 "h-full  w-full cursor-pointer rounded-full border-4 border-white bg-gray-6 object-cover"
-                              }*/
+                              }
                               alt={
                                 candidates_data[0]?.["First Name"] +
                                   " " +
@@ -89,7 +78,8 @@ function ProfileLayout({ children }: { children: ReactNode }) {
                         <h1 className="text-2xl font-bold text-white">
                           {candidates_data[0]?.["First Name"] +
                             " " +
-                            candidates_data[0]?.["Last Name"] || "candidate name"}
+                            candidates_data[0]?.["Last Name"] ||
+                            "candidate name"}
                         </h1>
                         <h1 className="text-xl font-medium text-white">
                           {`Added on ${formatCustomDate(candidates_data[0]?.created_at)} (in ${monthsAgo(candidates_data[0]?.created_at)})`}
@@ -108,6 +98,7 @@ function ProfileLayout({ children }: { children: ReactNode }) {
                           <Link
                             key={label}
                             href={path(String(Job_id), String(Candidate_id))}
+                            prefetch={false}
                             className={
                               "flex items-center justify-center gap-2 overflow-hidden rounded-t-md p-3 px-6 capitalize text-white transition ease-in-out " +
                               (ActiveRoute == Pathname

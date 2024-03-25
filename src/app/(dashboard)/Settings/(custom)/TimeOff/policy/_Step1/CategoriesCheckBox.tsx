@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { generateLeaveCategorieIcon } from "@/helpers/leave.helpers";
+import { generateLeaveCategorieIcon } from "@/helpers/TimeOff/leave.helpers";
 import { CheckBox } from "@/app/_ui/_PopUp/components/Settings/TimeOff/AddNewPolicy/CheckBox";
 import { NewCategoryBtn } from "./NewCategoryBtn";
 import useLeaveData from "@/hooks/TimeOff/useLeaveData";

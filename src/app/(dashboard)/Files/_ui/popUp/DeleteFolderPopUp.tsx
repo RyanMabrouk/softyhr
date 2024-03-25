@@ -1,4 +1,4 @@
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useParams, usePathname, useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { FaRegTrashCan } from "react-icons/fa6";
 import ButtonPopUp from "../components/ButtonPopUp";
@@ -9,23 +9,24 @@ import { useForm } from "react-hook-form";
 import PopUpSkeleton from "@/app/_ui/_PopUp/PopUpSkeleton";
 import useFolderData from "@/hooks/files/useFolderData";
 import LoaderPopUp from "../components/Loader/LoaderPopUp/LoaderPopUp";
+import { InputGeneric } from "@/app/_ui/InputGeneric";
 
 export default function DeleteFolderPopUp() {
   const { toast } = useToast();
   const queryClient = useQueryClient();
-  const searchParams = useSearchParams();
+  const params = useParams();
   const Router = useRouter();
   const pathname = usePathname();
   const { handleSubmit } = useForm();
 
   const [isTypingDelete, setIsTypingDelete] = useState("");
-  const id = searchParams.get("id");
+  const id = Number(params.folderId);
 
   const { folder } = useFolderData(id);
   const isPending = folder.isPending;
 
   const { mutateAsync: deleteFold } = useMutation({
-    mutationFn: async (folderId: any) => {
+    mutationFn: async (folderId: number) => {
       const { error } = await deleteFolder(folderId);
       if (error) {
         toast.error("Folder isn't deleted please try again");
@@ -36,12 +37,9 @@ export default function DeleteFolderPopUp() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["folders"] });
+      Router.push(pathname);
     },
   });
-
-  function onSubmit() {
-    const { error }: any = deleteFold(id);
-  }
 
   return (
     <>
@@ -52,7 +50,7 @@ export default function DeleteFolderPopUp() {
       ) : (
         <PopUpSkeleton title={"Just Checking ..."}>
           <form
-            onSubmit={handleSubmit(onSubmit)}
+            onSubmit={handleSubmit(() => deleteFold(Number(id)))}
             className=" shadow-popup px-auto flex min-w-[40rem] flex-col items-center gap-2 rounded-sm bg-white px-12 py-8"
           >
             <FaRegTrashCan fontSize="3.6rem" fill="#C20C0C" />
@@ -75,11 +73,12 @@ export default function DeleteFolderPopUp() {
                   Type <strong>"Delete"</strong> to permanently remove the
                   folder and its files.
                 </p>
-                <input
+                <InputGeneric
                   type="text"
+                  name="checkDelete"
                   value={isTypingDelete}
-                  onChange={(e) => setIsTypingDelete(e.target.value)}
-                  className="w-40 border border-stone-400 p-2  outline-1 transition-all duration-300 focus:outline-color2-300"
+                  setValueInParent={setIsTypingDelete}
+                  shadow="red"
                 />
               </div>
             </div>
@@ -89,7 +88,7 @@ export default function DeleteFolderPopUp() {
                 Delete Folder
               </ButtonPopUp>
               <button
-                className="cursor-pointer bg-gray-4 px-4 py-2 font-semibold text-gray-23 hover:bg-gray-6 "
+                className="min-w-[10rem] cursor-pointer rounded-md bg-gray-4 px-4 py-2 font-semibold text-gray-23 transition-all ease-linear hover:bg-gray-6 "
                 type="button"
                 onClick={() => {
                   queryClient.setQueryData(["fileIds"], []);

@@ -30,10 +30,7 @@ import RenamePolicy from "@/app/_ui/_PopUp/components/Settings/TimeOff/RenamePol
 import DeleteLeavePolicyData from "@/app/_ui/_PopUp/components/Settings/TimeOff/DeleteLeavePolicy/DeleteLeavePolicyData";
 import AddNewPolicy from "@/app/_ui/_PopUp/components/Settings/TimeOff/AddNewPolicy/AddNewPolicy";
 import AddEmployeesToPolicy from "@/app/_ui/_PopUp/components/Settings/TimeOff/AddEmployeesToPolicy/AddEmployeesToPolicy";
-import EditApplicationDetails from "@/app/_ui/_PopUp/components/Hiring/EditApplicationDetails/EditApplicationDetails";
-import EditJobInformation from "@/app/_ui/_PopUp/components/Hiring/EditJobInformation/EditJobInformation";
 import DeleteJob from "@/app/_ui/_PopUp/components/Hiring/DeleteJob/DeleteJob";
-import EditJobBoard from "@/app/_ui/_PopUp/components/Hiring/EditJobBoard/EditJobBoard";
 import HireCandidate from "@/app/_ui/_PopUp/components/Hiring/HireCandidate/HireCandidate";
 import DeleteFilesPopUp from "@/app/(dashboard)/Files/_ui/popUp/DeleteFilesPopUp";
 import CalculateLeaveBalance from "@/app/_ui/_PopUp/components/TimeOff/CalculateLeaveBalance/CalculateLeaveBalance";
@@ -44,6 +41,10 @@ import DeleteCandidate from "@/app/_ui/_PopUp/components/Hiring/DeleteCandidate/
 import AddEmployeesToRole from "@/app/_ui/_PopUp/components/Settings/AccessLevels/AddEmployeesToRole/AddEmployeesToRole";
 import ChangeUserAcessLevel from "@/app/_ui/_PopUp/components/Settings/AccessLevels/ChangeUserAcessLevel/ChangeUserAcessLevel";
 import ChangeEmployeePassword from "@/app/_ui/_PopUp/components/Settings/AccessLevels/ChangeEmployeePassword/ChangeEmployeePassword";
+import DeleteRole from "@/app/_ui/_PopUp/components/Settings/AccessLevels/DeleteRole/deleteRole";
+import { deleteCandidateStatus } from "@/actions/settings/Hiring/deleteCandidateStatus";
+import DeleteCandidateSource from "@/app/_ui/_PopUp/components/Settings/Hiring/DeleteCandidateSource/DeleteCandidateSource";
+import DeleteCandidateStatus from "@/app/_ui/_PopUp/components/Settings/Hiring/DeleteCandidateStatus/DeleteCandidateStatus";
 
 type PopupType = {
   [key: string]: () => React.JSX.Element;
@@ -75,9 +76,6 @@ export const popups: PopupType = {
   ADD_TIME_OFF_POLICY: AddTimeOffPolicy,
   CHANGE_ACCURAL_START_DATE: AccrualStartDate,
   DELETE_JOB: DeleteJob,
-  EDIT_JOB_INFORMATION: EditJobInformation,
-  EDIT_APPLICATION_DETAILS: EditApplicationDetails,
-  EDIT_JOB_BOARDS: EditJobBoard,
   HIRE_CANDIDATE: HireCandidate,
   CHANGE_DEFAULT_HOURS_PER_DAY: ChangeDefaultHoursPerDay,
   EDIT_LEAVE_CATEGORY: EditLeaveCategory,
@@ -91,8 +89,11 @@ export const popups: PopupType = {
   CREATE_COMMENT: CreateComment,
   CALCULATE_LEAVE_BALANCE: CalculateLeaveBalance,
   SEND_MAIL: SendMail,
-  DELETE_CANDIDATE:DeleteCandidate,
+  DELETE_CANDIDATE: DeleteCandidate,
   ADD_EMMPLOYEES_TO_ROLE: AddEmployeesToRole,
   ADD_EMMPLOYEE_TO_ROLE: ChangeUserAcessLevel,
   RESET_EMPLOYEE_PASSWORD: ChangeEmployeePassword,
+  DELETE_ROLE: DeleteRole,
+  DELETE_CANDIDATE_STATUS: DeleteCandidateStatus,
+  DELETE_CANDIDATE_SOURCE: DeleteCandidateSource,
 };

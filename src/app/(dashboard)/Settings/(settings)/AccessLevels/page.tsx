@@ -1,10 +1,10 @@
 "use client";
-import { HistoryTable } from "@/app/(dashboard)/people/(employee)/[employeeId]/TimeOff/components/HistoryTable";
-import useRoles from "@/hooks/useRoles";
+import { HistoryTable } from "@/app/(dashboard)/people/(employee)/[employeeId]/TimeOff/components/History/HistoryTable";
+import useRoles from "@/hooks/Roles/useRoles";
 import React from "react";
 import { FaLock } from "react-icons/fa";
 import useProfiles from "@/hooks/useProfiles";
-import useAllPermissions from "@/hooks/useAllPermissions";
+import useAllPermissions from "@/hooks/Roles/useAllPermissions";
 import { sameDay } from "@/helpers/date.helpers";
 import { EmployeeProfileLink } from "./[role_id]/components/EmployeeProfileLink";
 import { EmployyeSettingsBtn } from "./[role_id]/components/EmployyeSettingsBtn";
@@ -43,7 +43,7 @@ export default function Page() {
         <HistoryTable
           emptyMessage="No employees with this Access Level yet."
           Headers={["Name", "Level", "Last login", " "]}
-          layout="grid-cols-[3fr,2fr,2fr,1fr]"
+          layout="grid-cols-[2fr,2fr,3fr,1fr]"
           data={role_users_data?.map((user) => ({
             Name: (
               <EmployeeProfileLink user_id={user.user_id}>

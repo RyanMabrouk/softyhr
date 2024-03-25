@@ -1,15 +1,16 @@
 "use client";
-import React, { memo, useContext, } from "react";
-import FiledsChamps from "@/app/(dashboard)/people/components/Fileds/Fileds";
+import React, { memo, useContext } from "react";
 import { StepsContext } from "../context/StepsContext";
 import useData from "@/hooks/useData";
 import AdditionnalInputs from "./components/AdditionnalInputs";
+import FiledsChamps from "@/app/(dashboard)/people/components/sections/FiledsChamps";
 
 function Page() {
   const { InformationJob } = useContext(StepsContext);
   const {
     settings: { data, isPending },
   } = useData();
+
   return (
     <div className="flex h-full w-full flex-col items-start justify-start gap-[1.5rem] pb-12">
       {isPending ? (

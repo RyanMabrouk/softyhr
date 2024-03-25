@@ -1,12 +1,16 @@
+import { Hiring_type } from "./database.tables.types";
+
 export interface email_history_type {
   email_object?: string;
   created_at?: string;
-} 
+}
 export interface CandidateType {
+  Hiring?: Hiring_type;
   created_at: string;
   Email: string | null;
   "First Name": string | null;
   "Hiring Lead": string | null;
+  full_name: string;
   id: string;
   job_id: number | null;
   "Last Name": string | null;
@@ -16,8 +20,8 @@ export interface CandidateType {
   Ratings: number | null;
   status: string | null;
   candidate_emails?: any;
-  user_emails?:any;
-  Questions?:Object;
+  user_emails?: any;
+  Questions?: Object;
 }
 
 interface ObjectOfString {

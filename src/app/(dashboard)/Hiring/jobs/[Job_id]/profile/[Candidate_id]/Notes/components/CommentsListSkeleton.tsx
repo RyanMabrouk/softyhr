@@ -3,14 +3,14 @@ import CommentSkeleton from './CommentSkeleton'
 
 function CommentsListSkeleton() {
   return (
-    <div className='p-6 flex flex-col items-center justify-start gap-[1rem]'>
-      <CommentSkeleton />
-      <CommentSkeleton />
-      <CommentSkeleton />
-      <CommentSkeleton />
-      <CommentSkeleton />
-      <CommentSkeleton />
-      <CommentSkeleton />
+    <div className="flex w-full mt-[2rem] flex-col items-start justify-center gap-[1rem] p-4">
+      <CommentSkeleton className="ml-[4rem] self-start" />
+      <CommentSkeleton className="self-end" />
+      <CommentSkeleton className="ml-[4rem] self-start" />
+      <CommentSkeleton className="self-end" />
+      <CommentSkeleton className="ml-[4rem] self-start" />
+      <CommentSkeleton className="self-end" />
+      <CommentSkeleton className="ml-[4rem] self-start" />
     </div>
   );
 }

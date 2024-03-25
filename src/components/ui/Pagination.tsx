@@ -28,7 +28,7 @@ function Pagination({
   if (pageCount <= 1) return null;
 
   return (
-    <div className="absolute bottom-3 mt-8 flex w-full items-center justify-between">
+    <div className=" mt-8 flex w-full items-center justify-between">
       <p className=" flex flex-row gap-1 text-gray-25">
         Showing
         <span className=" font-semibold text-color-primary-8">
@@ -46,7 +46,7 @@ function Pagination({
         <button
           onClick={prevPage}
           disabled={currentPage === 1}
-          className={`flex items-center disabled:text-gray-25 disabled:border-gray-25 border border-transparent justify-center gap-2 rounded bg-fabric-700 px-3 py-1 text-white transition-all ease-linear disabled:bg-white ${currentPage === 1 ? "cursor-not-allowed" : "hover:bg-fabric-800"}`}
+          className={`flex items-center justify-center gap-2 rounded border border-transparent bg-fabric-700 px-3 py-1 text-white transition-all ease-linear disabled:border-gray-25 disabled:bg-white disabled:text-gray-25 ${currentPage === 1 ? "cursor-not-allowed" : "hover:bg-fabric-800"}`}
         >
           <HiChevronLeft />
         </button>
@@ -54,7 +54,7 @@ function Pagination({
         <button
           onClick={nextPage}
           disabled={currentPage === pageCount}
-          className={`flex items-center disabled:text-gray-25 disabled:border-gray-25 border border-transparent justify-center gap-2 rounded bg-fabric-700 px-3 py-1 text-white transition-all ease-linear disabled:bg-white ${currentPage === pageCount ? "cursor-not-allowed" : "hover:bg-fabric-800"}`}
+          className={`flex items-center justify-center gap-2 rounded border border-transparent bg-fabric-700 px-3 py-1 text-white transition-all ease-linear disabled:border-gray-25 disabled:bg-white disabled:text-gray-25 ${currentPage === pageCount ? "cursor-not-allowed" : "hover:bg-fabric-800"}`}
         >
           <HiChevronRight />
         </button>

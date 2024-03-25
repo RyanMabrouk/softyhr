@@ -2,13 +2,19 @@
 import getCurrentorg from "@/api/getCurrentOrg";
 import { Profile_Type } from "@/types/database.tables.types";
 import { createClient } from "@supabase/supabase-js";
-import { addFolder } from "../files/addFolder";
 import { getLogger } from "@/logging/log-util";
-export const CreateNewEmployee = async (
-  NewEmployeData: Profile_Type,
-  email: string,
-) => {
-  const logger = getLogger("*"); 
+import { createProfile } from "../auth/createProfile";
+
+export const CreateNewEmployee = async ({
+  NewEmployeData,
+  email,
+  role_id,
+}: {
+  NewEmployeData: Profile_Type;
+  email: string;
+  role_id: string;
+}) => {
+  const logger = getLogger("*");
   logger.info("CreateNewEmployee_enter");
   const supbaseAdmin = createClient(
     process.env.SUPABASE_URL || "",
@@ -32,45 +38,34 @@ export const CreateNewEmployee = async (
       };
     }
 
-    const { error: profile_error } = await supbaseAdmin 
-      .from("profiles") 
-      .insert([  
-        { 
-          ...NewEmployeData, 
-          org_name: org?.name, 
-          user_id: user?.user?.id,
-          role: "employee",  
-          role_id: 2, 
-          files_ids: [],
-        },
-      ]);
-   
-      if (profile_error) { 
+    const { error: profile_error } = await createProfile({
+      user_id: user?.user?.id,
+      company: org?.name || "",
+      first_name: NewEmployeData?.["Basic Information"]?.["First name"] || "",
+      last_name: NewEmployeData?.["Basic Information"]?.["Last name"] || "",
+      email: email,
+      tel: NewEmployeData?.["Contact"]?.["Mobile Phone"] || "",
+      job: NewEmployeData?.["Job Information"]?.[0]?.["Job Title"] || "",
+      role_id: Number(role_id),
+      supervisor_id: NewEmployeData?.supervisor_id || null,
+      Division: NewEmployeData?.["Job Information"]?.[0]?.Division || "",
+      Department: NewEmployeData?.["Job Information"]?.[0]?.Department || "",
+      Location: NewEmployeData?.["Job Information"]?.[0]?.Location || "",
+      custom_fields: NewEmployeData as any,
+    });
+    if (profile_error) {
       logger.error(profile_error.message);
-      return { 
+      return {
         Submitted: false,
         Error: profile_error,
         Message: "Error Creating User Profile",
       };
-    } 
-    const { error } = await addFolder( 
-      NewEmployeData?.["Basic Information"]?.["First name"] + 
-        " " + 
-        NewEmployeData?.["Basic Information"]?.["Last name"],  
-    ); 
-    if (error) {
-      logger.error(error.message);
-      return { 
-        Submitted: false,
-        Error: profile_error,
-        Message: "Error Creating User Profile", 
-      };
     }
-  logger.info("CreateNewEmployee_exit");
+    logger.info("CreateNewEmployee_exit");
     return {
       Submitted: true,
       Error: null,
-      Message: `${NewEmployeData?.["Basic Information"]?.["First name"]} Added to employees list`,
+      Message: `${NewEmployeData?.["Basic Information"]?.["First name"]} ${NewEmployeData?.["Basic Information"]?.["Last name"]} Added to employees list`,
     };
   } catch (error) {
     logger.error(error);

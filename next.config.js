@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   compiler: {
-    //removeConsole: process.env.NODE_ENV !== "development", // Remove console.log in production
+    removeConsole: process.env.NODE_ENV !== "development", // Remove console.log in production
   },
   swcMinify: true,
   logging: {
@@ -31,9 +31,15 @@ const nextConfig = {
       },
       {
         protocol: "https",
-        hostname: "**",
+        hostname: "plus.unsplash.com",
         port: "",
-        pathname: "**",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+        port: "",
+        pathname: "/**",
       },
     ],
   },
@@ -52,7 +58,8 @@ const nextConfig = {
 };
 
 const withPWA = require("next-pwa")({
-  dest: "public",
+  dest: "public/PWA",
 });
 
-module.exports = withPWA(nextConfig);
+module.exports =
+  process.env.NODE_ENV === "development" ? nextConfig : withPWA(nextConfig);

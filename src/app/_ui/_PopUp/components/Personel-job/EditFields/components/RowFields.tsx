@@ -23,7 +23,6 @@ function RowFields({
   data,
 }: RowFieldsPropsType) {
   const queryClient = useQueryClient();
-  console.log(data);
 
   const { mutateAsync, isPending, isPaused } = useMutation({
     mutationFn: async ({ RowStart, RowEnd, champ }: any) => {
@@ -45,14 +44,7 @@ function RowFields({
     accept: champ,
     drop: (item: any, monitor: any) => {
       const dropResult = monitor.internalMonitor.registry.dropTargets;
-      /*console.log(
-        ReorderFields(
-          item.Row,
-          dropResult.get(monitor.targetId).spec.Row,
-          data,
-          champ,
-        ),
-      );*/
+
       setSettings({
         ...ReorderFields(
           item.Row,
@@ -61,14 +53,7 @@ function RowFields({
           champ,
         ),
       });
-      console.log(
-        ReorderFields(
-          item.Row,
-          dropResult.get(monitor.targetId).spec.Row,
-          data,
-          champ,
-        ),
-      );
+     
       /*mutateAsync({
         RowStart: item.Row,
         champ: item.champ,

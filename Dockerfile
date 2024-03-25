@@ -1,7 +1,4 @@
 # syntax=docker/dockerfile:1
-# Comments are provided throughout this file to help you get started.
-# If you need more help, visit the Dockerfile reference guide at
-# https://docs.docker.com/go/dockerfile-reference/
 ARG NODE_VERSION=20.7.0
 ################################################################################
 # Use node image for base image for all stages.
@@ -18,7 +15,7 @@ FROM base as deps
 RUN --mount=type=bind,source=package.json,target=package.json \
     --mount=type=bind,source=package-lock.json,target=package-lock.json \
     --mount=type=cache,target=/root/.npm \
-    npm ci --omit=dev
+    npm ci --omit=dev --legacy-peer-deps
 ################################################################################
 # Create a stage for building the application.
 FROM deps as build
@@ -27,12 +24,12 @@ FROM deps as build
 RUN --mount=type=bind,source=package.json,target=package.json \
     --mount=type=bind,source=package-lock.json,target=package-lock.json \
     --mount=type=cache,target=/root/.npm \
-    npm ci
+    npm ci --legacy-peer-deps
 # Copy the rest of the source files into the image.
 COPY . .
 # Run the build script.
-ENV NODE_OPTIONS="--max-old-space-size=4096"
-RUN npm run build && npm prune --production
+ENV NODE_ENV production
+RUN NODE_OPTIONS="--max-old-space-size=4096" npm run build && rm -rf node_modules
 ################################################################################
 # Create a new stage to run the application with minimal runtime dependencies
 # where the necessary files are copied from the build stage.
@@ -46,7 +43,7 @@ USER node
 COPY package.json .
 # Copy the production dependencies from the deps stage and also
 # the built application from the build stage into the image.
-# COPY --from=deps /usr/src/app/node_modules ./node_modules
+COPY --from=deps /usr/src/app/node_modules ./node_modules
 COPY --from=build /usr/src/app/. ./.
 # Expose the port that the application listens on.
 EXPOSE 3000

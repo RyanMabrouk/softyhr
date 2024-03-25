@@ -54,5 +54,6 @@ export default function useRealTime({
       supabase.removeChannel(channel);
     };
     // dependencies are correctly set
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [table, event, filterString, onReceive, channelName, supabase]);
 }

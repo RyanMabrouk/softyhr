@@ -73,12 +73,7 @@ function EditEntry() {
                   const section = data[section_name]?.filter(
                     (item: any) => item?.id == item_id,
                   );
-                  /* console.log(
-                    data[section_name]?.filter(
-                      (item: any) => item?.id == item_id,
-                    )[0]?.[RowField?.name],
-                    RowField?.name,
-                  );*/
+
                   return (
                     <Component
                       defaultValue={section[0]?.[RowField?.name] || ""}
@@ -94,12 +89,7 @@ function EditEntry() {
                   const section = data[section_name]?.filter(
                     (item: any) => item?.id == item_id,
                   );
-                  console.log(
-                    data[section_name]?.filter(
-                      (item: any) => item?.id == item_id,
-                    )[0]?.[RowField?.name],
-                    RowField?.name,
-                  );
+
                   return (
                     <Component
                       key={uuidv4()}

@@ -8,14 +8,14 @@ interface RadioBoxPropsType {
   RowField: RowFieldType;
   setTouched?: React.Dispatch<React.SetStateAction<boolean>> | undefined;
   defaultValue?: string;
-  user?:any;
-  champ:string;
 }
 
-function RadioBox({ RowField, setTouched, user, champ }: RadioBoxPropsType) {
-  const [value, setValue] = useState(
-    String(user?.[champ]?.[RowField?.name || ""]),
-  );
+function RadioBox({
+  RowField,
+  setTouched,
+  defaultValue,
+}: RadioBoxPropsType) {
+  const [value, setValue] = useState(String(defaultValue));
 
   const onChange = (e: RadioChangeEvent) => {
     setTouched && setTouched(true);
@@ -38,13 +38,11 @@ function RadioBox({ RowField, setTouched, user, champ }: RadioBoxPropsType) {
       >
         <Radio.Group onChange={onChange} value={value} name={RowField?.name}>
           <Space direction="vertical">
-            {RowField?.options?.map(
-              (value: any, index: number) => (
-                <Radio key={index} value={value}>
-                  {value}
-                </Radio>
-              ),
-            )}
+            {RowField?.options?.map((value: any, index: number) => (
+              <Radio key={index} value={value}>
+                {value}
+              </Radio>
+            ))}
           </Space>
         </Radio.Group>
       </ConfigProvider>

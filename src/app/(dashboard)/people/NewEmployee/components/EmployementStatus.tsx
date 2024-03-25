@@ -1,7 +1,7 @@
 import React from "react";
-import FiledsChamps from "@/app/(dashboard)/people/components/Fileds/Fileds";
 import { FaAddressCard } from "react-icons/fa6";
 import { RowFieldType, RowType } from "@/types/database.tables.types";
+import FiledsChamps from "../../components/sections/FiledsChamps";
 
 function EmployementStatus() {
   const Fields: RowType[] = [

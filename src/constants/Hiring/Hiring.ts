@@ -1,7 +1,7 @@
 import { TiClipboard } from "react-icons/ti";
 import { RxAvatar } from "react-icons/rx";
 import { RiUserStarFill } from "react-icons/ri";
-import { IconType } from "react-icons";
+import { IconType } from "react-icons/lib";
 import { FaCircleUser } from "react-icons/fa6";
 
 export const HirinSections = [
@@ -41,6 +41,7 @@ export const HiringInfos: HiringInfosType[] = [
   { label: "Employment Type", name: "Employment Type" },
   { label: "Minimum Experience", name: "Minimum Experience" },
 ];
+
 export type HiringInfosType = {
   label: string;
   name: string;
@@ -72,7 +73,12 @@ export const ApplicationDefaultQuestions: ApplicationDefaultQuestionsType[] = [
     name: "Resume",
   },
   { required: false, AddToAppliement: false, type: "text", name: "Adress" },
-  { required: false, AddToAppliement: false, type: "text", name: "Linked URL" },
+  {
+    required: false,
+    AddToAppliement: false,
+    type: "text",
+    name: "LinkedIn URL",
+  },
   {
     required: false,
     AddToAppliement: false,
@@ -138,11 +144,11 @@ export const ApplicationIniTialQuestions: any = {
     type: "text",
     name: "Adress",
   },
-  "Linked URL": {
+  "LinkedIn URL": {
     required: false,
     AddToAppliement: false,
     type: "text",
-    name: "Linked URL",
+    name: "LinkedIn URL",
   },
   "Date available": {
     required: false,

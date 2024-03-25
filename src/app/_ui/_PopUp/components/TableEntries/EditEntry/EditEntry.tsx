@@ -47,12 +47,17 @@ function EditEntry() {
       {settings?.isPending || isPending ? (
         <Loader />
       ) : (
-        <PopUpSkeleton className="" title={`Edit ${section_name} item`}>
+        <PopUpSkeleton
+          className=""
+          title={`update
+ ${section_name} item`}
+        >
           <div className="flex flex-col items-start justify-center gap-[1rem] p-4 px-8">
             <div className="flex h-[4rem] w-full min-w-[30rem] items-center gap-[1rem] border-b border-gray-15 bg-gray-14 p-8">
               <Image
                 alt="profile image"
                 src={data?.profile_image || default_avatar}
+                className="h-[3rem] w-[3rem] rounded-full"
               />
               <h1>
                 {data?.["Basic Information"]?.["First name"] +
@@ -74,7 +79,6 @@ function EditEntry() {
                   const section = data[section_name]?.filter(
                     (item: any) => item?.id == item_id,
                   );
-                  //console.log(data[section_name]?.filter((item:any)=>item?.id == item_id)[0]?.[RowField?.name],RowField?.name);
                   return (
                     <Component
                       defaultValue={section[0]?.[RowField?.name] || ""}
@@ -90,7 +94,6 @@ function EditEntry() {
                   const section = data[section_name]?.filter(
                     (item: any) => item?.id == item_id,
                   );
-                  //console.log(data[section_name]?.filter((item:any)=>item?.id == item_id)[0]?.[RowField?.name],RowField?.name);
                   return (
                     <Component
                       key={uuidv4()}
@@ -105,12 +108,12 @@ function EditEntry() {
                     type="submit"
                     className="text-bold mt-4 rounded bg-color-primary-8 p-2 px-5 text-white duration-300 ease-in-out hover:!bg-color-primary-3 "
                   >
-                    Edit item
+                    Save
                   </button>
                   <button
                     type="reset"
                     onClick={() => router.push(pathname)}
-                    className="text-bold mt-4 rounded p-2 px-5 text-color5-500 duration-300 ease-in-out "
+                    className="text-bold mt-4 rounded p-2 text-color5-500 duration-300 ease-in-out "
                   >
                     Cancel
                   </button>

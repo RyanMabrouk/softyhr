@@ -4,14 +4,15 @@ import { v4 as uuidv4 } from "uuid";
 import Loader from "@/app/(dashboard)/people/components/Loader/Loader";
 import SubmitButton from "./SubmitButton";
 import { CreateCandidate } from "@/actions/hiring/CreateCandidate";
-import { FormulateFormData } from "@/helpers/Hiring/CountNewCandidates";
 import useToast from "@/hooks/useToast";
 import { UploadImage } from "@/actions/UploadFiles/uploadImage";
 import { useQueryClient } from "@tanstack/react-query";
 import ApplyFormSection from "@/app/careers/[career_id]/components/AppliymentForm/ApplyFormSection";
 import { usePathname, useRouter } from "next/navigation";
-import useHiringGuest from "@/hooks/Hiring/useHiringGuest";
+import useHiringGuest from "@/app/careers/hooks/useHiringGuest";
+import { FormulateFormData } from "@/app/(dashboard)/Hiring/components/HiringTable/helpers/CountNewCandidates";
 import { GetQuestions } from "@/helpers/Hiring/GetQuestions";
+import getSession from "@/api/getSession";
 
 interface AppliymentFormPropsType {
   job: Hiring_type;
@@ -26,18 +27,16 @@ function AppliymentForm({
   SuccessMessage,
   SubmittingButtonText,
 }: AppliymentFormPropsType) {
-  const { toastContainer, toast } = useToast();
+  const { toast } = useToast();
   const {
     Hiring: { data, isPending },
-  } = useHiringGuest(
-    { id: job?.id, "Job Status": "Open" }
-  );
+  } = useHiringGuest({ id: job?.id, "Job Status": "Open" });
   const QueryClient = useQueryClient();
   const router = useRouter();
   const pathname = usePathname();
-  console.log(data);
   const Base_url =
     "https://ybwqmrrlvmpdikvmkqra.supabase.co/storage/v1/object/public/hiring/";
+
   const SubmitForm = async (formdata: FormData) => {
     const identifient = uuidv4();
     const Formdata = new FormData();
@@ -79,7 +78,6 @@ function AppliymentForm({
       toast.success(SuccessMessage);
     } else toast.error(response?.Msg);
   };
-
   return (
     <>
       {isPending ? (
@@ -90,11 +88,11 @@ function AppliymentForm({
             className="flex flex-col items-start justify-center gap-[1rem]"
             action={SubmitForm}
           >
-            {data[0]?.Form?.map(
-              (FieldsArray: any, index: number) => {
+            <div className=" w-full border-b border-gray-18 pb-8">
+              {data[0]?.Form?.map((FieldsArray: any, index: number) => {
                 return (
                   <div
-                    className="mt-4 flex w-full flex-col place-items-start justify-center gap-[2rem] border-b border-gray-18 pb-8"
+                    className="mt-4 flex w-full flex-col place-items-start justify-center gap-[2rem]"
                     key={index}
                   >
                     <div className="flex flex-col items-start justify-center gap-[1rem]">
@@ -106,13 +104,11 @@ function AppliymentForm({
                     </div>
                   </div>
                 );
-              },
-            )}
-            {data[0]?.Questions?.map(
-              (FieldsArray: any, index: number) => {
+              })}
+              {data[0]?.Questions?.map((FieldsArray: any, index: number) => {
                 return (
                   <div
-                    className="mt-4 flex w-full flex-col place-items-start justify-center gap-[2rem] border-b border-gray-18 pb-8"
+                    className="gap-[2rem mt-4 flex w-full flex-col place-items-start justify-center "
                     key={index}
                   >
                     <div className="flex flex-col items-start justify-center gap-[1rem]">
@@ -124,8 +120,8 @@ function AppliymentForm({
                     </div>
                   </div>
                 );
-              },
-            )}
+              })}
+            </div>
             <div className="-mt-4 flex items-center justify-center gap-[2rem]">
               <SubmitButton
                 textSubmitting={SubmittingButtonText}

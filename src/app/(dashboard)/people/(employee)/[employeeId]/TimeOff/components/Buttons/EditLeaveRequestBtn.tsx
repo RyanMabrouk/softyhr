@@ -1,3 +1,5 @@
+"use client";
+import useTranslation from "@/translation/useTranslation";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
@@ -10,10 +12,11 @@ export function EditLeaveRequestBtn({
   leave_request_id: number;
 }) {
   const pathname = usePathname();
+  const { lang } = useTranslation();
   return (
     <Link
       className="tooltip flex flex-row items-center justify-center"
-      data-tip="Edit"
+      data-tip={lang?.["Time Off"].Edit}
       href={{
         pathname: pathname,
         query: {
@@ -22,7 +25,7 @@ export function EditLeaveRequestBtn({
         },
       }}
     >
-      <MdModeEdit aria-label="Edit" className={className} />
+      <MdModeEdit className={className} />
     </Link>
   );
 }

@@ -22,7 +22,7 @@ import usePolicy from "@/hooks/TimeOff/usePolicy";
 import {
   formatTotalHoursToTimeUnit,
   numberOfdaysInArrayOfDatesBeforeDay,
-} from "@/helpers/leave.helpers";
+} from "@/helpers/TimeOff/leave.helpers";
 import useData from "@/hooks/useData";
 export default function CalculateLeaveBalance() {
   const Router = useRouter();
@@ -32,10 +32,12 @@ export default function CalculateLeaveBalance() {
   } = useData();
   const employeeId = useParams().employeeId ?? user_profile?.user_id;
   const policy_id = useSearchParams().get("policy_id");
-  const { category: initial_category } = usePolicy({
+  const { category: initial_category, policy: initial_policy } = usePolicy({
     policy_id: Number(policy_id),
   });
-  const [policyId, setPolicyId] = useState<string | null>(policy_id);
+  const [activePolicyId, setActivePolicyId] = useState<number | null>(
+    Number(policy_id),
+  );
   const [chalendarDate, setCalendarDate] = React.useState<Date>(new Date());
   const {
     leave_balance: { data: leave_balance },
@@ -45,12 +47,12 @@ export default function CalculateLeaveBalance() {
     | database_profile_leave_balance_type
     | undefined = leave_balance?.find(
     (balance: database_profile_leave_balance_type) =>
-      balance.policy_id === Number(policyId),
+      balance.policy_id === Number(activePolicyId),
   );
   const [balance, setBalance] = useState<number>(
     current_policy_balance?.balance ?? 0,
   );
-  const { policy, category } = usePolicy({ policy_id: Number(policyId) });
+  const { policy, category } = usePolicy({ policy_id: Number(activePolicyId) });
   const {
     leave_categories: { data: leave_categories },
   } = useLeaveData();
@@ -93,9 +95,11 @@ export default function CalculateLeaveBalance() {
             label="Time Odd Category"
             defaultValue={{
               label: initial_category?.name,
-              value: Number(initial_category?.id),
+              value: String(initial_policy?.id),
             }}
-            setValueInParent={(value) => setPolicyId(value)}
+            setValueInParent={(value: string) =>
+              setActivePolicyId(Number(value))
+            }
             options={leave_balance?.map(
               (balance: database_profile_leave_balance_type) => ({
                 label: leave_categories?.find(

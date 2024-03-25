@@ -20,7 +20,7 @@ export default function DeleteFilesPopUp() {
 
   const [isTypingDelete, setIsTypingDelete] = useState("");
 
-  const fileIds: any = queryClient.getQueryData(["fileIds"]);
+  const fileIds: number[] | undefined = queryClient.getQueryData(["fileIds"]);
 
   const { mutateAsync: deleteFileApi } = useMutation({
     mutationFn: async (id: any) => {
@@ -62,7 +62,7 @@ export default function DeleteFilesPopUp() {
             </p>
             <div className="mt-4 flex max-h-96 w-11/12 flex-col items-center gap-4 overflow-y-auto overflow-x-hidden rounded-sm bg-gray-14 px-6 py-8">
               <div className="flex  w-[24rem] flex-col items-center px-4">
-                {fileIds?.map((fileId: any) => (
+                {fileIds?.map((fileId) => (
                   <DeleteFileBox fileId={fileId} key={fileId} />
                 ))}
               </div>

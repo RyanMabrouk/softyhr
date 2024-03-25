@@ -17,6 +17,7 @@ import { v4 as uuidv4 } from "uuid";
 import { Add_Entry } from "@/actions/personal-job/Entries/Add_Entry";
 import { useQueryClient } from "@tanstack/react-query";
 import useToast from "@/hooks/useToast";
+import Input from "@/app/(dashboard)/people/components/Fileds/Input/Input";
 
 function AddEntry() {
   const searchParams = useSearchParams();
@@ -53,6 +54,7 @@ function AddEntry() {
             <div className="flex h-[4rem] w-full min-w-[30rem] items-center gap-[1rem] border-b border-gray-15 bg-gray-14 p-8">
               <Image
                 alt="profile image"
+                className="h-[3rem] w-[3rem] rounded-full border border-gray-15"
                 src={data?.profile_image || default_avatar}
               />
               <h1>
@@ -71,13 +73,15 @@ function AddEntry() {
                 {settings?.data?.[0]?.["personnal"]?.Champs?.filter(
                   (section: any) => section?.champ == section_name,
                 )[0]?.Fields?.map((RowField: any) => {
-                  const Component = Field[RowField?.type.toUpperCase()];
+                  const Component =
+                    Field[(RowField?.type || "input").toUpperCase()];
                   return <Component key={uuidv4()} RowField={RowField} />;
                 })}
                 {settings?.data?.[0]?.["job"]?.Champs?.filter(
                   (section: any) => section?.champ == section_name,
                 )[0]?.Fields?.map((RowField: any) => {
-                  const Component = Field[RowField?.type.toUpperCase()];
+                  const Component =
+                    Field[(RowField?.type || "input").toUpperCase()] || Input;
                   return <Component key={uuidv4()} RowField={RowField} />;
                 })}
                 <div className="h-[0.1rem] w-full bg-gradient-to-r from-color-primary-1 to-color-primary-3" />
@@ -86,7 +90,7 @@ function AddEntry() {
                     type="submit"
                     className="text-bold mt-4 rounded bg-color-primary-8 p-2 px-5 text-white duration-300 ease-in-out hover:!bg-color-primary-3 "
                   >
-                    Add item
+                    Save
                   </button>
                   <button
                     type="reset"

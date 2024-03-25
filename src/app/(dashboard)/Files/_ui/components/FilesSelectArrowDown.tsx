@@ -5,10 +5,7 @@ import { TiArrowSortedDown } from "react-icons/ti";
 
 const FilesSelectArrowDown = ({ onSelect, options }: any) => {
   const [selectedOption, setSelectedOption] = useState("");
-  const [selectedLabel, setSelectedLabel] = useState("");
-
   const [isDropdownOpen, setDropdownOpen] = useState(false);
-
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -30,7 +27,6 @@ const FilesSelectArrowDown = ({ onSelect, options }: any) => {
 
   const handleOptionClick = (option: any) => {
     setSelectedOption(option.label);
-    setSelectedLabel(option.label);
     setDropdownOpen(false);
     // handleChange(option.value);
     onSelect?.(option.value);
@@ -42,7 +38,7 @@ const FilesSelectArrowDown = ({ onSelect, options }: any) => {
 
   return (
     <div
-      className={`relative inline-block  ${
+      className={`relative inline-block rounded-sm  ${
         isDropdownOpen ? "shadow-green  " : ""
       }`}
     >
@@ -55,9 +51,9 @@ const FilesSelectArrowDown = ({ onSelect, options }: any) => {
             event.stopPropagation();
             handleDropdownToggle();
           }}
-          className=" p-1 transition-all  border border-transparent ease-linear hover:border-stone-400 "
+          className=" rounded-sm border  border-transparent p-1 transition-all ease-linear hover:border-stone-400"
         >
-          <TiArrowSortedDown fill="#636363" />
+          <TiArrowSortedDown className="text-gray-29" />
         </button>
       </div>
       {isDropdownOpen && (

@@ -1,6 +1,6 @@
 "use client";
 import CustomSwiper from "@/app/_ui/swiper";
-import { generateLeaveCategorieIcon } from "@/helpers/leave.helpers";
+import { generateLeaveCategorieIcon } from "@/helpers/TimeOff/leave.helpers";
 import useData from "@/hooks/useData";
 import useEmployeeData from "@/hooks/useEmloyeeData";
 import useLeaveData from "@/hooks/TimeOff/useLeaveData";
@@ -60,7 +60,7 @@ export function TimeOff() {
         )?.disabled,
     )
     .map((policy: database_leave_policies_type) => {
-      const categorie: databese_leave_categories_type = leave_categories?.find(
+      const categorie = leave_categories?.find(
         (categorie: databese_leave_categories_type) =>
           categorie.id === policy?.categories_id,
       );
@@ -87,7 +87,7 @@ export function TimeOff() {
         id: policy.id,
         name: policy.name,
         type: policy.type,
-        title: categorie?.name,
+        title: categorie?.name ?? "",
         category_time_unit:
           categorie?.track_time_unit as databese_leave_categories_track_time_unit_type,
         icon: generateLeaveCategorieIcon({

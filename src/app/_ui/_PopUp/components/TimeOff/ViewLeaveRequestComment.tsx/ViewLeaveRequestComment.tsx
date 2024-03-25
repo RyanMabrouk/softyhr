@@ -16,7 +16,7 @@ import {
 import React from "react";
 import default_avatar from "/public/default_avatar.png";
 import default_user_avatar from "/public/default_avatar.png";
-import { formatTotalHoursToTimeUnit } from "@/helpers/leave.helpers";
+import { formatTotalHoursToTimeUnit } from "@/helpers/TimeOff/leave.helpers";
 import { formatDateToMonDDYYYY } from "@/helpers/date.helpers";
 import useEmployeeData from "@/hooks/useEmloyeeData";
 import PopUpSkeleton from "../../../PopUpSkeleton";
@@ -72,7 +72,7 @@ function ViewLeaveRequestComment() {
         </div>
         <header className="mb-3 flex w-full flex-row items-center gap-2 bg-gray-14 px-4 py-3">
           <Image
-            src={employee_profile?.picture || default_avatar}
+            src={employee_profile?.picture ?? default_avatar}
             className="h-12 w-12 rounded-full"
             alt=""
             width={80}
@@ -93,7 +93,7 @@ function ViewLeaveRequestComment() {
                     acc + Number(e.duration),
                   0,
                 ),
-                leave_category_data?.track_time_unit,
+                leave_category_data?.track_time_unit ?? "hours",
               )} of ${leave_category_data?.name}`}
             </div>
           </div>
@@ -102,7 +102,7 @@ function ViewLeaveRequestComment() {
           {leave_request_data?.reviewed_comment && (
             <main className="flex w-full flex-row items-center gap-2 px-4 py-3">
               <Image
-                src={admin_profile?.picture || default_user_avatar}
+                src={admin_profile?.picture ?? default_user_avatar}
                 className="h-8 w-8 rounded-full"
                 alt=""
                 width={80}

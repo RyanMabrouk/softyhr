@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import { useEffect, useState } from "react";
 
 const useScrollPosition = () => {
@@ -13,7 +13,7 @@ const useScrollPosition = () => {
     return () => window.removeEventListener("scroll", updatePosition);
   }, []);
 
-  return [scrollPosition];
+  return scrollPosition;
 };
 
 export default useScrollPosition;

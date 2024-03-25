@@ -65,7 +65,9 @@ export default function DeleteLeavePolicy() {
         </span>
       </div>
       <div className=" max-w-[85%] text-center text-[15px] leading-[22px] text-gray-20">
-        {`${first_name} will lose access to their history for this policy and will no longer be able to request time off from the ${category?.name} category.`}
+        {`${first_name} will lose access to their history for this policy and will no longer be able to request time off from the `}
+        <strong className="capitalize">{category?.name} </strong>
+        {` category.`}
       </div>
       <form
         action={() => deleteCat()}

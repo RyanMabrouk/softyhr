@@ -11,7 +11,7 @@ function CreateComment() {
   const id = params.get("id");
   const {
     candidates: { data, isPending },
-  } = useCandidate({ id: id });
+  } = useCandidate("", { id: id });
   return (
     <>
       {isPending ? (
