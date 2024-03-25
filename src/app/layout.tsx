@@ -17,7 +17,21 @@ export const metadata: Metadata = {
   description: "Manage your employees with ease",
   generator: "Next.js",
   manifest: "/manifest.json",
-  keywords: ["management", "softy hr", "company", "company management"],
+  keywords: [
+    "management",
+    "softy hr",
+    "company",
+    "company management",
+    "softyhr",
+    "hr",
+    "hr management",
+    "employee",
+    "human resources",
+    "human resources management",
+    "employee management",
+    "employee hr",
+    "softy",
+  ],
   authors: [
     {
       name: "Softylines",

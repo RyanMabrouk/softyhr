@@ -35,7 +35,7 @@ function CollapseCheckboxFilter({ options, title, setFilter }: Optionsprops) {
     );
 
     setFilter(formattedCheckedStatuses);
-  }, [checkedStatuses]);
+  }, [checkedStatuses, setFilter]);
 
   return (
     <div className="">

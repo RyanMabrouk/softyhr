@@ -6,8 +6,8 @@ import React, {
   useState,
 } from "react";
 import Image from "next/image";
-import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
-import CancelIcon from "@mui/icons-material/Cancel";
+import { MdKeyboardArrowRight } from "react-icons/md";
+import { MdCancel } from "react-icons/md";
 
 interface CollapseDataProps {
   children: ReactNode;
@@ -37,13 +37,8 @@ const CustomCollapse: React.FC<CollapseDataProps> = ({
           className={`flex cursor-pointer items-center`}
           onClick={() => setOpen(!open)}
         >
-          <KeyboardArrowRightIcon
-            sx={{
-              width: 20,
-              rotate: open ? "90deg" : "0deg",
-              color: open || hasSelectedItems ? "#599D15" : "black",
-              transition: ".3s ease",
-            }}
+          <MdKeyboardArrowRight
+            className={`width-[20px] transition-all ease-linear rotate-${open ? "90" : "0"} ${open || hasSelectedItems ? "text-fabric-700" : "text-black"}`}
           />
           {collapseTitle && (
             <p
@@ -56,15 +51,7 @@ const CustomCollapse: React.FC<CollapseDataProps> = ({
         {onResetHandler && (
           <button type="reset" onClick={onResetHandler}>
             {hasSelectedItems && (
-              <CancelIcon
-                sx={{
-                  width: 15,
-                  color: "#999",
-                  "&:hover": {
-                    color: "#555",
-                  },
-                }}
-              />
+              <MdCancel className="w-[15px] text-gray-26 hover:text-gray-25" />
             )}
           </button>
         )}

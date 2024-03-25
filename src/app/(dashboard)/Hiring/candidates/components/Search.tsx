@@ -1,13 +1,11 @@
 import * as React from "react";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
-import SearchIcon from "@mui/icons-material/Search";
+import { IoSearch } from "react-icons/io5";
 import { InputAdornment } from "@mui/material";
-import getCandidate from "@/api/Hiring/getCandidates";
 import { CandidateType } from "@/types/candidate.types";
 import _debounce from "lodash/debounce";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import { log } from "util";
 
 type searchProps = {
   search: string | null;
@@ -82,7 +80,7 @@ function Search({ search, setSearch }: searchProps) {
               startAdornment: (
                 <>
                   <InputAdornment position="start">
-                    <SearchIcon />
+                    <IoSearch />
                   </InputAdornment>
                   {params.InputProps.startAdornment}
                 </>

@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import DropDownSelectFilter from "./DropDownSelectFilter";
 import { IconButton } from "@mui/material";
-import StarIcon from "@mui/icons-material/Star";
+import { IoSearch } from "react-icons/io5";
 import { GlobalFilterState, GlobalRangeState } from "../types";
 import useHiring from "@/hooks/Hiring/useHiring";
 
@@ -86,7 +86,7 @@ function Filter({
         <div className="flex items-center justify-between bg-gray-10 pl-2 text-white">
           <p>Filtrer les résultats</p>
           <IconButton>
-            <StarIcon sx={{ color: "white", fontSize: "20px" }} />
+            <IoSearch className="text-[20px] text-white" />
           </IconButton>
         </div>
         <div className="px-3">

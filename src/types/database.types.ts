@@ -68,7 +68,7 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "candidate_comments"
             referencedColumns: ["id"]
-          }
+          },
         ]
       }
       candidate_emails: {
@@ -110,7 +110,7 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "profiles"
             referencedColumns: ["user_id"]
-          }
+          },
         ]
       }
       candidate_filter: {
@@ -193,7 +193,7 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "organizations"
             referencedColumns: ["name"]
-          }
+          },
         ]
       }
       candidate_statuses: {
@@ -286,7 +286,7 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "organizations"
             referencedColumns: ["name"]
-          }
+          },
         ]
       }
       changes_pending: {
@@ -321,7 +321,7 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "profiles"
             referencedColumns: ["user_id"]
-          }
+          },
         ]
       }
       Department: {
@@ -350,7 +350,7 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "organizations"
             referencedColumns: ["name"]
-          }
+          },
         ]
       }
       Division: {
@@ -412,7 +412,7 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "organizations"
             referencedColumns: ["name"]
-          }
+          },
         ]
       }
       files: {
@@ -470,7 +470,7 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "organizations"
             referencedColumns: ["name"]
-          }
+          },
         ]
       }
       folders: {
@@ -499,7 +499,7 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "organizations"
             referencedColumns: ["name"]
-          }
+          },
         ]
       }
       Hiring: {
@@ -566,7 +566,7 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "profiles"
             referencedColumns: ["user_id"]
-          }
+          },
         ]
       }
       leave_accrued: {
@@ -624,7 +624,7 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "users"
             referencedColumns: ["id"]
-          }
+          },
         ]
       }
       leave_balance: {
@@ -683,7 +683,7 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "users"
             referencedColumns: ["id"]
-          }
+          },
         ]
       }
       leave_categories: {
@@ -727,7 +727,7 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "organizations"
             referencedColumns: ["name"]
-          }
+          },
         ]
       }
       leave_policies: {
@@ -775,7 +775,7 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "organizations"
             referencedColumns: ["name"]
-          }
+          },
         ]
       }
       leave_requests: {
@@ -855,7 +855,7 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "users"
             referencedColumns: ["id"]
-          }
+          },
         ]
       }
       notifications: {
@@ -909,7 +909,7 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "users"
             referencedColumns: ["id"]
-          }
+          },
         ]
       }
       organizations: {
@@ -1027,7 +1027,7 @@ export type Database = {
             isOneToOne: true
             referencedRelation: "users"
             referencedColumns: ["id"]
-          }
+          },
         ]
       }
       roles: {
@@ -1062,7 +1062,7 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "organizations"
             referencedColumns: ["name"]
-          }
+          },
         ]
       }
       settings: {
@@ -1100,8 +1100,29 @@ export type Database = {
             isOneToOne: true
             referencedRelation: "organizations"
             referencedColumns: ["name"]
-          }
+          },
         ]
+      }
+      test: {
+        Row: {
+          created_at: string
+          id: number
+          job: string | null
+          name: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+          job?: string | null
+          name?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          job?: string | null
+          name?: string | null
+        }
+        Relationships: []
       }
       user_emails: {
         Row: {
@@ -1142,7 +1163,7 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "candidates"
             referencedColumns: ["id"]
-          }
+          },
         ]
       }
       users_permissions: {
@@ -1188,7 +1209,7 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "users"
             referencedColumns: ["id"]
-          }
+          },
         ]
       }
     }
@@ -1221,7 +1242,7 @@ export type Database = {
           schema: Json
           instance: Json
         }
-        Returns: unknown
+        Returns: string[]
       }
     }
     Enums: {
@@ -1238,58 +1259,60 @@ export type Database = {
     }
     CompositeTypes: {
       application_date: {
-        startdate: string
-        enddate: string
+        startdate: string | null
+        enddate: string | null
       }
       candidate_status: {
-        name: string
-        substatus: unknown
+        name: string | null
+        substatus: string[] | null
       }
       filter_range: {
-        min: number
-        max: number
+        min: number | null
+        max: number | null
       }
       job_details: {
-        job_status: string
-        department: string
-        hiring_lead: string
-        job_location: string
-        posting_title: string
-        job_description: string
-        internal_job_code: string
-        minimum_experience: string
+        job_status: string | null
+        department: string | null
+        hiring_lead: string | null
+        job_location: string | null
+        posting_title: string | null
+        job_description: string | null
+        internal_job_code: string | null
+        minimum_experience: string | null
       }
       job_information_type: {
-        job_status: string
-        department: string
-        hiring_lead: string
-        job_location: string
-        posting_title: string
-        job_description: string
-        internal_job_code: string
-        minimum_experience: string
+        job_status: string | null
+        department: string | null
+        hiring_lead: string | null
+        job_location: string | null
+        posting_title: string | null
+        job_description: string | null
+        internal_job_code: string | null
+        minimum_experience: string | null
       }
       leave_balance_type: {
-        balance: number
-        policy_id: number
-        categories_id: number
+        balance: number | null
+        policy_id: number | null
+        categories_id: number | null
       }
       leave_request_duration_used_type: {
-        date: string
-        duration: number
+        date: string | null
+        duration: number | null
       }
     }
   }
 }
 
+type PublicSchema = Database[Extract<keyof Database, "public">]
+
 export type Tables<
   PublicTableNameOrOptions extends
-    | keyof (Database["public"]["Tables"] & Database["public"]["Views"])
+    | keyof (PublicSchema["Tables"] & PublicSchema["Views"])
     | { schema: keyof Database },
   TableName extends PublicTableNameOrOptions extends { schema: keyof Database }
     ? keyof (Database[PublicTableNameOrOptions["schema"]]["Tables"] &
         Database[PublicTableNameOrOptions["schema"]]["Views"])
-    : never = never
+    : never = never,
 > = PublicTableNameOrOptions extends { schema: keyof Database }
   ? (Database[PublicTableNameOrOptions["schema"]]["Tables"] &
       Database[PublicTableNameOrOptions["schema"]]["Views"])[TableName] extends {
@@ -1297,67 +1320,67 @@ export type Tables<
     }
     ? R
     : never
-  : PublicTableNameOrOptions extends keyof (Database["public"]["Tables"] &
-      Database["public"]["Views"])
-  ? (Database["public"]["Tables"] &
-      Database["public"]["Views"])[PublicTableNameOrOptions] extends {
-      Row: infer R
-    }
-    ? R
+  : PublicTableNameOrOptions extends keyof (PublicSchema["Tables"] &
+        PublicSchema["Views"])
+    ? (PublicSchema["Tables"] &
+        PublicSchema["Views"])[PublicTableNameOrOptions] extends {
+        Row: infer R
+      }
+      ? R
+      : never
     : never
-  : never
 
 export type TablesInsert<
   PublicTableNameOrOptions extends
-    | keyof Database["public"]["Tables"]
+    | keyof PublicSchema["Tables"]
     | { schema: keyof Database },
   TableName extends PublicTableNameOrOptions extends { schema: keyof Database }
     ? keyof Database[PublicTableNameOrOptions["schema"]]["Tables"]
-    : never = never
+    : never = never,
 > = PublicTableNameOrOptions extends { schema: keyof Database }
   ? Database[PublicTableNameOrOptions["schema"]]["Tables"][TableName] extends {
       Insert: infer I
     }
     ? I
     : never
-  : PublicTableNameOrOptions extends keyof Database["public"]["Tables"]
-  ? Database["public"]["Tables"][PublicTableNameOrOptions] extends {
-      Insert: infer I
-    }
-    ? I
+  : PublicTableNameOrOptions extends keyof PublicSchema["Tables"]
+    ? PublicSchema["Tables"][PublicTableNameOrOptions] extends {
+        Insert: infer I
+      }
+      ? I
+      : never
     : never
-  : never
 
 export type TablesUpdate<
   PublicTableNameOrOptions extends
-    | keyof Database["public"]["Tables"]
+    | keyof PublicSchema["Tables"]
     | { schema: keyof Database },
   TableName extends PublicTableNameOrOptions extends { schema: keyof Database }
     ? keyof Database[PublicTableNameOrOptions["schema"]]["Tables"]
-    : never = never
+    : never = never,
 > = PublicTableNameOrOptions extends { schema: keyof Database }
   ? Database[PublicTableNameOrOptions["schema"]]["Tables"][TableName] extends {
       Update: infer U
     }
     ? U
     : never
-  : PublicTableNameOrOptions extends keyof Database["public"]["Tables"]
-  ? Database["public"]["Tables"][PublicTableNameOrOptions] extends {
-      Update: infer U
-    }
-    ? U
+  : PublicTableNameOrOptions extends keyof PublicSchema["Tables"]
+    ? PublicSchema["Tables"][PublicTableNameOrOptions] extends {
+        Update: infer U
+      }
+      ? U
+      : never
     : never
-  : never
 
 export type Enums<
   PublicEnumNameOrOptions extends
-    | keyof Database["public"]["Enums"]
+    | keyof PublicSchema["Enums"]
     | { schema: keyof Database },
   EnumName extends PublicEnumNameOrOptions extends { schema: keyof Database }
     ? keyof Database[PublicEnumNameOrOptions["schema"]]["Enums"]
-    : never = never
+    : never = never,
 > = PublicEnumNameOrOptions extends { schema: keyof Database }
   ? Database[PublicEnumNameOrOptions["schema"]]["Enums"][EnumName]
-  : PublicEnumNameOrOptions extends keyof Database["public"]["Enums"]
-  ? Database["public"]["Enums"][PublicEnumNameOrOptions]
-  : never
+  : PublicEnumNameOrOptions extends keyof PublicSchema["Enums"]
+    ? PublicSchema["Enums"][PublicEnumNameOrOptions]
+    : never

@@ -7,11 +7,9 @@ import Checkbox from "@mui/material/Checkbox";
 import Link from "next/link";
 
 function HireCandidate() {
-  const Router = useRouter();
   const params = useSearchParams();
-  const  ApplicationId = params.get("ApplicationId");
-  const  Candidate  = params.get("Candidate");
-  const pathname = usePathname();
+  const ApplicationId = params.get("ApplicationId");
+  const Candidate = params.get("Candidate");
   const [checked, setCheked] = useState<boolean>();
   return (
     <PopUpSkeleton title="Hire">
