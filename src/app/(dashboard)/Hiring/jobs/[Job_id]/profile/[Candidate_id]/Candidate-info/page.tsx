@@ -14,8 +14,7 @@ function Page() {
   const { Candidate_id } = params;
   const {
     candidates: { data, isPending },
-  } = useCandidate({ id: Candidate_id });
-console.log(data);
+  } = useCandidate("", { id: Candidate_id });
   return (
     <>
       {isPending ? (
@@ -23,35 +22,32 @@ console.log(data);
       ) : (
         <div className="flex h-full w-full flex-col items-center justify-start">
           <div className="flex w-3/5 flex-col items-start justify-center gap-[2rem]">
-            
-              <TabsPannelGeneric
-                TabsPannel={[
-                  {
-                    label: "Resume",
-                    Component: () =>
-                      data?.[0]?.metadata?.Resume ? (
-                        <PdfViewer url={data?.[0]?.metadata?.Resume} />
-                      ) : (
-                        <div className="flex min-h-full w-full items-center justify-center rounded-md bg-gray-14 py-8 pt-4">
-                          <Empty description="No Resume Available." />
-                        </div>
-                      ),
-                  },
-                  {
-                    label: "Cover Letter",
-                    Component: () =>
-                      data?.[0]?.metadata?.["Cover Letter"] ? (
-                        <PdfViewer
-                          url={data?.[0]?.metadata?.["Cover Letter"]}
-                        />
-                      ) : (
-                        <div className="flex min-h-full w-full items-center justify-center rounded-md bg-gray-14 py-8 pt-4">
-                          <Empty description="No Cover Letter Available." />
-                        </div>
-                      ),
-                  },
-                ]}
-              />
+            <TabsPannelGeneric
+              TabsPannel={[
+                {
+                  label: "Resume",
+                  Component: () =>
+                    data?.[0]?.metadata?.Resume ? (
+                      <PdfViewer url={data?.[0]?.metadata?.Resume} />
+                    ) : (
+                      <div className="flex min-h-full w-full items-center justify-center rounded-md bg-gray-14 py-8 pt-4">
+                        <Empty description="No Resume Available." />
+                      </div>
+                    ),
+                },
+                {
+                  label: "Cover Letter",
+                  Component: () =>
+                    data?.[0]?.metadata?.["Cover Letter"] ? (
+                      <PdfViewer url={data?.[0]?.metadata?.["Cover Letter"]} />
+                    ) : (
+                      <div className="flex min-h-full w-full items-center justify-center rounded-md bg-gray-14 py-8 pt-4">
+                        <Empty description="No Cover Letter Available." />
+                      </div>
+                    ),
+                },
+              ]}
+            />
             <ApplicationQuestions candidate={data?.[0]} />
           </div>
         </div>

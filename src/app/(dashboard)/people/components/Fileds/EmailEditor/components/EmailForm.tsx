@@ -33,7 +33,6 @@ function EmailForm() {
   const handleSetSelectedKeys: React.Dispatch<React.SetStateAction<string>> = (
     value,
   ) => {
-    console.log(value, "handleSetSelectedKeys");
     setMail &&
       setMail((old: MailType) => {
         return {

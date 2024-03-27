@@ -16,12 +16,12 @@ import CandidatesInfos from "./CandidatesInfos";
 import Loader from "@/app/_ui/Loader/Loader";
 import { Avatar } from "antd";
 
-function  ProfileLayout({ children }: { children: ReactNode }) {
+function ProfileLayout({ children }: { children: ReactNode }) {
   const params = useParams();
   const { Candidate_id, Job_id } = params;
   const {
     candidates: { data: candidates_data, isPending: candidates_isPending },
-  } = useCandidate({ id: Candidate_id });
+  } = useCandidate("", { id: Candidate_id });
   const {
     Hiring: { data: Hiring_data, isPending: Hiring_isPending },
   } = useHiring({ id: Job_id });
@@ -57,7 +57,8 @@ function  ProfileLayout({ children }: { children: ReactNode }) {
                         <Avatar
                           size={100}
                           icon={
-                            <Image className={
+                            <Image
+                              className={
                                 "h-full  w-full cursor-pointer rounded-full border-4 border-white bg-gray-6 object-cover"
                               }
                               alt={
@@ -77,7 +78,8 @@ function  ProfileLayout({ children }: { children: ReactNode }) {
                         <h1 className="text-2xl font-bold text-white">
                           {candidates_data[0]?.["First Name"] +
                             " " +
-                            candidates_data[0]?.["Last Name"] || "candidate name"}
+                            candidates_data[0]?.["Last Name"] ||
+                            "candidate name"}
                         </h1>
                         <h1 className="text-xl font-medium text-white">
                           {`Added on ${formatCustomDate(candidates_data[0]?.created_at)} (in ${monthsAgo(candidates_data[0]?.created_at)})`}

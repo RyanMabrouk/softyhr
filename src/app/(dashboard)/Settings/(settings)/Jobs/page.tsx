@@ -33,7 +33,7 @@ function CandidateStatuses() {
               ?.map((status: statusType) => {
                 return <StatusCard {...status} key={"status" + status?.id} />;
               })}
-            <AddStatus group_name="Actif"/>
+            <AddStatus group_name="Actif" />
           </>
         ) : (
           <Loader />

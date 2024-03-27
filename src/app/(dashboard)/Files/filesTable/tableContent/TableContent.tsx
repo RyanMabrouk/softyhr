@@ -47,7 +47,6 @@ export default function TableContent({
   }
 
   const folderId = params.folderId;
-  console.log("🚀 ~ folderId:", folderId);
 
   const queryClient = useQueryClient();
   let filesIdArr: number[] | string[] =

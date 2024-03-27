@@ -5,13 +5,13 @@ import "d3-flextree";
 import { OrgChart } from "d3-org-chart";
 import { FaExpandAlt } from "react-icons/fa";
 import { BiCollapse } from "react-icons/bi";
-import { getTawindColor } from "@/helpers/getTailwindColor";
+import { getTailwindColor } from "@/helpers/getTailwindColor";
 import * as d3 from "d3";
 import jsPDF from "jspdf";
 import { MdInstallDesktop } from "react-icons/md";
 import { useRouter } from "next/navigation";
 
-const color = getTawindColor("fabric-700");
+const color = getTailwindColor("fabric-700");
 export default function OrgChartComponent({
   data,
 }: {

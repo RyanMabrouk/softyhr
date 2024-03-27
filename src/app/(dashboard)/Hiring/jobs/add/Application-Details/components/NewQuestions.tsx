@@ -13,12 +13,10 @@ function NewQuestions({ RowField }: { RowField: RowFieldType }) {
   const [Error, setError] = useState<string | null>(null);
   const [QuestionValue, setQuestionValue] = useState<string>("");
   const [OldQuestionName, setOldQuestionName] = useState("");
-  const { Update_ApplicationDetails, ApplicationDetails } = useContext(StepsContext);
+  const { Update_ApplicationDetails, ApplicationDetails } =
+    useContext(StepsContext);
 
   const SaveQuestion = () => {
-    console.log(ApplicationDetails?.values?.Questions?.[QuestionValue]);
-    console.log(OldQuestionName);
-
     const IsQuestionExist = Object.keys(
       ApplicationDetails?.values?.Questions || {},
     )?.find((question_name: string) => question_name == QuestionValue?.trim());
@@ -50,11 +48,10 @@ function NewQuestions({ RowField }: { RowField: RowFieldType }) {
   };
 
   const EditQuestion = () => {
-    console.log(ApplicationDetails?.values?.Questions?.[QuestionValue]);
-    console.log(OldQuestionName);
-    const IsQuestionExist = Object.keys(
-      ApplicationDetails?.values?.Questions || {},
-    )?.find((question_name: string) => question_name == QuestionValue) || [];
+    const IsQuestionExist =
+      Object.keys(ApplicationDetails?.values?.Questions || {})?.find(
+        (question_name: string) => question_name == QuestionValue,
+      ) || [];
     if (IsQuestionExist?.length > 2) {
       setError("This Field name Already Exist !");
       return;
@@ -63,7 +60,6 @@ function NewQuestions({ RowField }: { RowField: RowFieldType }) {
       setError("This Field Should not be empty !");
       return;
     }
-    console.log(OldQuestionName);
     delete ApplicationDetails?.values?.Questions?.[OldQuestionName];
     Update_ApplicationDetails({
       values: {
@@ -81,7 +77,6 @@ function NewQuestions({ RowField }: { RowField: RowFieldType }) {
     });
     setEditting(false);
     setError(null);
-
   };
   return (
     <div className="w-full">

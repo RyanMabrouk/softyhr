@@ -52,11 +52,7 @@ function RowFiedlsList({
     accept: "champ",
     drop: (item: DropItemType, monitor: any) => {
       const dropResult = monitor.internalMonitor.registry.dropTargets;
-      /*console.log(
-        item.champ,
-        " dropped on ",
-        dropResult.get(monitor.targetId).spec.data,
-      );*/
+
       if (item?.rang == dropResult.get(monitor.targetId).spec.data?.rang)
         return;
       const NewSettings = ReorderChamps(

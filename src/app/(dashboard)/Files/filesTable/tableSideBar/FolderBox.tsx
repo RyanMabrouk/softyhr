@@ -5,19 +5,18 @@ import { useDrop } from "react-dnd";
 import { ItemTypes } from "@/constants/filesConstants";
 import { FaFolder } from "react-icons/fa6";
 import { IoFolderOpenSharp } from "react-icons/io5";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import FilesSelectArrowDown from "../../_ui/components/FilesSelectArrowDown";
 import { useQueryClient } from "@tanstack/react-query";
 import useFoldersIds from "@/hooks/files/useFoldersIds";
-import RoleGuard from "@/app/_ui/RoleGuard";
 import useUserRole from "@/hooks/Roles/useUserRole";
 import {
   database_files_type,
   database_folder_type,
 } from "@/types/database.tables.types";
-import { getTawindColor } from "@/helpers/getTailwindColor";
-const primary = getTawindColor("fabric-700");
-const grey = getTawindColor("gray-30");
+import { getTailwindColor } from "@/helpers/getTailwindColor";
+const primary = getTailwindColor("fabric-700");
+const grey = getTailwindColor("gray-30");
 export default function FolderBox({
   folder,
   setCheckAll,
@@ -26,7 +25,6 @@ export default function FolderBox({
   setCheckAll: React.Dispatch<React.SetStateAction<boolean>> | undefined;
 }) {
   let { id, name, files } = folder;
-  const pathname = usePathname();
   const { filesIds } = useFoldersIds();
   // active user role
   const {

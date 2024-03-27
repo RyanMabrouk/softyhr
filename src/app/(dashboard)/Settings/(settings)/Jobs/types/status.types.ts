@@ -9,5 +9,5 @@ export type InsertStatusType =
 export type sourcesType =
   Database["public"]["Tables"]["candidate_sources"]["Row"];
 
-  export type InsertSourcesType =
-    Database["public"]["Tables"]["candidate_sources"]["Insert"];
+export type InsertSourcesType =
+  Database["public"]["Tables"]["candidate_sources"]["Insert"];

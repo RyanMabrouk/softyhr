@@ -108,7 +108,6 @@ function StepsProvider({ children }: StepsProviderTypeProps) {
       payload,
     });
   };
-console.log(state);
 
   return (
     <StepsContext.Provider

@@ -1,9 +1,9 @@
 import React, { ReactNode } from "react";
 import { FormControl, MenuItem, Select } from "@mui/material";
 import { Label } from "./InputGeneric";
-import { getTawindColor } from "../../helpers/getTailwindColor";
+import { getTailwindColor } from "../../helpers/getTailwindColor";
 import { VscTriangleDown } from "react-icons/vsc";
-const color = getTawindColor("color-primary-10");
+const color = getTailwindColor("color-primary-10");
 export type Option = {
   group_name?: string; // add only the group name to create a group
   label: string | ReactNode;
@@ -36,6 +36,7 @@ export function SelectGeneric({
   setValueInParent?: React.Dispatch<React.SetStateAction<any>> | undefined;
   inputLabel?: string | ReactNode;
   cursor?: "white" | "black" | string;
+  disabled?: boolean;
 }) {
   const [open, setOpen] = React.useState(false);
   const cursor_type =
@@ -48,7 +49,7 @@ export function SelectGeneric({
       <Label name={name} required={required} error={error}>
         {label}
       </Label>
-      <div className="relative flex w-fit flex-row items-center justify-center gap-1.5">
+      <div className="relative flex flex-row items-center justify-center gap-1.5">
         <Select
           variant="outlined"
           data-placeholder-trigger="keydown"

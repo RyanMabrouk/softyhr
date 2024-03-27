@@ -12,7 +12,6 @@ export const CreateCandidate = async (NewCandaidate: insert_CandidateType) => {
   logger.info("CreateCandidate_enter");
   const supabase = createServerActionClient({ cookies });
   const org = await getCurrentorg();
-  console.log(NewCandaidate);
   const { error } = await postData("candidates", [
     { ...NewCandaidate, org_name: org?.name },
   ]);

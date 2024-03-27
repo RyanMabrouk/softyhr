@@ -1,5 +1,5 @@
 "use client";
-import React, { memo, useContext, } from "react";
+import React, { memo, useContext } from "react";
 import { StepsContext } from "../context/StepsContext";
 import useData from "@/hooks/useData";
 import AdditionnalInputs from "./components/AdditionnalInputs";
@@ -10,6 +10,7 @@ function Page() {
   const {
     settings: { data, isPending },
   } = useData();
+
   return (
     <div className="flex h-full w-full flex-col items-start justify-start gap-[1.5rem] pb-12">
       {isPending ? (

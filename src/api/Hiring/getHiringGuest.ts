@@ -2,7 +2,7 @@
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies, headers } from "next/headers";
 import { Database } from "@/types/database.types";
-import { getLogger } from "@/logging/log-util" 
+import { getLogger } from "@/logging/log-util";
 import { createClient } from "@supabase/supabase-js";
 import getCurrentorg from "../getCurrentOrg";
 import { getValidSubdomain } from "../getValidSubdomain";
@@ -34,10 +34,9 @@ export default async function getHiringGuest(
     EndPage,
   }: GetCandidateParamsType,
 ): Promise<{ data: any; error: any; meta: any }> {
-    const logger = getLogger("Hiring");
-    logger.info("getHiringGuest_enter"); 
+  const logger = getLogger("Hiring");
+  logger.info("getHiringGuest_enter");
   const session = await getSession();
-  console.log(session);
   session && delete match?.["Job Status"];
   const supabase = createClient<Database>(
     process.env.SUPABASE_URL || "",
@@ -91,13 +90,11 @@ export default async function getHiringGuest(
           .select(column, { count: "exact" })
           .order("id")
           .eq("org_name", org_name);
-  
-  
-  logger.info("getHiringGuest_exit"); 
+
+  logger.info("getHiringGuest_exit");
   if (data?.error) {
     logger.error(data?.error?.message);
   }
-  console.log(data);
   return {
     data: data?.data,
     error: data?.error,

@@ -68,8 +68,8 @@ export default function AddEmployeesToRole() {
         toast.success("Employees added to role successfully", "Success");
       }
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["users_permissions"] });
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ["users_permissions"] });
       Router.push(pathname);
     },
   });

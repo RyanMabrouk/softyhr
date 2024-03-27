@@ -22,15 +22,14 @@ function Page() {
     1,
     "All",
     '*,candidate_emails(created_at,email_object,profiles("Basic Information",picture),candidates("First Name","Last Name")),user_emails(created_at,email_object,candidate_sender,profiles("Basic Information",picture),candidates("First Name","Last Name"))',
-    
-    );
+  );
   return (
     <div className="flex h-full w-full items-start justify-center">
       <div className="flex w-8/12 flex-col items-start justify-start py-4">
         {isPending ? (
           <Loader />
         ) : (
-          <div className="flex gap-[2rem] h-full w-full flex-col items-start justify-start">
+          <div className="flex h-full w-full flex-col items-start justify-start gap-[2rem]">
             <Link
               href={{
                 pathname: pathname,

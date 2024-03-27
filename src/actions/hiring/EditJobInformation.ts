@@ -19,7 +19,6 @@ export const EditJobInformation = async (
     Newdata[key] = value;
   });
   let status = formdata.has("Job Status");
-  console.log(formdata?.get("Department"));
   const { error } = await updateData(
     "Hiring",
     {

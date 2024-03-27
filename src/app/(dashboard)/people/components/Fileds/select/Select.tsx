@@ -47,7 +47,6 @@ function SelectInput({
     setValue(e.target.value);
     setSelectedKeys && setSelectedKeys(e.target.value);
   };
-  console.log(RowField);
   return (
     <div className="flex items-end justify-center gap-[1rem]">
       <div className={"relative flex  flex-col items-start justify-center"}>

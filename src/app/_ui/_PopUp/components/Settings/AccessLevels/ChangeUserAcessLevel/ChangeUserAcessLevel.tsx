@@ -68,11 +68,11 @@ export default function ChangeUserAcessLevel() {
         );
       }
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries({
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({
         queryKey: ["users_permissions"],
       });
-      Router.push(pathname);
+      Router.push(pathname, { scroll: false });
     },
   });
   return (

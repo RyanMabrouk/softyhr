@@ -10,9 +10,8 @@ interface EmailCardPropsType {
 }
 
 function ReplyEmailCard({ email }: EmailCardPropsType) {
-  console.log(email);
   return (
-    <div className="flex w-full rounded-md cursor-pointer items-start justify-start gap-[1rem] px-4 py-4 duration-200 ease-linear hover:!bg-gray-14">
+    <div className="flex w-full cursor-pointer items-start justify-start gap-[1rem] rounded-md px-4 py-4 duration-200 ease-linear hover:!bg-gray-14">
       <Avatar
         size={40}
         icon={<Image alt="" width={100} height={100} src={avatar} />}

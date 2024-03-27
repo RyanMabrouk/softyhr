@@ -20,9 +20,9 @@ export const GetJobOpening = async (page: number) => {
       error,
     };
   } else {
-  logger.info("GetJobOpening_exit");
+    logger.info("GetJobOpening_exit");
     return {
-      data
+      data,
     };
   }
 };

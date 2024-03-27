@@ -54,7 +54,6 @@ export const CreateNewEmployee = async ({
       custom_fields: NewEmployeData as any,
     });
     if (profile_error) {
-      console.log(profile_error);
       logger.error(profile_error.message);
       return {
         Submitted: false,

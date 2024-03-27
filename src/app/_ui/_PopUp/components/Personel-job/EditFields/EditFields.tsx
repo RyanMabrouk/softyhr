@@ -43,9 +43,7 @@ function EditFields() {
     isPaused,
   } = useMutation({
     mutationFn: async (NewSettings: sectionType) => {
-      return await UpdateSettings({ [settings_type]: NewSettings }).then(() => {
-        console.log("updated successfuly !!!");
-      });
+      return await UpdateSettings({ [settings_type]: NewSettings });
     },
     onSuccess: () => {
       Router.push(pathname);

@@ -3,6 +3,7 @@ import getData from "@/api/getData";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 
 export default function useCandidate(
+  search?: string,
   match?: {
     [key: string]: string | number | boolean | null | string[] | undefined;
   },
@@ -10,6 +11,8 @@ export default function useCandidate(
   rowsPerPage?: number,
   filter?: string | null,
   column?: string,
+  genericFilter?: any,
+  range?: any,
 ) {
   const querykey: any = ["Candidates"];
   if (match && match.job_id) {
@@ -20,6 +23,15 @@ export default function useCandidate(
   }
   if (filter) {
     querykey.push(filter);
+  }
+  if (search) {
+    querykey.push(search);
+  }
+  if (genericFilter) {
+    querykey.push(genericFilter);
+  }
+  if (range) {
+    querykey.push(range);
   }
   const {
     data: candidates,
@@ -37,15 +49,21 @@ export default function useCandidate(
             StartPage: (page - 1) * rowsPerPage,
             EndPage: page * rowsPerPage,
             filter,
+            search,
+            genericFilter,
+            range,
           })
         : getCandidate("candidates", {
             match,
             column,
             filter,
+            search,
+            genericFilter,
+            range,
           }),
     placeholderData: keepPreviousData,
-    staleTime: 5000,
   });
+
   return {
     candidates: {
       data: candidates?.data,

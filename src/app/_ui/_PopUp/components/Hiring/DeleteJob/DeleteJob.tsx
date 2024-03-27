@@ -21,8 +21,7 @@ function DeleteJob() {
   const id = Number(params?.get("id")) || 0;
   const {
     Hiring: { data, isPending },
-  } = useHiring({id},"*,candidates(id)");
-  console.log("data", data);
+  } = useHiring({ id }, "*,candidates(id)");
   async function delete_job() {
     const response = await deleteJobOpening(id);
     if (response?.Error) toast.error(response?.Msg);
@@ -30,7 +29,7 @@ function DeleteJob() {
     router.push("/Hiring/jobs");
     queryClient.invalidateQueries({ queryKey: ["Hiring"] });
   }
-  
+
   return (
     <PopUpSkeleton title="Just Checking...">
       {isPending ? (

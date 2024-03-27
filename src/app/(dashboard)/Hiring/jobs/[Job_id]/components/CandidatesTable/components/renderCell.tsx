@@ -22,7 +22,6 @@ export const renderCell = (
 ) => {
   const cellValue = user[columnKey as keyof TableCandidateType];
   switch (columnKey) {
-
     case "Candidate Info":
       return (
         <div className="flex flex-col items-start justify-center gap-2">
@@ -101,6 +100,7 @@ export const renderCell = (
               </DropdownItem>
               <DropdownItem className="group hover:!bg-color-primary-8">
                 <div className="flex items-end justify-start gap-[0.5rem] duration-200 ease-linear">
+                  <MdDelete className="text-xl text-color-primary-7 group-hover:!text-white" />
                   <MdDelete className="text-xl text-color-primary-7 group-hover:!text-white" />
                   <Link
                     href={`?popup=DELETE_CANDIDATE&id=${user?.id}`}

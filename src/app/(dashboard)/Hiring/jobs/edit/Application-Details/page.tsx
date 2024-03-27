@@ -42,7 +42,6 @@ function ApplicationDetails() {
   }, [Hiring_data, Hiring_isPending]);
 
   async function EditApplicationDetailsHandler(formdata: FormData) {
-    console.log("submis", ApplicationDetails);
     const response = await EditApplicationDetails(
       {
         ...ApplicationDetails?.values,

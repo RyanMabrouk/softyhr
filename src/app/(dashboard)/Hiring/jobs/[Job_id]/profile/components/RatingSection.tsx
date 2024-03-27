@@ -13,7 +13,7 @@ function RatingSection() {
   const { Candidate_id, Job_id } = Params;
   const {
     candidates: { data: candidates_data, isPending: candidates_isPending },
-  } = useCandidate({ id: Candidate_id });
+  } = useCandidate("", { id: Candidate_id });
   const {
     Hiring: { data: Hiring_data, isPending: Hiring_isPending },
   } = useHiring({ id: Job_id });

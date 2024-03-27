@@ -5,8 +5,8 @@ import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 import { database_profile_type } from "@/types/database.tables.types";
+
 export async function GET(request: NextRequest) {
-  console.log("intercepted in caalback api route_enter");
   //const logger = getLogger("*");
   //logger.info("intercepted in caalback api route_enter");
   const requestUrl = new URL(request.url);

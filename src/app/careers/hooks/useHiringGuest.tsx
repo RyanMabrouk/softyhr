@@ -23,7 +23,6 @@ export default function useHiringGuest(
   const queryKey: any = ["Hiring", page, filter, match].filter(
     Boolean,
   ) as QueryKeyType;
-  console.log(match);
   const {
     data: Hiring,
     isPlaceholderData,

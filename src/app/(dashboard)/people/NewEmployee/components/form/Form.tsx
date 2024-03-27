@@ -30,11 +30,10 @@ function Form() {
   const Candidate = params.get("Candidate");
   const {
     candidates: { data: candidate_data, isPending: candidate_isPending },
-  }: any = useCandidate({ id: Candidate });
+  }: any = useCandidate("", { id: Candidate });
 
   //----------add_candiate_as_new_emplyee------
   const SubmitFormCandidate = async (formdata: FormData) => {
-    console.log("form candidate");
     //-----formulate_data-------
     let result: any = {};
     data?.Champs.forEach((champ: any) => {
@@ -70,8 +69,6 @@ function Form() {
       });
       result = { ...result, [champ?.champ]: { ...Champ } };
     });
-    console.log("first map exit", result);
-    console.log("enter formulateDataNewemployee with", formdata);
     const NewData = formulateDataNewemployee(formdata, {
       data: {
         ...result,

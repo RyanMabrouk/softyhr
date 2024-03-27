@@ -30,16 +30,14 @@ function AppliymentForm({
   const { toast } = useToast();
   const {
     Hiring: { data, isPending },
-  } = useHiringGuest({ id: job?.id , "Job Status":"Open" });
+  } = useHiringGuest({ id: job?.id, "Job Status": "Open" });
   const QueryClient = useQueryClient();
   const router = useRouter();
   const pathname = usePathname();
-  const Base_url = "https://ybwqmrrlvmpdikvmkqra.supabase.co/storage/v1/object/public/hiring/";
+  const Base_url =
+    "https://ybwqmrrlvmpdikvmkqra.supabase.co/storage/v1/object/public/hiring/";
 
-
-  
   const SubmitForm = async (formdata: FormData) => {
-
     const identifient = uuidv4();
     const Formdata = new FormData();
     const uploadPromises: any = [];
@@ -92,7 +90,6 @@ function AppliymentForm({
           >
             <div className=" w-full border-b border-gray-18 pb-8">
               {data[0]?.Form?.map((FieldsArray: any, index: number) => {
-                console.log(FieldsArray);
                 return (
                   <div
                     className="mt-4 flex w-full flex-col place-items-start justify-center gap-[2rem]"

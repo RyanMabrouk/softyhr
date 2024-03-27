@@ -7,7 +7,6 @@ function NewQuestionsList({
 }: {
   additionalQuestionsForm: RowFieldType[];
 }) {
-  console.log(additionalQuestionsForm);
   return (
     <div className="flex w-full flex-col items-start justify-center gap-1">
       {additionalQuestionsForm?.map((RowField: RowFieldType, index: number) => {

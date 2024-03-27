@@ -122,7 +122,6 @@ function SelectGeneric({
             isPending || options?.length == 0
               ? (params.inputProps.value = "")
               : null;
-            console.log(params);
             return <TextField className="!p-0" {...params} />;
           }}
         />

@@ -10,7 +10,7 @@ import Link from "next/link";
 
 interface DropDownGenericOption {
   link?: any;
-  actions?:()=>void;
+  actions?: () => void;
   Component: () => React.JSX.Element;
 }
 interface DropDownGenericPropsTYpe {
@@ -20,7 +20,7 @@ interface DropDownGenericPropsTYpe {
 
 function DropDownGeneric({
   options,
-  DropDownButton
+  DropDownButton,
 }: DropDownGenericPropsTYpe) {
   return (
     <Dropdown className="flex flex-col items-center justify-center">
@@ -54,7 +54,7 @@ function DropDownGeneric({
 
           return (
             <DropdownItem
-              className="duration-250 w-fill group flex ease-linear hover:bg-color-primary-8"
+              className="duration-250 group flex w-full ease-linear hover:bg-color-primary-8"
               key={index}
               onClick={action && action}
             >

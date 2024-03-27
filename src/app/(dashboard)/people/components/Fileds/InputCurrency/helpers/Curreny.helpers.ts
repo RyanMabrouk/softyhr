@@ -1,7 +1,6 @@
 export const formattedData=(data:any) =>{
   let result:any = [];
   Object.values(data).map(({ name, symbol, code }: any) => {
-    console.log(symbol);
     result.push({
       name,
       label: `${code} - ${name}`,
