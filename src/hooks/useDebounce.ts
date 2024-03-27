@@ -11,6 +11,8 @@ export default function useDebounce(
 ) {
   const { reset, clear } = useTimeout(callback, delay);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(reset, dependencies); // Removed unnecessary spread operator
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(clear, []); // Removed unnecessary spread operator
 }

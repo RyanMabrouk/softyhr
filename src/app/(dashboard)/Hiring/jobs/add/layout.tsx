@@ -11,7 +11,11 @@ import StepsProvider, {
   StepsContext,
 } from "./context/StepsContext";
 import { FormdataToObject } from "@/helpers/object.helpers";
-import { RiCheckboxBlankCircleLine, RiCheckboxCircleFill, RiCheckboxCircleLine } from "react-icons/ri";
+import {
+  RiCheckboxBlankCircleLine,
+  RiCheckboxCircleFill,
+  RiCheckboxCircleLine,
+} from "react-icons/ri";
 import SubmitFormBtn from "./SubmitFormBtn";
 import useToast from "@/hooks/useToast";
 import { CreateJobOpening } from "@/actions/hiring/CreateJobOpening";
@@ -149,6 +153,8 @@ const LayoutComponent = memo(function LayoutComponent({
                 <div className="flex w-full flex-col items-start justify-center  border-b border-gray-15 pb-4">
                   {CreateHiringJob?.map((path: string, index: number) => {
                     return (
+                      // TODO : does aria-disabled works ?
+                      // eslint-disable-next-line jsx-a11y/role-supports-aria-props
                       <h1
                         aria-disabled={!stepValidation?.[path]?.done}
                         tabIndex={
@@ -166,9 +172,11 @@ const LayoutComponent = memo(function LayoutComponent({
                         key={index}
                       >
                         {stepValidation?.[path]?.done ? (
-                          <RiCheckboxCircleFill className="text-3xl ease-linear duration-200 !text-color-primary-8" />
+                          <RiCheckboxCircleFill className="text-3xl !text-color-primary-8 duration-200 ease-linear" />
                         ) : (
-                          <RiCheckboxBlankCircleLine className={`text-3xl text-gray-15 ${pathname.includes(path) ? "!text-color-primary-8":""}`} />
+                          <RiCheckboxBlankCircleLine
+                            className={`text-3xl text-gray-15 ${pathname.includes(path) ? "!text-color-primary-8" : ""}`}
+                          />
                         )}
                         <h1
                           className={
