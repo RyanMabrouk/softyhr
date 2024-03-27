@@ -11,6 +11,7 @@ import React, { memo, useState } from "react";
 import { MdOutlineClose } from "react-icons/md";
 import ExtraTxt from "./components/ExtraTxt";
 import { RowFieldType } from "@/types/database.tables.types";
+import { useRouter } from "next/navigation";
 interface SelectInputPropsType {
   RowField: RowFieldType;
   setTouched?: React.Dispatch<React.SetStateAction<boolean>> | undefined;
@@ -35,7 +36,7 @@ function SelectInput({
 }: SelectInputPropsType) {
   const [value, setValue] = useState<string>(String(defaultValue) || "");
   const [open, setOpen] = React.useState(false);
-
+  const router = useRouter();
   const ClearSelectHandler = () => {
     setValue("");
     setSelectedKeys && setSelectedKeys("");
@@ -48,7 +49,7 @@ function SelectInput({
   };
   console.log(RowField);
   return (
-    <div  className="flex items-end justify-center gap-[1rem]">
+    <div className="flex items-end justify-center gap-[1rem]">
       <div className={"relative flex  flex-col items-start justify-center"}>
         <label
           className={
@@ -114,7 +115,7 @@ function SelectInput({
             )
           }
           renderValue={(selected) => {
-            if (value == "") {
+            if (value == "" || value == "+ Add item") {
               console.log(value, "value");
               return (
                 <h1 className="text-[0.95rem] font-normal !text-gray-13">
@@ -151,8 +152,9 @@ function SelectInput({
           })}
           {RowField?.addItem && (
             <MenuItem
-              className="p-1 pr-4 !text-color5-500"
-              onClick={() => console.log("add item")}
+              className="border-t border-gray-18 p-1 pr-4 !text-color5-500"
+              onClick={() => router.push(`?popup=ADD_ITEM&section=${RowField?.name}`)}
+              value={"+ Add item"}
             >
               + Add item
             </MenuItem>
@@ -169,7 +171,7 @@ function SelectInput({
         />
       </div>
       {RowField?.ExtraTxt_org && <ExtraTxt RowField={RowField} />}
-    </div >
+    </div>
   );
 }
 

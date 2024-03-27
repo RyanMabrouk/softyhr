@@ -2,8 +2,8 @@ import React, { ReactNode, createContext, useState } from "react";
 
 export const MailContext = createContext({});
 
-interface attachmentsType {
-  content: string;
+export interface attachmentsType {
+  path: string;
   file_name: string;
   org_name: string;
   size: number;

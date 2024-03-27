@@ -57,12 +57,12 @@ export default function Page() {
         </div>
       ) : (
         <div className="flex h-full max-h-[45rem] w-full items-center justify-center">
-          <Player
+         {/*<Player
             src="https://lottie.host/85fb7313-2848-45c2-bdb9-2b729f57afc2/AwfmWMtW8n.json"
             className="h-60 w-60"
             loop
             autoplay
-          />
+          />*/}
         </div>
       )}
       <PaginationButtons

@@ -53,7 +53,7 @@ const Input = ({
             (RowField?.Icon ? "pl-8 " : "")
           }
           type={RowField?.type}
-          value={value?.trim()}
+          value={value}
           id={RowField?.name}
           name={RowField?.name}
           onChange={(e) => {

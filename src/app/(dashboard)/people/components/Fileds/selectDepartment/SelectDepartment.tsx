@@ -65,12 +65,33 @@ function SelectGeneric({
           sx={{
             border: "1px solid #D9D9D9",
             color: "black",
+            ".MuiAutocomplete-endAdornment ": {
+              position: "absolute",
+              top: "0 !important",
+              right: "0 !important",
+              transform: "none !important",
+            },
+            ".MuiAutocomplete-popupIndicator": {
+              padding: "0 !important",
+              height: "1.9rem",
+            },
+            ".MuiAutocomplete-popupIndicatorOpen": {
+              padding: "0 !important",
+              height: "1.9rem",
+            },
+            ".MuiAutocomplete-endAdornment": {
+              display: "flex",
+              marginRight: "0.1rem",
+            },
             ".MuiSvgIcon-root ": {
-              fill: "#D9D9D9 !important",
+              fill: "#686868 !important",
+              backgroundColor: "#F4F4F4",
+              width: "1.5rem !important",
+              height: "100%",
             },
             height: "2rem",
             minWidth: "16rem",
-            borderRadius: "0.1rem !important",
+            borderRadius: "0.2rem !important",
             fontWeight: "300",
             fontSize: "1rem",
           }}
@@ -89,15 +110,14 @@ function SelectGeneric({
           loadingText="Loading..."
           loading={isPending}
           renderOption={(props, option: any) => (
-           
-                <Box
-                  component="li"
-                  sx={{ "& > img": { mr: 2, flexShrink: 0 } }}
-                  {...props}
-                  key={option.key}
-                >
-                  {option?.label}
-                </Box>            
+            <Box
+              component="li"
+              sx={{ "& > img": { mr: 2, flexShrink: 0 } }}
+              {...props}
+              key={option.key}
+            >
+              {option?.label}
+            </Box>
           )}
           renderInput={(params) => <TextField className="!p-0" {...params} />}
         />

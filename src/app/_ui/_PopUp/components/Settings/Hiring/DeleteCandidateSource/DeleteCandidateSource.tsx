@@ -75,7 +75,7 @@ export default function DeleteCandidateSource() {
               <hr className="h-[3px] w-full bg-primary-gradient" />
               <div className="flex items-center justify-start gap-[0.6rem] self-start">
                 <SubmitBtn className="px-3" disabled={isPending}>
-                  Remove, Source
+                  Remove
                 </SubmitBtn>
                 <CancelBtnGeneric />
               </div>

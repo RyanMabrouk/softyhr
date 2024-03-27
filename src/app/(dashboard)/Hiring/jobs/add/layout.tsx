@@ -11,7 +11,7 @@ import StepsProvider, {
   StepsContext,
 } from "./context/StepsContext";
 import { FormdataToObject } from "@/helpers/object.helpers";
-import { RiCheckboxCircleFill, RiCheckboxCircleLine } from "react-icons/ri";
+import { RiCheckboxBlankCircleLine, RiCheckboxCircleFill, RiCheckboxCircleLine } from "react-icons/ri";
 import SubmitFormBtn from "./SubmitFormBtn";
 import useToast from "@/hooks/useToast";
 import { CreateJobOpening } from "@/actions/hiring/CreateJobOpening";
@@ -145,26 +145,30 @@ const LayoutComponent = memo(function LayoutComponent({
               action={submitForm}
               className="flex w-full items-start justify-start gap-[1rem]"
             >
-              <div className="flex w-3/12 flex-col items-center gap-[1rem] rounded-xl bg-gray-14 p-4 px-8 pb-8 shadow-md">
+              <div className="flex w-3/12 min-w-[18rem] flex-col items-center gap-[1rem] rounded-xl bg-gray-14 p-4 px-8 pb-8 shadow-md">
                 <div className="flex w-full flex-col items-start justify-center  border-b border-gray-15 pb-4">
                   {CreateHiringJob?.map((path: string, index: number) => {
                     return (
-                      <Link
+                      <h1
                         aria-disabled={!stepValidation?.[path]?.done}
-                        tabIndex={!stepValidation?.[path]?.done ? -1 : undefined}
-                        href={path}
+                        tabIndex={
+                          !stepValidation?.[path]?.done ? -1 : undefined
+                        }
+                        onClick={() => {
+                          stepValidation?.[path]?.done && router.push(path);
+                        }}
                         className={
                           "flex items-center justify-center gap-[1rem] py-2 " +
                           (stepValidation?.[path]?.done
-                            ? ""
+                            ? " cursor-pointer"
                             : " disabled !cursor-not-allowed ")
                         }
                         key={index}
                       >
                         {stepValidation?.[path]?.done ? (
-                          <RiCheckboxCircleFill className="text-3xl !text-color-primary-8" />
+                          <RiCheckboxCircleFill className="text-3xl ease-linear duration-200 !text-color-primary-8" />
                         ) : (
-                          <RiCheckboxCircleLine className="text-3xl !text-color-primary-8" />
+                          <RiCheckboxBlankCircleLine className={`text-3xl text-gray-15 ${pathname.includes(path) ? "!text-color-primary-8":""}`} />
                         )}
                         <h1
                           className={
@@ -176,7 +180,7 @@ const LayoutComponent = memo(function LayoutComponent({
                         >
                           {path}
                         </h1>
-                      </Link>
+                      </h1>
                     );
                   })}
                 </div>

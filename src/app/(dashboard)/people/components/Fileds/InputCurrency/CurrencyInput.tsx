@@ -50,8 +50,9 @@ const CurrencyInput = ({
                   type: "select",
                   options: formattedData(Currency),
                 }}
+                renderOptionclassName="!pr-[0px] mt-1"
                 dropDownDisplay={false}
-                defaultValue={CurrentCurrency}
+                defaultValue={CurrentCurrency || "USD"}
                 setSelectedKeys={setCurrentCurency}
               />
             </div>

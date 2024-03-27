@@ -24,7 +24,7 @@ export const createCandidateStatus = async (payload: InsertStatusType) => {
       message: error?.message?.includes(
         "candidate_statuses_org_name_group_name_name_key",
       )
-        ? `status already exist in ${payload}`
+        ? `status already exist`
         : "Error creating candidate status",
     };
   } else {

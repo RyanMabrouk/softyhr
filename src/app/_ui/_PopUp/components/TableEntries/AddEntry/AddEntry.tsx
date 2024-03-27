@@ -85,7 +85,7 @@ function AddEntry() {
                   return <Component key={uuidv4()} RowField={RowField} />;
                 })}
                 <div className="h-[0.1rem] w-full bg-gradient-to-r from-color-primary-1 to-color-primary-3" />
-                <div className="flex items-start justify-center gap-[1rem]">
+                <div className="flex items-start justify-center gap-[0.5rem]">
                   <button
                     type="submit"
                     className="text-bold mt-4 rounded bg-color-primary-8 p-2 px-5 text-white duration-300 ease-in-out hover:!bg-color-primary-3 "
@@ -95,7 +95,7 @@ function AddEntry() {
                   <button
                     type="reset"
                     onClick={() => router.push(pathname)}
-                    className="text-bold mt-4 rounded p-2 px-5 text-color5-500 duration-300 ease-in-out "
+                    className="text-bold mt-4 rounded p-2 text-color5-500 duration-300 ease-in-out "
                   >
                     Cancel
                   </button>

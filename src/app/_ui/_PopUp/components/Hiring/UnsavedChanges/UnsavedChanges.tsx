@@ -34,6 +34,12 @@ function UnsavedChanges({ setShow }: UnsavedChangesPropsType) {
           </h1>
           <div className="h-[2px] w-full bg-gradient-to-r from-color-primary-2 to-color-primary-3" />
           <div className="flex w-full items-center justify-start gap-[1rem] px-8">
+            <button
+              onClick={() => console.log(pathname)}
+              className="bg-color-primary-8 px-4 py-1 text-lg font-semibold text-white"
+            >
+              Save Changes
+            </button>
             <Link
               href="/Hiring/jobs"
               className="bg-gray-17 px-4 py-1 text-lg font-semibold text-black"

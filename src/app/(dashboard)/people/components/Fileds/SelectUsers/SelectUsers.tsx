@@ -52,19 +52,34 @@ function SelectGeneric({
         <Autocomplete
           disablePortal
           id="combo-box-demo"
-          className={`relative z-10 !p-0 !font-medium !text-gray-29 [&_.MuiOutlinedInput-notchedOutline]:border-none`}
+          className={`relative z-10  flex !p-0 !font-medium !text-gray-29 [&_.MuiOutlinedInput-notchedOutline]:border-none`}
           autoHighlight
           sx={{
             border: "1px solid #D9D9D9",
             color: "black",
+            ".MuiAutocomplete-endAdornment ": {
+              position: "absolute",
+              top: "0 !important",
+              right: "0 !important",
+              transform: "none !important",
+            },
+            ".MuiAutocomplete-popupIndicator": {
+              padding: "0 !important",
+              height: "1.9rem",
+            },
+            ".MuiAutocomplete-popupIndicatorOpen": {
+              padding: "0 !important",
+              height: "1.9rem",
+            },
+            ".MuiAutocomplete-endAdornment": {
+              display: "flex",
+              marginRight: "0.1rem",
+            },
             ".MuiSvgIcon-root ": {
               fill: "#686868 !important",
               backgroundColor: "#F4F4F4",
-              width: "1.5rem",
+              width: "1.5rem !important",
               height: "100%",
-              position: "absolute",
-              right: 0,
-              top: 0,
             },
             height: "2rem",
             minWidth: "16rem",

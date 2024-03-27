@@ -1,11 +1,9 @@
 "use server";
+import { attachmentsType } from "@/app/_ui/_PopUp/components/Hiring/SendMail/context/MailContext";
 import { getLogger } from "@/logging/log-util";
 import { createTransport } from "nodemailer";
 require("dotenv").config();
-interface attachmentsType{
-  filename:string;
-  content:string;
-}
+
 export async function sendMail(
   toWho: any,
   subject: any,

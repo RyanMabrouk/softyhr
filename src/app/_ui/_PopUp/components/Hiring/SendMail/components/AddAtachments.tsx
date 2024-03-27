@@ -18,7 +18,14 @@ import DragAndDropFileInput from "@/app/(dashboard)/Files/_ui/components/DragAnd
 import UploadInput from "@/app/(dashboard)/Files/_ui/components/UploadInput";
 import FilesSelectComponent from "@/app/(dashboard)/Files/_ui/components/FilesSelectComponent";
 import UploadFileCheckBox from "@/app/(dashboard)/Files/_ui/components/UploadFileCheckBox";
-import { MailContext, MailContextType, MailType } from "../context/MailContext";
+import {
+  MailContext,
+  MailContextType,
+  MailType,
+  attachmentsType,
+} from "../context/MailContext";
+import { SubmitBtn } from "@/app/_ui/SubmitBtn";
+import { CgClose } from "react-icons/cg";
 interface FileObject {
   size: number;
   name: string;
@@ -86,6 +93,7 @@ export default function AddAttachments({
   }
   async function onSubmit() {
     const l = files.length;
+    console.log("uploaded");
     for (let i = 0; i <= l - 1; i++) {
       if (files[i].size > 50000000) {
         toast.error("the size of the file cannot exceed 50MB ");
@@ -96,7 +104,8 @@ export default function AddAttachments({
           const org = await getCurrentorg();
           const orgName = org?.name;
           const { name, size } = fileData;
-         setMail &&
+
+          setMail &&
             setMail((old: MailType) => {
               return {
                 email_object: old?.email_object,
@@ -104,21 +113,27 @@ export default function AddAttachments({
                 attachment: [
                   ...(old?.attachment || []),
                   {
-                    content: `https://ybwqmrrlvmpdikvmkqra.supabase.co/storage/v1/object/public/emails/${fileName}`,
+                    path: `https://ybwqmrrlvmpdikvmkqra.supabase.co/storage/v1/object/public/emails/${fileName}`,
                     file_name: name,
                     org_name: orgName || "",
                     size: Math.round(size / 1000),
                     file_type: fileType,
                   },
                 ],
-              };});
+              };
+            });
         }
       }
     }
+    setShow(false);
   }
 
-  const [files, setFiles] = useState<FileObject[]>([]);
-  const isThereFile = files.length !== 0;
+  const [files, setFiles] = useState<any>(
+    Mail?.attachment?.map((file: any) => {
+      return { name: file.file_name };
+    }),
+  );
+  const isThereFile = files?.length !== 0;
 
   function handleRemoveFile(name: string) {
     const newFiles = files.filter((file: FileObject) => {
@@ -133,46 +148,58 @@ export default function AddAttachments({
 
   return (
     <>
-      <PopUpSkeleton
-        title={"Upload Files"}
-        className="shadow-popup px-auto flex min-w-[35rem] flex-col items-center gap-2 rounded-sm bg-white px-8 py-4 "
-      >
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          className="flex w-full flex-col gap-4 px-2 pt-3"
-        >
-          <div className="flex flex-col gap-4">
-            <div
-              className={`flex items-center gap-4 ${isThereFile ? "" : "self-center"}`}
-            >
-              <DragAndDropFileInput
-                isThereFile={isThereFile}
-                handleAddFile={handleAddFile}
-                files={files}
-                handleRemoveFile={handleRemoveFile}
-              />
-            </div>
-            {isThereFile ? "" : <p className="text-center">or</p>}
-            <div className={`${isThereFile ? "" : "self-center"} `}>
-              <UploadInput
-                isThereFile={isThereFile}
-                handleAddFile={handleAddFile}
-              />
+      <div className="z-50 flex flex-col gap-2">
+        <div className="z-50 flex flex-col gap-2">
+          <div className="flex flex-row justify-between">
+            <h1 className=" pb-2 text-2xl font-normal text-fabric-700">
+              upload files
+            </h1>
+            <div onClick={() => setShow(false)}>
+              <CgClose className="cursor-pointer text-3xl text-gray-15" />
             </div>
           </div>
+        </div>
+        <div className={`shadow-popup rounded-sm bg-white p-8`}>
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="flex w-full flex-col gap-4 px-2 pt-3"
+          >
+            <div className="flex flex-col gap-4">
+              <div
+                className={`flex items-center gap-4 ${isThereFile ? "" : "self-center"}`}
+              >
+                <DragAndDropFileInput
+                  isThereFile={isThereFile}
+                  handleAddFile={handleAddFile}
+                  files={files}
+                  handleRemoveFile={handleRemoveFile}
+                />
+              </div>
+              {isThereFile ? "" : <p className="text-center">or</p>}
+              <div className={`${isThereFile ? "" : "self-center"} `}>
+                <UploadInput
+                  isThereFile={isThereFile}
+                  handleAddFile={handleAddFile}
+                />
+              </div>
+            </div>
 
-          <hr className="mt-4 h-[3px] w-full bg-primary-gradient" />
-          <div className="flex flex-row gap-4 px-2 pt-3">
-            <button disabled={isAddingFile}>Upload</button>
-            <button
-              className="cursor-pointer text-color5-500 hover:underline "
-              onClick={() => setShow(false)}
-            >
-              Cancel
-            </button>
-          </div>
-        </form>
-      </PopUpSkeleton>
+            <hr className="mt-4 h-[3px] w-full bg-primary-gradient" />
+            <div className="flex flex-row gap-4 px-2 pt-3">
+              <SubmitBtn disabled={isAddingFile}>Upload</SubmitBtn>
+              <button
+                className="cursor-pointer text-color5-500 hover:underline "
+                onClick={() => {
+                  console.log(Mail);
+                  setShow(false);
+                }}
+              >
+                Cancel
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
     </>
   );
 }

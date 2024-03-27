@@ -21,6 +21,7 @@ function EmployementStatus() {
               value: "Part-Time",
             },
           ],
+          minWidth: "13.5rem    ",
         },
       ],
       rang: 1,

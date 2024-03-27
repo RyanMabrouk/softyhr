@@ -46,14 +46,14 @@ const CurrencyInputPerPeriode = ({
             <div className="absolute -right-[1rem] top-0 overflow-hidden border-l  text-[1rem]">
               <SelectInput
                 className={
-                  "-mt-0.2 !h-[2rem] !min-w-[4rem] rounded-sm border !border-none border-gray-18 bg-white !pr-[1rem]"
+                  "-mt-0.2 !h-[2rem] !min-w-[4rem] rounded-sm border !border-none border-gray-18 bg-gray-14 !pr-[1rem]"
                 }
                 RowField={{
                   name: "",
                   type: "select",
                   options: formattedData(Currency),
                 }}
-                renderOptionclassName="!pr-[0px]"
+                renderOptionclassName="!pr-[0px] mt-1"
                 dropDownDisplay={false}
                 defaultValue={CurrentCurrency || "USD"}
                 setSelectedKeys={setCurrentCurency}

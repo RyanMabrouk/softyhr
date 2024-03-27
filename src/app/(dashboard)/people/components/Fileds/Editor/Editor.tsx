@@ -34,10 +34,10 @@ function Editor({
       <div
         className={
           " overflow-x-auto " +
-          (editable ? " w-[70rem] rounded-md border border-gray-19 p-2 " : "")
+          (editable ? " w-[40rem] rounded-md border border-gray-19 p-2 " : "")
         }
       >
-        <BlockNoteView editor={editor} />
+        <BlockNoteView theme={'light'} editor={editor} />
         <input
           readOnly
           autoFocus

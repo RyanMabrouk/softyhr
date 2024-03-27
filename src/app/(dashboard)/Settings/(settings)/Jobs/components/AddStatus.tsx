@@ -24,6 +24,7 @@ function AddStatus({ group_name }: { group_name: string }) {
     },
     onSuccess: () => {
       setAdding(false);
+      setValue("")
       QueryClient.invalidateQueries({ queryKey: ["candidate_statuses"] });
     },
     onError: (Error) => {
