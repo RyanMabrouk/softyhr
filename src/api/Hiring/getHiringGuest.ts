@@ -7,6 +7,7 @@ import { createClient } from "@supabase/supabase-js";
 import getCurrentorg from "../getCurrentOrg";
 import { getValidSubdomain } from "../getValidSubdomain";
 import getSession from "../getSession";
+import { table_type } from "@/types/database.tables.types";
 
 interface GetCandidateParamsType {
   user?: boolean;
@@ -17,7 +18,7 @@ interface GetCandidateParamsType {
   column?: string;
   StartPage?: number;
   EndPage?: number;
-  filter?: string | null;
+  filter?: string;
 }
 
 interface metaType {
@@ -25,7 +26,7 @@ interface metaType {
 }
 
 export default async function getHiringGuest(
-  table: string,
+  table: table_type,
   {
     match = undefined,
     column = "*",
@@ -44,7 +45,8 @@ export default async function getHiringGuest(
   );
   const host = headers().get("host")?.split(".");
   const subdomain = host?.[0] === "www" ? host?.[1] : host?.[0];
-  const org_name = getValidSubdomain(subdomain);
+  const org_name =
+    getValidSubdomain(subdomain) || session?.user.user_metadata.org_name;
   logger.info(org_name);
   const data = match
     ? StartPage != undefined && EndPage != undefined

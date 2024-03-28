@@ -113,7 +113,7 @@ export default function AddAttachments({
                 attachment: [
                   ...(old?.attachment || []),
                   {
-                    path: `https://ybwqmrrlvmpdikvmkqra.supabase.co/storage/v1/object/public/emails/${fileName}`,
+                    path: `${process.env.SUPABASE_STORAGE_LINK}/emails/${fileName}`,
                     file_name: name,
                     org_name: orgName || "",
                     size: Math.round(size / 1000),

@@ -20,16 +20,14 @@ function Page() {
                 New employee
               </h1>
             </div>
-            <p className="font-medium cursor-pointer text-gray-15 hover:text-color-primary-8 hover:underline">
+            <p className="cursor-pointer font-medium text-gray-15 hover:text-color-primary-8 hover:underline">
               Customize Add Employee Form
             </p>
           </div>
           <div className="w-full">
             <HirePacket checked={checked} setChecked={setChecked} />
           </div>
-          <div>
-            <Form />
-          </div>
+          <Form />
         </div>
       </div>
     </div>

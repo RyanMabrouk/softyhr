@@ -33,8 +33,8 @@ export const CreateNewEmployee = async ({
       logger.error(register_error.message);
       return {
         registred: false,
-        Error: register_error?.message,
-        Message: register_error?.message,
+        Error: register_error,
+        Message: register_error.message,
       };
     }
 
@@ -58,7 +58,7 @@ export const CreateNewEmployee = async ({
       return {
         Submitted: false,
         Error: profile_error,
-        Message: "Error Creating User Profile",
+        Message: profile_error.message,
       };
     }
     logger.info("CreateNewEmployee_exit");

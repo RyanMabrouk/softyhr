@@ -185,6 +185,7 @@ export default function FileBox({ file, pushFileId, removeFileId }: any) {
     addedByProfile?.["Basic Information"]?.["Last name"];
   return (
     <div
+      // @ts-ignore BUG: possible bug in react-dnd type
       ref={drag}
       className={`flex cursor-pointer items-center justify-between border-b-2 border-stone-200 p-2.5 transition-all  [&>*:nth-child(2)]:hover:flex  ${
         isChecked

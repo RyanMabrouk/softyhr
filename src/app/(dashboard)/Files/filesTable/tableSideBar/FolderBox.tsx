@@ -5,7 +5,7 @@ import { useDrop } from "react-dnd";
 import { ItemTypes } from "@/constants/filesConstants";
 import { FaFolder } from "react-icons/fa6";
 import { IoFolderOpenSharp } from "react-icons/io5";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import FilesSelectArrowDown from "../../_ui/components/FilesSelectArrowDown";
 import { useQueryClient } from "@tanstack/react-query";
 import useFoldersIds from "@/hooks/files/useFoldersIds";
@@ -14,9 +14,6 @@ import {
   database_files_type,
   database_folder_type,
 } from "@/types/database.tables.types";
-import { getTailwindColor } from "@/helpers/getTailwindColor";
-const primary = getTailwindColor("fabric-700");
-const grey = getTailwindColor("gray-30");
 export default function FolderBox({
   folder,
   setCheckAll,
@@ -24,15 +21,15 @@ export default function FolderBox({
   folder: database_folder_type & { files: database_files_type[] };
   setCheckAll: React.Dispatch<React.SetStateAction<boolean>> | undefined;
 }) {
-  let { id, name, files } = folder;
   const { filesIds } = useFoldersIds();
+  const { folderId } = useParams();
   // active user role
   const {
     role: { data: role },
   } = useUserRole();
   const numFiles = role?.permissions.includes("read:files")
-    ? files?.map((file) => file.id)?.length
-    : files?.map((file) => file.id).filter((id) => filesIds.includes(id))
+    ? folder.files?.map((file) => file.id)?.length
+    : folder.files?.map((file) => file.id).filter((id) => filesIds.includes(id))
         ?.length;
 
   const Router = useRouter();
@@ -54,7 +51,7 @@ export default function FolderBox({
       handleSelectedOption(null);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedOption, name, id]);
+  }, [selectedOption, folder.name, folder.id]);
 
   function handleSelectedOption(option: string | null) {
     setSelectOption(option);
@@ -79,13 +76,13 @@ export default function FolderBox({
     () => ({
       accept: ItemTypes.File,
       drop: (item, monitor) => {
-        return { id };
+        return { id: folder.id };
       },
       collect: (monitor) => ({
         isOver: !!monitor.isOver(),
       }),
     }),
-    [id],
+    [folder.id],
   );
   const options = [{ value: "rename", label: "Rename..." }];
   if (role?.permissions.includes("share:files")) {
@@ -96,20 +93,21 @@ export default function FolderBox({
   }
   return (
     <div
-      className={`flex h-10 w-11/12 cursor-pointer items-center gap-1 rounded-md px-3 py-4 transition-all ${isHovered || isOver ? "bg-white [&>*:nth-child(2)]:block" : ""}  `}
+      className={`flex h-10 w-full cursor-pointer items-center gap-1 rounded-md px-3 py-4 transition-all ${isHovered || isOver ? "bg-white [&>*:nth-child(2)]:block" : ""}  `}
       onMouseEnter={handleHover}
       onMouseLeave={handleLeave}
       onClick={() => handleClick()}
-      ref={drop}
+      // TODO: fix this type issue ( possible bug )
+      ref={drop as unknown as React.RefObject<HTMLDivElement> | null}
     >
       <button className="  flex w-full flex-row items-center justify-between text-left text-base  text-gray-30 transition-all  duration-300 hover:text-fabric-700">
-        <div className="flex flex-row items-center gap-1.5">
-          {isHovered || isOver ? (
-            <IoFolderOpenSharp fontSize="1.3rem" fill={primary} />
+        <div className="line-clamp-1 flex flex-row items-center gap-1.5 break-all ">
+          {isHovered || isOver || folder.id === Number(folderId) ? (
+            <IoFolderOpenSharp className="h-5 min-h-5 w-5 min-w-5 text-fabric-700" />
           ) : (
-            <FaFolder fontSize="1.3rem" fill={grey} />
+            <FaFolder className="h-5 min-h-5 w-5 min-w-5 text-gray-30" />
           )}
-          <span className="line-clamp-1">{name}</span>
+          <span className="line-clamp-1 break-all ">{folder.name}</span>
         </div>
         <span className="text-sm "> ({numFiles})</span>
       </button>

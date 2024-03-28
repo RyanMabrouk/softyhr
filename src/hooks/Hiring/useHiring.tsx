@@ -21,17 +21,16 @@ export default function useHiring(
   rowsPerPage?: number,
   filter?: string | null,
 ) {
- 
-const querykey: any = ["Hiring"] as QueryKeyType;
-if (match && match?.id) {
-  querykey.push(match?.id);
-}
-if (page != undefined) {
-  querykey.push(page);
-}
-if (filter) {
-  querykey.push(filter);
-}
+  const querykey: any = ["Hiring"] as QueryKeyType;
+  if (match && match?.id) {
+    querykey.push(match?.id);
+  }
+  if (page != undefined) {
+    querykey.push(page);
+  }
+  if (filter) {
+    querykey.push(filter);
+  }
   const {
     data: Hiring,
     isPlaceholderData,
@@ -45,11 +44,13 @@ if (filter) {
             StartPage: (page - 1) * rowsPerPage,
             EndPage: page * rowsPerPage,
             column: `${column || "*"},candidates(id,created_at)`,
-            filter,
+            // TODO: filter connot be null must be fixed (as supabase does not accept null value)
+            filter: filter === null ? undefined : filter,
           })
         : getHiring("Hiring", {
             match,
-            filter,
+            // TODO: filter connot be null must be fixed (as supabase does not accept null value)
+            filter: filter === null ? undefined : filter,
             column,
           }),
   });

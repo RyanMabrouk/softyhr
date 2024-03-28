@@ -26,7 +26,6 @@ export default function UploadInput({ isThereFile, handleAddFile }: any) {
         style={{ display: "none" }}
         onChange={handleFileChange}
       />
-
       {isThereFile ? (
         <button
           className="text-color5-500 hover:text-fabric-600 hover:underline"
@@ -36,7 +35,7 @@ export default function UploadInput({ isThereFile, handleAddFile }: any) {
         </button>
       ) : (
         <button
-          className="flex border-spacing-4 items-center gap-1 border bg-gray-17 px-2 py-1  text-gray-27 hover:opacity-80"
+          className="flex border-spacing-4 items-center gap-1 rounded-sm border bg-gray-17 px-2 py-1  text-gray-27 hover:opacity-80"
           onClick={handleFileUpload}
         >
           Choose File(s)

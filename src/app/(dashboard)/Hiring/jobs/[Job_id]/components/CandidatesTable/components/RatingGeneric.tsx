@@ -1,15 +1,15 @@
 "use client";
 import { Rating, SxProps } from "@mui/material";
-import React, { ChangeEvent, SyntheticEvent, useState } from "react";
+import React, { SyntheticEvent } from "react";
 import useToast from "@/hooks/useToast";
 import updateData from "@/api/updateData";
 import { useQueryClient } from "@tanstack/react-query";
-import { useParams, useRouter } from "next/navigation";
+import { table_type } from "@/types/database.tables.types";
 
 interface RatingGenericPropsType {
   DefaultValue: number;
   id: string | number;
-  tableName: string;
+  tableName: table_type;
   size?: "medium" | "large" | "small";
   sx?: SxProps;
 }

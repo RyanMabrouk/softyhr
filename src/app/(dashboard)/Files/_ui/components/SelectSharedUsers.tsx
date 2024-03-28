@@ -36,7 +36,14 @@ export default function SelectSharedUsers({
     if (isTyping !== "" && !isDropdownOpen) setDropdownOpen(true);
     else if (isTyping === "" && isDropdownOpen) setDropdownOpen(false);
   }, [isTyping, isDropdownOpen]);
-
+  // filtred data
+  const users = data?.filter(
+    (user: any) =>
+      user?.["Basic Information"]?.["First name"]
+        .toUpperCase()
+        .includes(isTyping.toUpperCase()) &&
+      !selectedShared.some((e: any) => e.user_id === user.user_id),
+  );
   return (
     <div className="relative w-full">
       <div className="relative w-fit">
@@ -60,22 +67,15 @@ export default function SelectSharedUsers({
       </div>
 
       {isDropdownOpen && !isPending && (
-        <div className="shadow-green absolute  z-50 mt-[0.1rem]  w-80 origin-top-right rounded-sm bg-white shadow-lg ring-1 ring-black ring-opacity-5">
+        <div className="shadow-green absolute z-50  mt-[0.1rem] w-80  origin-top-right rounded-sm bg-white shadow-lg ring-1 ring-black ring-opacity-5">
           <div
-            className="h-52 overflow-y-scroll py-1"
+            className="h-fit overflow-y-auto py-1"
             role="menu"
             aria-orientation="vertical"
             aria-labelledby="options-menu"
           >
-            {data
-              ?.filter(
-                (user: any) =>
-                  user?.["Basic Information"]?.["First name"]
-                    .toUpperCase()
-                    .includes(isTyping.toUpperCase()) &&
-                  !selectedShared.some((e: any) => e.user_id === user.user_id),
-              )
-              .map((user: any) => (
+            {users && users.length > 0 ? (
+              users.map((user: any) => (
                 <div
                   key={user.user_id}
                   onClick={() => {
@@ -85,7 +85,7 @@ export default function SelectSharedUsers({
                   role="menuitem"
                 >
                   {user.picture ? (
-                    // dont switch to next/image here !!
+                    // BUG: dont switch to next/image here (possible bug in next js) !!
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
                       src={user.picture}
@@ -103,7 +103,10 @@ export default function SelectSharedUsers({
                     {`${user?.["Basic Information"]?.["First name"]}     ${user?.["Basic Information"]?.["Last name"]} `}
                   </span>{" "}
                 </div>
-              ))}
+              ))
+            ) : (
+              <span className="m-1 ml-3 line-clamp-1 flex flex-row items-center gap-1 break-all text-gray-29">{`No matches for :  “ ${isTyping} ” `}</span>
+            )}
           </div>
         </div>
       )}

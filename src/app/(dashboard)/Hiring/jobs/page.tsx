@@ -43,7 +43,8 @@ function Page() {
             column: '*,profiles("Basic Information")',
             StartPage: (page + 1) * 6,
             EndPage: (page + 2) * 6,
-            filter,
+            // TODO: filter connot be null must be fixed (as supabase does not accept null value)
+            filter: filter === null ? undefined : filter,
           }),
       });
     }

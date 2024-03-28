@@ -39,13 +39,15 @@ export default function useCandidate(
             column,
             StartPage: (page - 1) * rowsPerPage,
             EndPage: page * rowsPerPage,
-            filter,
+            // TODO: filter connot be null must be fixed (as supabase does not accept null value)
+            filter: filter === null ? undefined : filter,
             search,
           })
         : getCandidate("candidates", {
             match,
             column,
-            filter,
+            // TODO: filter connot be null must be fixed (as supabase does not accept null value)
+            filter: filter === null ? undefined : filter,
             search,
           }),
     placeholderData: keepPreviousData,

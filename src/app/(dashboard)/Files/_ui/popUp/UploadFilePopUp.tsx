@@ -23,6 +23,8 @@ import { addFiletoUser } from "@/actions/files/addFiletoUser";
 import Image from "next/image";
 import default_avatar from "/public/default_avatar.png";
 import CancelBtnGeneric from "@/app/_ui/CancelBtnGeneric";
+import { database_profile_type } from "@/types/database.tables.types";
+import { EmployeesContainer } from "../components/EmployeesContainer";
 
 interface FileObject {
   size: number;
@@ -35,7 +37,10 @@ export default function UploadFilePopUp() {
   const pathname = usePathname();
   const { handleSubmit } = useForm();
   const [selectedFolder, setSelectedFolder] = useState(null);
-  const [selectedShared, setSelectedShared] = useState([]);
+  const [selectedShared, setSelectedShared] = useState<database_profile_type[]>(
+    [],
+  );
+  console.log("🚀 ~ UploadFilePopUp ~ selectedShared:", selectedShared);
   const [isChecked, setIsChecked] = useState(false);
 
   const {
@@ -47,9 +52,9 @@ export default function UploadFilePopUp() {
     setSelectedShared([]);
   }
 
-  function handleSelectedShared(selected: any) {
-    const arr: any = [...selectedShared, selected];
-    setSelectedShared(arr);
+  function handleSelectedShared(selected: database_profile_type) {
+    console.log("🚀 ~ handleSelectedShared ~ selected:", selected);
+    setSelectedShared((old) => [...old, selected]);
   }
 
   const { data: allFolders, isPending: isPending } = useQuery({
@@ -114,7 +119,7 @@ export default function UploadFilePopUp() {
           const session = await getSession();
           const user_id = session?.user?.id;
           const payload = {
-            file_url: `https://ybwqmrrlvmpdikvmkqra.supabase.co/storage/v1/object/public/files/${fileName}`,
+            file_url: `${process.env.SUPABASE_STORAGE_LINK}/files/${fileName}`,
             addedBy: user_id,
             name: name,
             org_name: orgName,
@@ -146,18 +151,17 @@ export default function UploadFilePopUp() {
   const isThereFile = files.length !== 0;
 
   function handleRemoveFile(name: string) {
-    const newFiles = files.filter((file: FileObject) => {
-      return file.name !== name;
-    });
-    setFiles(newFiles);
+    setFiles((old) =>
+      old.filter((file: FileObject) => {
+        return file.name !== name;
+      }),
+    );
   }
   function handleAddFile(selectedFile: any) {
-    const newFiles = [...files, selectedFile];
-    setFiles(newFiles);
+    setFiles((old) => [...old, selectedFile]);
   }
-  function handleDeleteShared(id: any) {
-    const newShared = selectedShared.filter((user: any) => user.user_id !== id);
-    setSelectedShared(newShared);
+  function handleDeleteShared(id: string) {
+    setSelectedShared((old) => old.filter((user) => user.user_id !== id));
   }
 
   return (
@@ -196,7 +200,10 @@ export default function UploadFilePopUp() {
             } `}
           >
             <div className="flex flex-col gap-2">
-              <label htmlFor="select" className="placeholder:text-gray-20">
+              <label
+                htmlFor="select"
+                className="rounded-sm placeholder:text-gray-20"
+              >
                 Choose a Folder
               </label>
               <FilesSelectComponent
@@ -215,38 +222,25 @@ export default function UploadFilePopUp() {
                 Share these file(s) with all Employees
               </p>
             </div>
-            <div className="flex flex-col gap-2">
-              {selectedShared.map((user: any) => (
-                <div
-                  key={user.user_id}
-                  className={` flex w-fit cursor-pointer items-center gap-2 rounded-md px-4 py-2 text-sm text-gray-700 transition-all duration-150 hover:bg-white   
-                  `}
-                >
-                  {
-                    <Image
-                      src={user?.picture ?? default_avatar}
-                      alt="user picture"
-                      className="h-8 w-8 rounded-full object-cover "
-                    />
-                  }
-                  <p>{`${user?.["Basic Information"]?.["First name"]}     ${user?.["Basic Information"]?.["Last name"]} `}</p>
-                  <button
-                    className="hover:opacity-70"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleDeleteShared(user.user_id);
-                    }}
-                  >
-                    <IoMdCloseCircleOutline className={"text-lg"} />
-                  </button>
-                </div>
-              ))}
-              <SelectSharedUsers
-                disabled={isThereFile && !isChecked}
-                onSelect={handleSelectedShared}
-                selectedShared={selectedShared}
+            {selectedShared.length > 0 && (
+              <EmployeesContainer
+                handleRemove={(user_id) => {
+                  handleDeleteShared(user_id);
+                }}
+                users={selectedShared.map((user) => ({
+                  user_id: user.user_id,
+                  picture: user.picture ?? default_avatar.src,
+                  //  @ts-ignore TODO: correct this type
+                  name: `${user["Basic Information"]["First name"]} ${user["Basic Information"]["Last name"]}`,
+                }))}
               />
-            </div>
+            )}
+            <span className="-mt-12"></span>
+            <SelectSharedUsers
+              disabled={isThereFile && !isChecked}
+              onSelect={handleSelectedShared}
+              selectedShared={selectedShared}
+            />
           </div>
 
           <hr className="mt-4 h-[3px] w-full bg-primary-gradient" />

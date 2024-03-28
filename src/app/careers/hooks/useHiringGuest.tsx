@@ -36,11 +36,13 @@ export default function useHiringGuest(
             StartPage: (page - 1) * rowsPerPage,
             EndPage: page * rowsPerPage,
             column: `${column || "*"},candidates(id,created_at)`,
-            filter,
+            // TODO: filter connot be null must be fixed (as supabase does not accept null value)
+            filter: filter === null ? undefined : filter,
           })
         : getHiringGuest("Hiring", {
             match,
-            filter,
+            // TODO: filter connot be null must be fixed (as supabase does not accept null value)
+            filter: filter === null ? undefined : filter,
             column,
           }),
   });

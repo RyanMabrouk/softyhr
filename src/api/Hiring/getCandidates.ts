@@ -4,6 +4,7 @@ import { cookies } from "next/headers";
 import { Database } from "@/types/database.types";
 import { getLogger } from "@/logging/log-util";
 import Search from "antd/es/transfer/search";
+import { table_type } from "@/types/database.tables.types";
 
 interface GetCandidateParamsType {
   match?: {
@@ -12,7 +13,7 @@ interface GetCandidateParamsType {
   column?: string;
   StartPage?: number;
   EndPage?: number;
-  filter?: string | null;
+  filter?: string;
   search?: string;
   genericFilter?: any;
   range?: any;
@@ -23,7 +24,7 @@ interface metaType {
 }
 
 export default async function getCandidate(
-  table: string,
+  table: table_type,
   {
     match = undefined,
     column = "*",

@@ -15,12 +15,12 @@ export function EmployeesContainer({
     picture: string;
     name: string;
   }[];
-  emptyMsg: string;
+  emptyMsg?: string;
 }) {
   return (
     <>
       <hr />
-      <div className=" flex h-40 w-full flex-col  items-start justify-start gap-1.5 overflow-y-auto overflow-x-hidden py-2">
+      <div className=" flex h-40 w-full flex-col items-start justify-start  gap-1.5 overflow-y-auto overflow-x-hidden rounded-md bg-white py-2">
         {users?.map((user) => (
           <div
             key={"user" + user.user_id}
@@ -36,7 +36,7 @@ export function EmployeesContainer({
             </button>
           </div>
         ))}
-        {users?.length === 0 && (
+        {emptyMsg && users?.length === 0 && (
           <div className="my-auto flex w-full flex-col items-center justify-center text-center text-gray-21">
             <PiUsersThreeFill className="h-10 w-10" />
             <span className="text-xl">{emptyMsg}</span>

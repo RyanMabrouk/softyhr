@@ -20,8 +20,7 @@ import avatar from "/public/default_avatar.png";
 import { Button } from "@/app/_ui/Button";
 import useToast from "@/hooks/useToast";
 
-const base_image_url =
-  "https://ybwqmrrlvmpdikvmkqra.supabase.co/storage/v1/object/public/avatar/";
+const base_image_url = `${process.env.SUPABASE_STORAGE_LINK}/avatar/`;
 
 const CropEasy = ({
   URL,

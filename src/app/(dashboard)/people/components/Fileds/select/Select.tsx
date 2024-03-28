@@ -115,7 +115,6 @@ function SelectInput({
           }
           renderValue={(selected) => {
             if (value == "" || value == "+ Add item") {
-              console.log(value, "value");
               return (
                 <h1 className="text-[0.95rem] font-normal !text-gray-13">
                   - Select -
@@ -152,7 +151,9 @@ function SelectInput({
           {RowField?.addItem && (
             <MenuItem
               className="border-t border-gray-18 p-1 pr-4 !text-color5-500"
-              onClick={() => router.push(`?popup=ADD_ITEM&section=${RowField?.name}`)}
+              onClick={() =>
+                router.push(`?popup=ADD_ITEM&section=${RowField?.name}`)
+              }
               value={"+ Add item"}
             >
               + Add item

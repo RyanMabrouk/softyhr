@@ -53,7 +53,7 @@ function RowFields({
           champ,
         ),
       });
-     
+
       /*mutateAsync({
         RowStart: item.Row,
         champ: item.champ,
@@ -68,9 +68,11 @@ function RowFields({
     }),
   }));
   return (
+    // @ts-ignore TODO: investigate this error
     <div ref={drop} className="w-full">
       <div
         className="flex h-[2rem] w-full cursor-move items-center  justify-start border border-dashed border-gray-18 bg-gray-14 px-4 py-4 pr-12 duration-150 ease-in-out hover:bg-gray-16"
+        // @ts-ignore TODO: investigate this error
         ref={drag}
       >
         {RowFields?.map((Fields: any, index: number) => {

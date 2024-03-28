@@ -13,6 +13,7 @@ export function EmployeeCard({
   return (
     <div className="flex flex-row items-center gap-2">
       {picture ? (
+        // BUG: The following line of code is not working as expected. witching to next/image is causing bug
         // eslint-disable-next-line @next/next/no-img-element
         <img src={picture} alt="" className="h-8 w-8 rounded-full  " />
       ) : (

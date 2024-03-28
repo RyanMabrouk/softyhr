@@ -3,12 +3,6 @@ import React, { memo, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { useDrag, useDrop } from "react-dnd";
 import { ReorderChamps } from "../../../../helper/ReorderChamps.helper";
-import {
-  QueryClient,
-  useMutation,
-  useQueryClient,
-} from "@tanstack/react-query";
-import { UpdateSettings } from "@/api/Settings/updateSettings";
 import { RowType, sectionType } from "@/types/database.tables.types";
 import RowFields from "./RowFields";
 import { Section } from "@/constants/userInfoSections";
@@ -70,10 +64,12 @@ function RowFiedlsList({
 
   if (Section[champ] == TableChamps) {
     return (
+      // @ts-ignore TODO: investigate this error
       <div ref={drag}>
         <div
           className="mt-2 flex cursor-move flex-col items-start justify-center gap-[0.5rem] border border-dashed border-gray-15  bg-gray-14  px-4 duration-150 ease-in-out   hover:!border-gray-14"
           key={uuidv4()}
+          // @ts-ignore TODO: investigate this error
           ref={drop}
         >
           <h1 className="pb-2 pt-2 text-lg font-bold text-gray-21">{champ}</h1>
@@ -82,10 +78,12 @@ function RowFiedlsList({
     );
   }
   return (
+    // @ts-ignore TODO: investigate this error
     <div ref={drag}>
       <div
         className="mt-2 flex cursor-move flex-col items-start justify-center gap-[0.5rem] border  border-dashed border-white px-4 pb-4 duration-150 ease-in-out   hover:!border-gray-16"
         key={uuidv4()}
+        // @ts-ignore TODO: investigate this error
         ref={drop}
       >
         <h1 className="pb-2 pt-2 text-lg font-bold text-gray-21">{champ}</h1>

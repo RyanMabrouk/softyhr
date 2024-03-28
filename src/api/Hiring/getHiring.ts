@@ -3,6 +3,7 @@ import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { Database } from "@/types/database.types";
 import { getLogger } from "@/logging/log-util";
+import { table_type } from "@/types/database.tables.types";
 
 interface GetCandidateParamsType {
   user?: boolean;
@@ -13,7 +14,7 @@ interface GetCandidateParamsType {
   column?: string;
   StartPage?: number;
   EndPage?: number;
-  filter?: string | null;
+  filter?: string;
 }
 
 interface metaType {
@@ -21,7 +22,7 @@ interface metaType {
 }
 
 export default async function getHiring(
-  table: string,
+  table: table_type,
   {
     match = undefined,
     column = "*",

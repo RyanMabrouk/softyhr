@@ -88,16 +88,12 @@ function Form() {
         NewData: any;
         formData: FormData;
       }) => {
-        const role_id = formData.get("role_id") as string;
-        if (role_id === "none") {
-          toast.error("Please select a role for the new employee");
-          throw new Error("Invalid Role in add new employee form");
-        }
         const response = await CreateNewEmployee({
           NewEmployeData: NewData,
           email: NewData?.Contact?.["Work Email"] || "",
-          role_id: role_id,
+          role_id: formData.get("role_id") as string,
         });
+
         setTouched(false);
         if (response?.Submitted) {
           toast.success(response?.Message);
@@ -122,8 +118,16 @@ function Form() {
       ) : (
         <div className="flex h-full w-full flex-col items-start justify-start pl-8">
           <form
-            className=""
-            action={Candidate ? SubmitFormCandidate : SubmitForm}
+            action={(formData) => {
+              const role_id = formData.get("role_id") as string;
+              if (role_id === "none") {
+                toast.error("Please select a role for the new employee");
+              } else {
+                Candidate
+                  ? SubmitFormCandidate(formData)
+                  : SubmitForm(formData);
+              }
+            }}
           >
             {data?.Champs?.sort((a: any, b: any) => a.rang - b.rang)?.map(
               ({ rang, champ, Icon, Fields }: ChampsType, index: number) => {

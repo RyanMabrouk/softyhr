@@ -2,7 +2,8 @@
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { Database } from "@/types/database.types";
-import { getLogger } from "@/logging/log-util"; 
+import { getLogger } from "@/logging/log-util";
+import { table_type } from "@/types/database.tables.types";
 
 interface GetCandidateParamsType {
   user?: boolean;
@@ -21,7 +22,7 @@ interface metaType {
 }
 
 export default async function getComment(
-  table: string,
+  table: table_type,
   {
     match = undefined,
     column = "*",
@@ -30,7 +31,7 @@ export default async function getComment(
   }: GetCandidateParamsType,
 ): Promise<{ data: any; error: any; meta: any }> {
   const logger = getLogger("Hiring");
-  logger.info("getComment_enter"); 
+  logger.info("getComment_enter");
   const supabase = createServerComponentClient<Database>({ cookies });
   const {
     data: { session },
@@ -63,9 +64,9 @@ export default async function getComment(
           .select(column)
           .order("id")
           .eq("org_name", org_name);
- 
-  logger.info("getComment_exit"); 
- 
+
+  logger.info("getComment_exit");
+
   if (data?.error) logger.error(data?.error?.message);
 
   return {

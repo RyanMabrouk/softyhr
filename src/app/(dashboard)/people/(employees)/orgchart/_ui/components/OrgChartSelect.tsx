@@ -85,7 +85,6 @@ const OrgChartSelect = ({ onSelect, options }: any) => {
                       >
                     | Iterable<React.ReactNode>
                     | React.ReactPortal
-                    | React.PromiseLikeOfReactNode
                     | null
                     | undefined;
                 },
