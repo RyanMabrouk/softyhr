@@ -1,10 +1,11 @@
 "use client";
+import { table_type } from "@/types/database.tables.types";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useEffect } from "react";
 type optionsType = {
   event: "UPDATE" | "INSERT" | "DELETE" | "*";
   schema: string;
-  table: string;
+  table: table_type;
   filter?: string;
 };
 export default function useRealTime({
@@ -13,7 +14,7 @@ export default function useRealTime({
   event = "*",
   onReceive,
 }: {
-  table: string;
+  table: table_type;
   filters?: {
     column: string;
     value: string | number;
@@ -30,9 +31,9 @@ export default function useRealTime({
     "",
   );
   let options: optionsType = {
-    event: event,
+    event,
+    table,
     schema: "public",
-    table: table,
   };
   if (filterString) {
     options = {

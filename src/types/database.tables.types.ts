@@ -1,61 +1,54 @@
-import { IconType } from "react-icons/lib";
-import { Database } from "./database.types";
-// Notifications
-export type database_notifications_type =
-  Database["public"]["Tables"]["notifications"]["Row"];
-// Permesssions
+import { Database, Tables, TablesInsert } from "./database.types";
 
-export type database_permissions_type =
-  Database["public"]["Tables"]["users_permissions"]["Row"];
+// Tables names
+export type table_type = keyof Database[Extract<
+  keyof Database,
+  "public"
+>]["Tables"];
+// Notifications
+export type database_notifications_type = Tables<"notifications">;
+// Permesssions
+export type database_permissions_type = Tables<"users_permissions">;
 // Roles
-export type database_roles_type = Database["public"]["Tables"]["roles"]["Row"];
+export type database_roles_type = Tables<"roles">;
 // leave balance
-export type database_profile_leave_balance_type =
-  Database["public"]["Tables"]["leave_balance"]["Row"];
+export type database_profile_leave_balance_type = Tables<"leave_balance">;
 // Leave Categories
-export type databese_leave_categories_type =
-  Database["public"]["Tables"]["leave_categories"]["Row"];
+export type databese_leave_categories_type = Tables<"leave_categories">;
 export type databese_leave_categories_track_time_unit_type =
-  Database["public"]["Tables"]["leave_categories"]["Row"]["track_time_unit"];
+  Tables<"leave_categories">["track_time_unit"];
 // Leave Requests
 export type database_leave_requests_type = Omit<
-  Database["public"]["Tables"]["leave_requests"]["Row"],
+  Tables<"leave_requests">,
   "duration_used"
 > & {
   duration_used: database_leave_request_duration_used_type[];
 };
 export type database_leave_request_status_type =
-  Database["public"]["Tables"]["leave_requests"]["Row"]["status"];
+  Tables<"leave_requests">["status"];
 export type database_leave_request_duration_used_type = {
   date: string;
   duration: number;
 };
 // Leave Accrued
-export type database_leave_accrued_type =
-  Database["public"]["Tables"]["leave_accrued"]["Row"];
+export type database_leave_accrued_type = Tables<"leave_accrued">;
 // Leave Policies
 export type database_leave_policies_policy_type =
-  Database["public"]["Tables"]["leave_policies"]["Row"]["type"];
-export type database_leave_policies_type =
-  Database["public"]["Tables"]["leave_policies"]["Row"];
+  Tables<"leave_policies">["type"];
+export type database_leave_policies_type = Tables<"leave_policies">;
 // Profile Types
-export type database_profile_type =
-  Database["public"]["Tables"]["profiles"]["Row"];
-
-export type database_profile_type_insert =
-  Database["public"]["Tables"]["profiles"]["Insert"];
+export type database_profile_type = Tables<"profiles">;
+export type database_profile_type_insert = TablesInsert<"profiles">;
 // files types
-export type database_files_type = Database["public"]["Tables"]["files"]["Row"];
-export type database_folder_type =
-  Database["public"]["Tables"]["folders"]["Row"];
+export type database_files_type = Tables<"files">;
+export type database_folder_type = Tables<"folders">;
 //---------organizations_types----------
 
-export type organizations_type =
-  Database["public"]["Tables"]["organizations"]["Row"];
+export type organizations_type = Tables<"organizations">;
 
 //-----------Depatment_types-------------
 
-export type Department_type = Database["public"]["Tables"]["Department"]["Row"];
+export type Department_type = Tables<"Department">;
 
 //------------Hiring_types---------------
 

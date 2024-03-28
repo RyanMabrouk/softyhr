@@ -4,6 +4,7 @@ import { cookies } from "next/headers";
 import { Database } from "@/types/database.types";
 import { getLogger } from "@/logging/log-util";
 import { PostgrestError } from "@supabase/supabase-js";
+import { table_type } from "@/types/database.tables.types";
 type getDataParams = {
   user?: boolean;
   org?: boolean;
@@ -25,8 +26,8 @@ type getDataParams = {
     page: number;
   };
 };
-export default async function getData(
-  table: string,
+export default async function getData<T = any>(
+  table: table_type,
   {
     user = undefined,
     org = undefined,
@@ -40,7 +41,10 @@ export default async function getData(
     org: false,
     column: "*",
   },
-): Promise<{ data: any[] | null; error: PostgrestError | null }> {
+): Promise<{
+  data: T[] | null;
+  error: PostgrestError | null;
+}> {
   const logger = getLogger("*");
   const supabase = createServerComponentClient<Database>({ cookies });
   let query = supabase.from(table).select(column);
@@ -106,5 +110,6 @@ export default async function getData(
   if (error) {
     logger.error(error?.message);
   }
+  // @ts-ignore BUG : possible bug in supabse type GenericStringError[] in data is never returned
   return { data: data, error: error };
 }

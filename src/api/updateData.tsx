@@ -3,8 +3,9 @@ import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import getCurrentorg from "./getCurrentOrg";
 import { getLogger } from "@/logging/log-util";
+import { table_type } from "@/types/database.tables.types";
 export default async function updateData(
-  table: string,
+  table: table_type,
   payload: {
     [key: string]: any;
   },
