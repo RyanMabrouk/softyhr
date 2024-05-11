@@ -43,3 +43,6 @@ firebase-debug.log*sendgrid.env
 sw.*
 workbox-*
 swe-worker-*
+temp_auto_push.bat
+temp_interactive_push.bat
+branch_structure.json
